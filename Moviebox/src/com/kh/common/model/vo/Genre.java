@@ -1,22 +1,22 @@
 package com.kh.common.model.vo;
 
 public class Genre {
-	private String genreCoade;
+	private String genreCode;
 	private String genreName;
 	
 	public Genre() {
 		super();
 	}
-	public Genre(String genreCoade, String genreName) {
+	public Genre(String genreCode, String genreName) {
 		super();
-		this.genreCoade = genreCoade;
+		this.genreCode = genreCode;
 		this.genreName = genreName;
 	}
-	public String getGenreCoade() {
-		return genreCoade;
+	public String getGenreCode() {
+		return genreCode;
 	}
-	public void setGenreCoade(String genreCoade) {
-		this.genreCoade = genreCoade;
+	public void setGenreCode(String genreCode) {
+		this.genreCode = genreCode;
 	}
 	public String getGenreName() {
 		return genreName;
@@ -26,13 +26,13 @@ public class Genre {
 	}
 	@Override
 	public String toString() {
-		return "Genre [genreCoade=" + genreCoade + ", genreName=" + genreName + "]";
+		return "Genre [genreCode=" + genreCode + ", genreName=" + genreName + "]";
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((genreCoade == null) ? 0 : genreCoade.hashCode());
+		result = prime * result + ((genreCode == null) ? 0 : genreCode.hashCode());
 		result = prime * result + ((genreName == null) ? 0 : genreName.hashCode());
 		return result;
 	}
@@ -45,10 +45,10 @@ public class Genre {
 		if (getClass() != obj.getClass())
 			return false;
 		Genre other = (Genre) obj;
-		if (genreCoade == null) {
-			if (other.genreCoade != null)
+		if (genreCode == null) {
+			if (other.genreCode != null)
 				return false;
-		} else if (!genreCoade.equals(other.genreCoade))
+		} else if (!genreCode.equals(other.genreCode))
 			return false;
 		if (genreName == null) {
 			if (other.genreName != null)
