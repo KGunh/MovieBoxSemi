@@ -63,7 +63,7 @@
         background-color: rgb(255, 193, 69);
     }
     #selectDateArea{
-        height: 210px;
+        height: 100px;
         width: 100%;
     }
     #printToday{
@@ -73,27 +73,22 @@
         margin-right: auto;
         margin-top: 20px;
         text-align: center;
-        color: white;
+        color: rgb(241, 241, 241);
+        font-size: 30px;
+        font-weight: bold;
+        line-height: 40px;
     }
-    #datePaging{
-        width: 1070px;
-        height: 120px;
-        margin-left: auto;
-        margin-right: auto;
-        margin-top: 10px;
-        text-align: center;
-        color: white;
-    }
+    
     #selectLocationArea{
         height: 60px;
     }
     #selectLocation{
         width: 1070px;
-        margin: auto;
         height: 100%;
         line-height: 60px;
+        float: left;
+        margin-left: 62px;
     }
-
     #selectLocation > select{
         height: 40px;
         width: 150px;
@@ -101,6 +96,21 @@
         padding-left: 8px;
         background-color: rgb(255, 193, 69);
         font-size: 20px;
+    }
+    #screenDate{
+        height: 40px;
+        border-radius: 12px;
+        padding-left: 8px;
+        background-color: rgb(255, 193, 69);
+        width: 150px;
+        font-size: 20px;
+        margin-left: 15px;
+    }
+    #selectLocation > select:focus{
+        outline: none;
+    }
+    #screenDate:focus{
+        outline: none;
     }
 
     #selectScreenArea{
@@ -180,7 +190,7 @@
         height: 280px;
         width: 180px;
         margin-top: 55px;
-        margin-left: 49px;
+        margin-left: 20px;
         border-radius: 24px;
     }
 
@@ -199,39 +209,6 @@
         border: 1px solid black;
     }
     
-    .button{
-        float: left;
-        height: 80px;
-        width: 80px;
-        margin-top: 15px;
-    }
-    .prev{
-        margin-left: 240px;
-    }
-    .displayDate{
-        float: left;
-        height: 80px;
-        width: 415px;
-        margin-top: 15px;
-    }
-    .date{
-        float: left;
-        height: 50px;
-        width: 50px;
-        border-radius: 50px;
-        margin-left: 8px;
-        margin-top: 12px;
-        background-color: rgb(202, 202, 202);
-        text-align: center;
-        line-height: 50px;
-        font-size: 20px;
-        color: rgb(32, 32, 32);
-        font-weight: bold;
-    }
-	.date:hover{
-		cursor: pointer;
-        background-color: rgb(241, 241, 241);
-	}
 
 </style>
 
@@ -251,72 +228,30 @@
                             <div class="swiper-slide">
                                 <!--TB_MOVIE에서 SELECT-->
                                 <div class="poster">
-                                    <img src="../../resource/img/poster/poster_Exhuma.jpg">
-                                </div>
-                                <div class="poster">
-                                    <img src="../../resource/img/poster/poster_Dune.jpg">
-                                </div>
-                                <div class="poster">
-                                    <img src="../../resource/img/poster/poster_SpyXFamily.jpg">
-                                </div>
-                                <div class="poster">
-                                    <img src="../../resource/img/poster/poster_SlamDunk.jpg">
-                                </div>
-                                <div class="poster">
-                                    <img src="../../resource/img/poster/poster_Wonka.jpg">
+                                    <img src="/moviebox/resource/img/poster/poster_Exhuma.jpg">
                                 </div>
                             </div>
                             <div class="swiper-slide">
                                 <div class="poster">
-                                    <img src="../../resource/img/poster/poster_Exhuma.jpg">
-                                </div>
-                                <div class="poster">
-                                    <img src="../../resource/img/poster/poster_Dune.jpg">
-                                </div>
-                                <div class="poster">
-                                    <img src="../../resource/img/poster/poster_SpyXFamily.jpg">
-                                </div>
-                                <div class="poster">
-                                    <img src="../../resource/img/poster/poster_SlamDunk.jpg">
-                                </div>
-                                <div class="poster">
-                                    <img src="../../resource/img/poster/poster_Wonka.jpg">
+                                    <img src="/moviebox/resource/img/poster/poster_Dune.jpg">
                                 </div>
                             </div>
-                            <div class="swiper-slide">
+                            <div class="swiper-slide">    
                                 <div class="poster">
-                                    <img src="../../resource/img/poster/poster_Exhuma.jpg">
-                                </div>
-                                <div class="poster">
-                                    <img src="../../resource/img/poster/poster_Dune.jpg">
-                                </div>
-                                <div class="poster">
-                                    <img src="../../resource/img/poster/poster_SpyXFamily.jpg">
-                                </div>
-                                <div class="poster">
-                                    <img src="../../resource/img/poster/poster_SlamDunk.jpg">
-                                </div>
-                                <div class="poster">
-                                    <img src="../../resource/img/poster/poster_Wonka.jpg">
+                                    <img src="/moviebox/resource/img/poster/poster_SpyXFamily.jpg">
                                 </div>
                             </div>
-                            <div class="swiper-slide">
+                            <div class="swiper-slide">    
                                 <div class="poster">
-                                    <img src="../../resource/img/poster/poster_Exhuma.jpg">
-                                </div>
-                                <div class="poster">
-                                    <img src="../../resource/img/poster/poster_Dune.jpg">
-                                </div>
-                                <div class="poster">
-                                    <img src="../../resource/img/poster/poster_SpyXFamily.jpg">
-                                </div>
-                                <div class="poster">
-                                    <img src="../../resource/img/poster/poster_SlamDunk.jpg">
-                                </div>
-                                <div class="poster">
-                                    <img src="../../resource/img/poster/poster_Wonka.jpg">
+                                    <img src="/moviebox/resource/img/poster/poster_SlamDunk.jpg">
                                 </div>
                             </div>
+                            <div class="swiper-slide">    
+                                <div class="poster">
+                                    <img src="/moviebox/resource/img/poster/poster_Wonka.jpg">
+                                </div>
+                            </div>
+                           
                         </div>
                     
                         <!-- If we need pagination -->
@@ -334,21 +269,6 @@
             </div>
             <div id="selectDateArea">
                 <div id="printToday"></div>
-
-                <div id="datePaging">
-                    <div class="button prev"></div>
-                    <div class="displayDate">
-                        <div class="date">18</div>
-                        <div class="date">19</div>
-                        <div class="date">20</div>
-                        <div class="date">21</div>
-                        <div class="date">22</div>
-                        <div class="date">23</div>
-                        <div class="date">24</div>
-                    </div>
-                    <div class="button next"></div>
-                </div>
-
             </div>
             <div id="selectLocationArea">
                 <div id="selectLocation">
@@ -370,6 +290,7 @@
                         <option value="광주">광주</option>
                         <option value="제주">제주</option>
                     </select>
+                    <input id="screenDate" type="date" name="screenDate">
                 </div>
             </div>
             <div id="selectScreenArea">
@@ -452,7 +373,7 @@
         // 슬라이더 동작 정의
         const swiper = new Swiper('.swiper', {
             loop : true, //반복 재생 여부
-            slidesPerView : 1, // 이전, 이후 사진 미리보기 갯수
+            slidesPerView : 4, // 이전, 이후 사진 미리보기 갯수
             pagination: { // 페이징 버튼 클릭 시 이미지 이동 가능
                 el: '.swiper-pagination',
                 clickable: true
@@ -463,7 +384,14 @@
             }
         }); 
 
-        document.getElementById("printToday").innerHTML = Date()
+        window.onload = function() {
+            var today = new Date();
+            var year = today.getFullYear();
+            var month = (String)(today.getMonth() + 1).padStart(2, '0');
+            var day = (String)(today.getDate()).padStart(2, '0');
+            document.getElementById('printToday').innerHTML = year + '-' + month + '-' + day;
+        }
+
 
         document.getElementById("content_1").onclick = function(e){
             /*
@@ -476,7 +404,6 @@
                 }
             }
             */
-            
         };
         
     </script>

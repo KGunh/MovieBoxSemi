@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.kh.theater.model.service.TheaterService;
 import com.kh.theater.model.vo.Theater;
 
-@WebServlet("/Theater.search")
+@WebServlet("/search.theater")
 public class TheaterSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
