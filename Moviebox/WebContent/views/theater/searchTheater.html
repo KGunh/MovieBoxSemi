@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>영화관 검색</title>
+    <style>
+        body {
+            background-color: #1A1A1A
+        }
+        div{
+            /*border: 1px solid red;*/
+            box-sizing: border-box;
+        }
+        #wrap{
+            width: 1200px;
+            margin: auto;
+        }
+        #content_searchTheater{
+            height: 850px;
+        }
+        #searcTextArea{
+            height: 60px;
+        }
+        #searchBar{
+            height: 60px;
+            position: relative;
+        }
+        #searchNavi{
+            margin-left: 60px;
+            margin-right: 60px;
+            height: 60px;
+        }
+        
+        #printTheaterArea{
+            height: 670px;
+        }
+        #searchText > p{
+            color: rgb(238, 238, 238);
+            font-size: 32px;
+            font-weight: 700;
+            height: 60px;
+            margin: 0;
+            padding-left: 60px;
+            line-height: 55px;
+        }
+        .searchLocation{
+            float: left;
+            height: 100%;
+            width: 71px; /*border 지울때 72px로 바꿀 것*/
+            text-align: center;
+            line-height: 60px;
+            color: rgb(238, 238, 238);
+            font-size: 24px;
+            font-weight: bold;
+            border-radius: 15px;
+        }
+        .searchLocation:first{
+            color : rgb(255, 193, 69);
+            background-color: #1A1A1A;
+        }
+        .searchLocation:hover{
+            cursor: pointer;
+        }
+        #inputTheaterName{
+            height: 45px;
+            width: 275px;
+            border-left: 60px;
+            box-sizing: border-box;
+            border-radius: 5px;
+            font-size: 18px;
+            
+        }
+        #inputTheaterName:focus{
+            outline: 3px solid rgb(255, 193, 69);
+        }
+        #inputTheaterArea{
+            height: 100%;
+            padding-top: 5px;
+            padding-left: 60px;
+            padding-right: 8px;
+            float: left;
+        }
+        #inputTheaterBtnArea{
+            padding-top: 6px;
+            height: 100%;
+            float: left;
+        }
+        #inputTheaterBtn{
+            height: 45px;
+            width: 50px;
+            border: 1px solid rgb(255, 193, 69);
+            color: rgb(255, 193, 69);
+            background-color: #1A1A1A;
+            border-radius: 9px;
+            line-height: 0px;
+        }
+        #inputTheaterBtn:hover{
+            cursor: pointer;
+        }
+        #printTheater{
+            margin: 30px 160px 30px 160px;
+            height: 600px;
+            position: relative;
+        }
+        .printTheaterName{
+            float: left;
+            height: 100%;
+            width: 290px;
+            color: rgb(238, 238, 238);
+            padding: 15px 15px 15px 15px;
+            font-size: 20px;
+        }
+    </style>
+    <script>
+        function selectLocation(location){
+            var search = document.getElementsByClassName('searchLocation');
+            for(let i = 0; i < search.length; i++){
+                search[i].style.color = 'rgb(238, 238, 238)';
+                search[i].style.background = '#1A1A1A';
+            }
+            location.style.color = '#1A1A1A';
+            location.style.background = 'rgb(255, 193, 69)';
+
+            /*조회한 영화목록을 지역에 맞게 분류하는 DIV조작함수가 필요함*/
+            //console.log(location.innerHTML);
+            /*DB에서 조회한 목록을 객체배열로 받은다음 객체의 지역필드값과 location.innerHTML를 비교해서 
+              선택한지역으로 분류하는 방식으로 구성예정(DB연결작업하면서)*/
+            
+        }
+        
+        /*검색버튼 클릭하면 이름으로 분류하는 함수 필요*/
+
+    </script>
+</head>
+<body>
+    <div id="wrap">
+         <!-- jsp에서 header include하기 -->
+         <div id="header" style="height: 200px; color: white;">header include</div>
+
+        <div id="content_searchTheater">
+            <div id="searcTextArea">
+                <div id="searchText">
+                    <p>영화관 검색</p>
+                </div>
+            </div>
+            <div id="searchBar">
+                <div id="inputTheaterArea">
+                    <input id="inputTheaterName" type="text" placeholder="영화관 이름을 검색해주세요">
+                </div>
+                <div id="inputTheaterBtnArea">
+                    <button id="inputTheaterBtn"><img style="height: 90%; width: 100%;" src="/MOVIEBOX/WebContent/resource/img/캡처.PNG" alt="검색"></button>
+                </div>
+            </div>
+            <div id="searchNavi">
+                <div class="searchLocation" onclick="selectLocation(this);">전체</div>
+                <div class="searchLocation" onclick="selectLocation(this);">서울</div>
+                <div class="searchLocation" onclick="selectLocation(this);">경기</div>
+                <div class="searchLocation" onclick="selectLocation(this);">인천</div>
+                <div class="searchLocation" onclick="selectLocation(this);">강원</div>
+                <div class="searchLocation" onclick="selectLocation(this);">대전</div>
+                <div class="searchLocation" onclick="selectLocation(this);">충남</div>
+                <div class="searchLocation" onclick="selectLocation(this);">충북</div>
+                <div class="searchLocation" onclick="selectLocation(this);">대구</div>
+                <div class="searchLocation" onclick="selectLocation(this);">경북</div>
+                <div class="searchLocation" onclick="selectLocation(this);">울산</div>
+                <div class="searchLocation" onclick="selectLocation(this);">부산</div>
+                <div class="searchLocation" onclick="selectLocation(this);">경남</div>
+                <div class="searchLocation" onclick="selectLocation(this);">제주</div>
+                <div class="searchLocation" onclick="selectLocation(this);">광주</div>
+            </div>
+            <div id="printTheaterArea">
+                <div id="printTheater">
+                    <div class="printTheaterName" style="border-right: 1px solid rgb(168, 168, 168);">영화관이름</div>
+                    <div class="printTheaterName">영화관이름</div>
+                    <div class="printTheaterName" style="border-left: 1px solid rgb(168, 168, 168);">영화관이름</div>
+                </div>
+            </div>
+        </div>
+        <!-- jsp에서 footer include하기 -->
+        <div id="footer" style="height: 250px; color: white;">footer include</div>
+    </div>
+
+    
+
+
+
+</body>
+</html>
