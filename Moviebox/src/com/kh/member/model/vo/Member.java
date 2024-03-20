@@ -1,4 +1,5 @@
 package com.kh.member.model.vo;
+import java.util.ArrayList;
 import java.util.Date;
 public class Member {
 	
@@ -15,13 +16,13 @@ public class Member {
 	private String status;
 	private String privilege;
 	private String localCode;
-	
+	private ArrayList<MemberGenre> genreList = new ArrayList();
 	public Member() {
 		super();
 	}
 	public Member(int memberNo, String memberId, String memberPwd, String memberName, Date birthday, String gender,
 			String email, String phone, String address, Date enrollDate, String status, String privilege,
-			String localCode) {
+			String localCode, ArrayList<MemberGenre> genreList) {
 		super();
 		this.memberNo = memberNo;
 		this.memberId = memberId;
@@ -36,6 +37,7 @@ public class Member {
 		this.status = status;
 		this.privilege = privilege;
 		this.localCode = localCode;
+		this.genreList = genreList;
 	}
 	public int getMemberNo() {
 		return memberNo;
@@ -115,12 +117,18 @@ public class Member {
 	public void setLocalCode(String localCode) {
 		this.localCode = localCode;
 	}
+	public ArrayList<MemberGenre> getGenreList() {
+		return genreList;
+	}
+	public void setGenreList(ArrayList<MemberGenre> genreList) {
+		this.genreList = genreList;
+	}
 	@Override
 	public String toString() {
 		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberName="
 				+ memberName + ", birthday=" + birthday + ", gender=" + gender + ", email=" + email + ", phone=" + phone
 				+ ", address=" + address + ", enrollDate=" + enrollDate + ", status=" + status + ", privilege="
-				+ privilege + ", localCode=" + localCode + "]";
+				+ privilege + ", localCode=" + localCode + ", genreList=" + genreList + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -131,6 +139,7 @@ public class Member {
 		result = prime * result + ((email == null) ? 0 : email.hashCode());
 		result = prime * result + ((enrollDate == null) ? 0 : enrollDate.hashCode());
 		result = prime * result + ((gender == null) ? 0 : gender.hashCode());
+		result = prime * result + ((genreList == null) ? 0 : genreList.hashCode());
 		result = prime * result + ((localCode == null) ? 0 : localCode.hashCode());
 		result = prime * result + ((memberId == null) ? 0 : memberId.hashCode());
 		result = prime * result + ((memberName == null) ? 0 : memberName.hashCode());
@@ -174,6 +183,11 @@ public class Member {
 			if (other.gender != null)
 				return false;
 		} else if (!gender.equals(other.gender))
+			return false;
+		if (genreList == null) {
+			if (other.genreList != null)
+				return false;
+		} else if (!genreList.equals(other.genreList))
 			return false;
 		if (localCode == null) {
 			if (other.localCode != null)
