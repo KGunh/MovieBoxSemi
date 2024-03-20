@@ -198,10 +198,6 @@
         box-shadow: 4px 4px 8px rgb(32, 32, 32);
     }
 
-    .poster:active{
-        border: 1px solid black;
-    }
-
     #submit-btn{
         height: 60px;
         width: 180px;
@@ -228,7 +224,7 @@
                     <!-- Slider main container -->
                     <div class="swiper">
                         <!-- Additional required wrapper -->
-                        <div class="swiper-wrapper">
+                        <div id="swiper-select" class="swiper-wrapper">
                             <!-- Slides -->
                             <div class="swiper-slide">
                                 <!--TB_MOVIE에서 SELECT-->
@@ -402,19 +398,18 @@
             document.getElementById('printToday').innerHTML = year + '-' + month + '-' + day;
         }
 
+        document.querySelectorAll('.poster').forEach(function(poster) {
+            poster.addEventListener('click', function(e) {
+                e.target.style.border = '4px solid crimson';
+            });
+        });
 
-        document.getElementById("content_1").onclick = function(e){
-            /*
-            for(){
-                if(내가 클릭한 애랑 같은 번호일경우){
-                    사이즈 조정
-                }
-                else{
-                    기본 스타일속성 적용
-                }
-            }
-            */
-        };
+        document.querySelectorAll('.screen').forEach(function(screenName) {
+            screenName.addEventListener('click', function(e){
+                e.target.style.background = 'white';
+            });
+        });
+        
         
     </script>
 </body>

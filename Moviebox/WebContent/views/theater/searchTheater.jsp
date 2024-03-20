@@ -208,7 +208,6 @@
                 document.getElementById('locationInput').value = locationName;
                 /*console.log(document.getElementById('locationInput').value);*/
                 document.getElementById('locationForm').submit();
-               
         }
 
         function selectName(){
