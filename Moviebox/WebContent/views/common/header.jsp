@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" %>
+    pageEncoding="UTF-8" import="com.kh.member.model.vo.Member"  %>
 <%
+	
+	Member loginUser = (Member)session.getAttribute("loginUser");
 
 	String contextPath = request.getContextPath();
 	
@@ -179,9 +181,12 @@
 		<div class="header-line">
 			<div class="top-header">
 				<div class="login-area">
+				<% if(loginUser == null) { %>
 					<a href="#" class="member">회원가입</a>
-                	<a href="#" class="member">로그인</a>
-
+                	<a href="<%=contextPath%>/loginForm.me" class="member">로그인</a>
+				<%}else { %>
+					<a href="<%= contextPath %>/logout.me" class="member">로그아웃</a>
+				<%} %>
 				</div>
 			</div>
 		</div>

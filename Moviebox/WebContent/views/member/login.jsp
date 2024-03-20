@@ -124,12 +124,12 @@
             <form action="<%=contextPath%>/login.me" method="post">
                 <div class="inputdiv">
                     <span class="input-span">아이디</span><br>
-                    <input type="text" class="input-text" name="memberId" placeholder="이름" required>
+                    <input type="text" class="input-text" name="memberId" placeholder="아이디" required>
                 </div>
 
                 <div class="inputdiv">
                     <span class="input-span">비밀번호</span><br>
-                    <input type="text" class="input-text" name="memberPwd" placeholder="생년월일" required>
+                    <input type="password" class="input-text" name="memberPwd" placeholder="비밀번호" required>
                 </div>
 
                 <div class="input-button">

@@ -7,7 +7,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.reservation.controller.ReservationController;
 
 /**
  * Servlet implementation class MemberServlet
@@ -35,12 +34,12 @@ public class MemberServlet extends HttpServlet {
 
 		String uri = request.getRequestURI();
 
+
 		String mapping = uri.substring(uri.lastIndexOf("/") + 1, uri.lastIndexOf("."));
 
 		MemberController mc = new MemberController();
 
 		String view = "";
-
 		boolean flag = true;
 
 		switch (mapping) {
@@ -50,10 +49,16 @@ public class MemberServlet extends HttpServlet {
 				flag = false;
 			}
 			break;
+		case "logout":
+			view = mc.logout(request,response); flag = false;
+		case "loginForm":
+			view = "views/member/login.jsp"; flag = false;
+	
 		}
 
+		
 		if (flag) {
-			response.sendRedirect(view);
+			response.sendRedirect(request.getContextPath() + view);
 		} else {
 			request.getRequestDispatcher(view).forward(request, response);
 		}

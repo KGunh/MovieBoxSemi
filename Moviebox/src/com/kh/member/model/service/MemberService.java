@@ -15,7 +15,7 @@ public class MemberService {
 		Member m = new MemberDao().login(conn, member);
 
 		close(conn);
-
+		
 		return m;
 		
 	}

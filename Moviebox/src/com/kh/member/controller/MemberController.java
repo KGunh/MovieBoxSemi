@@ -19,6 +19,7 @@ public class MemberController {
 		m.setMemberPwd(memberPwd);
 		
 		
+
 		Member loginUser = new MemberService().login(m);
 		String view = "";
 		if(loginUser != null) {
@@ -33,6 +34,16 @@ public class MemberController {
 			
 			view = "views/common/errorPage.jsp";
 		}
+		
+		
+		return view;
+	}
+	
+	public String logout(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		session.invalidate();
+		
+		String view = "index.jsp";
 		
 		return view;
 	}
