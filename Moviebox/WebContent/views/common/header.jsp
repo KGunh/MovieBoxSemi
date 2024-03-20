@@ -181,7 +181,7 @@
                 <!-- A grey horizontal navbar that becomes vertical on small screens -->
                 <ul class="nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="<%=contextPath %>/reservation.movie"><span>예매</span></a>
+                        <a class="nav-link" href="<%=contextPath %>/movie.reservation"><span>예매</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<%=contextPath %>"><span>영화</span></a>

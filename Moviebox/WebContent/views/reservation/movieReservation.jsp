@@ -23,12 +23,11 @@
 <style>
     div{
         box-sizing: border-box;
-        border: 1px solid red;
     }
 
     #wrap{
         width: 1200px;
-        height: 1530px;
+        height: 1600px;
     }
 
      /* 이미지 영역 사이즈 조절 */
@@ -38,19 +37,20 @@
     }
 
     /* 이미지 사이즈 조절 */
-    .swiper-slide>img {
+    .swiper-slide img {
         width : 100%;
         height : 100%;
     }
 
     /* 화살표 버튼색 변경 (기본색은 파란색) */
     div[class^=swiper-button] {
-        color : white;
+        color : rgb(32, 32, 32);
         /* display : none; */ /* 아니면 안보이게 숨기기도 가능 */
     }
 
     #title{
         padding-left: 50px;
+        height: 60px;
         margin-top: 30px;
         background-color: rgb(255, 193, 69);
         font-size: 35px;
@@ -62,10 +62,12 @@
     #selectMovieArea{
         background-color: rgb(255, 193, 69);
     }
+
     #selectDateArea{
         height: 100px;
         width: 100%;
     }
+
     #printToday{
         width: 1070px;
         height: 50px;
@@ -82,6 +84,7 @@
     #selectLocationArea{
         height: 60px;
     }
+
     #selectLocation{
         width: 1070px;
         height: 100%;
@@ -89,86 +92,75 @@
         float: left;
         margin-left: 62px;
     }
+    
     #selectLocation > select{
         height: 40px;
         width: 150px;
         border-radius: 12px;
-        padding-left: 8px;
+        padding-left: 15px;
         background-color: rgb(255, 193, 69);
         font-size: 20px;
+        font-weight: 700;
+        border: none;
     }
+
     #screenDate{
         height: 40px;
         border-radius: 12px;
-        padding-left: 8px;
+        padding-left: 15px;
         background-color: rgb(255, 193, 69);
-        width: 150px;
+        width: 200px;
         font-size: 20px;
+        font-weight: 700;
         margin-left: 15px;
+        border: none;
     }
     #selectLocation > select:focus{
         outline: none;
     }
+
     #screenDate:focus{
         outline: none;
     }
 
     #selectScreenArea{
-        height: 830px;
+        height: 800px;
     }
 
     #printScreen{
         width: 1070px;
-        height: 730px;
+        height: auto;
         margin: auto;
     }
 
     .screen{
-        height: 155px;
+        height: 175px;
         margin-top: 25px;
         border-radius: 25px;
         background-color: rgb(148, 145, 145);
     }
+
     .theaterName{
-        height: 40px;
-        padding-left: 50px;
+        height: 60px;
+        padding-left: 60px;
+        line-height: 60px;
         font-size: 25px;
         font-weight: bold;
         color: rgb(51,51,51);
     }
-    .button-prev{
-        font-size: 30px;
-        line-height: 100px;
-        width: 50px;
-        height: 100px;
-        float: left;
-        text-align: center;
-    }
-    .button-next{
-        font-size: 30px;
-        line-height: 100px;
-        width: 50px;
-        height: 100px;
-        float: right;
-        text-align: center;
-    }
-    .button-prev:hover{
-        cursor: pointer;
-    }
-    .button-next:hover{
-        cursor: pointer;
-    }
+    
     .selectScreen{
-        width: 750px;
+        width: 900px;
         height: 100px;
-        float: left;
-        margin-left: 105px;
+        display: flex;
+        justify-content: space-around;
+        margin-left: 80px;
     }
+
     .screenName{
         float: left;
         width: 155px;
         height: 85px;
-        margin-left: 65px;
         margin-top: 5px;
         border-radius: 25px;
         background-color: rgba(255, 255, 255, 0.6);
@@ -177,6 +169,7 @@
         font-weight: bold;
         line-height: 85px;
     }
+
     .screenName:hover{
         cursor: pointer;
     }
@@ -190,23 +183,35 @@
         height: 280px;
         width: 180px;
         margin-top: 55px;
-        margin-left: 20px;
+        margin-left: 55px;
         border-radius: 24px;
     }
 
     .poster:hover{
         cursor: pointer;
-      
     }
+
     .poster img{
         width: 100%;
         height: 100%;
         border-radius: 24px;
-        box-shadow: 2px 2px 4px rgb(32, 32, 32);
+        box-shadow: 4px 4px 8px rgb(32, 32, 32);
     }
 
     .poster:active{
         border: 1px solid black;
+    }
+
+    #submit-btn{
+        height: 60px;
+        width: 180px;
+        border-radius: 12px;
+        font-weight: 600;
+        font-size: 28px;
+        background-color: rgb(255, 193, 69);
+        float: right;
+        margin-right: 65px;
+        border: none;
     }
     
 
@@ -216,7 +221,7 @@
 <body>
     <%@ include file="/views/common/header.jsp" %>
     <div id="wrap">
-        <form action="서블릿맵핑">
+        <form action="/moviebox/seat.reservation" method="get">
             <div id="title">영화예매</div>
             <div id="selectMovieArea">
                 <div id="content_1">
@@ -299,7 +304,6 @@
                     <div class="screen">
                         <!--TB_SCREEN에서 SELECT-->
                         <div class="theaterName">CGV 강남</div>
-                        <div class="button-prev">◀</div>
                         <div class="selectScreen">
                             <div class="screenName">
                                 <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
@@ -310,13 +314,13 @@
                             <div class="screenName">
                                 <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
                             </div>
+                            <div class="screenName">
+                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
+                            </div>
                         </div>
-                        <div class="button-next">▶</div>
-
                     </div>
                     <div class="screen">
                         <div class="theaterName">CGV 강북</div>
-                        <div class="button-prev">◀</div>
                         <div class="selectScreen">
                             <div class="screenName">
                                 <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
@@ -327,12 +331,13 @@
                             <div class="screenName">
                                 <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
                             </div>
+                            <div class="screenName">
+                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
+                            </div>
                         </div>
-                        <div class="button-next">▶</div>
                     </div>
                     <div class="screen">
                         <div class="theaterName">메가박스</div>
-                        <div class="button-prev">◀</div>
                         <div class="selectScreen">
                             <div class="screenName">
                                 <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
@@ -343,12 +348,13 @@
                             <div class="screenName">
                                 <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
                             </div>
+                            <div class="screenName">
+                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
+                            </div>
                         </div>
-                        <div class="button-next">▶</div>
                     </div>
                     <div class="screen">
                         <div class="theaterName">롯데시네마</div>
-                        <div class="button-prev">◀</div>
                         <div class="selectScreen">
                             <div class="screenName">
                                 <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
@@ -359,11 +365,15 @@
                             <div class="screenName">
                                 <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
                             </div>
+                            <div class="screenName">
+                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
+                            </div>
                         </div>
-                        <div class="button-next">▶</div>
                     </div>
                 </div>
             </div>
+
+            <button id="submit-btn" type="submit">좌석 선택</button>
         </form>
     </div>
     <%@ include file="/views/common/footer.jsp" %>

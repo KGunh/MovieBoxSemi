@@ -154,7 +154,7 @@
             </div>
             <div id="searchBar">
                 <div id="theaterInputArea">
-                    <form id="nameForm" action="/moviebox/Theater.search.name" method="get">
+                    <form id="nameForm" action="/moviebox/search.theatername" method="get">
                     	<input id="searchTypeName" type="hidden" name="type" value="name">
                         <input id="theaterNameInput" name="theaterName" type="text" placeholder="영화관 이름을 검색해주세요">
                     </form>
@@ -180,7 +180,7 @@
                 <div class="searchLocation">제주</div>
                 <div class="searchLocation">광주</div>
             </div>
-            <form id="locationForm" action="/moviebox/Theater.search" method="get">
+            <form id="locationForm" action="/moviebox/search.theater" method="get">
             	<input id="searchTypeLocation" type="hidden" name="type" value="location">
             	<input id="locationInput" type="hidden" name="location">
             </form>

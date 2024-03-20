@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class MovieReservationController
+ * Servlet implementation class ReservationviewServlet
  */
-@WebServlet("/reservation.movie")
-public class MovieReservationController extends HttpServlet {
+@WebServlet("*.reservation")
+public class ReservationServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MovieReservationController() {
+    public ReservationServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,8 +26,29 @@ public class MovieReservationController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		request.getRequestDispatcher("views/reservation/movieReservation.jsp").forward(request, response);
+		request.setCharacterEncoding("UTF-8");
+		
+		String uri = request.getRequestURI();
+		
+		String mapping = uri.substring(uri.lastIndexOf("/") + 1 , uri.lastIndexOf("."));
+		
+		ReservationController rc = new ReservationController(); 
+		
+		String view = "";
+		
+		boolean flag = false;
+		
+		switch(mapping) {
+		case "movie" : view = "views/reservation/movieReservation.jsp"; break; 
+		case "seat" : view = "views/reservation/seatReservation.jsp"; break;
+		case "payment" : break;
+		}
+		
+		if(flag) {
+			response.sendRedirect(view);
+		} else {
+			request.getRequestDispatcher(view).forward(request, response);
+		}
 	}
 
 	/**
