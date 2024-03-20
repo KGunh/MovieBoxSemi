@@ -20,6 +20,28 @@ public class Member {
 	public Member() {
 		super();
 	}
+	
+	
+	public Member(int memberNo, String memberId, String memberPwd, String memberName, Date birthday, String gender,
+			String email, String phone, String address, Date enrollDate, String status, String privilege,
+			String localCode) {
+		super();
+		this.memberNo = memberNo;
+		this.memberId = memberId;
+		this.memberPwd = memberPwd;
+		this.memberName = memberName;
+		this.birthday = birthday;
+		this.gender = gender;
+		this.email = email;
+		this.phone = phone;
+		this.address = address;
+		this.enrollDate = enrollDate;
+		this.status = status;
+		this.privilege = privilege;
+		this.localCode = localCode;
+	}
+
+
 	public Member(int memberNo, String memberId, String memberPwd, String memberName, Date birthday, String gender,
 			String email, String phone, String address, Date enrollDate, String status, String privilege,
 			String localCode, ArrayList<MemberGenre> genreList) {

@@ -121,15 +121,15 @@
             <div class="title-content"><span class="tit">로그인</span></div>
         </div>
         <div id="input-list">
-            <form action="<%=contextPath%>/login" method="post">
+            <form action="<%=contextPath%>/login.me" method="post">
                 <div class="inputdiv">
                     <span class="input-span">아이디</span><br>
-                    <input type="text" class="input-text" name="userId" placeholder="이름" required>
+                    <input type="text" class="input-text" name="memberId" placeholder="이름" required>
                 </div>
 
                 <div class="inputdiv">
                     <span class="input-span">비밀번호</span><br>
-                    <input type="text" class="input-text" name="userPwd" placeholder="생년월일" required>
+                    <input type="text" class="input-text" name="memberPwd" placeholder="생년월일" required>
                 </div>
 
                 <div class="input-button">

@@ -1,14 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" %>
 <%
-
 
 	String contextPath = request.getContextPath();
 	
 	String alertMsg = (String)session.getAttribute("alertMsg");
 	
-	//로그인 성공 전 null
-	// 		    후 메시지문구
 %>
 <!DOCTYPE html>
 <html>
@@ -164,12 +161,27 @@
     </style>
 </head>
 <body>
+
+
+	<script>
+		
+		const msg = '<%= alertMsg %>';
+		
+		if(msg != 'null'){
+			alert(msg);
+		
+			<% session.removeAttribute("alertMsg"); %>
+		}
+		
+	
+	</script>
 	<div class="header">
 		<div class="header-line">
 			<div class="top-header">
 				<div class="login-area">
 					<a href="#" class="member">회원가입</a>
                 	<a href="#" class="member">로그인</a>
+
 				</div>
 			</div>
 		</div>
