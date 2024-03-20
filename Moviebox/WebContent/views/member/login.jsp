@@ -112,20 +112,24 @@
 
 <body>
 
+	<%@ include file="../common/header.jsp" %>
+
+	<%@ include file="../common/informationNavi.jsp" %>
+
     <div class="content">
         <div class="title-area">
             <div class="title-content"><span class="tit">로그인</span></div>
         </div>
         <div id="input-list">
-            <form>
+            <form action="<%=contextPath%>/login" method="post">
                 <div class="inputdiv">
                     <span class="input-span">아이디</span><br>
-                    <input type="text" class="input-text" placeholder="이름" required>
+                    <input type="text" class="input-text" name="userId" placeholder="이름" required>
                 </div>
 
                 <div class="inputdiv">
                     <span class="input-span">비밀번호</span><br>
-                    <input type="text" class="input-text" placeholder="생년월일" required>
+                    <input type="text" class="input-text" name="userPwd" placeholder="생년월일" required>
                 </div>
 
                 <div class="input-button">
