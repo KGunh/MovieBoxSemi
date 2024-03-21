@@ -10,7 +10,7 @@ public class ReservationController {
 		new ReservationService().selectMovieList();
 		
 		
-		
+		//리퀘스트 셋
 		
 	}
 

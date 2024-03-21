@@ -6,16 +6,14 @@ public class Movie {
 
 	private int movieNo;
 	private String movieTitle;
-	private String moviePoster;
-	private String runningTime;
 	private String director;
-	private String movieActor; 
 	private String movieRated;
 	private Date movieRelease;
 	private String movieStory;
-	private String movieStill;
 	private String status;
 	private String genreNo;
+	
+	
 	public Movie() {
 		super();
 	}
@@ -34,6 +32,43 @@ public class Movie {
 		this.movieStory = movieStory;
 		this.movieStill = movieStill;
 		this.status = status;
+		this.genreNo = genreNo;
+	}
+	
+	public void setMovieNo(int movieNo) {
+		this.movieNo = movieNo;
+	}
+	public void setMovieTitle(String movieTitle) {
+		this.movieTitle = movieTitle;
+	}
+	public void setMoviePoster(String moviePoster) {
+		this.moviePoster = moviePoster;
+	}
+	public void setRunningTime(String runningTime) {
+		this.runningTime = runningTime;
+	}
+	public void setDirector(String director) {
+		this.director = director;
+	}
+	public void setMovieActor(String movieActor) {
+		this.movieActor = movieActor;
+	}
+	public void setMovieRated(String movieRated) {
+		this.movieRated = movieRated;
+	}
+	public void setMovieRelease(Date movieRelease) {
+		this.movieRelease = movieRelease;
+	}
+	public void setMovieStory(String movieStory) {
+		this.movieStory = movieStory;
+	}
+	public void setMovieStill(String movieStill) {
+		this.movieStill = movieStill;
+	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
+	public void setGenreNo(String genreNo) {
 		this.genreNo = genreNo;
 	}
 	public int getMovieNo() {

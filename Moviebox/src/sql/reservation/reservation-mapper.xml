@@ -6,7 +6,15 @@
 		Reservation Mapper
 	</comment>
 	
-	
+	<entry key="selectMovieList">
+		SELECT
+		       MOVIE_NO,
+		       MOVIE_TITLE
+		  FROM
+		       TB_MOVIE
+		 WHERE
+		       STATUS = 'Y'
+	</entry>
 	
 	
 	
