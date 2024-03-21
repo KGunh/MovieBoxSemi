@@ -1,4 +1,4 @@
-package com.kh.reservation.controller;
+package com.kh.movie.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ReservationviewServlet
+ * Servlet implementation class MovieServlet
  */
-@WebServlet("*.reservation")
-public class ReservationServlet extends HttpServlet {
+@WebServlet("*.movie")
+public class MovieServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReservationServlet() {
+    public MovieServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,22 +26,20 @@ public class ReservationServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
+		// 인코딩
 		request.setCharacterEncoding("UTF-8");
 		
+		// 변수 
+		MovieController mc = new MovieController();
 		String uri = request.getRequestURI();
-		
-		String mapping = uri.substring(uri.lastIndexOf("/") + 1 , uri.lastIndexOf("."));
-		
-		ReservationController rc = new ReservationController(); 
-		
 		String view = "";
+		boolean flag = true;
 		
-		boolean flag = false;
+		String mapping = uri.substring(uri.lastIndexOf("/") + 1, uri.lastIndexOf("."));
 		
 		switch(mapping) {
-		case "movie" : new ReservationController().selectReservationInfo(request); view = "views/reservation/movieReservation.jsp"; break; 
-		case "seat" : new ReservationController().setSeat(request); view = "views/reservation/seatReservation.jsp"; break;
-		case "payment" : new ReservationController().insertReservation(); break;
+		case "list" : view = "views/movie/movieList.jsp"; break;
 		}
 		
 		if(flag) {
@@ -49,6 +47,8 @@ public class ReservationServlet extends HttpServlet {
 		} else {
 			request.getRequestDispatcher(view).forward(request, response);
 		}
+		
+		
 	}
 
 	/**
