@@ -218,7 +218,7 @@
                     <div class="movie-content">
                         <div class="movie-list-img"> 포스터 </div>
                         <div class="movie-list-title"> 영화 타이틀 </div>
-                        <button id="movie-content-btn1">상세정보</button>
+                        <button id="movie-content-btn1" onclick="detailPage();">상세정보</button>
                         <button id="movie-content-btn2">예매정보</button>
                     </div>
 
@@ -362,6 +362,15 @@
                     </div>
                 </div>
             </div>
+            
+            <script>
+            function detailPage(){
+            	
+            	location.href = '<%= contextPath %>/views/movie/movieDetail.jsp';
+            }
+            
+            </script>
+            
 
 
         </div> <!-- movie-list -->
