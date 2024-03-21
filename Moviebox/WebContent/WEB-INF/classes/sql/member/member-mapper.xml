@@ -7,28 +7,28 @@
 	</comment>
 	
 	<entry key="login">
-		SELECT
-		            MEMBER_NO,
-		            MEMBER_ID,	
-		            MEMBER_PWD,	
-		            MEMBER_NAME,	
-		            BIRTHDAY,	
-		            GENDER,	
-		            EMAIL,	
-		            PHONE,	
-		            ADDRESS,	
-		            ENROLL_DATE,	
-		            STATUS,	
-		            PRIVILEGE,	
-		            LOCAL_CODE
-		   FROM
-		            TB_MEMBER
-		 WHERE
-		            MEMBER_ID = ?
-		     AND
-		            MEMBER_PWD = ?
-		     AND
-		            STATUS = 'Y'
+		 SELECT
+	            MEMBER_NO,
+	            MEMBER_ID,	
+	            MEMBER_PWD,	
+	            MEMBER_NAME,	
+	            BIRTHDAY,	
+	            GENDER,	
+	            EMAIL,	
+	            PHONE,	
+	            ADDRESS,	
+	            ENROLL_DATE,	
+	            STATUS,	
+	            PRIVILEGE,	
+	            LOCAL_CODE
+	   	   FROM
+	            TB_MEMBER
+	      WHERE
+	            MEMBER_ID = ?
+	        AND
+	            MEMBER_PWD = ?
+	        AND
+	            STATUS = 'Y'
 		         
 		
 		
@@ -37,6 +37,29 @@
 	</entry>
 	
 	
+	<entry key="memberInsert">
+		INSERT
+  	      INTO
+       		   TB_MEMBER(MEMBER_NO,MEMBER_ID,MEMBER_PWD,MEMBER_NAME,BIRTHDAY,GENDER,EMAIL,PHONE,ADDRESS,LOCAL_CODE)
+		VALUES 
+			   (SEQ_MEMNO.NEXTVAL,?,?,?,?,?,?,?,?,?)
 	
+	</entry>
+	
+	
+	<entry key="genreInsert">
+		INSERT
+   		  INTO
+       		   TB_MEMBERGENR
+	    VALUES(
+	    		SEQ_MEMNO.CURRVAL,
+	    		(SELECT
+       				    GENRE_CODE
+ 				   FROM
+       				    TB_GENRE
+ 				   WHERE
+       					 GENRE_CATEGORY = ?))
+	
+	</entry>
 	
 </properties>

@@ -212,9 +212,26 @@
 </head>
 <body>
 
+	
+
 
 	<%@ include file="../common/header.jsp" %>
 	<%@ include file="../common/informationNavi.jsp" %>
+	
+	<% 
+		String memberId = loginUser.getMemberId();
+		String memberName = loginUser.getMemberName();
+		String phone = loginUser.getPhone();
+		
+		String email = loginUser.getEmail();
+		
+		String address = loginUser.getAddress();
+
+		
+
+
+	%>
+	
     <div class="content">
         <div class="title-area">
             <span class="tit">회원정보</span>
@@ -223,9 +240,9 @@
             <a class="btn">정보수정</a>
             <div class="info-area-content">
                 <div class="info-content1">
-                    <div class="info-name">김건희님<div class="info-id">rjsgml922</div></div>
-                    <div class="info-address">경기도 양주</div>
-                    <div class="info-email">rjsgml922naver.com</div>
+                    <div class="info-name"><%=memberName %> 님 <div class="info-id"><%=memberId %></div></div>
+                    <div class="info-address"><%=address %></div>
+                    <div class="info-email"><%=memberName %></div>
                 </div>
                 
                 <div class="info-content2">

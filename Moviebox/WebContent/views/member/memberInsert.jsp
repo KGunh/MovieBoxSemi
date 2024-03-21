@@ -235,11 +235,11 @@
 		</div>
 
 		<div id="input-list">
-			<form action="" method="post">
+			<form action="<%=contextPath%>/insert.me" method="post">
 				<div class="inputdiv">
-					<span class="input-span id" name="memberId">아이디</span><br> 
+					<span class="input-span id" >아이디</span><br> 
                     <input type="text"
-						class="input-text id">
+						class="input-text id" name="memberId">
 					<button class="idCheck" onclick="idCheck();">중복확인</button>
 				</div>
 				
@@ -282,21 +282,21 @@
 
 				<div class="inputdiv">
 					<span class="input-span">지역</span><br> 
-                    <select name="locationCode" id="location">
-						<option>서울</option>
-						<option>경기</option>
-						<option>인천</option>
-						<option>강원</option>
-						<option>대전</option>
-						<option>충남</option>
-						<option>충북</option>
-						<option>대구</option>
-						<option>경남</option>
-						<option>경북</option>
-						<option>울산</option>
-						<option>부산</option>
-						<option>제주</option>
-						<option>광주</option>
+                    <select name="localCode" id="location">
+						<option value="L1">서울</option>
+						<option value="L2">경기</option>
+						<option value="L3">인천</option>
+						<option value="L4">강원</option>
+						<option value="L5">대전</option>
+						<option value="L6">충남</option>
+						<option value="L7">충북</option>
+						<option value="L8">대구</option>
+						<option value="L9">경남</option>
+						<option value="L10">경북</option>
+						<option value="L11">울산</option>
+						<option value="L12">부산</option>
+						<option value="L13">제주</option>
+						<option value="L14">광주</option>
 
 					</select> <input type="text" name="address"class="input-text address">
 				</div>

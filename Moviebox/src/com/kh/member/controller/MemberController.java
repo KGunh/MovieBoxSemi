@@ -1,5 +1,7 @@
 package com.kh.member.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -60,13 +62,18 @@ public class MemberController {
 		String phone = request.getParameter("phone");
 		String localCode = request.getParameter("localCode");
 		String address = request.getParameter("address");
-		String[] genreList = request.getParameterValues("genre");
+		String[] genres = request.getParameterValues("genre");
 		
 		Member m = new Member();
+		String view = "";
 		
-		Genre g = new Genre();
+		ArrayList<Genre> genreList = new ArrayList();
 		
-		
+		for(int i = 0;i< genres.length; i++) {
+			Genre g = new Genre();
+			g.setGenreName(genres[i]);
+			genreList.add(g);
+		}
 		
 		
 	
@@ -80,13 +87,20 @@ public class MemberController {
 		m.setLocalCode(localCode);
 		m.setAddress(address);
 		
-		for(int i = 0; i < genreList.length; i++) {
-			g.setGenreName(genreList[i]);
+		
+		
+		
+		int result = new MemberService().insert(m,genreList);
+		
+		
+		if(result > 0) {
+			HttpSession session = request.getSession();
+			session.setAttribute("alertMsg", "회원가입에 성공했습니다.");
+		}else {
+			request.setAttribute("errorMsg", "회원가입에 실패했습니다.");
+			view = "views/common/errorPage.jsp";
 		}
 		
-		
-		new MemberService().insert();
-		
-		
+		return view;
 	}
 }

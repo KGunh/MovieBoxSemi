@@ -216,7 +216,7 @@
                         <a class="nav-link" href="<%=contextPath %>"><span>고객센터</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<%=contextPath %>"><span>마이페이지</span></a>
+                        <a class="nav-link" href="<%=contextPath %>/mypage.me"><span>마이페이지</span></a>
                     </li>
                 </ul>
 
