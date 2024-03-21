@@ -3,7 +3,9 @@ package com.kh.reservation.model.service;
 import static com.kh.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
+import com.kh.common.model.vo.Location;
 import com.kh.reservation.model.dao.ReservationDao;
 
 public class ReservationService {
@@ -13,8 +15,13 @@ public class ReservationService {
 		
 		new ReservationDao().selectMovieList(conn);
 		
-		new ReservationDao().selectLocationList(conn);
+		ArrayList<Location> list =  new ReservationDao().selectLocationList(conn);
 		
+		
+	}
+
+	public void selectLocationList() {
+		// TODO Auto-generated method stub
 		
 	}
 	

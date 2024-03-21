@@ -13,106 +13,74 @@ public class Movie {
 	private String status;
 	private String genreNo;
 	
-	
 	public Movie() {
 		super();
 	}
-	public Movie(int movieNo, String movieTitle, String moviePoster, String runningTime, String director,
-			String movieActor, String movieRated, Date movieRelease, String movieStory, String movieStill,
-			String status, String genreNo) {
+	public Movie(int movieNo, String movieTitle, String director, String movieRated, Date movieRelease,
+			String movieStory, String status, String genreNo) {
 		super();
 		this.movieNo = movieNo;
 		this.movieTitle = movieTitle;
-		this.moviePoster = moviePoster;
-		this.runningTime = runningTime;
 		this.director = director;
-		this.movieActor = movieActor;
 		this.movieRated = movieRated;
 		this.movieRelease = movieRelease;
 		this.movieStory = movieStory;
-		this.movieStill = movieStill;
 		this.status = status;
-		this.genreNo = genreNo;
-	}
-	
-	public void setMovieNo(int movieNo) {
-		this.movieNo = movieNo;
-	}
-	public void setMovieTitle(String movieTitle) {
-		this.movieTitle = movieTitle;
-	}
-	public void setMoviePoster(String moviePoster) {
-		this.moviePoster = moviePoster;
-	}
-	public void setRunningTime(String runningTime) {
-		this.runningTime = runningTime;
-	}
-	public void setDirector(String director) {
-		this.director = director;
-	}
-	public void setMovieActor(String movieActor) {
-		this.movieActor = movieActor;
-	}
-	public void setMovieRated(String movieRated) {
-		this.movieRated = movieRated;
-	}
-	public void setMovieRelease(Date movieRelease) {
-		this.movieRelease = movieRelease;
-	}
-	public void setMovieStory(String movieStory) {
-		this.movieStory = movieStory;
-	}
-	public void setMovieStill(String movieStill) {
-		this.movieStill = movieStill;
-	}
-	public void setStatus(String status) {
-		this.status = status;
-	}
-	public void setGenreNo(String genreNo) {
 		this.genreNo = genreNo;
 	}
 	public int getMovieNo() {
 		return movieNo;
 	}
+	public void setMovieNo(int movieNo) {
+		this.movieNo = movieNo;
+	}
 	public String getMovieTitle() {
 		return movieTitle;
 	}
-	public String getMoviePoster() {
-		return moviePoster;
-	}
-	public String getRunningTime() {
-		return runningTime;
+	public void setMovieTitle(String movieTitle) {
+		this.movieTitle = movieTitle;
 	}
 	public String getDirector() {
 		return director;
 	}
-	public String getMovieActor() {
-		return movieActor;
+	public void setDirector(String director) {
+		this.director = director;
 	}
 	public String getMovieRated() {
 		return movieRated;
 	}
+	public void setMovieRated(String movieRated) {
+		this.movieRated = movieRated;
+	}
 	public Date getMovieRelease() {
 		return movieRelease;
+	}
+	public void setMovieRelease(Date movieRelease) {
+		this.movieRelease = movieRelease;
 	}
 	public String getMovieStory() {
 		return movieStory;
 	}
-	public String getMovieStill() {
-		return movieStill;
+	public void setMovieStory(String movieStory) {
+		this.movieStory = movieStory;
 	}
 	public String getStatus() {
 		return status;
 	}
+	public void setStatus(String status) {
+		this.status = status;
+	}
 	public String getGenreNo() {
 		return genreNo;
 	}
+	public void setGenreNo(String genreNo) {
+		this.genreNo = genreNo;
+	}
 	@Override
 	public String toString() {
-		return "Movie [movieNo=" + movieNo + ", movieTitle=" + movieTitle + ", moviePoster=" + moviePoster
-				+ ", runningTime=" + runningTime + ", director=" + director + ", movieActor=" + movieActor
-				+ ", movieRated=" + movieRated + ", movieRelease=" + movieRelease + ", movieStory=" + movieStory
-				+ ", movieStill=" + movieStill + ", status=" + status + ", genreNo=" + genreNo + "]";
+		return "Movie [movieNo=" + movieNo + ", movieTitle=" + movieTitle + ", director=" + director + ", movieRated="
+				+ movieRated + ", movieRelease=" + movieRelease + ", movieStory=" + movieStory + ", status=" + status
+				+ ", genreNo=" + genreNo + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -120,15 +88,11 @@ public class Movie {
 		int result = 1;
 		result = prime * result + ((director == null) ? 0 : director.hashCode());
 		result = prime * result + ((genreNo == null) ? 0 : genreNo.hashCode());
-		result = prime * result + ((movieActor == null) ? 0 : movieActor.hashCode());
 		result = prime * result + movieNo;
-		result = prime * result + ((moviePoster == null) ? 0 : moviePoster.hashCode());
 		result = prime * result + ((movieRated == null) ? 0 : movieRated.hashCode());
 		result = prime * result + ((movieRelease == null) ? 0 : movieRelease.hashCode());
-		result = prime * result + ((movieStill == null) ? 0 : movieStill.hashCode());
 		result = prime * result + ((movieStory == null) ? 0 : movieStory.hashCode());
 		result = prime * result + ((movieTitle == null) ? 0 : movieTitle.hashCode());
-		result = prime * result + ((runningTime == null) ? 0 : runningTime.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
 	}
@@ -151,17 +115,7 @@ public class Movie {
 				return false;
 		} else if (!genreNo.equals(other.genreNo))
 			return false;
-		if (movieActor == null) {
-			if (other.movieActor != null)
-				return false;
-		} else if (!movieActor.equals(other.movieActor))
-			return false;
 		if (movieNo != other.movieNo)
-			return false;
-		if (moviePoster == null) {
-			if (other.moviePoster != null)
-				return false;
-		} else if (!moviePoster.equals(other.moviePoster))
 			return false;
 		if (movieRated == null) {
 			if (other.movieRated != null)
@@ -173,11 +127,6 @@ public class Movie {
 				return false;
 		} else if (!movieRelease.equals(other.movieRelease))
 			return false;
-		if (movieStill == null) {
-			if (other.movieStill != null)
-				return false;
-		} else if (!movieStill.equals(other.movieStill))
-			return false;
 		if (movieStory == null) {
 			if (other.movieStory != null)
 				return false;
@@ -187,11 +136,6 @@ public class Movie {
 			if (other.movieTitle != null)
 				return false;
 		} else if (!movieTitle.equals(other.movieTitle))
-			return false;
-		if (runningTime == null) {
-			if (other.runningTime != null)
-				return false;
-		} else if (!runningTime.equals(other.runningTime))
 			return false;
 		if (status == null) {
 			if (other.status != null)

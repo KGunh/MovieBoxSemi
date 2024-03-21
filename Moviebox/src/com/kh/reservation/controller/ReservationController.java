@@ -8,7 +8,7 @@ public class ReservationController {
 	
 	public void selectReservationInfo(HttpServletRequest request) {
 		new ReservationService().selectMovieList();
-		
+		new ReservationService().selectLocationList();
 		
 		//리퀘스트 셋
 		

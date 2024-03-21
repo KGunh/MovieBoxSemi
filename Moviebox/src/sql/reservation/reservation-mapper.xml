@@ -16,7 +16,17 @@
 		       STATUS = 'Y'
 	</entry>
 	
+	<entry key="selectLocationList">
+		SELECT
+			   LOCATION_CODE,
+			   LOCATION_NAME
+		  FROM
+			   TB_LOCATION
+		 ORDER
+			BY
+			   LOCATION_CODE
 	
+	</entry>
 	
 	
 </properties>
