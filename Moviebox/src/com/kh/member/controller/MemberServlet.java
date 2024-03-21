@@ -54,7 +54,14 @@ public class MemberServlet extends HttpServlet {
 		case "loginForm":
 			view = "views/member/login.jsp"; flag = false; break;
 		case "insertForm":
-			view = "views/member/memberInsert.jsp"; flag = false;
+			view = "views/member/memberInsert.jsp"; flag = false; break;
+		case "insert":
+			view = mc.insert(request,response);
+			break;
+		
+		case "idCheck":break;
+		default : return;
+			
 	
 		}
 

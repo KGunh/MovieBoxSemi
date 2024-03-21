@@ -47,4 +47,8 @@ public class MemberController {
 		
 		return view;
 	}
+	
+	public String insert(HttpServletRequest request, HttpServletResponse response) {
+		
+	}
 }

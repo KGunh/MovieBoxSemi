@@ -55,6 +55,7 @@
             margin: 0;
             position: absolute;
             bottom: 0;
+            padding: 5px;
             
         }
         .inputdiv button{
@@ -108,7 +109,6 @@
             border-radius: 8px;
             font-size: 12px;
             font-weight: bold;
-            
         }
 
         #secession{
@@ -235,16 +235,45 @@
 		</div>
 
 		<div id="input-list">
-			<form action="">
+			<form action="" method="post">
 				<div class="inputdiv">
-					<span class="input-span id">아이디</span><br> 
+					<span class="input-span id" name="memberId">아이디</span><br> 
                     <input type="text"
 						class="input-text id">
-					<button class="idCheck">중복확인</button>
+					<button class="idCheck" onclick="idCheck();">중복확인</button>
 				</div>
+				<script>
+					function idCheck() {
+						const $userId = $('.id');
+
+						$.ajax({
+							url : 'idCheck.me',
+							data : {
+								checkId : $userId.val()
+							},
+							success : function(result) {
+								if (result == 'N') {
+									alert('이미 존재하거나 탈퇴한 회원의 아이디입니다.');
+									$userId.val('').focus();
+								} else {
+									if (confirm('사용 가능한 아이디입니다. 사용하시겠습니까?')) {
+										$userId.attr('readonly', true);
+										$('#insertMember').removeAttr('disabled');
+									} else {
+										$userId.focus();
+									}
+								}
+							},
+							error : function() {
+								console.log('AJAX통신 실패');
+							}
+						});
+					}
+				</script>
+				
 				<div class="inputdiv">
 					<span class="input-span">비밀번호</span><br> 
-                    <input type="password" class="input-text">
+                    <input type="password" class="input-text" name="memberPwd">
 				</div>
 				<div class="inputdiv">
 					<span class="input-span">비밀번호 확인</span><br> 
@@ -324,7 +353,7 @@
 					</div>
 				</div>
 				<div class="input-button">
-					<input id="insertMember" type="submit" value="가입하기">
+					<input id="insertMember" type="submit" value="가입하기" disabled>
 				</div>
 			</form>
 		</div>
