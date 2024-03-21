@@ -7,7 +7,7 @@ public class Member {
 	private String memberId;
 	private String memberPwd;
 	private String memberName;
-	private Date birthday;
+	private String birthday;
 	private String gender;
 	private String email;
 	private String phone;
@@ -20,9 +20,7 @@ public class Member {
 	public Member() {
 		super();
 	}
-	
-	
-	public Member(int memberNo, String memberId, String memberPwd, String memberName, Date birthday, String gender,
+	public Member(int memberNo, String memberId, String memberPwd, String memberName, String birthday, String gender,
 			String email, String phone, String address, Date enrollDate, String status, String privilege,
 			String localCode) {
 		super();
@@ -40,9 +38,7 @@ public class Member {
 		this.privilege = privilege;
 		this.localCode = localCode;
 	}
-
-
-	public Member(int memberNo, String memberId, String memberPwd, String memberName, Date birthday, String gender,
+	public Member(int memberNo, String memberId, String memberPwd, String memberName, String birthday, String gender,
 			String email, String phone, String address, Date enrollDate, String status, String privilege,
 			String localCode, ArrayList<MemberGenre> genreList) {
 		super();
@@ -85,10 +81,10 @@ public class Member {
 	public void setMemberName(String memberName) {
 		this.memberName = memberName;
 	}
-	public Date getBirthday() {
+	public String getBirthday() {
 		return birthday;
 	}
-	public void setBirthday(Date birthday) {
+	public void setBirthday(String birthday) {
 		this.birthday = birthday;
 	}
 	public String getGender() {
@@ -144,13 +140,6 @@ public class Member {
 	}
 	public void setGenreList(ArrayList<MemberGenre> genreList) {
 		this.genreList = genreList;
-	}
-	@Override
-	public String toString() {
-		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberName="
-				+ memberName + ", birthday=" + birthday + ", gender=" + gender + ", email=" + email + ", phone=" + phone
-				+ ", address=" + address + ", enrollDate=" + enrollDate + ", status=" + status + ", privilege="
-				+ privilege + ", localCode=" + localCode + ", genreList=" + genreList + "]";
 	}
 	@Override
 	public int hashCode() {
@@ -251,6 +240,9 @@ public class Member {
 		return true;
 	}
 	
+	
+	
+
 	
 	
 	

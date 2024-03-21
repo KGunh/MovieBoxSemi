@@ -55,6 +55,7 @@
             margin: 0;
             position: absolute;
             bottom: 0;
+            padding: 5px;
             
         }
         .inputdiv button{
@@ -108,7 +109,6 @@
             border-radius: 8px;
             font-size: 12px;
             font-weight: bold;
-            
         }
 
         #secession{
@@ -226,6 +226,8 @@
 
 </head>
 <body>
+	
+	<%@ include file="../common/header.jsp" %>
 
 	<div class="content">
 	<div class="title-area">
@@ -233,16 +235,18 @@
 		</div>
 
 		<div id="input-list">
-			<form action="">
+			<form action="" method="post">
 				<div class="inputdiv">
-					<span class="input-span id">아이디</span><br> 
+					<span class="input-span id" name="memberId">아이디</span><br> 
                     <input type="text"
 						class="input-text id">
-					<button class="idCheck">중복확인</button>
+					<button class="idCheck" onclick="idCheck();">중복확인</button>
 				</div>
+				
+				
 				<div class="inputdiv">
 					<span class="input-span">비밀번호</span><br> 
-                    <input type="password" class="input-text">
+                    <input type="password" class="input-text" name="memberPwd">
 				</div>
 				<div class="inputdiv">
 					<span class="input-span">비밀번호 확인</span><br> 
@@ -250,35 +254,35 @@
 				</div>
 				<div class="inputdiv">
 					<span class="input-span">이름</span><br> 
-                    <input type="text" class="input-text">
+                    <input type="text" class="input-text" name="memberName">
 				</div>
 				<div class="inputdiv">
 					<span class="input-span">생년월일</span><br> 
-                    <input type="text" class="input-text">
+                    <input type="text" class="input-text" name="birthday">
 				</div>
 				<div class="inputdiv">
 					<span class="input-span">성별</span><br> 
                     <div class="gender f">
                         여자 
-                        <input type="radio" name="mb_gender" value="F" checked> 
+                        <input type="radio" name=gender value="F" checked> 
                     </div>
                     <div class="gender m">
-                        남자 <input type="radio" name="mb_gender" value="M">
+                        남자 <input type="radio" name="gender" value="M">
                     </div>
                    
 				</div>
 				<div class="inputdiv">
 					<span class="input-span">이메일</span><br> 
-                    <input type="text" class="input-text">
+                    <input type="email" class="input-text" name="email">
 				</div>
 				<div class="inputdiv">
 					<span class="input-span">전화번호</span><br> 
-                    <input type="text" class="input-text">
+                    <input type="text" class="input-text" name="phone">
 				</div>
 
 				<div class="inputdiv">
 					<span class="input-span">지역</span><br> 
-                    <select name="" id="location">
+                    <select name="locationCode" id="location">
 						<option>서울</option>
 						<option>경기</option>
 						<option>인천</option>
@@ -294,7 +298,7 @@
 						<option>제주</option>
 						<option>광주</option>
 
-					</select> <input type="text" class="input-text address">
+					</select> <input type="text" name="address"class="input-text address">
 				</div>
 				<div class="checkbox-div">
 					<span class="input-span">취향</span><br>
@@ -322,7 +326,7 @@
 					</div>
 				</div>
 				<div class="input-button">
-					<input id="insertMember" type="submit" value="가입하기">
+					<input id="insertMember" type="submit" value="가입하기" >
 				</div>
 			</form>
 		</div>
