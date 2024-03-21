@@ -226,6 +226,8 @@
 
 </head>
 <body>
+	
+	<%@ include file="../common/header.jsp" %>
 
 	<div class="content">
 	<div class="title-area">

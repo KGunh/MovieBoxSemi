@@ -50,9 +50,11 @@ public class MemberServlet extends HttpServlet {
 			}
 			break;
 		case "logout":
-			view = mc.logout(request,response); flag = false;
+			view = mc.logout(request,response); flag = false; break;
 		case "loginForm":
-			view = "views/member/login.jsp"; flag = false;
+			view = "views/member/login.jsp"; flag = false; break;
+		case "insertForm":
+			view = "views/member/memberInsert.jsp"; flag = false;
 	
 		}
 
