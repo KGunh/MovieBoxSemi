@@ -141,6 +141,14 @@ public class Member {
 	public void setGenreList(ArrayList<MemberGenre> genreList) {
 		this.genreList = genreList;
 	}
+	
+	@Override
+	public String toString() {
+		return "Member [memberNo=" + memberNo + ", memberId=" + memberId + ", memberPwd=" + memberPwd + ", memberName="
+				+ memberName + ", birthday=" + birthday + ", gender=" + gender + ", email=" + email + ", phone=" + phone
+				+ ", address=" + address + ", enrollDate=" + enrollDate + ", status=" + status + ", privilege="
+				+ privilege + ", localCode=" + localCode + ", genreList=" + genreList + "]";
+	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;

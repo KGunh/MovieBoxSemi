@@ -1,6 +1,9 @@
 package com.kh.member.model.service;
 
-import static com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.commit;
+import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -8,6 +11,7 @@ import java.util.ArrayList;
 import com.kh.common.model.vo.Genre;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
+import com.kh.member.model.vo.MemberGenre;
 
 public class MemberService {
 	
@@ -16,6 +20,11 @@ public class MemberService {
 		Connection conn = getConnection();
 
 		Member m = new MemberDao().login(conn, member);
+		
+		ArrayList<MemberGenre> list = new MemberDao().loginGenre(conn, member); 
+		m.setGenreList(list);
+		
+		
 
 		close(conn);
 		

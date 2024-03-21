@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList,com.kh.member.model.vo.MemberGenre"%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,7 +71,7 @@
         .info-name{
             font-size: 30px;
         }
-        .btn{
+        .btn5{
             background-color: #FFC145;
             width: auto;
             height: auto;
@@ -80,15 +80,21 @@
             font-weight: bold;
             top: 10px;
             right: 10px;
-        }
-        .btn:hover{
+            color: black;
             border: 1px solid #1A1A1A;
+            text-decoration-line: none;
+        }
+        .btn5:hover{
+            border: 1px solid #1A1A1A;
+            color: black;
+            text-decoration-line: none;
         }
         .info-content1{          
             float: left;
             width: 70%;
             height: 100%;
             position: relative;
+            background-color: white;
         }
         .info-name{
             position: relative;
@@ -98,7 +104,7 @@
         .info-id{
             position: absolute;
             top: 15px;
-            right:0;
+            right:10px;
             font-size: 12px;
             color: rgb(51, 51, 51);
         }
@@ -106,6 +112,14 @@
             font-size: 12px;
             position: absolute;
             color: rgb(51, 51, 51);
+            left: 10px;
+        }
+        .info-genre{
+        	font-size: 12px;
+            position: absolute;
+            color: rgb(51, 51, 51);
+            bottom: 10px;
+            right: 10px;
         }
         .info-address{
             top: 60px;
@@ -226,6 +240,11 @@
 		String email = loginUser.getEmail();
 		
 		String address = loginUser.getAddress();
+		String localCode = loginUser.getLocalCode();
+		
+		ArrayList<MemberGenre> list = loginUser.getGenreList();
+		
+			
 
 		
 
@@ -237,12 +256,17 @@
             <span class="tit">회원정보</span>
         </div>
         <div class="info-area">
-            <a class="btn">정보수정</a>
+            <a class="btn5">정보수정</a>
             <div class="info-area-content">
                 <div class="info-content1">
                     <div class="info-name"><%=memberName %> 님 <div class="info-id"><%=memberId %></div></div>
-                    <div class="info-address"><%=address %></div>
-                    <div class="info-email"><%=memberName %></div>
+                    <div class="info-address"><%=localCode%> <%=address %></div>
+                    <div class="info-email"><%=memberName%></div>
+                    <div class="info-genre">
+                    <% for(int i = 0; i< list.size(); i++){ %>
+                    <%= list.get(i).getGenreCode()%>
+                    <%} %>
+                    </div>
                 </div>
                 
                 <div class="info-content2">

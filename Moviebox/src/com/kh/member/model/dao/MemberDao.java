@@ -13,6 +13,7 @@ import java.util.Properties;
 
 import com.kh.common.model.vo.Genre;
 import com.kh.member.model.vo.Member;
+import com.kh.member.model.vo.MemberGenre;
 
 public class MemberDao {
 	
@@ -66,7 +67,7 @@ public class MemberDao {
 										 rset.getDate("ENROLL_DATE"),
 										 rset.getString("STATUS"),
 										 rset.getString("PRIVILEGE"),
-										 rset.getString("LOCAL_NAME"));
+										 rset.getString("LOCATION_NAME"));
 								
 			}
 		} catch (SQLException e) {
@@ -135,6 +136,40 @@ public class MemberDao {
 		
 		
 		return result;
+	}
+	
+	public ArrayList<MemberGenre> loginGenre(Connection conn,Member m){
+		ArrayList<MemberGenre> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("loginGenre");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getMemberId());
+			pstmt.setString(2, m.getMemberPwd());
+			
+			rset = pstmt.executeQuery();
+			
+			
+			while(rset.next()) {
+				MemberGenre mg = new MemberGenre();
+				
+				mg.setGenreCode(rset.getString("GENRE_CATEGORY"));
+				
+				list.add(mg);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		return list; 
 	}
 
 }
