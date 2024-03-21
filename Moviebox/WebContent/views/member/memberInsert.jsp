@@ -242,34 +242,7 @@
 						class="input-text id">
 					<button class="idCheck" onclick="idCheck();">중복확인</button>
 				</div>
-				<script>
-					function idCheck() {
-						const $userId = $('.id');
-
-						$.ajax({
-							url : 'idCheck.me',
-							data : {
-								checkId : $userId.val()
-							},
-							success : function(result) {
-								if (result == 'N') {
-									alert('이미 존재하거나 탈퇴한 회원의 아이디입니다.');
-									$userId.val('').focus();
-								} else {
-									if (confirm('사용 가능한 아이디입니다. 사용하시겠습니까?')) {
-										$userId.attr('readonly', true);
-										$('#insertMember').removeAttr('disabled');
-									} else {
-										$userId.focus();
-									}
-								}
-							},
-							error : function() {
-								console.log('AJAX통신 실패');
-							}
-						});
-					}
-				</script>
+				
 				
 				<div class="inputdiv">
 					<span class="input-span">비밀번호</span><br> 
@@ -281,35 +254,35 @@
 				</div>
 				<div class="inputdiv">
 					<span class="input-span">이름</span><br> 
-                    <input type="text" class="input-text">
+                    <input type="text" class="input-text" name="memberName">
 				</div>
 				<div class="inputdiv">
 					<span class="input-span">생년월일</span><br> 
-                    <input type="text" class="input-text">
+                    <input type="text" class="input-text" name="birthday">
 				</div>
 				<div class="inputdiv">
 					<span class="input-span">성별</span><br> 
                     <div class="gender f">
                         여자 
-                        <input type="radio" name="mb_gender" value="F" checked> 
+                        <input type="radio" name=gender value="F" checked> 
                     </div>
                     <div class="gender m">
-                        남자 <input type="radio" name="mb_gender" value="M">
+                        남자 <input type="radio" name="gender" value="M">
                     </div>
                    
 				</div>
 				<div class="inputdiv">
 					<span class="input-span">이메일</span><br> 
-                    <input type="text" class="input-text">
+                    <input type="email" class="input-text" name="email">
 				</div>
 				<div class="inputdiv">
 					<span class="input-span">전화번호</span><br> 
-                    <input type="text" class="input-text">
+                    <input type="text" class="input-text" name="phone">
 				</div>
 
 				<div class="inputdiv">
 					<span class="input-span">지역</span><br> 
-                    <select name="" id="location">
+                    <select name="locationCode" id="location">
 						<option>서울</option>
 						<option>경기</option>
 						<option>인천</option>
@@ -325,7 +298,7 @@
 						<option>제주</option>
 						<option>광주</option>
 
-					</select> <input type="text" class="input-text address">
+					</select> <input type="text" name="address"class="input-text address">
 				</div>
 				<div class="checkbox-div">
 					<span class="input-span">취향</span><br>
@@ -353,7 +326,7 @@
 					</div>
 				</div>
 				<div class="input-button">
-					<input id="insertMember" type="submit" value="가입하기" disabled>
+					<input id="insertMember" type="submit" value="가입하기" >
 				</div>
 			</form>
 		</div>
