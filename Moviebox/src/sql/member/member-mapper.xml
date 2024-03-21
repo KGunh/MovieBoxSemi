@@ -20,9 +20,11 @@
 	            ENROLL_DATE,	
 	            STATUS,	
 	            PRIVILEGE,	
-	            LOCAL_CODE
+	            LOCAL_NAME
 	   	   FROM
 	            TB_MEMBER
+	       JOIN
+                TB_LOCATION ON(LOCAL_CODE = LOCATION_CODE)
 	      WHERE
 	            MEMBER_ID = ?
 	        AND

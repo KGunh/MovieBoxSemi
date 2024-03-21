@@ -1,15 +1,29 @@
 package com.kh.reservation.controller;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
+
+import com.kh.reservation.model.service.ReservationService;
 
 public class ReservationController {
-
-	public void selectSeat(HttpServletRequest request, HttpServletResponse response) {
+	
+	public void selectReservationInfo(HttpServletRequest request) {
+		new ReservationService().selectMovieList();
+		
 		
 		
 		
 	}
+
+	public void setSeat(HttpServletRequest request) {
+		request.getParameter("");
+		// 좌석선택 화면으로 이동
+		
+	}
+	
+	public void insertReservation() {
+		//예약내용 insert
+	}
+
 
 	
 }
