@@ -113,9 +113,7 @@
 <body>
 
 	<%@ include file="../common/header.jsp" %>
-
-	<%@ include file="../common/informationNavi.jsp" %>
-
+	
     <div class="content">
         <div class="title-area">
             <div class="title-content"><span class="tit">로그인</span></div>

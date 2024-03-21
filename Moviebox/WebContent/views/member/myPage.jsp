@@ -211,6 +211,10 @@
     <title>마이페이지</title>
 </head>
 <body>
+
+
+	<%@ include file="../common/header.jsp" %>
+	<%@ include file="../common/informationNavi.jsp" %>
     <div class="content">
         <div class="title-area">
             <span class="tit">회원정보</span>

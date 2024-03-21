@@ -184,8 +184,10 @@
 				<% if(loginUser == null) { %>
 					<a href="#" class="member">회원가입</a>
                 	<a href="<%=contextPath%>/loginForm.me" class="member">로그인</a>
-				<%}else { %>
-					<a href="<%= contextPath %>/logout.me" class="member">로그아웃</a>
+				<%}else {  if(loginUser.getPrivilege().equals("Y")) {%>
+					<a href="#" class="member">관리자 기능</a>
+				<%} %>
+					<a href="<%=contextPath%>/logout.me" class="member">로그아웃</a>
 				<%} %>
 				</div>
 			</div>
