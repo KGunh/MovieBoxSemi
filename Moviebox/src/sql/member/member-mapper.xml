@@ -20,19 +20,36 @@
 	            ENROLL_DATE,	
 	            STATUS,	
 	            PRIVILEGE,	
-	            LOCAL_CODE
+	            LOCATION_NAME
 	   	   FROM
 	            TB_MEMBER
+	       JOIN
+                TB_LOCATION ON(LOCAL_CODE = LOCATION_CODE)
 	      WHERE
 	            MEMBER_ID = ?
 	        AND
 	            MEMBER_PWD = ?
 	        AND
 	            STATUS = 'Y'
-		         
-		
-		
-		
+
+	</entry>
+	
+	<entry key="loginGenre">
+		SELECT
+                GENRE_CATEGORY
+	   	   FROM
+	            TB_MEMBER
+           JOIN
+                TB_MEMBERGENR ON(MEMBER_NO = MEM_NO)
+           JOIN
+                TB_GENRE USING(GENRE_CODE)
+          WHERE
+	            MEMBER_ID = ?
+	        AND
+	            MEMBER_PWD = ?
+	        AND
+	            STATUS = 'Y'
+	
 	
 	</entry>
 	
