@@ -34,7 +34,7 @@ public class ReservationServlet extends HttpServlet {
 		
 		ReservationController rc = new ReservationController(); 
 		
-		String view = "";
+		String view = "출장";
 		
 		boolean flag = false;
 		
