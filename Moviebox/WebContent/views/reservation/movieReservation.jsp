@@ -20,6 +20,7 @@
 <title>Insert title here</title>
 <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <style>
     div{
         box-sizing: border-box;
@@ -61,6 +62,10 @@
     
     #selectMovieArea{
         background-color: rgb(255, 193, 69);
+    }
+
+    .poster:hover{
+        transform: scale(1.1);
     }
 
     #selectDateArea{
@@ -175,27 +180,33 @@
     }
 
     .swiper-slide{
-        position: relative;
         display: flex;
     }
 
     .poster{
         height: 280px;
         width: 180px;
-        margin-top: 55px;
-        margin-left: 55px;
+        margin: auto;
         border-radius: 24px;
     }
 
-    .poster:hover{
-        cursor: pointer;
+    .base{
+        height: 280px !important; 
+        width: 180px !important;
+        margin: auto;
+        border-radius: 24px;
     }
 
     .poster img{
         width: 100%;
         height: 100%;
         border-radius: 24px;
+        margin: auto;
         box-shadow: 4px 4px 8px rgb(32, 32, 32);
+    }
+
+    .poster img:hover{
+        cursor: pointer;
     }
 
     #submit-btn{
@@ -209,8 +220,8 @@
         margin-right: 65px;
         border: none;
     }
-    
 
+  
 </style>
 
 </head>
@@ -295,7 +306,6 @@
                 </div>
             </div>
             <div id="selectScreenArea">
-                <!-- 영화관 스크린 정보 -->
                 <div id="printScreen">
                     <div class="screen">
                         <!--TB_SCREEN에서 SELECT-->
@@ -398,18 +408,13 @@
             document.getElementById('printToday').innerHTML = year + '-' + month + '-' + day;
         }
 
-        document.querySelectorAll('.poster').forEach(function(poster) {
-            poster.addEventListener('click', function(e) {
-                e.target.style.border = '4px solid crimson';
+        $(function(){
+            $('.poster').click(function(){
+                $('.poster').not(this).removeAttr('style');
+                $(this).css('transform', 'scale(1.1)');
             });
         });
 
-        document.querySelectorAll('.screen').forEach(function(screenName) {
-            screenName.addEventListener('click', function(e){
-                e.target.style.background = 'white';
-            });
-        });
-        
         
     </script>
 </body>
