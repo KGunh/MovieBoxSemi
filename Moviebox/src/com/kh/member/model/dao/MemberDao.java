@@ -66,7 +66,7 @@ public class MemberDao {
 										 rset.getDate("ENROLL_DATE"),
 										 rset.getString("STATUS"),
 										 rset.getString("PRIVILEGE"),
-										 rset.getString("LOCAL_CODE"));
+										 rset.getString("LOCAL_NAME"));
 								
 			}
 		} catch (SQLException e) {
