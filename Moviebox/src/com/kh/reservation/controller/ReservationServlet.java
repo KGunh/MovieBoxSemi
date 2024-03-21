@@ -34,14 +34,14 @@ public class ReservationServlet extends HttpServlet {
 		
 		ReservationController rc = new ReservationController(); 
 		
-		String view = "출장";
+		String view = "";
 		
 		boolean flag = false;
 		
 		switch(mapping) {
-		case "movie" : view = "views/reservation/movieReservation.jsp"; break; 
-		case "seat" : view = "views/reservation/seatReservation.jsp"; break;
-		case "payment" : break;
+		case "movie" : new ReservationController().selectInfo(request); view = "views/reservation/movieReservation.jsp"; break; 
+		case "seat" : new ReservationController().setSeat(request); view = "views/reservation/seatReservation.jsp"; break;
+		case "payment" : new ReservationController().insertReservation(); break;
 		}
 		
 		if(flag) {
