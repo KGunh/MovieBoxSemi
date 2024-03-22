@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>고객센터 QnA</title>
 
     <style>
         body{
@@ -55,27 +55,45 @@
             width: 600px;
             height: 90px;
             float: left;
-            color:white;
-            /* border: 1px solid palegreen; */
+            font-weight: bolder;
+        }
+        
+        .notice-tap a {
+        	color: white;
+        }        
+        
+        .qna-tap a:hover {
+        	color: #1A1A1A;
+        	text-decoration: none;
         }
 
         .qna-tap{
             width: 600px;
             height: 90px;
-            background-color: #FFC145;
-            font-weight: bolder;
             color: #1A1A1A;
             display: inline-block;
             left: 0;
-        }
-
-        .notice-tap:hover{
-            font-weight: bolder;
-            color: #1A1A1A;
+            cursor: pointer;
             background-color: #FFC145;
         }
 
-        /*************************/
+        .notice-tap:hover{
+            background-color: #FFC145;
+        }
+        
+        .qna-tap a {
+            color: #1A1A1A;
+        }
+        
+        .notice-tap:hover a{
+        	color: #1A1A1A;
+        }
+        
+        .notice-tap a:hover {
+        	color: #1A1A1A;
+        	text-decoration: none;
+        }
+
         /* 검색 */
         #search-notice{
             width: 480px;
@@ -222,8 +240,8 @@
                 
             <!-- 카테고리 -->
             <div id="board-category">
-                <div class="notice-tap" onclick="openNotice();">공지사항</div>
-                <div class="qna-tap">QnA</div>
+                <div class="notice-tap"><a href="../notice/noticeList.jsp">공지사항</a></div>
+                <div class="qna-tap"><a href="qnaList.jsp">QnA</a></div>
             </div> <!-- board-category -->
 
             <!-- 검색 -->
@@ -289,12 +307,6 @@
         </div>
     </div>
     
-    <script>
-    	function openNotice(){
-    		window.location.href = "../notice/noticeList.jsp";
-    	}
-    
-    </script>
 
    	<%@ include file="../common/footer.jsp" %>
 

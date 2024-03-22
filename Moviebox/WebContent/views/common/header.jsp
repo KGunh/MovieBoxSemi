@@ -207,7 +207,7 @@
 		</div>
 		<div id="header-navigator">
             <div id="logo-div">
-                <div id="logo"><a href="<%=contextPath %>"><img class="img-concert" src="<%=contextPath%>/resource/img/4.png"/></a></div>
+                <div id="logo"><a href="<%=contextPath %>"><img class="img-concert" src="<%=contextPath%>/resources/img/4.png"/></a></div>
             </div>
             <div id="navigator">
                 <!-- A grey horizontal navbar that becomes vertical on small screens -->

@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<title>고객센터</title>
+<title>고객센터 공지사항</title>
 
     <style>
         body{
@@ -63,11 +63,14 @@
             float: left;
             background-color: #FFC145;
             font-weight: bolder;
-            color: #1A1A1A;
-            /* border: 1px solid palegreen; */
         }
         
-        a {
+        .notice-tap a {
+        	color: #1A1A1A;
+        }        
+        
+        .notice-tap a:hover {
+        	color: #1A1A1A;
         	text-decoration: none;
         }
 
@@ -80,13 +83,23 @@
             cursor: pointer;
         }
 
-
         .qna-tap:hover{
-            color: #1A1A1A;
             background-color: #FFC145;
         }
+        
+        .qna-tap a {
+        	color: white;
+        }
+        
+        .qna-tap:hover a{
+        	color: #1A1A1A;
+        }
+        
+        .qna-tap a:hover {
+        	color: #1A1A1A;
+        	text-decoration: none;
+        }
 
-        /*************************/
         /* 검색 */
         #search-notice{
             width: 480px;
@@ -244,7 +257,7 @@
                 </div>
 
                 <div id="search-img">
-                    <img src="<%= contextPath %>/resource/img/search.PNG" width="45" height="45">
+                    <img src="<%= contextPath %>/resources/img/search.PNG" width="45" height="45">
                 </div>
 
             </div> <!-- search-notice -->
