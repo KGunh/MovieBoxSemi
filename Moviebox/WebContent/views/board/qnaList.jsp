@@ -4,13 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
-
-<title>고객센터</title>
+<title>Insert title here</title>
 
     <style>
         body{
@@ -61,22 +55,22 @@
             width: 600px;
             height: 90px;
             float: left;
-            background-color: #FFC145;
-            font-weight: bolder;
-            color: #1A1A1A;
+            color:white;
             /* border: 1px solid palegreen; */
         }
 
         .qna-tap{
             width: 600px;
             height: 90px;
-            color: #FFC145;
+            background-color: #FFC145;
+            font-weight: bolder;
+            color: #1A1A1A;
             display: inline-block;
             left: 0;
         }
 
-
-        .qna-tap:hover{
+        .notice-tap:hover{
+            font-weight: bolder;
             color: #1A1A1A;
             background-color: #FFC145;
         }
@@ -97,6 +91,7 @@
             height: 30px;
             float: left;
             margin-left: 10px;
+            cursor: pointer;
         }
 
         #input-notice{
@@ -212,12 +207,12 @@
 
 
     </style>
-    
 </head>
 <body>
-
-	<%@ include file="../common/header.jsp" %>
-	
+    
+    <%@ include file="../common/header.jsp" %>
+       	
+       	
     <div id="wrap">
 
         <!-- 전체 감싸는 부분 -->
@@ -227,7 +222,7 @@
                 
             <!-- 카테고리 -->
             <div id="board-category">
-                <div class="notice-tap">공지사항</div>
+                <div class="notice-tap" onclick="openNotice();">공지사항</div>
                 <div class="qna-tap">QnA</div>
             </div> <!-- board-category -->
 
@@ -253,8 +248,8 @@
                             <th id="list-th-i">번호</th>
                             <th id="list-th-i">카테고리</th>
                             <th id="list-th">제목</th>
+                            <th id="list-th-i">작성자</th>
                             <th id="list-th-i">작성일</th>
-                            <th id="list-th-i">조회수</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -262,27 +257,26 @@
                             <td id="list-no">1</td>
                             <td id="list-ca">예매</td>
                             <td id="list-title">공지 제목 제목 공지 제목 공지사항 예매 공지</td>
+                            <td id="list-count">김유나</td>
                             <td id="list-date">2024-03-21</td>
-                            <td id="list-count">50</td>
                         </tr>
                         <tr>
                             <td id="list-no">2</td>
                             <td id="list-ca">영화관</td>
                             <td id="list-title">공지 제목 제목 공지 제목 공지사항 예매 공지</td>
+                            <td id="list-count">김유나</td>
                             <td id="list-date">2024-03-21</td>
-                            <td id="list-count">777</td>
                         </tr>
                         <tr>
                             <td id="list-no">3</td>
                             <td id="list-ca">기타</td>
                             <td id="list-title">공지 제목 제목 공지 제목 공지사항 예매 공지임 예매</td>
+                            <td id="list-count">김유나</td>
                             <td id="list-date">2024-03-21</td>
-                            <td id="list-count">58</td>
                         </tr>
                     </tbody>
                 </table>
             </div>
-
 
             <div id="page">
                 <div class="paging-area" align="center" style="margin-top:12px;">
@@ -295,7 +289,14 @@
         </div>
     </div>
     
-    	<%@ include file="../common/footer.jsp" %>
+    <script>
+    	function openNotice(){
+    		window.location.href = "../notice/noticeList.jsp";
+    	}
+    
+    </script>
+
+   	<%@ include file="../common/footer.jsp" %>
 
 
 </body>

@@ -1,25 +1,24 @@
-package com.kh.notice.controller;
+package com.kh.board.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.notice.controller.NoticeController;
-
 /**
- * Servlet implementation class NoticeServlet
+ * Servlet implementation class QnaServlet
  */
-@WebServlet("*.notice")
-public class NoticeServlet extends HttpServlet {
+@WebServlet("*.qna")
+public class QnaServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public NoticeServlet() {
+    public QnaServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,11 +30,9 @@ public class NoticeServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
-		// 변수 선언 
+		QnaController qc = new QnaController();
 		
-		NoticeController nc = new NoticeController();
-		
-		// URI 담기
+		// URI 담아주기
 		String uri = request.getRequestURI();
 		
 		String view = "";
@@ -43,8 +40,9 @@ public class NoticeServlet extends HttpServlet {
 		
 		String mapping = uri.substring(uri.lastIndexOf("/") + 1, uri.lastIndexOf("."));
 		
+		
 		switch(mapping) {
-		case "list" : view = "views/notice/noticeList.jsp"; break;
+		case "list" : view = "views/board/qnaList.jsp"; break;
 		}
 		
 		if(flag) {
@@ -52,7 +50,14 @@ public class NoticeServlet extends HttpServlet {
 		} else {
 			request.getRequestDispatcher(view).forward(request, response);
 		}
-	
+		
+		
+		
+		
+		
+		
+		
+		
 	
 	}
 
