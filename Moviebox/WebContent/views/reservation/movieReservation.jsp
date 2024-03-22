@@ -231,7 +231,7 @@
                             <% for(Movie m : movieList) { %>
 	                           	<div class="swiper-slide">
 	                                <div class="poster">
-	                                    <img src="/Moviebox/WebContent/<%= m.getFilePath() %>/<%= m.getFileName() %>">
+	                                    <img src="<%= contextPath %>/<%= m.getFilePath() %>/<%= m.getFileName() %>">
 	                                </div>
 	                            </div>
                             <% } %>
