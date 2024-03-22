@@ -43,11 +43,17 @@ private Properties prop = new Properties();
 			while(rset.next()) {
 				Movie m = new Movie();
 				m.setMovieNo(rset.getInt("MOVIE_NO"));
+				m.setMovieTitle(rset.getString("MOVIE_TITLE"));
+			    m.setFilePath(rset.getString("FILE_PATH"));
+			    m.setFileName(rset.getString("CHANGE_NAME"));
 				
 				list.add(m);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
 		}
 		return list;
 	}

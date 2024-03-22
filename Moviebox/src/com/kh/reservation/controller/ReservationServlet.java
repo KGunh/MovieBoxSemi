@@ -40,8 +40,8 @@ public class ReservationServlet extends HttpServlet {
 		boolean flag = false;
 		
 		switch(mapping) {
-		case "movie" : new ReservationController().selectReservationInfo(request); view = "views/reservation/movieReservation.jsp"; break; 
-		case "seat" : new ReservationController().setSeat(request); view = "views/reservation/seatReservation.jsp"; break;
+		case "movie" : view = new ReservationController().selectReservationInfo(request); view = "views/reservation/movieReservation.jsp"; break; 
+		case "seat" : new ReservationController().setSeat(request); break;
 		case "payment" : new ReservationController().insertReservation(); break;
 		}
 		

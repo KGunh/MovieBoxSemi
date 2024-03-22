@@ -1,17 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.kh.common.model.vo.Location, com.kh.movie.model.vo.Movie" %>
 
 <%
-
-
-
-
-
-
-
-
-
-
+	ArrayList<Movie> movieList = (ArrayList<Movie>)request.getAttribute("movieList");
+	ArrayList<Location> locationList = (ArrayList<Location>)request.getAttribute("locationList");
 %>
 <!DOCTYPE html>
 <html>
@@ -232,48 +225,23 @@
             <div id="title">영화예매</div>
             <div id="selectMovieArea">
                 <div id="content_1">
-                    <!-- Slider main container -->
                     <div class="swiper">
-                        <!-- Additional required wrapper -->
                         <div id="swiper-select" class="swiper-wrapper">
                             <!-- Slides -->
-                            <div class="swiper-slide">
-                                <!--TB_MOVIE에서 SELECT-->
-                                <div class="poster">
-                                    <img src="/moviebox/resource/img/poster/poster_Exhuma.jpg">
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="poster">
-                                    <img src="/moviebox/resource/img/poster/poster_Dune.jpg">
-                                </div>
-                            </div>
-                            <div class="swiper-slide">    
-                                <div class="poster">
-                                    <img src="/moviebox/resource/img/poster/poster_SpyXFamily.jpg">
-                                </div>
-                            </div>
-                            <div class="swiper-slide">    
-                                <div class="poster">
-                                    <img src="/moviebox/resource/img/poster/poster_SlamDunk.jpg">
-                                </div>
-                            </div>
-                            <div class="swiper-slide">    
-                                <div class="poster">
-                                    <img src="/moviebox/resource/img/poster/poster_Wonka.jpg">
-                                </div>
-                            </div>
-                           
+                            <% for(Movie m : movieList) { %>
+	                           	<div class="swiper-slide">
+	                                <div class="poster">
+	                                    <img src="/<%= m.getFilePath() %>/<%= m.getFileName() %>">
+	                                </div>
+	                            </div>
+                            <% } %>
                         </div>
-                    
-                        <!-- If we need pagination -->
+                    	
                         <div class="swiper-pagination"></div>
                     
-                        <!-- If we need navigation buttons -->
                         <div class="swiper-button-prev"></div>
                         <div class="swiper-button-next"></div>
                     
-                        <!-- If we need scrollbar -->
                         <div class="swiper-scrollbar"></div>
                     </div>
                 </div>
@@ -285,22 +253,10 @@
             <div id="selectLocationArea">
                 <div id="selectLocation">
                     <select>
-                        <!--TB_LOCATION에서 SELECT-->
-                        <option value="전체">전체</option>
-                        <option value="서울">서울</option>
-                        <option value="경기">경기</option>
-                        <option value="인천">인천</option>
-                        <option value="강원">강원</option>
-                        <option value="대전">대전</option>
-                        <option value="충남">충남</option>
-                        <option value="충북">충북</option>
-                        <option value="대구">대구</option>
-                        <option value="경북">경북</option>
-                        <option value="울산">울산</option>
-                        <option value="부산">부산</option>
-                        <option value="경남">경남</option>
-                        <option value="광주">광주</option>
-                        <option value="제주">제주</option>
+                        <option>전체</option>
+                        <% for(Location l : locationList){ %>
+                        	<option><%= l.getLocationName() %></option>
+                        <% } %>
                     </select>
                     <input id="screenDate" type="date" name="screenDate">
                 </div>
