@@ -92,10 +92,12 @@
             color: white;
             cursor: pointer;
             font-size: 15px;
+            text-decoration: none;
         }
 
         .align-a:hover{
             color: #FFC145;
+            text-decoration: none;
         }
 
         #movie-list-search{

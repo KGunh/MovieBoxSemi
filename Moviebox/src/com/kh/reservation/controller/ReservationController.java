@@ -6,12 +6,13 @@ import com.kh.reservation.model.service.ReservationService;
 
 public class ReservationController {
 	
-	public void selectReservationInfo(HttpServletRequest request) {
-		new ReservationService().selectMovieList();
-		new ReservationService().selectLocationList();
+	public String selectReservationInfo(HttpServletRequest request) {
+		request.setAttribute("movieList", new ReservationService().selectMovieList()); 
+		request.setAttribute("locationList", new ReservationService().selectLocationList()); 
 		
-		//리퀘스트 셋
+		String view = "views/reservation/seatReservation.jsp";
 		
+		return view;
 	}
 
 	public void setSeat(HttpServletRequest request) {

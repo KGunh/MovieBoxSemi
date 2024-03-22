@@ -12,12 +12,16 @@ public class Movie {
 	private String movieStory;
 	private String status;
 	private String genreNo;
+	private String filePath;
+	private String fileName;
+	
 	
 	public Movie() {
 		super();
 	}
+	
 	public Movie(int movieNo, String movieTitle, String director, String movieRated, Date movieRelease,
-			String movieStory, String status, String genreNo) {
+			String movieStory, String status, String genreNo, String filePath, String fileName) {
 		super();
 		this.movieNo = movieNo;
 		this.movieTitle = movieTitle;
@@ -27,7 +31,10 @@ public class Movie {
 		this.movieStory = movieStory;
 		this.status = status;
 		this.genreNo = genreNo;
+		this.filePath = filePath;
+		this.fileName = fileName;
 	}
+
 	public int getMovieNo() {
 		return movieNo;
 	}
@@ -76,6 +83,23 @@ public class Movie {
 	public void setGenreNo(String genreNo) {
 		this.genreNo = genreNo;
 	}
+	
+	public String getFilePath() {
+		return filePath;
+	}
+
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+
+	public String getFileName() {
+		return fileName;
+	}
+
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
+	}
+
 	@Override
 	public String toString() {
 		return "Movie [movieNo=" + movieNo + ", movieTitle=" + movieTitle + ", director=" + director + ", movieRated="
