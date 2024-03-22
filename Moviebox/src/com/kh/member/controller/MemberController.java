@@ -103,4 +103,12 @@ public class MemberController {
 		
 		return view;
 	}
+	
+	public String myPagePrint(HttpServletRequest request, HttpServletResponse response) {
+		String view = "";
+		
+		
+		
+		return view;
+	}
 }
