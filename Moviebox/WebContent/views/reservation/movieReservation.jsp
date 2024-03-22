@@ -337,11 +337,22 @@
 
             <button id="submit-btn" type="submit">좌석 선택</button>
         </form>
+       
+        
+        
     </div>
     <%@ include file="/views/common/footer.jsp" %>
 
 
     <script>
+
+
+            document.getElementById('#screenDate').onchange = function(){
+        		
+                
+        		
+        		
+        	}
         // 슬라이더 동작 정의
         const swiper = new Swiper('.swiper', {
             loop : true, //반복 재생 여부
