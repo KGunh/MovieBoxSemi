@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
-<title>고객센터</title>
+<title>고객센터 공지사항</title>
 
     <style>
         body{
@@ -63,8 +63,15 @@
             float: left;
             background-color: #FFC145;
             font-weight: bolder;
-            color: #1A1A1A;
-            /* border: 1px solid palegreen; */
+        }
+        
+        .notice-tap a {
+        	color: #1A1A1A;
+        }        
+        
+        .notice-tap a:hover {
+        	color: #1A1A1A;
+        	text-decoration: none;
         }
 
         .qna-tap{
@@ -73,15 +80,26 @@
             color: #FFC145;
             display: inline-block;
             left: 0;
+            cursor: pointer;
         }
-
 
         .qna-tap:hover{
-            color: #1A1A1A;
             background-color: #FFC145;
         }
+        
+        .qna-tap a {
+        	color: white;
+        }
+        
+        .qna-tap:hover a{
+        	color: #1A1A1A;
+        }
+        
+        .qna-tap a:hover {
+        	color: #1A1A1A;
+        	text-decoration: none;
+        }
 
-        /*************************/
         /* 검색 */
         #search-notice{
             width: 480px;
@@ -227,8 +245,8 @@
                 
             <!-- 카테고리 -->
             <div id="board-category">
-                <div class="notice-tap">공지사항</div>
-                <div class="qna-tap">QnA</div>
+                <div class="notice-tap"><a href="noticeList.jsp">공지사항</a></div>
+                <div class="qna-tap"><a href="../board/qnaList.jsp">QnA</a></div>
             </div> <!-- board-category -->
 
             <!-- 검색 -->
@@ -239,7 +257,7 @@
                 </div>
 
                 <div id="search-img">
-                    <img src="<%= contextPath %>/resource/img/search.PNG" width="45" height="45">
+                    <img src="<%= contextPath %>/resources/img/search.PNG" width="45" height="45">
                 </div>
 
             </div> <!-- search-notice -->
@@ -294,6 +312,8 @@
 
         </div>
     </div>
+    
+
     
     	<%@ include file="../common/footer.jsp" %>
 
