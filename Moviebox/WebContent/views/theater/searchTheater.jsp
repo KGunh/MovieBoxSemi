@@ -206,7 +206,6 @@
         document.getElementById('searchNavi').onclick = function(e){
                 var locationName = e.target.innerHTML;
                 document.getElementById('locationInput').value = locationName;
-                /*console.log(document.getElementById('locationInput').value);*/
                 document.getElementById('locationForm').submit();
         }
 
