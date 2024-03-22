@@ -36,11 +36,11 @@
 	
 	<entry key="loginGenre">
 		SELECT
-                GENRE_CATEGORY
+                GENRE_NAME
 	   	   FROM
 	            TB_MEMBER
            JOIN
-                TB_MEMBERGENR ON(MEMBER_NO = MEM_NO)
+                TB_MEMBERGENRE ON(MEMBER_NO = MEM_NO)
            JOIN
                 TB_GENRE USING(GENRE_CODE)
           WHERE
@@ -67,7 +67,7 @@
 	<entry key="genreInsert">
 		INSERT
    		  INTO
-       		   TB_MEMBERGENR
+       		   TB_MEMBERGENRE
 	    VALUES(
 	    		SEQ_MEMNO.CURRVAL,
 	    		(SELECT
@@ -75,7 +75,7 @@
  				   FROM
        				    TB_GENRE
  				   WHERE
-       					 GENRE_CATEGORY = ?))
+       					 GENRE_NAME = ?))
 	
 	</entry>
 	

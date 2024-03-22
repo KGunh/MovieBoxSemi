@@ -71,29 +71,23 @@
         .info-name{
             font-size: 30px;
         }
-        .btn5{
+        #btn1{
             background-color: #FFC145;
-            width: auto;
-            height: auto;
             position: absolute;
             font-size: 14px;
             font-weight: bold;
             top: 10px;
             right: 10px;
             color: black;
-            border: 1px solid #1A1A1A;
-            text-decoration-line: none;
+
         }
-        .btn5:hover{
-            border: 1px solid #1A1A1A;
-            color: black;
-            text-decoration-line: none;
-        }
+        
         .info-content1{          
             float: left;
-            width: 70%;
+            width: 100%;
             height: 100%;
             position: relative;
+            padding: 10px;
             background-color: white;
         }
         .info-name{
@@ -103,9 +97,9 @@
         }
         .info-id{
             position: absolute;
-            top: 15px;
-            right:10px;
-            font-size: 12px;
+            top: 8px;
+            right:20px;
+            font-size: 20px;
             color: rgb(51, 51, 51);
         }
         .info-address, .info-email{
@@ -243,10 +237,6 @@
 		String localCode = loginUser.getLocalCode();
 		
 		ArrayList<MemberGenre> list = loginUser.getGenreList();
-		
-			
-
-		
 
 
 	%>
@@ -256,7 +246,7 @@
             <span class="tit">회원정보</span>
         </div>
         <div class="info-area">
-            <a class="btn5">정보수정</a>
+            <a class="btn btn-warning" id="btn1">정보수정</a>
             <div class="info-area-content">
                 <div class="info-content1">
                     <div class="info-name"><%=memberName %> 님 <div class="info-id"><%=memberId %></div></div>
