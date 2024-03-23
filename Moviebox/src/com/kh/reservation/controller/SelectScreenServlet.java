@@ -1,28 +1,23 @@
-package com.kh.theater.controller;
+package com.kh.reservation.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.theater.model.service.TheaterService;
-import com.kh.theater.model.vo.Theater;
-
 /**
- * Servlet implementation class TheaterNameSearchController
+ * Servlet implementation class SelectScreenServlet
  */
-@WebServlet("/search.theatername")
-public class TheaterNameSearchController extends HttpServlet {
+@WebServlet("/screen.reservation")
+public class SelectScreenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TheaterNameSearchController() {
+    public SelectScreenServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,14 +26,20 @@ public class TheaterNameSearchController extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		String theaterName = request.getParameter("theaterName");
-		ArrayList<Theater> list = new TheaterService().searchTheaterName(theaterName);
-		String type = request.getParameter("type");
+
+		request.getParameter("date");
+		request.getParameter("location");
+	
+		// screen테이블과 조인하여 상영관 정보 가져오기
 		
-		request.setAttribute("type", type);
-		request.setAttribute("list", list);
-		request.getRequestDispatcher("views/theater/searchTheater.jsp").forward(request, response);
+		// 반복문으로 보여주기
 		
+		// 더보기 버튼 만들기
+	
+	
+	
+	
+	
 	}
 
 	/**
