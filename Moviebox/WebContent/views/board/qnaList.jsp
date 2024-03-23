@@ -252,7 +252,7 @@
                 </div>
 
                 <div id="search-img">
-                    <img src="<%= contextPath %>/resource/img/search.PNG" width="45" height="45">
+                    <img src="<%= contextPath %>/resources/img/search.PNG" width="45" height="45">
                 </div>
 
             </div> <!-- search-notice -->
