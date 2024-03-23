@@ -10,7 +10,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>영화 예매</title>
 <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
@@ -21,7 +21,7 @@
 
     #wrap{
         width: 1200px;
-        height: 1600px;
+        height: auto;
     }
 
      /* 이미지 영역 사이즈 조절 */
@@ -62,7 +62,7 @@
     }
 
     #selectDateArea{
-        height: 100px;
+        height: 80px;
         width: 100%;
     }
 
@@ -113,6 +113,7 @@
         margin-left: 15px;
         border: none;
     }
+
     #selectLocation > select:focus{
         outline: none;
     }
@@ -122,7 +123,8 @@
     }
 
     #selectScreenArea{
-        height: 800px;
+        height: auto;
+        padding-bottom: 100px;
     }
 
     #printScreen{
@@ -210,6 +212,7 @@
         font-size: 28px;
         background-color: rgb(255, 193, 69);
         float: right;
+        margin-top: 20px;
         margin-right: 65px;
         border: none;
     }
@@ -333,9 +336,9 @@
                         </div>
                     </div>
                 </div>
+                <button id="submit-btn" type="submit">좌석 선택</button>
             </div>
 
-            <button id="submit-btn" type="submit">좌석 선택</button>
         </form>
        
         
