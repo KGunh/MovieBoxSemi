@@ -12,15 +12,16 @@ import com.kh.common.model.vo.Genre;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
 import com.kh.member.model.vo.MemberGenre;
+import com.kh.movie.model.vo.Movie;
 
 public class MemberService {
 	
 	public Member login(Member member) {
 		
 		Connection conn = getConnection();
-
+		// 로그인
 		Member m = new MemberDao().login(conn, member);
-		
+		// 로그인한 회원 객체에 장르 추가
 		ArrayList<MemberGenre> list = new MemberDao().loginGenre(conn, member); 
 		m.setGenreList(list);
 		
@@ -35,11 +36,12 @@ public class MemberService {
 	public int insert(Member m, ArrayList<Genre> genreList) {
 		
 		Connection conn = getConnection();
-		
+		// 회원가입
 		int memberResult = new MemberDao().memberInsert(conn, m);
 		int genreResult = 1;
 		for(int i = 0; i < genreList.size(); i++) {
 			Genre g = new Genre();
+			// 회원가입 장르 추가
 			g.setGenreName(genreList.get(i).getGenreName());
 			genreResult += new MemberDao().genreInsert(conn,g);
 		}
@@ -55,6 +57,15 @@ public class MemberService {
 		close(conn);
 		return (memberResult * genreResult);
 		
+	}
+	
+	public Movie myPageMoviePrint(Member loginUser) {
+		Connection conn = getConnection();
+		
+		Movie m = new MemberDao().
+		
+		
+		return m;
 	}
 
 }

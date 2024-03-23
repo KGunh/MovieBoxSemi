@@ -9,6 +9,7 @@ import javax.servlet.http.HttpSession;
 import com.kh.common.model.vo.Genre;
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
+import com.kh.movie.model.vo.Movie;
 
 public class MemberController {
 
@@ -106,9 +107,48 @@ public class MemberController {
 	
 	public String myPagePrint(HttpServletRequest request, HttpServletResponse response) {
 		String view = "";
+		HttpSession session = request.getSession();
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		Movie m = new MemberService().myPageMoviePrint(loginUser);
+		
+		
+		
 		
 		
 		
 		return view;
 	}
+	
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -1,4 +1,4 @@
-package com.kh.member.model.vo;
+package com.kh.common.model.vo;
 
 public class Reservation {
 	private int ticketNo;

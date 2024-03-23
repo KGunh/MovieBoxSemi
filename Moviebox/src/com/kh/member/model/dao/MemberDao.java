@@ -14,6 +14,7 @@ import java.util.Properties;
 import com.kh.common.model.vo.Genre;
 import com.kh.member.model.vo.Member;
 import com.kh.member.model.vo.MemberGenre;
+import com.kh.movie.model.vo.Movie;
 
 public class MemberDao {
 	
@@ -29,7 +30,7 @@ public class MemberDao {
 			e.printStackTrace();
 		}
 	}
-	
+	//로그인기능
 	public Member login(Connection conn, Member member) {
 
 		
@@ -79,65 +80,7 @@ public class MemberDao {
 		return m;
 		
 	}
-	
-	public int memberInsert(Connection conn, Member m) {
-		int result = 0;
-		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("memberInsert");
-		
-		System.out.println(m.getMemberId());
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, m.getMemberId());
-			pstmt.setString(2, m.getMemberPwd());
-			pstmt.setString(3, m.getMemberName());
-			pstmt.setString(4, m.getBirthday());
-			pstmt.setString(5, m.getGender());
-			pstmt.setString(6, m.getEmail());
-			pstmt.setString(7, m.getPhone());
-			pstmt.setString(8, m.getAddress());
-			pstmt.setString(9, m.getLocalCode());
-			
-			result = pstmt.executeUpdate();
-			
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
-		
-		
-		
-		
-		return result;
-	}
-	
-	public int genreInsert(Connection conn, Genre g) {
-		
-		int result = 0;
-		PreparedStatement pstmt = null;
-		
-		String sql = prop.getProperty("genreInsert");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, g.getGenreName());
-			
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		
-		
-		return result;
-	}
-	
+	// 로그인 장르
 	public ArrayList<MemberGenre> loginGenre(Connection conn,Member m){
 		ArrayList<MemberGenre> list = new ArrayList();
 		PreparedStatement pstmt = null;
@@ -172,4 +115,76 @@ public class MemberDao {
 		return list; 
 	}
 
+	// 회원가입
+	public int memberInsert(Connection conn, Member m) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("memberInsert");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getMemberId());
+			pstmt.setString(2, m.getMemberPwd());
+			pstmt.setString(3, m.getMemberName());
+			pstmt.setString(4, m.getBirthday());
+			pstmt.setString(5, m.getGender());
+			pstmt.setString(6, m.getEmail());
+			pstmt.setString(7, m.getPhone());
+			pstmt.setString(8, m.getAddress());
+			pstmt.setString(9, m.getLocalCode());
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(pstmt);
+		}
+		
+		
+		
+		
+		return result;
+	}
+	// 회원가입 장르 추가
+	public int genreInsert(Connection conn, Genre g) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("genreInsert");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, g.getGenreName());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		
+		return result;
+	}
+	
+	public Movie myPageMoviePrint(Connection conn, Member loginUser) {
+		Movie movie = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("loginGenre");
+		
+		
+		
+		
+		
+	}
+	
+	
 }
