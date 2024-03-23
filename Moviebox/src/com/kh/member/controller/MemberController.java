@@ -1,15 +1,16 @@
 package com.kh.member.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.kh.common.model.vo.Genre;
+import com.kh.common.model.vo.Reservation;
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
-import com.kh.movie.model.vo.Movie;
 
 public class MemberController {
 
@@ -111,7 +112,9 @@ public class MemberController {
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		
-		Movie m = new MemberService().myPageMoviePrint(loginUser);
+		List<Reservation> list = new MemberService().myPagePrint(loginUser);
+		
+		
 		
 		
 		

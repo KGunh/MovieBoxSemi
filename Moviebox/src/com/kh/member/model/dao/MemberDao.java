@@ -9,9 +9,11 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.kh.common.model.vo.Genre;
+import com.kh.common.model.vo.Reservation;
 import com.kh.member.model.vo.Member;
 import com.kh.member.model.vo.MemberGenre;
 import com.kh.movie.model.vo.Movie;
@@ -173,16 +175,50 @@ public class MemberDao {
 		return result;
 	}
 	
-	public Movie myPageMoviePrint(Connection conn, Member loginUser) {
-		Movie movie = null;
+	public List<Reservation> myPagePrint(Connection conn, Member loginUser) {
+		
+		List<Reservation> list = new ArrayList();
+				
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("loginGenre");
+		String sql = prop.getProperty("myPagePrint");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1,loginUser.getMemberNo());
+			pstmt.setInt(2,loginUser.getMemberNo());
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Reservation r = new Reservation();
+				
+				r.setTicketNo(rset.getInt("TICKET_NO"));
+				r.setPersonNum(rset.getInt("PERSONNEL"));
+				r.setMovieTitle(rset.getString("MOVIE_TITLE"));
+				r.setTheaterName(rset.getString("THEATER_NAME"));
+				r.setWatchDate(rset.getString("TO_CHAR(WATCH_DATE,'YY/MM/DD, HH24:MI')"));
+				r.setStatus(rset.getString("TB_RESERVATION.STATUS"));
+				r.setStudentCount(rset.getInt("GRADE_1_COUNT"));
+				r.setCommonCount(rset.getInt("GRADE_2_COUNT"));
+				
+				list.add(r);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
 		
 		
 		
 		
+		return list;
 		
 	}
 	

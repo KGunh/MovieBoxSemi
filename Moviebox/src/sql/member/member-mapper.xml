@@ -79,4 +79,42 @@
 	
 	</entry>
 	
+	<entry key="myPageMoviePrint">
+		SELECT
+       			   TICKET_NO,
+       			   PERSONNEL,
+       	     	   MEMBER_NO,
+       			   MOVIE_TITLE,
+       			   THEATER_NAME,
+       		       TO_CHAR(WATCH_DATE,'YY/MM/DD, HH24:MI'),
+       			   TB_RESERVATION.STATUS,
+       			   GRADE_1_COUNT,
+       		       GRADE_2_COUNT
+  	      FROM
+       			   TB_RESERVATION
+  		   JOIN
+       			   TB_SCREEN USING(SCREEN_NO)
+           JOIN
+                   TB_MOVIE USING(MOVIE_NO)
+           JOIN
+       			   TB_THEATER USING(THEATER_NO)
+  		   JOIN
+       				(SELECT
+         				 		TICKET_NO,
+         						COUNT(CASE WHEN GRADE = 1 THEN 1 ELSE NULL END) AS GRADE_1_COUNT,
+         						COUNT(CASE WHEN GRADE = 2 THEN 1 ELSE NULL END) AS GRADE_2_COUNT
+     				   FROM
+         						TB_RESERVATION
+     					JOIN
+         						TB_PRICESHEET USING(TICKET_NO)
+     				 WHERE
+         						MEMBER_NO = ?
+     			 	 GROUP 
+     			 		  BY
+     			                TICKET_NO) USING(TICKET_NO)
+ 		WHERE
+       				MEMBER_NO = ?
+	
+	</entry>
+	
 </properties>

@@ -7,8 +7,10 @@ import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kh.common.model.vo.Genre;
+import com.kh.common.model.vo.Reservation;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
 import com.kh.member.model.vo.MemberGenre;
@@ -59,13 +61,13 @@ public class MemberService {
 		
 	}
 	
-	public Movie myPageMoviePrint(Member loginUser) {
+	public List<Reservation> myPagePrint(Member loginUser) {
 		Connection conn = getConnection();
 		
-		Movie m = new MemberDao().
+		List<Reservation> list = new MemberDao().myPagePrint(conn,loginUser);
 		
 		
-		return m;
+		return list;
 	}
 
 }
