@@ -30,6 +30,13 @@ public class ReservationService {
 		
 		return locationList;
 	}
+
+	public void selectScreen(String screenDate, String screenLocation) {
+		Connection conn = getConnection();
+		
+		ArrayList<Screen> screenList = new ReservationDao().selectScreen(conn, screenDate, screenLocation);
+		
+	}
 	
 	// 지역 조회
 	
