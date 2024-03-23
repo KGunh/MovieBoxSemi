@@ -15,6 +15,15 @@ public class ReservationController {
 		return view;
 	}
 
+	public void selectScreen(HttpServletRequest request) {
+		// 스크린 정보 
+		String screenDate = request.getParameter("date");
+		String screenLocation = request.getParameter("location");
+		
+		new ReservationService().selectScreen(screenDate, screenLocation); 
+		
+	}
+
 	public void setSeat(HttpServletRequest request) {
 		request.getParameter("");
 		// 좌석선택 화면으로 이동
@@ -24,6 +33,7 @@ public class ReservationController {
 	public void insertReservation() {
 		//예약내용 insert
 	}
+
 
 
 	

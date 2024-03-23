@@ -12,6 +12,8 @@ import java.util.Properties;
 
 import com.kh.common.model.vo.Location;
 import com.kh.movie.model.vo.Movie;
+import com.kh.theater.model.vo.Screen;
+
 import static com.kh.common.JDBCTemplate.*;
 
 public class ReservationDao {
@@ -82,6 +84,35 @@ private Properties prop = new Properties();
 			close(rset);
 			close(pstmt);
 		}
+		return list;
+	}
+
+	public ArrayList<Screen> selectScreen(Connection conn, String screenDate, String screenLocation) {
+		ArrayList<Screen> list = new ArrayList<Screen>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectScreen");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, screenDate);
+			pstmt.setString(2, screenLocation);
+			
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
 		return list;
 	}
 	

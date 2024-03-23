@@ -12,6 +12,9 @@ public class Movie {
 	private String status;
 	private String genreNo;
 	private int directorNo;
+	private String filePath;
+    private String fileName;
+	
 	public Movie() {
 		super();
 	}
@@ -81,6 +84,19 @@ public class Movie {
 	}
 	public void setDirectorNo(int directorNo) {
 		this.directorNo = directorNo;
+	}
+	
+	public String getFilePath() {
+		return filePath;
+	}
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+	public String getFileName() {
+		return fileName;
+	}
+	public void setFileName(String fileName) {
+		this.fileName = fileName;
 	}
 	@Override
 	public String toString() {
