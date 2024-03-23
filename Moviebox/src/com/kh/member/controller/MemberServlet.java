@@ -63,6 +63,7 @@ public class MemberServlet extends HttpServlet {
 			break;
 		
 		case "mypage":
+			view = mc.myPagePrint(request, response);
 			view = "views/member/myPage.jsp"; flag = false;
 			break;
 		default : return;

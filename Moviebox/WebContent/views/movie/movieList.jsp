@@ -206,7 +206,7 @@
                     </div>
 
                      <div id="search-img">
-                       <img src="<%= contextPath %>/resource/img/search.PNG" alt="검색 아이콘">
+                       <img src="<%= contextPath %>/resources/img/search.PNG" alt="검색 아이콘">
                     </div>
                     <div id="movie-list-input">
                         <input type="text" id="movie-list-search" placeholder="검색창">
