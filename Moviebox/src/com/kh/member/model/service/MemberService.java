@@ -67,7 +67,16 @@ public class MemberService {
 		List<Reservation> list = new MemberDao().myPagePrint(conn,loginUser);
 		
 		
+		close(conn);
 		return list;
+	}
+	
+	public Movie myPageMoviePoster(Reservation res) {
+		Connection conn = getConnection();
+		
+		Movie m = new MemberDao().myPageMoviePoster(conn,res);
+		close(conn);
+		return m;
 	}
 
 }

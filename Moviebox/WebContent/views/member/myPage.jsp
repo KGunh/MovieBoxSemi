@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList,com.kh.member.model.vo.MemberGenre"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList,com.kh.member.model.vo.MemberGenre,java.util.List,com.kh.common.model.vo.Reservation,com.kh.movie.model.vo.Movie"%>
+<%
+	List<Reservation> resList = (ArrayList)request.getAttribute("list");
+
+	List<Movie> movieList = (ArrayList)request.getAttribute("movieList");
+
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -130,7 +136,7 @@
         .history-area-list{
             float:left;
             height: 100%;
-            width: 60%;
+            width: 55%;
         }
         .history-area-list > div{
             font-weight: bold;
@@ -140,7 +146,7 @@
         .history-area-price{
             float:right;
             height: 100%;
-            width: 20%;
+            width: 25%;
             background-color: white;
             border-radius: 5px;
             position: relative;
@@ -214,6 +220,10 @@
             width: 48%;
             height: 100%;
         }
+        #poster{
+        	width: 100%;
+        	height: 100%;
+        }
 
     </style>
     <title>마이페이지</title>
@@ -267,15 +277,18 @@
         <div class="mini-tit">MY 예매내역</div>
         <div class="history-area">
             <div class="history-area-content">
-                <div class="history-area-image"></div>
+                <div class="history-area-image"><img id="poster" src="<%=contextPath %>/<%= movieList.get(0).getFilePath()%>/<%=movieList.get(0).getFileName() %>"></div>
                 <div class="history-area-list">
-                    <div>영화이름</div>
-                    <div>날짜</div>
-                    <div>극장</div>
-                    <div>예매일시</div>
+                    <div>영화&emsp;<%=resList.get(0).getMovieTitle() %></div>
+                    <div>날짜&emsp;<%=resList.get(0).getWatchDate() %></div>
+                    <div>극장&emsp;<%=resList.get(0).getTheaterName() %></div>
+                    <div>인원&emsp;&emsp;<%=(resList.get(0).getStudentCount()+resList.get(0).getCommonCount()) %>명</div>
                 </div>
                 <div class="history-area-price">
-                    <div class="count"><span>청소년</span><span>성인</span><span style="border-top: 1px solid rgb(158, 157, 157);;">금액</span></div>
+                    <div class="count">
+                    <span>청소년 :&nbsp;<%=resList.get(0).getStudentCount()%>&emsp;<%=resList.get(0).getStudentPrice() %>원</span>
+                    <span>성인 :&nbsp;<%=resList.get(0).getCommonCount() %>&emsp;&emsp;<%=resList.get(0).getCommonPrice() %>원</span>
+                    <span style="border-top: 1px solid rgb(158, 157, 157);">금액 :&emsp;&emsp;&nbsp;&nbsp;&nbsp;<%=resList.get(0).getTotalPrice() %>원</span></div>
 
                 </div>
             </div>

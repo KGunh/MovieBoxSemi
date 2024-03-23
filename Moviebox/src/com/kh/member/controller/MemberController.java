@@ -11,6 +11,7 @@ import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.Reservation;
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
+import com.kh.movie.model.vo.Movie;
 
 public class MemberController {
 
@@ -109,12 +110,33 @@ public class MemberController {
 	public String myPagePrint(HttpServletRequest request, HttpServletResponse response) {
 		String view = "";
 		HttpSession session = request.getSession();
-		
+		List<Movie> movieList = new ArrayList();
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		
 		List<Reservation> list = new MemberService().myPagePrint(loginUser);
 		
-		
+		if(list.isEmpty()) {
+			request.setAttribute("errorMsg","");
+			view = "views/common/errorPage.jsp";
+		}else {
+			System.out.println(list);
+			for(int i = 0; i < list.size(); i++) {
+				Reservation res =  list.get(i);
+				Movie m = new MemberService().myPageMoviePoster(res);
+				System.out.println(m);
+				if(m == null) {
+					request.setAttribute("errorMsg","");
+					return view = "views/common/errorPage.jsp";
+				}
+				
+				movieList.add(m);
+				
+			}
+			System.out.println(movieList);
+			request.setAttribute("movieList", movieList);
+			request.setAttribute("list", list);
+			view = "views/member/myPage.jsp";
+		}
 		
 		
 		

@@ -57,14 +57,13 @@ public class MemberServlet extends HttpServlet {
 			view = "views/member/memberInsert.jsp"; flag = false; break;
 		case "insert":
 			view = mc.insert(request,response);
-			if(!view.equals("views/common/errorPage.jsp")) {
+			if(view.equals("views/common/errorPage.jsp")) {
 				flag = false;
 			}
 			break;
 		
 		case "mypage":
-			view = mc.myPagePrint(request, response);
-			view = "views/member/myPage.jsp"; flag = false;
+			view = mc.myPagePrint(request, response); flag = false;
 			break;
 		default : return;
 			

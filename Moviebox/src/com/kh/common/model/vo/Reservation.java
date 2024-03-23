@@ -11,6 +11,9 @@ public class Reservation {
 	private String watchDate;
 	private int studentCount;
 	private int commonCount;
+	private int studentPrice;
+	private int commonPrice;
+	private int totalPrice;
 	
 	
 	public Reservation() {
@@ -28,6 +31,24 @@ public class Reservation {
 	
 	
 	
+	public int getStudentPrice() {
+		return studentPrice;
+	}
+	public void setStudentPrice(int studentPrice) {
+		this.studentPrice = studentPrice;
+	}
+	public int getCommonPrice() {
+		return commonPrice;
+	}
+	public void setCommonPrice(int commonPrice) {
+		this.commonPrice = commonPrice;
+	}
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
 	public int getStudentCount() {
 		return studentCount;
 	}

@@ -199,10 +199,13 @@ public class MemberDao {
 				r.setPersonNum(rset.getInt("PERSONNEL"));
 				r.setMovieTitle(rset.getString("MOVIE_TITLE"));
 				r.setTheaterName(rset.getString("THEATER_NAME"));
-				r.setWatchDate(rset.getString("TO_CHAR(WATCH_DATE,'YY/MM/DD, HH24:MI')"));
-				r.setStatus(rset.getString("TB_RESERVATION.STATUS"));
+				r.setWatchDate(rset.getString("WATCH_DATE"));
+				r.setStatus(rset.getString("STATUS"));
 				r.setStudentCount(rset.getInt("GRADE_1_COUNT"));
 				r.setCommonCount(rset.getInt("GRADE_2_COUNT"));
+				r.setStudentPrice(rset.getInt("STUDENT_PRICE"));
+				r.setCommonPrice(rset.getInt("COMMON_PRICE"));
+				r.setTotalPrice(rset.getInt("TOTAL_PRICE"));
 				
 				list.add(r);
 			}
@@ -215,12 +218,41 @@ public class MemberDao {
 			close(pstmt);
 		}
 		
-		
-		
-		
+
 		return list;
 		
 	}
 	
+	public Movie myPageMoviePoster(Connection conn,Reservation res){
+		
+		Movie m = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("myPageMoviePoster");
+		System.out.println(res.getTicketNo());
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, res.getTicketNo());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				m = new Movie();
+				m.setFilePath(rset.getString("FILE_PATH"));
+				m.setFileName(rset.getString("CHANGE_NAME"));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return m;
+	}
 	
 }
