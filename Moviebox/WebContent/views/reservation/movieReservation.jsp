@@ -255,7 +255,7 @@
             </div>
             <div id="selectLocationArea">
                 <div id="selectLocation">
-                    <select>
+                    <select id="locationOption">
                         <option>전체</option>
                         <% for(Location l : locationList){ %>
                         	<option><%= l.getLocationName() %></option>
@@ -267,7 +267,6 @@
             <div id="selectScreenArea">
                 <div id="printScreen">
                     <div class="screen">
-                        <!--TB_SCREEN에서 SELECT-->
                         <div class="theaterName">CGV 강남</div>
                         <div class="selectScreen">
                             <div class="screenName">
@@ -284,57 +283,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="screen">
-                        <div class="theaterName">CGV 강북</div>
-                        <div class="selectScreen">
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="screen">
-                        <div class="theaterName">메가박스</div>
-                        <div class="selectScreen">
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="screen">
-                        <div class="theaterName">롯데시네마</div>
-                        <div class="selectScreen">
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
                 <button id="submit-btn" type="submit">좌석 선택</button>
             </div>
@@ -348,25 +297,15 @@
 
 
     <script>
-
-		/*
-        document.getElementById('#screenDate').onchange = function(){
-       		
-               
-       		
-       		
-       	}
-		*/
 		
-        // 슬라이더 동작 정의
         const swiper = new Swiper('.swiper', {
-            loop : true, //반복 재생 여부
-            slidesPerView : 4, // 이전, 이후 사진 미리보기 갯수
-            pagination: { // 페이징 버튼 클릭 시 이미지 이동 가능
+            loop : true,
+            slidesPerView : 4,
+            pagination: {
                 el: '.swiper-pagination',
                 clickable: true
             },
-            navigation: { // 화살표 버튼 클릭 시 이미지 이동 가능
+            navigation: {
                 prevEl: '.swiper-button-prev',
                 nextEl: '.swiper-button-next'
             }
@@ -378,13 +317,31 @@
             var month = (String)(today.getMonth() + 1).padStart(2, '0');
             var day = (String)(today.getDate()).padStart(2, '0');
             document.getElementById('printToday').innerHTML = year + '-' + month + '-' + day;
-        }
+        };
 
         $(function(){
             $('.poster').click(function(){
                 $('.poster').not(this).removeAttr('style');
                 $(this).css('transform', 'scale(1.1)');
             });
+        });
+        
+        $('#screenDate').change(function(){
+            $.ajax({
+            	url : 'screen.reservation',
+            	type : 'get',
+            	data : {
+                    date : $('#screenDate').val(),
+                    location : $('#locationOption').val()
+            	},
+            	success : function(result){
+            		
+            	},
+            	error : {
+            		
+            	}
+            });
+            
         });
 
         
