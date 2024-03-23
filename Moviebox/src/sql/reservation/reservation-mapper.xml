@@ -9,14 +9,34 @@
 	<entry key="selectMovieList">
 		SELECT
 		       MOVIE_NO,
-		       MOVIE_TITLE
+		       MOVIE_TITLE,
+		       FILE_PATH,
+		       CHANGE_NAME
 		  FROM
 		       TB_MOVIE
+		  JOIN
+		       TB_ATTACHMENT USING(MOVIE_NO)
 		 WHERE
-		       STATUS = 'Y'
+		       STATUS = 'Y'  
+		 ORDER
+		    BY
+		       MOVIE_NO
 	</entry>
 	
+	<entry key="selectLocationList">
+		SELECT
+		       LOCATION_CODE,
+		       LOCATION_NAME
+		  FROM
+		       TB_LOCATION
+	</entry>
 	
+	<entry key="selectScreenList">
+		
+			  
+	
+	
+	</entry>
 	
 	
 </properties>

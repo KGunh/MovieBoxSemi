@@ -6,11 +6,21 @@ import com.kh.reservation.model.service.ReservationService;
 
 public class ReservationController {
 	
-	public void selectReservationInfo(HttpServletRequest request) {
-		new ReservationService().selectMovieList();
+	public String selectReservationInfo(HttpServletRequest request) {
+		request.setAttribute("movieList", new ReservationService().selectMovieList()); 
+		request.setAttribute("locationList", new ReservationService().selectLocationList()); 
 		
+		String view = "views/reservation/seatReservation.jsp";
 		
-		//리퀘스트 셋
+		return view;
+	}
+
+	public void selectScreen(HttpServletRequest request) {
+		// 스크린 정보 
+		String screenDate = request.getParameter("date");
+		String screenLocation = request.getParameter("location");
+		
+		new ReservationService().selectScreen(screenDate, screenLocation); 
 		
 	}
 
@@ -23,6 +33,7 @@ public class ReservationController {
 	public void insertReservation() {
 		//예약내용 insert
 	}
+
 
 
 	

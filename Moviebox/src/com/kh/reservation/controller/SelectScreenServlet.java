@@ -1,7 +1,6 @@
 package com.kh.reservation.controller;
 
 import java.io.IOException;
-
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -9,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class ReservationviewServlet
+ * Servlet implementation class SelectScreenServlet
  */
-@WebServlet("*.reservation")
-public class ReservationServlet extends HttpServlet {
+@WebServlet("/screen.reservation")
+public class SelectScreenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReservationServlet() {
+    public SelectScreenServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,29 +26,17 @@ public class ReservationServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		
-		String uri = request.getRequestURI();
+		// screen테이블과 조인하여 상영관 정보 가져오기
+		new ReservationController().selectScreen(request);
+		// 반복문으로 보여주기
 		
-		String mapping = uri.substring(uri.lastIndexOf("/") + 1 , uri.lastIndexOf("."));
-		
-		ReservationController rc = new ReservationController(); 
-		
-		String view = "";
-		
-		boolean flag = false;
-		
-		switch(mapping) {
-		case "movie" : view = new ReservationController().selectReservationInfo(request); view = "views/reservation/movieReservation.jsp"; break; 
-		case "seat" : new ReservationController().setSeat(request); break;
-		case "payment" : new ReservationController().insertReservation(); break;
-		}
-		
-		if(flag) {
-			response.sendRedirect(view);
-		} else {
-			request.getRequestDispatcher(view).forward(request, response);
-		}
+		// 더보기 버튼 만들기
+	
+	
+	
+	
+	
 	}
 
 	/**

@@ -157,7 +157,7 @@ public class MemberDao {
 			while(rset.next()) {
 				MemberGenre mg = new MemberGenre();
 				
-				mg.setGenreCode(rset.getString("GENRE_CATEGORY"));
+				mg.setGenreCode(rset.getString("GENRE_NAME"));
 				
 				list.add(mg);
 			}

@@ -1,6 +1,7 @@
 package com.kh.reservation.model.dao;
 
 import java.io.FileInputStream;
+
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -9,7 +10,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.common.model.vo.Location;
 import com.kh.movie.model.vo.Movie;
+import com.kh.theater.model.vo.Screen;
+
+import static com.kh.common.JDBCTemplate.*;
 
 public class ReservationDao {
 private Properties prop = new Properties();
@@ -40,12 +45,72 @@ private Properties prop = new Properties();
 			while(rset.next()) {
 				Movie m = new Movie();
 				m.setMovieNo(rset.getInt("MOVIE_NO"));
-				m.setMo
+				m.setMovieTitle(rset.getString("MOVIE_TITLE"));
+			    m.setFilePath(rset.getString("FILE_PATH"));
+			    m.setFileName(rset.getString("CHANGE_NAME"));
 				
-				
+				list.add(m);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public ArrayList<Location> selectLocationList(Connection conn) {
+		ArrayList<Location> list = new ArrayList<Location>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectLocationList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Location l = new Location();
+				l.setLocationCode(rset.getString("LOCATION_CODE"));
+				l.setLocationName(rset.getString("LOCATION_NAME"));
+				
+				list.add(l);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public ArrayList<Screen> selectScreen(Connection conn, String screenDate, String screenLocation) {
+		ArrayList<Screen> list = new ArrayList<Screen>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectScreen");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, screenDate);
+			pstmt.setString(2, screenLocation);
+			
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
 		}
 		
 		return list;

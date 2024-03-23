@@ -1,21 +1,47 @@
 package com.kh.reservation.model.service;
 
+import static com.kh.common.JDBCTemplate.close;
 import static com.kh.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 
+import com.kh.common.model.vo.Location;
+import com.kh.movie.model.vo.Movie;
 import com.kh.reservation.model.dao.ReservationDao;
+import com.kh.theater.model.vo.Screen;
 
 public class ReservationService {
 
-	public void selectMovieList() {
+	public ArrayList<Movie> selectMovieList() {
+		// 영화조회쪽이랑 상의해서 메소드 통일해야함!
 		Connection conn = getConnection();
 		
-		new ReservationDao().selectMovieList(conn);
+		ArrayList<Movie> movieList = new ReservationDao().selectMovieList(conn);
 		
-		new ReservationDao().selectLocationList(conn);
+		close(conn);
+		
+		return movieList;
+	}
+
+	public ArrayList<Location> selectLocationList() {
+		Connection conn = getConnection();
+	
+		ArrayList<Location> locationList =  new ReservationDao().selectLocationList(conn);
+	
+		close(conn);
+		
+		return locationList;
+	}
+
+	public ArrayList<Screen> selectScreen(String screenDate, String screenLocation) {
+		// 영화조회쪽이랑 상의해서 메소드 통일해야함!
+		Connection conn = getConnection();
+		
+		ArrayList<Screen> screenList = new ReservationDao().selectScreen(conn, screenDate, screenLocation);
 		
 		
+		return screenList;
 	}
 	
 	// 지역 조회
