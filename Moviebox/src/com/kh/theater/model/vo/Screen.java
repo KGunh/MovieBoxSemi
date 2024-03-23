@@ -8,6 +8,9 @@ public class Screen {
 	private int movieNo;
 	private String watchDate;
 	private String screenName;
+	private String theaterName;
+	private int movieRt;
+	
 	public Screen() {
 		super();
 	}
@@ -48,6 +51,20 @@ public class Screen {
 	}
 	public void setScreenName(String screenName) {
 		this.screenName = screenName;
+	}
+	
+	public String getTheaterName() {
+		return theaterName;
+	}
+	public void setTheaterName(String theaterName) {
+		this.theaterName = theaterName;
+	}
+	
+	public inst getMovieRt() {
+		return movieRt;
+	}
+	public void setMovieRt(int movieRt) {
+		this.movieRt = movieRt;
 	}
 	@Override
 	public String toString() {

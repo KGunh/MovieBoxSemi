@@ -34,15 +34,17 @@ public class ReservationService {
 		return locationList;
 	}
 
-	public ArrayList<Screen> selectScreen(String screenDate, String screenLocation) {
+	public ArrayList<Screen> selectScreen(String screenDate, String screenLocation,  int movieNo) {
 		// 영화조회쪽이랑 상의해서 메소드 통일해야함!
 		Connection conn = getConnection();
 		
-		ArrayList<Screen> screenList = new ReservationDao().selectScreen(conn, screenDate, screenLocation);
+		ArrayList<Screen> screenList = new ReservationDao().selectScreen(conn, screenDate, screenLocation, movieNo);
 		
+		close(conn);
 		
 		return screenList;
 	}
+
 	
 	// 지역 조회
 	

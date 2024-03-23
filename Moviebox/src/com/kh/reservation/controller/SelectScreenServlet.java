@@ -28,7 +28,9 @@ public class SelectScreenServlet extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
 		// screen테이블과 조인하여 상영관 정보 가져오기
-		new ReservationController().selectScreen(request);
+		String view = new ReservationController().selectScreen(request);
+		
+				
 		// 반복문으로 보여주기
 		
 		// 더보기 버튼 만들기

@@ -235,6 +235,7 @@
 	                           	<div class="swiper-slide">
 	                                <div class="poster">
 	                                    <img src="<%= contextPath %>/<%= m.getFilePath() %>/<%= m.getFileName() %>">
+                                        <input class="selectMovieNo" type="hidden" value="<%= m.getMovieNo() %>">
 	                                </div>
 	                            </div>
                             <% } %>
@@ -333,6 +334,7 @@
             	data : {
                     date : $('#screenDate').val(),
                     location : $('#locationOption').val()
+                    movieNo : $('#selectMovieNo').val()
             	},
             	success : function(result){
             		
