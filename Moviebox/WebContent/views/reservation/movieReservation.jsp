@@ -346,13 +346,15 @@
 
     <script>
 
-
-            document.getElementById('#screenDate').onchange = function(){
-        		
-                
-        		
-        		
-        	}
+		/*
+        document.getElementById('#screenDate').onchange = function(){
+       		
+               
+       		
+       		
+       	}
+		*/
+		
         // 슬라이더 동작 정의
         const swiper = new Swiper('.swiper', {
             loop : true, //반복 재생 여부
