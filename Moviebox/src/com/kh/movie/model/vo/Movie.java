@@ -1,40 +1,33 @@
 package com.kh.movie.model.vo;
 
-import java.sql.Date;
 
 public class Movie {
 
 	private int movieNo;
 	private String movieTitle;
-	private String director;
+	private String movieRt;
 	private String movieRated;
-	private Date movieRelease;
+	private String movieRelease;
 	private String movieStory;
 	private String status;
 	private String genreNo;
-	private String filePath;
-	private String fileName;
-	
-	
+	private int directorNo;
 	public Movie() {
 		super();
 	}
-	
-	public Movie(int movieNo, String movieTitle, String director, String movieRated, Date movieRelease,
-			String movieStory, String status, String genreNo, String filePath, String fileName) {
+	public Movie(int movieNo, String movieTitle, String movieRt, String movieRated, String movieRelease,
+			String movieStory, String status, String genreNo, int directorNo) {
 		super();
 		this.movieNo = movieNo;
 		this.movieTitle = movieTitle;
-		this.director = director;
+		this.movieRt = movieRt;
 		this.movieRated = movieRated;
 		this.movieRelease = movieRelease;
 		this.movieStory = movieStory;
 		this.status = status;
 		this.genreNo = genreNo;
-		this.filePath = filePath;
-		this.fileName = fileName;
+		this.directorNo = directorNo;
 	}
-
 	public int getMovieNo() {
 		return movieNo;
 	}
@@ -47,11 +40,11 @@ public class Movie {
 	public void setMovieTitle(String movieTitle) {
 		this.movieTitle = movieTitle;
 	}
-	public String getDirector() {
-		return director;
+	public String getMovieRt() {
+		return movieRt;
 	}
-	public void setDirector(String director) {
-		this.director = director;
+	public void setMovieRt(String movieRt) {
+		this.movieRt = movieRt;
 	}
 	public String getMovieRated() {
 		return movieRated;
@@ -59,10 +52,10 @@ public class Movie {
 	public void setMovieRated(String movieRated) {
 		this.movieRated = movieRated;
 	}
-	public Date getMovieRelease() {
+	public String getMovieRelease() {
 		return movieRelease;
 	}
-	public void setMovieRelease(Date movieRelease) {
+	public void setMovieRelease(String movieRelease) {
 		this.movieRelease = movieRelease;
 	}
 	public String getMovieStory() {
@@ -83,38 +76,28 @@ public class Movie {
 	public void setGenreNo(String genreNo) {
 		this.genreNo = genreNo;
 	}
-	
-	public String getFilePath() {
-		return filePath;
+	public int getDirectorNo() {
+		return directorNo;
 	}
-
-	public void setFilePath(String filePath) {
-		this.filePath = filePath;
+	public void setDirectorNo(int directorNo) {
+		this.directorNo = directorNo;
 	}
-
-	public String getFileName() {
-		return fileName;
-	}
-
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-
 	@Override
 	public String toString() {
-		return "Movie [movieNo=" + movieNo + ", movieTitle=" + movieTitle + ", director=" + director + ", movieRated="
+		return "Movie [movieNo=" + movieNo + ", movieTitle=" + movieTitle + ", movieRt=" + movieRt + ", movieRated="
 				+ movieRated + ", movieRelease=" + movieRelease + ", movieStory=" + movieStory + ", status=" + status
-				+ ", genreNo=" + genreNo + "]";
+				+ ", genreNo=" + genreNo + ", directorNo=" + directorNo + "]";
 	}
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((director == null) ? 0 : director.hashCode());
+		result = prime * result + directorNo;
 		result = prime * result + ((genreNo == null) ? 0 : genreNo.hashCode());
 		result = prime * result + movieNo;
 		result = prime * result + ((movieRated == null) ? 0 : movieRated.hashCode());
 		result = prime * result + ((movieRelease == null) ? 0 : movieRelease.hashCode());
+		result = prime * result + ((movieRt == null) ? 0 : movieRt.hashCode());
 		result = prime * result + ((movieStory == null) ? 0 : movieStory.hashCode());
 		result = prime * result + ((movieTitle == null) ? 0 : movieTitle.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
@@ -129,10 +112,7 @@ public class Movie {
 		if (getClass() != obj.getClass())
 			return false;
 		Movie other = (Movie) obj;
-		if (director == null) {
-			if (other.director != null)
-				return false;
-		} else if (!director.equals(other.director))
+		if (directorNo != other.directorNo)
 			return false;
 		if (genreNo == null) {
 			if (other.genreNo != null)
@@ -150,6 +130,11 @@ public class Movie {
 			if (other.movieRelease != null)
 				return false;
 		} else if (!movieRelease.equals(other.movieRelease))
+			return false;
+		if (movieRt == null) {
+			if (other.movieRt != null)
+				return false;
+		} else if (!movieRt.equals(other.movieRt))
 			return false;
 		if (movieStory == null) {
 			if (other.movieStory != null)
@@ -170,6 +155,5 @@ public class Movie {
 	}
 	
 	
-	
-	
+
 }
