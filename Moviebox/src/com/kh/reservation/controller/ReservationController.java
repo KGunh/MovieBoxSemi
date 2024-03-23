@@ -1,8 +1,11 @@
 package com.kh.reservation.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import com.kh.reservation.model.service.ReservationService;
+import com.kh.theater.model.vo.Screen;
 
 public class ReservationController {
 	
@@ -19,9 +22,13 @@ public class ReservationController {
 		// 스크린 정보 
 		String screenDate = request.getParameter("date");
 		String screenLocation = request.getParameter("location");
+		int movieNo = Integer.parseInt(request.getParameter("movieNo"));
 		
-		new ReservationService().selectScreen(screenDate, screenLocation); 
+		ArrayList<Screen> screenList = new ReservationService().selectScreen(screenDate, screenLocation, movieNo); 
 		
+		request.setAttribute("screenList", screenList);
+		
+		//return view = "";
 	}
 
 	public void setSeat(HttpServletRequest request) {

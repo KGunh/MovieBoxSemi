@@ -32,10 +32,31 @@
 	</entry>
 	
 	<entry key="selectScreenList">
-		
-			  
-	
-	
+		SELECT
+		       SCREEN_NO,
+		       THEATER_NO,
+		       THEATER_NAME,
+		       MOVIE_TITLE,
+		       MOVIE_RT,
+		       WATCH_DATE,
+		       SCREEN_NAME||'관' AS SCREEN_NAME
+		  FROM
+		       TB_SCREEN
+		  JOIN    
+		       TB_MOVIE USING(MOVIE_NO)
+		  JOIN
+		       TB_THEATER USING(THEATER_NO)
+		  JOIN
+		       TB_LOCATION USING(LOCATION_CODE)
+		 WHERE
+		       MOVIE_NO = ?
+		   AND
+		       LOCATION_NAME = ?
+		   AND 
+		       WATCH_DATE LIKE '%'||?||'%'
+		 ORDER
+		    BY
+		       WATCH_DATE
 	</entry>
 	
 	

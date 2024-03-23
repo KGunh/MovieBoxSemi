@@ -1,7 +1,8 @@
 package com.kh.reservation.model.dao;
 
-import java.io.FileInputStream;
+import static com.kh.common.JDBCTemplate.close;
 
+import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
@@ -14,10 +15,9 @@ import com.kh.common.model.vo.Location;
 import com.kh.movie.model.vo.Movie;
 import com.kh.theater.model.vo.Screen;
 
-import static com.kh.common.JDBCTemplate.*;
-
 public class ReservationDao {
-private Properties prop = new Properties();
+	
+	private Properties prop = new Properties();
 	
 	public ReservationDao() {
 		String filePath = ReservationDao
@@ -87,7 +87,7 @@ private Properties prop = new Properties();
 		return list;
 	}
 
-	public ArrayList<Screen> selectScreen(Connection conn, String screenDate, String screenLocation) {
+	public ArrayList<Screen> selectScreen(Connection conn, String screenDate, String screenLocation, int movieNo) {
 		ArrayList<Screen> list = new ArrayList<Screen>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -97,22 +97,30 @@ private Properties prop = new Properties();
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, screenDate);
+			pstmt.setInt(1, movieNo);
 			pstmt.setString(2, screenLocation);
+			pstmt.setString(3, screenDate);
 			
 			rset = pstmt.executeQuery();
 			
 			while (rset.next()) {
+				Screen s = new Screen();
+				s.setMovieNo(rset.getInt("MOVIE_NO"));
+				s.setScreenNo(rset.getInt("SCREEN_NO"));
+				s.setScreenName(rset.getString("SCREEN_NAME"));
+				s.setWatchDate(rset.getString("WATCH_DATE"));
+				s.setTheaterNo(rset.getInt("THEATER_NO"));
+				s.setTheaterName(rset.getString("THEATER_NAME"));
+				s.setMovieRt(rset.getInt("MOVIE_RT"));
 				
+				list.add(s);
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
 			close(rset);
 			close(pstmt);
 		}
-		
 		return list;
 	}
 	
