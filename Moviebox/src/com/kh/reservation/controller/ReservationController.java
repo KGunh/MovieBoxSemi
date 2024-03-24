@@ -18,7 +18,7 @@ public class ReservationController {
 		return view;
 	}
 
-	public void selectScreen(HttpServletRequest request) {
+	public ArrayList<Screen> selectScreen(HttpServletRequest request) {
 		// 스크린 정보 
 		String screenDate = request.getParameter("date");
 		String screenLocation = request.getParameter("location");
@@ -28,7 +28,7 @@ public class ReservationController {
 		
 		request.setAttribute("screenList", screenList);
 		
-		//return view = "";
+		return screenList;
 	}
 
 	public void setSeat(HttpServletRequest request) {

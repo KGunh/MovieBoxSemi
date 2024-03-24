@@ -284,7 +284,6 @@
                             </div>
                         </div>
                     </div>
-                    
                 </div>
                 <button id="submit-btn" type="submit">좌석 선택</button>
             </div>
@@ -333,7 +332,7 @@
             	type : 'get',
             	data : {
                     date : $('#screenDate').val(),
-                    location : $('#locationOption').val()
+                    location : $('#locationOption').val(),
                     movieNo : $('#selectMovieNo').val()
             	},
             	success : function(result){
