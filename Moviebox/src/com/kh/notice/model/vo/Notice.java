@@ -3,89 +3,142 @@ package com.kh.notice.model.vo;
 import java.util.Date;
 
 public class Notice {
+	
 	private int noticeNo;
+	private String noticeCategory;
 	private String noticeTitle;
 	private String noticeContent;
-	private String noticeWriter;
-	private int count;
-	private Date createDate;
+	private Date noticeDate;
+	private int noticeCount;
 	private String status;
+	private int memberNo;
+	
 	
 	public Notice() {
 		super();
 	}
-	public Notice(int noticeNo, String noticeTitle, String noticeContent, String noticeWriter, int count,
-			Date createDate, String status) {
+
+
+	public Notice(int noticeNo, String noticeCategory, String noticeTitle, String noticeContent, Date noticeDate,
+			int noticeCount, String status, int memberNo) {
 		super();
 		this.noticeNo = noticeNo;
+		this.noticeCategory = noticeCategory;
 		this.noticeTitle = noticeTitle;
 		this.noticeContent = noticeContent;
-		this.noticeWriter = noticeWriter;
-		this.count = count;
-		this.createDate = createDate;
+		this.noticeDate = noticeDate;
+		this.noticeCount = noticeCount;
 		this.status = status;
+		this.memberNo = memberNo;
 	}
+
+
+	
+	
 	public int getNoticeNo() {
 		return noticeNo;
 	}
+
+
 	public void setNoticeNo(int noticeNo) {
 		this.noticeNo = noticeNo;
 	}
+
+
+	public String getNoticeCategory() {
+		return noticeCategory;
+	}
+
+
+	public void setNoticeCategory(String noticeCategory) {
+		this.noticeCategory = noticeCategory;
+	}
+
+
 	public String getNoticeTitle() {
 		return noticeTitle;
 	}
+
+
 	public void setNoticeTitle(String noticeTitle) {
 		this.noticeTitle = noticeTitle;
 	}
+
+
 	public String getNoticeContent() {
 		return noticeContent;
 	}
+
+
 	public void setNoticeContent(String noticeContent) {
 		this.noticeContent = noticeContent;
 	}
-	public String getNoticeWriter() {
-		return noticeWriter;
+
+
+	public Date getNoticeDate() {
+		return noticeDate;
 	}
-	public void setNoticeWriter(String noticeWriter) {
-		this.noticeWriter = noticeWriter;
+
+
+	public void setNoticeDate(Date noticeDate) {
+		this.noticeDate = noticeDate;
 	}
-	public int getCount() {
-		return count;
+
+
+	public int getNoticeCount() {
+		return noticeCount;
 	}
-	public void setCount(int count) {
-		this.count = count;
+
+
+	public void setNoticeCount(int noticeCount) {
+		this.noticeCount = noticeCount;
 	}
-	public Date getCreateDate() {
-		return createDate;
-	}
-	public void setCreateDate(Date createDate) {
-		this.createDate = createDate;
-	}
+
+
 	public String getStatus() {
 		return status;
 	}
+
+
 	public void setStatus(String status) {
 		this.status = status;
 	}
+
+
+	public int getMemberNo() {
+		return memberNo;
+	}
+
+
+	public void setMemberNo(int memberNo) {
+		this.memberNo = memberNo;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Notice [noticeNo=" + noticeNo + ", noticeTitle=" + noticeTitle + ", noticeContent=" + noticeContent
-				+ ", noticeWriter=" + noticeWriter + ", count=" + count + ", createDate=" + createDate + ", status="
-				+ status + "]";
+		return "Notice [noticeNo=" + noticeNo + ", noticeCategory=" + noticeCategory + ", noticeTitle=" + noticeTitle
+				+ ", noticeContent=" + noticeContent + ", noticeDate=" + noticeDate + ", noticeCount=" + noticeCount
+				+ ", status=" + status + ", memberNo=" + memberNo + "]";
 	}
+
+
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + count;
-		result = prime * result + ((createDate == null) ? 0 : createDate.hashCode());
+		result = prime * result + memberNo;
+		result = prime * result + ((noticeCategory == null) ? 0 : noticeCategory.hashCode());
 		result = prime * result + ((noticeContent == null) ? 0 : noticeContent.hashCode());
+		result = prime * result + noticeCount;
+		result = prime * result + ((noticeDate == null) ? 0 : noticeDate.hashCode());
 		result = prime * result + noticeNo;
 		result = prime * result + ((noticeTitle == null) ? 0 : noticeTitle.hashCode());
-		result = prime * result + ((noticeWriter == null) ? 0 : noticeWriter.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
 		return result;
 	}
+
+
 	@Override
 	public boolean equals(Object obj) {
 		if (this == obj)
@@ -95,17 +148,24 @@ public class Notice {
 		if (getClass() != obj.getClass())
 			return false;
 		Notice other = (Notice) obj;
-		if (count != other.count)
+		if (memberNo != other.memberNo)
 			return false;
-		if (createDate == null) {
-			if (other.createDate != null)
+		if (noticeCategory == null) {
+			if (other.noticeCategory != null)
 				return false;
-		} else if (!createDate.equals(other.createDate))
+		} else if (!noticeCategory.equals(other.noticeCategory))
 			return false;
 		if (noticeContent == null) {
 			if (other.noticeContent != null)
 				return false;
 		} else if (!noticeContent.equals(other.noticeContent))
+			return false;
+		if (noticeCount != other.noticeCount)
+			return false;
+		if (noticeDate == null) {
+			if (other.noticeDate != null)
+				return false;
+		} else if (!noticeDate.equals(other.noticeDate))
 			return false;
 		if (noticeNo != other.noticeNo)
 			return false;
@@ -113,11 +173,6 @@ public class Notice {
 			if (other.noticeTitle != null)
 				return false;
 		} else if (!noticeTitle.equals(other.noticeTitle))
-			return false;
-		if (noticeWriter == null) {
-			if (other.noticeWriter != null)
-				return false;
-		} else if (!noticeWriter.equals(other.noticeWriter))
 			return false;
 		if (status == null) {
 			if (other.status != null)
@@ -128,5 +183,6 @@ public class Notice {
 	}
 	
 	
+
 	
 }

@@ -1,15 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%@ page import="com.kh.notice.model.vo.Notice,
-				 java.util.ArrayList"%>
-    
-<%
-	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
-
-%>    
-    
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -271,8 +261,9 @@
                 </div>
 
             </div> <!-- search-notice -->
-            
-                 <!-- 게시판 -->
+
+
+            <!-- 게시판 -->
             <div class="container">
                 <table class="table table-hover">
                     <thead>
@@ -309,45 +300,6 @@
                     </tbody>
                 </table>
             </div>
-
-				
-            <!-- 게시판
-            <div class="container">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th id="list-th-i">번호</th>
-                            <th id="list-th-i">카테고리</th>
-                            <th id="list-th">제목</th>
-                            <th id="list-th-i">작성일</th>
-                            <th id="list-th-i">조회수</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    
-                    < % if(list.isEmpty()) { %>
-                        <tr>
-                            <th colspan="5">조회 된 공지사항이 없습니다. </th>
-                        </tr>
-                     < % } else { %>
-                     
-                     	< % for(Notice notice : list) { %>
-                        <tr class="list">
-                            <td id="list-no">< %= notice.getNoticeNo() %></td>
-                            <td id="list-ca">< %= notice.getNoticeCategory() %></td>
-                            <td id="list-title">< %= notice.getNoticeTitle() %></td>
-                            <td id="list-date">< %= notice.getNoticeDate() %></td>
-                            <td id="list-count">< %= notice.getNoticeCount() %></td>
-                        </tr>
-                        
-                        < % } %>
-                    < % } %>
-
-                     
-                    </tbody>
-
-                </table>
-            </div> -->
 
 
             <div id="page">

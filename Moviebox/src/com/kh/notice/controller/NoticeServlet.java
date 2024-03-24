@@ -1,13 +1,17 @@
 package com.kh.notice.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
+import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.notice.controller.NoticeController;
+import com.kh.notice.model.service.NoticeService;
+import com.kh.notice.model.vo.Notice;
 
 /**
  * Servlet implementation class NoticeServlet
@@ -50,10 +54,21 @@ public class NoticeServlet extends HttpServlet {
 		if(flag) {
 			response.sendRedirect(view);
 		} else {
+			
+			//ArrayList<Notice> noticeList = new NoticeService().selectNoticeList();
+			//request.setAttribute("noticeList", noticeList);
+			
 			request.getRequestDispatcher(view).forward(request, response);
 		}
-	
-	
+		
+		
+		// 공지사항 목록 출력
+
+		
+		
+		
+		
+		
 	}
 
 	/**
