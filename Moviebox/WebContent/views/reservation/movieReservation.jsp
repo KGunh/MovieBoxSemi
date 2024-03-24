@@ -321,32 +321,20 @@
                     movieNo : $('#movieNo').val()
             	},
             	success : function(result){
-                    console.log(result);
                     let resultStr = '';
                     let flag = true;
                     
                     for(let i in result){
                         resultStr += '<div class="screen">'
                                    +     '<div class="theaterName">' + result[i].theaterName + '</div>'
-                                   +     '<div class="selectScreen">';
-
-                        while(flag) {
-                            if(i == result[i].theaterNo){
-                                resultStr += '<div class="screenName">'
-                                           +    '<span style="color: black;">' + result[i].watchDate + '</span>~<span style="color: gray;">' + (result[i].watchDate + result[i].movieRt) + '</span>'
-                                           + '</div>'
-                            }
-                            else{
-                                flag = false;
-                            }
-                        }
-
-                        resultStr += '</div>'
-                                +  '</div>';
-
-                        flag = true;
+                                   +     '<div class="selectScreen">'
+                                   +        '<div class="screenName">'
+                                   +            '<span style="color: black;">' + result[i].watchDate + '</span>~<span style="color: gray;">' + (result[i].watchDate + result[i].movieRt) + '</span>'
+                                   +        '</div>'
+                                   +     '</div>'
+                                   + '</div>';
                     };
-                    console.log(resultStr);
+
                     $('#printScreen').html(resultStr);
             	},
             	error : function(){
@@ -355,6 +343,19 @@
             });
         });
 
+
+        /*
+         while(flag) {
+                            if(i + 1 == result[i].theaterNo){
+                                resultStr += '<div class="screenName">'
+                                           +    '<span style="color: black;">' + result[i].watchDate + '</span>~<span style="color: gray;">' + (result[i].watchDate + result[i].movieRt) + '</span>'
+                                           + '</div>'
+                            }
+                            else{
+                                flag = false;
+                            }
+                        }
+        */
         
     </script>
 </body>
