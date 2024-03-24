@@ -93,16 +93,16 @@ public class ReservationDao {
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectScreen");
-		
 		try {
 			pstmt = conn.prepareStatement(sql);
+		    
+		    pstmt.setInt(1, movieNo);
+		    pstmt.setString(2, screenLocation);
+		    pstmt.setString(3, screenDate);
+		    
+		    rset = pstmt.executeQuery();
 			
-			pstmt.setInt(1, movieNo);
-			pstmt.setString(2, screenLocation);
-			pstmt.setString(3, screenDate);
-			
-			rset = pstmt.executeQuery();
-			
+		    System.out.println(sql);
 			while (rset.next()) {
 				Screen s = new Screen();
 				s.setMovieNo(rset.getInt("MOVIE_NO"));

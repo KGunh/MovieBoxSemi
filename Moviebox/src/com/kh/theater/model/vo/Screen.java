@@ -60,7 +60,7 @@ public class Screen {
 		this.theaterName = theaterName;
 	}
 	
-	public inst getMovieRt() {
+	public int getMovieRt() {
 		return movieRt;
 	}
 	public void setMovieRt(int movieRt) {

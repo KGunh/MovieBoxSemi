@@ -230,15 +230,15 @@
                 <div id="content_1">
                     <div class="swiper">
                         <div id="swiper-select" class="swiper-wrapper">
-                            <!-- Slides -->
                             <% for(Movie m : movieList) { %>
 	                           	<div class="swiper-slide">
 	                                <div class="poster">
-	                                    <img src="<%= contextPath %>/<%= m.getFilePath() %>/<%= m.getFileName() %>">
-                                        <input class="selectMovieNo" type="hidden" value="<%= m.getMovieNo() %>">
+	                                    <img src="<%= contextPath %>/<%= m.getFilePath() %>/<%= m.getFileName() %>" alt="영화포스터">
+                                        <input type="hidden" value="<%= m.getMovieNo() %>">
 	                                </div>
 	                            </div>
                             <% } %>
+                            <input id="movieNo" type="hidden">
                         </div>
                     	
                         <div class="swiper-pagination"></div>
@@ -267,23 +267,7 @@
             </div>
             <div id="selectScreenArea">
                 <div id="printScreen">
-                    <div class="screen">
-                        <div class="theaterName">CGV 강남</div>
-                        <div class="selectScreen">
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
                 <button id="submit-btn" type="submit">좌석 선택</button>
             </div>
@@ -323,6 +307,7 @@
             $('.poster').click(function(){
                 $('.poster').not(this).removeAttr('style');
                 $(this).css('transform', 'scale(1.1)');
+                $('#movieNo').val($(this).children().eq(1).val());
             });
         });
         
@@ -333,16 +318,41 @@
             	data : {
                     date : $('#screenDate').val(),
                     location : $('#locationOption').val(),
-                    movieNo : $('#selectMovieNo').val()
+                    movieNo : $('#movieNo').val()
             	},
             	success : function(result){
-            		
+                    console.log(result);
+                    let resultStr = '';
+                    let flag = true;
+                    
+                    for(let i in result){
+                        resultStr += '<div class="screen">'
+                                   +     '<div class="theaterName">' + result[i].theaterName + '</div>'
+                                   +     '<div class="selectScreen">';
+
+                        while(flag) {
+                            if(i == result[i].theaterNo){
+                                resultStr += '<div class="screenName">'
+                                           +    '<span style="color: black;">' + result[i].watchDate + '</span>~<span style="color: gray;">' + (result[i].watchDate + result[i].movieRt) + '</span>'
+                                           + '</div>'
+                            }
+                            else{
+                                flag = false;
+                            }
+                        }
+
+                        resultStr += '</div>'
+                                +  '</div>';
+
+                        flag = true;
+                    };
+                    console.log(resultStr);
+                    $('#printScreen').html(resultStr);
             	},
-            	error : {
-            		
-            	}
+            	error : function(){
+					console.log('검색결과가 없음');
+				}
             });
-            
         });
 
         

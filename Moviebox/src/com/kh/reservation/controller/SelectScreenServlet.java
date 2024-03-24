@@ -36,13 +36,11 @@ public class SelectScreenServlet extends HttpServlet {
 		ArrayList<Screen> screenList = new ReservationController().selectScreen(request);
 		
 		response.setContentType("application/json; charset=UTF-8");
+		
 		new Gson().toJson(screenList, response.getWriter());		
 		// 반복문으로 보여주기
 		
 		// 더보기 버튼 만들기
-	
-	
-	
 	
 	
 	}

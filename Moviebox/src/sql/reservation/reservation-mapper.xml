@@ -31,12 +31,13 @@
 		       TB_LOCATION
 	</entry>
 	
-	<entry key="selectScreenList">
+	<entry key="selectScreen">
 		SELECT
 		       SCREEN_NO,
 		       THEATER_NO,
 		       THEATER_NAME,
 		       MOVIE_TITLE,
+		       MOVIE_NO,
 		       MOVIE_RT,
 		       WATCH_DATE,
 		       SCREEN_NAME||'관' AS SCREEN_NAME
@@ -51,11 +52,12 @@
 		 WHERE
 		       MOVIE_NO = ?
 		   AND
-		       LOCATION_NAME = ?
+		       LOCATION_NAME LIKE '%'||?||'%'
 		   AND 
-		       WATCH_DATE LIKE '%'||?||'%'
-		 ORDER
-		    BY
+		       WATCH_DATE LIKE ?
+	     ORDER
+	        BY
+		       THEATER_NO,
 		       WATCH_DATE
 	</entry>
 	

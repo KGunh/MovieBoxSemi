@@ -19,15 +19,20 @@ public class ReservationController {
 	}
 
 	public ArrayList<Screen> selectScreen(HttpServletRequest request) {
-		// 스크린 정보 
-		String screenDate = request.getParameter("date");
+		String[] dateStr = request.getParameter("date").split("-");
+		String screenDate = dateStr[0].substring(2) + "/" + dateStr[1] + "/" + dateStr[2];
+		
 		String screenLocation = request.getParameter("location");
+		
 		int movieNo = Integer.parseInt(request.getParameter("movieNo"));
 		
 		ArrayList<Screen> screenList = new ReservationService().selectScreen(screenDate, screenLocation, movieNo); 
-		
-		request.setAttribute("screenList", screenList);
-		
+		/* 확인하고 지울 것!!!!!!!!!!!!
+		System.out.println(screenDate);
+		System.out.println(screenLocation);
+		System.out.println(movieNo);
+		System.out.println(screenList);
+		*/
 		return screenList;
 	}
 
