@@ -12,7 +12,7 @@ import com.kh.notice.model.vo.Notice;
 
 public class NoticeListController {
 	
-	public String selectNoticeList(HttpServletRequest request, HttpServletResponse response) {
+	public String selectNoticeList(HttpServletRequest request) {
 		
 		ArrayList<Notice> list = new NoticeService().selectNoticeList();
 		

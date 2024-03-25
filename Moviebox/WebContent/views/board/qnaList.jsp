@@ -197,6 +197,7 @@
         }
         
         #list-th-i{
+        	width: 100px;
         	text-align: center;
         	border-bottom: 1px solid #bbbbbb46;
         }
@@ -211,6 +212,21 @@
             width: 1200px;
             margin-top: 40px;
             margin-bottom: 40px;
+        }
+        
+        
+        /* 글쓰기 버튼 */
+        #qna-insert-btn{
+            width: 100px;
+            height: 40px;
+            float: right;
+            border: none;
+            border-radius: 8px;
+            margin-right: 44px;
+            margin-bottom: 15px;
+            font-size: 15px;
+            font-weight: bold;
+            background-color: #FFC145;
         }
 
 
@@ -246,6 +262,10 @@
                 </div>
 
             </div> <!-- search-notice -->
+            
+            <div id="qna-insert">
+                <button id="qna-insert-btn">글쓰기</button>
+            </div>
 
 
             <!-- 게시판 -->
@@ -285,9 +305,9 @@
 
             <div id="page">
                 <div class="paging-area" align="center" style="margin-top:12px;">
-                    <button class="btn btn-outline-danger" style="color:white; background: none; border: 1px solid white;"> < </button>
+                    <button class="btn btn-outline-secondary" style="color:white; background: none; border: 1px solid white;"> < </button>
                     <button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;">1</button>
-                    <button class="btn btn-outline-danger" style="color:white; background: none; border: 1px solid white;"> > </button>
+                    <button class="btn btn-outline-secondary" style="color:white; background: none; border: 1px solid white;"> > </button>
                 </div>
             </div>
 

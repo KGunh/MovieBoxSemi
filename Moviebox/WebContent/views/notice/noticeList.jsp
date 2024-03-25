@@ -226,6 +226,20 @@ ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
             margin-top: 40px;
             margin-bottom: 40px;
         }
+        
+       /* 글쓰기 버튼 */
+        #qna-insert-btn{
+            width: 100px;
+            height: 40px;
+            float: right;
+            border: none;
+            border-radius: 8px;
+            margin-right: 44px;
+            margin-bottom: 15px;
+            font-size: 15px;
+            font-weight: bold;
+            background-color: #FFC145;
+        }
 
 
     </style>
@@ -261,6 +275,10 @@ ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
 
             </div> <!-- search-notice -->
             
+            <div id="qna-insert">
+                <button id="qna-insert-btn">글쓰기</button>
+            </div>
+            
             <!-- 게시판 -->
             <div class="container">
                 <table class="table table-hover">
@@ -269,8 +287,8 @@ ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
                             <th id="list-th-i">번호</th>
                             <th id="list-th-i">카테고리</th>
                             <th id="list-th">제목</th>
-                            <th id="list-th-i">작성일</th>
                             <th id="list-th-i">조회수</th>
+                            <th id="list-th-i">작성일</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -285,8 +303,8 @@ ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
                             <td id="list-no"><%= n.getNoticeNo() %></td>
                             <td id="list-ca"><%= n.getNoticeCategory() %></td>
                             <td id="list-title"><%= n.getNoticeTitle() %></td>
-                            <td id="list-date"><%= n.getCreateDate() %></td>
                             <td id="list-count"><%= n.getCount() %></td>
+                            <td id="list-date"><%= n.getCreateDate() %></td>
                         </tr>
                         
                         <% } %>
@@ -310,6 +328,7 @@ ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
     </div>
     
     	<%@ include file="../common/footer.jsp" %>
+
     	
     	<script>
     		function openNoticePage(){
