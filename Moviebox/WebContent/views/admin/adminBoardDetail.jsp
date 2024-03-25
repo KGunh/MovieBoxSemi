@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 > 영화 조회</title>
+<title>Insert title here</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -25,7 +25,7 @@
         #wrap{
             /*width: 1200px;*/
             margin: 0 auto;
-            border : /*1px solid red*/
+            border : 1px solid red;
         }
 
         #top_wrap{
@@ -270,15 +270,16 @@
 		    color: #ffffff;
 		}
 
+
+
     </style>
 </head>
 <body>
-
 	<!-- 헤더 -->
     <%@ include file="/views/common/header.jsp" %>
-    
+	
+	
     <div id="wrap">
-
 
         <div id="top_wrap">
             <div class="top_1">
@@ -318,19 +319,17 @@
                 </ul>    
             </div>
             <div class="content_2">
-                <p id="p">영화 관리</p>
+                <p id="p">게시글관리 > 공지 관리</p>
                 <form>
                 <div id="content_2_box"><!--컨텐트2 전체박스-->
 
                     <div id="cnt2_box_wrap"> <!-- 셀렉, 인풋, 버튼 전체 -->
                         <select name="#" id="select" >
-                            <option value="">전체</option>
-                            <option value="">번호</option>
-                            <option value="">개봉일</option>
-                            <option value="">영화제목</option>
-                            <option value="">장르</option>
-                            <option value="">관람등급</option>
-                            <option value="">등록일</option>
+                            <option value="">공통</option>
+                            <option value="">예매</option>
+                            <option value="">영화관</option>
+                            <option value="">굿즈</option>
+                            <option value="">기타</option>
                         </select>
                             <input type="search" id="find">
                             <button type="submit" id="btn" style="background-color: #FFC145;">
@@ -358,93 +357,93 @@
                               <thead>
                                 <tr style="background-color: #eaeaea; margin-top: 0; height: 40px; color: #212121; border: 0px solid #cfcfcf; opacity: 0.8; text-align: center;">
                                     <th>번호</th>
-                                    <th>개봉일</th>
-                                    <th>영화 제목</th>
-                                    <th>장르</th>
-                                    <th>관람등급</th>
+                                    <th>카테고리</th>
+                                    <th>제목</th>
+                                    <th>작성일</th>
                                     <th>등록일</th>
+                                    <th>조회수</th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td>2024/02/01</td>
-                                    <td>파묘</td>
-                                    <td>미스터리</td>
-                                    <td>15</td>
-                                    <td>2024/02/22</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
-                                    <td>2024/02/02</td>
-                                    <td>듄: 파트2</td>
-                                    <td>액션</td>
-                                    <td>12</td>
-                                    <td>2024/02/28</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>3</td>
-                                    <td>2024/02/03</td>
-                                    <td>웡카</td>
-                                    <td>판타지</td>
-                                    <td>전체</td>
-                                    <td>2024/01/31</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>4</td>
-                                    <td>2024/02/01</td>
-                                    <td>파묘</td>
-                                    <td>미스터리</td>
-                                    <td>15</td>
-                                    <td>2024/02/22</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>5</td>
-                                    <td>2024/02/02</td>
-                                    <td>듄: 파트2</td>
-                                    <td>액션</td>
-                                    <td>12</td>
-                                    <td>2024/02/28</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>6</td>
-                                    <td>2024/02/03</td>
-                                    <td>웡카</td>
-                                    <td>판타지</td>
-                                    <td>전체</td>
-                                    <td>2024/01/31</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>7</td>
-                                    <td>2024/02/01</td>
-                                    <td>파묘</td>
-                                    <td>미스터리</td>
-                                    <td>15</td>
-                                    <td>2024/02/22</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>8</td>
-                                    <td>2024/02/02</td>
-                                    <td>듄: 파트2</td>
-                                    <td>액션</td>
-                                    <td>12</td>
-                                    <td>2024/02/28</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>9</td>
-                                    <td>2024/02/03</td>
-                                    <td>웡카</td>
-                                    <td>판타지</td>
-                                    <td>전체</td>
-                                    <td>2024/01/31</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>10</td>
-                                    <td>2024/02/03</td>
-                                    <td>웡카</td>
-                                    <td>판타지</td>
-                                    <td>전체</td>
-                                    <td>2024/01/31</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                               </tbody>
                             </table>
@@ -476,6 +475,8 @@
         </div>
 
     </div>
+
+
  	<%@ include file="/views/common/footer.jsp" %>
  	<!-- 푸터 -->
 </body>

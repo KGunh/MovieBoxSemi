@@ -5,8 +5,8 @@
 				 java.util.ArrayList"%>
     
 <%
-	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
-
+	ArrayList<Notice> list = (ArrayList)request.getAttribute("noticeList");
+	System.out.println(list);
 %>    
     
     
@@ -293,7 +293,7 @@
                      <% } else { %>
                      
                      	<% for(Notice n : list) { %>
-                        <tr>
+                        <tr class="list">
                             <td id="list-no"><%= n.getNoticeNo() %></td>
                             <td id="list-ca"><%= n.getNoticeCategory() %></td>
                             <td id="list-title"><%= n.getNoticeTitle() %></td>
