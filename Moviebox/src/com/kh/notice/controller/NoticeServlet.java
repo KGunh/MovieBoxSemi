@@ -42,7 +42,7 @@ public class NoticeServlet extends HttpServlet {
 		boolean flag = true;
 		
 		switch(mapping) {
-		case "list" : view = nc.selectNoticeList(request); break;
+		case "list" : view = nc.selectNoticeList(request); flag = false; break;
 		}
 		
 		if(flag) {
