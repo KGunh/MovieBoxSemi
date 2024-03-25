@@ -230,6 +230,7 @@
 
 	<%@ include file="../common/header.jsp" %>
 	<%@ include file="../common/informationNavi.jsp" %>
+	
 	<% if(loginUser == null) {%>
 		<script>
 			location.href = ('<%=contextPath%>/loginForm.me');
