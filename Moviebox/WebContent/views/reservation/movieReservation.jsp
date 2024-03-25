@@ -321,20 +321,24 @@
                     movieNo : $('#movieNo').val()
             	},
             	success : function(result){
+                    console.log(result);
                     let resultStr = '';
                     let flag = true;
-                    
-                    for(let i in result){
-                        resultStr += '<div class="screen">'
-                                   +     '<div class="theaterName">' + result[i].theaterName + '</div>'
-                                   +     '<div class="selectScreen">'
-                                   +        '<div class="screenName">'
-                                   +            '<span style="color: black;">' + result[i].watchDate + '</span>~<span style="color: gray;">' + (result[i].watchDate + result[i].movieRt) + '</span>'
-                                   +        '</div>'
-                                   +     '</div>'
-                                   + '</div>';
-                    };
-
+                    if(result.length > 0){
+                        for(let i in result){
+                            resultStr += '<div class="screen">'
+                                       +     '<div class="theaterName">' + result[i].theaterName + '</div>'
+                                       +     '<div class="selectScreen">'
+                                       +        '<div class="screenName">'
+                                       +            '<span style="color: black;">' + result[i].watchDate + '</span>~<span style="color: gray;">' + (result[i].watchDate + result[i].movieRt) + '</span>'
+                                       +        '</div>'
+                                       +     '</div>'
+                                       + '</div>';
+                        };
+                    }
+                    else{
+                        resultStr = '조회된 영화관이 없습니다.';
+                    }
                     $('#printScreen').html(resultStr);
             	},
             	error : function(){

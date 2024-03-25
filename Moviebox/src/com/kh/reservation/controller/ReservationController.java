@@ -27,12 +27,10 @@ public class ReservationController {
 		int movieNo = Integer.parseInt(request.getParameter("movieNo"));
 		
 		ArrayList<Screen> screenList = new ReservationService().selectScreen(screenDate, screenLocation, movieNo); 
-		/* 확인하고 지울 것!!!!!!!!!!!!
 		System.out.println(screenDate);
 		System.out.println(screenLocation);
 		System.out.println(movieNo);
 		System.out.println(screenList);
-		*/
 		return screenList;
 	}
 
