@@ -40,9 +40,9 @@ public class CinemaServlet extends HttpServlet {
 		
 		switch(mapping) {
 		
-		case "insertAdmin" :  view = "/views/admin/CinemaInsert";
-		case "editAdmin"   :  view= "/views/admin/CinemaEdit";
-		case "checkAdmin"  :  view = "/views/admin/CinemaCheck";
+		case "insertAdmin" :  view = "/views/admin/CinemaInsert.jsp";
+		case "editAdmin"   :  view= "/views/admin/CinemaEdit.jsp";
+		case "checkAdmin"  :  view = "/views/admin/CinemaCheck.jsp";
 		
 		}
 		
