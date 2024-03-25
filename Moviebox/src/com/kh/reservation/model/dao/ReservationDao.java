@@ -44,6 +44,7 @@ public class ReservationDao {
 			
 			while(rset.next()) {
 				Movie m = new Movie();
+				
 				m.setMovieNo(rset.getInt("MOVIE_NO"));
 				m.setMovieTitle(rset.getString("MOVIE_TITLE"));
 			    m.setFilePath(rset.getString("FILE_PATH"));

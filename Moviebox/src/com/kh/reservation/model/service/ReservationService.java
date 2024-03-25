@@ -44,7 +44,7 @@ public class ReservationService {
 		Connection conn = getConnection();
 		
 		ArrayList<Screen> screenList = new ReservationDao().selectScreen(conn, screenDate, screenLocation, movieNo);
-		
+		System.out.println(screenList);
 		close(conn);
 		
 		return screenList;

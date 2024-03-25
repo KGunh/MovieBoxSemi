@@ -323,43 +323,40 @@
             	},
             	success : function(result){
                     var screens = [];
-                   
+                    var screenDate = [];
                     
                     for (var i = 0; i < result.length; i++) {
-                        // 각 객체의 키 값 설정
-                        var theaterNo = result[i].theaterNo;
-                        var watchDate = result[i].watchDate;
-                        
-                        if(theaterNo == result[i - 1].theaterNo){
-                            var screenList = {
-                                for(){
-
+                        var tNo = result[i].theaterNo;
+                        var theaterName = result[i].theaterName;
+                        if(i > 0){
+                            if(tNo == result[i - 1].theaterNo){
+                                for(i; i <= 4; i++){
+                                    screenDate.push(result[i].watchDate);
                                 }
                             }
                         }
-
-                        // 객체 생성 및 키 값과 리스트 값 설정
                         var screen = {
-                            theaterNo: theaterNo,
-                            list: []
+                            theaterNo: tNo,
+                            theaterName: theaterName,
+                            screenList: screenDate
                         };
-                        
-                        // 객체 배열에 추가
+                        console.log(screens);
                         screens.push(screen);
-                    }
-                    
+                    };
                     
                     let resultStr = '';
                     let flag = true;
-                    if(result.length > 0){
-                        for(let i in result){
+                    if(screens.length >= 0){
+                        for(let i in screens){
                             resultStr += '<div class="screen">'
-                                       +     '<div class="theaterName">' + result[i].theaterName + '</div>'
+                                       +     '<div class="theaterName">' + screens[i].theaterName + '</div>'
+                            for(let j = 0; j < screens[1].screenList.length; j++){
                                        +     '<div class="selectScreen">'
                                        +        '<div class="screenName">'
-                                       +            '<span style="color: black;">' + result[i].watchDate + '</span>~<span style="color: gray;">' + (result[i].watchDate + result[i].movieRt) + '</span>'
+                                       +            '<span style="color: black;">' + screens[i].screenList[j] + '</span>~<span style="color: gray;">' + screens[i].screenList[j] + '</span>'
                                        +        '</div>'
                                        +     '</div>'
+                            }
                                        + '</div>';
                         };
                     }
