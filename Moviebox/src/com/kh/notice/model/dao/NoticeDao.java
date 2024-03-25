@@ -51,7 +51,7 @@ public class NoticeDao {
 				notice.setNoticeTitle(rset.getString("NOTICE_TITLE"));
 				notice.setCreateDate(rset.getString("CREATE_DATE"));
 				notice.setCount(rset.getInt("COUNT"));
-				System.out.println(notice);				
+			
 				list.add(notice);
 
 			}

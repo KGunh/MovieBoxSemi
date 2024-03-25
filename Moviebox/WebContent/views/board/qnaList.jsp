@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ page import="com.kh.board.model.vo.Board,
+ 				 java.util.ArrayList"%>
+    
+<%
+	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("qnaList");
+
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,15 +68,6 @@
             cursor: pointer;
         }
         
-        .notice-tap a {
-        	color: white;
-        }        
-        
-        .qna-tap a:hover {
-        	color: #1A1A1A;
-        	text-decoration: none;
-        }
-
         .qna-tap{
             width: 600px;
             height: 90px;
@@ -80,20 +80,9 @@
 
         .notice-tap:hover{
             background-color: #FFC145;
-        }
-        
-        .qna-tap a {
             color: #1A1A1A;
         }
         
-        .notice-tap:hover a{
-        	color: #1A1A1A;
-        }
-        
-        .notice-tap a:hover {
-        	color: #1A1A1A;
-        	text-decoration: none;
-        }
 
         /* 검색 */
         #search-notice{
@@ -208,6 +197,7 @@
         }
         
         #list-th-i{
+        	width: 100px;
         	text-align: center;
         	border-bottom: 1px solid #bbbbbb46;
         }
@@ -222,6 +212,21 @@
             width: 1200px;
             margin-top: 40px;
             margin-bottom: 40px;
+        }
+        
+        
+        /* 글쓰기 버튼 */
+        #qna-insert-btn{
+            width: 100px;
+            height: 40px;
+            float: right;
+            border: none;
+            border-radius: 8px;
+            margin-right: 44px;
+            margin-bottom: 15px;
+            font-size: 15px;
+            font-weight: bold;
+            background-color: #FFC145;
         }
 
 
@@ -241,8 +246,8 @@
                 
             <!-- 카테고리 -->
             <div id="board-category">
-                <div class="notice-tap" onclick="openNoticePage();"><a href="../notice/noticeList.jsp">공지사항</a></div>
-                <div class="qna-tap" onclick="openQnaPage();"><a href="qnaList.jsp">QnA</a></div>
+                <div class="notice-tap" onclick="openNoticePage();">공지사항</div>
+                <div class="qna-tap" onclick="openQnaPage();">QnA</div>
             </div> <!-- board-category -->
 
             <!-- 검색 -->
@@ -257,6 +262,10 @@
                 </div>
 
             </div> <!-- search-notice -->
+            
+            <div id="qna-insert">
+                <button id="qna-insert-btn">글쓰기</button>
+            </div>
 
 
             <!-- 게시판 -->
@@ -272,36 +281,33 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <% if (list == null || list.isEmpty()) { %>
                         <tr>
-                            <td id="list-no">1</td>
-                            <td id="list-ca">예매</td>
-                            <td id="list-title">공지 제목 제목 공지 제목 공지사항 예매 공지</td>
-                            <td id="list-count">김유나</td>
-                            <td id="list-date">2024-03-21</td>
+                            <td colspan="5">조회 된 공지사항이 없습니다. </td>
                         </tr>
+                        
+                        <% } else { %>
+                        
+                        	<% for(Board b : list) { %>
                         <tr>
-                            <td id="list-no">2</td>
-                            <td id="list-ca">영화관</td>
-                            <td id="list-title">공지 제목 제목 공지 제목 공지사항 예매 공지</td>
-                            <td id="list-count">김유나</td>
-                            <td id="list-date">2024-03-21</td>
+                            <td id="list-no"><%= b.getBoardNo() %></td>
+                            <td id="list-ca"><%= b.getBoardCategory() %></td>
+                            <td id="list-title"><%= b.getBoardTitle() %></td>
+                            <td id="list-count"><%= b.getCount() %></td>
+                            <td id="list-date"><%= b.getCreateDate() %></td>
                         </tr>
-                        <tr>
-                            <td id="list-no">3</td>
-                            <td id="list-ca">기타</td>
-                            <td id="list-title">공지 제목 제목 공지 제목 공지사항 예매 공지임 예매</td>
-                            <td id="list-count">김유나</td>
-                            <td id="list-date">2024-03-21</td>
-                        </tr>
+      
+                        	<% } %>
+                        <% } %>
                     </tbody>
                 </table>
             </div>
 
             <div id="page">
                 <div class="paging-area" align="center" style="margin-top:12px;">
-                    <button class="btn btn-outline-danger" style="color:white; background: none; border: 1px solid white;"> < </button>
+                    <button class="btn btn-outline-secondary" style="color:white; background: none; border: 1px solid white;"> < </button>
                     <button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;">1</button>
-                    <button class="btn btn-outline-danger" style="color:white; background: none; border: 1px solid white;"> > </button>
+                    <button class="btn btn-outline-secondary" style="color:white; background: none; border: 1px solid white;"> > </button>
                 </div>
             </div>
 
@@ -312,11 +318,12 @@
    	
  	    <script>
     		function openNoticePage(){
-    			location.href = '../notice/noticeList.jsp';
+    			location.href = '<%=contextPath %>/list.notice';
     		}
     		
     		function openQnaPage(){
-				location.href = '../board/qnaList.jsp';    			
+    			location.href = '<%=contextPath %>/list.qna';
+    			
     		}
     	
     	</script>

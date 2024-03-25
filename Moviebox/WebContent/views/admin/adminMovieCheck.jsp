@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>관리자 > 영화 조회</title>
+<title>영화관리(조회,등록)</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -297,7 +297,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#">영화 관리</a>
+                        <a href="<%=contextPath %>/adminMovieCheck.admin">영화 관리</a>
                         <ul class="submenu">
 
                         </ul>
@@ -311,12 +311,14 @@
                     <li class="post">
                         <a href="#">게시글 관리</a>
                         <ul class="submenu">
-                        <li><a href="#">공지 관리</a></li>
+                        <li><a href="<%=contextPath %>/adminBoardDetail.admin">공지 관리</a></li>
                         <li><a href="#">문의 게시글 관리</a></li>
                         </ul>
                     </li>
                 </ul>    
             </div>
+            
+    <!------------------------------------------------------------>
             <div class="content_2">
                 <p id="p">영화 관리</p>
                 <form>
@@ -343,9 +345,12 @@
 
 
                     <div id="cnt2_btn"><!--등록 버튼-->
-                        <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right;">등록</button>
+                        <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right;" onclick="insertButton()";
+                        >등록</button>
 
                     </div><!--등록 버튼-->
+                    
+
 
 
 
@@ -461,6 +466,7 @@
                         <button class="btn btn-outline-secondary" style="color:#ffffff">1</button>
                         <button class="btn btn-outline-secondary" style="color:#ffffff"> > </button>
                     </div>
+                    
                     <!--페이지 숫자-->
 
 
@@ -478,5 +484,14 @@
     </div>
  	<%@ include file="/views/common/footer.jsp" %>
  	<!-- 푸터 -->
+ 	
+ 	
+ 	
+ 	<script>
+ 		function insertButton(){
+ 			location.href = '<%= contextPath %>/adminMovieInsert.admin';
+ 		}
+
+	</script>
 </body>
 </html>

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>게시글관리 > 공지관리(등록,조회)</title>
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -25,7 +25,7 @@
         #wrap{
             /*width: 1200px;*/
             margin: 0 auto;
-            border : 1px solid red;
+           /* border : 1px solid red;  */
         }
 
         #top_wrap{
@@ -298,7 +298,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#">영화 관리</a>
+                        <a href="<%=contextPath %>/adminMovieCheck.admin">영화 관리</a>
                         <ul class="submenu">
 
                         </ul>
@@ -310,7 +310,7 @@
                         </ul>
                     </li> 
                     <li class="post">
-                        <a href="#">게시글 관리</a>
+                        <a href="<%=contextPath %>/adminBoardDetail.admin">게시글 관리</a>
                         <ul class="submenu">
                         <li><a href="#">공지 관리</a></li>
                         <li><a href="#">문의 게시글 관리</a></li>

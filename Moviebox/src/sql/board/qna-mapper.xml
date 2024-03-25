@@ -3,18 +3,18 @@
 <properties>
 
 	<comment>
-		Notice Mapper
+		Qna Mapper
 	</comment>
 	
-	<entry key="selectNoticeList">
+	<entry key="selectQnaList">
 		SELECT
-			  NOTICE_NO,
-			  NOTICE_CATEGORY,
-			  NOTICE_TITLE,
-			  COUNT,
+			  BOARD_NO,
+			  BOARD_CATEGORY,
+			  BOARD_TITLE,
+			  BOARD_WRITER,
 			  TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE
 		  FROM
-		  	  TB_NOTICE
+		  	  TB_BOARD
 		 ORDER
 		 	BY
 		 	  CREATE_DATE DESC	
