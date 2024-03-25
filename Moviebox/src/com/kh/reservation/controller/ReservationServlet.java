@@ -1,6 +1,7 @@
 package com.kh.reservation.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -42,13 +43,16 @@ public class ReservationServlet extends HttpServlet {
 		boolean flag = false;
 		
 		switch(mapping) {
-		case "a": view = rc.a(request); break;
-		
-		
+
 		
 		case "movie" : view = "views/reservation/movieReservation.jsp"; flag= true; break; 
 		case "seat" : view = "views/reservation/seatReservation.jsp"; break;
 		case "payment" : break;
+
+		case "movie" : view = new ReservationController().selectReservationInfo(request); view = "views/reservation/movieReservation.jsp"; break; 
+		case "seat" : new ReservationController().setSeat(request); break;
+		case "payment" : new ReservationController().insertReservation(); break;
+
 		}
 		
 		// B. 응답뷰 지정

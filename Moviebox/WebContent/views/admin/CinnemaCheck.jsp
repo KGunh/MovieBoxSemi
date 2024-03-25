@@ -387,39 +387,9 @@
     </style>
 </head>
 <body>
-   <div id="header">
-      <div id="top-header">
-         <div id="login-area">
-            <a href="#" class="member">회원가입</a> <a href="#" class="member">로그인</a>
-         </div>
-      </div>
-      <div id="header-navigator">
-         <div id="logo-div">
-            <div id="logo">
-               <a href="#">MOVIE MOX</a>
-            </div>
-         </div>
-         <div id="navigator">
-            <div class="navi">
-               <a href="#" id="reservation">예매</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="movie">영화</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="theater">영화관</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="notice">고객센터</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="myPage">마이페이지</a>
-            </div>
-         </div>
-
-      </div>
-
-   </div>
+   
+<%@ include file="/views/common/header.jsp" %>
+   
 <!-- 여기까지가 헤더 -->
 
 <body>

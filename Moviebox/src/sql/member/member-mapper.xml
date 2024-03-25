@@ -7,36 +7,154 @@
 	</comment>
 	
 	<entry key="login">
+		 SELECT
+	            MEMBER_NO,
+	            MEMBER_ID,	
+	            MEMBER_PWD,	
+	            MEMBER_NAME,	
+	            BIRTHDAY,	
+	            GENDER,	
+	            EMAIL,	
+	            PHONE,	
+	            ADDRESS,	
+	            ENROLL_DATE,	
+	            STATUS,	
+	            PRIVILEGE,	
+	            LOCATION_NAME
+	   	   FROM
+	            TB_MEMBER
+	       JOIN
+                TB_LOCATION ON(LOCAL_CODE = LOCATION_CODE)
+	      WHERE
+	            MEMBER_ID = ?
+	        AND
+	            MEMBER_PWD = ?
+	        AND
+	            STATUS = 'Y'
+
+	</entry>
+	
+	<entry key="loginGenre">
 		SELECT
-		            MEMBER_NO,
-		            MEMBER_ID,	
-		            MEMBER_PWD,	
-		            MEMBER_NAME,	
-		            BIRTHDAY,	
-		            GENDER,	
-		            EMAIL,	
-		            PHONE,	
-		            ADDRESS,	
-		            ENROLL_DATE,	
-		            STATUS,	
-		            PRIVILEGE,	
-		            LOCAL_CODE
-		   FROM
-		            TB_MEMBER
-		 WHERE
-		            MEMBER_ID = ?
-		     AND
-		            MEMBER_PWD = ?
-		     AND
-		            STATUS = 'Y'
-		         
-		
-		
-		
+                GENRE_NAME
+	   	   FROM
+	            TB_MEMBER
+           JOIN
+                TB_MEMBERGENRE ON(MEMBER_NO = MEM_NO)
+           JOIN
+                TB_GENRE USING(GENRE_CODE)
+          WHERE
+	            MEMBER_ID = ?
+	        AND
+	            MEMBER_PWD = ?
+	        AND
+	            STATUS = 'Y'
+	
 	
 	</entry>
 	
 	
+	<entry key="memberInsert">
+		INSERT
+  	      INTO
+       		   TB_MEMBER(MEMBER_NO,MEMBER_ID,MEMBER_PWD,MEMBER_NAME,BIRTHDAY,GENDER,EMAIL,PHONE,ADDRESS,LOCAL_CODE)
+		VALUES 
+			   (SEQ_MEMNO.NEXTVAL,?,?,?,?,?,?,?,?,?)
 	
+	</entry>
+	
+	
+	<entry key="genreInsert">
+		INSERT
+   		  INTO
+       		   TB_MEMBERGENRE
+	    VALUES(
+	    		SEQ_MEMNO.CURRVAL,
+	    		(SELECT
+       				    GENRE_CODE
+ 				   FROM
+       				    TB_GENRE
+ 				   WHERE
+       					 GENRE_NAME = ?))
+	
+	</entry>
+	
+	<entry key="myPagePrint">
+		SELECT
+       			    TICKET_NO,
+       				PERSONNEL,
+       				MEMBER_NO,
+       				MOVIE_TITLE,
+       				THEATER_NAME,
+       				TO_CHAR(WATCH_DATE,'YY/MM/DD, HH24:MI') AS WATCH_DATE,
+       				TB_RESERVATION.STATUS AS STATUS,
+      				GRADE_1_COUNT,
+       				GRADE_2_COUNT,
+       				STUDENT_PRICE,
+       				COMMON_PRICE,
+       				TOTAL_PRICE
+  			FROM
+       				TB_RESERVATION
+  			 JOIN
+       				TB_SCREEN USING(SCREEN_NO)
+  			 JOIN
+      			 	TB_MOVIE USING(MOVIE_NO)
+  			 JOIN
+       				TB_THEATER USING(THEATER_NO)
+  			 JOIN
+       				TB_ATTACHMENT USING(MOVIE_NO)
+  			 JOIN
+       				(SELECT
+      				 			a.TICKET_NO,
+       							a.GRADE_1_COUNT,
+       							a.GRADE_2_COUNT,
+       							a.GRADE_1_COUNT * p1.PRICE AS STUDENT_PRICE,
+       							a.GRADE_2_COUNT * p2.PRICE AS COMMON_PRICE,
+       							(a.GRADE_1_COUNT * p1.PRICE) + (a.GRADE_2_COUNT * p2.PRICE) AS TOTAL_PRICE
+  						FROM
+        						(SELECT
+                							TICKET_NO,
+                							COUNT(CASE WHEN GRADE = 1 THEN 1 ELSE NULL END) AS GRADE_1_COUNT,
+                							COUNT(CASE WHEN GRADE = 2 THEN 1 ELSE NULL END) AS GRADE_2_COUNT
+           							FROM
+                							TB_RESERVATION
+           							 JOIN
+                							TB_PRICESHEET USING(TICKET_NO)
+           							 JOIN
+                							TB_PRICE USING(GRADE)
+          						  WHERE
+                							MEMBER_NO = ?
+          						  GROUP 
+             						   BY 
+                							TICKET_NO) A
+  									JOIN 
+  											TB_PRICE p1 ON p1.GRADE = 1
+  									JOIN 
+  											TB_PRICE p2 ON p2.GRADE = 2
+  											) USING(TICKET_NO)  											 											
+ 				WHERE
+       						MEMBER_NO = ?
+ 				ORDER
+ 	  			     BY
+ 	  	    				TICKET_NO DESC
+	
+	</entry>
+	
+	<entry key="myPageMoviePoster">
+				SELECT
+       					   FILE_PATH,
+       					   CHANGE_NAME
+  				  FROM
+       					   TB_RESERVATION
+  				   JOIN
+       						TB_SCREEN USING(SCREEN_NO)
+  				   JOIN
+       						TB_MOVIE USING(MOVIE_NO)
+  				   JOIN
+       						TB_ATTACHMENT USING(MOVIE_NO)
+ 				WHERE
+       						TICKET_NO = ?
+	
+	</entry>
 	
 </properties>

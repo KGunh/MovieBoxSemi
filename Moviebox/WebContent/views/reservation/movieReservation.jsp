@@ -1,25 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.kh.common.model.vo.Location, com.kh.movie.model.vo.Movie" %>
 
 <%
-
-
-
-
-
-
-
-
-
-
+	ArrayList<Movie> movieList = (ArrayList<Movie>)request.getAttribute("movieList");
+	ArrayList<Location> locationList = (ArrayList<Location>)request.getAttribute("locationList");
 %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>영화 예매</title>
 <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
 <style>
     div{
         box-sizing: border-box;
@@ -27,7 +21,7 @@
 
     #wrap{
         width: 1200px;
-        height: 1600px;
+        height: auto;
     }
 
      /* 이미지 영역 사이즈 조절 */
@@ -63,8 +57,12 @@
         background-color: rgb(255, 193, 69);
     }
 
+    .poster:hover{
+        transform: scale(1.1);
+    }
+
     #selectDateArea{
-        height: 100px;
+        height: 80px;
         width: 100%;
     }
 
@@ -115,6 +113,7 @@
         margin-left: 15px;
         border: none;
     }
+
     #selectLocation > select:focus{
         outline: none;
     }
@@ -124,7 +123,8 @@
     }
 
     #selectScreenArea{
-        height: 800px;
+        height: auto;
+        padding-bottom: 100px;
     }
 
     #printScreen{
@@ -175,27 +175,33 @@
     }
 
     .swiper-slide{
-        position: relative;
         display: flex;
     }
 
     .poster{
         height: 280px;
         width: 180px;
-        margin-top: 55px;
-        margin-left: 55px;
+        margin: auto;
         border-radius: 24px;
     }
 
-    .poster:hover{
-        cursor: pointer;
+    .base{
+        height: 280px !important; 
+        width: 180px !important;
+        margin: auto;
+        border-radius: 24px;
     }
 
     .poster img{
         width: 100%;
         height: 100%;
         border-radius: 24px;
+        margin: auto;
         box-shadow: 4px 4px 8px rgb(32, 32, 32);
+    }
+
+    .poster img:hover{
+        cursor: pointer;
     }
 
     #submit-btn{
@@ -206,11 +212,12 @@
         font-size: 28px;
         background-color: rgb(255, 193, 69);
         float: right;
+        margin-top: 20px;
         margin-right: 65px;
         border: none;
     }
-    
 
+  
 </style>
 
 </head>
@@ -221,48 +228,24 @@
             <div id="title">영화예매</div>
             <div id="selectMovieArea">
                 <div id="content_1">
-                    <!-- Slider main container -->
                     <div class="swiper">
-                        <!-- Additional required wrapper -->
                         <div id="swiper-select" class="swiper-wrapper">
-                            <!-- Slides -->
-                            <div class="swiper-slide">
-                                <!--TB_MOVIE에서 SELECT-->
-                                <div class="poster">
-                                    <img src="/moviebox/resource/img/poster/poster_Exhuma.jpg">
-                                </div>
-                            </div>
-                            <div class="swiper-slide">
-                                <div class="poster">
-                                    <img src="/moviebox/resource/img/poster/poster_Dune.jpg">
-                                </div>
-                            </div>
-                            <div class="swiper-slide">    
-                                <div class="poster">
-                                    <img src="/moviebox/resource/img/poster/poster_SpyXFamily.jpg">
-                                </div>
-                            </div>
-                            <div class="swiper-slide">    
-                                <div class="poster">
-                                    <img src="/moviebox/resource/img/poster/poster_SlamDunk.jpg">
-                                </div>
-                            </div>
-                            <div class="swiper-slide">    
-                                <div class="poster">
-                                    <img src="/moviebox/resource/img/poster/poster_Wonka.jpg">
-                                </div>
-                            </div>
-                           
+                            <% for(Movie m : movieList) { %>
+	                           	<div class="swiper-slide">
+	                                <div class="poster">
+	                                    <img src="<%= contextPath %>/<%= m.getFilePath() %>/<%= m.getFileName() %>" alt="영화포스터">
+                                        <input type="hidden" value="<%= m.getMovieNo() %>">
+	                                </div>
+	                            </div>
+                            <% } %>
+                            <input id="movieNo" type="hidden">
                         </div>
-                    
-                        <!-- If we need pagination -->
+                    	
                         <div class="swiper-pagination"></div>
                     
-                        <!-- If we need navigation buttons -->
                         <div class="swiper-button-prev"></div>
                         <div class="swiper-button-next"></div>
                     
-                        <!-- If we need scrollbar -->
                         <div class="swiper-scrollbar"></div>
                     </div>
                 </div>
@@ -273,118 +256,40 @@
             </div>
             <div id="selectLocationArea">
                 <div id="selectLocation">
-                    <select>
-                        <!--TB_LOCATION에서 SELECT-->
-                        <option value="전체">전체</option>
-                        <option value="서울">서울</option>
-                        <option value="경기">경기</option>
-                        <option value="인천">인천</option>
-                        <option value="강원">강원</option>
-                        <option value="대전">대전</option>
-                        <option value="충남">충남</option>
-                        <option value="충북">충북</option>
-                        <option value="대구">대구</option>
-                        <option value="경북">경북</option>
-                        <option value="울산">울산</option>
-                        <option value="부산">부산</option>
-                        <option value="경남">경남</option>
-                        <option value="광주">광주</option>
-                        <option value="제주">제주</option>
+                    <select id="locationOption">
+                        <option>전체</option>
+                        <% for(Location l : locationList){ %>
+                        	<option><%= l.getLocationName() %></option>
+                        <% } %>
                     </select>
                     <input id="screenDate" type="date" name="screenDate">
                 </div>
             </div>
             <div id="selectScreenArea">
-                <!-- 영화관 스크린 정보 -->
                 <div id="printScreen">
-                    <div class="screen">
-                        <!--TB_SCREEN에서 SELECT-->
-                        <div class="theaterName">CGV 강남</div>
-                        <div class="selectScreen">
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="screen">
-                        <div class="theaterName">CGV 강북</div>
-                        <div class="selectScreen">
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="screen">
-                        <div class="theaterName">메가박스</div>
-                        <div class="selectScreen">
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="screen">
-                        <div class="theaterName">롯데시네마</div>
-                        <div class="selectScreen">
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                            <div class="screenName">
-                                <span style="color: black;">23:10</span>~<span style="color: gray;">25:34</span>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
+                <button id="submit-btn" type="submit">좌석 선택</button>
             </div>
 
-            <button id="submit-btn" type="submit">좌석 선택</button>
         </form>
+       
+        
+        
     </div>
     <%@ include file="/views/common/footer.jsp" %>
 
 
     <script>
-        // 슬라이더 동작 정의
+		
         const swiper = new Swiper('.swiper', {
-            loop : true, //반복 재생 여부
-            slidesPerView : 4, // 이전, 이후 사진 미리보기 갯수
-            pagination: { // 페이징 버튼 클릭 시 이미지 이동 가능
+            loop : true,
+            slidesPerView : 4,
+            pagination: {
                 el: '.swiper-pagination',
                 clickable: true
             },
-            navigation: { // 화살표 버튼 클릭 시 이미지 이동 가능
+            navigation: {
                 prevEl: '.swiper-button-prev',
                 nextEl: '.swiper-button-next'
             }
@@ -396,20 +301,61 @@
             var month = (String)(today.getMonth() + 1).padStart(2, '0');
             var day = (String)(today.getDate()).padStart(2, '0');
             document.getElementById('printToday').innerHTML = year + '-' + month + '-' + day;
-        }
+        };
 
-        document.querySelectorAll('.poster').forEach(function(poster) {
-            poster.addEventListener('click', function(e) {
-                e.target.style.border = '4px solid crimson';
-            });
-        });
-
-        document.querySelectorAll('.screen').forEach(function(screenName) {
-            screenName.addEventListener('click', function(e){
-                e.target.style.background = 'white';
+        $(function(){
+            $('.poster').click(function(){
+                $('.poster').not(this).removeAttr('style');
+                $(this).css('transform', 'scale(1.1)');
+                $('#movieNo').val($(this).children().eq(1).val());
             });
         });
         
+        $('#screenDate').change(function(){
+            $.ajax({
+            	url : 'screen.reservation',
+            	type : 'get',
+            	data : {
+                    date : $('#screenDate').val(),
+                    location : $('#locationOption').val(),
+                    movieNo : $('#movieNo').val()
+            	},
+            	success : function(result){
+                    let resultStr = '';
+                    let flag = true;
+                    
+                    for(let i in result){
+                        resultStr += '<div class="screen">'
+                                   +     '<div class="theaterName">' + result[i].theaterName + '</div>'
+                                   +     '<div class="selectScreen">'
+                                   +        '<div class="screenName">'
+                                   +            '<span style="color: black;">' + result[i].watchDate + '</span>~<span style="color: gray;">' + (result[i].watchDate + result[i].movieRt) + '</span>'
+                                   +        '</div>'
+                                   +     '</div>'
+                                   + '</div>';
+                    };
+
+                    $('#printScreen').html(resultStr);
+            	},
+            	error : function(){
+					console.log('검색결과가 없음');
+				}
+            });
+        });
+
+
+        /*
+         while(flag) {
+                            if(i + 1 == result[i].theaterNo){
+                                resultStr += '<div class="screenName">'
+                                           +    '<span style="color: black;">' + result[i].watchDate + '</span>~<span style="color: gray;">' + (result[i].watchDate + result[i].movieRt) + '</span>'
+                                           + '</div>'
+                            }
+                            else{
+                                flag = false;
+                            }
+                        }
+        */
         
     </script>
 </body>

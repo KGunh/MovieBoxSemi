@@ -14,14 +14,24 @@
 <head>
 <meta charset="UTF-8">
 <title>헤더</title>
+
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
+
+
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <style>
+    
         * {
             box-sizing: border-box;
+  			font-family: "Noto Sans KR", sans-serif;
         }
+        
         .content{
             height: 910px;
             width: 500px;
@@ -165,6 +175,8 @@
 <body>
 
 
+	
+
 	<script>
 		
 		const msg = '<%= alertMsg %>';
@@ -182,10 +194,12 @@
 			<div class="top-header">
 				<div class="login-area">
 				<% if(loginUser == null) { %>
-					<a href="#" class="member">회원가입</a>
+					<a href="<%=contextPath%>/insertForm.me" class="member">회원가입</a>
+					
                 	<a href="<%=contextPath%>/loginForm.me" class="member">로그인</a>
+                	
 				<%}else {  if(loginUser.getPrivilege().equals("Y")) {%>
-					<a href="#" class="member">관리자 기능</a>
+					<a href="<%= contextPath %>/adminMain.me" class="member">관리자 기능</a><!-- 관리자로 로그인시 관리자페이지로 이동 가능 버튼 -->
 				<%} %>
 					<a href="<%=contextPath%>/logout.me" class="member">로그아웃</a>
 				<%} %>
@@ -194,7 +208,7 @@
 		</div>
 		<div id="header-navigator">
             <div id="logo-div">
-                <div id="logo"><a href="<%=contextPath %>"><img class="img-concert" src="<%=contextPath%>/resource/img/4.png"/></a></div>
+                <div id="logo"><a href="<%=contextPath %>"><img class="img-concert" src="<%=contextPath%>/resources/img/4.png"/></a></div>
             </div>
             <div id="navigator">
                 <!-- A grey horizontal navbar that becomes vertical on small screens -->
@@ -203,16 +217,20 @@
                         <a class="nav-link" href="<%=contextPath %>/movie.reservation"><span>예매</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<%=contextPath %>"><span>영화</span></a>
+                        <a class="nav-link" href="<%=contextPath %>/list.movie"><span>영화</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<%=contextPath %>/search.theater"><span>영화관</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<%=contextPath %>"><span>고객센터</span></a>
+                        <a class="nav-link" href="<%=contextPath %>/list.notice"><span>고객센터</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<%=contextPath %>"><span>마이페이지</span></a>
+       					<% if(loginUser == null) { %>
+                        <a class="nav-link" href="<%=contextPath %>/loginForm.me"><span>마이페이지</span></a>
+                        <%} else { %>
+                        <a class="nav-link" href="<%=contextPath %>/mypage.me"><span>마이페이지</span></a>
+                        <%} %>
                     </li>
                 </ul>
 

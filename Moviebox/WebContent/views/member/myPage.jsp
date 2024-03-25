@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.ArrayList,com.kh.member.model.vo.MemberGenre,java.util.List,com.kh.common.model.vo.Reservation,com.kh.movie.model.vo.Movie"%>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -71,24 +72,24 @@
         .info-name{
             font-size: 30px;
         }
-        .btn{
+        #btn1{
             background-color: #FFC145;
-            width: auto;
-            height: auto;
             position: absolute;
             font-size: 14px;
             font-weight: bold;
             top: 10px;
             right: 10px;
+            color: black;
+
         }
-        .btn:hover{
-            border: 1px solid #1A1A1A;
-        }
+        
         .info-content1{          
             float: left;
-            width: 70%;
+            width: 100%;
             height: 100%;
             position: relative;
+            padding: 10px;
+            background-color: white;
         }
         .info-name{
             position: relative;
@@ -97,15 +98,23 @@
         }
         .info-id{
             position: absolute;
-            top: 15px;
-            right:0;
-            font-size: 12px;
+            top: 8px;
+            right:20px;
+            font-size: 20px;
             color: rgb(51, 51, 51);
         }
         .info-address, .info-email{
             font-size: 12px;
             position: absolute;
             color: rgb(51, 51, 51);
+            left: 10px;
+        }
+        .info-genre{
+        	font-size: 12px;
+            position: absolute;
+            color: rgb(51, 51, 51);
+            bottom: 10px;
+            right: 10px;
         }
         .info-address{
             top: 60px;
@@ -122,7 +131,7 @@
         .history-area-list{
             float:left;
             height: 100%;
-            width: 60%;
+            width: 55%;
         }
         .history-area-list > div{
             font-weight: bold;
@@ -132,7 +141,7 @@
         .history-area-price{
             float:right;
             height: 100%;
-            width: 20%;
+            width: 25%;
             background-color: white;
             border-radius: 5px;
             position: relative;
@@ -206,26 +215,65 @@
             width: 48%;
             height: 100%;
         }
+        #poster{
+        	width: 100%;
+        	height: 100%;
+        }
 
     </style>
     <title>마이페이지</title>
 </head>
 <body>
 
+	
+
 
 	<%@ include file="../common/header.jsp" %>
 	<%@ include file="../common/informationNavi.jsp" %>
+	<% if(loginUser == null) {%>
+		<script>
+			location.href = ('<%=contextPath%>/loginForm.me');
+		</script>
+	<%} else {%>
+	
+	<% 
+		String memberId = loginUser.getMemberId();
+		String memberName = loginUser.getMemberName();
+		String phone = loginUser.getPhone();
+		
+		String email = loginUser.getEmail();
+		
+		String address = loginUser.getAddress();
+		String localCode = loginUser.getLocalCode();
+		
+		ArrayList<MemberGenre> list = loginUser.getGenreList();
+		List<Reservation> resList = (ArrayList)request.getAttribute("list");
+		List<Movie> movieList = (ArrayList)request.getAttribute("movieList");
+		
+
+
+	%>
+	
+
     <div class="content">
         <div class="title-area">
             <span class="tit">회원정보</span>
         </div>
         <div class="info-area">
-            <a class="btn">정보수정</a>
+            <a class="btn btn-warning" id="btn1">정보수정</a>
             <div class="info-area-content">
                 <div class="info-content1">
-                    <div class="info-name">김건희님<div class="info-id">rjsgml922</div></div>
-                    <div class="info-address">경기도 양주</div>
-                    <div class="info-email">rjsgml922naver.com</div>
+                    <div class="info-name"><%=memberName %> 님 <div class="info-id"><%=memberId %></div></div>
+                    <div class="info-address"><%=localCode%> <%=address %></div>
+                    <div class="info-email"><%=memberName%></div>
+                    <div class="info-genre">
+                    <%if(list == null) {%>
+                    <%} else { %>
+                    	<% for(int i = 0; i< list.size(); i++){ %>
+                    		<%= list.get(i).getGenreCode()%>
+                    	<%} %>
+                    <%} %>
+                    </div>
                 </div>
                 
                 <div class="info-content2">
@@ -236,17 +284,24 @@
         <div class="mini-tit">MY 예매내역</div>
         <div class="history-area">
             <div class="history-area-content">
-                <div class="history-area-image"></div>
+            <%if(resList == null) {%>
+            	<h5 align="center">고객님의 최근 예매 내역이 존재하지 않습니다.</h5>
+            <%} else { %>
+                <div class="history-area-image"><img id="poster" src="<%=contextPath %>/<%= movieList.get(0).getFilePath()%>/<%=movieList.get(0).getFileName() %>"></div>
                 <div class="history-area-list">
-                    <div>영화이름</div>
-                    <div>날짜</div>
-                    <div>극장</div>
-                    <div>예매일시</div>
+                    <div>영화&emsp;<%=resList.get(0).getMovieTitle() %></div>
+                    <div>날짜&emsp;<%=resList.get(0).getWatchDate() %></div>
+                    <div>극장&emsp;<%=resList.get(0).getTheaterName() %></div>
+                    <div>인원&emsp;&emsp;<%=(resList.get(0).getStudentCount()+resList.get(0).getCommonCount()) %>명</div>
                 </div>
                 <div class="history-area-price">
-                    <div class="count"><span>청소년</span><span>성인</span><span style="border-top: 1px solid rgb(158, 157, 157);;">금액</span></div>
+                    <div class="count">
+                    <span>청소년 :&nbsp;<%=resList.get(0).getStudentCount()%>&emsp;<%=resList.get(0).getStudentPrice() %>원</span>
+                    <span>성인 :&nbsp;<%=resList.get(0).getCommonCount() %>&emsp;&emsp;<%=resList.get(0).getCommonPrice() %>원</span>
+                    <span style="border-top: 1px solid rgb(158, 157, 157);">금액 :&emsp;&emsp;&nbsp;&nbsp;&nbsp;<%=resList.get(0).getTotalPrice() %>원</span></div>
 
                 </div>
+            <%} %>
             </div>
 
         </div>
@@ -275,6 +330,6 @@
             </div>
         </div>
     </div>
-    
+<%}%>
 </body>
 </html>

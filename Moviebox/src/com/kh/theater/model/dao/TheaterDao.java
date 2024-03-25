@@ -19,7 +19,7 @@ public class TheaterDao {
 	public TheaterDao() {
 		String filePath = TheaterDao
 						.class
-						.getResource("/sql/moviebox-mapper.xml")
+						.getResource("/sql/theater/theater-mapper.xml")
 						.getPath();
 		try {
 			prop.loadFromXML(new FileInputStream(filePath));
@@ -44,8 +44,7 @@ public class TheaterDao {
 											  rset.getString("THEATER_NAME"),
 											  rset.getString("THEATER_ADDR"),
 											  rset.getString("MAP_LINK"),
-											  rset.getString("SCREEN_NAME"),
-											  rset.getString("LOCAL_NAME"));
+											  rset.getString("LOCATION_NAME"));
 				
 				list.add(theater);
 			}
@@ -75,9 +74,8 @@ public class TheaterDao {
 											  rset.getString("THEATER_NAME"),
 											  rset.getString("THEATER_ADDR"),
 											  rset.getString("MAP_LINK"),
-											  rset.getString("SCREEN_NAME"),
-											  rset.getString("LOCAL_NAME"));
-				
+											  rset.getString("LOCATION_NAME"));
+
 				list.add(theater);
 			}
 		} catch (SQLException e) {
@@ -103,11 +101,10 @@ public class TheaterDao {
 			
 			while(rset.next()) {
 				Theater theater = new Theater(rset.getInt("THEATER_NO"),
-						  rset.getString("THEATER_NAME"),
-						  rset.getString("THEATER_ADDR"),
-						  rset.getString("MAP_LINK"),
-						  rset.getString("SCREEN_NAME"),
-						  rset.getString("LOCAL_NAME"));
+											  rset.getString("THEATER_NAME"),
+											  rset.getString("THEATER_ADDR"),
+											  rset.getString("MAP_LINK"),
+											  rset.getString("LOCATION_NAME"));
 
 				list.add(theater);
 			}

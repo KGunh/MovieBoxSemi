@@ -45,14 +45,30 @@ public class MemberServlet extends HttpServlet {
 		switch (mapping) {
 		case "login":
 			view = mc.login(request,response);
-			if(view != "") {
+			if(!view.equals("views/common/errorPage.jsp")) {
 				flag = false;
 			}
 			break;
 		case "logout":
-			view = mc.logout(request,response); flag = false;
+			view = mc.logout(request,response); flag = false; break;
 		case "loginForm":
-			view = "views/member/login.jsp"; flag = false;
+			view = "views/member/login.jsp"; flag = false; break;
+		case "insertForm":
+			view = "views/member/memberInsert.jsp"; flag = false; break;
+		case "insert":
+			view = mc.insert(request,response);
+			if(view.equals("views/common/errorPage.jsp")) {
+				flag = false;
+			}
+			break;
+		
+		case "mypage":
+			view = mc.myPagePrint(request, response); flag = false;
+			break;
+		case "adminMain":
+			view = "/views/admin/adminMain.jsp"; break;
+		default : return;
+			
 	
 		}
 

@@ -1,4 +1,4 @@
-package com.kh.member.model.vo;
+package com.kh.common.model.vo;
 
 public class Reservation {
 	private int ticketNo;
@@ -6,6 +6,16 @@ public class Reservation {
 	private int memberNo;
 	private int screenNo;
 	private String status;
+	private String movieTitle;
+	private String theaterName;
+	private String watchDate;
+	private int studentCount;
+	private int commonCount;
+	private int studentPrice;
+	private int commonPrice;
+	private int totalPrice;
+	
+	
 	public Reservation() {
 		super();
 	}
@@ -16,6 +26,58 @@ public class Reservation {
 		this.memberNo = memberNo;
 		this.screenNo = screenNo;
 		this.status = status;
+	}
+	
+	
+	
+	
+	public int getStudentPrice() {
+		return studentPrice;
+	}
+	public void setStudentPrice(int studentPrice) {
+		this.studentPrice = studentPrice;
+	}
+	public int getCommonPrice() {
+		return commonPrice;
+	}
+	public void setCommonPrice(int commonPrice) {
+		this.commonPrice = commonPrice;
+	}
+	public int getTotalPrice() {
+		return totalPrice;
+	}
+	public void setTotalPrice(int totalPrice) {
+		this.totalPrice = totalPrice;
+	}
+	public int getStudentCount() {
+		return studentCount;
+	}
+	public void setStudentCount(int studentCount) {
+		this.studentCount = studentCount;
+	}
+	public int getCommonCount() {
+		return commonCount;
+	}
+	public void setCommonCount(int commonCount) {
+		this.commonCount = commonCount;
+	}
+	public String getWatchDate() {
+		return watchDate;
+	}
+	public void setWatchDate(String whtchDate) {
+		this.watchDate = whtchDate;
+	}
+	public String getMovieTitle() {
+		return movieTitle;
+	}
+	public void setMovieTitle(String movieTitle) {
+		this.movieTitle = movieTitle;
+	}
+	public String getTheaterName() {
+		return theaterName;
+	}
+	public void setTheaterName(String theaterName) {
+		this.theaterName = theaterName;
 	}
 	public int getTicketNo() {
 		return ticketNo;

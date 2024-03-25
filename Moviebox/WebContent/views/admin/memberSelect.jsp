@@ -355,7 +355,7 @@
 </head>
 <body>
 
-<%@ include file = "view/common/header.jsp" %>
+<%@ include file = "/views/common/header.jsp" %>
 
    <div id="header">
       <div id="top-header">

@@ -13,13 +13,12 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>영화관 조회</title>
 <style>
         body {
             background-color: #1A1A1A
         }
         div{
-            /*border: 1px solid red;*/
             box-sizing: border-box;
         }
         #wrap{
@@ -56,7 +55,7 @@
         .searchLocation{
             float: left;
             height: 100%;
-            width: 71px; /*border 지울때 72px로 바꿀 것*/
+            width: 72px;
             text-align: center;
             line-height: 60px;
             color: rgb(238, 238, 238);
@@ -66,6 +65,8 @@
         }
         .searchLocation:hover{
             cursor: pointer;
+            background-color: rgb(255, 193, 69);
+            color: #1A1A1A;
         }
         #theaterNameInput{
             height: 45px;
@@ -123,6 +124,10 @@
             font-weight: 700;
         }
         
+        .printTheaterName > a:hover{
+			color: rgb(255, 193, 69);
+        }
+        
         
     </style>
     <script>
@@ -160,7 +165,7 @@
                     </form>
                 </div>
                 <div id="theaterInputBtnArea">
-                    <button id="theaterInputBtn" onclick="selectName();"><img style="height: 90%; width: 100%;" src="resource/img/search.PNG" alt="검색"></button>
+                    <button id="theaterInputBtn" onclick="selectName();"><img style="height: 90%; width: 100%;" src="resources/img/search.PNG" alt="검색"></button>
                 </div>
             </div>
             <div id="searchNavi">
@@ -206,7 +211,6 @@
         document.getElementById('searchNavi').onclick = function(e){
                 var locationName = e.target.innerHTML;
                 document.getElementById('locationInput').value = locationName;
-                /*console.log(document.getElementById('locationInput').value);*/
                 document.getElementById('locationForm').submit();
         }
 

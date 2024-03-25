@@ -12,12 +12,11 @@
 		       THEATER_NAME,
 		       THEATER_ADDR,
 		       MAP_LINK,
-		       SCREEN_NAME,
-		       LOCAL_NAME
+		       LOCATION_NAME
 		  FROM
 		       TB_THEATER
 		  JOIN
-		       TB_LOCATION USING(LOCAL_CODE)      
+		       TB_LOCATION USING(LOCATION_CODE)      
 		 ORDER
 		    BY
 		       THEATER_NO ASC   	   
@@ -28,14 +27,13 @@
 		       THEATER_NAME,
 		       THEATER_ADDR,
 		       MAP_LINK,
-		       SCREEN_NAME,
-		       LOCAL_NAME
+		       LOCATION_NAME
 		  FROM
 		       TB_THEATER
 		  JOIN
-		       TB_LOCATION USING(LOCAL_CODE)
+		       TB_LOCATION USING(LOCATION_CODE)
          WHERE
-         	   LOCAL_NAME = ?   
+         	   LOCATION_NAME = ?   
 		 ORDER
 		    BY
 		       THEATER_NO ASC 
@@ -46,12 +44,11 @@
 		       THEATER_NAME,
 		       THEATER_ADDR,
 		       MAP_LINK,
-		       SCREEN_NAME,
-		       LOCAL_NAME
+		       LOCATION_NAME
 		  FROM
 		       TB_THEATER
 		  JOIN
-		       TB_LOCATION USING(LOCAL_CODE)
+		       TB_LOCATION USING(LOCATION_CODE)
          WHERE
          	   THEATER_NAME LIKE '%'||?||'%'   
 		 ORDER

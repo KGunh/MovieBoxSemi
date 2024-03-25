@@ -15,7 +15,7 @@ import com.kh.theater.model.vo.Theater;
 /**
  * Servlet implementation class TheaterNameSearchController
  */
-@WebServlet("/Theater.search.name")
+@WebServlet("/search.theatername")
 public class TheaterNameSearchController extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
