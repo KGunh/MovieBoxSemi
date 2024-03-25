@@ -1,8 +1,8 @@
 package com.kh.reservation.controller;
 
-import java.util.ArrayList;
-import java.util.LinkedHashSet;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -35,17 +35,16 @@ public class ReservationController {
 		}
 		
 		if(screenLocation.equals("전체")) screenLocation = ""; //예외처리
-
+		
 		List<Screen> screenList = new ReservationService().selectScreen(screenDate, screenLocation, movieNo); 
+	    
+		Set<Integer> theaterNoSet = new HashSet<>();
+	    
+		for (Screen screen : screenList) {
+            theaterNoSet.add(screen.getTheaterNo());
+        }
+		System.out.println(theaterNoSet);
 		
-		LinkedHashSet<Screen> set = new LinkedHashSet<>(screenList);
-        List<Screen> list = new ArrayList<>(set);
-		
-		System.out.println(list);
-		for(int i = 0; 0 < screenList.size(); i++) {
-			
-		}
-
 		return screenList;
 	}
 
