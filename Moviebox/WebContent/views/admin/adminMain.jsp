@@ -193,8 +193,8 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#">영화 관리</a>
-                        <ul class="submenu">
+                        <a href="<%=contextPath %>/adminMovieCheck.admin">영화 관리</a>
+                        <ul class="submenu" >
 
                         </ul>
                     </li>
