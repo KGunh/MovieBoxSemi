@@ -1,12 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
- 
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-    <style>
+	    <style>
     	
     	a{
             text-decoration: none;
@@ -56,7 +55,8 @@
             border-bottom: 1px solid lightgray;
         }
         .info-my{
-            color: black;
+        	color: #FFC145;
+            
             text-decoration: none;
             font-weight: bold;
             width: 100%;
@@ -65,7 +65,7 @@
             padding-top: 25px;
         }
         .info-list{
-            color: #FFC145;
+            color: black;
             font-weight: bold;
             width: 100%;
             height: 100%;
@@ -78,30 +78,47 @@
         
         
         #info-navi-first{
-            background-color: #FFC145;
+        	background-color: #1A1A1A;
+            
         }
         #info-navi-second{
-            background-color: #1A1A1A;
+            background-color: #FFC145;
         }
         .info-my:hover{
             text-decoration: none;
-            color: black;
+            color: #FFC145;
             
         }
         .info-list:hover{
             text-decoration: none;  
-            color: #FFC145;   
+             
+            color: black;  
         }
 
-    </style>
+    </style>s
 </head>
 <body>
-	<div>
+	<%@ include file="../common/header.jsp" %>
 	
-	</div>
+	<div id="info-header">
+        <div id="info-title">
+            <span class="title">마이페이지</span>
+        </div>
+        <div id="info-header-navi">
+            
+            <ul class="info-navi">
+                <li id="info-navi-first">
+                    <a href="<%=contextPath%>/mypage.me" class="info-my">회원정보</a>
+                </li>
+                <li id="info-navi-second">
+                    <a href="#" class="info-list">예매내역</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+	
 	
 
-
-    
 </body>
 </html>

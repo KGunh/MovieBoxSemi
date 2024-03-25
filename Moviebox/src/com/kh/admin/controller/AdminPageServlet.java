@@ -44,7 +44,8 @@ public class AdminPageServlet extends HttpServlet {
 		switch(mapping) {
 		case "adminMovieCheck" :
 			view = "/views/admin/adminMovieCheck.jsp"; break;
-		
+		case "adminBoardDetail" :
+			view = "/views/admin/adminBoardDetail.jsp"; break;
 		}
 
 	

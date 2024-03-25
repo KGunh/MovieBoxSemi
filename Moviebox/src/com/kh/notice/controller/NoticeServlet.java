@@ -43,6 +43,8 @@ public class NoticeServlet extends HttpServlet {
 		
 		switch(mapping) {
 		case "list" : view = nc.selectNoticeList(request); flag = false; break; // dispatcher
+
+
 		}
 		
 		
