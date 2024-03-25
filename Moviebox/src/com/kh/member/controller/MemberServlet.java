@@ -67,7 +67,7 @@ public class MemberServlet extends HttpServlet {
 			break;
 		case "adminMain":
 			view = "/views/admin/adminMain.jsp"; break;
-		case "resList" : view = "/views/member/myReservation.jsp"; break;
+		case "resList" : view = mc.myReservation(request, response); flag = false; break;
 		default : return;
 			
 	

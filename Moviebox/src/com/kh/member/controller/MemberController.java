@@ -155,13 +155,13 @@ public class MemberController {
 					answerList.add(a);
 					}
 				}
-				
+				request.setAttribute("boardList", boardList);
 			}
 			if(!answerList.isEmpty()) {
 				request.setAttribute("answerList", answerList);
 			}
 			
-			request.setAttribute("boardList", boardList);
+			
 			
 			
 			view = "views/member/myPage.jsp";
@@ -173,6 +173,46 @@ public class MemberController {
 	}
 	
 
+	public String myReservation(HttpServletRequest request, HttpServletResponse response) {
+		String view = "";
+		HttpSession session = request.getSession();
+		List<Movie> movieList = new ArrayList();
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		if(loginUser == null) {
+			return view = "views/member/myPage.jsp";
+		} else {
+			List<Reservation> list = new MemberService().myPagePrint(loginUser);
+			
+			System.out.println(list);
+			if (list.isEmpty()) {
+				return view ="views/member/myReservation.jsp";
+			} else {
+				
+				
+				for (int i = 0; i < list.size(); i++) {
+					Reservation res = list.get(i);
+					Movie m = new MemberService().myPageMoviePoster(res);
+					if (m == null) {
+						request.setAttribute("errorMsg", "");
+						return view = "views/common/errorPage.jsp";
+					}
+
+					movieList.add(m);
+
+				}
+				
+				request.setAttribute("list", list);
+				request.setAttribute("movieList", movieList);
+
+				view = "views/member/myReservation.jsp";
+			}
+		}
+		
+		
+		return view;
+	}
 	
 	
 	
