@@ -162,16 +162,18 @@
         width: 155px;
         height: 85px;
         margin-top: 5px;
+        margin-left: 48px;
         border-radius: 25px;
         background-color: rgba(255, 255, 255, 0.6);
         text-align: center;
-        font-size: 20px;
+        font-size: 18px;
         font-weight: bold;
         line-height: 85px;
     }
 
     .screenName:hover{
         cursor: pointer;
+        background-color: white;
     }
 
     .swiper-slide{
@@ -249,7 +251,6 @@
                         <div class="swiper-scrollbar"></div>
                     </div>
                 </div>
-
             </div>
             <div id="selectDateArea">
                 <div id="printToday"></div>
@@ -271,14 +272,10 @@
                 </div>
                 <button id="submit-btn" type="submit">좌석 선택</button>
             </div>
-
         </form>
-       
-        
-        
     </div>
-    <%@ include file="/views/common/footer.jsp" %>
 
+    <%@ include file="/views/common/footer.jsp" %>
 
     <script>
 		
@@ -311,6 +308,12 @@
             });
         });
        
+        $(function(){
+            $('.screenName').click(function(){
+                $(this).css('background', 'white');
+            });
+        });
+
         function selectScreen(){
             $.ajax({
             	url : 'screen.reservation',
@@ -322,7 +325,7 @@
             	},
             	success : function(result){
                     var resultStr = '';
-                    console.log(result);
+
                     for(let i = 0; i < result.length; i++){
                         resultStr += '<div class="screen">'
                                     +     '<div class="theaterName">' + result[i].theaterName + '</div>';
@@ -357,6 +360,7 @@
             selectScreen();
         });
 
+        
     </script>
 </body>
 </html>
