@@ -214,6 +214,27 @@ public class MemberController {
 		return view;
 	}
 	
+	public String pwdCheck(HttpServletRequest request, HttpServletResponse response) {
+		String view = "";
+		
+		HttpSession session = request.getSession();
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		String CheckPwd = request.getParameter("memberPwd");
+
+		
+		String loginUserPwd = loginUser.getMemberPwd();
+
+		
+		if(CheckPwd.equals(loginUserPwd)) {
+			view = "views/member/myPageModify.jsp";
+		} else {
+			session.setAttribute("alertMsg", "잘못된 비밀번호입니다 다시 입력해주세요.");
+			view = "views/member/myPagePwdCheck.jsp";
+		}
+		return view;
+	}
 	
 	
 	

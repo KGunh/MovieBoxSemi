@@ -43,38 +43,23 @@ public class MemberServlet extends HttpServlet {
 		boolean flag = true;
 
 		switch (mapping) {
-		case "login":
-			view = mc.login(request,response);
-			if(!view.equals("views/common/errorPage.jsp")) {
-				flag = false;
-			}
-			break;
-		case "logout":
-			view = mc.logout(request,response); flag = false; break;
-		case "loginForm":
-			view = "views/member/login.jsp"; flag = false; break;
-		case "insertForm":
-			view = "views/member/memberInsert.jsp"; flag = false; break;
-		case "insert":
-			view = mc.insert(request,response);
-			if(view.equals("views/common/errorPage.jsp")) {
-				flag = false;
-			}
-			break;
-		
-		case "mypage":
-			view = mc.myPagePrint(request, response); flag = false;
-			break;
-		case "adminMain":
-			view = "/views/admin/adminMain.jsp"; break;
-		case "resList" : view = mc.myReservation(request, response); flag = false; break;
+		case "login": view = mc.login(request,response);break;
+		case "logout": view = mc.logout(request,response);  break;
+		case "loginForm": view = "views/member/login.jsp"; break;
+		case "insertForm": view = "views/member/memberInsert.jsp";break;
+		case "insert": view = mc.insert(request,response); break;
+		case "mypage": view = mc.myPagePrint(request, response);break;
+		case "adminMain": view = "views/admin/adminMain.jsp"; break;
+		case "resList" : view = mc.myReservation(request, response);  break;
+		case "pwdCheckForm" : view = "views/member/myPagePwdCheck.jsp"; break;
+		case "pwdCheck" : view = mc.pwdCheck(request, response); break;
 		default : return;
 			
 	
 		}
 
 		
-		if (flag) {
+		if (!flag) {
 			response.sendRedirect(request.getContextPath() + view);
 		} else {
 			request.getRequestDispatcher(view).forward(request, response);

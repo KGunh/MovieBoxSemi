@@ -366,7 +366,7 @@
             <span class="tit">회원정보</span>
         </div>
         <div class="info-area">
-            <a class="btn btn-warning" id="btn1">정보수정</a>
+            <a class="btn btn-warning" id="btn1" href="<%=contextPath %>/pwdCheckForm.me">정보수정</a>
             <div class="info-area-content">
                 <div class="info-content1">
                     <div class="info-name"><%=memberName %> 님 <div class="info-id"><%=memberId %></div></div>
