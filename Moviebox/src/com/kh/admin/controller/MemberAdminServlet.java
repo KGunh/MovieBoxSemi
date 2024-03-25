@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class CinemaController
+ * Servlet implementation class MemberAdminController
  */
-@WebServlet("*.cm")
-public class CinemaServlet extends HttpServlet {
+@WebServlet("*.mb")
+public class MemberAdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CinemaServlet() {
+    public MemberAdminServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -31,18 +31,17 @@ public class CinemaServlet extends HttpServlet {
 		String uri =request.getRequestURI();
 		
 		String mapping = uri.substring(uri.lastIndexOf("/")+1,uri.lastIndexOf("."));
-		System.out.println(mapping);
+//		System.out.println(mapping);
 		String view = "";
 		
-		CinemaAdminContorller CAC = new CinemaAdminContorller();
+		MemberAdminController MAC = new MemberAdminController();
 		
 		boolean flag = false;
 		
 		switch(mapping) {
 		
-		case "insertAdmin" :  view = "/views/admin/CinemaInsert.jsp";
-		case "editAdmin"   :  view= "/views/admin/CinemaEdit.jsp";
-		case "checkAdmin"  :  view = "views/admin/CinemaCheck.jsp";
+		case "selectAdmin" :  view = "views/admin/memberSelect.jsp";
+		case "modifyAdmin."   :  view= "views/admin/memberModify.jsp";
 		
 		}
 		
@@ -56,22 +55,14 @@ public class CinemaServlet extends HttpServlet {
 		
 		switch(mapping) {
 		
-		case "insertAdmin" :  CAC.cinemaInsert();
-		case "editAdmin"   :  CAC.cinemaEdit();
-		case "checkAdmin"  :  CAC.cinemaCheck();
+		case "selectAdmin" :  MAC.selectAdmin();
+		case "editAdmin"   :  MAC.editAdmin();
+		
+		
 		
 		}
 		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+	
 		
 	}
 

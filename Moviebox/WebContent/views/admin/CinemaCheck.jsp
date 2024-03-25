@@ -379,6 +379,8 @@
             margin-top: -15px;
 
         }
+        
+        
 
 
      
@@ -388,41 +390,40 @@
 </head>
 <body>
    
-   <%@ include file =/views/common/header.jsp  %>
-   
-   
-<!-- 여기까지가 헤더 -->
-
-<body>
-    <div id="wrap">
-        <!-- jsp에서 header include하기 -->
+   	<!-- 헤더 -->
+    <%@ include file="/views/common/header.jsp" %>
     
+    <div id="wrap">
+
+
         <div id="top_wrap">
             <div class="top_1">
                 <h1>관리자</h1>
             </div>
-            <div class="top_2" style="color: white;">
-                <span><a href="#">로그아웃</a></span> | <span><a href="#">홈페이지</a></span>
-            </div>
+
         </div>
-        <div id="content" >
+
+        <div id="content">
             <div class="content_1">
                 <ul class="menu">
                     <li>
                         <a href="#">회원 관리</a>
                         <ul class="submenu">
+
                         </ul>
                     </li>
                     <li>
                         <a href="#">영화 관리</a>
                         <ul class="submenu">
+
                         </ul>
                     </li>
                     <li>
-                        <a href="#">영화관 관리</a>
+                        <a href="<%=contextPath%>/checkAdmin.cm">영화관 관리</a>
                         <ul class="submenu">
+
                         </ul>
-                    </li>
+                    </li> 
                     <li class="post">
                         <a href="#">게시글 관리</a>
                         <ul class="submenu">
@@ -430,9 +431,15 @@
                         <li><a href="#">문의 게시글 관리</a></li>
                         </ul>
                     </li>
-                </ul>
+                </ul>    
             </div>
-            <div class="content_2">
+
+            <!------------------------------------------------------------>
+
+            
+
+            
+                         <div class="content_2">
                 <h2>영화관 관리</h2>
                 <div class="content_2_top">
                  
@@ -600,13 +607,19 @@
               
 
                </div > 
-                
+               
+                </div>
              
+  
 
-
-
-
-
-
+ 	<%@ include file="/views/common/footer.jsp" %>
+ 	<!-- 푸터 -->
+   
+   
+   
+   
+   
+   
+   
 </body>
 </html>

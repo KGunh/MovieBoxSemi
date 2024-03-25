@@ -199,7 +199,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath%>/editAdmin.cm">영화관 관리</a>
+                        <a href="<%=contextPath%>/checkAdmin.cm">영화관 관리</a>
                         <ul class="submenu">
 
                         </ul>

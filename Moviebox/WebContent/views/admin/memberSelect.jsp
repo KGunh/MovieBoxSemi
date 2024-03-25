@@ -1,7 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
-    <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -169,9 +168,6 @@
 
         .content_2_top{
             padding: 20px 0px 0px 40px;
-            height: 80px;
-            width: 880px;
-            border-bottom: 3px solid lightgray;
         }
         .menu {
             width: 200px;
@@ -247,30 +243,91 @@
         } 
 
 
-     
-     #select{
-        
-        display: inline;
-     }
-       
-       
+        .tableoutline{
+            display: inline;
+        }
 
+        #table{
+            
+            width: 800px;
+            border: 1px solid lightgray;
+        }
+
+        #table > tr,td {
+            height: 50px;
+            width: 250px;
+           
+            text-align: center;
+            margin-top: 10px;
+            margin-right: 10px;
+            
+            border-bottom: 2px solid lightgray;
+            
+            
+        }
+        
+       .num{
+        width: 80px;
+       }
       
-       
 
-       
-       #btn1{
-        width: 100px;
-        border: none;
-        font-size: 14px;
-        height: 35px;
-        border-radius: 8px;
         
-        background-color: #FFC145;
-      }
+       
+      
+            
+      
 
-      #btn1:hover{
-        box-shadow: 10px;
+       #select{
+        border: 1px solid gainsboro;
+        border-radius: 5px;
+        width: 150px;
+        height: 35px;
+        
+        font-size: 15px;
+        
+       }
+   
+       #find {
+        width: 400px;
+        height: 35px;
+        border-radius: 5px;
+        border: 1px solid lightgray;
+        font-size: 15px;
+       }
+
+       .content_2_top{
+        margin-left: 70px;
+       }
+
+       #table {
+        border: 2px solid lightgray;
+        margin: auto;
+        margin-top: 60px;
+
+       }
+
+       #table tr{
+        border-bottom: 2px solid lightgray;
+        
+       
+       }
+
+       .check{
+        height: 20px;
+        width: 20px;
+       
+
+       }
+
+       .btn1{
+        width: 70px;
+        border: none;
+        font-size: 12px;
+        height: 25px;
+        border-radius: 5px;
+        margin-top: 44px;
+        float: left;
+        background-color: lightgray
       }
 
 
@@ -284,69 +341,47 @@
 
        #delete{
         float: right;
+        height: 70px;
         width: 100px;
-        height: 50px;
         
        }
 
-       #content_2_content{
-        height: 500px;
-        width: 880px;
-        margin-top: 20px;
+       #cnt2_paging-area {
+            width: 825px;
+            height: 40px;
+            /* border : 1px solid rgb(0, 245, 225); */
+            margin: 0 auto;
+            margin-top: 0px;
+            display: inline-block;
+            padding: 17px  190px 0px;
+        }
+
+        .page-link{
+            color: #212121;
+        }
+
+        #inputBox-2 {
+            width: 280px;
+            height: 40px;
+            margin-left: 10px;
+        }
+
+        #cnt2_post{
+            padding-top: 50px;
+        }
+
+        #cnt2_post{
+            width: 825px;
+        }
+
+        .container{
+            width: 825px;
+            margin-top: -15px;
+
+        }
         
-       
-       }
-       #content_2_content> div {
-     
         
-        height: 40px;
-      
-        margin: 40px 0px 20px;
-       
-       }
-     
 
-      
-      .input{
-       float: right;
-       text-align: center;
-       height: 39px;
-       width: 650px;
-       border-radius: 5px;
-       font-size: 18px;
-       border: 2px solid lightgray;
-       color: gray;
-    }
-
-    .input1{
-        float: right;
-        text-align: center;
-        height: 39px;
-        width: 200px;
-        font-size: 18px;
-        border-radius: 5px;
-        margin-left: 25px;
-        border: 2px solid lightgray;
-        color: gray;
-    }
-
-    .name {
-        font-size: 20px;
-        font-weight:400;
-        color: #323232;
-        margin-left: 15px;
-    }
-
-    #address{
-        width: 200px;
-        display: inline;
-        
-    }
-
-    
-
-       
-     
 
      
 
@@ -354,74 +389,41 @@
     </style>
 </head>
 <body>
-
-<%@ include file = "views/common/header.jsp" %>
-
-   <div id="header">
-      <div id="top-header">
-         <div id="login-area">
-            <a href="#" class="member">회원가입</a> <a href="#" class="member">로그인</a>
-         </div>
-      </div>
-      <div id="header-navigator">
-         <div id="logo-div">
-            <div id="logo">
-               <a href="#">MOVIE MOX</a>
-            </div>
-         </div>
-         <div id="navigator">
-            <div class="navi">
-               <a href="#" id="reservation">예매</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="movie">영화</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="theater">영화관</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="notice">고객센터</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="myPage">마이페이지</a>
-            </div>
-         </div>
-
-      </div>
-
-   </div>
-<!-- 여기까지가 헤더 -->
-
-<body>
-    <div id="wrap">
-        <!-- jsp에서 header include하기 -->
+   
+   	<!-- 헤더 -->
+    <%@ include file="/views/common/header.jsp" %>
     
+    <div id="wrap">
+
+
         <div id="top_wrap">
             <div class="top_1">
                 <h1>관리자</h1>
             </div>
-            <div class="top_2" style="color: white;">
-               
-            </div>
+
         </div>
-        <div id="content" >
+
+        <div id="content">
             <div class="content_1">
                 <ul class="menu">
                     <li>
                         <a href="#">회원 관리</a>
                         <ul class="submenu">
+
                         </ul>
                     </li>
                     <li>
                         <a href="#">영화 관리</a>
                         <ul class="submenu">
+
                         </ul>
                     </li>
                     <li>
-                        <a href="#">영화관 관리</a>
+                        <a href="<%=contextPath%>/checkAdmin.cm">영화관 관리</a>
                         <ul class="submenu">
+
                         </ul>
-                    </li>
+                    </li> 
                     <li class="post">
                         <a href="#">게시글 관리</a>
                         <ul class="submenu">
@@ -429,80 +431,73 @@
                         <li><a href="#">문의 게시글 관리</a></li>
                         </ul>
                     </li>
-                </ul>
+                </ul>    
             </div>
-            <div class="content_2">
-                <h2>영화관 관리 〉영화관 등록</h2>
+
+            <!------------------------------------------------------------>
+
+            
+
+              <div class="content_2">
+                <h2> 회원 기본 정보</h2>
                 <div class="content_2_top">
+                 
+                    <table class="table table-hover"  style="height: 490px;">
+                       
+                          <tr>
+                            <tbody>
+                            <th class="title">회원번호</th>
+                            <td>0822A</td>
+                        </tr>
+                            <tr>
+                              <th class="title">아이디</th>
+                              <td>grace3510</td>
+                            </tr>
+                            <tr>  
+                              <th class="title">이름</th>
+                              <td>유은혜</td>
+                            </tr>
+                            <tr>  
+                              <th class="title">성별</th>
+                              <td>F</td>
+                            </tr>  
+                            <tr>
+                              <th class="title">생년월일</th>
+                              <td>920324</td> 
+                            </tr>
+                            <tr>
+                              <th class="title">주소</th>
+                              <td>경기도 여주시 대신면 후포리</td>
+                            </tr>
+                            <tr>  
+                              <th class="title">전화번호</th>
+                              <td>010-7455-4474</td>
+                            </tr>
+                            <tr>
+                              <th class="title">가입일</th>
+                              <td>22/08/22</td>
+                            </tr>  
+                            <tr>
+                              <th class="title">취향</th>
+                              <td>마블 히어로</td>
+                            </tr>
+                          
+                      
+                        
+                         
+                                
+
+
+                              </tbody>
+                              </table>
+
+                </div>
+                <div id="buttoon">
+                   <button class="btn">수정</button>
+                   <button class="btn">닫기</button>
+                </div>
                 
             </div>
-            <div id="content_2_content" >
-                
-               
-                <div>
-                    <span class="name">지역</span>
-                    <select name="region" class="input" style="width: 650px; height: 39px;">
-                        <option value="지역">서울</option>
-                        <option value="지역">경기도</option>
-                        <option value="지역">강원도</option>
-                        <option value="지역">충정도</option>
-                        <option value="지역">전라도</option>
-                        <option value="지역">경상도</option>
-                        <option value="지역">제주도</option>
-                    </select>
-                
-                </div>
-                <div>
-                    <span class="name">영화관 이름</span>
-                    <input type="text" class="input" placeholder="영화관 이름을 입력하시오">
-                </div>
-                <div><span class="name">상영관 수</span>
-                    <input type="text" class="input" placeholder="총 상영관 수를 입력하시오">
-                </div>
-
-                <div><span class="name">좌석 수</span>
-                    <input type="text" class="input" placeholder="총 좌석 수를 입력하시오">
-                </div>
-                <div><span class="name">주소</span>
-                    <div id="address">
-                    <select name="" id="province" class="input1">
-                        <option value="시" >읍/면/동</option>
-                        <option value="">서울시</option>
-                        <option value="">경기도</option>
-
-                    </select>
-
-                    <select name="" id="city" class="input1">
-                        <option value="시" >시/군/구</option>
-                        <option value=""></option>
-                        <option value=""></option>
-
-                    </select>
-                    <select name="" id="city" class="input1">
-                        <option value="시" >시/도</option>
-                        <option value=""></option>
-                        <option value=""></option>
-
-                    </select>
-                </div>
-
-                </div>
-                <div>
-                    <input type="text" class="input" placeholder="상세주소를 입력해주시오">
-                </div>
-                <div id="delete" >
-                    <button id="btn1">등록</button>
-                </div>
-            </div>
-           
-                
-                </div>
-               
-                
-
-                   
-        
-                </div>
                       
                 </div>
 
@@ -515,13 +510,19 @@
               
 
                </div > 
-                
+               
+                </div>
              
+  
 
-
-
-
-
-
+ 	<%@ include file="/views/common/footer.jsp" %>
+ 	<!-- 푸터 -->
+   
+   
+   
+   
+   
+   
+   
 </body>
 </html>
