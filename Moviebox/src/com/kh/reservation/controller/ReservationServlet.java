@@ -30,9 +30,7 @@ public class ReservationServlet extends HttpServlet {
 		request.setCharacterEncoding("UTF-8");
 		
 		String uri = request.getRequestURI();
-		
 		String mapping = uri.substring(uri.lastIndexOf("/") + 1 , uri.lastIndexOf("."));
-		System.out.println(mapping);
 		ReservationController rc = new ReservationController(); 
 		
 		String view = "";

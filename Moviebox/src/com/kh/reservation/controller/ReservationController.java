@@ -1,6 +1,8 @@
 package com.kh.reservation.controller;
 
-import java.util.ArrayList;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -18,7 +20,7 @@ public class ReservationController {
 		return view;
 	}
 
-	public ArrayList<Screen> selectScreen(HttpServletRequest request) {
+	public List<Screen> selectScreen(HttpServletRequest request) {
 		String[] dateStr = request.getParameter("date").split("-");
 		String screenLocation = request.getParameter("location");
 		String screenDate = "";
@@ -33,8 +35,15 @@ public class ReservationController {
 		}
 		
 		if(screenLocation.equals("전체")) screenLocation = ""; //예외처리
-
-		ArrayList<Screen> screenList = new ReservationService().selectScreen(screenDate, screenLocation, movieNo); 
+		
+		List<Screen> screenList = new ReservationService().selectScreen(screenDate, screenLocation, movieNo); 
+	    
+		Set<Integer> theaterNoSet = new HashSet<>();
+	    
+		for (Screen screen : screenList) {
+            theaterNoSet.add(screen.getTheaterNo());
+        }
+		System.out.println(theaterNoSet);
 		
 		return screenList;
 	}
