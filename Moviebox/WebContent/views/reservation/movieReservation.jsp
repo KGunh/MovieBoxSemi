@@ -321,57 +321,23 @@
                     movieNo : $('#movieNo').val()
             	},
             	success : function(result){
-                    /*
-                    var screens = [];
-                    var screenDate = [];
-                    
-                    for (var i = 0; i < result.length; i++) {
-                        var tNo = result[i].theaterNo;
-                        var theaterName = result[i].theaterName;
-                        var flag = true;
-                        
-                        if(i > 0){
-                            while(flag){
-                                if(tNo != result[i - 1].theaterNo){
-                                    flag = false;
-                                }
-                                else{
-                                    screenDate.push(result[i].watchDate);
-                                    i++;
-                                };
-                            };
+                    var resultStr = '';
+                    console.log(result);
+                    for(let i = 0; i < result.length; i++){
+                        resultStr += '<div class="screen">'
+                                    +     '<div class="theaterName">' + result[i].theaterName + '</div>';
+                                    +     '<div class="selectScreen">'
+                        for(let j = 0; j < result[i].watchDateList.length; j++){
+                            resultStr +=        '<div class="screenName">'
+                                        +            '<span style="color: black;">' + result[i].watchDateList[j] + '</span>'
+                                        +        '</div>'
                         };
-
-                        var screen = {
-                            theaterNo: tNo,
-                            theaterName: theaterName,
-                            screenList: screenDate
-                        };
-
-                        screens.push(screen);
+                        resultStr +=    '</div>';
+                                    + '</div>';
                     };
-                    
-                    let resultStr = '';
-
-                    if(screens.length >= 0){
-                        for(let i in screens){
-                            resultStr += '<div class="screen">'
-                                       +     '<div class="theaterName">' + screens[i].theaterName + '</div>';
-                                       +     '<div class="selectScreen">'
-                            for(let j = 0; j < screens[1].screenList.length; j++){
-                                resultStr +=        '<div class="screenName">'
-                                           +            '<span style="color: black;">' + screens[i].screenList[j] + '</span>'
-                                           +        '</div>'
-                            };
-                            resultStr +=    '</div>';
-                                       + '</div>';
-                        };
-                    }
-                    else{
-                        resultStr = '<div style="color: rgb(148, 145, 145);">조회된 영화관이 없습니다.</div>';
-                    }
+                
                     $('#printScreen').html(resultStr);
-                    */
+                    
             	},
             	error : function(){
 					console.log('검색결과가 없음');
