@@ -212,13 +212,13 @@
             margin-right: 19px;
         }
 
-        .btn-outline-warning:hover{
+        .btn-outline-secondary:hover{
             background-color: #dddddd;
             border-color: #c2c2c2;
             color: #212121;
         }
 
-        .btn-outline-warning {
+        .btn-outline-secondary {
             border-color: #c2c2c2;
             color: #212121;
         }
@@ -264,6 +264,11 @@
             color: #ffffff;
         }
 
+
+		tr:hover td {
+		    background-color: #2c2c2c; 
+		    color: #ffffff;
+		}
 
     </style>
 </head>
@@ -452,9 +457,9 @@
 
                     
                     <div class="paging-area" align="center" style="margin-top:12px;">
-                        <button class="btn btn-outline-warning"> < </button>
-                        <button class="btn btn-outline-warning">1</button>
-                        <button class="btn btn-outline-warning"> > </button>
+                        <button class="btn btn-outline-secondary" style="color:#ffffff"> < </button>
+                        <button class="btn btn-outline-secondary" style="color:#ffffff">1</button>
+                        <button class="btn btn-outline-secondary" style="color:#ffffff"> > </button>
                     </div>
                     <!--페이지 숫자-->
 
