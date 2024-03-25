@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>영화관리 → 등록</title>
+<title>영화관리 → 영화등록</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -26,7 +26,7 @@
         #wrap{
             /*width: 1200px;*/
             margin: 0 auto;
-            border : 1px solid red;
+ 			/* border : 1px solid red;  */
         }
 
         #top_wrap{
@@ -165,7 +165,7 @@
             margin-bottom: 30px;
             font-size: x-large;
             font-weight: bold;
-            
+            color: #ffffff;
         }  
 
         /* -------------------------------------------*/
@@ -178,7 +178,7 @@
             font-size: 15px;
             font-weight: bold;
             line-height: 60px;
-            color: #585858;
+            color:#ffffff;
             text-align: right;
             padding-right: 30px;
         }
@@ -273,6 +273,7 @@
             display: none;
             display: inline;
             float: left;
+            color:#ffffff;
         }
 
         .fileBox{ /*파일선택버튼*/
@@ -370,6 +371,7 @@
 
         input::placeholder{
             padding-left: 7px;
+            
         }
 
 
@@ -403,8 +405,8 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#">영화 관리</a>
-                        <ul class="submenu">
+                        <a href="<%=contextPath %>/adminMovieCheck.admin">영화 관리</a>
+                        <ul class="submenu" >
 
                         </ul>
                     </li>
@@ -417,7 +419,7 @@
                     <li class="post">
                         <a href="#">게시글 관리</a>
                         <ul class="submenu">
-                        <li><a href="#">공지 관리</a></li>
+                        <li><a href="<%=contextPath %>/adminBoardDetail.admin">공지 관리</a></li>
                         <li><a href="#">문의 게시글 관리</a></li>
                         </ul>
                     </li>
