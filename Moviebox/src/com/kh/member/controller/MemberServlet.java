@@ -29,7 +29,7 @@ public class MemberServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-
+		
 		request.setCharacterEncoding("UTF-8");
 
 		String uri = request.getRequestURI();
@@ -67,6 +67,7 @@ public class MemberServlet extends HttpServlet {
 			break;
 		case "adminMain":
 			view = "/views/admin/adminMain.jsp"; break;
+		case "resList" : view = "/views/member/myReservation.jsp"; break;
 		default : return;
 			
 	
