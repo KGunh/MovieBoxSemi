@@ -11,9 +11,6 @@
             height: auto;
             margin: auto;
         }
-        div{
-            border: 1px solid red;
-        }
     	a{
             text-decoration: none;
         }
@@ -112,6 +109,7 @@
             margin: auto;
             margin-bottom: 50px;
             background-color: rgb(33, 33, 33);
+            border-radius: 8px;
         }
 
         #reservationList-content > div{
@@ -164,10 +162,14 @@
         .totalCount, .totalPrice{
             width: 100%;
             height: 25%;
+            padding: 10px 0px 10px 5px;
         }
         .countPrice{
             width: 100%;
             height: 50%;
+            padding: 18px 0px 18px 5px;
+            border-top: 1px solid lightgray;
+            border-bottom: 1px solid lightgray;
         }
         #contentTable{
             color: white;
@@ -176,6 +178,12 @@
         #contentTable td{
             font-size: 13px;
             font-weight: bold;
+        }
+        .res-result h6{
+            margin: 0;
+        }
+        #studentText{
+            margin-bottom: 10px;
         }
     </style>    
 </head>
@@ -252,7 +260,7 @@
                             <h6>총 인원 : </h6>
                         </div>
                         <div class="countPrice">
-                            <h6>청소년 :</h6>
+                            <h6 id="studentText">청소년 :</h6>
                             <h6>성인 :</h6>
                         </div>
                         <div class="totalPrice">
