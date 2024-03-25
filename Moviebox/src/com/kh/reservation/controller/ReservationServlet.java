@@ -44,7 +44,7 @@ public class ReservationServlet extends HttpServlet {
 		case "seat" : new ReservationController().setSeat(request); break;
 		case "payment" : new ReservationController().insertReservation(); break;
 		}
-		
+		System.out.println(view);
 		if(flag) {
 			response.sendRedirect(view);
 		} else {
