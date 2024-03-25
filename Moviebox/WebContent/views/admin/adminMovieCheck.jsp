@@ -25,7 +25,7 @@
         #wrap{
             /*width: 1200px;*/
             margin: 0 auto;
-            border : 1px solid red;
+            border : /*1px solid red*/
         }
 
         #top_wrap{
@@ -257,17 +257,23 @@
             margin-bottom: 30px;
             font-size: x-large;
             font-weight: bold;
+            color: #ffffff;
         }  
 
+        td{
+            color: #ffffff;
+        }
 
 
     </style>
 </head>
 <body>
 
+	<!-- 헤더 -->
+    <%@ include file="/views/common/header.jsp" %>
+    
     <div id="wrap">
-        <!-- jsp에서 header include하기 -->
-        <div id="header" style="height: 200px; color: white;">header include</div>
+
 
         <div id="top_wrap">
             <div class="top_1">
@@ -465,7 +471,7 @@
         </div>
 
     </div>
-
-    <br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+ 	<%@ include file="/views/common/footer.jsp" %>
+ 	<!-- 푸터 -->
 </body>
 </html>

@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.member.controller.MemberController;
+
 /**
  * Servlet implementation class AdminPageController
  */
@@ -27,10 +29,30 @@ public class AdminPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-	
 		
+		request.setCharacterEncoding("UTF-8");
+		
+		String uri = request.getRequestURI();
+
+		String mapping = uri.substring(uri.lastIndexOf("/") + 1, uri.lastIndexOf("."));
+		
+		AdminPageController admin = new AdminPageController();
+		
+		String view = "";
+		boolean flag = true;
 	
+		switch(mapping) {
+		case "adminMovieCheck" :
+			view = "/views/admin/adminMovieCheck.jsp"; break;
+		
+		}
+
 	
+		if (flag) {
+			response.sendRedirect(request.getContextPath() + view);
+		} else {
+			request.getRequestDispatcher(view).forward(request, response);
+		}
 	
 	
 	
