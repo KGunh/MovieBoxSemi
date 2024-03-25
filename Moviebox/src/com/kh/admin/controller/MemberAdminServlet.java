@@ -31,40 +31,45 @@ public class MemberAdminServlet extends HttpServlet {
 		String uri =request.getRequestURI();
 		
 		String mapping = uri.substring(uri.lastIndexOf("/")+1,uri.lastIndexOf("."));
-//		System.out.println(mapping);
+		System.out.println(mapping);
 		String view = "";
+		boolean flag = false;
 		
 		MemberAdminController MAC = new MemberAdminController();
 		
-		boolean flag = false;
+		
 		
 		switch(mapping) {
 		
-		case "selectAdmin" :  view = "views/admin/memberSelect.jsp";
-		case "modifyAdmin."   :  view= "views/admin/memberModify.jsp";
+		case "selectAdmin"  :  view = "views/admin/memberSelect.jsp"; break;
+		case "modifyAdmin."   :  view= "views/admin/memberModify.jsp"; break;
 		
 		}
 		
-		if(false != flag) {
-		response.sendRedirect(view);
+		System.out.println(view);
+		
+
+		
+		if(false!=flag) {
+		
+			response.sendRedirect(view);
 			
 		}else {
-			System.out.println(view);
+			
 			request.getRequestDispatcher(view).forward(request, response);	
 		}
 		
 		switch(mapping) {
 		
-		case "selectAdmin" :  MAC.selectAdmin();
-		case "editAdmin"   :  MAC.editAdmin();
-		
-		
+		case "selectAdmin" :  MAC.selectAdmin(request);
+		case "editAdmin"   :  MAC.editAdmin(request);
 		
 		}
 		
-	
+
 		
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
