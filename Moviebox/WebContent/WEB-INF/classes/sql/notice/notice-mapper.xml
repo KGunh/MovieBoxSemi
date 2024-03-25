@@ -17,8 +17,8 @@
 		  	  TB_NOTICE
 		 ORDER
 		 	BY
-		 	  CREATE_DATE DESC
-  
+		 	  CREATE_DATE DESC	
 	</entry>
+
 	
 </properties>

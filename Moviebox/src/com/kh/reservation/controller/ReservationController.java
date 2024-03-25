@@ -13,7 +13,7 @@ public class ReservationController {
 		request.setAttribute("movieList", new ReservationService().selectMovieList()); 
 		request.setAttribute("locationList", new ReservationService().selectLocationList()); 
 		
-		String view = "views/reservation/seatReservation.jsp";
+		String view = "views/reservation/movieReservation.jsp";
 		
 		return view;
 	}
