@@ -252,7 +252,7 @@
             text-align: left;
             margin-top: 10px;
             margin-right: 10px;
-            
+            color:white;
             border-bottom: 1px solid lightgray;
             
             
@@ -328,7 +328,7 @@
             width : 200px;
             height : 800px;
             padding-top: 20px;
-            background-color: #323232;
+            background-color: #212121;
 
 
         }
@@ -340,7 +340,7 @@
             height : 800px;
             padding-left: 50px;
             padding-top: 20px;
-            background-color : #323232;
+            background-color : black;
 
         }
 

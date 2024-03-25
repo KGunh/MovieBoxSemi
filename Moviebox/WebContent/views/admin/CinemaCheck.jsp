@@ -457,9 +457,21 @@
                     </button>
 
                     <div id="delete" >
-                        <button class="btn1">등록</button>
+                        <button class="btn1" onclick="enrollment();">등록</button>
                        <!-- 수정/ 삭제 클릭해서 상세조회에서 함-->
                     </div>
+                    
+                    <script>
+                    	function enrollment(){
+                    		
+                    		location.href = '<%=contextPath%>/views/admin/CinemaInsert.jsp'; 
+                    		
+                    	}
+                    
+                    
+                    </script>
+                    
+                    
                 </div>
                
 
