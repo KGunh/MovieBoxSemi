@@ -39,7 +39,7 @@
 		       MOVIE_TITLE,
 		       MOVIE_NO,
 		       MOVIE_RT,
-		       WATCH_DATE,
+		       TO_CHAR(WATCH_DATE, 'YY/MM/DD, HH24:MI') AS WATCH_DATE,
 		       SCREEN_NAME||'관' AS SCREEN_NAME
 		  FROM
 		       TB_SCREEN
@@ -54,9 +54,9 @@
 		   AND
 		       LOCATION_NAME LIKE '%'||?||'%'
 		   AND 
-		       WATCH_DATE LIKE ?
-	     ORDER
-	        BY
+		       TO_CHAR(WATCH_DATE, 'YY/MM/DD') = ?
+		 ORDER
+		    BY
 		       THEATER_NO,
 		       WATCH_DATE
 	</entry>

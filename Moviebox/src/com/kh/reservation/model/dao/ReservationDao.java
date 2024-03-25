@@ -102,7 +102,6 @@ public class ReservationDao {
 		    
 		    rset = pstmt.executeQuery();
 			
-		    System.out.println(sql);
 			while (rset.next()) {
 				Screen s = new Screen();
 				s.setMovieNo(rset.getInt("MOVIE_NO"));
