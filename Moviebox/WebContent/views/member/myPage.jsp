@@ -314,7 +314,7 @@
                 <div class="QNA-area-list" style="border-bottom: 1px solid rgb(158, 157, 157);">
                     <div id="QNA-title"><%=boardList.get(i).getBoardTitle() %></div>
                     <div id="QNA-createDate"><%=boardList.get(i).getcreateDate() %></div>
-                    <%if() %>
+                    <%if(true) %>
                     <div id="QNA-yn">Y/N</div>
                 </div>
                 	<%} %>

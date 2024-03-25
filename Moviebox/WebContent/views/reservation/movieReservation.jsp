@@ -5,6 +5,7 @@
 <%
 	ArrayList<Movie> movieList = (ArrayList<Movie>)request.getAttribute("movieList");
 	ArrayList<Location> locationList = (ArrayList<Location>)request.getAttribute("locationList");
+	System.out.println(movieList);
 %>
 <!DOCTYPE html>
 <html>
