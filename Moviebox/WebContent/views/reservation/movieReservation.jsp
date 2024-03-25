@@ -240,7 +240,7 @@
 	                                </div>
 	                            </div>
                             <% } %>
-                            <input id="movieNo" type="hidden">
+                            <input id="movieNo" name="movieNo" type="hidden">
                         </div>
                     	
                         <div class="swiper-pagination"></div>
@@ -270,6 +270,7 @@
                 <div id="printScreen">
                     
                 </div>
+                <input id="screenNo" type="hidden" name="screenNo">
                 <button id="submit-btn" type="submit">좌석 선택</button>
             </div>
         </form>
@@ -307,13 +308,11 @@
                 $('#movieNo').val($(this).children().eq(1).val());
             });
         });
-       
-        $(function(){
-            $('.screenName').click(function(){
-                $(this).css('background', 'white');
-            });
-        });
 
+        document.getElementById('.screenName').click = function(){
+           // document.getElementById('#screenNo').val(this.);
+        }
+       
         function selectScreen(){
             $.ajax({
             	url : 'screen.reservation',
@@ -332,7 +331,7 @@
                                     +     '<div class="selectScreen">'
                         for(let j = 0; j < result[i].watchDateList.length; j++){
                             resultStr +=        '<div class="screenName">'
-                                        +            '<span style="color: black;">' + result[i].watchDateList[j] + '</span>'
+                                        +            '<span style="color: black;">' + result[i].watchDateList[j] + '</span>~'
                                         +        '</div>'
                         };
                         resultStr +=    '</div>';
@@ -360,7 +359,6 @@
             selectScreen();
         });
 
-        
     </script>
 </body>
 </html>

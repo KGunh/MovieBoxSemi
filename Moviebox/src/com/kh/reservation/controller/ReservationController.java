@@ -28,7 +28,7 @@ public class ReservationController {
 		String screenDate = "";
 		int movieNo = 0;
 		
-		if (dateStr.length >= 3) { // 예외처리
+		if(dateStr.length >= 3) { // 예외처리
 			screenDate = dateStr[0].substring(2) + "/" + dateStr[1] + "/" + dateStr[2];
 		};
 		
@@ -47,10 +47,10 @@ public class ReservationController {
 			sc.setTheaterNo(screen.getTheaterNo());
 			sc.setTheaterName(screen.getTheaterName());
 			sc.setMovieNo(screen.getMovieNo());
+			sc.setMovieRt(screen.getMovieRt());
 			
             set.add(sc);
         };
-        //System.out.println(set); 중복제거 확인
         
 		// 중복이 제거후 list에 담기
 		List<Screen> screenList = new ArrayList<Screen>();
@@ -60,10 +60,10 @@ public class ReservationController {
 			screen.setTheaterNo(sc.getTheaterNo());
 			screen.setTheaterName(sc.getTheaterName());
 			screen.setMovieNo(sc.getMovieNo());
+			screen.setMovieRt(sc.getMovieRt());
 			
 			screenList.add(screen);
 		};
-		//System.out.println(screenList); 중복제거 확인
 		
 		// 영화관마다 상영중인 시간 list필드에 담기
 		for(int i = 0; i < screenList.size(); i++) {
@@ -80,8 +80,6 @@ public class ReservationController {
 		    screenList.get(i).setScreenNoList(screenNoList);
 		    screenList.get(i).setWatchDateList(watchDateList);
 		};
-		
-		//System.out.println(screenList);
 		
 		return screenList;
 	}
