@@ -20,14 +20,20 @@ public class ReservationController {
 
 	public ArrayList<Screen> selectScreen(HttpServletRequest request) {
 		String[] dateStr = request.getParameter("date").split("-");
-		String screenDate = dateStr[0].substring(2) + "/" + dateStr[1] + "/" + dateStr[2];
-		
 		String screenLocation = request.getParameter("location");
+		String screenDate = "";
+		int movieNo = 0;
 		
-		if(screenLocation.equals("전체")) screenLocation = "";
+		if (dateStr.length >= 3) { // 예외처리
+			screenDate = dateStr[0].substring(2) + "/" + dateStr[1] + "/" + dateStr[2];
+		}
 		
-		int movieNo = Integer.parseInt(request.getParameter("movieNo"));
+		if(!request.getParameter("movieNo").equals("")) { // 예외처리
+			movieNo = Integer.parseInt(request.getParameter("movieNo"));
+		}
 		
+		if(screenLocation.equals("전체")) screenLocation = ""; //예외처리
+
 		ArrayList<Screen> screenList = new ReservationService().selectScreen(screenDate, screenLocation, movieNo); 
 		
 		return screenList;
