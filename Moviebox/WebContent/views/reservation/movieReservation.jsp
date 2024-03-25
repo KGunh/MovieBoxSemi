@@ -321,6 +321,33 @@
                     movieNo : $('#movieNo').val()
             	},
             	success : function(result){
+                    var screens = [];
+                   
+                    
+                    for (var i = 0; i < result.length; i++) {
+                        // 각 객체의 키 값 설정
+                        var theaterNo = result[i].theaterNo;
+                        var watchDate = result[i].watchDate;
+                        
+                        if(theaterNo == result[i - 1].theaterNo){
+                            var screenList = {
+                                for(){
+
+                                }
+                            }
+                        }
+
+                        // 객체 생성 및 키 값과 리스트 값 설정
+                        var screen = {
+                            theaterNo: theaterNo,
+                            list: []
+                        };
+                        
+                        // 객체 배열에 추가
+                        screens.push(screen);
+                    }
+                    
+                    
                     let resultStr = '';
                     let flag = true;
                     if(result.length > 0){
@@ -344,7 +371,7 @@
 					console.log('검색결과가 없음');
 				}
             });
-        }
+        };
          
         $('#screenDate').change(function(){
             selectScreen();
@@ -358,19 +385,6 @@
             selectScreen();
         });
 
-        /*
-         while(flag) {
-                            if(i + 1 == result[i].theaterNo){
-                                resultStr += '<div class="screenName">'
-                                           +    '<span style="color: black;">' + result[i].watchDate + '</span>~<span style="color: gray;">' + (result[i].watchDate + result[i].movieRt) + '</span>'
-                                           + '</div>'
-                            }
-                            else{
-                                flag = false;
-                            }
-                        }
-        */
-        
     </script>
 </body>
 </html>
