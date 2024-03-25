@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<comment>
+		Notice Mapper
+	</comment>
+	
+	<entry key="selectNoticeList">
+		SELECT
+			  NOTICE_NO,
+			  NOTICE_CATEGORY,
+			  NOTICE_TITLE,
+			  CREATE_DATE,
+			  COUNT
+		  FROM
+		  	  TB_NOTICE
+		 ORDER
+		 	BY
+		 	  CREATE_DATE DESC
+  
+	</entry>
+	
+</properties>

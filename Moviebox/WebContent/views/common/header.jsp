@@ -226,7 +226,11 @@
                         <a class="nav-link" href="<%=contextPath %>/list.notice"><span>고객센터</span></a>
                     </li>
                     <li class="nav-item">
+       					<% if(loginUser == null) { %>
+                        <a class="nav-link" href="<%=contextPath %>/loginForm.me"><span>마이페이지</span></a>
+                        <%} else { %>
                         <a class="nav-link" href="<%=contextPath %>/mypage.me"><span>마이페이지</span></a>
+                        <%} %>
                     </li>
                 </ul>
 

@@ -23,22 +23,22 @@ public class MemberController {
 		
 		m.setMemberId(memberId);
 		m.setMemberPwd(memberPwd);
-		
+		HttpSession session = request.getSession();
 		
 
 		Member loginUser = new MemberService().login(m);
 		String view = "";
 		if(loginUser != null) {
-			HttpSession session = request.getSession();
+			
 			
 			session.setAttribute("loginUser", loginUser);
 			
 			session.setAttribute("alertMsg", "로그인 성공");
 			
 		} else {
-			request.setAttribute("errorMsg", "로그인에 실패했습니다!");
+			session.setAttribute("alertMsg", "잘못된 로그인 정보입니다.");
 			
-			view = "views/common/errorPage.jsp";
+			view = "/loginForm.me";
 		}
 		
 		
@@ -72,10 +72,12 @@ public class MemberController {
 		
 		ArrayList<Genre> genreList = new ArrayList();
 		
-		for(int i = 0;i< genres.length; i++) {
-			Genre g = new Genre();
-			g.setGenreName(genres[i]);
-			genreList.add(g);
+		if(!genreList.isEmpty()) {
+			for(int i = 0;i< genres.length; i++) {
+				Genre g = new Genre();
+				g.setGenreName(genres[i]);
+				genreList.add(g);
+			}
 		}
 		
 		
@@ -108,37 +110,38 @@ public class MemberController {
 	}
 	
 	public String myPagePrint(HttpServletRequest request, HttpServletResponse response) {
+		
 		String view = "";
 		HttpSession session = request.getSession();
 		List<Movie> movieList = new ArrayList();
 		Member loginUser = (Member)session.getAttribute("loginUser");
-		
-		List<Reservation> list = new MemberService().myPagePrint(loginUser);
-		
-		if(list.isEmpty()) {
-			request.setAttribute("errorMsg","");
-			view = "views/common/errorPage.jsp";
-		}else {
-			System.out.println(list);
-			for(int i = 0; i < list.size(); i++) {
-				Reservation res =  list.get(i);
-				Movie m = new MemberService().myPageMoviePoster(res);
-				System.out.println(m);
-				if(m == null) {
-					request.setAttribute("errorMsg","");
-					return view = "views/common/errorPage.jsp";
+		if(loginUser == null) {
+			return view = "views/member/myPage.jsp";
+		} else {
+
+			List<Reservation> list = new MemberService().myPagePrint(loginUser);
+			if (list.isEmpty()) {
+				return view = "views/member/myPage.jsp";
+			} else {
+				for (int i = 0; i < list.size(); i++) {
+					Reservation res = list.get(i);
+					Movie m = new MemberService().myPageMoviePoster(res);
+					System.out.println(m);
+					if (m == null) {
+						request.setAttribute("errorMsg", "");
+						return view = "views/common/errorPage.jsp";
+					}
+
+					movieList.add(m);
+
 				}
-				
-				movieList.add(m);
-				
+				System.out.println(movieList);
+				request.setAttribute("movieList", movieList);
+				request.setAttribute("list", list);
+				view = "views/member/myPage.jsp";
 			}
-			System.out.println(movieList);
-			request.setAttribute("movieList", movieList);
-			request.setAttribute("list", list);
-			view = "views/member/myPage.jsp";
+
 		}
-		
-		
 		
 		
 		
