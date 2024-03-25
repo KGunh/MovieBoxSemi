@@ -205,7 +205,7 @@
                         </ul>
                     </li> 
                     <li class="post">
-                        <a href="#">게시글 관리</a>
+                        <a href="<%=contextPath %>/adminBoardDetail.admin">게시글 관리</a>
                         <ul class="submenu">
                         <li><a href="#">공지 관리</a></li>
                         <li><a href="#">문의 게시글 관리</a></li>
