@@ -170,6 +170,7 @@
     </style>
 </head>
 <body>
+	<!-- 헤더 -->
     <%@ include file="/views/common/header.jsp" %>
     
     <div id="wrap">
@@ -232,6 +233,7 @@
 
     </div>
 
- <%@ include file="/views/common/footer.jsp" %>
+ 	<%@ include file="/views/common/footer.jsp" %>
+ 	<!-- 푸터 -->
 </body>
 </html>

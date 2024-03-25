@@ -1,7 +1,6 @@
 package com.kh.notice.model.service;
 
-import static com.kh.common.JDBCTemplate.close;
-import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -17,8 +16,11 @@ public class NoticeService {
 		ArrayList<Notice> list = new NoticeDao().selectNoticeList(conn);
 		
 		close(conn);
-		return list;
 		
+		
+		return list;
 	}
+
+
 
 }

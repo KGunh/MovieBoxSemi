@@ -199,7 +199,7 @@
                 	<a href="<%=contextPath%>/loginForm.me" class="member">로그인</a>
                 	
 				<%}else {  if(loginUser.getPrivilege().equals("Y")) {%>
-					<a href="<%= contextPath %>/adminMain.me" class="member">관리자 기능</a><!-- 관리자로 로그인시 관리자페이지로 이동 가능 버튼 -->
+					<a href="<%= contextPath %>/adminMain.me" class="member">관리자 기능</a><!-- 관리자로 로그인시 관리자 기능 활성화 -->
 				<%} %>
 					<a href="<%=contextPath%>/logout.me" class="member">로그아웃</a>
 				<%} %>

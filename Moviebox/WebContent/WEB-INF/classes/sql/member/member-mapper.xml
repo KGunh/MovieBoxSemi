@@ -157,4 +157,34 @@
 	
 	</entry>
 	
+	<entry key="myPageBoardPrint">
+	SELECT
+      	   BOARD_NO,
+       	   BOARD_TITLE,
+           CREATE_DATE
+      FROM
+       	   TB_BOARD
+     WHERE
+           MEMBER_NO = ?
+     ORDER
+     	BY
+     	   BOARD_NO DESC
+       	   
+	
+	
+	</entry>
+	
+	<entry key="myPageBoardAnswer">
+	SELECT
+       	   ANSWER_NO,
+           BOARD_NO
+      FROM
+           TB_ANSWER
+     WHERE
+           STATUS = 'Y'
+       AND
+           BOARD = ?
+	
+	</entry>
+	
 </properties>

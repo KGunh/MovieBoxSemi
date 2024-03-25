@@ -1,21 +1,23 @@
 package com.kh.board.model.vo;
 
-import java.util.Date;
 
 public class Board {
 	private int boardNo;
 	private String boardTitle;
 	private String boardContent;
-	private String boardWriter;
+	private String createDate;
 	private int count;
-	private Date createDate;
 	private String status;
+	private String boardWriter;
+	
+	
+	
 	
 	public Board() {
 		super();
 	}
 
-	public Board(int boardNo, String boardTitle, String boardContent, String boardWriter, int count, Date createDate,
+	public Board(int boardNo, String boardTitle, String boardContent, String boardWriter, int count, String createDate,
 			String status) {
 		super();
 		this.boardNo = boardNo;
@@ -67,11 +69,11 @@ public class Board {
 		this.count = count;
 	}
 
-	public Date getCreateDate() {
+	public String getcreateDate() {
 		return createDate;
 	}
 
-	public void setCreateDate(Date createDate) {
+	public void setCreateDate(String createDate) {
 		this.createDate = createDate;
 	}
 
@@ -86,7 +88,7 @@ public class Board {
 	@Override
 	public String toString() {
 		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
-				+ ", boardWriter=" + boardWriter + ", count=" + count + ", createDate=" + createDate + ", status="
+				+ ", boardWriter=" + boardWriter + ", count=" + count + ", createString=" + createDate + ", status="
 				+ status + "]";
 	}
 

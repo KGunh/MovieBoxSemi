@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.kh.board.model.vo.Answer;
+import com.kh.board.model.vo.Board;
 import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.Reservation;
 import com.kh.member.model.vo.Member;
@@ -230,7 +232,7 @@ public class MemberDao {
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("myPageMoviePoster");
-		System.out.println(res.getTicketNo());
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
@@ -255,4 +257,76 @@ public class MemberDao {
 		return m;
 	}
 	
+	
+	public List<Board> myPageBoardPrint(Connection conn, Member loginUser){
+		
+		List<Board> boardList = new ArrayList();
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("myPageBoardPrint");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, loginUser.getMemberNo());
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Board b = new Board();
+				
+				b.setBoardNo(rset.getInt("BOARD_NO"));
+				b.setBoardTitle(rset.getString("BOARD_TITLE"));
+				b.setCreateDate(rset.getString("CREATE_DATE"));
+				
+				boardList.add(b);
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return boardList;
+	}
+	
+	
+	public Answer myPageBoardAnswer(Connection conn,Board board) {
+		Answer a = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("myPageBoardAnswer");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, board.getBoardNo());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				a = new Answer();
+				
+				a.setAnswerNo(rset.getInt("ANSWER_NO"));
+				a.setBoardNo(rset.getInt("BOARD_NO"));
+				
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return a;
+	}
 }
