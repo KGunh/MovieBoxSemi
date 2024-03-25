@@ -6,6 +6,11 @@ import static com.kh.common.JDBCTemplate.getConnection;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
+import org.apache.catalina.core.ApplicationContext;
+
 import com.kh.common.model.vo.Location;
 import com.kh.movie.model.vo.Movie;
 import com.kh.reservation.model.dao.ReservationDao;
@@ -43,6 +48,8 @@ public class ReservationService {
 		close(conn);
 		
 		return screenList;
+		
+		
 	}
 
 	

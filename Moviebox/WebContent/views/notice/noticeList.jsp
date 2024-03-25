@@ -286,14 +286,14 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <% if(list != null) { %>
+                    <% if(list == null || list.isEmpty()) { %>
                         <tr>
                             <td colspan="5">조회 된 공지사항이 없습니다. </td>
                         </tr>
                      <% } else { %>
                      
                      	<% for(Notice n : list) { %>
-                        <tr class="list">
+                        <tr>
                             <td id="list-no"><%= n.getNoticeNo() %></td>
                             <td id="list-ca"><%= n.getNoticeCategory() %></td>
                             <td id="list-title"><%= n.getNoticeTitle() %></td>

@@ -22,6 +22,7 @@ public class NoticeDao {
 		String fileName = NoticeDao.class
 				.getResource("/sql/notice/notice-mapper.xml")
 				.getPath();
+		
 		try {
 			prop.loadFromXML(new FileInputStream(fileName));
 		} catch (IOException e) {
@@ -52,9 +53,9 @@ public class NoticeDao {
 				notice.setNoticeTitle(rset.getString("NOTICE_TITLE"));
 				notice.setCreateDate(rset.getString("CREATE_DATE"));
 				notice.setCount(rset.getInt("COUNT"));
-				
+				System.out.println(notice);
 				list.add(notice);
-				
+
 			}
 			
 		} catch (SQLException e) {
@@ -64,7 +65,7 @@ public class NoticeDao {
 			close(pstmt);
 		}
 		
-		
+		System.out.println(list);
 		
 		return list;
 	}
