@@ -44,6 +44,7 @@ public class ReservationServlet extends HttpServlet {
 		
 		switch(mapping) {
 <<<<<<< HEAD
+<<<<<<< HEAD
 		case "movie" : view = new ReservationController().selectReservationInfo(request); break; 
 		case "seat" : new ReservationController().setSeat(request); break;
 		case "payment" : new ReservationController().insertReservation(); break;
@@ -56,9 +57,12 @@ public class ReservationServlet extends HttpServlet {
 		case "seat" : view = "views/reservation/seatReservation.jsp"; break;
 		case "payment" : break;
 >>>>>>> b5cca4dda70eae2c057d74ae145dc247e35c7678
+=======
+		case "movie" : view = new ReservationController().selectReservationInfo(request); view = "views/reservation/movieReservation.jsp"; break; 
+		case "seat" : new ReservationController().setSeat(request); break;
+		case "payment" : new ReservationController().insertReservation(); break;
+>>>>>>> 26517526f38e10894c270720163ac98e724801ff
 		}
-		
-		// B. 응답뷰 지정
 		
 		if(flag) {
 			response.sendRedirect(view);

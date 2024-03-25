@@ -1,11 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.ArrayList,com.kh.member.model.vo.MemberGenre,java.util.List,com.kh.common.model.vo.Reservation,com.kh.movie.model.vo.Movie"%>
-<%
-	List<Reservation> resList = (ArrayList)request.getAttribute("list");
+    pageEncoding="UTF-8" import="com.kh.board.model.vo.Board,java.util.ArrayList,com.kh.member.model.vo.MemberGenre,java.util.List,com.kh.common.model.vo.Reservation,com.kh.movie.model.vo.Movie"%>
 
-	List<Movie> movieList = (ArrayList)request.getAttribute("movieList");
-
-%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -235,6 +230,11 @@
 
 	<%@ include file="../common/header.jsp" %>
 	<%@ include file="../common/informationNavi.jsp" %>
+	<% if(loginUser == null) {%>
+		<script>
+			location.href = ('<%=contextPath%>/loginForm.me');
+		</script>
+	<%} else {%>
 	
 	<% 
 		String memberId = loginUser.getMemberId();
@@ -247,10 +247,15 @@
 		String localCode = loginUser.getLocalCode();
 		
 		ArrayList<MemberGenre> list = loginUser.getGenreList();
+		List<Reservation> resList = (ArrayList)request.getAttribute("list");
+		List<Movie> movieList = (ArrayList)request.getAttribute("movieList");
+		List<Board> boardList = (ArrayList)request.getAttribute("boardList");
+		List<Answer> answerList = (ArrayList)request.getAttribute("answerList");
 
 
 	%>
 	
+
     <div class="content">
         <div class="title-area">
             <span class="tit">회원정보</span>
@@ -263,8 +268,11 @@
                     <div class="info-address"><%=localCode%> <%=address %></div>
                     <div class="info-email"><%=memberName%></div>
                     <div class="info-genre">
-                    <% for(int i = 0; i< list.size(); i++){ %>
-                    <%= list.get(i).getGenreCode()%>
+                    <%if(list == null) {%>
+                    <%} else { %>
+                    	<% for(int i = 0; i< list.size(); i++){ %>
+                    		<%= list.get(i).getGenreCode()%>
+                    	<%} %>
                     <%} %>
                     </div>
                 </div>
@@ -277,6 +285,9 @@
         <div class="mini-tit">MY 예매내역</div>
         <div class="history-area">
             <div class="history-area-content">
+            <%if(resList == null) {%>
+            	<h5 align="center">고객님의 최근 예매 내역이 존재하지 않습니다.</h5>
+            <%} else { %>
                 <div class="history-area-image"><img id="poster" src="<%=contextPath %>/<%= movieList.get(0).getFilePath()%>/<%=movieList.get(0).getFileName() %>"></div>
                 <div class="history-area-list">
                     <div>영화&emsp;<%=resList.get(0).getMovieTitle() %></div>
@@ -291,19 +302,26 @@
                     <span style="border-top: 1px solid rgb(158, 157, 157);">금액 :&emsp;&emsp;&nbsp;&nbsp;&nbsp;<%=resList.get(0).getTotalPrice() %>원</span></div>
 
                 </div>
+            <%} %>
             </div>
 
         </div>
         <div class="mini-tit">MY 문의글내역</div>
         <div class="QNA-area">
             <div class="QNA-area-content">
-                <div class="QNA-area-list">
-                    <div id="QNA-title">제목</div>
-                    <div id="QNA-createDate">날짜</div>
+            	<%if(boardList != null) {%>
+            		<%for(int i=0;i < boardList.size(); i ++) {%>
+                <div class="QNA-area-list" style="border-bottom: 1px solid rgb(158, 157, 157);">
+                    <div id="QNA-title"><%=boardList.get(i).getBoardTitle() %></div>
+                    <div id="QNA-createDate"><%=boardList.get(i).getcreateDate() %></div>
+                    <%if() %>
                     <div id="QNA-yn">Y/N</div>
                 </div>
-                <div class="QNA-area-list" style="border-top: 1px solid rgb(158, 157, 157);"></div>
-
+                	<%} %>
+                
+				<%} else { %>
+					<h5 align="center">고객님의 최근 문의 내역이 존재하지 않습니다.</h5>
+				<%} %>
             </div>
         </div>
         <div class="mini-tit">MY 상품구매내역</div>
@@ -319,6 +337,6 @@
             </div>
         </div>
     </div>
-    
+<%}%>
 </body>
 </html>

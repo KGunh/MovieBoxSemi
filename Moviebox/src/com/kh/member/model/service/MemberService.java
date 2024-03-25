@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kh.board.model.vo.Answer;
+import com.kh.board.model.vo.Board;
 import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.Reservation;
 import com.kh.member.model.dao.MemberDao;
@@ -24,9 +26,10 @@ public class MemberService {
 		// 로그인
 		Member m = new MemberDao().login(conn, member);
 		// 로그인한 회원 객체에 장르 추가
-		ArrayList<MemberGenre> list = new MemberDao().loginGenre(conn, member); 
-		m.setGenreList(list);
-		
+		if(m != null) {
+			ArrayList<MemberGenre> list = new MemberDao().loginGenre(conn, member);
+			m.setGenreList(list);
+		}
 		
 
 		close(conn);
@@ -41,11 +44,13 @@ public class MemberService {
 		// 회원가입
 		int memberResult = new MemberDao().memberInsert(conn, m);
 		int genreResult = 1;
-		for(int i = 0; i < genreList.size(); i++) {
-			Genre g = new Genre();
-			// 회원가입 장르 추가
-			g.setGenreName(genreList.get(i).getGenreName());
-			genreResult += new MemberDao().genreInsert(conn,g);
+		if(!genreList.isEmpty()) {
+			for(int i = 0; i < genreList.size(); i++) {
+				Genre g = new Genre();
+				// 회원가입 장르 추가
+				g.setGenreName(genreList.get(i).getGenreName());
+				genreResult += new MemberDao().genreInsert(conn,g);
+			}
 		}
 		if(memberResult * genreResult > 0) {
 			
@@ -77,6 +82,27 @@ public class MemberService {
 		Movie m = new MemberDao().myPageMoviePoster(conn,res);
 		close(conn);
 		return m;
+	}
+	
+	public List<Board> myPageBoardPrint(Member loginUser){
+		Connection conn = getConnection();
+		
+		List<Board> boardList = new MemberDao().myPageBoardPrint(conn, loginUser);
+		
+		close(conn);
+		
+		return boardList;
+		
+	}
+	
+	public Answer myPageBoardAnswer(Board board) {
+		Connection conn = getConnection();
+		
+		Answer a = new MemberDao().myPageBoardAnswer(conn,board);
+		
+		close(conn);
+		
+		return a;
 	}
 
 }

@@ -310,8 +310,8 @@
                 $('#movieNo').val($(this).children().eq(1).val());
             });
         });
-        
-        $('#screenDate').change(function(){
+       
+        function selectScreen(){
             $.ajax({
             	url : 'screen.reservation',
             	type : 'get',
@@ -321,42 +321,70 @@
                     movieNo : $('#movieNo').val()
             	},
             	success : function(result){
+                    var screens = [];
+                   
+                    
+                    for (var i = 0; i < result.length; i++) {
+                        // 각 객체의 키 값 설정
+                        var theaterNo = result[i].theaterNo;
+                        var watchDate = result[i].watchDate;
+                        
+                        if(theaterNo == result[i - 1].theaterNo){
+                            var screenList = {
+                                for(){
+
+                                }
+                            }
+                        }
+
+                        // 객체 생성 및 키 값과 리스트 값 설정
+                        var screen = {
+                            theaterNo: theaterNo,
+                            list: []
+                        };
+                        
+                        // 객체 배열에 추가
+                        screens.push(screen);
+                    }
+                    
+                    
                     let resultStr = '';
                     let flag = true;
-                    
-                    for(let i in result){
-                        resultStr += '<div class="screen">'
-                                   +     '<div class="theaterName">' + result[i].theaterName + '</div>'
-                                   +     '<div class="selectScreen">'
-                                   +        '<div class="screenName">'
-                                   +            '<span style="color: black;">' + result[i].watchDate + '</span>~<span style="color: gray;">' + (result[i].watchDate + result[i].movieRt) + '</span>'
-                                   +        '</div>'
-                                   +     '</div>'
-                                   + '</div>';
-                    };
-
+                    if(result.length > 0){
+                        for(let i in result){
+                            resultStr += '<div class="screen">'
+                                       +     '<div class="theaterName">' + result[i].theaterName + '</div>'
+                                       +     '<div class="selectScreen">'
+                                       +        '<div class="screenName">'
+                                       +            '<span style="color: black;">' + result[i].watchDate + '</span>~<span style="color: gray;">' + (result[i].watchDate + result[i].movieRt) + '</span>'
+                                       +        '</div>'
+                                       +     '</div>'
+                                       + '</div>';
+                        };
+                    }
+                    else{
+                        resultStr = '<div style="color: rgb(148, 145, 145);">조회된 영화관이 없습니다.</div>';
+                    }
                     $('#printScreen').html(resultStr);
             	},
             	error : function(){
 					console.log('검색결과가 없음');
 				}
             });
+        };
+         
+        $('#screenDate').change(function(){
+            selectScreen();
         });
 
+        $('.poster').click(function(){
+            selectScreen();
+        });
 
-        /*
-         while(flag) {
-                            if(i + 1 == result[i].theaterNo){
-                                resultStr += '<div class="screenName">'
-                                           +    '<span style="color: black;">' + result[i].watchDate + '</span>~<span style="color: gray;">' + (result[i].watchDate + result[i].movieRt) + '</span>'
-                                           + '</div>'
-                            }
-                            else{
-                                flag = false;
-                            }
-                        }
-        */
-        
+        $('#locationOption').change(function(){
+            selectScreen();
+        });
+
     </script>
 </body>
 </html>
