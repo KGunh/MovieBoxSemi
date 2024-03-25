@@ -49,7 +49,5 @@ public class ReservationController {
 		//예약내용 insert
 	}
 
-
-
 	
 }
