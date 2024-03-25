@@ -41,8 +41,6 @@ public class SelectScreenServlet extends HttpServlet {
 		// 반복문으로 보여주기
 		
 		// 더보기 버튼 만들기
-	
-	
 	}
 
 	/**

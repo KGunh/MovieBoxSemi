@@ -109,7 +109,7 @@ public class ReservationDao {
 				s.setMovieNo(rset.getInt("MOVIE_NO"));
 				s.setScreenNo(rset.getInt("SCREEN_NO"));
 				s.setScreenName(rset.getString("SCREEN_NAME"));
-				s.setWatchDate(rset.getString("WATCH_DATE"));
+				s.setWatchDate(rset.getString("WATCH_DATE").substring(10));
 				s.setTheaterNo(rset.getInt("THEATER_NO"));
 				s.setTheaterName(rset.getString("THEATER_NAME"));
 				s.setMovieRt(rset.getInt("MOVIE_RT"));
