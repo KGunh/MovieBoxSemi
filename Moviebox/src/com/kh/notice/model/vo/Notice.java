@@ -8,8 +8,9 @@ public class Notice {
 	private String noticeCategory;
 	private String noticeTitle;
 	private String noticeContent;
-	private Date noticeDate;
-	private int noticeCount;
+	private String createDate;
+	
+	private int count;
 	private String status;
 	private int memberNo;
 	
@@ -19,15 +20,15 @@ public class Notice {
 	}
 
 
-	public Notice(int noticeNo, String noticeCategory, String noticeTitle, String noticeContent, Date noticeDate,
-			int noticeCount, String status, int memberNo) {
+	public Notice(int noticeNo, String noticeCategory, String noticeTitle, String noticeContent, String createDate,
+			int count, String status, int memberNo) {
 		super();
 		this.noticeNo = noticeNo;
 		this.noticeCategory = noticeCategory;
 		this.noticeTitle = noticeTitle;
 		this.noticeContent = noticeContent;
-		this.noticeDate = noticeDate;
-		this.noticeCount = noticeCount;
+		this.createDate = createDate;
+		this.count = count;
 		this.status = status;
 		this.memberNo = memberNo;
 	}
@@ -75,23 +76,23 @@ public class Notice {
 	}
 
 
-	public Date getNoticeDate() {
-		return noticeDate;
+	public String getCreateDate() {
+		return createDate;
 	}
 
 
-	public void setNoticeDate(Date noticeDate) {
-		this.noticeDate = noticeDate;
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
 	}
 
 
-	public int getNoticeCount() {
-		return noticeCount;
+	public int getCount() {
+		return count;
 	}
 
 
-	public void setNoticeCount(int noticeCount) {
-		this.noticeCount = noticeCount;
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 
@@ -118,7 +119,7 @@ public class Notice {
 	@Override
 	public String toString() {
 		return "Notice [noticeNo=" + noticeNo + ", noticeCategory=" + noticeCategory + ", noticeTitle=" + noticeTitle
-				+ ", noticeContent=" + noticeContent + ", noticeDate=" + noticeDate + ", noticeCount=" + noticeCount
+				+ ", noticeContent=" + noticeContent + ", createDate=" + createDate + ", count=" + count
 				+ ", status=" + status + ", memberNo=" + memberNo + "]";
 	}
 
@@ -130,8 +131,8 @@ public class Notice {
 		result = prime * result + memberNo;
 		result = prime * result + ((noticeCategory == null) ? 0 : noticeCategory.hashCode());
 		result = prime * result + ((noticeContent == null) ? 0 : noticeContent.hashCode());
-		result = prime * result + noticeCount;
-		result = prime * result + ((noticeDate == null) ? 0 : noticeDate.hashCode());
+		result = prime * result + count;
+		result = prime * result + ((createDate == null) ? 0 : createDate.hashCode());
 		result = prime * result + noticeNo;
 		result = prime * result + ((noticeTitle == null) ? 0 : noticeTitle.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
@@ -160,12 +161,12 @@ public class Notice {
 				return false;
 		} else if (!noticeContent.equals(other.noticeContent))
 			return false;
-		if (noticeCount != other.noticeCount)
+		if (count != other.count)
 			return false;
-		if (noticeDate == null) {
-			if (other.noticeDate != null)
+		if (createDate == null) {
+			if (other.createDate != null)
 				return false;
-		} else if (!noticeDate.equals(other.noticeDate))
+		} else if (!createDate.equals(other.createDate))
 			return false;
 		if (noticeNo != other.noticeNo)
 			return false;

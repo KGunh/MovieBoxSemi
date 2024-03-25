@@ -1,17 +1,12 @@
 package com.kh.notice.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-
-import com.kh.notice.model.service.NoticeService;
-import com.kh.notice.model.vo.Notice;
 
 /**
  * Servlet implementation class NoticeServlet
@@ -37,27 +32,22 @@ public class NoticeServlet extends HttpServlet {
 		
 		// 변수 선언 
 		
-		NoticeController nc = new NoticeController();
+		NoticeListController nc = new NoticeListController();
 		
 		// URI 담기
 		String uri = request.getRequestURI();
+		String mapping = uri.substring(uri.lastIndexOf("/") + 1, uri.lastIndexOf("."));
 		
 		String view = "";
 		boolean flag = true;
 		
-		String mapping = uri.substring(uri.lastIndexOf("/") + 1, uri.lastIndexOf("."));
-		
 		switch(mapping) {
-		case "list" : view = "views/notice/noticeList.jsp"; break;
+		case "list" : view = nc.selectNoticeList(request); break;
 		}
 		
 		if(flag) {
 			response.sendRedirect(view);
 		} else {
-			
-			//ArrayList<Notice> noticeList = new NoticeService().selectNoticeList();
-			//request.setAttribute("noticeList", noticeList);
-			
 			request.getRequestDispatcher(view).forward(request, response);
 		}
 		
