@@ -24,13 +24,12 @@ public class ReservationController {
 		
 		String screenLocation = request.getParameter("location");
 		
+		if(screenLocation.equals("전체")) screenLocation = "";
+		
 		int movieNo = Integer.parseInt(request.getParameter("movieNo"));
 		
 		ArrayList<Screen> screenList = new ReservationService().selectScreen(screenDate, screenLocation, movieNo); 
-		System.out.println(screenDate);
-		System.out.println(screenLocation);
-		System.out.println(movieNo);
-		System.out.println(screenList);
+		
 		return screenList;
 	}
 

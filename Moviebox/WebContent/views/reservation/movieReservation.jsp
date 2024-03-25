@@ -310,8 +310,8 @@
                 $('#movieNo').val($(this).children().eq(1).val());
             });
         });
-        
-        $('#screenDate').change(function(){
+       
+        function selectScreen(){
             $.ajax({
             	url : 'screen.reservation',
             	type : 'get',
@@ -321,7 +321,6 @@
                     movieNo : $('#movieNo').val()
             	},
             	success : function(result){
-                    console.log(result);
                     let resultStr = '';
                     let flag = true;
                     if(result.length > 0){
@@ -337,7 +336,7 @@
                         };
                     }
                     else{
-                        resultStr = '조회된 영화관이 없습니다.';
+                        resultStr = '<div style="color: rgb(148, 145, 145);">조회된 영화관이 없습니다.</div>';
                     }
                     $('#printScreen').html(resultStr);
             	},
@@ -345,8 +344,19 @@
 					console.log('검색결과가 없음');
 				}
             });
+        }
+         
+        $('#screenDate').change(function(){
+            selectScreen();
         });
 
+        $('.poster').click(function(){
+            selectScreen();
+        });
+
+        $('#locationOption').change(function(){
+            selectScreen();
+        });
 
         /*
          while(flag) {
