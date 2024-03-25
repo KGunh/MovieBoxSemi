@@ -73,6 +73,7 @@
             float: left;
             background-color: #FFC145;
             font-weight: bolder;
+            cursor: pointer;
         }
         
         .notice-tap a {
@@ -255,8 +256,8 @@
                 
             <!-- 카테고리 -->
             <div id="board-category">
-                <div class="notice-tap"><a href="noticeList.jsp">공지사항</a></div>
-                <div class="qna-tap"><a href="../board/qnaList.jsp">QnA</a></div>
+                <div class="notice-tap" onclick="openNoticePage();"><a href="noticeList.jsp">공지사항</a></div>
+                <div class="qna-tap" onclick="openQnaPage();"><a href="../board/qnaList.jsp">QnA</a></div>
             </div> <!-- board-category -->
 
             <!-- 검색 -->
@@ -272,7 +273,7 @@
 
             </div> <!-- search-notice -->
             
-                 <!-- 게시판 -->
+            <!-- 게시판 -->
             <div class="container">
                 <table class="table table-hover">
                     <thead>
@@ -285,27 +286,25 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <% if(list != null) { %>
                         <tr>
-                            <td id="list-no">1</td>
-                            <td id="list-ca">예매</td>
-                            <td id="list-title">공지 제목 제목 공지 제목 공지사항 예매 공지</td>
-                            <td id="list-date">2024-03-21</td>
-                            <td id="list-count">50</td>
+                            <td colspan="5">조회 된 공지사항이 없습니다. </td>
                         </tr>
-                        <tr>
-                            <td id="list-no">2</td>
-                            <td id="list-ca">영화관</td>
-                            <td id="list-title">공지 제목 제목 공지 제목 공지사항 예매 공지</td>
-                            <td id="list-date">2024-03-21</td>
-                            <td id="list-count">777</td>
+                     <% } else { %>
+                     
+                     	<% for(Notice n : list) { %>
+                        <tr class="list">
+                            <td id="list-no"><%= n.getNoticeNo() %></td>
+                            <td id="list-ca"><%= n.getNoticeCategory() %></td>
+                            <td id="list-title"><%= n.getNoticeTitle() %></td>
+                            <td id="list-date"><%= n.getCreateDate() %></td>
+                            <td id="list-count"><%= n.getCount() %></td>
                         </tr>
-                        <tr>
-                            <td id="list-no">3</td>
-                            <td id="list-ca">기타</td>
-                            <td id="list-title">공지 제목 제목 공지 제목 공지사항 예매 공지임 예매</td>
-                            <td id="list-date">2024-03-21</td>
-                            <td id="list-count">58</td>
-                        </tr>
+                        
+                        <% } %>
+                    <% } %>
+
+                     
                     </tbody>
                 </table>
             </div>
@@ -336,8 +335,8 @@
                             <td id="list-no">< %= notice.getNoticeNo() %></td>
                             <td id="list-ca">< %= notice.getNoticeCategory() %></td>
                             <td id="list-title">< %= notice.getNoticeTitle() %></td>
-                            <td id="list-date">< %= notice.getNoticeDate() %></td>
-                            <td id="list-count">< %= notice.getNoticeCount() %></td>
+                            <td id="list-date">< %= notice.getCreateDate() %></td>
+                            <td id="list-count">< %= notice.getCount() %></td>
                         </tr>
                         
                         < % } %>
@@ -361,9 +360,18 @@
         </div>
     </div>
     
-
-    
     	<%@ include file="../common/footer.jsp" %>
+    	
+    	<script>
+    		function openNoticePage(){
+    			location.href = '../notice/noticeList.jsp';
+    		}
+    		
+    		function openQnaPage(){
+				location.href = '../board/qnaList.jsp';    			
+    		}
+    	
+    	</script>
 
 
 </body>

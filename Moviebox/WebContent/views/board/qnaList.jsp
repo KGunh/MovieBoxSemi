@@ -56,6 +56,7 @@
             height: 90px;
             float: left;
             font-weight: bolder;
+            cursor: pointer;
         }
         
         .notice-tap a {
@@ -240,8 +241,8 @@
                 
             <!-- 카테고리 -->
             <div id="board-category">
-                <div class="notice-tap"><a href="../notice/noticeList.jsp">공지사항</a></div>
-                <div class="qna-tap"><a href="qnaList.jsp">QnA</a></div>
+                <div class="notice-tap" onclick="openNoticePage();"><a href="../notice/noticeList.jsp">공지사항</a></div>
+                <div class="qna-tap" onclick="openQnaPage();"><a href="qnaList.jsp">QnA</a></div>
             </div> <!-- board-category -->
 
             <!-- 검색 -->
@@ -306,9 +307,19 @@
 
         </div>
     </div>
-    
 
    	<%@ include file="../common/footer.jsp" %>
+   	
+ 	    <script>
+    		function openNoticePage(){
+    			location.href = '../notice/noticeList.jsp';
+    		}
+    		
+    		function openQnaPage(){
+				location.href = '../board/qnaList.jsp';    			
+    		}
+    	
+    	</script>
 
 
 </body>
