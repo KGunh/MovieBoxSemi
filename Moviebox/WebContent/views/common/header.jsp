@@ -199,9 +199,7 @@
                 	<a href="<%=contextPath%>/loginForm.me" class="member">로그인</a>
                 	
 				<%}else {  if(loginUser.getPrivilege().equals("Y")) {%>
-					<a href="<%= contextPath %>/adminMain.me" class="member">관리자 기능</a>
-					<!-- 관리자로 로그인시 관리자 기능 활성화  /adminMain.me는 MemberServlet.java에서 case에 들어갈 맵핑값. case "adminMain"라고 적어주는데 adminMain.me인데 .me를 생략한것 -->
-					
+					<a href="<%= contextPath %>/adminMain.me" class="member">관리자 기능</a><!-- 관리자로 로그인시 관리자 기능 활성화 -->
 				<%} %>
 					<a href="<%=contextPath%>/logout.me" class="member">로그아웃</a>
 				<%} %>

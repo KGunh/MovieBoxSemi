@@ -40,11 +40,11 @@ public class ReservationServlet extends HttpServlet {
 		boolean flag = false;
 		
 		switch(mapping) {
-		case "movie" : view = new ReservationController().selectReservationInfo(request); break; 
-		case "seat" : new ReservationController().setSeat(request); break;
-		case "payment" : new ReservationController().insertReservation(); break;
+		case "movie" : view = rc.selectReservationInfo(request); break; 
+		case "seat" : rc.setSeat(request); break;
+		case "payment" : rc.insertReservation(); break;
 		}
-		System.out.println(view);
+		
 		if(flag) {
 			response.sendRedirect(view);
 		} else {
