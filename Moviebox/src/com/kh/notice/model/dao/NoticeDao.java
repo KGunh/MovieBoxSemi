@@ -19,9 +19,7 @@ public class NoticeDao {
 	
 	public NoticeDao() {
 		
-		String fileName = NoticeDao.class
-				.getResource("/sql/notice/notice-mapper.xml")
-				.getPath();
+		String fileName = NoticeDao.class.getResource("/sql/notice/notice-mapper.xml").getPath();
 		
 		try {
 			prop.loadFromXML(new FileInputStream(fileName));
@@ -53,10 +51,11 @@ public class NoticeDao {
 				notice.setNoticeTitle(rset.getString("NOTICE_TITLE"));
 				notice.setCreateDate(rset.getString("CREATE_DATE"));
 				notice.setCount(rset.getInt("COUNT"));
-				System.out.println(notice);
+				System.out.println(notice);				
 				list.add(notice);
 
 			}
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -65,7 +64,6 @@ public class NoticeDao {
 			close(pstmt);
 		}
 		
-		System.out.println(list);
 		
 		return list;
 	}

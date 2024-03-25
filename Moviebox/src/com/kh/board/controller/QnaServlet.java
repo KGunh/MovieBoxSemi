@@ -30,20 +30,21 @@ public class QnaServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		
+		// 변수 선언 
+		
 		QnaController qc = new QnaController();
 		
-		// URI 담아주기
+		// URI 담기
 		String uri = request.getRequestURI();
+		String mapping = uri.substring(uri.lastIndexOf("/") + 1, uri.lastIndexOf("."));
 		
 		String view = "";
 		boolean flag = true;
 		
-		String mapping = uri.substring(uri.lastIndexOf("/") + 1, uri.lastIndexOf("."));
-		
-		
 		switch(mapping) {
-		case "list" : view = "views/board/qnaList.jsp"; break;
+		case "list" : view = qc.selectQnaList(request); flag = false; break; // dispatcher
 		}
+		
 		
 		if(flag) {
 			response.sendRedirect(view);

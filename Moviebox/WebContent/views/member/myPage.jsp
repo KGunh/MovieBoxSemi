@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.board.model.vo.Board,java.util.ArrayList,com.kh.member.model.vo.MemberGenre,java.util.List,com.kh.common.model.vo.Reservation,com.kh.movie.model.vo.Movie"%>
+    pageEncoding="UTF-8" import="com.kh.board.model.vo.Answer,com.kh.board.model.vo.Board,java.util.ArrayList,com.kh.member.model.vo.MemberGenre,java.util.List,com.kh.common.model.vo.Reservation,com.kh.movie.model.vo.Movie"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -219,6 +219,90 @@
         	width: 100%;
         	height: 100%;
         }
+        a{
+            text-decoration: none;
+        }
+        #info-header{
+            width: 100%;
+            height: 175px;
+        }
+        #info-title{
+            width: 100%;
+            height: 100px;
+        }
+        .title{
+            display: block;
+            width: 100%;
+            height: 100%;
+            font-size: 30px;
+            font-weight: bold;
+            line-height: 100px;
+            text-align: center;
+            color: white;
+        }
+        #info-header-navi{
+            width: 1050px;
+            height: 75px;
+            margin : auto;
+        }
+        #info-header-navi ul{
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        #info-header-navi li{
+            width: 50%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+        .info-navi{
+            border-top: 1px solid lightgray;
+            border-bottom: 1px solid lightgray;
+        }
+        .info-my{
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            padding-top: 25px;
+        }
+        .info-list{
+            color: #FFC145;
+            font-weight: bold;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            padding-top: 25px;
+        }
+        .info-navi > a{
+        	text-decoration: none;
+        }
+        
+        
+        #info-navi-first{
+            background-color: #FFC145;
+        }
+        #info-navi-second{
+            background-color: #1A1A1A;
+        }
+        .info-my:hover{
+            text-decoration: none;
+            color: black;
+            
+        }
+        .info-list:hover{
+            text-decoration: none;  
+            color: #FFC145;   
+        }
 
     </style>
     <title>마이페이지</title>
@@ -229,7 +313,24 @@
 
 
 	<%@ include file="../common/header.jsp" %>
-	<%@ include file="../common/informationNavi.jsp" %>
+	
+	<div id="info-header">
+        <div id="info-title">
+            <span class="title">마이페이지</span>
+        </div>
+        <div id="info-header-navi">
+            
+            <ul class="info-navi">
+                <li id="info-navi-first">
+                    <a href="#" class="info-my">회원정보</a>
+                </li>
+                <li id="info-navi-second">
+                    <a href="<%=contextPath %>/resList.me" class="info-list">예매내역</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
 	
 	<% if(loginUser == null) {%>
 		<script>
@@ -252,7 +353,7 @@
 		List<Movie> movieList = (ArrayList)request.getAttribute("movieList");
 		List<Board> boardList = (ArrayList)request.getAttribute("boardList");
 		List<Answer> answerList = (ArrayList)request.getAttribute("answerList");
-
+		System.out.println(answerList);
 
 	%>
 	
@@ -312,11 +413,16 @@
             <div class="QNA-area-content">
             	<%if(boardList != null) {%>
             		<%for(int i=0;i < boardList.size(); i ++) {%>
+            		<% if(i==2) { break;}%>
                 <div class="QNA-area-list" style="border-bottom: 1px solid rgb(158, 157, 157);">
                     <div id="QNA-title"><%=boardList.get(i).getBoardTitle() %></div>
                     <div id="QNA-createDate"><%=boardList.get(i).getcreateDate() %></div>
-                    <%if(true) %>
-                    <div id="QNA-yn">Y/N</div>
+                    
+                    <%if(answerList == null) {%>
+                    <div id="QNA-yn">N</div>
+                    <%} else { %>
+                    <div id="QNA-yn">Y</div>
+                    <%} %>
                 </div>
                 	<%} %>
                 

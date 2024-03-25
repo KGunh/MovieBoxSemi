@@ -5,8 +5,7 @@
 				 java.util.ArrayList"%>
     
 <%
-	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
-
+ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
 %>    
     
     
@@ -74,42 +73,30 @@
             background-color: #FFC145;
             font-weight: bolder;
             cursor: pointer;
-        }
-        
-        .notice-tap a {
-        	color: #1A1A1A;
-        }        
-        
-        .notice-tap a:hover {
-        	color: #1A1A1A;
-        	text-decoration: none;
+            color: #1A1A1A;
         }
 
         .qna-tap{
             width: 600px;
             height: 90px;
-            color: #FFC145;
+            color: white;
             display: inline-block;
             left: 0;
             cursor: pointer;
         }
 
-        .qna-tap:hover{
+        .notice-tap:hover{
             background-color: #FFC145;
         }
         
-        .qna-tap a {
-        	color: white;
+        .qna-tap:hover{
+            background-color: #FFC145;
+            color: #1A1A1A;
         }
+
+
         
-        .qna-tap:hover a{
-        	color: #1A1A1A;
-        }
-        
-        .qna-tap a:hover {
-        	color: #1A1A1A;
-        	text-decoration: none;
-        }
+
 
         /* 검색 */
         #search-notice{
@@ -223,6 +210,7 @@
         }
         
         #list-th-i{
+        	width: 100px;
         	text-align: center;
         	border-bottom: 1px solid #bbbbbb46;
         }
@@ -256,8 +244,8 @@
                 
             <!-- 카테고리 -->
             <div id="board-category">
-                <div class="notice-tap" onclick="openNoticePage();"><a href="noticeList.jsp">공지사항</a></div>
-                <div class="qna-tap" onclick="openQnaPage();"><a href="../board/qnaList.jsp">QnA</a></div>
+                <div class="notice-tap" onclick="openNoticePage();">공지사항</div>
+                <div class="qna-tap" onclick="openQnaPage();">QnA</div>
             </div> <!-- board-category -->
 
             <!-- 검색 -->
@@ -293,7 +281,7 @@
                      <% } else { %>
                      
                      	<% for(Notice n : list) { %>
-                        <tr>
+                        <tr class="list">
                             <td id="list-no"><%= n.getNoticeNo() %></td>
                             <td id="list-ca"><%= n.getNoticeCategory() %></td>
                             <td id="list-title"><%= n.getNoticeTitle() %></td>
@@ -308,45 +296,6 @@
                     </tbody>
                 </table>
             </div>
-
-				
-            <!-- 게시판
-            <div class="container">
-                <table class="table table-hover">
-                    <thead>
-                        <tr>
-                            <th id="list-th-i">번호</th>
-                            <th id="list-th-i">카테고리</th>
-                            <th id="list-th">제목</th>
-                            <th id="list-th-i">작성일</th>
-                            <th id="list-th-i">조회수</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                    
-                    < % if(list.isEmpty()) { %>
-                        <tr>
-                            <th colspan="5">조회 된 공지사항이 없습니다. </th>
-                        </tr>
-                     < % } else { %>
-                     
-                     	< % for(Notice notice : list) { %>
-                        <tr class="list">
-                            <td id="list-no">< %= notice.getNoticeNo() %></td>
-                            <td id="list-ca">< %= notice.getNoticeCategory() %></td>
-                            <td id="list-title">< %= notice.getNoticeTitle() %></td>
-                            <td id="list-date">< %= notice.getCreateDate() %></td>
-                            <td id="list-count">< %= notice.getCount() %></td>
-                        </tr>
-                        
-                        < % } %>
-                    < % } %>
-
-                     
-                    </tbody>
-
-                </table>
-            </div> -->
 
 
             <div id="page">
@@ -364,11 +313,11 @@
     	
     	<script>
     		function openNoticePage(){
-    			location.href = '../notice/noticeList.jsp';
+    			location.href = '<%=contextPath %>/list.notice';
     		}
     		
     		function openQnaPage(){
-				location.href = '../board/qnaList.jsp';    			
+    			location.href = '<%=contextPath %>/list.qna'; 			
     		}
     	
     	</script>

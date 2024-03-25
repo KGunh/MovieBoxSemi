@@ -161,7 +161,7 @@
 	SELECT
       	   BOARD_NO,
        	   BOARD_TITLE,
-           CREATE_DATE
+           TO_CHAR(CREATE_DATE,'YYYY-MM-DD') AS CREATE_DATE
       FROM
        	   TB_BOARD
      WHERE
@@ -183,7 +183,7 @@
      WHERE
            STATUS = 'Y'
        AND
-           BOARD = ?
+           BOARD_NO = ?
 	
 	</entry>
 	

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<comment>
+		Qna Mapper
+	</comment>
+	
+	<entry key="selectQnaList">
+		SELECT
+			  BOARD_NO,
+			  BOARD_CATEGORY,
+			  BOARD_TITLE,
+			  BOARD_WRITER,
+			  CREATE_DATE
+		  FROM
+		  	  TB_BOARD
+		 ORDER
+		 	BY
+		 	  CREATE_DATE DESC	
+	</entry>
+
+	
+</properties>

@@ -17,7 +17,7 @@ public class NoticeService {
 		
 		close(conn);
 		
-		
+
 		return list;
 	}
 
