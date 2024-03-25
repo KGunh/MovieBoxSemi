@@ -7,6 +7,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.board.model.vo.Answer;
+import com.kh.board.model.vo.Board;
 import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.Reservation;
 import com.kh.member.model.service.MemberService;
@@ -114,19 +116,18 @@ public class MemberController {
 		String view = "";
 		HttpSession session = request.getSession();
 		List<Movie> movieList = new ArrayList();
+		List<Answer> answerList = new ArrayList();
+		
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		if(loginUser == null) {
 			return view = "views/member/myPage.jsp";
 		} else {
 
 			List<Reservation> list = new MemberService().myPagePrint(loginUser);
-			if (list.isEmpty()) {
-				return view = "views/member/myPage.jsp";
-			} else {
+			if (!list.isEmpty()) {
 				for (int i = 0; i < list.size(); i++) {
 					Reservation res = list.get(i);
 					Movie m = new MemberService().myPageMoviePoster(res);
-					System.out.println(m);
 					if (m == null) {
 						request.setAttribute("errorMsg", "");
 						return view = "views/common/errorPage.jsp";
@@ -135,17 +136,33 @@ public class MemberController {
 					movieList.add(m);
 
 				}
-				System.out.println(movieList);
 				request.setAttribute("movieList", movieList);
 				request.setAttribute("list", list);
 				view = "views/member/myPage.jsp";
 			}
+			
+			
+			List<Board> boardList = new MemberService().myPageBoardPrint(loginUser);
+			
+			
 
+			if(!boardList.isEmpty()) {
+				
+				for(int i=0;i<boardList.size();i++) {
+					Board board = boardList.get(i);		
+					Answer a = new MemberService().myPageBoardAnswer(board);
+					
+					answerList.add(a);
+				}
+			}
+			request.setAttribute("boardList", boardList);
+			request.setAttribute("answerList", answerList);
+			
+			view = "views/member/myPage.jsp";
 		}
 		
 		
-		
-		
+
 		return view;
 	}
 	

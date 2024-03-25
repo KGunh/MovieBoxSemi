@@ -9,6 +9,8 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.kh.board.model.vo.Answer;
+import com.kh.board.model.vo.Board;
 import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.Reservation;
 import com.kh.member.model.dao.MemberDao;
@@ -80,6 +82,27 @@ public class MemberService {
 		Movie m = new MemberDao().myPageMoviePoster(conn,res);
 		close(conn);
 		return m;
+	}
+	
+	public List<Board> myPageBoardPrint(Member loginUser){
+		Connection conn = getConnection();
+		
+		List<Board> boardList = new MemberDao().myPageBoardPrint(conn, loginUser);
+		
+		close(conn);
+		
+		return boardList;
+		
+	}
+	
+	public Answer myPageBoardAnswer(Board board) {
+		Connection conn = getConnection();
+		
+		Answer a = new MemberDao().myPageBoardAnswer(conn,board);
+		
+		close(conn);
+		
+		return a;
 	}
 
 }
