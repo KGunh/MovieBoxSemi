@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.board.model.vo.Answer,com.kh.board.model.vo.Board,java.util.ArrayList,com.kh.member.model.vo.MemberGenre,java.util.List,com.kh.common.model.vo.Reservation,com.kh.movie.model.vo.Movie"%>
+    pageEncoding="UTF-8" import="com.kh.board.model.vo.Board,java.util.ArrayList,com.kh.member.model.vo.MemberGenre,java.util.List,com.kh.common.model.vo.Reservation,com.kh.movie.model.vo.Movie"%>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -314,13 +314,8 @@
                 <div class="QNA-area-list" style="border-bottom: 1px solid rgb(158, 157, 157);">
                     <div id="QNA-title"><%=boardList.get(i).getBoardTitle() %></div>
                     <div id="QNA-createDate"><%=boardList.get(i).getcreateDate() %></div>
-
-                    <%if(answerList == null){ %>
-                    <div id="QNA-yn">N</div>
-                    <%} else { %>
-                    <div id="QNA-yn">Y</div>
-                    <%} %>
-
+                    <%if(true) %>
+                    <div id="QNA-yn">Y/N</div>
                 </div>
                 	<%} %>
                 

@@ -187,19 +187,19 @@
             <div class="content_1">
                 <ul class="menu">
                     <li>
-                        <a href="">회원 관리</a>
+                        <a href="#">회원 관리</a>
                         <ul class="submenu">
 
                         </ul>
                     </li>
                     <li>
-                        <a href="">영화 관리</a>
+                        <a href="#">영화 관리</a>
                         <ul class="submenu">
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/checkAdmin.cm">영화관 관리</a>
+                        <a href="#">영화관 관리</a>
                         <ul class="submenu">
 
                         </ul>
