@@ -1,9 +1,5 @@
 package com.kh.reservation.controller;
 
-<<<<<<< HEAD
-<<<<<<< HEAD
-=======
->>>>>>> 26517526f38e10894c270720163ac98e724801ff
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -53,36 +49,5 @@ public class ReservationController {
 		//예약내용 insert
 	}
 
-<<<<<<< HEAD
-
-=======
-import javax.servlet.http.HttpServletRequest;
-
-public class ReservationController {
-	
-	public String a(HttpServletRequest request) {
-		
-		request.getParameter("a");
-		
-		
-		// 가공 ~
-		
-		// 서비스 호출 ~
-		
-		//request.getRequestDispatcher("view/~어ㅓㅉ고저쪽~~").forward(request, response);
-		
-		return "view/~어ㅓㅉ고저쪽~~";
-		
-	}
-	
-	public String b(HttpServletRequest request) {
-		
-		
-		return "views/common/errorPage.jsp";
-	}
->>>>>>> b5cca4dda70eae2c057d74ae145dc247e35c7678
-
-=======
->>>>>>> 26517526f38e10894c270720163ac98e724801ff
 	
 }
