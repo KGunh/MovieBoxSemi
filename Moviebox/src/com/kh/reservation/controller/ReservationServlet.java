@@ -37,25 +37,13 @@ public class ReservationServlet extends HttpServlet {
 		
 		String view = "";
 		
-		// A. 값뽑기
-		
-		
 		boolean flag = false;
 		
 		switch(mapping) {
-
-		
-		case "movie" : view = "views/reservation/movieReservation.jsp"; flag= true; break; 
-		case "seat" : view = "views/reservation/seatReservation.jsp"; break;
-		case "payment" : break;
-
-		case "movie" : view = new ReservationController().selectReservationInfo(request); view = "views/reservation/movieReservation.jsp"; break; 
-		case "seat" : new ReservationController().setSeat(request); break;
-		case "payment" : new ReservationController().insertReservation(); break;
-
+		case "movie" : view = rc.selectReservationInfo(request); break; 
+		case "seat" : rc.setSeat(request); break;
+		case "payment" : rc.insertReservation(); break;
 		}
-		
-		// B. 응답뷰 지정
 		
 		if(flag) {
 			response.sendRedirect(view);
