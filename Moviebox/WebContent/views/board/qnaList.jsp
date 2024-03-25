@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ page import="com.kh.board.model.vo.Board,
+ 				 java.util.ArrayList"%>
+    
+<%
+	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("qnaList");
+
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -59,15 +68,6 @@
             cursor: pointer;
         }
         
-        .notice-tap a {
-        	color: white;
-        }        
-        
-        .qna-tap a:hover {
-        	color: #1A1A1A;
-        	text-decoration: none;
-        }
-
         .qna-tap{
             width: 600px;
             height: 90px;
@@ -80,20 +80,9 @@
 
         .notice-tap:hover{
             background-color: #FFC145;
-        }
-        
-        .qna-tap a {
             color: #1A1A1A;
         }
         
-        .notice-tap:hover a{
-        	color: #1A1A1A;
-        }
-        
-        .notice-tap a:hover {
-        	color: #1A1A1A;
-        	text-decoration: none;
-        }
 
         /* 검색 */
         #search-notice{
@@ -241,8 +230,8 @@
                 
             <!-- 카테고리 -->
             <div id="board-category">
-                <div class="notice-tap" onclick="openNoticePage();"><a href="../notice/noticeList.jsp">공지사항</a></div>
-                <div class="qna-tap" onclick="openQnaPage();"><a href="qnaList.jsp">QnA</a></div>
+                <div class="notice-tap" onclick="openNoticePage();">공지사항</div>
+                <div class="qna-tap" onclick="openQnaPage();">QnA</div>
             </div> <!-- board-category -->
 
             <!-- 검색 -->
@@ -272,27 +261,24 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <% if (list == null || list.isEmpty()) { %>
                         <tr>
-                            <td id="list-no">1</td>
-                            <td id="list-ca">예매</td>
-                            <td id="list-title">공지 제목 제목 공지 제목 공지사항 예매 공지</td>
-                            <td id="list-count">김유나</td>
-                            <td id="list-date">2024-03-21</td>
+                            <td colspan="5">조회 된 공지사항이 없습니다. </td>
                         </tr>
+                        
+                        <% } else { %>
+                        
+                        	<% for(Board b : list) { %>
                         <tr>
-                            <td id="list-no">2</td>
-                            <td id="list-ca">영화관</td>
-                            <td id="list-title">공지 제목 제목 공지 제목 공지사항 예매 공지</td>
-                            <td id="list-count">김유나</td>
-                            <td id="list-date">2024-03-21</td>
+                            <td id="list-no"><%= b.getBoardNo() %></td>
+                            <td id="list-ca"><%= b.getBoardCategory() %></td>
+                            <td id="list-title"><%= b.getBoardTitle() %></td>
+                            <td id="list-count"><%= b.getCount() %></td>
+                            <td id="list-date"><%= b.getCreateDate() %></td>
                         </tr>
-                        <tr>
-                            <td id="list-no">3</td>
-                            <td id="list-ca">기타</td>
-                            <td id="list-title">공지 제목 제목 공지 제목 공지사항 예매 공지임 예매</td>
-                            <td id="list-count">김유나</td>
-                            <td id="list-date">2024-03-21</td>
-                        </tr>
+      
+                        	<% } %>
+                        <% } %>
                     </tbody>
                 </table>
             </div>
@@ -312,11 +298,12 @@
    	
  	    <script>
     		function openNoticePage(){
-    			location.href = '../notice/noticeList.jsp';
+    			location.href = '<%=contextPath %>/list.notice';
     		}
     		
     		function openQnaPage(){
-				location.href = '../board/qnaList.jsp';    			
+    			location.href = '<%=contextPath %>/list.qna';
+    			
     		}
     	
     	</script>
