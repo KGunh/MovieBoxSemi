@@ -30,11 +30,11 @@ public class ReservationController {
 		
 		if (dateStr.length >= 3) { // 예외처리
 			screenDate = dateStr[0].substring(2) + "/" + dateStr[1] + "/" + dateStr[2];
-		}
+		};
 		
 		if(!request.getParameter("movieNo").equals("")) { // 예외처리
 			movieNo = Integer.parseInt(request.getParameter("movieNo"));
-		}
+		};
 		
 		if(screenLocation.equals("전체")) screenLocation = ""; //예외처리
 		
@@ -74,12 +74,12 @@ public class ReservationController {
 		        if(list.get(j).getTheaterNo() == screenList.get(i).getTheaterNo()) {
 		            watchDateList.add(list.get(j).getWatchDate());
 		            screenNoList.add(list.get(j).getScreenNo());
-		        }
-		    }
+		        };
+		    };
 
 		    screenList.get(i).setScreenNoList(screenNoList);
 		    screenList.get(i).setWatchDateList(watchDateList);
-		}
+		};
 		
 		//System.out.println(screenList);
 		
