@@ -9,7 +9,6 @@ public class Notice {
 	private String noticeTitle;
 	private String noticeContent;
 	private String createDate;
-	
 	private int count;
 	private String status;
 	private int memberNo;

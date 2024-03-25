@@ -52,13 +52,6 @@ public class NoticeServlet extends HttpServlet {
 		}
 		
 		
-		// 공지사항 목록 출력
-
-		
-		
-		
-		
-		
 	}
 
 	/**
