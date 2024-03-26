@@ -7,35 +7,51 @@
 <title>Insert title here</title>
 </head>
 <style>
+    body{
+        color: rgb(32,32,32);
+    }
 	div{
         border: 1px solid red;
         box-sizing: border-box;
     }
+    a{
+        text-decoration: none;
+        color: rgb(32,32,32);
+    }
 
     #wrap{
         width: 1200px;
-        height: 1600px;
+        height: 1000px;
     }
 
     #title{
         height: 80px;
         width: 100%;
-        margin-top: 50px;
+        margin-top: 30px;
         color: rgb(32,32,32);
         background-color: rgb(255, 193, 69);
-        font-size: 32px;
+        font-size: 35px;
         font-weight: 700;
         line-height: 80px;
         padding-left: 30px;
     }
 
     #selectPersonArea{
-        height: 400px;
+        height: 250px;
         width: 100%;
     }
 
+    #seat-title{
+        height: 50px;
+        font-size: 24px;
+        font-weight: 700;
+        color: rgb(148, 145, 145);
+        line-height: 50px;
+        text-align: center;
+    }
+
     .line{
-        height: 30px;
+        height: 50px;
         width: 100%;
     }
 
@@ -43,14 +59,50 @@
         float: left;
         height: 30px;
         width: 30px;
+        margin-top: 8px;
     }
 
     .line-wrap{
         width: 550px;
-        height: 30px;
-        vertical-align: middle;
+        height: 50px;
         margin: auto;
     }
+
+    #selectText{
+        height: 150px;
+        color: rgb(255, 193, 69);
+        padding-top: 30px;
+        padding-left: 30px;
+        font-size: 28px;
+        font-weight: 700;
+    }
+    
+    #select-wrap{
+        height: 150px;
+    }
+
+    #selectAge{
+        height: 100px;   
+        float: left; 
+    }
+
+    #selectAge > div{
+        float: left;
+        height: 30px;
+        width: 60px;
+        line-height: 25px;
+        font-size: 16px;
+        font-weight: 700;
+        text-align: center;
+        border-radius: 8px;
+        background-color: rgba(70, 69, 69, 0.82);
+        color: rgb(125, 124, 124);
+    }
+
+    #selectPerson{
+        float: left;
+    }
+
 
 </style>
 
@@ -63,13 +115,13 @@
     <div id="selectPersonArea">
         <div id="selectText">
             인원 선택
-            <div>
+            <div style="color:rgb(148, 145, 145); font-size: 16px;">
                 최대 8명까지 선택 가능
             </div>
         </div>
         <div id="select-wrap">
             <div id="selectAge">
-                <span>청소년</span><span>성인</span>
+                <div>청소년</div><div>성인</div>
             </div>
             <div id="selectPerson">
                 selectPerson
@@ -78,7 +130,7 @@
     </div>
 	
     <div id="seat-wrap">
-        <div id="seat-title"></div>
+        <div id="seat-title"> 좌석 선택</div>
         <div id="seat-arrange">
             <div id="a-line" class="line">
                 <div id="a-line-wrap" class="line-wrap">
@@ -216,6 +268,7 @@
     </div>
 	
 	</div>
+</a>
 	<%@ include file="/views/common/footer.jsp" %>
 </body>
 </html>
