@@ -73,15 +73,17 @@ public class MemberController {
 		Member m = new Member();
 		String view = "";
 		
-		ArrayList<Genre> genreList = new ArrayList();
+		List<Genre> genreList = new ArrayList();
 		
-		if(!genreList.isEmpty()) {
+		if(genres != null) {
 			for(int i = 0;i< genres.length; i++) {
 				Genre g = new Genre();
 				g.setGenreName(genres[i]);
 				genreList.add(g);
 			}
 		}
+		
+
 		
 		
 	
@@ -230,15 +232,59 @@ public class MemberController {
 		String CheckPwd = request.getParameter("memberPwd");
 
 		
-		String loginUserPwd = loginUser.getMemberPwd();
-
 		
+		String loginUserPwd = loginUser.getMemberPwd();
+		System.out.println(CheckPwd);
+		System.out.println(loginUserPwd);
+
 		if(CheckPwd.equals(loginUserPwd)) {
 			view = "views/member/myPageModify.jsp";
 		} else {
 			session.setAttribute("alertMsg", "잘못된 비밀번호입니다 다시 입력해주세요.");
 			view = "views/member/myPagePwdCheck.jsp";
 		}
+		return view;
+	}
+	
+	public String update(HttpServletRequest request, HttpServletResponse response) {
+		String view = "";
+		
+		HttpSession session = request.getSession();
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		String address = request.getParameter("address");
+		String email = request.getParameter("email");
+		String localCode = request.getParameter("localCode");
+		String[] genres = request.getParameterValues("genre");
+		
+		Member m = new Member();
+		
+		List<Genre> genreList = new ArrayList();
+		
+		
+		if(genres != null) {
+			for(int i = 0;i< genres.length; i++) {
+				Genre g = new Genre();
+				g.setGenreName(genres[i]);
+				genreList.add(g);
+			}
+		}
+		m.setMemberNo(loginUser.getMemberNo());
+		m.setEmail(email);
+		m.setLocalCode(localCode);
+		m.setAddress(address);
+		int result = new MemberService().update(m,genreList);
+		
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "수정에 성공했습니다.");
+			view = "/views/common/myPageModify.jsp";
+		}else {
+			session.setAttribute("alertMsg", "수정에 실패했습니다.");
+			view = "/views/common/myPageModify.jsp";
+		}
+		
 		return view;
 	}
 	

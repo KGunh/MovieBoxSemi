@@ -40,7 +40,7 @@ public class MemberService {
 		
 	}
 	
-	public int insert(Member m, ArrayList<Genre> genreList) {
+	public int insert(Member m, List<Genre> genreList) {
 		
 		Connection conn = getConnection();
 		// 회원가입
@@ -127,6 +127,42 @@ public class MemberService {
 		close(conn);
 		
 		return orderList;
+		
+	}
+	
+	public int update(Member m,List<Genre> genreList) {
+		Connection conn = getConnection();
+		String local = new MemberDao().selectlocal(conn,m);
+		m.setLocalCode(local);
+		
+		
+		int memberResult = new MemberDao().updateMember(conn, m);
+		
+		
+		int memberGenreList = 1;
+		int genreResult = 1;
+		if(!genreList.isEmpty()) {
+			memberGenreList = new MemberDao().deleteGenreList(conn,m);
+			for(int i = 0; i < genreList.size(); i++) {
+				Genre g = new Genre();
+				// 회원가입 장르 추가
+				g.setGenreName(genreList.get(i).getGenreName());
+				genreResult += new MemberDao().genreInsert(conn,g);
+			}
+		}
+		
+		if(memberResult * genreResult * memberGenreList > 0) {			
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		return (memberResult * genreResult * memberGenreList);
+		
+	
+		
+		
 		
 	}
 
