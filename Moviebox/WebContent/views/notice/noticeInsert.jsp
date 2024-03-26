@@ -246,9 +246,13 @@
 
 
                     <div class="detail-content-box">
-                        <div id="insert-box">
+                        <form action="<%= contextPath %>/insert.notice"
+                        method="post" id="insert-box">
                             <div id="category-box">
                                 <div id="box-name">분류</div>
+                                
+                                <input type="hidden" name="memNo" value="<%= loginUser.getMemberNo()%>" />
+                                
                                 <select name="category" id="select-category">
                                     <option value="theater">영화관</option>
                                     <option value="reservation">예매</option>
@@ -266,23 +270,17 @@
                                 <div id="box-name">내용</div>
                                 <textarea id="select-content" cols="30" rows="10" name="content"></textarea>
                             </div>
-
-                            
-
-                        </div> <!-- insert box -->
-
-                        <div id="insert-btn" align="center">
-                            <button class="notice-detail-btn">등록</button>
-                            <button class="notice-detail-btn1">취소</button>
-                        </div>
-
+	
+	                        <div id="insert-btn" align="center">
+	                        
+	                            <button type="submit" class="notice-detail-btn">등록</button>
+                				<button type="button" class="notice-detail-btn1" onclick="history.back()">취소</button>
+                
+	                        </div>
+                    	</form> <!-- insert box -->
                     </div> <!-- detail-content-box -->
 
-
                 </div> <!-- notice-content -->
-
-
-
 
             </div> <!-- notice-list -->
         </div> <!-- notice-detail -->
@@ -290,6 +288,10 @@
 
     	<%@ include file="../common/footer.jsp" %>
 
+	<script>
+
+	
+	</script>
     
 </body>
 </html>
