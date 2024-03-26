@@ -61,6 +61,7 @@ public class ReservationController {
 			screen.setTheaterName(sc.getTheaterName());
 			screen.setMovieNo(sc.getMovieNo());
 			screen.setMovieRt(sc.getMovieRt());
+			screen.setScreenNo(sc.getScreenNo());
 			
 			screenList.add(screen);
 		};
