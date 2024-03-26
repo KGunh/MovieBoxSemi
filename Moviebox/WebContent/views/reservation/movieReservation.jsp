@@ -308,10 +308,10 @@
                 $('#movieNo').val($(this).children().eq(1).val());
             });
         });
-
-        document.getElementById('.screenName').click = function(){
-           // document.getElementById('#screenNo').val(this.);
-        }
+		
+        function selectScreenNo(e){
+            document.getElementById('screenNo').value = e.children[1].value;
+        };
        
         function selectScreen(){
             $.ajax({
@@ -324,14 +324,15 @@
             	},
             	success : function(result){
                     var resultStr = '';
-
+                    console.log(result);
                     for(let i = 0; i < result.length; i++){
                         resultStr += '<div class="screen">'
                                     +     '<div class="theaterName">' + result[i].theaterName + '</div>';
                                     +     '<div class="selectScreen">'
                         for(let j = 0; j < result[i].watchDateList.length; j++){
-                            resultStr +=        '<div class="screenName">'
+                            resultStr +=        '<div class="screenName" onclick="selectScreenNo(this);">'
                                         +            '<span style="color: black;">' + result[i].watchDateList[j] + '</span>~'
+                                        +            '<input type="hidden" value="' + result[i].screenNoList[j] + '">'
                                         +        '</div>'
                         };
                         resultStr +=    '</div>';
@@ -342,11 +343,11 @@
                     
             	},
             	error : function(){
-					console.log('검색결과가 없음');
+					$('#printScreen').html('조회된 영화관이 없습니다.');
 				}
             });
         };
-         
+            
         $('#screenDate').change(function(){
             selectScreen();
         });
