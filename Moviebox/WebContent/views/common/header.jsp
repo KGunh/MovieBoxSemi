@@ -186,6 +186,7 @@
 		
 			<% session.removeAttribute("alertMsg"); %>
 		}
+		
 	
 	</script>
 	<div class="header">

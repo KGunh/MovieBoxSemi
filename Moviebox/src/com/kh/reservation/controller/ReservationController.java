@@ -86,13 +86,19 @@ public class ReservationController {
 	}
 
 	public String setSeat(HttpServletRequest request) {
+		
+		
+		
+		
+		
 		String view = "views/reservation/seatReservation.jsp";
 		
 		return view;		
 	}
 	
 	public void insertReservation() {
-		//예약내용 insert
+		// 예약 정보를 가지고 결제 페이지로 연결
+		// 예약내용 insert
 	}
 
 	

@@ -11,6 +11,7 @@ import com.kh.board.model.vo.Answer;
 import com.kh.board.model.vo.Board;
 import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.Reservation;
+import com.kh.goods.model.vo.Order;
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 import com.kh.movie.model.vo.Movie;
@@ -161,7 +162,12 @@ public class MemberController {
 				request.setAttribute("answerList", answerList);
 			}
 			
+			List<Order> orderList = new MemberService().myPageOrderPrint(loginUser);
 			
+			if(!orderList.isEmpty()) {
+				
+				request.setAttribute("orderList", orderList);
+			}
 			
 			
 			view = "views/member/myPage.jsp";

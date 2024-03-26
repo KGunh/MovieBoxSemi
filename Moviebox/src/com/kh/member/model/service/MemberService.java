@@ -13,6 +13,8 @@ import com.kh.board.model.vo.Answer;
 import com.kh.board.model.vo.Board;
 import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.Reservation;
+import com.kh.goods.model.vo.Goods;
+import com.kh.goods.model.vo.Order;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
 import com.kh.member.model.vo.MemberGenre;
@@ -103,6 +105,29 @@ public class MemberService {
 		close(conn);
 		
 		return a;
+	}
+	
+	public List<Order> myPageOrderPrint(Member loginUser){
+		Connection conn = getConnection();
+		
+		List<Order> orderList = new MemberDao().myPageOrderPrint(conn,loginUser);
+		
+		
+		if(!orderList.isEmpty()) {
+			for(int i= 0;i<orderList.size();i++) {
+				int orderNo = orderList.get(i).getOrderNo();
+				List<Goods> goodsList = new MemberDao().orderGoods(conn,orderNo);
+				
+				orderList.get(i).setGoodsList(goodsList);
+				
+			}
+			
+		}
+
+		close(conn);
+		
+		return orderList;
+		
 	}
 
 }
