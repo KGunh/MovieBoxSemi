@@ -43,7 +43,7 @@ public class NoticeServlet extends HttpServlet {
 		
 		switch(mapping) {
 		case "list" : view = nc.selectNoticeList(request); flag = false; break;
-		case "insert" : view = "views/notice/noticeInsert.jsp";
+		case "insert" : view = "views/notice/noticeInsert.jsp"; break;
 
 		}
 		
