@@ -32,7 +32,7 @@ public class NoticeServlet extends HttpServlet {
 		
 		// 변수 선언 
 		
-		NoticeListController nc = new NoticeListController();
+		NoticeController nc = new NoticeController();
 		
 		// URI 담기
 		String uri = request.getRequestURI();
@@ -43,7 +43,7 @@ public class NoticeServlet extends HttpServlet {
 		
 		switch(mapping) {
 		case "list" : view = nc.selectNoticeList(request); flag = false; break;
-
+		case "insert" : view = "views/notice/noticeInsert.jsp";
 
 		}
 		
