@@ -37,7 +37,7 @@
     }
 
     #selectPersonArea{
-        height: 250px;
+        height: 200px;
         width: 100%;
     }
 
@@ -69,7 +69,7 @@
     }
 
     #selectText{
-        height: 150px;
+        height: 100px;
         color: rgb(255, 193, 69);
         padding-top: 30px;
         padding-left: 30px;
@@ -79,28 +79,64 @@
     
     #select-wrap{
         height: 150px;
+        width: 600px;
+        margin-left: 300px;
     }
 
     #selectAge{
-        height: 100px;   
         float: left; 
+        margin-left: 15px;
+        margin-top: 20px;
     }
 
-    #selectAge > div{
-        float: left;
-        height: 30px;
-        width: 60px;
-        line-height: 25px;
-        font-size: 16px;
+    #selectAge > button{
+        height: 45px;
+        width: 75px;
+        font-size: 20px;
         font-weight: 700;
-        text-align: center;
         border-radius: 8px;
         background-color: rgba(70, 69, 69, 0.82);
         color: rgb(125, 124, 124);
+        border: none;
     }
 
     #selectPerson{
         float: left;
+        margin-left: 20px;
+        margin-top: 20px;
+    }
+
+    #selectPerson > button{
+        background-color: rgba(70, 69, 69, 0.82);
+        color: rgb(125, 124, 124);
+        height: 45px;
+        width: 45px;
+        border: none;
+        border-radius: 8px;
+    }
+
+    #select-wrap button:hover{
+        background-color: rgb(255, 193, 69);
+        color: rgb(32,32,32);
+    }
+
+    .a-seat{
+        background-color: rgb(255, 193, 69);
+    }
+    .b-seat{
+        background-color: rgb(225, 163, 89);
+    }
+    .c-seat{
+        background-color: rgb(195, 143, 109);
+    }
+    .d-seat{
+        background-color: rgb(165, 123, 129);
+    }
+    .e-seat{
+        background-color: rgb(135, 103, 149);
+    }
+    .f-seat{
+        background-color: rgb(105, 83, 169);
     }
 
 
@@ -121,10 +157,18 @@
         </div>
         <div id="select-wrap">
             <div id="selectAge">
-                <div>청소년</div><div>성인</div>
+                <button>청소년</button>
+                <button>성인</button>
             </div>
             <div id="selectPerson">
-                selectPerson
+                <button>1</button>
+                <button>2</button>
+                <button>3</button>
+                <button>4</button>
+                <button>5</button>
+                <button>6</button>
+                <button>7</button>
+                <button>8</button>
             </div>
         </div>
     </div>
