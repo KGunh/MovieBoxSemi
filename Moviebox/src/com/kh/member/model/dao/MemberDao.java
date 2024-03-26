@@ -15,10 +15,14 @@ import java.util.Properties;
 import com.kh.board.model.vo.Answer;
 import com.kh.board.model.vo.Board;
 import com.kh.common.model.vo.Genre;
+import com.kh.common.model.vo.Price;
 import com.kh.common.model.vo.Reservation;
+import com.kh.goods.model.vo.Goods;
+import com.kh.goods.model.vo.Order;
 import com.kh.member.model.vo.Member;
 import com.kh.member.model.vo.MemberGenre;
 import com.kh.movie.model.vo.Movie;
+import com.kh.reservation.model.vo.Seat;
 
 public class MemberDao {
 	
@@ -199,16 +203,22 @@ public class MemberDao {
 				
 				r.setTicketNo(rset.getInt("TICKET_NO"));
 				r.setPersonNum(rset.getInt("PERSONNEL"));
+				r.setMemberNo(rset.getInt("MEMBER_NO"));
+				r.setScreenNo(rset.getInt("SCREEN_NO"));
 				r.setMovieTitle(rset.getString("MOVIE_TITLE"));
+				r.setRunningTime(rset.getString("RT"));
 				r.setTheaterName(rset.getString("THEATER_NAME"));
 				r.setWatchDate(rset.getString("WATCH_DATE"));
 				r.setStatus(rset.getString("STATUS"));
-				r.setStudentCount(rset.getInt("GRADE_1_COUNT"));
-				r.setCommonCount(rset.getInt("GRADE_2_COUNT"));
-				r.setStudentPrice(rset.getInt("STUDENT_PRICE"));
-				r.setCommonPrice(rset.getInt("COMMON_PRICE"));
-				r.setTotalPrice(rset.getInt("TOTAL_PRICE"));
+				Price price = new Price();
+				price.setStudentCount(rset.getInt("GRADE_1_COUNT"));
+				price.setCommonCount(rset.getInt("GRADE_2_COUNT"));
+				price.setStudentPrice(rset.getInt("STUDENT_PRICE"));
+				price.setCommonPrice(rset.getInt("COMMON_PRICE"));
+				price.setTotalPrice(rset.getInt("TOTAL_PRICE"));
 				
+				r.setPrice(price);
+				r.setSeatList(seatList(conn, r.getTicketNo()));
 				list.add(r);
 			}
 			
@@ -223,6 +233,39 @@ public class MemberDao {
 
 		return list;
 		
+	}
+	public List<Seat> seatList(Connection conn, int ticketNo){
+		List<Seat> seatList = new ArrayList<>();    
+		 PreparedStatement pstmt = null;
+		 ResultSet rset = null;
+		 
+		 String sql = prop.getProperty("seatList");
+		 
+		 
+		 try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, ticketNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Seat seat = new Seat();
+				seat.setSeatNo(rset.getString("SEAT_NO"));
+				
+				seatList.add(seat);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		 
+		 
+		 
+		 return seatList;
 	}
 	
 	public Movie myPageMoviePoster(Connection conn,Reservation res){
@@ -328,5 +371,78 @@ public class MemberDao {
 		}
 
 		return a;
+	}
+	
+	public List<Order> myPageOrderPrint(Connection conn,Member loginUser){
+		List<Order> orderList = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("myPageOrderPrint");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, loginUser.getMemberNo());
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				Order o = new Order();
+				
+				o.setOrderNo(rset.getInt("ORDER_NO"));
+				o.setMemberNo(rset.getInt("MEMBER_NO"));
+				o.setStatus(rset.getString("STATUS"));
+				o.setOrderDate(rset.getString("ORDER_DATE"));
+				
+				
+				orderList.add(o);
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+			
+		}
+		
+		return orderList;
+	}
+	
+	public List<Goods> orderGoods(Connection conn,int orderNo){
+		List<Goods> goodsList = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("orderGoods");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, orderNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Goods g = new Goods();
+				g.setGoodsNo(rset.getInt("GOODS_NO"));
+				g.setGoodsName(rset.getString("GOODS_NAME"));
+				g.setGoodsPrice(rset.getInt("GOODS_PRICE"));
+				g.setQty(rset.getInt("QTY"));
+				
+				goodsList.add(g);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+			
+		}
+		return goodsList;
 	}
 }

@@ -29,7 +29,7 @@ public class NoticeDao {
 	}
 	
 
-
+	// 공지사항 목록 전체 출력 
 	public ArrayList<Notice> selectNoticeList(Connection conn) {
 		ArrayList<Notice> list = new ArrayList();
 		ResultSet rset = null;
@@ -53,9 +53,7 @@ public class NoticeDao {
 				notice.setCount(rset.getInt("COUNT"));
 			
 				list.add(notice);
-
 			}
-			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -64,11 +62,35 @@ public class NoticeDao {
 			close(pstmt);
 		}
 		
-		
 		return list;
 	}
 	
 	
+	// 글쓰기
+	public int insert(Connection conn, Notice notice) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insert");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, notice.getNoticeCategory());
+			pstmt.setString(2, notice.getNoticeTitle());
+			pstmt.setString(3, notice.getNoticeContent());
+			pstmt.setInt(4, Integer.parseInt(notice.getNoticeWriter()));
+			
+			result = pstmt.executeUpdate();
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 
 
 

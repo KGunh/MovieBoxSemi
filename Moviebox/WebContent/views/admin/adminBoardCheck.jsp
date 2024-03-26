@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글관리 > 공지관리(등록,조회)</title>
+<title>공지목록</title>
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -310,10 +311,10 @@
                         </ul>
                     </li> 
                     <li class="post">
-                        <a href="<%=contextPath %>/adminBoardDetail.admin">게시글 관리</a>
+                        <a href="#">게시글 관리</a>
                         <ul class="submenu">
-                        <li><a href="#">공지 관리</a></li>
-                        <li><a href="#">문의 게시글 관리</a></li>
+                        <li><a href="<%=contextPath %>/adminBoardDetail.admin">공지 관리</a></li>
+                        <li><a href="<%=contextPath %>/adminQnADetail.admin">문의 게시글 관리</a></li>
                         </ul>
                     </li>
                 </ul>    
@@ -332,7 +333,7 @@
                             <option value="">기타</option>
                         </select>
                             <input type="search" id="find">
-                            <button type="submit" id="btn" style="background-color: #FFC145;">
+                            <button type="submit" id="btn" style="background-color: #FFC145; height: 35px;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
                                 </svg>
@@ -342,7 +343,8 @@
 
 
                     <div id="cnt2_btn"><!--등록 버튼-->
-                        <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right;">등록</button>
+                        <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right;" onclick="insertButton()";
+                        >등록</button>
 
                     </div><!--등록 버튼-->
 
@@ -479,5 +481,11 @@
 
  	<%@ include file="/views/common/footer.jsp" %>
  	<!-- 푸터 -->
+ 	
+ 	<script>
+		function insertButton(){
+			location.href = '<%= contextPath %>/adminBoardInsert.admin';
+		}
+	</script>
 </body>
 </html>

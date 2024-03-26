@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="com.kh.reservation.model.vo.Seat,com.kh.common.model.vo.Price,java.util.ArrayList,com.kh.member.model.vo.MemberGenre,java.util.List,com.kh.common.model.vo.Reservation,com.kh.movie.model.vo.Movie"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -10,9 +10,6 @@
             width: 1200px;
             height: auto;
             margin: auto;
-        }
-        div{
-            border: 1px solid red;
         }
     	a{
             text-decoration: none;
@@ -103,7 +100,7 @@
         }
         #reservationList{
             width: 100%;
-            height: 1200px;
+            height: auto;
             padding-top: 50px;
         }
         #reservationList > div{
@@ -112,6 +109,7 @@
             margin: auto;
             margin-bottom: 50px;
             background-color: rgb(33, 33, 33);
+            border-radius: 8px;
         }
 
         #reservationList-content > div{
@@ -120,7 +118,7 @@
         }
         .res-img{
             width: 18%;
-            padding: 40px 20px 40px 30px;
+            padding: 15px 20px 15px 30px;
         }
         .res-content{
             width: 44%;
@@ -164,10 +162,14 @@
         .totalCount, .totalPrice{
             width: 100%;
             height: 25%;
+            padding: 10px 0px 10px 5px;
         }
         .countPrice{
             width: 100%;
             height: 50%;
+            padding: 18px 0px 18px 5px;
+            border-top: 1px solid lightgray;
+            border-bottom: 1px solid lightgray;
         }
         #contentTable{
             color: white;
@@ -177,10 +179,40 @@
             font-size: 13px;
             font-weight: bold;
         }
+        .res-result h6{
+            margin: 0;
+        }
+        #studentText{
+            margin-bottom: 10px;
+        }
+        #poster{
+        	width: 100%;
+            height: 100%;
+        }
+
+        #noData h3{
+        	text-align: center; 
+        	color: white;
+        	line-height: 200px;
+        }
     </style>    
 </head>
 <body>
 	<%@ include file="../common/header.jsp" %>
+	
+	<%
+	
+		List<Reservation> resList = (ArrayList)request.getAttribute("list");
+		List<Movie> movieList = (ArrayList)request.getAttribute("movieList");
+
+	
+	%>
+	
+	<% if(loginUser == null) {%>
+		<script>
+			location.href = ('<%=contextPath%>/loginForm.me');
+		</script>
+	<%} else {%>
 	<div class="wrap">
 	    <div id="info-header">
             <div id="info-title">
@@ -201,40 +233,60 @@
         </div>
 
         <div id="reservationList">
+
+         <%if(resList != null) { %>
+            	<%for(int i= 0; i<resList.size(); i++) {%>
             <div id="reservationList-content">
+           
                 <div class="res-img">
-                    <div><img src="" alt=""></div>
+
+                    <div><img id="poster" src="<%=contextPath %>/<%= movieList.get(i).getFilePath()%>/<%=movieList.get(i).getFileName() %>" alt=""></div>
                 </div>
                 <div class="res-content">
                     <div>
                         <table id="contentTable">
                             <thead>
                                 <tr>
-                                    <th colspan="4">파묘</th>
+                                    <th colspan="4"><%=resList.get(i).getMovieTitle() %></th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td>예약번호</td>
-                                    <td>240302-0015-4243</td>
+                                    <td><%=resList.get(i).getTicketNo() %></td>
                                     <td>상영관</td>
-                                    <td>1관</td>
+                                    <td><%=resList.get(i).getScreenNo() %>관</td>
                                 </tr>
                                 <tr>
                                     <td>극장</td>
-                                    <td>CGV 양주옥정</td>
+                                    <td><%=resList.get(i).getTheaterName() %></td>
                                     <td>시간</td>
-                                    <td>09:40~11~26</td>
+                                    <td><%=resList.get(i).getRunningTime() %></td>
                                 </tr>
                                 <tr>
                                     <td>날짜</td>
-                                    <td>2024-03-02(토)</td>
+                                    <td><%=resList.get(i).getWatchDate() %></td>
                                     <td>좌석</td>
-                                    <td>F9</td>
+                                    <td style="font-size: 12px;">
+                                    <%
+                                    	List<Seat> seatList = resList.get(i).getSeatList(); 
+										for(Seat s : seatList){   
+                                    %>
+                                     <%=s.getSeatNo()%> <%} %>
+                                     </td>
+                                   
                                 </tr>
                                 <tr>
+                                	<%Price price = resList.get(i).getPrice(); %>
                                     <td>인원</td>
-                                    <td>성인 1명</td>
+                                    <td>
+                                    <%if(price.getStudentCount() > 0) {%>
+                                    		청소년 <%=price.getStudentCount()%>명
+                                    <%} %>		
+                                    <%if(price.getCommonCount() > 0) {%>
+                                    		성인 <%=price.getCommonCount()%>명
+                                    <%} %>				
+                                    </td>
                                     <td>예매일시</td>
                                     <td>2024-02-25</td>   
                                 </tr>
@@ -249,24 +301,30 @@
                 <div class="res-result">
                     <div>
                         <div class="totalCount">
-                            <h6>총 인원 : </h6>
+                            <h6>총 인원 : <%=resList.get(i).getPersonNum()%> 명</h6>
                         </div>
                         <div class="countPrice">
-                            <h6>청소년 :</h6>
-                            <h6>성인 :</h6>
+                            <h6 id="studentText">청소년 : <%=price.getStudentCount()%> X 11000  = <%=price.getStudentPrice() %></h6>
+                            <h6>성인 : <%=price.getCommonCount()%> X 13000  = <%=price.getCommonPrice() %></h6>
                         </div>
                         <div class="totalPrice">
-                            <h6>총 가격 : </h6>
+                            <h6>총 가격 : <%=price.getTotalPrice() %> 원</h6>
                         </div>
                     </div>
                 </div>
+                
             </div>
-            <div>
-
-            </div>
+            <%}} else { %>
+                		<div id="noData">
+								<h3> 예매내역이 존재하지 않습니다.</h3>
+            			</div>
+                
+                <%} %>
+            
         </div>
     </div>
 	
-
+	<%} %>
+	<%@ include file="../common/footer.jsp" %>
 </body>
 </html>

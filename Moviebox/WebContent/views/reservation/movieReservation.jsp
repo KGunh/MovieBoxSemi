@@ -162,16 +162,18 @@
         width: 155px;
         height: 85px;
         margin-top: 5px;
+        margin-left: 48px;
         border-radius: 25px;
         background-color: rgba(255, 255, 255, 0.6);
         text-align: center;
-        font-size: 20px;
+        font-size: 18px;
         font-weight: bold;
         line-height: 85px;
     }
 
     .screenName:hover{
         cursor: pointer;
+        background-color: white;
     }
 
     .swiper-slide{
@@ -238,7 +240,7 @@
 	                                </div>
 	                            </div>
                             <% } %>
-                            <input id="movieNo" type="hidden">
+                            <input id="movieNo" name="movieNo" type="hidden">
                         </div>
                     	
                         <div class="swiper-pagination"></div>
@@ -249,7 +251,6 @@
                         <div class="swiper-scrollbar"></div>
                     </div>
                 </div>
-
             </div>
             <div id="selectDateArea">
                 <div id="printToday"></div>
@@ -269,16 +270,13 @@
                 <div id="printScreen">
                     
                 </div>
+                <input id="screenNo" type="hidden" name="screenNo">
                 <button id="submit-btn" type="submit">좌석 선택</button>
             </div>
-
         </form>
-       
-        
-        
     </div>
-    <%@ include file="/views/common/footer.jsp" %>
 
+    <%@ include file="/views/common/footer.jsp" %>
 
     <script>
 		
@@ -310,6 +308,10 @@
                 $('#movieNo').val($(this).children().eq(1).val());
             });
         });
+		
+        function selectScreenNo(e){
+            document.getElementById('screenNo').value = e.children[1].value;
+        };
        
         function selectScreen(){
             $.ajax({
@@ -321,64 +323,31 @@
                     movieNo : $('#movieNo').val()
             	},
             	success : function(result){
-                    /*
-                    var screens = [];
-                    var screenDate = [];
-                    
-                    for (var i = 0; i < result.length; i++) {
-                        var tNo = result[i].theaterNo;
-                        var theaterName = result[i].theaterName;
-                        var flag = true;
-                        
-                        if(i > 0){
-                            while(flag){
-                                if(tNo != result[i - 1].theaterNo){
-                                    flag = false;
-                                }
-                                else{
-                                    screenDate.push(result[i].watchDate);
-                                    i++;
-                                };
-                            };
+                    var resultStr = '';
+                    console.log(result);
+                    for(let i = 0; i < result.length; i++){
+                        resultStr += '<div class="screen">'
+                                    +     '<div class="theaterName">' + result[i].theaterName + '</div>';
+                                    +     '<div class="selectScreen">'
+                        for(let j = 0; j < result[i].watchDateList.length; j++){
+                            resultStr +=        '<div class="screenName" onclick="selectScreenNo(this);">'
+                                        +            '<span style="color: black;">' + result[i].watchDateList[j] + '</span>~'
+                                        +            '<input type="hidden" value="' + result[i].screenNoList[j] + '">'
+                                        +        '</div>'
                         };
-
-                        var screen = {
-                            theaterNo: tNo,
-                            theaterName: theaterName,
-                            screenList: screenDate
-                        };
-
-                        screens.push(screen);
+                        resultStr +=    '</div>';
+                                    + '</div>';
                     };
-                    
-                    let resultStr = '';
-
-                    if(screens.length >= 0){
-                        for(let i in screens){
-                            resultStr += '<div class="screen">'
-                                       +     '<div class="theaterName">' + screens[i].theaterName + '</div>';
-                                       +     '<div class="selectScreen">'
-                            for(let j = 0; j < screens[1].screenList.length; j++){
-                                resultStr +=        '<div class="screenName">'
-                                           +            '<span style="color: black;">' + screens[i].screenList[j] + '</span>'
-                                           +        '</div>'
-                            };
-                            resultStr +=    '</div>';
-                                       + '</div>';
-                        };
-                    }
-                    else{
-                        resultStr = '<div style="color: rgb(148, 145, 145);">조회된 영화관이 없습니다.</div>';
-                    }
+                
                     $('#printScreen').html(resultStr);
-                    */
+                    
             	},
             	error : function(){
-					console.log('검색결과가 없음');
+					$('#printScreen').html('조회된 영화관이 없습니다.');
 				}
             });
         };
-         
+            
         $('#screenDate').change(function(){
             selectScreen();
         });

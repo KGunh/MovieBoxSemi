@@ -4,7 +4,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>영화목록</title>
+<title>게시글관리 문의게시글</title>
+
+
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
@@ -212,13 +214,13 @@
             margin-right: 19px;
         }
 
-        .btn-outline-secondary:hover{
+        .btn-outline-warning:hover{
             background-color: #dddddd;
             border-color: #c2c2c2;
             color: #212121;
         }
 
-        .btn-outline-secondary {
+        .btn-outline-warning {
             border-color: #c2c2c2;
             color: #212121;
         }
@@ -269,16 +271,14 @@
 		    background-color: #2c2c2c; 
 		    color: #ffffff;
 		}
-
     </style>
+    
 </head>
 <body>
-
 	<!-- 헤더 -->
     <%@ include file="/views/common/header.jsp" %>
-    
-    <div id="wrap">
 
+    <div id="wrap">
 
         <div id="top_wrap">
             <div class="top_1">
@@ -317,27 +317,23 @@
                     </li>
                 </ul>    
             </div>
-            
-    <!------------------------------------------------------------>
             <div class="content_2">
-                <p id="p">영화 관리</p>
+                <p id="p">게시글관리 > 문의 게시글 관리</p>
                 <form>
                 <div id="content_2_box"><!--컨텐트2 전체박스-->
 
                     <div id="cnt2_box_wrap"> <!-- 셀렉, 인풋, 버튼 전체 -->
                         <select name="#" id="select" >
-                            <option value="">전체</option>
-                            <option value="">번호</option>
-                            <option value="">개봉일</option>
-                            <option value="">영화제목</option>
-                            <option value="">장르</option>
-                            <option value="">관람등급</option>
-                            <option value="">등록일</option>
+                            <option value="">문의 종류</option>
+                            <option value="">예매 문의</option>
+                            <option value="">영화관 문의</option>
+                            <option value="">굿즈 문의</option>
+                            <option value="">기타 문의</option>
                         </select>
                             <input type="search" id="find">
                             <button type="submit" id="btn" style="background-color: #FFC145; height: 35px;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
-                                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                                    <path style="color:#212121;" d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
                                 </svg>
                             </button>
                     </div><!-- 셀렉, 인풋, 버튼 전체 -->
@@ -349,8 +345,6 @@
                         >등록</button>
 
                     </div><!--등록 버튼-->
-                    
-
 
 
 
@@ -362,22 +356,22 @@
                             <table class="table table-hover" style="text-align: center; font-size: small;">
                               <thead>
                                 <tr style="background-color: #eaeaea; margin-top: 0; height: 40px; color: #212121; border: 0px solid #cfcfcf; opacity: 0.8; text-align: center;">
-                                    <th>번호</th>
-                                    <th>개봉일</th>
-                                    <th>영화 제목</th>
-                                    <th>장르</th>
-                                    <th>관람등급</th>
-                                    <th>등록일</th>
+                                    <th style="width: 60px;">번호</th>
+                                    <th style="width: 100px;">카테고리</th>
+                                    <th style="width: 300px;">제목</th>
+                                    <th style="width: 100px;">작성자</th>
+                                    <th style="width: 100px;">등록일</th>
+                                    <th style="width: 80px;">조회수</th>
                                 </tr>
                               </thead>
                               <tbody>
                                 <tr>
                                     <td>1</td>
-                                    <td>2024/02/01</td>
-                                    <td>파묘</td>
-                                    <td>미스터리</td>
-                                    <td>15</td>
-                                    <td>2024/02/22</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
@@ -466,7 +460,6 @@
                         <button class="btn btn-outline-secondary" style="color:#ffffff">1</button>
                         <button class="btn btn-outline-secondary" style="color:#ffffff"> > </button>
                     </div>
-                    
                     <!--페이지 숫자-->
 
 
@@ -482,14 +475,12 @@
         </div>
 
     </div>
- 	<%@ include file="/views/common/footer.jsp" %>
+     	<%@ include file="/views/common/footer.jsp" %>
  	<!-- 푸터 -->
- 	
- 	
  	
  	<script>
  		function insertButton(){
- 			location.href = '<%= contextPath %>/adminMovieInsert.admin';
+ 			location.href = '<%= contextPath %>/adminQnAInsert.admin';
  		}
 	</script>
 </body>

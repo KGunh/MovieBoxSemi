@@ -11,6 +11,7 @@ import com.kh.board.model.vo.Answer;
 import com.kh.board.model.vo.Board;
 import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.Reservation;
+import com.kh.goods.model.vo.Order;
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 import com.kh.movie.model.vo.Movie;
@@ -155,13 +156,18 @@ public class MemberController {
 					answerList.add(a);
 					}
 				}
-				
+				request.setAttribute("boardList", boardList);
 			}
 			if(!answerList.isEmpty()) {
 				request.setAttribute("answerList", answerList);
 			}
 			
-			request.setAttribute("boardList", boardList);
+			List<Order> orderList = new MemberService().myPageOrderPrint(loginUser);
+			
+			if(!orderList.isEmpty()) {
+				
+				request.setAttribute("orderList", orderList);
+			}
 			
 			
 			view = "views/member/myPage.jsp";
@@ -173,7 +179,68 @@ public class MemberController {
 	}
 	
 
+	public String myReservation(HttpServletRequest request, HttpServletResponse response) {
+		String view = "";
+		HttpSession session = request.getSession();
+		List<Movie> movieList = new ArrayList();
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		if(loginUser == null) {
+			return view = "views/member/myPage.jsp";
+		} else {
+			List<Reservation> list = new MemberService().myPagePrint(loginUser);
+			
+			System.out.println(list);
+			if (list.isEmpty()) {
+				return view ="views/member/myReservation.jsp";
+			} else {
+				
+				
+				for (int i = 0; i < list.size(); i++) {
+					Reservation res = list.get(i);
+					Movie m = new MemberService().myPageMoviePoster(res);
+					if (m == null) {
+						request.setAttribute("errorMsg", "");
+						return view = "views/common/errorPage.jsp";
+					}
+
+					movieList.add(m);
+
+				}
+				
+				request.setAttribute("list", list);
+				request.setAttribute("movieList", movieList);
+
+				view = "views/member/myReservation.jsp";
+			}
+		}
+		
+		
+		return view;
+	}
 	
+	public String pwdCheck(HttpServletRequest request, HttpServletResponse response) {
+		String view = "";
+		
+		HttpSession session = request.getSession();
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		String CheckPwd = request.getParameter("memberPwd");
+
+		
+		String loginUserPwd = loginUser.getMemberPwd();
+
+		
+		if(CheckPwd.equals(loginUserPwd)) {
+			view = "views/member/myPageModify.jsp";
+		} else {
+			session.setAttribute("alertMsg", "잘못된 비밀번호입니다 다시 입력해주세요.");
+			view = "views/member/myPagePwdCheck.jsp";
+		}
+		return view;
+	}
 	
 	
 	

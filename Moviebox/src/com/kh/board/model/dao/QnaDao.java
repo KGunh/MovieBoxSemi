@@ -50,7 +50,7 @@ public class QnaDao {
 				Board board = new Board();
 				
 				board.setBoardNo(rset.getInt("BOARD_NO"));
-				board.setBoardCategory(rset.getString("BOARD_CATEGORY"));
+				board.setBoardCategory(rset.getString("CATEGORY_NO"));
 				board.setBoardTitle(rset.getString("BOARD_TITLE"));
 				board.setBoardWriter(rset.getString("BOARD_WRITER"));
 				board.setCreateDate(rset.getString("CREATE_DATE"));

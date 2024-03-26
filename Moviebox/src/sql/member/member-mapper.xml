@@ -84,7 +84,9 @@
        			    TICKET_NO,
        				PERSONNEL,
        				MEMBER_NO,
+                    SCREEN_NO,
        				MOVIE_TITLE,
+                    TO_CHAR(WATCH_DATE,'HH24:MI') || '~' || TO_CHAR(WATCH_DATE + NUMTODSINTERVAL(TO_NUMBER(MOVIE_RT), 'MINUTE'), 'HH24:MI') AS RT,
        				THEATER_NAME,
        				TO_CHAR(WATCH_DATE,'YY/MM/DD, HH24:MI') AS WATCH_DATE,
        				TB_RESERVATION.STATUS AS STATUS,
@@ -140,6 +142,20 @@
 	
 	</entry>
 	
+	<entry key="seatList">
+		SELECT
+       			    SEAT_NO
+ 		   FROM   
+       			    TB_SEAT
+ 		  WHERE
+       				TICKET_NO = ?
+ 		  ORDER
+    		    BY SEAT_NO
+	
+	
+	</entry>
+	
+	
 	<entry key="myPageMoviePoster">
 				SELECT
        					   FILE_PATH,
@@ -184,6 +200,33 @@
            STATUS = 'Y'
        AND
            BOARD_NO = ?
+	
+	</entry>
+	
+	<entry key="myPageOrderPrint">
+	SELECT
+       	   ORDER_NO,
+           MEMBER_NO,
+           STATUS,
+       	   ORDER_DATE
+  	  FROM
+       	   TB_ORDER
+ 	 WHERE
+       	   MEMBER_NO = ?
+	</entry>
+	
+	<entry key="orderGoods">
+	SELECT
+       	   GOODS_NO,
+           GOODS_NAME,
+           GOODS_PRICE,
+           QTY
+      FROM
+           TB_GOODS
+  	  JOIN
+       	   TB_ORDERDETAIL USING(GOODS_NO)
+ 	 WHERE
+       	   ORDER_NO = ?
 	
 	</entry>
 	
