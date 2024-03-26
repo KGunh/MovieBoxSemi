@@ -2,10 +2,7 @@ package com.kh.notice.controller;
 
 import java.util.ArrayList;
 
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
 
 import com.kh.notice.model.service.NoticeService;
 import com.kh.notice.model.vo.Notice;
@@ -32,6 +29,16 @@ public class NoticeController {
 		String noticeTitle = request.getParameter("title");
 		String noticeContent = request.getParameter("content");
 		String userNo = request.getParameter("userNo");
+		
+		// 객체에 담기
+		Notice notice = new Notice();
+		notice.setNoticeCategory(noticeCategory);
+		notice.setNoticeTitle(noticeTitle);
+		notice.setNoticeContent(noticeContent);
+		notice.setNoticeWriter(userNo);
+		
+		// 서비스로 넘기기
+		new NoticeService().insert(notice);
 	}
 
 }
