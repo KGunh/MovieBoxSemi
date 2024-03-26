@@ -342,6 +342,11 @@ ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
     		function insert(){
     			location.href = '<%=contextPath%>/insert.notice';
     		}
+    		
+    		$('tbody > tr.list').click(function(){
+    			const noticeNo = $(this).children().eq(0).text();
+    			location.href = '<%=contextPath%>/detail.notice?noticeNo=' + noticeNo;
+            });
     	
     	</script>
 

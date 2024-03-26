@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.common.model.vo.Price,com.kh.board.model.vo.Answer,com.kh.board.model.vo.Board,java.util.ArrayList,com.kh.member.model.vo.MemberGenre,java.util.List,com.kh.common.model.vo.Reservation,com.kh.movie.model.vo.Movie"%>
+    pageEncoding="UTF-8" import="com.kh.goods.model.vo.Goods,com.kh.goods.model.vo.Order,com.kh.common.model.vo.Price,com.kh.board.model.vo.Answer,com.kh.board.model.vo.Board,java.util.ArrayList,com.kh.member.model.vo.MemberGenre,java.util.List,com.kh.common.model.vo.Reservation,com.kh.movie.model.vo.Movie"%>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -207,8 +208,10 @@
         }
         .store-area-list{
             float: left;
-            width: 48%;
+            width: 100%;
             height: 100%;
+            background: white;
+            border: 1px solid black;
         }
         .store-area-list2{
             float: right;
@@ -303,6 +306,34 @@
             text-decoration: none;  
             color: #FFC145;   
         }
+        
+        .store-area-content div{
+        	float: left;
+            height: 100%;
+            padding: 5px 5px 5px 5px;
+        	
+        }
+        .store-area{
+            font-size: 12px;
+        }
+        .store-content{
+             width: 100%;
+
+        }
+        table td{
+        }
+        .menu{
+            text-align: center;
+        }
+        .price{
+            text-align: center;
+        }
+        table{
+        	float:left;
+        	width: 40%;
+        	margin-left: 5%;
+        }
+        
 
     </style>
     <title>마이페이지</title>
@@ -353,6 +384,7 @@
 		List<Movie> movieList = (ArrayList)request.getAttribute("movieList");
 		List<Board> boardList = (ArrayList)request.getAttribute("boardList");
 		List<Answer> answerList = (ArrayList)request.getAttribute("answerList");
+		List<Order> orderList = (ArrayList)request.getAttribute("orderList");
 		
 
 		
@@ -440,13 +472,57 @@
             
         <div class="store-area">
             <div class="store-area-list">
-                <div class="store-area-content">
-                </div>
+                	<div class="store-img"></div>
+                	<div class="store-content">
+                	<% if(orderList != null) {%>
+                		<%for(int i = 0; i<orderList.size();i++) { %>
+                			<%if(i==2) break; %>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <th>주문번호 <%=orderList.get(i).getOrderNo() %></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="menu">메뉴</td>
+                                    <%List<Goods> goodsList = orderList.get(i).getGoodsList();%>
+                                    <%if(!goodsList.isEmpty()) { %>
+                                    	<%for(Goods g : goodsList) {%>
+                                    <td class="menu"><%= g.getGoodsName() %></td>
+                                    	
+                                    	<%} %>
+
+                                    <%} %>
+                                </tr>
+                                <tr>
+                                    <td class="menu">개수</td>
+                                    <%if(!goodsList.isEmpty()) { %>
+                                    	<%for(Goods g : goodsList) {%>
+                                    <td class="menu"><%= g.getQty()%>개</td>
+                                    	
+                                    	<%} %>
+
+                                    <%} %>
+                                </tr>
+                                <tr>
+                                    <td class="menu">비용</td>
+                                    <%if(!goodsList.isEmpty()) { %>
+                                    	<%for(Goods g : goodsList) {%>
+                                    <td class="menu"><%= g.getGoodsPrice() %></td>
+                                    	
+                                    	<%} %>
+
+                                    <%} %>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <%} %>
+					<%} %>
+
+                    </div>
             </div>
-            <div class="store-area-list2">
-                <div class="store-area-content">
-                </div>
-            </div>
+            
         </div>
     </div>
 <%}%>

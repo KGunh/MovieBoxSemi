@@ -17,6 +17,8 @@ import com.kh.board.model.vo.Board;
 import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.Price;
 import com.kh.common.model.vo.Reservation;
+import com.kh.goods.model.vo.Goods;
+import com.kh.goods.model.vo.Order;
 import com.kh.member.model.vo.Member;
 import com.kh.member.model.vo.MemberGenre;
 import com.kh.movie.model.vo.Movie;
@@ -369,5 +371,78 @@ public class MemberDao {
 		}
 
 		return a;
+	}
+	
+	public List<Order> myPageOrderPrint(Connection conn,Member loginUser){
+		List<Order> orderList = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("myPageOrderPrint");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, loginUser.getMemberNo());
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()){
+				Order o = new Order();
+				
+				o.setOrderNo(rset.getInt("ORDER_NO"));
+				o.setMemberNo(rset.getInt("MEMBER_NO"));
+				o.setStatus(rset.getString("STATUS"));
+				o.setOrderDate(rset.getString("ORDER_DATE"));
+				
+				
+				orderList.add(o);
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+			
+		}
+		
+		return orderList;
+	}
+	
+	public List<Goods> orderGoods(Connection conn,int orderNo){
+		List<Goods> goodsList = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("orderGoods");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, orderNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Goods g = new Goods();
+				g.setGoodsNo(rset.getInt("GOODS_NO"));
+				g.setGoodsName(rset.getString("GOODS_NAME"));
+				g.setGoodsPrice(rset.getInt("GOODS_PRICE"));
+				g.setQty(rset.getInt("QTY"));
+				
+				goodsList.add(g);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+			
+		}
+		return goodsList;
 	}
 }

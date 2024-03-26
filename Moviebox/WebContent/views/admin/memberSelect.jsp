@@ -169,9 +169,6 @@
 
         .content_2_top{
             padding: 20px 0px 0px 40px;
-            height: 80px;
-            width: 880px;
-            border-bottom: 3px solid lightgray;
         }
         .menu {
             width: 200px;
@@ -247,30 +244,90 @@
         } 
 
 
-     
-     #select{
-        
-        display: inline;
-     }
-       
-       
+        .tableoutline{
+            display: inline;
+        }
 
+        #table{
+            
+            width: 800px;
+            border: 1px solid lightgray;
+        }
+
+        #table > tr,td {
+            height: 50px;
+            width: 250px;
+           
+            text-align: center;
+            margin-top: 10px;
+            margin-right: 10px;
+            
+            border-bottom: 2px solid lightgray;
+            
+            
+        }
+        
+       .num{
+        width: 80px;
+       }
       
-       
 
-       
-       #btn1{
-        width: 100px;
-        border: none;
-        font-size: 14px;
-        height: 35px;
-        border-radius: 8px;
         
-        background-color: #FFC145;
-      }
+       
+      
+            
+      
 
-      #btn1:hover{
-        box-shadow: 10px;
+       #select{
+        border: 1px solid gainsboro;
+        border-radius: 5px;
+        width: 150px;
+        height: 35px;
+        
+        font-size: 15px;
+        
+       }
+   
+       #find {
+        width: 400px;
+        height: 35px;
+        border-radius: 5px;
+        border: 1px solid lightgray;
+        font-size: 15px;
+       }
+
+       .content_2_top{
+        margin-left: 70px;
+       }
+
+       #table {
+        border: 2px solid lightgray;
+        margin: auto;
+        margin-top: 60px;
+
+       }
+
+       #table tr{
+        border-bottom: 2px solid lightgray;
+        
+       
+       }
+
+       .check{
+        height: 20px;
+        width: 20px;
+       
+
+       }
+
+       #btn1{
+        width: 70px;
+        border: none;
+        font-size: 12px;
+        height: 25px;
+        border-radius: 5px;
+        
+        background-color: rgb(189, 187, 187);
       }
 
 
@@ -284,69 +341,44 @@
 
        #delete{
         float: right;
-        width: 100px;
-        height: 50px;
+        width: 90px;
         
+       margin-top: 18px;
        }
 
-       #content_2_content{
-        height: 500px;
-        width: 880px;
-        margin-top: 20px;
-        
-       
-       }
-       #content_2_content> div {
-     
-        
-        height: 40px;
-      
-        margin: 40px 0px 20px;
-       
-       }
-     
+       #cnt2_paging-area {
+            width: 825px;
+            height: 40px;
+            /* border : 1px solid rgb(0, 245, 225); */
+            margin: 0 auto;
+            margin-top: 0px;
+            display: inline-block;
+            padding-left: 195px;
+        }
 
-      
-      .input{
-       float: right;
-       text-align: center;
-       height: 39px;
-       width: 650px;
-       border-radius: 5px;
-       font-size: 18px;
-       border: 2px solid lightgray;
-       color: gray;
-    }
+        .page-link{
+            color: #212121;
+        }
 
-    .input1{
-        float: right;
-        text-align: center;
-        height: 39px;
-        width: 200px;
-        font-size: 18px;
-        border-radius: 5px;
-        margin-left: 25px;
-        border: 2px solid lightgray;
-        color: gray;
-    }
+        #inputBox-2 {
+            width: 280px;
+            height: 40px;
+            margin-left: 10px;
+        }
 
-    .name {
-        font-size: 20px;
-        font-weight:400;
-        color: #323232;
-        margin-left: 15px;
-    }
+        #cnt2_post{
+            padding-top: 50px;
+        }
 
-    #address{
-        width: 200px;
-        display: inline;
-        
-    }
+        #cnt2_post{
+            width: 825px;
+        }
 
-    
+        .container{
+            width: 825px;
 
-       
-     
+        }
+
 
      
 
@@ -354,9 +386,6 @@
     </style>
 </head>
 <body>
-
-<%@ include file = "views/common/header.jsp" %>
-
    <div id="header">
       <div id="top-header">
          <div id="login-area">
@@ -401,7 +430,7 @@
                 <h1>관리자</h1>
             </div>
             <div class="top_2" style="color: white;">
-               
+                
             </div>
         </div>
         <div id="content" >
@@ -432,75 +461,147 @@
                 </ul>
             </div>
             <div class="content_2">
-                <h2>영화관 관리 〉영화관 등록</h2>
+                <h2>회원 관리</h2>
                 <div class="content_2_top">
-                
-            </div>
-            <div id="content_2_content" >
-                
-               
-                <div>
-                    <span class="name">지역</span>
-                    <select name="region" class="input" style="width: 650px; height: 39px;">
-                        <option value="지역">서울</option>
-                        <option value="지역">경기도</option>
-                        <option value="지역">강원도</option>
-                        <option value="지역">충정도</option>
-                        <option value="지역">전라도</option>
-                        <option value="지역">경상도</option>
-                        <option value="지역">제주도</option>
-                    </select>
-                
-                </div>
-                <div>
-                    <span class="name">영화관 이름</span>
-                    <input type="text" class="input" placeholder="영화관 이름을 입력하시오">
-                </div>
-                <div><span class="name">상영관 수</span>
-                    <input type="text" class="input" placeholder="총 상영관 수를 입력하시오">
-                </div>
+                 
+                   <select name="#" id="select" >
+                    <option value="">전체</option>
+                    <option value="">가입일</option>
+                    <option value="">취향</option>
+                   </select>
+                    <input type="search" id="find">
+                    <button type="submit" id="btn" style="background-color: #FFC145;">
+                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
+                            <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
+                          </svg>
+                    </button>
 
-                <div><span class="name">좌석 수</span>
-                    <input type="text" class="input" placeholder="총 좌석 수를 입력하시오">
-                </div>
-                <div><span class="name">주소</span>
-                    <div id="address">
-                    <select name="" id="province" class="input1">
-                        <option value="시" >읍/면/동</option>
-                        <option value="">서울시</option>
-                        <option value="">경기도</option>
-
-                    </select>
-
-                    <select name="" id="city" class="input1">
-                        <option value="시" >시/군/구</option>
-                        <option value=""></option>
-                        <option value=""></option>
-
-                    </select>
-                    <select name="" id="city" class="input1">
-                        <option value="시" >시/도</option>
-                        <option value=""></option>
-                        <option value=""></option>
-
-                    </select>
-                </div>
-
-                </div>
-                <div>
-                    <input type="text" class="input" placeholder="상세주소를 입력해주시오">
                 </div>
                 <div id="delete" >
-                    <button id="btn1">등록</button>
+                    <button id="btn1">탈퇴</button>
                 </div>
-            </div>
-           
-                
-                </div>
-               
-                
 
-                   
+                <div id="cnt2_post"><!--게시판-->
+
+                    <div class="container">
+
+
+                        <table class="table table-hover" style="text-align: center; font-size: small;">
+                          <thead>
+                            <tr style="background-color: #eaeaea; margin-top: 0; height: 40px; color: #212121; border: 0px solid #cfcfcf; opacity: 0.8; text-align: center;">
+                                <th><input type="checkbox" name="check" value="check" id="check" checked></th>
+                                <th class="num">순번</th>
+                                <th>이름</th>
+                                <th>가입일</th>
+                                <th>취향</th> 
+                                <th>전화번호</th>
+                            </tr>
+                          </thead>
+                          <tbody>
+                            <tr>
+                                <td><input type="checkbox" name="check" value="check" id="check"></td>
+                                <td>1</td>
+                                <td>유은혜</td>
+                                <td>22/06/18</td>
+                                <td>SF</td>
+                                <td>010-8999-9999</td>
+                                
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check" value="check" id="check"></td>
+                                <td>2</td>
+                                <td>유은혜</td>
+                                <td>22/06/18</td>
+                                <td>SF</td>
+                                <td>010-8999-9999</td>
+                                
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check" value="check" id="check"></td>
+                                <td>2024/02/03</td>
+                                <td>웡카</td>
+                                <td>판타지</td>
+                                <td>전체</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check" value="check" id="check"></td>
+                                <td>2024/02/01</td>
+                                <td>파묘</td>
+                                <td>미스터리</td>
+                                <td>15</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check" value="check" id="check"></td>
+                                <td>2024/02/02</td>
+                                <td>듄: 파트2</td>
+                                <td>액션</td>
+                                <td>12</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check" value="check" id="check"></td>
+                                <td>2024/02/03</td>
+                                <td>웡카</td>
+                                <td>판타지</td>
+                                <td>전체</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check" value="check" id="check"></td>
+                                <td>2024/02/01</td>
+                                <td>파묘</td>
+                                <td>미스터리</td>
+                                <td>15</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check" value="check" id="check"></td>
+                                <td>2024/02/02</td>
+                                <td>듄: 파트2</td>
+                                <td>액션</td>
+                                <td>12</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check" value="check" id="check"></td>
+                                <td>2024/02/03</td>
+                                <td>웡카</td>
+                                <td>판타지</td>
+                                <td>전체</td>
+                                <td></td>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" name="check" value="check" id="check"></td>
+                                <td>2024/02/03</td>
+                                <td>웡카</td>
+                                <td>판타지</td>
+                                <td>전체</td>
+                                <td></td>
+                            </tr>
+                          </tbody>
+                        </table>
+                      </div>
+                      </div>
+
+
+                      <div id="cnt2_paging-area"> 
+
+                        <ul class="pagination pagination">
+                            <li class="page-item"><a class="page-link" href="#"> < </a></li>
+                            <li class="page-item"><a class="page-link" href="#">1</a></li>
+                            <li class="page-item"><a class="page-link" href="#">2</a></li>
+                            <li class="page-item"><a class="page-link" href="#">3</a></li>
+                            <li class="page-item"><a class="page-link" href="#">4</a></li>
+                            <li class="page-item"><a class="page-link" href="#">5</a></li>
+                            <li class="page-item"><a class="page-link" href="#">6</a></li>
+                            <li class="page-item"><a class="page-link" href="#">7</a></li>
+                            <li class="page-item"><a class="page-link" href="#">8</a></li>
+                            <li class="page-item"><a class="page-link" href="#">9</a></li>
+                            <li class="page-item"><a class="page-link" href="#">10</a></li>
+                            <li class="page-item"><a class="page-link" href="#"> > </a></li>
+                        </ul>
         
                 </div>
                       
