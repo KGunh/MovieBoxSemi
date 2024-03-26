@@ -430,7 +430,7 @@
                 <h1>관리자</h1>
             </div>
             <div class="top_2" style="color: white;">
-                <span><a href="#">로그아웃</a></span> | <span><a href="#">홈페이지</a></span>
+                
             </div>
         </div>
         <div id="content" >
