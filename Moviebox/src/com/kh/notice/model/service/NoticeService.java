@@ -21,6 +21,14 @@ public class NoticeService {
 		return list;
 	}
 
+	// 글쓰기
+	public void insert(Notice notice) {
+		
+		Connection conn = getConnection();
+		new NoticeDao().insert(conn, notice);
+		
+	}
+
 
 
 }
