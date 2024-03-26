@@ -4,6 +4,9 @@ public class CinemaAdminContorller {
 
 	public void cinemaCheck () {
 				
+		
+		
+		
 	}
 	
 	public void cinemaEdit() {

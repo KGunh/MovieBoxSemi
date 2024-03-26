@@ -187,7 +187,7 @@
             <div class="content_1">
                 <ul class="menu">
                     <li>
-                        <a href="#">회원 관리</a>
+                        <a href="<%=contextPath %>/selectAdmin.mb">회원 관리</a>
                         <ul class="submenu">
 
                         </ul>
@@ -199,7 +199,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="#">영화관 관리</a>
+                        <a href="<%=contextPath%>/checkAdmin.cm">영화관 관리</a>
                         <ul class="submenu">
 
                         </ul>

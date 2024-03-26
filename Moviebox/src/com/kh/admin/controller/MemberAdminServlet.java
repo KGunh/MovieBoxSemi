@@ -8,16 +8,16 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 /**
- * Servlet implementation class CinemaController
+ * Servlet implementation class MemberAdminController
  */
-@WebServlet("*.cm")
-public class CinemaServlet extends HttpServlet {
+@WebServlet("*.mb")
+public class MemberAdminServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CinemaServlet() {
+    public MemberAdminServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -33,47 +33,45 @@ public class CinemaServlet extends HttpServlet {
 		String mapping = uri.substring(uri.lastIndexOf("/")+1,uri.lastIndexOf("."));
 		System.out.println(mapping);
 		String view = "";
-		
-		CinemaAdminContorller CAC = new CinemaAdminContorller();
-		
 		boolean flag = false;
 		
+		MemberAdminController MAC = new MemberAdminController();
+		
+		
+		
 		switch(mapping) {
 		
-		case "insertAdmin" :  view = "/views/admin/CinemaInsert.jsp";
-		case "editAdmin"   :  view= "/views/admin/CinemaEdit.jsp";
-		case "checkAdmin"  :  view = "views/admin/CinemaCheck.jsp";
+		case "selectAdmin"    :  view = "views/admin/memberSelect.jsp"; break;
+		case "modifyAdmin."   :  view= "views/admin/memberModify.jsp"; break;
 		
 		}
 		
-		if(false != flag) {
-		response.sendRedirect(view);
-			
+		System.out.println(view);
+		
+
+		
+		
+		switch(mapping) {
+		
+		case "selectAdmin" :  MAC.selectAdmin(request);  break; 
+		case "editAdmin"   :  MAC.editAdmin(request); break; 
+		
+		}
+		
+		
+		if(false!=flag) {
+			response.sendRedirect(view);
 		}else {
-			System.out.println(view);
-			request.getRequestDispatcher(view).forward(request, response);	
-		}
-		
-		switch(mapping) {
-		
-		case "insertAdmin" :  CAC.cinemaInsert();
-		case "editAdmin"   :  CAC.cinemaEdit();
-		case "checkAdmin"  :  CAC.cinemaCheck();
-		
+			request.getRequestDispatcher(view).forward(request, response);		
 		}
 		
 		
 		
 		
-		
-		
-		
-		
-		
-		
-		
+
 		
 	}
+	
 
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
