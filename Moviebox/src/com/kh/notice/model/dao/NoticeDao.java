@@ -82,9 +82,7 @@ public class NoticeDao {
 			pstmt.setInt(4, Integer.parseInt(notice.getNoticeWriter()));
 			
 			result = pstmt.executeUpdate();
-			
-			
-			
+
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

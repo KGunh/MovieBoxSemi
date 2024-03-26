@@ -30,6 +30,7 @@ public class NoticeController {
 		String noticeContent = request.getParameter("content");
 		String memNo = request.getParameter("memNo");
 		
+		
 		// 객체에 담기
 		Notice notice = new Notice();
 		notice.setNoticeCategory(noticeCategory);

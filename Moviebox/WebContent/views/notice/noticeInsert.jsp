@@ -248,6 +248,7 @@
                     <div class="detail-content-box">
                         <form action="<%= contextPath %>/insert.notice"
                         method="post" id="insert-box">
+                        
                             <div id="category-box">
                                 <div id="box-name">분류</div>
                                 
