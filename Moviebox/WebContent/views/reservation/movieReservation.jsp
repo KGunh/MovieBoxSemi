@@ -309,13 +309,9 @@
             });
         });
 		
-        $(function(){
-            $('.screenName').click(function(){
-                $('.screenName').not(this).removeAttr('style');
-                $(this).css('background', 'white');
-                $('#screenNo').val();
-            });
-        });
+        function selectScreenNo(e){
+            document.getElementById('screenNo').value = e.children[1].value;
+        };
        
         function selectScreen(){
             $.ajax({
@@ -328,15 +324,15 @@
             	},
             	success : function(result){
                     var resultStr = '';
-
+                    console.log(result);
                     for(let i = 0; i < result.length; i++){
                         resultStr += '<div class="screen">'
                                     +     '<div class="theaterName">' + result[i].theaterName + '</div>';
                                     +     '<div class="selectScreen">'
                         for(let j = 0; j < result[i].watchDateList.length; j++){
-                            resultStr +=        '<div class="screenName" onclick="abc(this.value);" value="' + result[i].screenNo[j] + '">'
+                            resultStr +=        '<div class="screenName" onclick="selectScreenNo(this);">'
                                         +            '<span style="color: black;">' + result[i].watchDateList[j] + '</span>~'
-                                        +            '<input"hidden" value="' + result[i].screenNo[j] + '">'    
+                                        +            '<input type="hidden" value="' + result[i].screenNoList[j] + '">'
                                         +        '</div>'
                         };
                         resultStr +=    '</div>';
@@ -351,12 +347,7 @@
 				}
             });
         };
-
-        function abc(e){
-            console.log(e);
-
-        }
-         
+            
         $('#screenDate').change(function(){
             selectScreen();
         });
