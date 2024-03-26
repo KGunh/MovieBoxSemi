@@ -4,7 +4,8 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>게시글관리 > 문의 게시글 관리</title>
+<title>게시글관리 문의게시글</title>
+
 
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -270,17 +271,13 @@
 		    background-color: #2c2c2c; 
 		    color: #ffffff;
 		}
-
-
-
     </style>
-
-
+    
 </head>
 <body>
-
 	<!-- 헤더 -->
     <%@ include file="/views/common/header.jsp" %>
+
     <div id="wrap">
 
         <div id="top_wrap">
@@ -301,7 +298,7 @@
                     </li>
                     <li>
                         <a href="<%=contextPath %>/adminMovieCheck.admin">영화 관리</a>
-                        <ul class="submenu" >
+                        <ul class="submenu">
 
                         </ul>
                     </li>
@@ -344,7 +341,8 @@
 
 
                     <div id="cnt2_btn"><!--등록 버튼-->
-                        <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right;">등록</button>
+                        <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right;" onclick="insertButton()";
+                        >등록</button>
 
                     </div><!--등록 버튼-->
 
@@ -477,8 +475,13 @@
         </div>
 
     </div>
-    <%@ include file="/views/common/footer.jsp" %>
+     	<%@ include file="/views/common/footer.jsp" %>
  	<!-- 푸터 -->
-
+ 	
+ 	<script>
+ 		function insertButton(){
+ 			location.href = '<%= contextPath %>/adminQnAInsert.admin';
+ 		}
+	</script>
 </body>
 </html>
