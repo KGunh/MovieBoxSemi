@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ 
 <!DOCTYPE html>
 <html>
 <head>
@@ -95,22 +96,12 @@
     </style>
 </head>
 <body>
-    <div id="info-header">
-        <div id="info-title">
-            <span class="title">마이페이지</span>
-        </div>
-        <div id="info-header-navi">
-            
-            <ul class="info-navi">
-                <li id="info-navi-first">
-                    <a href="/info" class="info-my">회원정보</a>
-                </li>
-                <li id="info-navi-second">
-                    <a href="/list" class="info-list">예매내역</a>
-                </li>
-            </ul>
-        </div>
+	<div>
+	
+	</div>
+	
 
-    </div>
+
+    
 </body>
 </html>

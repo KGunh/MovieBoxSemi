@@ -151,12 +151,18 @@ public class MemberController {
 				for(int i=0;i<boardList.size();i++) {
 					Board board = boardList.get(i);		
 					Answer a = new MemberService().myPageBoardAnswer(board);
-					
+					if(a != null) {
 					answerList.add(a);
+					}
 				}
+				
 			}
+			if(!answerList.isEmpty()) {
+				request.setAttribute("answerList", answerList);
+			}
+			
 			request.setAttribute("boardList", boardList);
-			request.setAttribute("answerList", answerList);
+			
 			
 			view = "views/member/myPage.jsp";
 		}

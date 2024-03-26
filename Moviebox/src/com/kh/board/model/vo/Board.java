@@ -9,25 +9,42 @@ public class Board {
 	private int count;
 	private String status;
 	private String boardWriter;
+	private String boardCategory;
 	
 	
 	
 	
+	
+	
+
+
 	public Board() {
 		super();
 	}
 
-	public Board(int boardNo, String boardTitle, String boardContent, String boardWriter, int count, String createDate,
-			String status) {
+	public Board(int boardNo, String boardTitle, String boardContent, String createDate, int count, String status,
+			String boardWriter, String boardCategory) {
 		super();
 		this.boardNo = boardNo;
 		this.boardTitle = boardTitle;
 		this.boardContent = boardContent;
-		this.boardWriter = boardWriter;
-		this.count = count;
 		this.createDate = createDate;
+		this.count = count;
 		this.status = status;
+		this.boardWriter = boardWriter;
+		this.boardCategory = boardCategory;
 	}
+	
+	
+	
+	public String getBoardCategory() {
+		return boardCategory;
+	}
+
+	public void setBoardCategory(String boardCategory) {
+		this.boardCategory = boardCategory;
+	}
+
 
 	public int getBoardNo() {
 		return boardNo;
@@ -69,7 +86,7 @@ public class Board {
 		this.count = count;
 	}
 
-	public String getcreateDate() {
+	public String getCreateDate() {
 		return createDate;
 	}
 

@@ -42,21 +42,17 @@ public class NoticeServlet extends HttpServlet {
 		boolean flag = true;
 		
 		switch(mapping) {
-		case "list" : view = nc.selectNoticeList(request); break;
+		case "list" : view = nc.selectNoticeList(request); flag = false; break;
+
+
 		}
+		
 		
 		if(flag) {
 			response.sendRedirect(view);
 		} else {
 			request.getRequestDispatcher(view).forward(request, response);
 		}
-		
-		
-		// 공지사항 목록 출력
-
-		
-		
-		
 		
 		
 	}

@@ -41,7 +41,7 @@ public class MemberAdminServlet extends HttpServlet {
 		
 		switch(mapping) {
 		
-		case "selectAdmin"  :  view = "views/admin/memberSelect.jsp"; break;
+		case "selectAdmin"    :  view = "views/admin/memberSelect.jsp"; break;
 		case "modifyAdmin."   :  view= "views/admin/memberModify.jsp"; break;
 		
 		}
@@ -50,21 +50,23 @@ public class MemberAdminServlet extends HttpServlet {
 		
 
 		
-		if(false!=flag) {
-		
-			response.sendRedirect(view);
-			
-		}else {
-			
-			request.getRequestDispatcher(view).forward(request, response);	
-		}
 		
 		switch(mapping) {
 		
-		case "selectAdmin" :  MAC.selectAdmin(request);
-		case "editAdmin"   :  MAC.editAdmin(request);
+		case "selectAdmin" :  MAC.selectAdmin(request);  break; 
+		case "editAdmin"   :  view=MAC.editAdmin(request); break; 
 		
 		}
+		
+		
+		if(false!=flag) {
+			response.sendRedirect(view);
+		}else {
+			request.getRequestDispatcher(view).forward(request, response);		
+		}
+		
+		
+		
 		
 
 		

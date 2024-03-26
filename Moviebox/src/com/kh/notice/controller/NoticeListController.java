@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.kh.notice.model.service.NoticeService;
 import com.kh.notice.model.vo.Notice;
@@ -20,6 +21,8 @@ public class NoticeListController {
 		String view = "views/notice/noticeList.jsp";
 		
 		return view;
+		
+	
 		
 	}
 	
