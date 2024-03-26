@@ -51,6 +51,10 @@ public class AdminPageServlet extends HttpServlet {
 		case "adminMovieInsert" :
 			view = "/views/admin/adminMovieInsert.jsp"; break;
 			
+		case "adminQnADetail" :
+			view = "/views/admin/adminQnADetail.jsp"; break;
+			
+			
 			
 		}
 

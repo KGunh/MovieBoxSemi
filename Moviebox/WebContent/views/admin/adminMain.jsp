@@ -208,7 +208,7 @@
                         <a href="#">게시글 관리</a>
                         <ul class="submenu">
                         <li><a href="<%=contextPath %>/adminBoardDetail.admin">공지 관리</a></li>
-                        <li><a href="#">문의 게시글 관리</a></li>
+                        <li><a href="<%=contextPath %>/adminQnADetail.admin">문의 게시글 관리</a></li>
                         </ul>
                     </li>
                 </ul>    
