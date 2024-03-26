@@ -15,7 +15,7 @@ import com.kh.theater.model.vo.Screen;
 /**
  * Servlet implementation class SelectScreenServlet
  */
-@WebServlet("/screen.reservation")
+@WebServlet("/*.reservation.ajax")
 public class SelectScreenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
