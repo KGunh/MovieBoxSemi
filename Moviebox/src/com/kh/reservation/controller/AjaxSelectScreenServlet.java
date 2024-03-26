@@ -1,6 +1,7 @@
 package com.kh.reservation.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,17 +9,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.kh.theater.model.vo.Screen;
+
 /**
- * Servlet implementation class ReservationviewServlet
+ * Servlet implementation class SelectScreenServlet
  */
-@WebServlet("*.reservation")
-public class ReservationServlet extends HttpServlet {
+@WebServlet("/screen.reservationAjax")
+public class AjaxSelectScreenServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public ReservationServlet() {
+    public AjaxSelectScreenServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,28 +31,12 @@ public class ReservationServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		
-		String uri = request.getRequestURI();
-		String mapping = uri.substring(uri.lastIndexOf("/") + 1 , uri.lastIndexOf("."));
-		ReservationController rc = new ReservationController(); 
+		List<Screen> screenList = new ReservationController().selectScreen(request);
 		
-		String view = "";
+		response.setContentType("application/json; charset=UTF-8");
 		
-		boolean flag = false;
-		
-		switch(mapping) {
-		case "movie" : view = rc.selectReservationInfo(request); break; 
-		case "seat" : view = rc.connectSeatList(request); break;
-		//case "seat" : view = rc.setSeat(request); break; 온보드 ajax 바꿀 것
-		case "payment" : rc.insertReservation(); break;
-		}
-		
-		if(flag) {
-			response.sendRedirect(view);
-		} else {
-			request.getRequestDispatcher(view).forward(request, response);
-		}
+		new Gson().toJson(screenList, response.getWriter());		
 	}
 
 	/**

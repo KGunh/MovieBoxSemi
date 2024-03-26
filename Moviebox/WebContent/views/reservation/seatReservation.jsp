@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.List, com.kh.reservation.model.vo.Seat" %>
-
+<%@ page  %>
 <%
-	List<Seat> list = (List<Seat>)request.getAttribute("seatList");
-%>    
-    
-    
+	String screenNo = (String)request.getAttribute("screenNo");
+	String movieNo = (String)request.getAttribute("movieNo");
+	String screenDate = (String)request.getAttribute("screenDate");
+
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -18,7 +19,7 @@
         color: rgb(32,32,32);
     }
 	div{
-        border: 1px solid red;
+        /*border: 1px solid red;*/
         box-sizing: border-box;
     }
     a{
@@ -139,13 +140,14 @@
     }
 
     #seat-arrange{
-        width: 1000px;
+        width: 800px;
         height: 450px;
         margin: auto;
         border: 1px solid rgb(125, 124, 124);
     }
 
     .screen-wrap {
+        height: 100px;
         perspective: 1000px;
         display: flex;
         align-items: center;
@@ -271,13 +273,31 @@
        
         window.onload = function() {
             $('.screen').addClass('rotate');
+            
+            $.ajax({
+                url : 'seat.reservationAjax',
+            	type : 'get',
+            	data : {
+                    screenNo : <%= screenNo %>
+            	},
+                success : function(result){
+                    console.log(result);
+                },
+                error : function(){
+
+                }
+            });
+            
         };
 
+        // 인원수 버튼에 대한 스타일동작 및 값처리
         $('.people-Count').click(e => {
             peopleCount = (Number)($(e.target).html());
+            $('.seats').removeClass('clicked');
 
             if($(e.target).hasClass('clicked')){
                 $('.people-Count').removeClass('clicked');
+                peopleCount = 0;
             } 
             else{
                 $('.people-Count').removeClass('clicked');
@@ -304,20 +324,9 @@
 
         });
 
-         /*
-    	window.onload = function(){
-            $.ajax({
-                url : 'screen.reservation',
-            	type : 'get',
-            	data : {
-                    
-            	},
-                success : function(result){
-
-                }
-            });
-        };
-        */
+         
+    	
+        
 
 
     </script>
