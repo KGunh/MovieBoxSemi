@@ -132,6 +132,10 @@
         border-radius: 8px;
     }
 
+    #selectPerson > button:hover{
+        background-color: rgb(255, 193, 69);
+    }
+
 
 
 </style>
@@ -232,9 +236,9 @@
     </style>
 
     <script>
-
-       
-
+        var peopleCount = 0;
+        
+        /*
     	window.onload = function(){
             $.ajax({
                 url : 'screen.reservation',
@@ -247,7 +251,31 @@
                 }
             });
         };
-        var peopleCount = 0;
+        */
+        
+        $('.people-Count').click(e => {
+            console.log($(e.target).html())
+            peopleCount = $(e.target).html();
+
+            if($e.hasClass('clicked')){
+                $e.removeClass('clicked');
+                $e.addClass('unClicked');
+                peopleCount -= 1;
+            } 
+            else{
+                peopleCount += 1;
+                $e.removeClass('unClicked');
+                $e.addClass('clicked');
+            }
+
+        });
+
+
+
+
+
+
+        /*
         $('.seats').click(e => {
             const $e = $(e.target);
             
@@ -286,7 +314,7 @@
             }
         };
        
-
+        */
 
     </script>
 
