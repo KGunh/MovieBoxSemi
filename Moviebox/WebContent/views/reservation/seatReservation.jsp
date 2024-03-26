@@ -8,12 +8,25 @@
 </head>
 <style>
 	div{
+        border: 1px solid red;
         box-sizing: border-box;
     }
 
     #wrap{
         width: 1200px;
         height: 1600px;
+    }
+
+    #title{
+        height: 60px;
+        width: 100%;
+        margin-top: 50px;
+        color: rgb(32,32,32);
+        background-color: rgb(255, 193, 69);
+        font-size: 28px;
+        font-weight: 700;
+        line-height: 60px;
+        padding-left: 50px;
     }
 
 </style>
@@ -156,7 +169,6 @@
                 <div class="f-seat"></div>
             </div>
         </div>
-
     </div>
 	
 	</div>

@@ -21,7 +21,7 @@ public class ReservationController {
 		
 		return view;
 	}
-
+	// 예매페이지 ajax용 메소드
 	public List<Screen> selectScreen(HttpServletRequest request) {
 		String[] dateStr = request.getParameter("date").split("-");
 		String screenLocation = request.getParameter("location");
@@ -85,10 +85,10 @@ public class ReservationController {
 		return screenList;
 	}
 
-	public void setSeat(HttpServletRequest request) {
-		request.getParameter("");
-		// 좌석선택 화면으로 이동
+	public String setSeat(HttpServletRequest request) {
+		String view = "views/reservation/seatReservation.jsp";
 		
+		return view;		
 	}
 	
 	public void insertReservation() {
