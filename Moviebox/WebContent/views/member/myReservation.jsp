@@ -118,7 +118,7 @@
         }
         .res-img{
             width: 18%;
-            padding: 40px 20px 40px 30px;
+            padding: 15px 20px 15px 30px;
         }
         .res-content{
             width: 44%;

@@ -203,4 +203,31 @@
 	
 	</entry>
 	
+	<entry key="myPageOrderPrint">
+	SELECT
+       	   ORDER_NO,
+           MEMBER_NO,
+           STATUS,
+       	   ORDER_DATE
+  	  FROM
+       	   TB_ORDER
+ 	 WHERE
+       	   MEMBER_NO = ?
+	</entry>
+	
+	<entry key="orderGoods">
+	SELECT
+       	   GOODS_NO,
+           GOODS_NAME,
+           GOODS_PRICE,
+           QTY
+      FROM
+           TB_GOODS
+  	  JOIN
+       	   TB_ORDERDETAIL USING(GOODS_NO)
+ 	 WHERE
+       	   ORDER_NO = ?
+	
+	</entry>
+	
 </properties>
