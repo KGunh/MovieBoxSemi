@@ -11,13 +11,6 @@ public class Board {
 	private String boardWriter;
 	private String boardCategory;
 	
-	
-	
-	
-	
-	
-
-
 	public Board() {
 		super();
 	}

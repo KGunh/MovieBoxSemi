@@ -47,10 +47,10 @@ public class NoticeDao {
 				Notice notice = new Notice();
 				
 				notice.setNoticeNo(rset.getInt("NOTICE_NO"));
-				notice.setNoticeCategory(rset.getString("NOTICE_CATEGORY"));
+				notice.setNoticeCategory(rset.getString("CATEGORY_NAME"));
 				notice.setNoticeTitle(rset.getString("NOTICE_TITLE"));
-				notice.setCreateDate(rset.getString("CREATE_DATE"));
 				notice.setCount(rset.getInt("COUNT"));
+				notice.setCreateDate(rset.getString("CREATE_DATE"));
 			
 				list.add(notice);
 			}
@@ -66,23 +66,19 @@ public class NoticeDao {
 	}
 	
 	
-	// 글쓰기
-	public int insert(Connection conn, Notice notice) {
+	public int increaseCount(Connection conn, int noticeNo) {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("insert");
+		String sql = prop.getProperty("increaseCount");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, notice.getNoticeCategory());
-			pstmt.setString(2, notice.getNoticeTitle());
-			pstmt.setString(3, notice.getNoticeContent());
-			pstmt.setInt(4, Integer.parseInt(notice.getNoticeWriter()));
-			
+			pstmt.setInt(1, noticeNo);
 			result = pstmt.executeUpdate();
-
+			
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -91,6 +87,63 @@ public class NoticeDao {
 		
 		return result;
 	}
+
+
+	public Notice selectNotice(Connection conn, int noticeNo) {
+		
+		Notice n = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectNotice");
+		
+		
+		
+		
+		return null;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+//	// 글쓰기
+//	public int insert(Connection conn, Notice notice) {
+//		
+//		int result = 0;
+//		PreparedStatement pstmt = null;
+//		String sql = prop.getProperty("insert");
+//		
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			
+//			pstmt.setString(1, notice.getNoticeCategory());
+//			pstmt.setString(2, notice.getNoticeTitle());
+//			pstmt.setString(3, notice.getNoticeContent());
+//			pstmt.setInt(4, Integer.parseInt(notice.getNoticeWriter()));
+//			
+//			result = pstmt.executeUpdate();
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close(pstmt);
+//		}
+//		
+//		return result;
+//	}
 
 
 
