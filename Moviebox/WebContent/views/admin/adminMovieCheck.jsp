@@ -381,75 +381,75 @@
                                 </tr>
                                 <tr>
                                     <td>2</td>
-                                    <td>2024/02/02</td>
-                                    <td>듄: 파트2</td>
-                                    <td>액션</td>
-                                    <td>12</td>
-                                    <td>2024/02/28</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>3</td>
-                                    <td>2024/02/03</td>
-                                    <td>웡카</td>
-                                    <td>판타지</td>
-                                    <td>전체</td>
-                                    <td>2024/01/31</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>4</td>
-                                    <td>2024/02/01</td>
-                                    <td>파묘</td>
-                                    <td>미스터리</td>
-                                    <td>15</td>
-                                    <td>2024/02/22</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>5</td>
-                                    <td>2024/02/02</td>
-                                    <td>듄: 파트2</td>
-                                    <td>액션</td>
-                                    <td>12</td>
-                                    <td>2024/02/28</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>6</td>
-                                    <td>2024/02/03</td>
-                                    <td>웡카</td>
-                                    <td>판타지</td>
-                                    <td>전체</td>
-                                    <td>2024/01/31</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>7</td>
-                                    <td>2024/02/01</td>
-                                    <td>파묘</td>
-                                    <td>미스터리</td>
-                                    <td>15</td>
-                                    <td>2024/02/22</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>8</td>
-                                    <td>2024/02/02</td>
-                                    <td>듄: 파트2</td>
-                                    <td>액션</td>
-                                    <td>12</td>
-                                    <td>2024/02/28</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>9</td>
-                                    <td>2024/02/03</td>
-                                    <td>웡카</td>
-                                    <td>판타지</td>
-                                    <td>전체</td>
-                                    <td>2024/01/31</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>10</td>
-                                    <td>2024/02/03</td>
-                                    <td>웡카</td>
-                                    <td>판타지</td>
-                                    <td>전체</td>
-                                    <td>2024/01/31</td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
                                 </tr>
                               </tbody>
                             </table>
