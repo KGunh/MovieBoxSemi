@@ -28,14 +28,14 @@ public class NoticeController {
 		String noticeCategory = request.getParameter("category");
 		String noticeTitle = request.getParameter("title");
 		String noticeContent = request.getParameter("content");
-		String userNo = request.getParameter("userNo");
+		String memNo = request.getParameter("memNo");
 		
 		// 객체에 담기
 		Notice notice = new Notice();
 		notice.setNoticeCategory(noticeCategory);
 		notice.setNoticeTitle(noticeTitle);
 		notice.setNoticeContent(noticeContent);
-		notice.setNoticeWriter(userNo);
+		notice.setNoticeWriter(memNo);
 		
 		// 서비스로 넘기기
 		int result = new NoticeService().insert(notice);

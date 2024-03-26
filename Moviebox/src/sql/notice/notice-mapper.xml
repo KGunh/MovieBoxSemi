@@ -17,7 +17,7 @@
 		  	  TB_NOTICE
 		 ORDER
 		 	BY
-		 	  CREATE_DATE DESC	
+		 	  NOTICE_NO DESC	
 	</entry>
 
 
