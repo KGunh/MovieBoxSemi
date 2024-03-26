@@ -70,7 +70,7 @@
         margin-left: 10px;
         font-size: 14px;
         text-align: center;
-        line-height: 26px;
+        line-height: 30px;
         border-radius: 6px;
         background-color: rgba(70, 69, 69, 0.82);
         color: rgb(125, 124, 124);
@@ -140,11 +140,12 @@
 
     #seat-arrange{
         width: 1000px;
+        height: 450px;
         margin: auto;
         border: 1px solid rgb(125, 124, 124);
     }
 
-    .container {
+    .screen-wrap {
         perspective: 1000px;
         display: flex;
         align-items: center;
@@ -160,7 +161,7 @@
     }
     
     .rotate {
-        transition: all 0.5s ease-out;
+        transition: all 0.001ms ease-out;
         transform: rotateX(-50deg);
     }
 
@@ -200,7 +201,7 @@
         <div id="seat-wrap">
             <div id="seat-title"> 좌석 선택 </div>
             <div id="seat-arrange">
-                <div class="container">
+                <div class="screen-wrap">
                     <div class="screen"></div>
                 </div>
                 <div id="a-line" class="line">
@@ -267,12 +268,43 @@
 
     <script>
         var peopleCount = 0;
-        
+       
         window.onload = function() {
             $('.screen').addClass('rotate');
         };
 
-        /*
+        $('.people-Count').click(e => {
+            peopleCount = (Number)($(e.target).html());
+
+            if($(e.target).hasClass('clicked')){
+                $('.people-Count').removeClass('clicked');
+            } 
+            else{
+                $('.people-Count').removeClass('clicked');
+                $(e.target).addClass('clicked');
+            }
+        });
+
+        $('.seats').click(e => {
+            if($(e.target).hasClass('clicked')){
+                $(e.target).removeClass('clicked');
+                peopleCount += 1;
+            } 
+            else{
+                if(peopleCount < 1 ){
+                    if(!$('.people-Count').hasClass('clicked')) alert('인원을 먼저 선택해주세요.');
+                    else alert('좌석을 모두 선택하셨습니다.');
+                }
+                else{
+                    $(e.target).addClass('clicked');
+                    peopleCount -= 1;
+                };
+            };
+
+
+        });
+
+         /*
     	window.onload = function(){
             $.ajax({
                 url : 'screen.reservation',
@@ -286,67 +318,7 @@
             });
         };
         */
-        
 
-
-        $('.people-Count').click(e => {
-            peopleCount = $(e.target).html();
-
-            if($(e.target).hasClass('clicked')){
-                $('.people-Count').removeClass('clicked');
-            } 
-            else{
-                $('.people-Count').removeClass('clicked');
-                $(e.target).addClass('clicked');
-            }
-        });
-
-
-
-
-
-
-
-        /*
-        $('.seats').click(e => {
-            const $e = $(e.target);
-            
-            if(peopleCount < 8){
-                if($e.hasClass('clicked')){
-                    $e.removeClass('clicked');
-                    $e.addClass('unClicked');
-                    peopleCount -= 1;
-                } 
-                else{
-                    peopleCount += 1;
-                    $e.removeClass('unClicked');
-                    $e.addClass('clicked');
-                }
-            }
-            else{
-                alert('선택 가능한 인원은 최대 8명입니다');
-                console.log($('.people-Count').eq(7));
-                $('.seats').removeClass('clicked');
-                $('.people-Count').eq(0).removeAttr('style');
-                peopleCount = 0;
-            }
-
-
-
-            count();
-        });
-
-        function count(){
-            console.log(peopleCount);
-            var clickSeat = $('#selectPerson').children().eq(peopleCount - 1);
-            
-            if(peopleCount > 0){
-                clickSeat.css('background', 'rgb(255, 193, 69)'); 
-                $('#selectPerson').children().not(clickSeat).not().removeAttr('style');
-            }
-        };
-       
-        */
 
     </script>
 
