@@ -52,7 +52,6 @@
         margin: auto;
     }
 
-
 </style>
 
 
@@ -70,13 +69,7 @@
         </div>
         <div id="select-wrap">
             <div id="selectAge">
-                <div>
-                    청소년
-                </div>
-              
-                <div>
-                    성인
-                </div>
+                <span>청소년</span><span>성인</span>
             </div>
             <div id="selectPerson">
                 selectPerson
