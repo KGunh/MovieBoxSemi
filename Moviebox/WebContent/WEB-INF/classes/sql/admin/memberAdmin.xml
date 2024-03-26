@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+<entry key="selectAdmin">
+
+
+			SELECT 
+					MEMBER_NO,
+					MEMBER_NAME,	
+					ENROLL_DATE,
+					STATUS,
+					PHONE
+			  FROM
+					TB_MEMEBR
+
+
+</entry>
+
+
+
+
+
+
+
+
+
+
+
+
+
+</properties>
