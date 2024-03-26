@@ -331,7 +331,7 @@
                                     +     '<div class="selectScreen">'
                         for(let j = 0; j < result[i].watchDateList.length; j++){
                             resultStr +=        '<div class="screenName" onclick="selectScreenNo(this);">'
-                                        +            '<span style="color: black;">' + result[i].watchDateList[j] + '</span>~'
+                                        +            '<span style="color: black;">' + result[i].watchDateList[j] + '</span>'
                                         +            '<input type="hidden" value="' + result[i].screenNoList[j] + '">'
                                         +        '</div>'
                         };

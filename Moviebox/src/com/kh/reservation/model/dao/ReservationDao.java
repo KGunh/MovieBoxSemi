@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.kh.common.model.vo.Location;
 import com.kh.movie.model.vo.Movie;
+import com.kh.reservation.model.vo.Seat;
 import com.kh.theater.model.vo.Screen;
 
 public class ReservationDao {
@@ -109,7 +110,7 @@ public class ReservationDao {
 				s.setMovieNo(rset.getInt("MOVIE_NO"));
 				s.setScreenNo(rset.getInt("SCREEN_NO"));
 				s.setScreenName(rset.getString("SCREEN_NAME"));
-				s.setWatchDate(rset.getString("WATCH_DATE").substring(10));
+				s.setWatchDate(rset.getString("WATCH_DATE"));
 				s.setTheaterNo(rset.getInt("THEATER_NO"));
 				s.setTheaterName(rset.getString("THEATER_NAME"));
 				s.setMovieRt(rset.getInt("MOVIE_RT"));
@@ -123,6 +124,38 @@ public class ReservationDao {
 			close(pstmt);
 		}
 		return list;
+	}
+
+	public List<Seat> selectSeatList(Connection conn, int screenNo) {
+		List<Seat> seatList = new ArrayList<>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectSeatList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, screenNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Seat seat = new Seat();
+				
+				seat.setScreenNo(rset.getInt("SCREEN_NO"));
+				seat.setSeatNo(rset.getString("SEAT_NO"));
+				seat.setTicketNo(rset.getInt("TICKET_NO"));
+				
+				seatList.add(seat);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return seatList;
 	}
 	
 	

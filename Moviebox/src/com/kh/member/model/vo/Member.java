@@ -1,6 +1,7 @@
 package com.kh.member.model.vo;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 public class Member {
 	
 	private int memberNo;
@@ -16,7 +17,8 @@ public class Member {
 	private String status;
 	private String privilege;
 	private String localCode;
-	private ArrayList<MemberGenre> genreList = new ArrayList();
+	private String localName;
+	private List<MemberGenre> genreList;
 	public Member() {
 		super();
 	}
@@ -55,6 +57,17 @@ public class Member {
 		this.status = status;
 		this.privilege = privilege;
 		this.localCode = localCode;
+		this.genreList = genreList;
+	}
+	
+	
+	public String getLocalName() {
+		return localName;
+	}
+	public void setLocalName(String localName) {
+		this.localName = localName;
+	}
+	public void setGenreList(List<MemberGenre> genreList) {
 		this.genreList = genreList;
 	}
 	public int getMemberNo() {
@@ -135,7 +148,7 @@ public class Member {
 	public void setLocalCode(String localCode) {
 		this.localCode = localCode;
 	}
-	public ArrayList<MemberGenre> getGenreList() {
+	public List<MemberGenre> getGenreList() {
 		return genreList;
 	}
 	public void setGenreList(ArrayList<MemberGenre> genreList) {
