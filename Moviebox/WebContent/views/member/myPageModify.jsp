@@ -300,7 +300,6 @@
 		for(int i = 0; i < list.size(); i++) {
         	 genreList += list.get(i).getGenreCode() + (i < (list.size()-1) ? "," : "");
 		}
-		System.out.println(genreList);
 	%>
     %>
 
