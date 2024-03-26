@@ -1,19 +1,23 @@
 package com.kh.common.model.vo;
 
+import java.util.List;
+
+import com.kh.reservation.model.vo.Seat;
+
 public class Reservation {
 	private int ticketNo;
 	private int personNum;
 	private int memberNo;
 	private int screenNo;
+	private String runningTime;
 	private String status;
 	private String movieTitle;
 	private String theaterName;
 	private String watchDate;
-	private int studentCount;
-	private int commonCount;
-	private int studentPrice;
-	private int commonPrice;
-	private int totalPrice;
+	private Price price;
+	
+	private List<Seat> seatList;
+	
 	
 	
 	public Reservation() {
@@ -31,35 +35,24 @@ public class Reservation {
 	
 	
 	
-	public int getStudentPrice() {
-		return studentPrice;
+	
+	public List<Seat> getSeatList() {
+		return seatList;
 	}
-	public void setStudentPrice(int studentPrice) {
-		this.studentPrice = studentPrice;
+	public void setSeatList(List<Seat> seatList) {
+		this.seatList = seatList;
 	}
-	public int getCommonPrice() {
-		return commonPrice;
+	public String getRunningTime() {
+		return runningTime;
 	}
-	public void setCommonPrice(int commonPrice) {
-		this.commonPrice = commonPrice;
+	public void setRunningTime(String runningTime) {
+		this.runningTime = runningTime;
 	}
-	public int getTotalPrice() {
-		return totalPrice;
+	public Price getPrice() {
+		return price;
 	}
-	public void setTotalPrice(int totalPrice) {
-		this.totalPrice = totalPrice;
-	}
-	public int getStudentCount() {
-		return studentCount;
-	}
-	public void setStudentCount(int studentCount) {
-		this.studentCount = studentCount;
-	}
-	public int getCommonCount() {
-		return commonCount;
-	}
-	public void setCommonCount(int commonCount) {
-		this.commonCount = commonCount;
+	public void setPrice(Price price) {
+		this.price = price;
 	}
 	public String getWatchDate() {
 		return watchDate;

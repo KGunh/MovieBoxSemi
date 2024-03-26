@@ -1,6 +1,6 @@
 package com.kh.theater.model.vo;
 
-import java.util.Date;
+import java.util.List;
 
 public class Screen {
 	private int screenNo;
@@ -10,6 +10,9 @@ public class Screen {
 	private String screenName;
 	private String theaterName;
 	private int movieRt;
+	private List<String> watchDateList;
+	private List<Integer> screenNoList;
+	
 	
 	public Screen() {
 		super();
@@ -66,10 +69,25 @@ public class Screen {
 	public void setMovieRt(int movieRt) {
 		this.movieRt = movieRt;
 	}
+	
+	public List<String> getWatchDateList() {
+		return watchDateList;
+	}
+	public void setWatchDateList(List<String> watchDateList) {
+		this.watchDateList = watchDateList;
+	}
+	
+	public List<Integer> getScreenNoList() {
+		return screenNoList;
+	}
+	public void setScreenNoList(List<Integer> screenNoList) {
+		this.screenNoList = screenNoList;
+	}
 	@Override
 	public String toString() {
 		return "Screen [screenNo=" + screenNo + ", theaterNo=" + theaterNo + ", movieNo=" + movieNo + ", watchDate="
-				+ watchDate + ", screenName=" + screenName + "]";
+				+ watchDate + ", screenName=" + screenName + ", theaterName=" + theaterName + ", movieRt=" + movieRt
+				+ "]";
 	}
 	@Override
 	public int hashCode() {

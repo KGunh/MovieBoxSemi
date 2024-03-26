@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.kh.common.model.vo.Location;
@@ -44,6 +45,7 @@ public class ReservationDao {
 			
 			while(rset.next()) {
 				Movie m = new Movie();
+				
 				m.setMovieNo(rset.getInt("MOVIE_NO"));
 				m.setMovieTitle(rset.getString("MOVIE_TITLE"));
 			    m.setFilePath(rset.getString("FILE_PATH"));
@@ -87,8 +89,8 @@ public class ReservationDao {
 		return list;
 	}
 
-	public ArrayList<Screen> selectScreen(Connection conn, String screenDate, String screenLocation, int movieNo) {
-		ArrayList<Screen> list = new ArrayList<Screen>();
+	public List<Screen> selectScreen(Connection conn, String screenDate, String screenLocation, int movieNo) {
+		List<Screen> list = new ArrayList<Screen>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
@@ -107,7 +109,7 @@ public class ReservationDao {
 				s.setMovieNo(rset.getInt("MOVIE_NO"));
 				s.setScreenNo(rset.getInt("SCREEN_NO"));
 				s.setScreenName(rset.getString("SCREEN_NAME"));
-				s.setWatchDate(rset.getString("WATCH_DATE"));
+				s.setWatchDate(rset.getString("WATCH_DATE").substring(10));
 				s.setTheaterNo(rset.getInt("THEATER_NO"));
 				s.setTheaterName(rset.getString("THEATER_NAME"));
 				s.setMovieRt(rset.getInt("MOVIE_RT"));

@@ -241,4 +241,10 @@
 	</div>
 
 </body>
+
+<script>
+	$('a').click(function(){
+		location.href = 'https://www.kh-academy.co.kr';
+	})
+</script>
 </html>

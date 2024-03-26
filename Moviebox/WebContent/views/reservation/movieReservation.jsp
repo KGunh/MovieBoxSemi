@@ -1,11 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, com.kh.common.model.vo.Location, com.kh.movie.model.vo.Movie" %>
+<%@ page import="java.util.List, com.kh.common.model.vo.Location, com.kh.movie.model.vo.Movie" %>
 
 <%
-	ArrayList<Movie> movieList = (ArrayList<Movie>)request.getAttribute("movieList");
-	ArrayList<Location> locationList = (ArrayList<Location>)request.getAttribute("locationList");
-	System.out.println(movieList);
+	List<Movie> movieList = (List<Movie>)request.getAttribute("movieList");
+	List<Location> locationList = (List<Location>)request.getAttribute("locationList");
 %>
 <!DOCTYPE html>
 <html>
@@ -163,16 +162,18 @@
         width: 155px;
         height: 85px;
         margin-top: 5px;
+        margin-left: 48px;
         border-radius: 25px;
         background-color: rgba(255, 255, 255, 0.6);
         text-align: center;
-        font-size: 20px;
+        font-size: 18px;
         font-weight: bold;
         line-height: 85px;
     }
 
     .screenName:hover{
         cursor: pointer;
+        background-color: white;
     }
 
     .swiper-slide{
@@ -239,7 +240,7 @@
 	                                </div>
 	                            </div>
                             <% } %>
-                            <input id="movieNo" type="hidden">
+                            <input id="movieNo" name="movieNo" type="hidden">
                         </div>
                     	
                         <div class="swiper-pagination"></div>
@@ -250,7 +251,6 @@
                         <div class="swiper-scrollbar"></div>
                     </div>
                 </div>
-
             </div>
             <div id="selectDateArea">
                 <div id="printToday"></div>
@@ -270,16 +270,13 @@
                 <div id="printScreen">
                     
                 </div>
+                <input id="screenNo" type="hidden" name="screenNo">
                 <button id="submit-btn" type="submit">좌석 선택</button>
             </div>
-
         </form>
-       
-        
-        
     </div>
-    <%@ include file="/views/common/footer.jsp" %>
 
+    <%@ include file="/views/common/footer.jsp" %>
 
     <script>
 		
@@ -311,6 +308,10 @@
                 $('#movieNo').val($(this).children().eq(1).val());
             });
         });
+
+        document.getElementById('.screenName').click = function(){
+           // document.getElementById('#screenNo').val(this.);
+        }
        
         function selectScreen(){
             $.ajax({
@@ -322,51 +323,23 @@
                     movieNo : $('#movieNo').val()
             	},
             	success : function(result){
-                    var screens = [];
-                   
-                    
-                    for (var i = 0; i < result.length; i++) {
-                        // 각 객체의 키 값 설정
-                        var theaterNo = result[i].theaterNo;
-                        var watchDate = result[i].watchDate;
-                        
-                        if(theaterNo == result[i - 1].theaterNo){
-                            var screenList = {
-                                for(){
+                    var resultStr = '';
 
-                                }
-                            }
-                        }
-
-                        // 객체 생성 및 키 값과 리스트 값 설정
-                        var screen = {
-                            theaterNo: theaterNo,
-                            list: []
+                    for(let i = 0; i < result.length; i++){
+                        resultStr += '<div class="screen">'
+                                    +     '<div class="theaterName">' + result[i].theaterName + '</div>';
+                                    +     '<div class="selectScreen">'
+                        for(let j = 0; j < result[i].watchDateList.length; j++){
+                            resultStr +=        '<div class="screenName">'
+                                        +            '<span style="color: black;">' + result[i].watchDateList[j] + '</span>~'
+                                        +        '</div>'
                         };
-                        
-                        // 객체 배열에 추가
-                        screens.push(screen);
-                    }
-                    
-                    
-                    let resultStr = '';
-                    let flag = true;
-                    if(result.length > 0){
-                        for(let i in result){
-                            resultStr += '<div class="screen">'
-                                       +     '<div class="theaterName">' + result[i].theaterName + '</div>'
-                                       +     '<div class="selectScreen">'
-                                       +        '<div class="screenName">'
-                                       +            '<span style="color: black;">' + result[i].watchDate + '</span>~<span style="color: gray;">' + (result[i].watchDate + result[i].movieRt) + '</span>'
-                                       +        '</div>'
-                                       +     '</div>'
-                                       + '</div>';
-                        };
-                    }
-                    else{
-                        resultStr = '<div style="color: rgb(148, 145, 145);">조회된 영화관이 없습니다.</div>';
-                    }
+                        resultStr +=    '</div>';
+                                    + '</div>';
+                    };
+                
                     $('#printScreen').html(resultStr);
+                    
             	},
             	error : function(){
 					console.log('검색결과가 없음');
