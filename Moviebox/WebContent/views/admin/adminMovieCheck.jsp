@@ -491,7 +491,6 @@
  		function insertButton(){
  			location.href = '<%= contextPath %>/adminMovieInsert.admin';
  		}
-
 	</script>
 </body>
 </html>
