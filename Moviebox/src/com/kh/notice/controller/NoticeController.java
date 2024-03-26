@@ -35,12 +35,15 @@ public class NoticeController {
 	
 	
 	// 공지사항 조회
-	public void selectNotice(HttpServletRequest request, HttpServletResponse response) {
+	public String selectNotice(HttpServletRequest request, HttpServletResponse response) {
 		
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
 		
-		new NoticeService().selectNotice(noticeNo);
+		Notice notice = new NoticeService().selectNotice(noticeNo);
+		request.setAttribute("notice", notice);
+		String view = "views/notice/noticeDetail.jsp";
 		
+		return view;
 		
 	}
 

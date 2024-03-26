@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ page import="com.kh.notice.model.vo.*" %>
+    
+
+<%
+	Notice notice = (Notice)request.getAttribute("notice");
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -71,12 +79,13 @@
         .notice-tap:hover{
             color: #1A1A1A;
             background-color: #FFC145;
-
+            cursor: pointer;
         }
 
         .qna-tap:hover{
             color: #1A1A1A;
             background-color: #FFC145;
+            cursor: pointer;
         }
 
         /* 내용 입력 */
@@ -198,39 +207,28 @@
         
                 <!-- 카테고리 -->
                 <div id="board-category">
-                    <div class="notice-tap">공지사항</div>
-                    <div class="qna-tap">QnA</div>
+	                <div class="notice-tap" onclick="openNoticePage();">공지사항</div>
+	                <div class="qna-tap" onclick="openQnaPage();">QnA</div>
                 </div> <!-- board-category -->
 
                 <div class="notice-content">
                     <div class="detail-box1">
                         <div class="detail-title-box1">
-                            <div class="detail-category"><span>[공지 카테고리]</span></div>
-                            <div class="detail-title"><span>공지 제목 들어가는 부분 </span></div>
+                            <div class="detail-category"><span>[<%= notice.getNoticeCategory() %>]</span></div>
+                            <div class="detail-title"><span><%= notice.getNoticeTitle() %> </span></div>
                         </div>
                     </div>
 
                     <div class="detail-box2">
                         <div class="detail-title-box2">
-                            <div class="detail-date"><a>2024.03.20 16:34</a></div>
-                            <div class="detail-count"><a>조회수 : 777</div>
+                            <div class="detail-date"><a>작성일 : <%= notice.getCreateDate() %></a></div>
+                            <div class="detail-count"><a> 조회수 : <%= notice.getCount() %></div>
                         </div>
                     </div>
 
                     <div class="detail-content-box">
                         <div class="detail-content">
-                            아아아 내용내용 출력식 <br>
-                            아아아 내용내용 출력식 <br>
-                            아아아 내용내용 출력식 <br>
-                            아아아 내용내용 출력식 <br>
-                            아아아 내용내용 출력식 <br>
-                            아아아 내용내용 출력식 <br>
-                            아아아 내용내용 출력식 <br>
-                            아아아 내용내용 출력식 <br>
-                            아아아 내용내용 출력식 <br>
-                            아아아 내용내용 출력식 <br>
-                            아아아 내용내용 출력식 <br>
-                            아아아 내용내용 출력식 <br>
+                        <%= notice.getNoticeContent() %>
                         </div>
                     </div>
                 </div> <!-- notice-content -->
@@ -248,5 +246,20 @@
     </div> <!-- wrap -->
     
     <%@ include file="../common/footer.jsp" %>
+    
+      	<script>
+    		function openNoticePage(){
+    			location.href = '<%=contextPath %>/list.notice';
+    		}
+    		
+    		function openQnaPage(){
+    			location.href = '<%=contextPath %>/list.qna'; 			
+    		}
+    		
+    	</script>
+    
+    
+    
+    
 </body>
 </html>

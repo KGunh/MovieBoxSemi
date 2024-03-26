@@ -96,10 +96,31 @@ public class NoticeDao {
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectNotice");
 		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, noticeNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				n = new Notice();
+				n.setNoticeCategory(rset.getString("CATEGORY_NAME"));
+				n.setNoticeTitle(rset.getString("NOTICE_TITLE"));
+				n.setCreateDate(rset.getString("CREATE_DATE"));
+				n.setCount(rset.getInt("COUNT"));
+				n.setNoticeWriter(rset.getString("NOTICE_WRITER"));
+				n.setNoticeContent(rset.getString("NOTICE_CONTENT"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
 		
-		
-		
-		return null;
+		return n;
 	}
 	
 	

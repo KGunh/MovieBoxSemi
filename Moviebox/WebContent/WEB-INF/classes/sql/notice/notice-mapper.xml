@@ -25,23 +25,23 @@
 
 	<entry key="selectNotice">
 		SELECT
-			  CATEGORY_NAME,
-			  NOTICE_TITLE,
-			  NOTICE_CONTENT,
-			  CREATE_DATE,
-			  COUNT
+		      CATEGORY_NAME,
+		      NOTICE_TITLE,
+		      TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE,
+		      COUNT,
+		      NOTICE_WRITER,
+		      NOTICE_CONTENT
 		  FROM
-		  	  BOARD
-		   LEFT
+		      TB_NOTICE
 		  JOIN
-		  	  CATEGORY USING(CATEGORY_NO)
+		      TB_CATEGORY ON (NOTICE_CATEGORY = CATEGORY_NO)
 		  JOIN
-		  	  MEMBER ON (BOARD_WRITER = USER_NO)
+		      TB_MEMBER ON (MEMBER_NO = NOTICE_WRITER)
 		 WHERE
-		 	  BOARD_NO = ?
+		      NOTICE_NO = ?
 		   AND
-		   	  BOARD.STATUS = 'Y'
-	
+		      TB_NOTICE.STATUS = 'Y'
+			
 	
 	</entry>
 
