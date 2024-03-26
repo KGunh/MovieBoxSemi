@@ -4,113 +4,134 @@ package com.kh.notice.model.vo;
 public class Notice {
 	
 	private int noticeNo;
-	private String noticeCategory;
 	private String noticeTitle;
+	private String noticeWriter;
 	private String noticeContent;
 	private String createDate;
 	private int count;
 	private String status;
 	
-	private String noticeWriter;
+	private String noticeCategory;
 	private int userNo;
-
+	
+	
 	public Notice() {
 		super();
 	}
 
-	public Notice(int noticeNo, String noticeCategory, String noticeTitle, String noticeContent, String createDate,
-			int count, String status, String noticeWriter) {
+
+	public Notice(int noticeNo, String noticeTitle, String noticeWriter, String noticeContent, String createDate,
+			int count, String status, String noticeCategory, int userNo) {
 		super();
 		this.noticeNo = noticeNo;
-		this.noticeCategory = noticeCategory;
 		this.noticeTitle = noticeTitle;
+		this.noticeWriter = noticeWriter;
 		this.noticeContent = noticeContent;
 		this.createDate = createDate;
 		this.count = count;
 		this.status = status;
-		this.noticeWriter = noticeWriter;
-	}
-
-	
-	
-	public int getUserNo() {
-		return userNo;
-	}
-
-	public void setUserNo(int userNo) {
+		this.noticeCategory = noticeCategory;
 		this.userNo = userNo;
 	}
+
 
 	public int getNoticeNo() {
 		return noticeNo;
 	}
 
+
 	public void setNoticeNo(int noticeNo) {
 		this.noticeNo = noticeNo;
 	}
 
-	public String getNoticeCategory() {
-		return noticeCategory;
-	}
-
-	public void setNoticeCategory(String noticeCategory) {
-		this.noticeCategory = noticeCategory;
-	}
 
 	public String getNoticeTitle() {
 		return noticeTitle;
 	}
 
+
 	public void setNoticeTitle(String noticeTitle) {
 		this.noticeTitle = noticeTitle;
 	}
 
-	public String getNoticeContent() {
-		return noticeContent;
-	}
-
-	public void setNoticeContent(String noticeContent) {
-		this.noticeContent = noticeContent;
-	}
-
-	public String getCreateDate() {
-		return createDate;
-	}
-
-	public void setCreateDate(String createDate) {
-		this.createDate = createDate;
-	}
-
-	public int getCount() {
-		return count;
-	}
-
-	public void setCount(int count) {
-		this.count = count;
-	}
-
-	public String getStatus() {
-		return status;
-	}
-
-	public void setStatus(String status) {
-		this.status = status;
-	}
 
 	public String getNoticeWriter() {
 		return noticeWriter;
 	}
 
+
 	public void setNoticeWriter(String noticeWriter) {
 		this.noticeWriter = noticeWriter;
 	}
 
+
+	public String getNoticeContent() {
+		return noticeContent;
+	}
+
+
+	public void setNoticeContent(String noticeContent) {
+		this.noticeContent = noticeContent;
+	}
+
+
+	public String getCreateDate() {
+		return createDate;
+	}
+
+
+	public void setCreateDate(String createDate) {
+		this.createDate = createDate;
+	}
+
+
+	public int getCount() {
+		return count;
+	}
+
+
+	public void setCount(int count) {
+		this.count = count;
+	}
+
+
+	public String getStatus() {
+		return status;
+	}
+
+
+	public void setStatus(String status) {
+		this.status = status;
+	}
+
+
+	public String getNoticeCategory() {
+		return noticeCategory;
+	}
+
+
+	public void setNoticeCategory(String noticeCategory) {
+		this.noticeCategory = noticeCategory;
+	}
+
+
+	public int getUserNo() {
+		return userNo;
+	}
+
+
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
+	}
+
+
 	@Override
 	public String toString() {
-		return "Notice [noticeNo=" + noticeNo + ", noticeCategory=" + noticeCategory + ", noticeTitle=" + noticeTitle
+		return "Notice [noticeNo=" + noticeNo + ", noticeTitle=" + noticeTitle + ", noticeWriter=" + noticeWriter
 				+ ", noticeContent=" + noticeContent + ", createDate=" + createDate + ", count=" + count + ", status="
-				+ status + ", noticeWriter=" + noticeWriter + "]";
+				+ status + ", noticeCategory=" + noticeCategory + ", userNo=" + userNo + "]";
 	}
+
 
 	@Override
 	public int hashCode() {
@@ -124,8 +145,10 @@ public class Notice {
 		result = prime * result + ((noticeTitle == null) ? 0 : noticeTitle.hashCode());
 		result = prime * result + ((noticeWriter == null) ? 0 : noticeWriter.hashCode());
 		result = prime * result + ((status == null) ? 0 : status.hashCode());
+		result = prime * result + userNo;
 		return result;
 	}
+
 
 	@Override
 	public boolean equals(Object obj) {
@@ -170,12 +193,12 @@ public class Notice {
 				return false;
 		} else if (!status.equals(other.status))
 			return false;
+		if (userNo != other.userNo)
+			return false;
 		return true;
 	}
+
 	
-	
-	
-	
-	
-	
+
+
 }
