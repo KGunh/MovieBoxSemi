@@ -18,7 +18,6 @@
         color: rgb(32,32,32);
     }
 	div{
-        border: 1px solid red;
         box-sizing: border-box;
     }
     a{
@@ -133,10 +132,6 @@
         border-radius: 8px;
     }
 
-    #select-wrap button:hover{
-        background-color: rgb(255, 193, 69);
-        color: rgb(32,32,32);
-    }
 
 
 </style>
@@ -238,7 +233,7 @@
 
     <script>
 
-        var peopleCount = 0;
+       
 
     	window.onload = function(){
             $.ajax({
@@ -252,7 +247,7 @@
                 }
             });
         };
-
+        var peopleCount = 0;
         $('.seats').click(e => {
             const $e = $(e.target);
             
@@ -270,11 +265,13 @@
             }
             else{
                 alert('선택 가능한 인원은 최대 8명입니다');
-                peopleCount = 0;
+                console.log($('.people-Count').eq(7));
                 $('.seats').removeClass('clicked');
-                $('.people-Count').removeAttr('style');
-                count();
+                $('.people-Count').eq(0).removeAttr('style');
+                peopleCount = 0;
             }
+
+
 
             count();
         });
@@ -282,8 +279,11 @@
         function count(){
             console.log(peopleCount);
             var clickSeat = $('#selectPerson').children().eq(peopleCount - 1);
-            clickSeat.css('background', 'rgb(255, 193, 69)'); 
-            $('#selectPerson').children().not(clickSeat).not().removeAttr('style');
+            
+            if(peopleCount > 0){
+                clickSeat.css('background', 'rgb(255, 193, 69)'); 
+                $('#selectPerson').children().not(clickSeat).not().removeAttr('style');
+            }
         };
        
 
