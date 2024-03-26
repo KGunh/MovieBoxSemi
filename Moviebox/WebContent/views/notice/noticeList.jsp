@@ -276,7 +276,7 @@ ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
             </div> <!-- search-notice -->
             
             <div id="qna-insert">
-                <button id="qna-insert-btn">글쓰기</button>
+                <button id="qna-insert-btn" onclick="insert();">글쓰기</button>
             </div>
             
             <!-- 게시판 -->
@@ -337,6 +337,10 @@ ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
     		
     		function openQnaPage(){
     			location.href = '<%=contextPath %>/list.qna'; 			
+    		}
+    		
+    		function insert(){
+    			location.href = '<%=contextPath%>/insert.notice';
     		}
     	
     	</script>
