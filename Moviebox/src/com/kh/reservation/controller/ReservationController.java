@@ -1,7 +1,6 @@
 package com.kh.reservation.controller;
 
 import java.util.ArrayList;
-import java.util.HashSet;
 import java.util.LinkedHashSet;
 import java.util.List;
 import java.util.Set;
@@ -9,6 +8,7 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
 import com.kh.reservation.model.service.ReservationService;
+import com.kh.reservation.model.vo.Seat;
 import com.kh.theater.model.vo.Screen;
 
 public class ReservationController {
@@ -44,6 +44,7 @@ public class ReservationController {
 	    // set으로 중복값 제거
 		for (Screen screen : list) {
 			Screen sc = new Screen();
+			
 			sc.setTheaterNo(screen.getTheaterNo());
 			sc.setTheaterName(screen.getTheaterName());
 			sc.setMovieNo(screen.getMovieNo());
@@ -57,6 +58,7 @@ public class ReservationController {
 		
 		for(Screen sc : set) {
 			Screen screen = new Screen();
+			
 			screen.setTheaterNo(sc.getTheaterNo());
 			screen.setTheaterName(sc.getTheaterName());
 			screen.setMovieNo(sc.getMovieNo());
@@ -86,10 +88,11 @@ public class ReservationController {
 	}
 
 	public String setSeat(HttpServletRequest request) {
+		int screenNo = Integer.parseInt(request.getParameter("screenNo"));
 		
+		List<Seat> seatlist = new ReservationService().selectSeatList(screenNo);
 		
-		
-		
+		request.setAttribute("seatList", seatlist);
 		
 		String view = "views/reservation/seatReservation.jsp";
 		

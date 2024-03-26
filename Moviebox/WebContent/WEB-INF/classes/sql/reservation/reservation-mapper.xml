@@ -39,7 +39,7 @@
 		       MOVIE_TITLE,
 		       MOVIE_NO,
 		       MOVIE_RT,
-		       TO_CHAR(WATCH_DATE, 'YY/MM/DD, HH24:MI') AS WATCH_DATE,
+		       TO_CHAR(WATCH_DATE,'HH24:MI') || '~' || TO_CHAR(WATCH_DATE + NUMTODSINTERVAL(TO_NUMBER(MOVIE_RT), 'MINUTE') , 'HH24:MI') AS WATCH_DATE,
 		       SCREEN_NAME||'관' AS SCREEN_NAME
 		  FROM
 		       TB_SCREEN
@@ -59,6 +59,22 @@
 		    BY
 		       THEATER_NO,
 		       WATCH_DATE
+	</entry>
+	
+	<entry key="selectSeatList">
+		SELECT
+		       SEAT_NO,
+		       SCREEN_NO,
+		       TICKET_NO
+		  FROM
+		       TB_SEAT
+		 WHERE
+		       SCREEN_NO = ?
+		 ORDER
+		    BY
+		       SUBSTR(SEAT_NO, 1, 1),
+			   CAST(SUBSTR(SEAT_NO, 2) AS NUMBER),
+		       SEAT_NO
 	</entry>
 	
 	
