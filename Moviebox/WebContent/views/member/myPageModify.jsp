@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.List,com.kh.member.model.vo.MemberGenre"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -177,39 +177,161 @@
             left:50%;
             transform:translate(-50%, -50%);
         }
+        a{
+            text-decoration: none;
+        }
+        #info-header{
+            width: 100%;
+            height: 175px;
+        }
+        #info-title{
+            width: 100%;
+            height: 100px;
+        }
+        .title{
+            display: block;
+            width: 100%;
+            height: 100%;
+            font-size: 30px;
+            font-weight: bold;
+            line-height: 100px;
+            text-align: center;
+            color: white;
+        }
+        #info-header-navi{
+            width: 1050px;
+            height: 75px;
+            margin : auto;
+        }
+        #info-header-navi ul{
+            list-style-type: none;
+            display: flex;
+            justify-content: center;
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        #info-header-navi li{
+            width: 50%;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            
+        }
+        .info-navi{
+            border-top: 1px solid lightgray;
+            border-bottom: 1px solid lightgray;
+        }
+        .info-my{
+            color: black;
+            text-decoration: none;
+            font-weight: bold;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            padding-top: 25px;
+        }
+        .info-list{
+            color: #FFC145;
+            font-weight: bold;
+            width: 100%;
+            height: 100%;
+            text-align: center;
+            padding-top: 25px;
+        }
+        .info-navi > a{
+        	text-decoration: none;
+        }
+        
+        
+        #info-navi-first{
+            background-color: #FFC145;
+        }
+        #info-navi-second{
+            background-color: #1A1A1A;
+        }
+        .info-my:hover{
+            text-decoration: none;
+            color: black;
+            
+        }
+        .info-list:hover{
+            text-decoration: none;  
+            color: #FFC145;   
+        }
     </style>
     
 </head>
 <body>
+	<%@ include file="../common/header.jsp" %>
+	
+	<div id="info-header">
+        <div id="info-title">
+            <span class="title">마이페이지</span>
+        </div>
+        <div id="info-header-navi">
+            
+            <ul class="info-navi">
+                <li id="info-navi-first">
+                    <a href="#" class="info-my">회원정보</a>
+                </li>
+                <li id="info-navi-second">
+                    <a href="<%=contextPath %>/resList.me" class="info-list">예매내역</a>
+                </li>
+            </ul>
+        </div>
+
+    </div>
+    <%
+	    String memberId = loginUser.getMemberId();
+		String memberName = loginUser.getMemberName();
+		String phone = loginUser.getPhone();
+		String birthday = loginUser.getBirthday();
+		String email = loginUser.getEmail();
+		String memberPwd = loginUser.getMemberPwd();
+		
+		String address = loginUser.getAddress();
+		String localCode = loginUser.getLocalCode();
+		List<MemberGenre> list = loginUser.getGenreList();
+		String genreList = "";
+		
+		for(int i = 0; i < list.size(); i++) {
+        	 genreList += list.get(i).getGenreCode() + (i < (list.size()-1) ? "," : "");
+		}
+		System.out.println(genreList);
+	%>
+    %>
 
     <div class="content">
         <div class="input-title"><span class="tit">내정보 수정</span></div>
         <div id="input-list">
-            <form action="">
+            <form action="<%=contextPath%>/update.me" method="post">
                 <div class="inputdiv">
                     <span class="input-span">생년월일</span><br>
-                    <input type="text" class="input-text N" disabled>
+                    <input type="text" class="input-text N" value="<%=birthday %>" disabled>
                 </div>
                 <div class="inputdiv">
                     <span class="input-span">이름</span><br>
-                    <input type="text" class="input-text N" disabled>
+                    <input type="text" class="input-text N" value="<%=memberName %>" disabled>
                 </div>
                 <div class="inputdiv">
                     <span class="input-span">전화번호</span><br>
-                    <input type="text" class="input-text N" disabled>
+                    <input type="text" class="input-text N" value="<%=phone %>"  disabled>
                 </div>
                 <div class="inputdiv">
                     <span class="input-span">아이디</span><br>
-                    <input type="text" class="input-text N" disabled>
+                    <input type="text" class="input-text N" value="<%=memberId %>" disabled>
                 </div>
                 <div class="inputdiv pwd">
                     <span class="input-span">비밀번호</span><br>
-                    <input type="password" class="input-text N password" disabled>
+                    <input type="password" class="input-text N password" value="<%=memberPwd %>"  disabled>
                     <button class="password-edit">변경</button>
                 </div>
                 <div class="inputdiv">
                     <span class="input-span">주소</span><br>
-                    <select name="" id="location">
+                    <select name="localCode" id="location">
                         <option>서울</option>
                         <option>경기</option>
                         <option>인천</option>
@@ -226,11 +348,11 @@
                         <option>광주</option>
 
                     </select>
-                    <input type="text" class="input-text address">
+                    <input type="text" class="input-text address" value="<%=address%>">
                 </div>
                 <div class="inputdiv">
                     <span class="input-span">이메일</span><br>
-                    <input type="text" class="input-text">
+                    <input type="text" class="input-text" value="<%=email %>" name="email">
                 </div>
                 <div class="checkbox-div">
                     <span class="input-span">취향</span><br>
@@ -262,6 +384,24 @@
                     <input id="edit" type="submit" value="정보수정">
                 </div>
             </form>
+            <script>
+                $(function(){
+                    const local = '<%=localCode%>';
+                    
+                    const genreList = '<%=genreList%>'
+                    $('#location').val(local).attr('selected',true);
+                    
+                    $('input[type=checkbox]').each(function(){	
+    					if(genreList.search($(this).val()) != -1){
+    						$(this).attr('checked',true);
+    					}
+    				});
+                    
+                });
+
+                
+                
+            </script>
 
 
         </div>

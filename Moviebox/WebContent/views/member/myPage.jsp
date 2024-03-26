@@ -331,7 +331,7 @@
         table{
         	float:left;
         	width: 40%;
-        	margin-left: 5%;
+        	margin: auto;
         }
         
 
@@ -379,7 +379,7 @@
 		String address = loginUser.getAddress();
 		String localCode = loginUser.getLocalCode();
 		
-		ArrayList<MemberGenre> list = loginUser.getGenreList();
+		List<MemberGenre> list = loginUser.getGenreList();
 		List<Reservation> resList = (ArrayList)request.getAttribute("list");
 		List<Movie> movieList = (ArrayList)request.getAttribute("movieList");
 		List<Board> boardList = (ArrayList)request.getAttribute("boardList");
@@ -476,7 +476,7 @@
                 	<div class="store-content">
                 	<% if(orderList != null) {%>
                 		<%for(int i = 0; i<orderList.size();i++) { %>
-                			<%if(i==2) break; %>
+                			<%if(i==1) break; %>
                         <table>
                             <thead>
                                 <tr>

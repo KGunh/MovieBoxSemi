@@ -42,6 +42,7 @@ public class MemberServlet extends HttpServlet {
 		String view = "";
 		boolean flag = true;
 
+		
 		switch (mapping) {
 		case "login": view = mc.login(request,response);break;
 		case "logout": view = mc.logout(request,response);  break;
@@ -53,6 +54,8 @@ public class MemberServlet extends HttpServlet {
 		case "resList" : view = mc.myReservation(request, response);  break;
 		case "pwdCheckForm" : view = "views/member/myPagePwdCheck.jsp"; break;
 		case "pwdCheck" : view = mc.pwdCheck(request, response); break;
+		case "update" : view = mc.update(request, response); flag = false; break;
+		
 		default : return;
 			
 	

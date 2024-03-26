@@ -12,7 +12,7 @@
 	            MEMBER_ID,	
 	            MEMBER_PWD,	
 	            MEMBER_NAME,	
-	            BIRTHDAY,	
+	            TO_CHAR(BIRTHDAY,'YYYY-MM-DD') AS BIRTHDAY,	
 	            GENDER,	
 	            EMAIL,	
 	            PHONE,	
@@ -116,6 +116,7 @@
   						FROM
         						(SELECT
                 							TICKET_NO,
+                							
                 							COUNT(CASE WHEN GRADE = 1 THEN 1 ELSE NULL END) AS GRADE_1_COUNT,
                 							COUNT(CASE WHEN GRADE = 2 THEN 1 ELSE NULL END) AS GRADE_2_COUNT
            							FROM
@@ -213,6 +214,8 @@
        	   TB_ORDER
  	 WHERE
        	   MEMBER_NO = ?
+     ORDER
+    	BY ORDER_NO DESC
 	</entry>
 	
 	<entry key="orderGoods">
@@ -230,4 +233,36 @@
 	
 	</entry>
 	
+	<entry key="selectlocal">
+	SELECT
+       	   LOCATION_CODE
+      FROM
+           TB_LOCATION
+     WHERE
+           LOCATION_NAME = ?
+	
+	
+	</entry>
+
+	<entry key="updateMember">
+	UPDATE
+       	   TB_MEMBER
+   	   SET
+       	   LOCAL_CODE = ?,
+           ADDRESS = ?,
+           EMAIL = ?,
+           UPDATE_DATE = SYSDATE
+ 	 WHERE
+           MEMBER_NO = ?
+	
+	
+	</entry>
+	
+	<entry key="memberGenreList">
+		DELETE
+  		  FROM  
+       		   TB_MEMBERGENRE
+ 		 WHERE
+       		   MEM_NO = ? 
+	</entry>
 </properties>
