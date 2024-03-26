@@ -67,12 +67,31 @@ public class NoticeDao {
 	
 	
 	// 글쓰기
-	public void insert(Connection conn, Notice notice) {
+	public int insert(Connection conn, Notice notice) {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insert");
 		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, notice.getNoticeCategory());
+			pstmt.setString(2, notice.getNoticeTitle());
+			pstmt.setString(3, notice.getNoticeContent());
+			pstmt.setInt(4, Integer.parseInt(notice.getNoticeWriter()));
+			
+			result = pstmt.executeUpdate();
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		
+		return result;
 	}
 
 

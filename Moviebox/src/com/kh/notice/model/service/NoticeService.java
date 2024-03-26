@@ -22,11 +22,21 @@ public class NoticeService {
 	}
 
 	// 글쓰기
-	public void insert(Notice notice) {
+	public int insert(Notice notice) {
 		
 		Connection conn = getConnection();
-		new NoticeDao().insert(conn, notice);
+		int result = new NoticeDao().insert(conn, notice);
 		
+		// 트랜잭션?
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
 	}
 
 

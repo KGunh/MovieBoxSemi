@@ -9,7 +9,7 @@
 	<entry key="selectQnaList">
 		SELECT
 			  BOARD_NO,
-			  BOARD_CATEGORY,
+			  CATEGORY_NO,
 			  BOARD_TITLE,
 			  BOARD_WRITER,
 			  TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE
@@ -17,7 +17,7 @@
 		  	  TB_BOARD
 		 ORDER
 		 	BY
-		 	  CREATE_DATE DESC	
+		 	  BOARD_NO DESC	
 	</entry>
 
 	

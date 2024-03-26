@@ -22,23 +22,27 @@ public class NoticeController {
 	
 
 	// 공지사항 글쓰기
-	public void insert(HttpServletRequest request) {
+	public String insert(HttpServletRequest request) {
 		
 		// request.getParameter로 값 뽑기
 		String noticeCategory = request.getParameter("category");
 		String noticeTitle = request.getParameter("title");
 		String noticeContent = request.getParameter("content");
-		String userNo = request.getParameter("userNo");
+		String memNo = request.getParameter("memNo");
 		
 		// 객체에 담기
 		Notice notice = new Notice();
 		notice.setNoticeCategory(noticeCategory);
 		notice.setNoticeTitle(noticeTitle);
 		notice.setNoticeContent(noticeContent);
-		notice.setNoticeWriter(userNo);
+		notice.setNoticeWriter(memNo);
 		
 		// 서비스로 넘기기
-		new NoticeService().insert(notice);
+		int result = new NoticeService().insert(notice);
+		
+		String view = "views/notice/noticeInsert.jsp";
+		
+		return view;
 	}
 
 }
