@@ -4,8 +4,16 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
-  <style>
+<title>게시글 문의글 등록,답변</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
+
+
+
+    <style>
 
         
         div{
@@ -17,7 +25,7 @@
         #wrap{
             /*width: 1200px;*/
             margin: 0 auto;
-            /*border : 1px solid red;*/
+            border : 1px solid red;
         }
 
         #top_wrap{
@@ -147,6 +155,7 @@
         #content_2_box { /*컨텐트2 전체 div*/
             width: 770px;
             height: 690px;
+            /* border : 1px solid rgb(255, 150, 79); */
         }
 
 
@@ -155,15 +164,107 @@
             margin-bottom: 30px;
             font-size: x-large;
             font-weight: bold;
-            
+            color: #ffffff;
         }  
 
         /* -------------------------------------------*/
 
 
+        #box_wrap{
+            /* border: 1px solid rgb(0, 255, 64); */
+            width: 500px;
+            height: 690px;
+            margin: auto;
+ 
+        }
+        #box_category{
+            /* border: 1px solid rgb(0, 183, 255); */
+            width: 480px;
+            height: 50px;
+            margin: auto;
+            float: left;
+            padding-top: 5px;
+            padding-left: 15px;
+        }
+
+        #box_1{
+            /* border: 1px solid rgb(255, 0, 149); */
+            width: 480px;
+            height: 50px;
+            margin: auto;
+            float: left;
+        }
+
+        #box_2{ 
+            /* border: 1px solid rgb(255, 0, 149); */
+            width: 470px;
+            height: 50px;
+            float: left;
+            padding-left: 17px;
+        }
+
+        #box_3{ /*form-control 테두리*/
+            /* border: 1px solid rgb(255, 0, 149); */
+            width: 470px;
+            height: 250px;
+            float: left;
+            padding-left: 17px;
+            margin-bottom: 7px;
+        }
+
+        .fileBox{ /*form-control 테두리*/
+            /* border: 1px solid rgb(0, 47, 255); */
+            width: 470px;
+            height: 50px;
+            float: left;
+            padding-left: 17px;
+            margin-top: 10px;
+        }
+        #file {
+            display: none;
+            display: inline;
+            float: left;
+        }
+
+        input[type=file]::file-selector-button {
+            width: 130px;
+            height: 40px;
+            background-color: #FFC145;
+            border: 1px solid lightgray;;
+            border-radius: 8px;
+            cursor: pointer;
+            text-align: center;
+            color: #323232;
+        }
 
 
+        
+        .title_p{
+            float: left;
+            padding-left: 15px;
+            font-size: 18px;
+            font-weight: bold;
+            line-height: 50px;
+ 			color: #ffffff;
+        }
 
+        #button{
+            /* border: 1px solid rgb(255, 0, 149); */
+            width: 470px;
+            float: left;
+            margin-top: 5px;
+        }
+
+        #category{ /*카테고리*/
+            border: 1px solid rgb(212, 212, 212);
+            border-radius: 8px;
+            width: 150px;
+            height: 37px;
+            font-size: 15px;
+            color: #727272;
+            padding-left: 7px;
+
+        }
 
 
 
@@ -172,9 +273,7 @@
 <body>
 	<!-- 헤더 -->
     <%@ include file="/views/common/header.jsp" %>
-    
     <div id="wrap">
-
 
         <div id="top_wrap">
             <div class="top_1">
@@ -194,7 +293,7 @@
                     </li>
                     <li>
                         <a href="<%=contextPath %>/adminMovieCheck.admin">영화 관리</a>
-                        <ul class="submenu" >
+                        <ul class="submenu">
 
                         </ul>
                     </li>
@@ -217,10 +316,45 @@
             <!------------------------------------------------------------>
 
             <div class="content_2"><!--content_2 시작-->
-                <p id="p">관리자 메인페이지</p>
+                <p id="p">게시글관리 > 문의 관리 > 문의하기</p>
 
             <form>
                 <div id="content_2_box"><!--컨텐트2 전체박스-->
+                    <div id="box_wrap">
+
+                        <div id="box_category">
+                            <select name="#" id="category" >
+                                <option value="">문의 종류 선택</option>
+                                <option value="">예매 문의</option>
+                                <option value="">영화관 문의</option>
+                                <option value="">굿즈 문의</option>
+                                <option value="">기타 문의</option>
+                            </select>
+                        </div>
+
+                        <div id="box_1">
+                            <p class="title_p">문의 제목</p>
+                        </div>
+
+                        <div id="box_2">
+                            <input type="text" class="form-control" name="title" style="border-radius: 8px;" value="넹?" >
+                        </div>
+
+                        <div id="box_1">
+                            <p class="title_p">문의 내용</p>
+                        </div>
+
+                        <div id="box_3">
+                            <textarea class="form-control" rows="5" name="content" style="resize:none; height: 250px; border-radius: 8px;" >환불!!</textarea>
+                        </div>
+
+
+                        
+                        <div id="button"><!--등록 버튼-->
+                            <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">등록</button>
+                            <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">목록</button>
+                        </div><!--등록 버튼-->
+                    </div>
  
 
                 </div><!--컨텐트2 전체박스 끝-->
@@ -233,7 +367,7 @@
 
     </div>
 
- 	<%@ include file="/views/common/footer.jsp" %>
+     	<%@ include file="/views/common/footer.jsp" %>
  	<!-- 푸터 -->
 </body>
 </html>

@@ -43,13 +43,25 @@ public class AdminPageServlet extends HttpServlet {
 	
 		switch(mapping) {
 		case "adminMovieCheck" :
-			view = "/views/admin/adminMovieCheck.jsp"; break;
-			
-		case "adminBoardDetail" :
-			view = "/views/admin/adminBoardDetail.jsp"; break;
+			view = "/views/admin/adminMovieCheck.jsp"; break; //영화관리
 			
 		case "adminMovieInsert" :
-			view = "/views/admin/adminMovieInsert.jsp"; break;
+			view = "/views/admin/adminMovieInsert.jsp"; break; //영화등록
+			
+			
+		case "adminBoardDetail" :
+			view = "/views/admin/adminBoardDetail.jsp"; break; //공지관리
+			
+		case "adminBoardInsert" :
+			view = "/views/admin/adminBoardInsert.jsp"; break; //공지등록
+			
+			
+		case "adminQnADetail" :
+			view = "/views/admin/adminQnADetail.jsp"; break; //문의관리
+			
+		case "adminQnAInsert" :
+			view = "/views/admin/adminQnAInsert.jsp"; break; //문의관리
+			
 			
 			
 		}

@@ -11,11 +11,17 @@ public class Notice {
 	private int count;
 	private String status;
 	private int memberNo;
+	
+	private String noticeWriter;
+	
+	
+	
+	
 	public Notice() {
 		super();
 	}
 	public Notice(int noticeNo, String noticeCategory, String noticeTitle, String noticeContent, String createDate,
-			int count, String status, int memberNo) {
+			int count, String status, int memberNo, String noticeWriter) {
 		super();
 		this.noticeNo = noticeNo;
 		this.noticeCategory = noticeCategory;
@@ -25,7 +31,17 @@ public class Notice {
 		this.count = count;
 		this.status = status;
 		this.memberNo = memberNo;
+		this.noticeWriter = noticeWriter;
 	}
+	
+	
+	public String getNoticeWriter() {
+		return noticeWriter;
+	}
+	public void setNoticeWriter(String noticeWriter) {
+		this.noticeWriter = noticeWriter;
+	}
+	
 	public int getNoticeNo() {
 		return noticeNo;
 	}

@@ -249,22 +249,22 @@
                         <div id="insert-box">
                             <div id="category-box">
                                 <div id="box-name">분류</div>
-                                <select name="#" id="select-category" >
-                                    <option value="">영화관</option>
-                                    <option value="">예매</option>
-                                    <option value="">굿즈</option>
-                                    <option value="">기타</option>
+                                <select name="category" id="select-category">
+                                    <option value="theater">영화관</option>
+                                    <option value="reservation">예매</option>
+                                    <option value="goods">굿즈</option>
+                                    <option value="etc">기타</option>
                                 </select>
                             </div> <!-- category box -->
 
                             <div id="title-box">
                                 <div id="box-name">제목</div>
-                                <input type="text" id="select-title">
+                                <input type="text" id="select-title" name="title">
                             </div>
 
                             <div id="content-box">
                                 <div id="box-name">내용</div>
-                                <textarea id="select-content" cols="30" rows="10"></textarea>
+                                <textarea id="select-content" cols="30" rows="10" name="content"></textarea>
                             </div>
 
                             

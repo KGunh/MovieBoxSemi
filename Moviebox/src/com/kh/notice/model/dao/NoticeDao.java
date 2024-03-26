@@ -29,7 +29,7 @@ public class NoticeDao {
 	}
 	
 
-
+	// 공지사항 목록 전체 출력 
 	public ArrayList<Notice> selectNoticeList(Connection conn) {
 		ArrayList<Notice> list = new ArrayList();
 		ResultSet rset = null;
@@ -53,9 +53,7 @@ public class NoticeDao {
 				notice.setCount(rset.getInt("COUNT"));
 			
 				list.add(notice);
-
 			}
-			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -64,11 +62,18 @@ public class NoticeDao {
 			close(pstmt);
 		}
 		
-		
 		return list;
 	}
 	
 	
+	// 글쓰기
+	public void insert(Connection conn, Notice notice) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		
+	}
 
 
 

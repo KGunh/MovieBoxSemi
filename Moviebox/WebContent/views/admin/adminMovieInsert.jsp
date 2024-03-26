@@ -269,11 +269,11 @@
 
 
         /*-------------------------------------------------------*/
-        #file {
+        #file { 
             display: none;
             display: inline;
             float: left;
-            color:#ffffff;
+            color:#ffffff;/*첨부파일색상*/
         }
 
         .fileBox{ /*파일선택버튼*/
@@ -281,6 +281,7 @@
             height: 40px;
             float: left;
             line-height: 40px;
+
         }
         
         .fileBox_2{/*파일명 박스*/
@@ -300,6 +301,7 @@
             cursor: pointer;
             margin-top: 10px;
             text-align: center;
+            
         }
 
         /*---------------------------------------*/
@@ -420,7 +422,7 @@
                         <a href="#">게시글 관리</a>
                         <ul class="submenu">
                         <li><a href="<%=contextPath %>/adminBoardDetail.admin">공지 관리</a></li>
-                        <li><a href="#">문의 게시글 관리</a></li>
+                        <li><a href="<%=contextPath %>/adminQnADetail.admin">문의 게시글 관리</a></li>
                         </ul>
                     </li>
                 </ul>    
@@ -532,7 +534,7 @@
 
 
 	 <%@ include file="/views/common/footer.jsp" %>
- 	<!-- 푸터 -->
+ 	 <!-- 푸터 -->
 
 
 </body>
