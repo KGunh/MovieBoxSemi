@@ -18,6 +18,7 @@
         color: rgb(32,32,32);
     }
 	div{
+        border: 1px solid red;
         box-sizing: border-box;
     }
     a{
@@ -77,12 +78,16 @@
 
     .seats:hover{
         cursor: pointer;
+        transform: scale(1.2);
     }
 
     .line-wrap{
         width: 750px;
         height: 50px;
         margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: center;
     }
 
     #selectText{
@@ -102,41 +107,62 @@
 
     #selectAge{
         float: left; 
-        margin-left: 15px;
-        margin-top: 20px;
+        margin-left: 70px;
+        margin-top: 10px;
     }
 
     #selectAge > button{
-        height: 45px;
-        width: 75px;
-        font-size: 20px;
+        height: 35px;
+        width: 65px;
+        font-size: 16px;
         font-weight: 700;
         border-radius: 8px;
-        background-color: rgba(70, 69, 69, 0.82);
-        color: rgb(125, 124, 124);
         border: none;
     }
 
     #selectPerson{
         float: left;
         margin-left: 20px;
-        margin-top: 20px;
+        margin-top: 10px;
     }
 
     #selectPerson > button{
-        background-color: rgba(70, 69, 69, 0.82);
-        color: rgb(125, 124, 124);
-        height: 45px;
-        width: 45px;
+        height: 35px;
+        width: 35px;
         border: none;
         border-radius: 8px;
     }
 
     #selectPerson > button:hover{
         background-color: rgb(255, 193, 69);
+        color: rgb(32,32,32);
     }
 
+    #seat-arrange{
+        width: 1000px;
+        margin: auto;
+        border: 1px solid rgb(125, 124, 124);
+    }
 
+    .container {
+        perspective: 1000px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: 0;
+    }
+
+    .screen {
+        width: 400px;
+        height: 80px;
+        background-color: white;
+        box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+    }
+    
+    .rotate {
+        transition: all 0.5s ease-out;
+        transform: rotateX(-50deg);
+    }
 
 </style>
 
@@ -174,51 +200,60 @@
         <div id="seat-wrap">
             <div id="seat-title"> 좌석 선택 </div>
             <div id="seat-arrange">
+                <div class="container">
+                    <div class="screen"></div>
+                </div>
                 <div id="a-line" class="line">
                     <div id="a-line-wrap" class="line-wrap">
-                        <% for(int i = 1; i <= 18; i++){ %>
+                        <% for(int i = 1; i <= 12; i++){ %>
                         	<div class="a-seat seats">A<%= i %></div>
                         <% } %>
                     </div>
                 </div>
                 <div id="b-line" class="line">
                     <div id="b-line-wrap" class="line-wrap">
-                        <% for(int i = 1; i <= 18; i++){ %>
+                        <% for(int i = 1; i <= 12; i++){ %>
                         	<div class="b-seat seats">B<%= i %></div>
                         <% } %>
                     </div>
                 </div>
                 <div id="c-line" class="line">
                     <div id="c-line-wrap" class="line-wrap">
-                         <% for(int i = 1; i <= 18; i++){ %>
+                         <% for(int i = 1; i <= 12; i++){ %>
                         	<div class="c-seat seats">C<%= i %></div>
                          <% } %>
                     </div>
                 </div>
                 <div id="d-line" class="line">
                     <div id="d-line-wrap" class="line-wrap">
-                         <% for(int i = 1; i <= 18; i++){ %>
+                         <% for(int i = 1; i <= 12; i++){ %>
                         	<div class="d-seat seats">D<%= i %></div>
                          <% } %>
                     </div>
                 </div>
                 <div id="e-line" class="line">
                     <div id="e-line-wrap" class="line-wrap">
-                        <% for(int i = 1; i <= 18; i++){ %>
+                        <% for(int i = 1; i <= 12; i++){ %>
                         	<div class="e-seat seats">E<%= i %></div>
                         <% } %>
                     </div>
                 </div>
                 <div id="f-line" class="line">
                     <div id="e-line-wrap" class="line-wrap">
-                         <% for(int i = 1; i <= 18; i++){ %>
+                         <% for(int i = 1; i <= 12; i++){ %>
                         	<div class="f-seat seats">F<%= i %></div>
                          <% } %>
                     </div>
                 </div>
             </div>
         </div>
-        <button>결제</button>
+        <button>좌석 선택</button>
+
+        <div id="select-seat-area">
+            <div id="select-seat">
+
+            </div>
+        </div>
 	</div>
 	<%@ include file="/views/common/footer.jsp" %>
 
@@ -228,16 +263,15 @@
             background-color: rgb(255, 193, 69);
         }
 
-        .unClicked{
-            border : none;
-            background-color: rgba(70, 69, 69, 0.82);
-        }
-
     </style>
 
     <script>
         var peopleCount = 0;
         
+        window.onload = function() {
+            $('.screen').addClass('rotate');
+        };
+
         /*
     	window.onload = function(){
             $.ajax({
@@ -253,22 +287,20 @@
         };
         */
         
+
+
         $('.people-Count').click(e => {
-            console.log($(e.target).html())
             peopleCount = $(e.target).html();
 
-            if($e.hasClass('clicked')){
-                $e.removeClass('clicked');
-                $e.addClass('unClicked');
-                peopleCount -= 1;
+            if($(e.target).hasClass('clicked')){
+                $('.people-Count').removeClass('clicked');
             } 
             else{
-                peopleCount += 1;
-                $e.removeClass('unClicked');
-                $e.addClass('clicked');
+                $('.people-Count').removeClass('clicked');
+                $(e.target).addClass('clicked');
             }
-
         });
+
 
 
 
