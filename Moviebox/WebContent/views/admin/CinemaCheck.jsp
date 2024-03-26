@@ -379,6 +379,8 @@
             margin-top: -15px;
 
         }
+        
+        
 
 
      
@@ -387,71 +389,41 @@
     </style>
 </head>
 <body>
-   <div id="header">
-      <div id="top-header">
-         <div id="login-area">
-            <a href="#" class="member">회원가입</a> <a href="#" class="member">로그인</a>
-         </div>
-      </div>
-      <div id="header-navigator">
-         <div id="logo-div">
-            <div id="logo">
-               <a href="#">MOVIE MOX</a>
-            </div>
-         </div>
-         <div id="navigator">
-            <div class="navi">
-               <a href="#" id="reservation">예매</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="movie">영화</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="theater">영화관</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="notice">고객센터</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="myPage">마이페이지</a>
-            </div>
-         </div>
-
-      </div>
-
-   </div>
-<!-- 여기까지가 헤더 -->
-
-<body>
-    <div id="wrap">
-        <!-- jsp에서 header include하기 -->
+   
+   	<!-- 헤더 -->
+    <%@ include file="/views/common/header.jsp" %>
     
+    <div id="wrap">
+
+
         <div id="top_wrap">
             <div class="top_1">
                 <h1>관리자</h1>
             </div>
-            <div class="top_2" style="color: white;">
-                <span><a href="#">로그아웃</a></span> | <span><a href="#">홈페이지</a></span>
-            </div>
+
         </div>
-        <div id="content" >
+
+        <div id="content">
             <div class="content_1">
                 <ul class="menu">
                     <li>
                         <a href="#">회원 관리</a>
                         <ul class="submenu">
+
                         </ul>
                     </li>
                     <li>
                         <a href="#">영화 관리</a>
                         <ul class="submenu">
+
                         </ul>
                     </li>
                     <li>
-                        <a href="#">영화관 관리</a>
+                        <a href="<%=contextPath%>/checkAdmin.cm">영화관 관리</a>
                         <ul class="submenu">
+
                         </ul>
-                    </li>
+                    </li> 
                     <li class="post">
                         <a href="#">게시글 관리</a>
                         <ul class="submenu">
@@ -459,9 +431,15 @@
                         <li><a href="#">문의 게시글 관리</a></li>
                         </ul>
                     </li>
-                </ul>
+                </ul>    
             </div>
-            <div class="content_2">
+
+            <!------------------------------------------------------------>
+
+            
+
+            
+                         <div class="content_2">
                 <h2>영화관 관리</h2>
                 <div class="content_2_top">
                  
@@ -479,9 +457,21 @@
                     </button>
 
                     <div id="delete" >
-                        <button class="btn1">등록</button>
+                        <button class="btn1" onclick="enrollment();">등록</button>
                        <!-- 수정/ 삭제 클릭해서 상세조회에서 함-->
                     </div>
+                    
+                    <script>
+                    	function enrollment(){
+                    		
+                    		location.href = '<%=contextPath%>/views/admin/CinemaInsert.jsp'; 
+                    		
+                    	}
+                    
+                    
+                    </script>
+                    
+                    
                 </div>
                
 
@@ -629,13 +619,19 @@
               
 
                </div > 
-                
+               
+                </div>
              
+  
 
-
-
-
-
-
+ 	<%@ include file="/views/common/footer.jsp" %>
+ 	<!-- 푸터 -->
+   
+   
+   
+   
+   
+   
+   
 </body>
 </html>

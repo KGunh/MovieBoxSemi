@@ -8,20 +8,73 @@
 	
 	<entry key="selectNoticeList">
 		SELECT
-			  NOTICE_NO,
-			  NOTICE_CATEGORY,
-			  NOTICE_TITLE,
-			  COUNT,
-			  TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE
+		      NOTICE_NO,
+		      CATEGORY_NAME,
+		      NOTICE_TITLE,
+		      COUNT,
+		      TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE
 		  FROM
-		  	  TB_NOTICE
+		      TB_NOTICE
+		  JOIN
+		      TB_CATEGORY ON(NOTICE_CATEGORY = CATEGORY_NO)
 		 ORDER
-		 	BY
-		 	  NOTICE_NO DESC	
+		    BY
+		      NOTICE_NO DESC
 	</entry>
 
 
-	<entry key="insert">
+	<entry key="selectNotice">
+		SELECT
+			  CATEGORY_NAME,
+			  NOTICE_TITLE,
+			  NOTICE_CONTENT,
+			  CREATE_DATE,
+			  COUNT
+		  FROM
+		  	  BOARD
+		   LEFT
+		  JOIN
+		  	  CATEGORY USING(CATEGORY_NO)
+		  JOIN
+		  	  MEMBER ON (BOARD_WRITER = USER_NO)
+		 WHERE
+		 	  BOARD_NO = ?
+		   AND
+		   	  BOARD.STATUS = 'Y'
+	
+	
+	</entry>
+
+
+	<!-- <entry key="increaseCount">
+		UPDATE
+			  TB_NOTICE
+		   SET
+		   	  COUNT = COUNT + 1
+		 WHERE
+		 	  NOTICE_NO
+		   AND
+		   	  STATUS = 'Y'
+	
+	</entry> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 	<entry key="insert">
 		INSERT
 		  INTO
 		  	  TB_NOTICE
@@ -34,12 +87,12 @@
 		  	  )
 		VALUES
 			  (
-			  SEQ_MEMNO.NEXTVAL,
+			  SEQ_NOTICENO.NEXTVAL,
 			  ?,
 			  ?,
 			  ?,
 			  ?
 			  )
-	</entry>
+	</entry> -->
 	
 </properties>

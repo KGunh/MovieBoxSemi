@@ -10,10 +10,11 @@ import java.util.List;
 import com.kh.common.model.vo.Location;
 import com.kh.movie.model.vo.Movie;
 import com.kh.reservation.model.dao.ReservationDao;
+import com.kh.reservation.model.vo.Seat;
 import com.kh.theater.model.vo.Screen;
 
 public class ReservationService {
-
+	
 	public List<Movie> selectMovieList() {
 		// 영화조회쪽이랑 상의해서 메소드 통일해야함!
 		Connection conn = getConnection();
@@ -44,6 +45,16 @@ public class ReservationService {
 		close(conn);
 		
 		return screenList;
+	}
+
+	public List<Seat> selectSeatList(int screenNo) {
+		Connection conn = getConnection();
+		
+		List<Seat> seatlist = new ReservationDao().selectSeatList(conn, screenNo);
+		
+		close(conn);
+		
+		return seatlist;
 	}
 
 	

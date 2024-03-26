@@ -251,8 +251,8 @@
                             <div id="category-box">
                                 <div id="box-name">분류</div>
                                 
-                                <input type="hidden" name="memNo" value="<%= loginUser.getMemberNo()%>" />
-                                
+                                <!-- <input type="hidden" name="userNo" value="< %= loginUser.getMemberNo()%>" /> -->                                
+                                <input type="hidden" name="userNo" value="<%= loginUser.getMemberNo()%>" />
                                 <select name="category" id="select-category">
                                     <option value="theater">영화관</option>
                                     <option value="reservation">예매</option>
