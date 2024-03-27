@@ -12,7 +12,7 @@
 					STATUS,
 					PHONE
 			  FROM
-					TB_MEMEBR
+					TB_MEMBER
 
 
 </entry>

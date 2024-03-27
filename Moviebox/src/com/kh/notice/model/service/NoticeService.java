@@ -1,10 +1,14 @@
 package com.kh.notice.model.service;
 
-import static com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.commit;
+import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.board.model.vo.Category;
 import com.kh.notice.model.dao.NoticeDao;
 import com.kh.notice.model.vo.Notice;
 
@@ -20,7 +24,7 @@ public class NoticeService {
 		return list;
 	}
 
-	
+	// 공지사항 조회
 	public Notice selectNotice(int noticeNo) {
 		Connection conn = getConnection();
 		
@@ -31,12 +35,39 @@ public class NoticeService {
 		return notice;
 		
 	}
-
 	
 	
+	// 공지사항 글쓰기
+	public int insertNotice(Notice notice) {
+		
+		Connection conn = getConnection();
+		
+		int result = new NoticeDao().insertNotice(conn, notice);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+		
+	}
 	
 	
+	// 카테고리
+	public ArrayList<Category> selectCategoryList(){
+		Connection conn = getConnection();
+		
+		ArrayList<Category> list = new NoticeDao().selectCategoryList(conn);
+		
+		close(conn);
+		
+		return list;
+	}
 	
+	
+	// 공지사항 글 수정
 	
 	
 	

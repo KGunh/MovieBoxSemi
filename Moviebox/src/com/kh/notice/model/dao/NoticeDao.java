@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.board.model.vo.Category;
 import com.kh.notice.model.vo.Notice;
 
 public class NoticeDao {
@@ -88,7 +89,7 @@ public class NoticeDao {
 		return result;
 	}
 
-
+	// 공지사항 조회
 	public Notice selectNotice(Connection conn, int noticeNo) {
 		
 		Notice n = null;
@@ -124,6 +125,61 @@ public class NoticeDao {
 	}
 	
 	
+	// 공지사항 글쓰기
+	public int insertNotice(Connection conn, Notice notice) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, notice.getNoticeTitle());
+			pstmt.setInt(2, notice.getUserNo());
+			pstmt.setString(3, notice.getNoticeContent());
+			pstmt.setInt(4, notice.getCategoryNo());
+			
+			
+			result = pstmt.executeUpdate();
+
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	
+	public ArrayList<Category> selectCategoryList(Connection conn){
+		
+		ArrayList<Category> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectCategoryList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Category(
+									 rset.getInt("CATEGORY_NO"),
+									 rset.getString("CATEGORY_NAME")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return list;
+	}
 	
 	
 	

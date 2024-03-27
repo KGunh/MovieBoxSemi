@@ -214,7 +214,11 @@
                 <!-- A grey horizontal navbar that becomes vertical on small screens -->
                 <ul class="nav">
                     <li class="nav-item">
+                    	<% if(loginUser == null) { %>
+                        <a class="nav-link" onclick="nologin();" href="<%=contextPath %>/loginForm.me"><span>예매</span></a>
+                        <%} else { %>
                         <a class="nav-link" href="<%=contextPath %>/movie.reservation"><span>예매</span></a>
+                        <%} %>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<%=contextPath %>/list.movie"><span>영화</span></a>
@@ -227,7 +231,8 @@
                     </li>
                     <li class="nav-item">
        					<% if(loginUser == null) { %>
-                        <a class="nav-link" href="<%=contextPath %>/loginForm.me"><span>마이페이지</span></a>
+       					
+                        <a class="nav-link" onclick="nologin();" href="<%=contextPath %>/loginForm.me"><span>마이페이지</span></a>
                         <%} else { %>
                         <a class="nav-link" href="<%=contextPath %>/mypage.me"><span>마이페이지</span></a>
                         <%} %>
@@ -235,6 +240,11 @@
                 </ul>
 
             </div>
+            <script>
+            	function nologin() {
+					alert('로그인이 필요한 서비스입니다');
+				}
+            </script>
 
         </div>
 
