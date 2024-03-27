@@ -44,7 +44,39 @@
 			
 	
 	</entry>
+	
+	
+	<entry key="insertNotice">
+		INSERT
+		  INTO
+		  	  TB_NOTICE
+		  	  (
+		  	  NOTICE_NO,
+		  	  NOTICE_TITLE,
+		  	  NOTICE_WRITER,
+		  	  NOTICE_CONTENT,
+		  	  CREATE_DATE,
+		  	  NOTICE_CATEGORY
+		  	  )
+		VALUES
+			  (
+			  SEQ_NOTICENO.NEXTVAL,
+			  ?,
+			  ?,
+			  ?,
+			  SYSDATE,
+			  ?
+			  )
+	
+	</entry>
 
+	<entry key="selectCategoryList">
+		SELECT
+			  CATEGORY_NO,
+			  CATEGORY_NAME
+		  FROM
+		  	  TB_CATEGORY
+	</entry>
 
 	<!-- <entry key="increaseCount">
 		UPDATE
