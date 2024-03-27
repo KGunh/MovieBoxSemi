@@ -70,15 +70,17 @@ public class NoticeController {
 		
 		HttpSession session = request.getSession();
 		
-		String noticeCategory = request.getParameter("category");
+		int categoryNo = Integer.parseInt(request.getParameter("category"));
 		String noticeTitle = request.getParameter("title");
 		String noticeContent = request.getParameter("content");
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		
 		// 가공
 		Notice notice = new Notice();
-		notice.setNoticeCategory(noticeCategory);
+		notice.setCategoryNo(categoryNo);
 		notice.setNoticeTitle(noticeTitle);
 		notice.setNoticeContent(noticeContent);
+		notice.setUserNo(userNo);
 		
 		int result = new NoticeService().insertNotice(notice);
 		request.setAttribute("noticeInsert", result);
@@ -86,12 +88,11 @@ public class NoticeController {
 		String view = "";
 		
 		if(result > 0) {
-			view = "views/notice/noticeList.jsp";
+			view = "/list.notice";
 		} else {
 			session.setAttribute("alertMsg", "공지사항 작성 실패");
 			view = "views/member/noticeInsert.jsp";
 		}
-		
 		
 		return view;
 	}

@@ -6,12 +6,15 @@ public class Notice {
 	private int noticeNo;
 	private String noticeTitle;
 	private String noticeContent;
-	private String noticeWriter; 
+	private String noticeWriter;
 	private String createDate;
 	private int count;
 	private String status;
 	
 	private String noticeCategory;
+	
+	private int categoryNo;
+	
 	private int userNo;
 	
 	
@@ -33,6 +36,18 @@ public class Notice {
 		this.noticeCategory = noticeCategory;
 		this.userNo = userNo;
 	}
+
+	
+
+	public int getCategoryNo() {
+		return categoryNo;
+	}
+
+
+	public void setCategoryNo(int categoryNo) {
+		this.categoryNo = categoryNo;
+	}
+
 
 
 	public int getNoticeNo() {
