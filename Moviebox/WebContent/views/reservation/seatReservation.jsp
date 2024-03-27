@@ -431,10 +431,14 @@
         // 좌석 선택 후 예매정보 하단에 표시
         $('#print-resv-info').click(function(){
             $.ajax({
-                url : 'seat.reservationAjax',
-            	type : 'get',
+                url : 'printInfo.reservationAjax',
+            	type : 'post',
             	data : {
-                    screenNo : <%= screenNo %>
+                    memberNo : <%= loginUser.getMemberNo() %>,
+                    screenNo : <%= screenNo %>,
+                    movieNo : ,
+                    people : ,
+                    
             	},
                 success : function(result){
                     console.log(result);

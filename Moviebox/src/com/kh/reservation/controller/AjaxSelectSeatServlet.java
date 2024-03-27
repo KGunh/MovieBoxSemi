@@ -31,11 +31,11 @@ public class AjaxSelectSeatServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Seat> screenList = new ReservationController().selectSeatList(request);
+		List<Seat> seatList = new ReservationController().selectSeatList(request);
 				
 		response.setContentType("application/json; charset=UTF-8");
 				
-		new Gson().toJson(screenList, response.getWriter());		
+		new Gson().toJson(seatList, response.getWriter());		
 	}
 
 	/**
