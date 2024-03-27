@@ -1,10 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ page import="com.kh.board.model.vo.Category, java.util.ArrayList "%>
+<%@ page import="com.kh.board.model.vo.Category, java.util.ArrayList,
+				 com.kh.notice.model.vo.Notice "%>
     
 <%
 	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("categoryList");
+	Notice notice = (Notice)request.getAttribute("notice");
 %>
     
     
@@ -262,16 +264,16 @@
 
 
                     <div class="detail-content-box">
-                        <form action="<%= contextPath %>/insert.notice" method="post" id="insert-box">
+                        <form action="<%= contextPath %>/update.notice" method="post" id="insert-box">
                         
-                        <input type="hidden" name="userNo" value="<%= loginUser.getMemberNo()%>" />
+                        <input type="hidden" name="noticeNo" value="<%= notice.getNoticeNo()%>" />
                             
                             <div id="category-box">
                                 <div id="box-name">분류</div>
                                 
                                 <select name="category" id="select-category">
                                 <% for(Category c : list) { %>
-									<option value="<%= c.getCategoryNo() %>">
+									<option class="<%= c.getCategoryName()%>" value="<%= c.getCategoryNo() %>">
 										<%= c.getCategoryName() %>
 									</option>
 								<% } %>
@@ -280,12 +282,12 @@
 
                             <div id="title-box">
                                 <div id="box-name">제목</div>
-                                <input type="text" id="select-title" name="title">
+                                <input type="text" id="select-title" name="title" value="">
                             </div>
 
                             <div id="content-box">
                                 <div id="box-name">내용</div>
-                                <textarea id="select-content" cols="30" rows="10" name="content"></textarea>
+                                <textarea id="select-content" cols="30" rows="10" name="content"><%= notice.getNoticeContent() %></textarea>
                             </div>
 	
 	                        <div id="insert-btn" align="center">
@@ -306,6 +308,21 @@
 	<% } %>
     
     <%@ include file="../common/footer.jsp" %>
+    
+    <script>
+    
+    	$(function(){
+    		
+    		$('option[class="<%=notice.getCategoryNo()%>"]').attr('selected', 'true');
+    		
+    	})
+    	
+    	
+    	
+    	
+    	
+    
+    </script>
 
     
 </body>

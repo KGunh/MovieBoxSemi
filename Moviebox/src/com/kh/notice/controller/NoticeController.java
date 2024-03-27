@@ -96,6 +96,26 @@ public class NoticeController {
 		
 		return view;
 	}
+	
+	// 공지사항 글 수정
+	public String updateNoticeForm(HttpServletRequest request, HttpServletResponse response) {
+		
+		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+		Notice notice = new NoticeService().selectNotice(noticeNo);
+		
+		request.setAttribute("notice", notice);
+		
+		String view = "views/notice/noticeUpdateForm.jsp";
+		
+		return view;
+	}
+	
+	public String updateNotice(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		return null;
+	}
+	
 
 	
 
