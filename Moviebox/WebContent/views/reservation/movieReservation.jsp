@@ -241,8 +241,6 @@
 	                                </div>
 	                            </div>
                             <% } %>
-                            <input id="movieNo" name="movieNo" type="hidden">
-                            <input id="movieTitle" name="movieTitle" type="hidden">
                         </div>
                     	
                         <div class="swiper-pagination"></div>
@@ -269,10 +267,13 @@
                 </div>
             </div>
             <div id="selectScreenArea">
-                <div id="printScreen">
-                    
-                </div>
+                <div id="printScreen"></div>
+                
+                <input id="movieNo" type="hidden" name="movieNo">
+                <input id="movieTitle" type="hidden" name="movieTitle">
                 <input id="screenNo" type="hidden" name="screenNo">
+                <input id="screenName" type="hidden" name="screenName">
+                
                 <button id="submit-btn" type="submit">좌석 선택</button>
             </div>
         </form>
@@ -314,6 +315,7 @@
 		
         function selectScreenNo(e){
             document.getElementById('screenNo').value = e.children[1].value;
+            document.getElementById('screenName').value = e.children[2].value;
         };
        
         function selectScreen(){
@@ -336,6 +338,7 @@
                             resultStr +=        '<div class="screenName" onclick="selectScreenNo(this);">'
                                         +            '<span style="color: black;">' + result[i].watchDateList[j] + '</span>'
                                         +            '<input type="hidden" value="' + result[i].screenNoList[j] + '">'
+                                        +            '<input type="hidden" value="' + result[i].screenNameList[j] + '">'
                                         +        '</div>'
                         };
                         resultStr +=    '</div>';

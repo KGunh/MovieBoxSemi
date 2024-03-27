@@ -4,6 +4,7 @@
 <%
 	String screenNo = (String)request.getAttribute("screenNo");
 	String movieNo = (String)request.getAttribute("movieNo");
+	String movieTitle = (String)request.getAttribute("movieTitle");
 	String screenDate = (String)request.getAttribute("screenDate");
 
 %>
