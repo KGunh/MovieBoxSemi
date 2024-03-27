@@ -280,4 +280,16 @@
 	</entry>
 	
 	
+	<entry key="updatePwd">
+		UPDATE
+			   TB_MEMBER
+		   SET
+		   	   MEMBER_PWD = ?
+		 WHERE
+		 	   MEMBER_NO = ?
+		
+		
+		
+		
+	</entry>
 </properties>

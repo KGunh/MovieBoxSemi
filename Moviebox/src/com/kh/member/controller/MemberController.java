@@ -13,6 +13,7 @@ import com.kh.board.model.vo.Board;
 import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.Reservation;
 import com.kh.goods.model.vo.Order;
+import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 import com.kh.movie.model.vo.Movie;
@@ -194,7 +195,6 @@ public class MemberController {
 		} else {
 			List<Reservation> list = new MemberService().myPagePrint(loginUser);
 			
-			System.out.println(list);
 			if (list.isEmpty()) {
 				return view ="views/member/myReservation.jsp";
 			} else {
@@ -317,9 +317,39 @@ public class MemberController {
 			}
 		}
 		
-
+	}
+	public String updatePwd(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		String view = "";
+		Member loginUser = (Member)session.getAttribute("loginUser");
 		
-
+		int memberNo = loginUser.getMemberNo();
+		String changePwd = request.getParameter("changePwd");
+		
+		
+		Member m = new Member();
+		
+		m.setMemberNo(memberNo);
+		m.setMemberPwd(changePwd);
+		
+		int result = new MemberService().updatePwd(m);
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "수정에 성공했습니다.");
+			
+			
+			Member updateMem = new MemberService().login(loginUser);
+			
+			session.setAttribute("loginUser", updateMem);
+			
+			view = "/Updateform.me";
+		}else {
+			session.setAttribute("alertMsg", "수정에 실패했습니다.");
+			view = "/Updateform.me";
+		}
+		
+		return view;
+		
 	}
 	
 	

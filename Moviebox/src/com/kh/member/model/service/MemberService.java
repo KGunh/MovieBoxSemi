@@ -9,6 +9,9 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
 import com.kh.board.model.vo.Answer;
 import com.kh.board.model.vo.Board;
 import com.kh.common.model.vo.Genre;
@@ -163,6 +166,19 @@ public class MemberService {
 		
 		
 		
+	}
+	
+	public int updatePwd(Member m) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().updatePwd(conn, m);
+		
+		
+		if(result > 0) commit(conn);
+		
+		close(conn);
+		
+		return result;
 	}
 	
 

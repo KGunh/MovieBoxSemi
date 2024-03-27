@@ -1,6 +1,7 @@
 package com.kh.member.model.dao;
 
 import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.getConnection;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -548,7 +549,31 @@ public class MemberDao {
 	}
 	
 
-	
+	public int updatePwd(Connection conn,Member m) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updatePwd");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			
+			
+			pstmt.setString(1, m.getMemberPwd());
+			pstmt.setInt(2, m.getMemberNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+		
+	}
 	
 	
 	

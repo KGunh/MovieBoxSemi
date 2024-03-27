@@ -276,6 +276,7 @@
         	margin: auto;
         	width: 100%;
         	height: auto;
+            padding-left: 19px;
         }
         #modal-content{
         	width: 480px;
@@ -304,6 +305,15 @@
         #errorText{
             font-size: 12px;
             color: red;
+        }
+        .form-group{
+            position: relative;
+        }
+        .form-group > span{
+            display: block;
+            position: absolute;
+            bottom: -15px;
+            font-size: 12px;
         }
     </style>
     
@@ -452,7 +462,7 @@
     </div>
     
 
-<div class="modal" id="updatePwd">
+<div class="modal" id="updatePwd" >
 		<div class="modal-dialog" id="modal-margin">
 			<div class="modal-content" id="modal-content">
 
@@ -463,23 +473,24 @@
 
 				
 				<div class="modal-body" id="modal-body">
-					<form action="<%=contextPath%>/updatePwd.me" method="post">
+					<form action="<%=contextPath%>/updatePwd.me" method="post" id="pwdUpdateForm">
 						<div class="form-group">
 							<label for="userPwd">현재 비밀번호</label> 
-							<input type="password" class="form-control" name="userPwd" placeholder="비밀번호를 입력해주세요" id="userPwd" required>
-                            <span id="errorText2"></span>
+							<input type="password" class="form-control" name="userPwd" placeholder="비밀번호를 입력해주세요" id="userPwd">
+                            <span id="errorText1"></span>
 						</div>
 						<div class="form-group">
 							<label for="changePwd">변경할 비밀번호</label> 
-							<input type="password" class="form-control"  name="changePwd" placeholder="변경할 비밀번호를 입력해주세요" id="changePwd" required>
+							<input type="password" class="form-control"  name="changePwd" placeholder="변경할 비밀번호를 입력해주세요" id="changePwd">
+                            <span id="errorText2"></span>
 						</div>
 						
 						<div class="form-group">
 							<label for="checkPwd">변경할 비밀번호 확인</label> 
-							<input type="password" class="form-control"  placeholder="다시 한번 입력해주세요" id="checkPwd" required>
-                            <span id="errorText"></span>
+							<input type="password" class="form-control"  placeholder="다시 한번 입력해주세요" id="checkPwd">
+                            <span id="errorText3"></span>
 						</div>
-						<button type="submit" class="btn btn-warning" id="modal-btn">비밀번호 변경</button>
+						<button type="button" class="btn btn-warning" id="modal-btn">비밀번호 변경</button>
 						<input type="hidden" value="<%=loginUser.getMemberNo() %>" name="userNo">
                         <script>
                             $(function(){
@@ -495,10 +506,10 @@
                                             if(result == 'N') {
                                                 $userPwd.css('border','1px solid red');
                                                 $userPwd.val('').focus();
-                                                $('#errorText').html('잘못된 입력입니다. 다시입력해주세요').css('color','red');
+                                                $('#errorText1').html('잘못된 입력입니다. 다시입력해주세요').css('color','red');
                                             } else{
                                             	$userPwd.removeAttr('style');
-                                                $('#errorText').html('');
+                                                $('#errorText1').html('');
                                             }
                                         }
 
@@ -512,9 +523,54 @@
                         </script>
                         <script>
                         $(function(){
+                        	$('#modal-btn').click(function(){
+                                const $userPwd = $('#userPwd');
+                                const $changePwd = $('#changePwd');
+                                const $checkPwd = $('#checkPwd');
+
+                                if($userPwd.val() == ''){
+                                    $('#errorText1').html('값이 비어있습니다').css('color','red');
+                                } 
+                                if($changePwd.val() == ''){
+                                    $('#errorText2').html('값이 비어있습니다').css('color','red');
+                                }
+                                if($checkPwd.val() == ''){
+                                    $('#errorText3').html('값이 비어있습니다').css('color','red');
+                                }
+								
+                                if($userPwd.val() != '' && $changePwd.val() != '' && $checkPwd.val() != ''){
+                                	$('#pwdUpdateForm').submit();
+                                }
+
+                            });
                         	
-                        	
-                        })
+                        });
+                        </script>
+                        <script>
+					
+                            $(function(){
+
+                                $('#changePwd').blur(function(){
+                                    const $changePwd = $(this).val();
+                                    const $checkPwd = $('#checkPwd').val();
+                                    if($changePwd != ''){
+                                        $('#changePwd').removeAttr('style');
+                                        $('#errorText2').html('');
+                                    }
+                                    if($changePwd != $checkPwd){
+                                        $('#checkPwd').css('border','1px solid red');
+                                        $('#errorText3').html('잘못된 입력입니다. 다시입력해주세요').css('color','red');
+                                    } 
+                                    else{
+                                        $('#checkPwd').removeAttr('style');
+                                        $('#errorText3').html('');
+                                    }
+
+                                });
+                                
+                            });
+                            
+                            
                         </script>
 						<script>
 					
@@ -525,11 +581,11 @@
                                     const $checkPwd = $(this).val();
                                     if($changePwd != $checkPwd){
                                         $('#checkPwd').css('border','1px solid red');
-                                        $('#errorText').html('잘못된 입력입니다. 다시입력해주세요').css('color','red');
+                                        $('#errorText3').html('잘못된 입력입니다. 다시입력해주세요').css('color','red');
                                     } 
                                     else{
                                         $('#checkPwd').removeAttr('style');
-                                        $('#errorText').html('');
+                                        $('#errorText3').html('');
                                     }
 
                                 });
