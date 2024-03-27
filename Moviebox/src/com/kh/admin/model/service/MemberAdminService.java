@@ -2,6 +2,7 @@ package com.kh.admin.model.service;
 import com.kh.member.model.vo.Member;
 
 import java.sql.Connection;
+import java.util.ArrayList;
 import java.util.List;
 
 import com.kh.admin.model.dao.MemberAdminDao;
@@ -11,12 +12,12 @@ import com.kh.common.JDBCTemplate.*;
 public class MemberAdminService {
 	
 
-	public List<Member>selectMemberAdmin(){
+	public ArrayList<Member>selectMemberAdmin(){
 		
-		List<Member> member = null;
+		 
 		Connection conn = JDBCTemplate.getConnection();
 		
-		member = new MemberAdminDao().selectMemberAdmin(conn);
+		ArrayList<Member> member = new MemberAdminDao().selectMemberAdmin(conn);
 		
 		
 		JDBCTemplate.close(conn);

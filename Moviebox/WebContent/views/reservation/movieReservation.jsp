@@ -329,7 +329,6 @@
             	},
             	success : function(result){
                     var resultStr = '';
-
                     for(let i = 0; i < result.length; i++){
                         resultStr += '<div class="screen">'
                                     +     '<div class="theaterName">' + result[i].theaterName + '</div>';

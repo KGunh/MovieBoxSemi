@@ -219,7 +219,7 @@
             <div id="seat-title"> 좌석 선택 </div>
             <div id="seat-arrange">
                 <div class="screen-wrap">
-                    <div class="screen"></div>
+                    <div class="screen rotate"></div>
                 </div>
                 <div id="a-line" class="line">
                     <div id="a-line-wrap" class="line-wrap">
@@ -287,8 +287,6 @@
         var peopleCount = 0;
        
         window.onload = function() {
-            $('.screen').addClass('rotate');
-            
             $.ajax({
                 url : 'seat.reservationAjax',
             	type : 'get',
