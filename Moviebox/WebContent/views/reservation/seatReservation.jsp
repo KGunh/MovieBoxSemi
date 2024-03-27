@@ -21,7 +21,7 @@
         color: rgb(32,32,32);
     }
 	div{
-        border: 1px solid red;
+        /*border: 1px solid red;*/
         box-sizing: border-box;
     }
     a{
@@ -47,7 +47,7 @@
     }
 
     #selectPersonArea{
-        height: 250px;
+        height: 270px;
         width: 100%;
     }
 
@@ -167,6 +167,16 @@
 
     .ageBtn:hover{
         background-color: rgb(255, 193, 69);
+    }
+
+    #select-people{
+        height: 70px;
+        width: 200px;
+        margin: auto;
+        text-align: center;
+        color: rgb(125, 124, 124);
+        font-size: 16px;
+        font-weight: 500;
     }
 
     /* 스크린 모양 만들기 */
@@ -295,9 +305,10 @@
 
     <script>
         var peopleCount = 0;
+        var selectPeople = 0;
         var ageType = '';
-        var resvTeen = [];
-        var resvAdult = [];
+        var resvTeen = ['', 0];
+        var resvAdult = ['', 0];
 
         window.onload = function() {
             $.ajax({
@@ -328,15 +339,60 @@
                 $('.people-Count').removeClass('clicked');
                 $(e.target).addClass('clicked');
             }
+            
+            printPeople();
         });
+        // 청소년 성인 구분하여 숫자넣기
+        $('.ageBtn').click(e => {
+            if($(e.target).hasClass('clicked')){
+                $('.ageBtn').removeClass('clicked');
+
+                ageType = '';
+            } 
+            else{
+                $('.ageBtn').removeClass('clicked');
+                $('.people-Count').removeClass('clicked');
+                $(e.target).addClass('clicked');
+                ageType = ($(e.target).html() == '성인' ? 'adult' : 'teen');
+            };
+            
+            printPeople();
+        });
+        // 선택한 인원 보여주기
+        function printPeople(){
+            if(ageType == 'teen'){
+                resvTeen = [ageType, peopleCount];
+                
+            }
+            else if(ageType == 'adult') {
+                resvAdult = [ageType, peopleCount];
+
+            };
+
+            selectPeople = resvTeen[1] + resvAdult[1];
+
+            if(Number(resvTeen[1] + resvAdult[1]) < 9){
+                $('#select-people').html(
+                    '<div>청소년 : ' + resvTeen[1] + '명</div>'
+                   +'<div>  성인 : ' + resvAdult[1] + '명</div>'
+                   +'<div>  전체 : ' + selectPeople + '명</div>'
+                );
+            } 
+            else {
+                alert('선택 가능한 인원은 최대 8명입니다!');
+                $('#select-people').html('');
+            };
+
+            peopleCount = 0;
+        };
 
         $('.seats').click(e => {
             if($(e.target).hasClass('clicked')){
                 $(e.target).removeClass('clicked');
-                peopleCount += 1;
+                selectPeople += 1;
             } 
             else{
-                if(peopleCount < 1 ){
+                if(selectPeople < 1 ){
                     if(!$('.people-Count').hasClass('clicked')){
                          alert('인원을 먼저 선택해주세요.');
                     }
@@ -346,38 +402,12 @@
                 }
                 else{
                     $(e.target).addClass('clicked');
-                    peopleCount -= 1;
+                    selectPeople -= 1;
                 };
             };
         });
 
-        $('.ageBtn').click(e => {
-            if($(e.target).hasClass('clicked')){
-                $('.ageBtn').removeClass('clicked');
-                ageType = '';
-            } 
-            else{
-                $('.ageBtn').removeClass('clicked');
-                $(e.target).addClass('clicked');
-                ageType = ($(e.target).html() == '성인' ? 'adult' : 'teen');
-            };
-            
-            if(ageType == 'teen'){
-                resvTeen = [ageType, peopleCount];
-            }
-            else if(ageType == 'adult') {
-                resvAdult = [ageType, peopleCount];
-            };
-            
-            if((resvTeen[1] + resvAdult[1]) < 9){
-                alert('선택 가능한 인원은 최대 8명입니다!');
-            } 
-            else {
-                
-            }
-
-
-        });
+        
 
         // 좌석 선택 후 예매정보 하단에 표시
         function selectResv(){
