@@ -38,6 +38,9 @@ public class AdminPageServlet extends HttpServlet {
 		
 		AdminPageController admin = new AdminPageController();
 		
+		
+		
+		
 		String view = "";
 		boolean flag = true;
 	
@@ -49,14 +52,14 @@ public class AdminPageServlet extends HttpServlet {
 			view = "/views/admin/adminMovieInsert.jsp"; break; //영화등록
 			
 			
-		case "adminBoardDetail" :
+		case "adminBoardCheck" :
 			view = "/views/admin/adminBoardCheck.jsp"; break; //공지목록
 			
 		case "adminBoardInsert" :
 			view = "/views/admin/adminBoardInsert.jsp"; break; //공지등록
 			
 			
-		case "adminQnADetail" :
+		case "adminQnACheck" :
 			view = "/views/admin/adminQnACheck.jsp"; break; //문의목록
 			
 		case "adminQnAInsert" :

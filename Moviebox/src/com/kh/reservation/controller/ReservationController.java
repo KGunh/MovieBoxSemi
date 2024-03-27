@@ -96,10 +96,11 @@ public class ReservationController {
 	// 영화 선택 후 좌석 선택화면으로 보내는 메소드
 	public String connectSeatList(HttpServletRequest request) {
 		request.setAttribute("movieNo", request.getParameter("movieNo"));
-		request.setAttribute("screenNo", request.getParameter("movieTitle"));
+		request.setAttribute("movieTitle", request.getParameter("movieTitle"));
 		request.setAttribute("screenDate", request.getParameter("screenDate"));
 		request.setAttribute("screenNo", request.getParameter("screenNo"));
-	
+		request.setAttribute("screenName", request.getParameter("screenName"));
+		
 		String view = "views/reservation/seatReservation.jsp";
 		
 		return view;

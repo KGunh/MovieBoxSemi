@@ -1,5 +1,6 @@
 package com.kh.member.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -291,6 +292,37 @@ public class MemberController {
 		
 		return view;
 	}
+	
+	public void pwdDuplicationCheck(HttpServletRequest request, HttpServletResponse response) {
+		String checkPwd = request.getParameter("checkPwd");
+		
+		HttpSession session = request.getSession();
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		String loginUserPwd = loginUser.getMemberPwd();
+		response.setContentType("text/html; charset=UTF-8");
+		
+		if(checkPwd.equals(loginUserPwd)) {
+			try {
+				response.getWriter().print("Y");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		} else {
+			try {
+				response.getWriter().print("N");
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		
+
+		
+
+	}
+	
+	
 	
 	
 	

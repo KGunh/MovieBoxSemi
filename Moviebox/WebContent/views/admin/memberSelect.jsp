@@ -2,9 +2,11 @@
     pageEncoding="UTF-8" import = " java.util.ArrayList, com.kh.member.model.vo.Member" 
     %>
     
+    
 <%
 
 ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
+String contextPath = request.getContextPath();
 %>    
 
     <!DOCTYPE html>
@@ -504,8 +506,9 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                             </tr>
                           </thead>
                           <tbody>
-                        
+                       
                            <% for(Member m : mb){ %>
+                                <tr class="member">
                                 <td><input type="checkbox" name="check" value="check" id="check"></td>
                                 <td><%= m.getMemberNo() %></td>
                                 <td><%= m.getMemberName()%></td>
@@ -521,6 +524,23 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                         </table>
                       </div>
                       </div>
+                      
+                      <script> 
+                      
+                    	$(function(){
+                    		
+                    		$('.member').click(function(){
+                    			
+                    			const memberNo = $(this).children().eq(1).text();
+                    			location.href='<%=contextPath%>/modifyAdmin.mb?memberNo=' + memberNo;
+                    			
+                    		});
+                    		
+                    		
+                    	})  
+                      
+                      
+                      </script>
 
 
                       <div id="cnt2_paging-area"> 
