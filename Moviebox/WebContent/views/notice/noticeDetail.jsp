@@ -166,7 +166,7 @@
         .detail-content{
             padding: 10px;
             padding-top: 20px;
-            padding-bottom: 20px;
+            padding-bottom: 100px;
             border-bottom: 1px solid #3f3f3f;
         }
 
@@ -234,9 +234,12 @@
                 </div> <!-- notice-content -->
 
                 <div class="notice-btn" align="center">
-                    <button class="notice-detail-btn">목록</button>
-                    <button class="notice-detail-btn">수정</button> <!-- 관리자로 로그인 했을 때만 보이기 -->
-                    <button class="notice-detail-btn">삭제</button> <!-- 관리자로 로그인 했을 때만 보이기 -->
+                    <button class="notice-detail-btn" onclick="backPage();">목록</button>
+                    <!-- 관리자로 로그인 했을 때만 보이기 -->
+                    <% if(loginUser != null && loginUser.getMemberId().equals("admin")) { %>
+                    <button class="notice-detail-btn" onclick="noticeUpdatePage();">수정</button> 
+                    <button class="notice-detail-btn">삭제</button>
+                    <% } %>
                 </div>
 
 
@@ -254,6 +257,14 @@
     		
     		function openQnaPage(){
     			location.href = '<%=contextPath %>/list.qna'; 			
+    		}
+    		
+    		function backPage(){
+    			location.href = '<%=contextPath%>/list.notice';
+    		}
+    		
+    		function noticeUpdatePage(){
+    			location.href = '<%=contextPath%>/updateForm.notice?noticeNo=<%=notice.getNoticeNo()%>';
     		}
     		
     	</script>
