@@ -21,7 +21,7 @@
         color: rgb(32,32,32);
     }
 	div{
-        /*border: 1px solid red;*/
+        border: 1px solid red;
         box-sizing: border-box;
     }
     a{
@@ -31,7 +31,7 @@
 
     #wrap{
         width: 1200px;
-        height: 1000px;
+        height: auto;
     }
 
     #title{
@@ -47,7 +47,7 @@
     }
 
     #selectPersonArea{
-        height: 270px;
+        height: 280px;
         width: 100%;
     }
 
@@ -170,13 +170,32 @@
     }
 
     #select-people{
-        height: 70px;
+        height: 80px;
         width: 200px;
         margin: auto;
         text-align: center;
         color: rgb(125, 124, 124);
         font-size: 16px;
         font-weight: 500;
+    }
+
+    #print-resv-info{
+        color: rgb(32,32,32);
+        background-color: rgb(255, 193, 69);
+        height: 60px;
+        width: 150px;
+        border: 0;
+        font-size: 24px;
+        font-weight: 700;
+        margin-left: 850px;
+    }
+
+    #select-seat-area{
+        width: 800px;
+        margin: auto;
+        padding-top: 50px;
+        padding-bottom: 50px;
+        height: auto;
     }
 
     /* 스크린 모양 만들기 */
@@ -285,7 +304,7 @@
                 </div>
             </div>
         </div>
-        <button onclick="selectResv();">좌석 선택</button>
+        <button id="print-resv-info" >좌석 선택</button>
 
         <div id="select-seat-area">
             <div id="select-seat">
@@ -304,10 +323,10 @@
     </style>
 
     <script>
-        var peopleCount = 0;
-        var selectPeople = 0;
-        var ageType = '';
-        var resvTeen = ['', 0];
+        var peopleCount = 0; // 연령별 선택한 인원
+        var selectPeople = 0; // 총 인원
+        var ageType = ''; // 연령
+        var resvTeen = ['', 0]; 
         var resvAdult = ['', 0];
 
         window.onload = function() {
@@ -410,9 +429,22 @@
         
 
         // 좌석 선택 후 예매정보 하단에 표시
-        function selectResv(){
+        $('#print-resv-info').click(function(){
+            $.ajax({
+                url : 'printInfo.reservationAjax',
+            	type : 'post',
+            	data : {
+                    screenNo : <%= screenNo %>,
+                    movieNo : <%= movieNo %>
+            	},
+                success : function(result){
+                    console.log(result);
+                },
+                error : function(){
 
-        };
+                }
+            });
+        });
 
 
 
