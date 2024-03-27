@@ -68,7 +68,21 @@ public class NoticeService {
 	
 	
 	// 공지사항 글 수정
-	
+	public int updateNotice(Notice notice) {
+		
+		Connection conn = getConnection();
+		
+		int result = new NoticeDao().updateNotice(conn, notice);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+		
+	}
 	
 	
 	
