@@ -4,6 +4,7 @@
 <%
 	String screenNo = (String)request.getAttribute("screenNo");
 	String movieNo = (String)request.getAttribute("movieNo");
+	String movieTitle = (String)request.getAttribute("movieTitle");
 	String screenDate = (String)request.getAttribute("screenDate");
 
 %>
@@ -60,19 +61,23 @@
 
     .line{
         height: 50px;
-        width: 100%;
+        width: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin: auto;
     }
 
     .seats{
-        float: left;        
-        height: 30px;
+        height: 28px;
         width: 30px;
         margin-top: 8px;
-        margin-left: 10px;
         font-size: 14px;
+        font-weight: 600;
         text-align: center;
         line-height: 30px;
-        border-radius: 6px;
+        border-top-left-radius: 12px;
+        border-top-right-radius: 12px;
         background-color: rgba(70, 69, 69, 0.82);
         color: rgb(125, 124, 124);
     }
@@ -84,11 +89,11 @@
 
     .line-wrap{
         width: 750px;
-        height: 50px;
+        height: 70px;
         margin: auto;
         display: flex;
         align-items: center;
-        justify-content: center;
+        justify-content: space-evenly;
     }
 
     #selectText{
@@ -101,15 +106,21 @@
     }
     
     #select-wrap{
-        height: 150px;
+        height: 50px;
         width: 600px;
         margin-left: 300px;
+    }
+    #movie-info{
+        width: 600px;
+        height: 50px;
+        margin-left: 300px;
+        color: rgb(125, 124, 124);
     }
 
     #selectAge{
         float: left; 
         margin-left: 70px;
-        margin-top: 10px;
+        margin-top: 5px;
     }
 
     #selectAge > button{
@@ -124,7 +135,7 @@
     #selectPerson{
         float: left;
         margin-left: 20px;
-        margin-top: 10px;
+        margin-top: 5px;
     }
 
     #selectPerson > button{
@@ -146,6 +157,10 @@
         border: 1px solid rgb(125, 124, 124);
     }
 
+    #select-seat{
+        color: rgb(125, 124, 124);
+    }
+    /* 스크린 모양 만들기 */
     .screen-wrap {
         height: 100px;
         perspective: 1000px;
@@ -163,7 +178,6 @@
     }
     
     .rotate {
-        transition: all 0.001ms ease-out;
         transform: rotateX(-50deg);
     }
 
@@ -182,6 +196,7 @@
                     최대 8명까지 선택 가능
                 </div>
             </div>
+            <div id="movie-info">선택한 영화정보 출력영역</div>
             <div id="select-wrap">
                 <div id="selectAge">
                     <button>청소년</button>
@@ -204,7 +219,7 @@
             <div id="seat-title"> 좌석 선택 </div>
             <div id="seat-arrange">
                 <div class="screen-wrap">
-                    <div class="screen"></div>
+                    <div class="screen rotate"></div>
                 </div>
                 <div id="a-line" class="line">
                     <div id="a-line-wrap" class="line-wrap">
@@ -254,7 +269,7 @@
 
         <div id="select-seat-area">
             <div id="select-seat">
-
+                예매 예정 정보 출력 영역
             </div>
         </div>
 	</div>
@@ -272,8 +287,6 @@
         var peopleCount = 0;
        
         window.onload = function() {
-            $('.screen').addClass('rotate');
-            
             $.ajax({
                 url : 'seat.reservationAjax',
             	type : 'get',
@@ -287,7 +300,6 @@
 
                 }
             });
-            
         };
 
         // 인원수 버튼에 대한 스타일동작 및 값처리
@@ -320,8 +332,6 @@
                     peopleCount -= 1;
                 };
             };
-
-
         });
 
          

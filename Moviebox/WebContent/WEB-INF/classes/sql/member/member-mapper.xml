@@ -258,11 +258,24 @@
 	
 	</entry>
 	
-	<entry key="memberGenreList">
+	<entry key="deleteGenreList">
 		DELETE
   		  FROM  
        		   TB_MEMBERGENRE
  		 WHERE
        		   MEM_NO = ? 
+	</entry>
+	
+	<entry key="genreUpdateInsert">
+		INSERT
+		  INTO
+		  	   TB_MEMBERGENRE
+		VALUES(?,(SELECT
+       				    GENRE_CODE
+ 				   FROM
+       				    TB_GENRE
+ 				   WHERE
+       					 GENRE_NAME = ?))
+	
 	</entry>
 </properties>
