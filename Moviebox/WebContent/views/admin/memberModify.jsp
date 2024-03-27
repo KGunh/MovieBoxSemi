@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+    pageEncoding="UTF-8" import = " java.util.ArrayList, com.kh.member.model.vo.Member" %>
+ <% Member m = (Member)request.getAttribute("member"); %>
         
  
 
@@ -265,7 +265,7 @@
        
        #buttoon{
         float: right;
-        margin-top: 10px;
+        margin-top: 70px;
         margin-right: 30px;
        }
             
@@ -500,48 +500,57 @@
                           <tr>
                             <tbody>
                             <th class="title">회원번호</th>
-                            <td>0822A</td>
+                            <td><%=m.getMemberNo() %></td>
                         </tr>
-                            <tr>
-                              <th class="title">아이디</th>
-                              <td>grace3510</td>
-                            </tr>
+                           
                             <tr>  
                               <th class="title">이름</th>
-                              <td>유은혜</td>
+                              <td><%=m.getMemberName() %></td>
+                              
                             </tr>
+                            
+                             <tr>
+                              <th class="title">아이디</th>
+                              <td><%=m.getMemberId() %></td>
+                            </tr>
+                            
+                             <tr>
+                              <th class="title">비밀번호</th>
+                              <td><%=m.getMemberPwd() %></td>
+                            </tr>
+                            
                             <tr>  
+                            
                               <th class="title">성별</th>
-                              <td>F</td>
+                              <td><%=m.getGender() %></td>
                             </tr>  
                             <tr>
                               <th class="title">생년월일</th>
-                              <td>920324</td> 
+                              <td><%=m.getBirthday() %></td> 
+                            </tr>
+                             <tr>
+                              <th class="title">이메일</th>
+                              <td><%=m.getEmail() %></td> 
                             </tr>
                             <tr>
                               <th class="title">주소</th>
-                              <td>경기도 여주시 대신면 후포리</td>
+                              <td><%=m.getAddress() %></td>
                             </tr>
                             <tr>  
                               <th class="title">전화번호</th>
-                              <td>010-7455-4474</td>
+                              <td><%=m.getPhone() %></td>
                             </tr>
                             <tr>
                               <th class="title">가입일</th>
-                              <td>22/08/22</td>
+                              <td><%=m.getEmail() %></td>
                             </tr>  
                             <tr>
-                              <th class="title">취향</th>
-                              <td>마블 히어로</td>
+                              <th class="title">탈퇴여부</th>
+                              <td><%=m.getStatus() %></td>
                             </tr>
-                          
-                      
-                        
-                         
-                                
-
-
-                              </tbody>
+                            
+                           
+                          </tbody>
                               </table>
 
                 </div>

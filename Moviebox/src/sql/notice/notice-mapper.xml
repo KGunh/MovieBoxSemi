@@ -77,6 +77,25 @@
 		  FROM
 		  	  TB_CATEGORY
 	</entry>
+	
+	
+	<entry key="updateNotice">
+		UPDATE
+	      	  TB_NOTICE
+	       SET
+		      NOTICE_CATEGORY = ?,
+		      NOTICE_TITLE = ?,
+		      NOTICE_CONTENT = ?
+	 	 WHERE
+	      	  NOTICE_NO = ?
+	   	   AND
+	      	  STATUS = 'Y'
+	</entry>
+	
+	
+	
+	
+	
 
 	<!-- <entry key="increaseCount">
 		UPDATE

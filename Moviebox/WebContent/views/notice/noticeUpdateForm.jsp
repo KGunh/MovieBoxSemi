@@ -7,6 +7,7 @@
 <%
 	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("categoryList");
 	Notice notice = (Notice)request.getAttribute("notice");
+	Category category = (Category)request.getAttribute("category");
 %>
     
     
@@ -271,18 +272,29 @@
                             <div id="category-box">
                                 <div id="box-name">분류</div>
                                 
+                                
                                 <select name="category" id="select-category">
+                                
                                 <% for(Category c : list) { %>
-									<option class="<%= c.getCategoryName()%>" value="<%= c.getCategoryNo() %>">
+									<option class="<%= c.getCategoryNo()%>" value="<%= c.getCategoryNo() %>">
 										<%= c.getCategoryName() %>
 									</option>
 								<% } %>
+								
                                 </select>
+                                
+                                    <script>
+								    	$(function(){
+								    		$('option[class="<%=notice.getCategoryNo()%>"]').attr('selected', 'true');
+								    	})
+    
+								    </script>
+								    
                             </div> <!-- category box -->
 
                             <div id="title-box">
                                 <div id="box-name">제목</div>
-                                <input type="text" id="select-title" name="title" value="">
+                                <input type="text" id="select-title" name="title" value="<%= notice.getNoticeTitle() %>">
                             </div>
 
                             <div id="content-box">
@@ -309,20 +321,7 @@
     
     <%@ include file="../common/footer.jsp" %>
     
-    <script>
-    
-    	$(function(){
-    		
-    		$('option[class="<%=notice.getCategoryNo()%>"]').attr('selected', 'true');
-    		
-    	})
-    	
-    	
-    	
-    	
-    	
-    
-    </script>
+
 
     
 </body>

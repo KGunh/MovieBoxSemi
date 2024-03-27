@@ -8,20 +8,10 @@
 
 
 	<entry key="selectListCount">
-			SELECT
-			    MOVIE_NO,
-			    MOVIE_RELEASE,
-			    MOVIE_TITLE,
-			    MOVIE_RATED,
-			    GENRE_NAME,
-			    MOVIE_UPDATE
-			FROM
-			    TB_MOVIE
-			JOIN
-			    TB_GENRE ON(GENRE_NO = GENRE_CODE)
-			ORDER
-			   BY
-			     MOVIE_RELEASE DESC 
+		SELECT
+			   COUNT(*)
+	      FROM
+	           TB_MOVIE
 	</entry>
 
 

@@ -112,8 +112,32 @@ public class NoticeController {
 	
 	public String updateNotice(HttpServletRequest request, HttpServletResponse response) {
 		
+		HttpSession session = request.getSession();
 		
-		return null;
+		int categoryNo = Integer.parseInt(request.getParameter("categoryNo"));
+		String noticeTitle = request.getParameter("title");
+		String noticeContent = request.getParameter("content");
+		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+		
+		Notice notice = new Notice();
+		notice.setCategoryNo(categoryNo);
+		notice.setNoticeTitle(noticeTitle);
+		notice.setNoticeContent(noticeContent);
+		notice.setNoticeNo(noticeNo);
+		
+		int result = new NoticeService().updateNotice(notice);
+		request.setAttribute("notice", result);
+		
+		String view = "";
+		
+		if(result > 0) {
+			view = "/update.notice";
+		} else {
+			session.setAttribute("alertMsg", "공지사항 수정 실패");
+			view = "view/notice/noticeUpdateForm.jsp";
+		}
+		
+		return view;
 	}
 	
 
