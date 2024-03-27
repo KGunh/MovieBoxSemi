@@ -234,7 +234,7 @@
     
     <% if(loginUser == null) { %>
     	<script>
-    		alert('회원만 작성 가능');
+    		alert('관리자만 작성 가능합니다.');
     	</script>
 
 	<% } else { %>

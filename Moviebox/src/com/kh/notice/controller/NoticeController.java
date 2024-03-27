@@ -54,6 +54,17 @@ public class NoticeController {
 		return view;
 	}
 	
+	// 카테고리
+	public String selectCategoryList(HttpServletRequest request, HttpServletResponse response) {
+		ArrayList<Category> list = new NoticeService().selectCategoryList();
+		request.setAttribute("categoryList", list);
+		
+		String view = "views/notice/noticeInsert.jsp";
+		
+		return view;
+		
+	}
+	
 	// 공지사항 글쓰기
 	public String insertNotice(HttpServletRequest request, HttpServletResponse response) {
 		
@@ -77,7 +88,7 @@ public class NoticeController {
 		if(result > 0) {
 			view = "views/notice/noticeList.jsp";
 		} else {
-			session.setAttribute("alertMsg", "잘못된 비밀번호입니다 다시 입력해주세요.");
+			session.setAttribute("alertMsg", "공지사항 작성 실패");
 			view = "views/member/noticeInsert.jsp";
 		}
 		
@@ -86,16 +97,7 @@ public class NoticeController {
 	}
 
 	
-	// 카테고리
-	public String selectCategoryList(HttpServletRequest request, HttpServletResponse response) {
-		ArrayList<Category> list = new NoticeService().selectCategoryList();
-		request.setAttribute("categoryList", list);
-		
-		String view = "views/notice/noticeInsert.jsp";
-		
-		return view;
-		
-	}
+
 	
 	
 	

@@ -141,8 +141,9 @@ public class NoticeDao {
 			pstmt.setString(3, notice.getNoticeContent());
 			pstmt.setInt(4, Integer.parseInt(notice.getNoticeCategory()));
 			
-			result = pstmt.executeUpdate();
 			
+			result = pstmt.executeUpdate();
+			System.out.println(result);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
