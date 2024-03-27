@@ -67,6 +67,7 @@ public class ReservationController {
 			screen.setMovieRt(sc.getMovieRt());
 			screen.setScreenNo(sc.getScreenNo());
 			
+			
 			screenList.add(screen);
 		};
 		
@@ -74,16 +75,19 @@ public class ReservationController {
 		for(int i = 0; i < screenList.size(); i++) {
 		    List<String> watchDateList = new ArrayList<>();
 		    List<Integer> screenNoList = new ArrayList<>();
+		    List<String> screenNameList = new ArrayList<>();
 
 		    for(int j = 0; j < list.size(); j++) {
 		        if(list.get(j).getTheaterNo() == screenList.get(i).getTheaterNo()) {
 		            watchDateList.add(list.get(j).getWatchDate());
 		            screenNoList.add(list.get(j).getScreenNo());
+		            screenNameList.add(list.get(j).getScreenName());
 		        };
 		    };
 
-		    screenList.get(i).setScreenNoList(screenNoList);
+		    screenList.get(i).setScreenNameList(screenNameList);
 		    screenList.get(i).setWatchDateList(watchDateList);
+		    screenList.get(i).setScreenNoList(screenNoList);
 		};
 		
 		return screenList;
@@ -92,6 +96,7 @@ public class ReservationController {
 	// 영화 선택 후 좌석 선택화면으로 보내는 메소드
 	public String connectSeatList(HttpServletRequest request) {
 		request.setAttribute("movieNo", request.getParameter("movieNo"));
+		request.setAttribute("screenNo", request.getParameter("movieTitle"));
 		request.setAttribute("screenDate", request.getParameter("screenDate"));
 		request.setAttribute("screenNo", request.getParameter("screenNo"));
 	
@@ -102,7 +107,7 @@ public class ReservationController {
 	
 	public List<Seat> selectSeatList(HttpServletRequest request) {
 		int screenNo = Integer.parseInt(request.getParameter("screenNo"));
-		System.out.println(screenNo);
+
 		return new ReservationService().selectSeatList(screenNo);		
 	}
 	

@@ -12,7 +12,7 @@ public class Screen {
 	private int movieRt;
 	private List<String> watchDateList;
 	private List<Integer> screenNoList;
-	
+	private List<String> screenNameList;
 	
 	public Screen() {
 		super();
@@ -62,7 +62,6 @@ public class Screen {
 	public void setTheaterName(String theaterName) {
 		this.theaterName = theaterName;
 	}
-	
 	public int getMovieRt() {
 		return movieRt;
 	}
@@ -82,6 +81,12 @@ public class Screen {
 	}
 	public void setScreenNoList(List<Integer> screenNoList) {
 		this.screenNoList = screenNoList;
+	}
+	public List<String> getScreenNameList() {
+		return screenNameList;
+	}
+	public void setScreenNameList(List<String> screenNameList) {
+		this.screenNameList = screenNameList;
 	}
 	@Override
 	public String toString() {

@@ -237,10 +237,10 @@
 	                                <div class="poster">
 	                                    <img src="<%= contextPath %>/<%= m.getFilePath() %>/<%= m.getFileName() %>" alt="영화포스터">
                                         <input type="hidden" value="<%= m.getMovieNo() %>">
+                                        <input type="hidden" value="<%= m.getMovieTitle() %>">
 	                                </div>
 	                            </div>
                             <% } %>
-                            <input id="movieNo" name="movieNo" type="hidden">
                         </div>
                     	
                         <div class="swiper-pagination"></div>
@@ -267,10 +267,13 @@
                 </div>
             </div>
             <div id="selectScreenArea">
-                <div id="printScreen">
-                    
-                </div>
+                <div id="printScreen"></div>
+                
+                <input id="movieNo" type="hidden" name="movieNo">
+                <input id="movieTitle" type="hidden" name="movieTitle">
                 <input id="screenNo" type="hidden" name="screenNo">
+                <input id="screenName" type="hidden" name="screenName">
+                
                 <button id="submit-btn" type="submit">좌석 선택</button>
             </div>
         </form>
@@ -306,11 +309,13 @@
                 $('.poster').not(this).removeAttr('style');
                 $(this).css('transform', 'scale(1.1)');
                 $('#movieNo').val($(this).children().eq(1).val());
+                $('#movieTitle').val($(this).children().eq(2).val());
             });
         });
 		
         function selectScreenNo(e){
             document.getElementById('screenNo').value = e.children[1].value;
+            document.getElementById('screenName').value = e.children[2].value;
         };
        
         function selectScreen(){
@@ -333,6 +338,7 @@
                             resultStr +=        '<div class="screenName" onclick="selectScreenNo(this);">'
                                         +            '<span style="color: black;">' + result[i].watchDateList[j] + '</span>'
                                         +            '<input type="hidden" value="' + result[i].screenNoList[j] + '">'
+                                        +            '<input type="hidden" value="' + result[i].screenNameList[j] + '">'
                                         +        '</div>'
                         };
                         resultStr +=    '</div>';
