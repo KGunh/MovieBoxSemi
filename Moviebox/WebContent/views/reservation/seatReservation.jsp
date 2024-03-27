@@ -2,10 +2,11 @@
     pageEncoding="UTF-8"%>
 <%@ page  %>
 <%
+    String screenDate = (String)request.getAttribute("screenDate");
+    String screenName = (String)request.getAttribute("screenName");
+	String movieTitle = (String)request.getAttribute("movieTitle");
 	String screenNo = (String)request.getAttribute("screenNo");
 	String movieNo = (String)request.getAttribute("movieNo");
-	String movieTitle = (String)request.getAttribute("movieTitle");
-	String screenDate = (String)request.getAttribute("screenDate");
 
 %>
 
@@ -20,7 +21,7 @@
         color: rgb(32,32,32);
     }
 	div{
-        /*border: 1px solid red;*/
+        border: 1px solid red;
         box-sizing: border-box;
     }
     a{
@@ -46,7 +47,7 @@
     }
 
     #selectPersonArea{
-        height: 200px;
+        height: 250px;
         width: 100%;
     }
 
@@ -60,12 +61,21 @@
     }
 
     .line{
-        height: 50px;
+        height: 55px;
         width: 500px;
         display: flex;
         align-items: center;
         justify-content: center;
         margin: auto;
+    }
+
+    .line-wrap{
+        width: 750px;
+        height: 55px;
+        margin: auto;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
     }
 
     .seats{
@@ -87,15 +97,6 @@
         transform: scale(1.2);
     }
 
-    .line-wrap{
-        width: 750px;
-        height: 70px;
-        margin: auto;
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
-    }
-
     #selectText{
         height: 100px;
         color: rgb(255, 193, 69);
@@ -114,7 +115,10 @@
         width: 600px;
         height: 50px;
         margin-left: 300px;
-        color: rgb(125, 124, 124);
+        color: rgb(255, 193, 69);
+        text-align: center;
+        font-size: 24px;
+        font-weight: 500;
     }
 
     #selectAge{
@@ -160,6 +164,11 @@
     #select-seat{
         color: rgb(125, 124, 124);
     }
+
+    .ageBtn:hover{
+        background-color: rgb(255, 193, 69);
+    }
+
     /* 스크린 모양 만들기 */
     .screen-wrap {
         height: 100px;
@@ -196,11 +205,11 @@
                     최대 8명까지 선택 가능
                 </div>
             </div>
-            <div id="movie-info">선택한 영화정보 출력영역</div>
+            <div id="movie-info"><%= movieTitle %> <%= screenName %> <%= screenDate %></div>
             <div id="select-wrap">
                 <div id="selectAge">
-                    <button>청소년</button>
-                    <button>성인</button>
+                    <button class="people-teen ageBtn">청소년</button>
+                    <button class="people-adult ageBtn">성인</button>
                 </div>
                 <div id="selectPerson">
                     <button class="people-Count">1</button>
@@ -333,6 +342,16 @@
                 };
             };
         });
+
+        $('.ageBtn').click(e => {
+            if($(e.target).hasClass('clicked')){
+                $('.ageBtn').removeClass('clicked');
+            } 
+            else{
+                $('.ageBtn').removeClass('clicked');
+                $(e.target).addClass('clicked');
+            }
+        })
 
          
     	

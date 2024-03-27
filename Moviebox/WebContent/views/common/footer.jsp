@@ -97,11 +97,6 @@
 			</div>
 		</div>
 	</div>
-
-    <script>
-        $(function(){
-            location.href = location.href;
-        })
-    </script>
+    
 </body>
 </html>
