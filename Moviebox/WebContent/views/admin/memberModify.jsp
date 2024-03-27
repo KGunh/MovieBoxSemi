@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-
+    pageEncoding="UTF-8" import = " java.util.ArrayList, com.kh.member.model.vo.Member" %>
+ <% Member m = (Member)request.getAttribute("member"); %>
         
  
 
@@ -500,59 +500,56 @@
                           <tr>
                             <tbody>
                             <th class="title">회원번호</th>
-                            <td></td>
+                            <td><%=m.getMemberNo() %></td>
                         </tr>
                            
                             <tr>  
                               <th class="title">이름</th>
-                              <td></td>
+                              <td><%=m.getMemberName() %></td>
                               
                             </tr>
                             
                              <tr>
                               <th class="title">아이디</th>
-                              <td></td>
+                              <td><%=m.getMemberId() %></td>
                             </tr>
                             
                              <tr>
                               <th class="title">비밀번호</th>
-                              <td></td>
+                              <td><%=m.getMemberPwd() %></td>
                             </tr>
                             
                             <tr>  
                             
                               <th class="title">성별</th>
-                              <td></td>
+                              <td><%=m.getGender() %></td>
                             </tr>  
                             <tr>
                               <th class="title">생년월일</th>
-                              <td></td> 
+                              <td><%=m.getBirthday() %></td> 
                             </tr>
                              <tr>
                               <th class="title">이메일</th>
-                              <td></td> 
+                              <td><%=m.getEmail() %></td> 
                             </tr>
                             <tr>
                               <th class="title">주소</th>
-                              <td></td>
+                              <td><%=m.getAddress() %></td>
                             </tr>
                             <tr>  
                               <th class="title">전화번호</th>
-                              <td></td>
+                              <td><%=m.getPhone() %></td>
                             </tr>
                             <tr>
                               <th class="title">가입일</th>
-                              <td></td>
+                              <td><%=m.getEmail() %></td>
                             </tr>  
                             <tr>
                               <th class="title">탈퇴여부</th>
-                              <td></td>
+                              <td><%=m.getStatus() %></td>
                             </tr>
                             
-                             <tr>
-                              <th class="title">최근 수정 날짜</th>
-                              <td></td>
-                            </tr>
+                           
                           </tbody>
                               </table>
 

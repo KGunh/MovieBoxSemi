@@ -69,7 +69,7 @@ public class MemberAdminDao {
 			
 	}
 	
-	public Member editAdmin(Connection conn){
+	public Member editAdmin(Connection conn, int memberNo){
 		
 		Member m = new Member(); 
 		
@@ -79,9 +79,10 @@ public class MemberAdminDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
 			rset = pstmt.executeQuery(sql);
 			
-		while(rset.next()) {
+		if(rset.next()) {
 			
 			
 						m.setMemberNo(rset.getInt("MEMBER_NO"));
@@ -94,6 +95,7 @@ public class MemberAdminDao {
 						m.setPhone(rset.getString("PHONE"));
 						m.setEnrollDate(rset.getDate("ENROLL_DATE"));
 						m.setStatus(rset.getString("STATUS"));
+						
 						
 						
 		}

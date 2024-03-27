@@ -46,9 +46,9 @@ public class MemberAdminController {
 	
 	public String editAdmin(HttpServletRequest request) {
 		
-			
+			int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		
-			Member m =new MemberAdminService().editAdmin();
+			Member m =new MemberAdminService().editAdmin(memberNo);
 			
 		
 		request.setAttribute("member", m);

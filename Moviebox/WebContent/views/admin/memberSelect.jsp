@@ -2,6 +2,7 @@
     pageEncoding="UTF-8" import = " java.util.ArrayList, com.kh.member.model.vo.Member" 
     %>
     
+    
 <%
 
 ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
@@ -530,7 +531,7 @@ String contextPath = request.getContextPath();
                     		
                     		$('.member').click(function(){
                     			
-                    			const memberNo = $(this).children().eq(2).text();
+                    			const memberNo = $(this).children().eq(1).text();
                     			location.href='<%=contextPath%>/modifyAdmin.mb?memberNo=' + memberNo;
                     			
                     		});

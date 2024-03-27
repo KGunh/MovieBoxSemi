@@ -28,12 +28,12 @@ public class MemberAdminService {
 		
 	}
 	
-	public Member editAdmin(){
+	public Member editAdmin(int memberNo){
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
 		
-		Member member =new MemberAdminDao().editAdmin(conn);
+		Member member =new MemberAdminDao().editAdmin(conn,memberNo);
 		JDBCTemplate.close(conn);
 		
 		return member;
