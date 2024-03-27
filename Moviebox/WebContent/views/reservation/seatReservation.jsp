@@ -434,11 +434,8 @@
                 url : 'printInfo.reservationAjax',
             	type : 'post',
             	data : {
-                    memberNo : <%= loginUser.getMemberNo() %>,
                     screenNo : <%= screenNo %>,
-                    movieNo : ,
-                    people : ,
-                    
+                    movieNo : <%= movieNo %>
             	},
                 success : function(result){
                     console.log(result);
