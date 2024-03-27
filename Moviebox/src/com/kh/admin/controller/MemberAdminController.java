@@ -1,6 +1,7 @@
 package com.kh.admin.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -16,9 +17,11 @@ public class MemberAdminController {
 	
 	public void selectAdmin(HttpServletRequest request) {
 		
-		List<Member> member =new MemberAdminService().selectMemberAdmin();
-		
+		ArrayList<Member> member =new MemberAdminService().selectMemberAdmin();
+		System.out.println(member);
 
+		/*
+		
 		for(int i = 0; i<member.size(); i++) {
 			
 			request.setAttribute("memberNo", member.get(i).getMemberNo());
@@ -29,10 +32,12 @@ public class MemberAdminController {
 			
 			//request.getRequestDispatcher("views/admin/memberSelect.jsp").forward(request, response);		
 		
-			
+		
 		}
 		
+		*/	
 		
+		request.setAttribute("member", member);
 		
 		
 	}

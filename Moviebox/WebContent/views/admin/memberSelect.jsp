@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import = " java.util.ArrayList, com.kh.member.model.vo.Member" 
+    %>
+    
+<%
+
+ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
+%>    
 
     <!DOCTYPE html>
 <html lang="en">
@@ -465,9 +471,9 @@
                 <div class="content_2_top">
                  
                    <select name="#" id="select" >
-                    <option value="">전체</option>
+                    <option value="" >전체</option>
                     <option value="">가입일</option>
-                    <option value="">취향</option>
+                    <option value="">탈퇴여부</option>
                    </select>
                     <input type="search" id="find">
                     <button type="submit" id="btn" style="background-color: #FFC145;">
@@ -493,20 +499,24 @@
                                 <th class="num">순번</th>
                                 <th>이름</th>
                                 <th>가입일</th>
-                                <th>취향</th> 
+                                <th>탈퇴여부</th> 
                                 <th>전화번호</th>
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
+                        
+                           <% for(Member m : mb){ %>
                                 <td><input type="checkbox" name="check" value="check" id="check"></td>
-                                <td>1</td>
-                                <td>유은혜</td>
+                                <td>m.getmemberNo()</td>
+                                <td><%=m.getmemberName() %></td>
                                 <td>22/06/18</td>
                                 <td>SF</td>
                                 <td>010-8999-9999</td>
                                 
                             </tr>
+                            	<% } %>
+                           
+                            
                             <tr>
                                 <td><input type="checkbox" name="check" value="check" id="check"></td>
                                 <td>2</td>
