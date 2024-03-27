@@ -40,7 +40,7 @@ public class MemberServlet extends HttpServlet {
 		MemberController mc = new MemberController();
 
 		String view = "";
-		boolean flag = true;
+		int flag = 0;
 
 		
 		switch (mapping) {
@@ -55,18 +55,18 @@ public class MemberServlet extends HttpServlet {
 		case "pwdCheckForm" : view = "views/member/myPagePwdCheck.jsp"; break;
 		case "pwdCheck" : view = mc.pwdCheck(request, response); break;
 		case "Updateform" : view = "views/member/myPageModify.jsp"; break;
-		case "update" : view = mc.update(request, response); flag = false; break;
-		//case "updatePwd" : view = mc.updatePwd(request,response); flag = false; break;
+		case "update" : view = mc.update(request, response); flag = 1; break;
+		case "pwdDuplicationCheck" : mc.pwdDuplicationCheck(request,response); flag = 3; break;
 		
 		default : return;
 			
 	
 		}
-
 		
-		if (!flag) {
+		
+		if (flag == 1) {
 			response.sendRedirect(request.getContextPath() + view);
-		} else {
+		} else if (flag == 0){
 			request.getRequestDispatcher(view).forward(request, response);
 		}
 
