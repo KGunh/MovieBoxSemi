@@ -323,10 +323,10 @@
     </style>
 
     <script>
-        var peopleCount = 0;
-        var selectPeople = 0;
-        var ageType = '';
-        var resvTeen = ['', 0];
+        var peopleCount = 0; // 연령별 선택한 인원
+        var selectPeople = 0; // 총 인원
+        var ageType = ''; // 연령
+        var resvTeen = ['', 0]; 
         var resvAdult = ['', 0];
 
         window.onload = function() {

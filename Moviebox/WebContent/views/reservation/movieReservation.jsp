@@ -226,7 +226,7 @@
 <body>
     <%@ include file="/views/common/header.jsp" %>
     <div id="wrap">
-        <form action="/moviebox/seat.reservation" method="get">
+        <form action="/moviebox/seat.reservation" method="post">
             <div id="title">영화예매</div>
             <div id="selectMovieArea">
                 <div id="content_1">
