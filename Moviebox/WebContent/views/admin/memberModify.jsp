@@ -265,7 +265,7 @@
        
        #buttoon{
         float: right;
-        margin-top: 10px;
+        margin-top: 70px;
         margin-right: 30px;
        }
             
@@ -500,48 +500,60 @@
                           <tr>
                             <tbody>
                             <th class="title">회원번호</th>
-                            <td>0822A</td>
+                            <td></td>
                         </tr>
-                            <tr>
-                              <th class="title">아이디</th>
-                              <td>grace3510</td>
-                            </tr>
+                           
                             <tr>  
                               <th class="title">이름</th>
-                              <td>유은혜</td>
+                              <td></td>
+                              
                             </tr>
+                            
+                             <tr>
+                              <th class="title">아이디</th>
+                              <td></td>
+                            </tr>
+                            
+                             <tr>
+                              <th class="title">비밀번호</th>
+                              <td></td>
+                            </tr>
+                            
                             <tr>  
+                            
                               <th class="title">성별</th>
-                              <td>F</td>
+                              <td></td>
                             </tr>  
                             <tr>
                               <th class="title">생년월일</th>
-                              <td>920324</td> 
+                              <td></td> 
+                            </tr>
+                             <tr>
+                              <th class="title">이메일</th>
+                              <td></td> 
                             </tr>
                             <tr>
                               <th class="title">주소</th>
-                              <td>경기도 여주시 대신면 후포리</td>
+                              <td></td>
                             </tr>
                             <tr>  
                               <th class="title">전화번호</th>
-                              <td>010-7455-4474</td>
+                              <td></td>
                             </tr>
                             <tr>
                               <th class="title">가입일</th>
-                              <td>22/08/22</td>
+                              <td></td>
                             </tr>  
                             <tr>
-                              <th class="title">취향</th>
-                              <td>마블 히어로</td>
+                              <th class="title">탈퇴여부</th>
+                              <td></td>
                             </tr>
-                          
-                      
-                        
-                         
-                                
-
-
-                              </tbody>
+                            
+                             <tr>
+                              <th class="title">최근 수정 날짜</th>
+                              <td></td>
+                            </tr>
+                          </tbody>
                               </table>
 
                 </div>

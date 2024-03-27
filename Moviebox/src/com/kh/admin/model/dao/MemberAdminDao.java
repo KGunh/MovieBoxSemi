@@ -69,7 +69,54 @@ public class MemberAdminDao {
 			
 	}
 	
-	
+	public Member editAdmin(Connection conn){
+		
+		Member m = new Member(); 
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("editAdmin");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery(sql);
+			
+		while(rset.next()) {
+			
+			
+						m.setMemberNo(rset.getInt("MEMBER_NO"));
+						m.setMemberId(rset.getString("MEMBER_ID"));
+						m.setMemberName(rset.getString("MEMBER_NAME"));
+						m.setGender(rset.getString("GENDER"));
+						m.setBirthday(rset.getString("BIRTHDAY"));
+						m.setEmail(rset.getString("EMAIL"));
+						m.setAddress(rset.getString("ADDRESS"));
+						m.setPhone(rset.getString("PHONE"));
+						m.setEnrollDate(rset.getDate("ENROLL_DATE"));
+						m.setStatus(rset.getString("STATUS"));
+						
+						
+		}
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		
+		
+		
+		
+		return m;
+		
+		
+	}
 	
 }
 	

@@ -46,8 +46,16 @@ public class MemberAdminController {
 	
 	public String editAdmin(HttpServletRequest request) {
 		
+			
 		
-		return "views/admin/editAdmin.mb";
+			Member m =new MemberAdminService().editAdmin();
+			
+		
+		request.setAttribute("member", m);
+		
+		
+		
+		return "views/admin/modifyAdmin.mb";
 		
 		
 		
