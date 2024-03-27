@@ -56,6 +56,7 @@ public class MemberServlet extends HttpServlet {
 		case "pwdCheck" : view = mc.pwdCheck(request, response); break;
 		case "Updateform" : view = "views/member/myPageModify.jsp"; break;
 		case "update" : view = mc.update(request, response); flag = false; break;
+		//case "updatePwd" : view = mc.updatePwd(request,response); flag = false; break;
 		
 		default : return;
 			
