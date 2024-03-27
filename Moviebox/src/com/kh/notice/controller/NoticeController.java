@@ -45,7 +45,7 @@ public class NoticeController {
 		
 		String view = "";
 		if(loginUser != null && loginUser.getMemberId().equals("admin")) {
-			view = "views/notice/noticeInsert.jsp";
+			view = "views/notice/noticeInsertForm.jsp";
 		} else {
 			session.setAttribute("alertMsg", "관리자로 로그인 해주세요.");
 			view = "/list.notice";
@@ -59,7 +59,7 @@ public class NoticeController {
 		ArrayList<Category> list = new NoticeService().selectCategoryList();
 		request.setAttribute("categoryList", list);
 		
-		String view = "views/notice/noticeInsert.jsp";
+		String view = "views/notice/noticeInsertForm.jsp";
 		
 		return view;
 		
@@ -91,7 +91,7 @@ public class NoticeController {
 			view = "/list.notice";
 		} else {
 			session.setAttribute("alertMsg", "공지사항 작성 실패");
-			view = "views/member/noticeInsert.jsp";
+			view = "views/member/noticeInsertForm.jsp";
 		}
 		
 		return view;
@@ -100,33 +100,5 @@ public class NoticeController {
 	
 
 	
-	
-	
-	
-	
-
-//	// 공지사항 글쓰기
-//	public String insert(HttpServletRequest request) {
-//		
-//		// request.getParameter로 값 뽑기
-//		String noticeCategory = request.getParameter("category");
-//		String noticeTitle = request.getParameter("title");
-//		String noticeContent = request.getParameter("content");
-//		String userNo = request.getParameter("userNo");
-//		
-//		// 객체에 담기
-//		Notice notice = new Notice();
-//		notice.setNoticeCategory(noticeCategory);
-//		notice.setNoticeTitle(noticeTitle);
-//		notice.setNoticeContent(noticeContent);
-//		notice.setNoticeWriter(userNo);
-//		
-//		// 서비스로 넘기기
-//		int result = new NoticeService().insert(notice);
-//		
-//		String view = "views/notice/noticeInsert.jsp";
-//		
-//		return view;
-//	}
 
 }
