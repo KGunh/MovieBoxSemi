@@ -5,8 +5,8 @@ public class Notice {
 	
 	private int noticeNo;
 	private String noticeTitle;
-	private String noticeWriter;
 	private String noticeContent;
+	private String noticeWriter; 
 	private String createDate;
 	private int count;
 	private String status;

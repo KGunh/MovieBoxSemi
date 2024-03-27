@@ -275,6 +275,7 @@ ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
 
             </div> <!-- search-notice -->
             
+            <!-- 관리자로 로그인 했을 때만 보이게 해야함! -->
             <div id="qna-insert">
                 <button id="qna-insert-btn" onclick="insert();">글쓰기</button>
             </div>
@@ -340,7 +341,7 @@ ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
     		}
     		
     		function insert(){
-    			location.href = '<%=contextPath%>/insert.notice';
+    			location.href = '<%=contextPath%>/enrollForm.notice';
     		}
     		
     		$('tbody > tr.list').click(function(){
