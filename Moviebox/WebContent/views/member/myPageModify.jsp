@@ -261,6 +261,46 @@
             text-decoration: none;  
             color: #FFC145;   
         }
+        
+        #modal-margin{
+        	margin: auto;
+        	margin-top: 250px;
+        	margin-bottom: 500px;
+        	width: 40%;
+        	height: 540px;
+        }
+        #modal-body{
+        	padding:40px 75px 30px 75px;
+        }
+        #updatePwd{
+        	margin: auto;
+        	width: 100%;
+        	height: auto;
+        }
+        #modal-content{
+        	width: 480px;
+        	height: 540px;
+        }
+        #modal-header{
+        	height: 70px;
+        	font-size: 25px;
+        	boder-bottom: none;
+        	padding: 35px 0px 0px 1rem;
+        }
+        #modal-input1,#modal-input2,#modal-input3{
+        	height: 50px;
+        	background:rgb(224, 224, 224);
+        }
+        .form-group label{
+        	font-size:16;
+        	color:rgb(158, 158, 158);
+        }
+        #modal-btn{
+        	margin-top:30px;
+        	width: 100%;
+        	height: 50px;
+        	font-weight: bold;
+        }
     </style>
     
 </head>
@@ -326,7 +366,7 @@
                 <div class="inputdiv pwd">
                     <span class="input-span">비밀번호</span><br>
                     <input type="password" class="input-text N password" value="<%=memberPwd %>"  disabled>
-                    <button class="password-edit">변경</button>
+                    <button type="button" class="password-edit" data-toggle="modal" data-target="#updatePwd">변경</button>
                 </div>
                 <div class="inputdiv">
                     <span class="input-span">주소</span><br>
@@ -401,13 +441,58 @@
                 
                 
             </script>
-
-
+		<!-- 비밀번호 변경 모달 -->
+	
         </div>
 
 
     </div>
 
+<div class="modal" id="updatePwd">
+		<div class="modal-dialog" id="modal-margin">
+			<div class="modal-content" id="modal-content">
+
+				<div class="modal-header" id="modal-header">
+					<h4 class="modal-title">비밀번호 변경</h4>
+					<button type="button" class="close" data-dismiss="modal">&times;</button>
+				</div>
+
+				<!-- 현재 비밀번호, 변경할 비밀번호, 변경할 비밀번호 재입력 -->
+				<div class="modal-body" id="modal-body">
+					<form action="<%=contextPath%>/updatePwd.me" method="post">
+						<div class="form-group">
+							<label for="userPwd">현재 비밀번호</label> 
+							<input type="password" class="form-control" id="modal-input1" name="userPwd" placeholder="비밀번호를 입력해주세요" id="userPwd" required>
+						</div>
+						<div class="form-group">
+							<label for="changePwd">변경할 비밀번호</label> 
+							<input type="password" class="form-control" id="modal-input2"  name="changePwd" placeholder="변경할 비밀번호를 입력해주세요" id="changePwd" required>
+						</div>
+						
+						<div class="form-group">
+							<label for="checkPwd">변경할 비밀번호 확인</label> 
+							<input type="password" class="form-control" id="modal-input3"  placeholder="다시 한번 입력해주세요" id="checkPwd" required>
+						</div>
+						<button type="submit" class="btn btn-warning" id="modal-btn" onclick="return validatePwd();">비밀번호 변경</button>
+						<input type="hidden" value="<%=loginUser.getMemberNo() %>" name="userNo">
+						
+						<script>
+							function validatePwd() {
+								if($('#changePwd').val() != $('#checkPwd').val()){
+									alert('비밀번호를 동일하게 입력해주세요');
+									$('#checkPwd').focus().val('');
+									return false;
+								}
+								return true;
+							}
+						</script>
+					</form>
+
+				</div>
+
+			</div>
+		</div>
+	</div>
 
 </body>
 </html>
