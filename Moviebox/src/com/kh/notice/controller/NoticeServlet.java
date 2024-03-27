@@ -46,7 +46,7 @@ public class NoticeServlet extends HttpServlet {
 		case "enrollForm" : view = nc.selectCategoryList(request, response); flag = false; break;
 		case "insert" : view = nc.insertNotice(request, response); flag=false; break;
 		case "detail" : view = nc.selectNotice(request, response); flag = false; break;
-		case "update" : view = "views/notice/noticeInsert.jsp"; break;
+		case "update" : view = "views/notice/noticeInsertForm.jsp"; break;
 
 		}
 		
