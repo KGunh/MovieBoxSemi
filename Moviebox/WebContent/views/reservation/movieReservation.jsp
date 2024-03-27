@@ -237,10 +237,12 @@
 	                                <div class="poster">
 	                                    <img src="<%= contextPath %>/<%= m.getFilePath() %>/<%= m.getFileName() %>" alt="영화포스터">
                                         <input type="hidden" value="<%= m.getMovieNo() %>">
+                                        <input type="hidden" value="<%= m.getMovieTitle() %>">
 	                                </div>
 	                            </div>
                             <% } %>
                             <input id="movieNo" name="movieNo" type="hidden">
+                            <input id="movieTitle" name="movieTitle" type="hidden">
                         </div>
                     	
                         <div class="swiper-pagination"></div>
@@ -306,6 +308,7 @@
                 $('.poster').not(this).removeAttr('style');
                 $(this).css('transform', 'scale(1.1)');
                 $('#movieNo').val($(this).children().eq(1).val());
+                $('#movieTitle').val($(this).children().eq(2).val());
             });
         });
 		

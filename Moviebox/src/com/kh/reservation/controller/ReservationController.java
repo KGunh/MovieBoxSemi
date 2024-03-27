@@ -102,7 +102,7 @@ public class ReservationController {
 	
 	public List<Seat> selectSeatList(HttpServletRequest request) {
 		int screenNo = Integer.parseInt(request.getParameter("screenNo"));
-		System.out.println(screenNo);
+
 		return new ReservationService().selectSeatList(screenNo);		
 	}
 	
