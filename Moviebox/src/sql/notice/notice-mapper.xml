@@ -67,8 +67,8 @@
 			  SYSDATE,
 			  ?
 			  )
-	
 	</entry>
+	
 
 	<entry key="selectCategoryList">
 		SELECT

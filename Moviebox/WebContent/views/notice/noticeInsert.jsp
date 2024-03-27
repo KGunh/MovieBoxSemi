@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ page import="com.kh.board.model.vo.Category, java.util.ArrayList "%>
+    
+<%
+	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("categoryList");
+%>
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -37,7 +45,9 @@
             padding-bottom: 50px;
             font-size: 30px;
             font-weight: bold;
+            border-bottom: 1px solid #3f3f3f;
         }
+        
 
         /* 카테고리*/
         #board-category{
@@ -222,8 +232,14 @@
 </head>
 <body>
 
-    	<%@ include file="../common/header.jsp" %>
+    <%@ include file="../common/header.jsp" %>
+    
+    <% if(loginUser == null) { %>
+    	<script>
+    		alert('관리자만 작성 가능합니다.');
+    	</script>
 
+	<% } else { %>
     <div id="wrap">
         <div id="notice-detail">
             <!-- 전체 감싸는 부분 -->
@@ -231,11 +247,11 @@
 
                 <div id="title">고객센터</div>
         
-                <!-- 카테고리 -->
+                <!-- 고객센터 큰 분류 카테고리 
                 <div id="board-category">
                     <div class="notice-tap">공지사항</div>
                     <div class="qna-tap">QnA</div>
-                </div> <!-- board-category -->
+                </div>-->
 
                 <div class="notice-content">
                     <div class="detail-box1">
@@ -246,18 +262,19 @@
 
 
                     <div class="detail-content-box">
-                        <form action="<%= contextPath %>/insert.notice"
-                        method="post" id="insert-box">
+                        <form action="<%= contextPath %>/insert.notice" method="post" id="insert-box">
+                        
+                        <input type="hidden" name="userNo" value="<%= loginUser.getMemberNo()%>" />
+                            
                             <div id="category-box">
                                 <div id="box-name">분류</div>
                                 
-                                <!-- <input type="hidden" name="userNo" value="< %= loginUser.getMemberNo()%>" /> -->                                
-                                
                                 <select name="category" id="select-category">
-                                    <option value="theater">영화관</option>
-                                    <option value="reservation">예매</option>
-                                    <option value="goods">굿즈</option>
-                                    <option value="etc">기타</option>
+                                <% for(Category c : list) { %>
+									<option value="<%= c.getCategoryNo() %>">
+										<%= c.getCategoryName() %>
+									</option>
+								<% } %>
                                 </select>
                             </div> <!-- category box -->
 
@@ -285,13 +302,11 @@
             </div> <!-- notice-list -->
         </div> <!-- notice-detail -->
     </div> <!-- wrap -->
-
-    	<%@ include file="../common/footer.jsp" %>
-
-	<script>
-
 	
-	</script>
+	<% } %>
+    
+    <%@ include file="../common/footer.jsp" %>
+
     
 </body>
 </html>

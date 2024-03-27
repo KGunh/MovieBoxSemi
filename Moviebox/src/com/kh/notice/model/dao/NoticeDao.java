@@ -137,12 +137,13 @@ public class NoticeDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, notice.getNoticeTitle());
-			pstmt.setInt(2, Integer.parseInt(notice.getNoticeWriter()));
+			pstmt.setInt(2, notice.getUserNo());
 			pstmt.setString(3, notice.getNoticeContent());
-			pstmt.setInt(4, Integer.parseInt(notice.getNoticeCategory()));
+			pstmt.setInt(4, notice.getCategoryNo());
+			
 			
 			result = pstmt.executeUpdate();
-			
+
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

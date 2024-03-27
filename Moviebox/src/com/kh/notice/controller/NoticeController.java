@@ -36,44 +36,23 @@ public class NoticeController {
 		return view;
 		
 	}
-//	
-//	// 로그인 여부
-//	public void noticeLoginForm(HttpServletRequest request, HttpServletResponse response) {
-//		HttpSession session = request.getSession();
-//		Member loginUser = (Member)session.getAttribute("loginUser");
-//		
-//		if(loginUser != null && loginUser.getMemberId().equals("admin")) {
-//			request.getRequestDispatcher;
-//		} else {
-//			session.setAttribute("arertMsg", "관리자도 아니면서 감히~~~~~~~");
-//			response.sendRedirect(request.getContextPath());
-//		}
-//		
-//		
-//	}
-//	
-	// 공지사항 글쓰기
-	public String insertNotice(HttpServletRequest request, HttpServletResponse response) {
+	
+	// 로그인 여부
+	public String insertFormNotice(HttpServletRequest request, HttpServletResponse response) {
 		
-		String noticeCategory = request.getParameter("category");
-		String noticeTitle = request.getParameter("title");
-		String noticeContent = request.getParameter("content");
+		HttpSession session = request.getSession();		
+		Member loginUser = (Member)session.getAttribute("loginUser");
 		
-		// 가공
-		Notice notice = new Notice();
-		notice.setNoticeCategory(noticeCategory);
-		notice.setNoticeTitle(noticeTitle);
-		notice.setNoticeContent(noticeContent);
-		
-		int result = new NoticeService().insertNotice(notice);
-		request.setAttribute("noticeInsert", result);
-		
-		String view = "views/notice/noticeInsert.jsp";
-		
+		String view = "";
+		if(loginUser != null && loginUser.getMemberId().equals("admin")) {
+			view = "views/notice/noticeInsert.jsp";
+		} else {
+			session.setAttribute("alertMsg", "관리자로 로그인 해주세요.");
+			view = "/list.notice";
+		}
 		
 		return view;
 	}
-
 	
 	// 카테고리
 	public String selectCategoryList(HttpServletRequest request, HttpServletResponse response) {
@@ -85,6 +64,41 @@ public class NoticeController {
 		return view;
 		
 	}
+	
+	// 공지사항 글쓰기
+	public String insertNotice(HttpServletRequest request, HttpServletResponse response) {
+		
+		HttpSession session = request.getSession();
+		
+		int categoryNo = Integer.parseInt(request.getParameter("category"));
+		String noticeTitle = request.getParameter("title");
+		String noticeContent = request.getParameter("content");
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		
+		// 가공
+		Notice notice = new Notice();
+		notice.setCategoryNo(categoryNo);
+		notice.setNoticeTitle(noticeTitle);
+		notice.setNoticeContent(noticeContent);
+		notice.setUserNo(userNo);
+		
+		int result = new NoticeService().insertNotice(notice);
+		request.setAttribute("noticeInsert", result);
+		
+		String view = "";
+		
+		if(result > 0) {
+			view = "/list.notice";
+		} else {
+			session.setAttribute("alertMsg", "공지사항 작성 실패");
+			view = "views/member/noticeInsert.jsp";
+		}
+		
+		return view;
+	}
+
+	
+
 	
 	
 	

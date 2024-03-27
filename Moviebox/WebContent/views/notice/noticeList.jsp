@@ -341,7 +341,7 @@ ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
     		}
     		
     		function insert(){
-    			location.href = '<%=contextPath%>/insert.notice';
+    			location.href = '<%=contextPath%>/enrollForm.notice';
     		}
     		
     		$('tbody > tr.list').click(function(){
