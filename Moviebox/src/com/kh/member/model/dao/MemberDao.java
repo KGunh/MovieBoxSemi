@@ -454,7 +454,9 @@ public class MemberDao {
 		String sql = prop.getProperty("selectlocal");
 		
 		try {
+			
 			pstmt = conn.prepareStatement(sql);
+			
 			
 			pstmt.setString(1, m.getLocalCode());
 			
@@ -507,9 +509,32 @@ public class MemberDao {
 		String sql = prop.getProperty("deleteGenreList");
 		
 		try {
+			
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, m.getMemberNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	public int genreUpdateInsert (Connection conn,Genre g, Member m) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("genreUpdateInsert");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, m.getMemberNo());
+			pstmt.setString(2, g.getGenreName());
 			
 			result = pstmt.executeUpdate();
 			

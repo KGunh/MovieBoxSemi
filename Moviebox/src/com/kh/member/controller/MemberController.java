@@ -234,8 +234,6 @@ public class MemberController {
 		
 		
 		String loginUserPwd = loginUser.getMemberPwd();
-		System.out.println(CheckPwd);
-		System.out.println(loginUserPwd);
 
 		if(CheckPwd.equals(loginUserPwd)) {
 			view = "views/member/myPageModify.jsp";
@@ -252,7 +250,6 @@ public class MemberController {
 		HttpSession session = request.getSession();
 		
 		Member loginUser = (Member)session.getAttribute("loginUser");
-		
 		String address = request.getParameter("address");
 		String email = request.getParameter("email");
 		String localCode = request.getParameter("localCode");
@@ -274,15 +271,22 @@ public class MemberController {
 		m.setEmail(email);
 		m.setLocalCode(localCode);
 		m.setAddress(address);
+		System.out.println(m.getAddress());
 		int result = new MemberService().update(m,genreList);
 		
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "수정에 성공했습니다.");
-			view = "/views/common/myPageModify.jsp";
+			
+			
+			Member updateMem = new MemberService().login(loginUser);
+			
+			session.setAttribute("loginUser", updateMem);
+			
+			view = "/Updateform.me";
 		}else {
 			session.setAttribute("alertMsg", "수정에 실패했습니다.");
-			view = "/views/common/myPageModify.jsp";
+			view = "/Updateform.me";
 		}
 		
 		return view;

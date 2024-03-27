@@ -275,7 +275,7 @@
             
             <ul class="info-navi">
                 <li id="info-navi-first">
-                    <a href="#" class="info-my">회원정보</a>
+                    <a href="<%=contextPath %>/mypage.me" class="info-my">회원정보</a>
                 </li>
                 <li id="info-navi-second">
                     <a href="<%=contextPath %>/resList.me" class="info-list">예매내역</a>
@@ -321,7 +321,7 @@
                 </div>
                 <div class="inputdiv">
                     <span class="input-span">아이디</span><br>
-                    <input type="text" class="input-text N" value="<%=memberId %>" disabled>
+                    <input type="text" class="input-text N" name="memberId" value="<%=memberId %>" disabled>
                 </div>
                 <div class="inputdiv pwd">
                     <span class="input-span">비밀번호</span><br>
@@ -347,7 +347,7 @@
                         <option>광주</option>
 
                     </select>
-                    <input type="text" class="input-text address" value="<%=address%>">
+                    <input type="text" class="input-text address" name="address" value="<%=address%>">
                 </div>
                 <div class="inputdiv">
                     <span class="input-span">이메일</span><br>

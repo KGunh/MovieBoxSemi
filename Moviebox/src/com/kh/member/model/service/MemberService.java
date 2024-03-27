@@ -142,12 +142,11 @@ public class MemberService {
 		int memberGenreList = 1;
 		int genreResult = 1;
 		if(!genreList.isEmpty()) {
-			memberGenreList = new MemberDao().deleteGenreList(conn,m);
+			memberGenreList += new MemberDao().deleteGenreList(conn,m);
 			for(int i = 0; i < genreList.size(); i++) {
 				Genre g = new Genre();
-				// 회원가입 장르 추가
 				g.setGenreName(genreList.get(i).getGenreName());
-				genreResult += new MemberDao().genreInsert(conn,g);
+				genreResult += new MemberDao().genreUpdateInsert(conn,g,m);
 			}
 		}
 		

@@ -215,7 +215,7 @@
             
             <ul class="info-navi">
                 <li id="info-navi-first">
-                    <a href="#" class="info-my">회원정보</a>
+                    <a href="<%=contextPath %>/mypage.me" class="info-my">회원정보</a>
                 </li>
                 <li id="info-navi-second">
                     <a href="<%=contextPath %>/resList.me" class="info-list">예매내역</a>
