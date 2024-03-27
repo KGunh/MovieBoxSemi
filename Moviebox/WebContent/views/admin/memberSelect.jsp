@@ -507,7 +507,7 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                         
                            <% for(Member m : mb){ %>
                                 <td><input type="checkbox" name="check" value="check" id="check"></td>
-                                <td>m.getmemberNo()</td>
+                                <td><%=m.getmemberNo() %></td>
                                 <td><%=m.getmemberName() %></td>
                                 <td>22/06/18</td>
                                 <td>SF</td>
