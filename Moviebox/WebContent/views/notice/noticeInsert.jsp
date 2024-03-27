@@ -45,7 +45,9 @@
             padding-bottom: 50px;
             font-size: 30px;
             font-weight: bold;
+            border-bottom: 1px solid #3f3f3f;
         }
+        
 
         /* 카테고리*/
         #board-category{
@@ -245,11 +247,11 @@
 
                 <div id="title">고객센터</div>
         
-                <!-- 고객센터 큰 분류 카테고리 -->
+                <!-- 고객센터 큰 분류 카테고리 
                 <div id="board-category">
                     <div class="notice-tap">공지사항</div>
                     <div class="qna-tap">QnA</div>
-                </div> <!--  -->
+                </div>-->
 
                 <div class="notice-content">
                     <div class="detail-box1">
