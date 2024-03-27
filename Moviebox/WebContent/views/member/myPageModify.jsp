@@ -284,10 +284,10 @@
         #modal-header{
         	height: 70px;
         	font-size: 25px;
-        	boder-bottom: none;
-        	padding: 35px 0px 0px 1rem;
+        	border-bottom: none;
+        	padding: 35px 1rem 0px 1rem;
         }
-        #modal-input1,#modal-input2,#modal-input3{
+        #userPwd,#changePwd,#checkPwd{
         	height: 50px;
         	background:rgb(224, 224, 224);
         }
@@ -300,6 +300,10 @@
         	width: 100%;
         	height: 50px;
         	font-weight: bold;
+        }
+        #errorText{
+            font-size: 12px;
+            color: red;
         }
     </style>
     
@@ -441,12 +445,12 @@
                 
                 
             </script>
-		<!-- 비밀번호 변경 모달 -->
 	
         </div>
 
 
     </div>
+    
 
 <div class="modal" id="updatePwd">
 		<div class="modal-dialog" id="modal-margin">
@@ -457,35 +461,84 @@
 					<button type="button" class="close" data-dismiss="modal">&times;</button>
 				</div>
 
-				<!-- 현재 비밀번호, 변경할 비밀번호, 변경할 비밀번호 재입력 -->
+				
 				<div class="modal-body" id="modal-body">
 					<form action="<%=contextPath%>/updatePwd.me" method="post">
 						<div class="form-group">
 							<label for="userPwd">현재 비밀번호</label> 
-							<input type="password" class="form-control" id="modal-input1" name="userPwd" placeholder="비밀번호를 입력해주세요" id="userPwd" required>
+							<input type="password" class="form-control" name="userPwd" placeholder="비밀번호를 입력해주세요" id="userPwd" required>
+                            <span id="errorText2"></span>
 						</div>
 						<div class="form-group">
 							<label for="changePwd">변경할 비밀번호</label> 
-							<input type="password" class="form-control" id="modal-input2"  name="changePwd" placeholder="변경할 비밀번호를 입력해주세요" id="changePwd" required>
+							<input type="password" class="form-control"  name="changePwd" placeholder="변경할 비밀번호를 입력해주세요" id="changePwd" required>
 						</div>
 						
 						<div class="form-group">
 							<label for="checkPwd">변경할 비밀번호 확인</label> 
-							<input type="password" class="form-control" id="modal-input3"  placeholder="다시 한번 입력해주세요" id="checkPwd" required>
+							<input type="password" class="form-control"  placeholder="다시 한번 입력해주세요" id="checkPwd" required>
+                            <span id="errorText"></span>
 						</div>
-						<button type="submit" class="btn btn-warning" id="modal-btn" onclick="return validatePwd();">비밀번호 변경</button>
+						<button type="submit" class="btn btn-warning" id="modal-btn">비밀번호 변경</button>
 						<input type="hidden" value="<%=loginUser.getMemberNo() %>" name="userNo">
-						
+                        <script>
+                            $(function(){
+                                $('#userPwd').blur(function(){
+                                    const $userPwd = $('#userPwd');
+                                    
+                                    $.ajax({
+                                        url : 'pwdDuplicationCheck.me',
+                                        data : {
+                                            checkPwd : $userPwd.val()
+                                        },
+                                        success : function(result){
+                                            if(result == 'N') {
+                                                $userPwd.css('border','1px solid red');
+                                                $userPwd.val('').focus();
+                                                $('#errorText').html('잘못된 입력입니다. 다시입력해주세요').css('color','red');
+                                            } else{
+                                            	$userPwd.removeAttr('style');
+                                                $('#errorText').html('');
+                                            }
+                                        }
+
+
+                                    })
+
+                                });
+
+                            });
+
+                        </script>
+                        <script>
+                        $(function(){
+                        	
+                        	
+                        })
+                        </script>
 						<script>
-							function validatePwd() {
-								if($('#changePwd').val() != $('#checkPwd').val()){
-									alert('비밀번호를 동일하게 입력해주세요');
-									$('#checkPwd').focus().val('');
-									return false;
-								}
-								return true;
-							}
-						</script>
+					
+                            $(function(){
+
+                                $('#checkPwd').blur(function(){
+                                    const $changePwd = $('#changePwd').val();
+                                    const $checkPwd = $(this).val();
+                                    if($changePwd != $checkPwd){
+                                        $('#checkPwd').css('border','1px solid red');
+                                        $('#errorText').html('잘못된 입력입니다. 다시입력해주세요').css('color','red');
+                                    } 
+                                    else{
+                                        $('#checkPwd').removeAttr('style');
+                                        $('#errorText').html('');
+                                    }
+
+                                });
+                                
+                            });
+                            
+                            
+                        </script>
+						
 					</form>
 
 				</div>
