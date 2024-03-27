@@ -25,24 +25,15 @@ public class MemberAdminDao {
 			try {
 				prop.loadFromXML(new FileInputStream(sqlFile));
 			} catch (IOException e) {
-				// TODO Auto-generated catch block
 				e.printStackTrace();
 			}
-		
-		
-			
 				
 				
-				
-				
-				
-			}
+	}
 			
 			
 	
 	public ArrayList<Member> selectMemberAdmin(Connection conn){
-		
-		
 		ArrayList<Member> member = new ArrayList<Member>();
 
 		PreparedStatement pstmt = null;

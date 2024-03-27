@@ -1,11 +1,15 @@
 package com.kh.admin.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import com.kh.member.model.vo.Member;
 
 /**
  * Servlet implementation class MemberAdminController
@@ -41,7 +45,7 @@ public class MemberAdminServlet extends HttpServlet {
 		
 		switch(mapping) {
 		
-		case "selectAdmin"    :  view = "views/admin/memberSelect.jsp"; break;
+		case "selectAdmin"    :  view = MAC.selectAdmin(request); break;
 		case "modifyAdmin."   :  view= "views/admin/memberModify.jsp"; break;
 		
 		}
@@ -53,7 +57,7 @@ public class MemberAdminServlet extends HttpServlet {
 		
 		switch(mapping) {
 		
-		case "selectAdmin" :  MAC.selectAdmin(request);  break; 
+		
 		case "editAdmin"   :  MAC.editAdmin(request); break; 
 		
 		}
