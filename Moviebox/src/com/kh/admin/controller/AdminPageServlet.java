@@ -38,6 +38,9 @@ public class AdminPageServlet extends HttpServlet {
 		
 		AdminPageController admin = new AdminPageController();
 		
+		
+		
+		
 		String view = "";
 		boolean flag = true;
 	
