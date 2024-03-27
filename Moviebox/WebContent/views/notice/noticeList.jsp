@@ -275,11 +275,14 @@ ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
 
             </div> <!-- search-notice -->
             
-            <!-- 관리자로 로그인 했을 때만 보이게 해야함! -->
-            <div id="qna-insert">
-                <button id="qna-insert-btn" onclick="insert();">글쓰기</button>
-            </div>
             
+	            <!-- 관리자로 로그인 했을 때만 보이게 해야함! -->
+	        <div id="qna-insert">
+	            <% if(loginUser != null && loginUser.getMemberId().equals("admin")) { %>
+	                <button id="qna-insert-btn" onclick="insert();">글쓰기</button>
+	            <% } %>
+	        </div>
+
             <!-- 게시판 -->
             <div class="container">
                 <table class="table table-hover">
@@ -319,9 +322,9 @@ ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
 
             <div id="page">
                 <div class="paging-area" align="center" style="margin-top:12px;">
-                    <button class="btn btn-outline-danger" style="color:white; background: none; border: 1px solid white;"> < </button>
+                    <button class="btn btn-outline-secondary" style="color:white; background: none; border: 1px solid white;"> < </button>
                     <button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;">1</button>
-                    <button class="btn btn-outline-danger" style="color:white; background: none; border: 1px solid white;"> > </button>
+                    <button class="btn btn-outline-secondary" style="color:white; background: none; border: 1px solid white;"> > </button>
                 </div>
             </div>
 

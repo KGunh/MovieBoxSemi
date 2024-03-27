@@ -45,7 +45,7 @@ public class NoticeController {
 		
 		String view = "";
 		if(loginUser != null && loginUser.getMemberId().equals("admin")) {
-			view = "views/notice/noticeInsert.jsp";
+			view = "views/notice/noticeInsertForm.jsp";
 		} else {
 			session.setAttribute("alertMsg", "관리자로 로그인 해주세요.");
 			view = "/list.notice";
@@ -59,7 +59,7 @@ public class NoticeController {
 		ArrayList<Category> list = new NoticeService().selectCategoryList();
 		request.setAttribute("categoryList", list);
 		
-		String view = "views/notice/noticeInsert.jsp";
+		String view = "views/notice/noticeInsertForm.jsp";
 		
 		return view;
 		
@@ -70,15 +70,17 @@ public class NoticeController {
 		
 		HttpSession session = request.getSession();
 		
-		String noticeCategory = request.getParameter("category");
+		int categoryNo = Integer.parseInt(request.getParameter("category"));
 		String noticeTitle = request.getParameter("title");
 		String noticeContent = request.getParameter("content");
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
 		
 		// 가공
 		Notice notice = new Notice();
-		notice.setNoticeCategory(noticeCategory);
+		notice.setCategoryNo(categoryNo);
 		notice.setNoticeTitle(noticeTitle);
 		notice.setNoticeContent(noticeContent);
+		notice.setUserNo(userNo);
 		
 		int result = new NoticeService().insertNotice(notice);
 		request.setAttribute("noticeInsert", result);
@@ -86,46 +88,37 @@ public class NoticeController {
 		String view = "";
 		
 		if(result > 0) {
-			view = "views/notice/noticeList.jsp";
+			view = "/list.notice";
 		} else {
 			session.setAttribute("alertMsg", "공지사항 작성 실패");
-			view = "views/member/noticeInsert.jsp";
+			view = "views/member/noticeInsertForm.jsp";
 		}
-		
 		
 		return view;
 	}
-
+	
+	// 공지사항 글 수정
+	public String updateNoticeForm(HttpServletRequest request, HttpServletResponse response) {
+		
+		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+		Notice notice = new NoticeService().selectNotice(noticeNo);
+		
+		request.setAttribute("notice", notice);
+		
+		String view = "views/notice/noticeUpdateForm.jsp";
+		
+		return view;
+	}
+	
+	public String updateNotice(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		return null;
+	}
 	
 
 	
-	
-	
-	
-	
 
-//	// 공지사항 글쓰기
-//	public String insert(HttpServletRequest request) {
-//		
-//		// request.getParameter로 값 뽑기
-//		String noticeCategory = request.getParameter("category");
-//		String noticeTitle = request.getParameter("title");
-//		String noticeContent = request.getParameter("content");
-//		String userNo = request.getParameter("userNo");
-//		
-//		// 객체에 담기
-//		Notice notice = new Notice();
-//		notice.setNoticeCategory(noticeCategory);
-//		notice.setNoticeTitle(noticeTitle);
-//		notice.setNoticeContent(noticeContent);
-//		notice.setNoticeWriter(userNo);
-//		
-//		// 서비스로 넘기기
-//		int result = new NoticeService().insert(notice);
-//		
-//		String view = "views/notice/noticeInsert.jsp";
-//		
-//		return view;
-//	}
+	
 
 }

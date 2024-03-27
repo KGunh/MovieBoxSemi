@@ -15,9 +15,10 @@ import com.kh.member.model.vo.Member;
 public class MemberAdminController {
 	
 	
-	public void selectAdmin(HttpServletRequest request) {
+	public String selectAdmin(HttpServletRequest request) {
 		
 		ArrayList<Member> member =new MemberAdminService().selectMemberAdmin();
+		
 		System.out.println(member);
 
 		/*
@@ -36,9 +37,10 @@ public class MemberAdminController {
 		}
 		
 		*/	
-		
 		request.setAttribute("member", member);
 		
+		String view = "views/admin/memberSelect.jsp";
+		return view;
 		
 	}
 	
