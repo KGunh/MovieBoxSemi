@@ -222,6 +222,7 @@
                     <button class="people-Count">8</button>
                 </div>
             </div>
+            <div id="select-people"></div>
         </div>
         
         <div id="seat-wrap">
@@ -274,7 +275,7 @@
                 </div>
             </div>
         </div>
-        <button>좌석 선택</button>
+        <button onclick="selectResv();">좌석 선택</button>
 
         <div id="select-seat-area">
             <div id="select-seat">
@@ -294,7 +295,10 @@
 
     <script>
         var peopleCount = 0;
-       
+        var ageType = '';
+        var resvTeen = [];
+        var resvAdult = [];
+
         window.onload = function() {
             $.ajax({
                 url : 'seat.reservationAjax',
@@ -333,8 +337,12 @@
             } 
             else{
                 if(peopleCount < 1 ){
-                    if(!$('.people-Count').hasClass('clicked')) alert('인원을 먼저 선택해주세요.');
-                    else alert('좌석을 모두 선택하셨습니다.');
+                    if(!$('.people-Count').hasClass('clicked')){
+                         alert('인원을 먼저 선택해주세요.');
+                    }
+                    else {
+                        alert('좌석을 모두 선택하셨습니다.');
+                    }
                 }
                 else{
                     $(e.target).addClass('clicked');
@@ -346,12 +354,40 @@
         $('.ageBtn').click(e => {
             if($(e.target).hasClass('clicked')){
                 $('.ageBtn').removeClass('clicked');
+                ageType = '';
             } 
             else{
                 $('.ageBtn').removeClass('clicked');
                 $(e.target).addClass('clicked');
+                ageType = ($(e.target).html() == '성인' ? 'adult' : 'teen');
+            };
+            
+            if(ageType == 'teen'){
+                resvTeen = [ageType, peopleCount];
             }
-        })
+            else if(ageType == 'adult') {
+                resvAdult = [ageType, peopleCount];
+            };
+            
+            if((resvTeen[1] + resvAdult[1]) < 9){
+                alert('선택 가능한 인원은 최대 8명입니다!');
+            } 
+            else {
+                
+            }
+
+
+        });
+
+        // 좌석 선택 후 예매정보 하단에 표시
+        function selectResv(){
+
+        };
+
+
+
+
+
 
          
     	

@@ -274,12 +274,20 @@
                 <input id="screenNo" type="hidden" name="screenNo">
                 <input id="screenName" type="hidden" name="screenName">
                 
-                <button id="submit-btn" type="submit">좌석 선택</button>
+                <button id="submit-btn" type="button">좌석 선택</button>
             </div>
         </form>
     </div>
 
     <%@ include file="/views/common/footer.jsp" %>
+
+    <style>
+        .clicked{
+            color: rgb(32,32,32);
+            background-color: rgb(255, 193, 69);
+        }
+
+    </style>
 
     <script>
 		
@@ -314,8 +322,19 @@
         });
 		
         function selectScreenNo(e){
-            document.getElementById('screenNo').value = e.children[1].value;
-            document.getElementById('screenName').value = e.children[2].value;
+            console.log(e);
+            if($(e).hasClass('clicked')){
+                $('.screenName').removeClass('clicked');
+                $('#screenNo').removeAttr('value');
+                $('#screenName').removeAttr('value');
+                return '';
+            } 
+            else{
+                $('.screenName').removeClass('clicked');
+                $(e).addClass('clicked');
+            }
+            $('#screenNo').val(e.children[1].value);
+            $('#screenName').val(e.children[2].value)
         };
        
         function selectScreen(){
@@ -363,6 +382,14 @@
 
         $('#locationOption').change(function(){
             selectScreen();
+        });
+
+        $('#submit-btn').click(function(){
+            if(!$('#screenNo').val()){
+                alert('상영관을 선택해주세요!');
+            } else {
+                $('form').submit();
+            }
         });
 
     </script>
