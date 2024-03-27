@@ -190,12 +190,18 @@
         margin-left: 850px;
     }
 
-    #select-seat-area{
+    #check-area{
         width: 800px;
+        height: 400px;
         margin: auto;
-        padding-top: 50px;
-        padding-bottom: 50px;
-        height: auto;
+        margin-bottom: 50px;
+    }
+
+    #check-movie, #reservation-info{
+        float: left;
+    }
+    #check-area div{
+        color: rgb(125, 124, 124);
     }
 
     /* 스크린 모양 만들기 */
@@ -306,9 +312,20 @@
         </div>
         <button id="print-resv-info" >좌석 선택</button>
 
-        <div id="select-seat-area">
-            <div id="select-seat">
-                예매 예정 정보 출력 영역
+        <div id="check-area">
+            <div id="check-reservation">
+                <div id="check-movie">
+                    <div id="poster-select">영화포스터</div>
+                    <div id="movie-select">영화 정보</div>
+                </div>
+                <div id="reservation-info">
+                    <div>영화 : </div>
+                    <div>상영 일자 : </div>
+                    <div>상영관 : </div>
+                    <div>인원 : </div>
+                    <div>머시기 :</div>
+                    <div>머시기 : </div>
+                </div>
             </div>
         </div>
 	</div>

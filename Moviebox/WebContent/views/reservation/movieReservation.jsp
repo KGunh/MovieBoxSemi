@@ -173,7 +173,7 @@
 
     .screenName:hover{
         cursor: pointer;
-        background-color: white;
+        background-color: rgb(255, 193, 69);
     }
 
     .swiper-slide{
@@ -269,10 +269,11 @@
             <div id="selectScreenArea">
                 <div id="printScreen"></div>
                 
-                <input id="movieNo" type="hidden" name="movieNo">
                 <input id="movieTitle" type="hidden" name="movieTitle">
-                <input id="screenNo" type="hidden" name="screenNo">
+                <input id="movieNo" type="hidden" name="movieNo">
+                <input id="theaterName" type="hidden" name="theaterName">
                 <input id="screenName" type="hidden" name="screenName">
+                <input id="screenNo" type="hidden" name="screenNo">
                 
                 <button id="submit-btn" type="button">좌석 선택</button>
             </div>
@@ -322,7 +323,6 @@
         });
 		
         function selectScreenNo(e){
-            console.log(e);
             if($(e).hasClass('clicked')){
                 $('.screenName').removeClass('clicked');
                 $('#screenNo').removeAttr('value');
@@ -335,6 +335,8 @@
             }
             $('#screenNo').val(e.children[1].value);
             $('#screenName').val(e.children[2].value)
+            $('#theaterName').val();
+            console.log(e.closest(e));
         };
        
         function selectScreen(){
@@ -392,6 +394,7 @@
             }
         });
 
+        
     </script>
 </body>
 </html>
