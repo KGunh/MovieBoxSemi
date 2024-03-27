@@ -17,12 +17,13 @@ import com.kh.theater.model.vo.Screen;
  */
 @WebServlet("*.reservation.ajax")
 public class SelectScreenServlet extends HttpServlet {
+
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public SelectScreenServlet() {
+    public AjaxSelectScreenServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,15 +33,11 @@ public class SelectScreenServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// screen테이블과 조인하여 상영관 정보 가져오기
 		List<Screen> screenList = new ReservationController().selectScreen(request);
 		
 		response.setContentType("application/json; charset=UTF-8");
 		
 		new Gson().toJson(screenList, response.getWriter());		
-		// 반복문으로 보여주기
-		
-		// 더보기 버튼 만들기
 	}
 
 	/**

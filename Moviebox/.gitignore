@@ -1,2 +1,5 @@
 /bin/
 .classPath
+/.metadata/
+/Servers
+/.classpath

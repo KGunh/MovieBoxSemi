@@ -13,6 +13,7 @@ import com.kh.theater.model.vo.Screen;
 
 public class ReservationController {
 	
+	// 영화 선택 화면의 영화, 지역정보 리스트 조회
 	public String selectReservationInfo(HttpServletRequest request) {
 		request.setAttribute("movieList", new ReservationService().selectMovieList()); 
 		request.setAttribute("locationList", new ReservationService().selectLocationList()); 
@@ -21,7 +22,8 @@ public class ReservationController {
 		
 		return view;
 	}
-	// 예매페이지 ajax용 메소드
+	
+	// 예매페이지 영화 상영 시간의 리스트 조회
 	public List<Screen> selectScreen(HttpServletRequest request) {
 		String[] dateStr = request.getParameter("date").split("-");
 		String screenLocation = request.getParameter("location");
@@ -87,16 +89,21 @@ public class ReservationController {
 		return screenList;
 	}
 
-	public String setSeat(HttpServletRequest request) {
-		int screenNo = Integer.parseInt(request.getParameter("screenNo"));
-		
-		List<Seat> seatlist = new ReservationService().selectSeatList(screenNo);
-		
-		request.setAttribute("seatList", seatlist);
-		
+	// 영화 선택 후 좌석 선택화면으로 보내는 메소드
+	public String connectSeatList(HttpServletRequest request) {
+		request.setAttribute("movieNo", request.getParameter("movieNo"));
+		request.setAttribute("screenDate", request.getParameter("screenDate"));
+		request.setAttribute("screenNo", request.getParameter("screenNo"));
+	
 		String view = "views/reservation/seatReservation.jsp";
 		
-		return view;		
+		return view;
+	}
+	
+	public List<Seat> selectSeatList(HttpServletRequest request) {
+		int screenNo = Integer.parseInt(request.getParameter("screenNo"));
+		System.out.println(screenNo);
+		return new ReservationService().selectSeatList(screenNo);		
 	}
 	
 	public void insertReservation() {
