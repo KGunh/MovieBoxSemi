@@ -114,6 +114,20 @@ public class NoticeService {
 		
 		return result;
 	}
+
+	public int countNotice(int noticeNo) {
+		
+		Connection conn = getConnection();
+		int result = new NoticeDao().countNotice(conn, noticeNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
 	
 	
 	
