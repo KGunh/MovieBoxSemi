@@ -544,8 +544,10 @@
             	type : 'post',
             	data : {
                     screenNo : <%= screenNo %>,
-                    movieNo : <%= movieNo %>
-            	},
+                    movieNo : <%= movieNo %>,
+                    teenAge : resvTeen,
+                    AdultAge : resvAdult 
+                },
                 success : function(result){
                     console.log(result);
                     console.log('예매 정보 가져옴~');

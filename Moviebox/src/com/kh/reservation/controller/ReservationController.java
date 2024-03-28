@@ -114,6 +114,8 @@ public class ReservationController {
 	}
 	// 예약내용 확인
 	public void checkReservationInfo(HttpServletRequest request) {
+		request.getAttribute("screenNo");
+		request.getAttribute("movieNo");
 		
 		
 	}
