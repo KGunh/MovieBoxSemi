@@ -31,6 +31,7 @@ public class BoardDao {
 		}
 	}
 
+	// 전체 목록 출력
 	public ArrayList<Board> selectBoardList(Connection conn) {
 		
 		ArrayList<Board> list = new ArrayList();
@@ -49,7 +50,7 @@ public class BoardDao {
 				Board board = new Board();
 				
 				board.setBoardNo(rset.getInt("BOARD_NO"));
-				board.setBoardCategory(rset.getString("CATEGORY_NO"));
+				board.setBoardCategory(rset.getString("CATEGORY_NAME"));
 				board.setBoardTitle(rset.getString("BOARD_TITLE"));
 				board.setBoardWriter(rset.getString("BOARD_WRITER"));
 				board.setCreateDate(rset.getString("CREATE_DATE"));
@@ -66,6 +67,37 @@ public class BoardDao {
 		
 		return list;
 	}
+	
+	
+	// 페이징바
+	public int selectListCount(Connection conn) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			listCount = rset.getInt("COUNT(*)");
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return listCount;
+	}
+	
 
 	public Board detailBoard(Connection conn, int boardNo) {
 		

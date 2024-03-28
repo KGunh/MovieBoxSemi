@@ -9,12 +9,12 @@
 	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
 	Notice notice = (Notice)request.getAttribute("notice");
 	
-//	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
+	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
 	
-//	int currentPage = pi.getCurrentPage();
-//	int startPage = pi.getStartPage();
-//	int endPage = pi.getEndPage();
-//	int maxPage = pi.getMaxPage();
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
 	
 %>    
     

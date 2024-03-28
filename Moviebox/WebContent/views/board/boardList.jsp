@@ -295,7 +295,7 @@
                             <td id="list-no"><%= b.getBoardNo() %></td>
                             <td id="list-ca"><%= b.getBoardCategory() %></td>
                             <td id="list-title"><%= b.getBoardTitle() %></td>
-                            <td id="list-count"><%= b.getCount() %></td>
+                            <td id="list-count"><%= b.getBoardWriter() %></td>
                             <td id="list-date"><%= b.getCreateDate() %></td>
                         </tr>
       
@@ -324,7 +324,7 @@
     		}
     		
     		function openQnaPage(){
-    			location.href = '<%=contextPath %>/list.board';
+    			location.href = '<%= contextPath %>/list.board?currentPage=1';
     		}
     		
     		$('tbody > tr.list').click(function(){

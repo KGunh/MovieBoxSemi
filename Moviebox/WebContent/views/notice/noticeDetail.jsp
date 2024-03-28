@@ -257,7 +257,7 @@
     		}
     		
     		function openQnaPage(){
-    			location.href = '<%=contextPath %>/list.qna'; 			
+    			location.href = '<%=contextPath %>/list.board'; 			
     		}
     		
     		function backPage(){

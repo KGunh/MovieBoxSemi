@@ -30,20 +30,20 @@
 	
 	<entry key="selectNoticeList">
 		SELECT
-	      NOTICE_NO,
-	      CATEGORY_NAME,
-	      NOTICE_TITLE,
-	      COUNT,
-	      TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE
-	  FROM
-	      TB_NOTICE
-	  JOIN
-	      TB_CATEGORY ON(NOTICE_CATEGORY = CATEGORY_NO)
-	 WHERE
-	      STATUS = 'Y'
-	 ORDER
-	    BY
-	      NOTICE_NO DESC
+		      NOTICE_NO,
+		      CATEGORY_NAME,
+		      NOTICE_TITLE,
+		      COUNT,
+		      TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE
+		  FROM
+		      TB_NOTICE
+		  JOIN
+		      TB_CATEGORY ON(NOTICE_CATEGORY = CATEGORY_NO)
+		 WHERE
+		      STATUS = 'Y'
+		 ORDER
+		    BY
+		      NOTICE_NO DESC
 	
 	</entry>
 	
