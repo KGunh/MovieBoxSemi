@@ -106,6 +106,10 @@
             background-color: #FFC145;
             
         }
+        .tit:hover{
+            color: white;
+            text-decoration: none;
+        }
     </style>
 
 </head>
@@ -116,8 +120,8 @@
 
     <div class="content">
         <div class="title-area">
-            <div class="title-content"><span class="tit">아이디 찾기</span></div>
-            <div class="title-content"><span class="tit">비밀번호 찾기</span></div>
+            <div class="title-content"><a class="tit">아이디 찾기</a></div>
+            <div class="title-content" ><a href="<%=contextPath%>/pwdSearchForm.me" class="tit" style="border-bottom: none;">비밀번호 찾기</a></div>
         </div>
         <div id="input-list">
             <form action="<%=contextPath%>/idSearch.me" method="post">

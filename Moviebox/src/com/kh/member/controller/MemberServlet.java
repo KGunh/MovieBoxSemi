@@ -60,9 +60,11 @@ public class MemberServlet extends HttpServlet {
 		case "updatePwd" : view = mc.updatePwd(request, response); flag = 1; break;
 		case "idSearchForm" : view = "views/member/idSearchForm.jsp"; break;
 		case "idSearch" : view = mc.idSearch(request,response); break;
+		case "pwdSearchForm" : view = "views/member/pwdSearchForm.jsp"; break;
+		case "pwdSearch" : view = mc.pwdSearch(request,response); break;
 		case "deleteForm" : view = "views/member/memberDelete.jsp"; break;
 		case "delete" : view = mc.delete(request,response); flag=1; break;
-		
+		case "pwdSearchUpdate" : view = mc.pwdSearchUpdate(request, response); break; 
 		default : return;
 			
 	
