@@ -171,7 +171,7 @@
 				</div>
 				<div class="inputdiv colorWhite" style="height: 50px;">
                     <div class="search">
-                        <a href="#" class="find_text">아이디 찾기</a>
+                        <a href="<%=contextPath%>/idSearchForm.me" class="find_text">아이디 찾기</a>
                     </div>
                     <div style="width: 2%; height: 100%; float: left;text-align: center;
                     line-height: 50px;">|</div>
@@ -182,7 +182,7 @@
         		
         		<div class="inputdiv colorWhite" style="height: 50px;">
             		<div class="regis">MOVIE BOX 회원이 아니신가요?</div>
-            		<div class="register" ><a href="#" class="find_text">회원가입하기</a></div>
+            		<div class="register" ><a href="<%=contextPath%>/insertForm.me" class="find_text">회원가입하기</a></div>
         		</div>
 
             </form>

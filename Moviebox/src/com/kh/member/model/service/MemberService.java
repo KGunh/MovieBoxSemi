@@ -181,5 +181,15 @@ public class MemberService {
 		return result;
 	}
 	
+	public String idSearch(Member m) {
+		Connection conn = getConnection();
+		
+		String memberId = new MemberDao().idSerach(conn,m);
+		
+		close(conn);
+		
+		return memberId;
+	}
+	
 
 }

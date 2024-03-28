@@ -59,6 +59,8 @@ public class MemberServlet extends HttpServlet {
 		case "pwdDuplicationCheck" : mc.pwdDuplicationCheck(request,response); flag = 3; break;
 		case "updatePwd" : view = mc.updatePwd(request, response); flag = 1; break;
 		case "idSearchForm" : view = "views/member/idSearchForm.jsp"; break;
+		case "idSearch" : view = mc.idSearch(request,response); break;
+		
 		default : return;
 			
 	
