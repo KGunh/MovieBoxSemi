@@ -237,7 +237,7 @@
                     <!-- 관리자로 로그인 했을 때만 보이기 -->
                     <% if(loginUser != null && loginUser.getMemberId().equals("admin")) { %>
                     <button class="notice-detail-btn" onclick="noticeUpdatePage();">수정</button> 
-                    <button class="notice-detail-btn">삭제</button>
+                    <button class="notice-detail-btn" onclick="noticeDelete();">삭제</button>
                     <% } %>
                 </div>
 
@@ -266,6 +266,19 @@
     			location.href = '<%=contextPath%>/updateForm.notice?noticeNo=<%=notice.getNoticeNo()%>';
     		}
     		
+    		function noticeDelete(){
+    			const result = confirm('삭제하려면 확인을 눌러주세요.');
+                if(result){
+                	location.href = '<%=contextPath%>/remove.notice?noticeNo=<%=notice.getNoticeNo()%>';
+                } 
+                else{
+            		$('tbody > tr.list').click(function(){
+            			const noticeNo = $(this).children().eq(0).text();
+            			location.href = '<%=contextPath%>/detail.notice?noticeNo=' + noticeNo;
+                    });
+                }
+    			
+    		}
     	</script>
     
     

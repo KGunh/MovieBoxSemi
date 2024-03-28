@@ -48,6 +48,7 @@ public class NoticeServlet extends HttpServlet {
 		case "detail" : view = nc.selectNotice(request, response); flag = false; break;
 		case "update" : view = nc.updateNotice(request, response); flag = false; break;
 		case "updateForm" : view = nc.updateNoticeList(request, response); flag = false; break;
+		case "remove" : view = nc.removeNotice(request, response); flag=false; break;
 		
 
 		}

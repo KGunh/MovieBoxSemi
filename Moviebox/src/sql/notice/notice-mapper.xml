@@ -17,6 +17,8 @@
 		      TB_NOTICE
 		  JOIN
 		      TB_CATEGORY ON(NOTICE_CATEGORY = CATEGORY_NO)
+		 WHERE
+		 	  STATUS = 'Y'
 		 ORDER
 		    BY
 		      NOTICE_NO DESC
@@ -95,7 +97,15 @@
 	
 	
 	
+	<entry key="removeNotice">
 	
+		UPDATE
+			  TB_NOTICE
+		   SET
+		   	  STATUS = 'N'
+		 WHERE
+		 	  NOTICE_NO = ?
+	</entry>
 	
 
 	<!-- <entry key="increaseCount">
