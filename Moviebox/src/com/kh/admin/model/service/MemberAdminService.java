@@ -33,7 +33,8 @@ public class MemberAdminService {
 		Connection conn = JDBCTemplate.getConnection();
 		
 		
-		Member member =new MemberAdminDao().editAdmin(conn,memberNo);
+		Member member = new MemberAdminDao().editAdmin(conn,memberNo);
+		
 		JDBCTemplate.close(conn);
 		
 		return member;

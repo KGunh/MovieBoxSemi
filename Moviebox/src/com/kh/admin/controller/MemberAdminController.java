@@ -15,7 +15,7 @@ import com.kh.member.model.vo.Member;
 public class MemberAdminController {
 	
 	
-	public String selectAdmin(HttpServletRequest request) {
+	public String selectAdmin(HttpServletRequest request, HttpServletResponse response) {
 		
 		ArrayList<Member> member =new MemberAdminService().selectMemberAdmin();
 		
@@ -44,23 +44,32 @@ public class MemberAdminController {
 		
 	}
 	
-	public String editAdmin(HttpServletRequest request) {
+	public String editAdmin(HttpServletRequest request, HttpServletResponse response) {
 		
 			int memberNo = Integer.parseInt(request.getParameter("memberNo"));
-		
-			System.out.println(memberNo);
+			String view = "";
+
 			
 			Member m =new MemberAdminService().editAdmin(memberNo);
 			
+			
+			if(m != null) {
+				request.setAttribute("member", m);
+				view = "views/admin/memberModify.jsp";
+				
+			}else {
+				view = "index.jsp";
+			}
+			
 		
-		request.setAttribute("member", m);
+			
 		
 		
 		
-		return "views/admin/modifyAdmin.mb";
 		
 		
 		
+		return view;
 		
 	}
 	

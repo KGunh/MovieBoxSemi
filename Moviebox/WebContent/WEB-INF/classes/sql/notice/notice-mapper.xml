@@ -6,24 +6,49 @@
 		Notice Mapper
 	</comment>
 	
+	<!-- <entry key="selectNoticeList">
+		SELECT *
+  		  FROM (
+		        SELECT A.*, ROWNUM RNUM
+		          FROM (SELECT
+                              NOTICE_NO,
+                              CATEGORY_NAME,
+                              NOTICE_TITLE,
+                              COUNT,
+                              TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE
+		                  FROM
+		                      TB_NOTICE
+		                  JOIN
+		                      TB_CATEGORY ON(NOTICE_CATEGORY = CATEGORY_NO)
+		                 WHERE
+		                      TB_NOTICE.STATUS = 'Y'
+		                 ORDER
+		                    BY
+		                      CREATE_DATE DESC) A)
+	 WHERE RNUM BETWEEN ? AND ?
+	</entry> -->
+	
 	<entry key="selectNoticeList">
 		SELECT
-		      NOTICE_NO,
-		      CATEGORY_NAME,
-		      NOTICE_TITLE,
-		      COUNT,
-		      TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE
-		  FROM
-		      TB_NOTICE
-		  JOIN
-		      TB_CATEGORY ON(NOTICE_CATEGORY = CATEGORY_NO)
-		 ORDER
-		    BY
-		      NOTICE_NO DESC
+	      NOTICE_NO,
+	      CATEGORY_NAME,
+	      NOTICE_TITLE,
+	      COUNT,
+	      TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE
+	  FROM
+	      TB_NOTICE
+	  JOIN
+	      TB_CATEGORY ON(NOTICE_CATEGORY = CATEGORY_NO)
+	 WHERE
+	      STATUS = 'Y'
+	 ORDER
+	    BY
+	      NOTICE_NO DESC
+	
 	</entry>
 	
 
-	<entry key="selectNotice">
+	<entry key="detailNotice">
 		SELECT
 			  NOTICE_NO,
 		      CATEGORY_NAME,
@@ -95,23 +120,40 @@
 	
 	
 	
+	<entry key="removeNotice">
+	
+		UPDATE
+			  TB_NOTICE
+		   SET
+		   	  STATUS = 'N'
+		 WHERE
+		 	  NOTICE_NO = ?
+	</entry>
 	
 	
 
-	<!-- <entry key="increaseCount">
+	<entry key="countNotice">
 		UPDATE
 			  TB_NOTICE
 		   SET
 		   	  COUNT = COUNT + 1
 		 WHERE
-		 	  NOTICE_NO
+		 	  NOTICE_NO = ?
 		   AND
 		   	  STATUS = 'Y'
 	
-	</entry> -->
+	</entry>
 
 
-
+	<entry key="noticeListCount">
+	
+		SELECT
+		      COUNT(*)
+		  FROM
+		      TB_NOTICE
+		 WHERE
+		      STATUS = 'Y'
+	</entry>
 
 
 

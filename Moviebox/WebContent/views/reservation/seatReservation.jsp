@@ -7,7 +7,7 @@
 	String movieTitle = (String)request.getAttribute("movieTitle");
 	String screenNo = (String)request.getAttribute("screenNo");
 	String movieNo = (String)request.getAttribute("movieNo");
-
+    String theaterName = (String)request.getAttribute("theaterName");
 %>
 
 <!DOCTYPE html>
@@ -21,7 +21,7 @@
         color: rgb(32,32,32);
     }
 	div{
-        border: 1px solid red;
+        /*border: 1px solid red;*/
         box-sizing: border-box;
     }
     a{
@@ -111,6 +111,7 @@
         width: 600px;
         margin-left: 300px;
     }
+
     #movie-info{
         width: 600px;
         height: 50px;
@@ -158,7 +159,8 @@
         width: 800px;
         height: 450px;
         margin: auto;
-        border: 1px solid rgb(125, 124, 124);
+        margin-bottom: 20px;
+        background-color: #0e0e0e;
     }
 
     #select-seat{
@@ -190,18 +192,10 @@
         margin-left: 850px;
     }
 
-    #check-area{
-        width: 800px;
-        height: 400px;
-        margin: auto;
-        margin-bottom: 50px;
-    }
-
-    #check-movie, #reservation-info{
-        float: left;
-    }
-    #check-area div{
-        color: rgb(125, 124, 124);
+    #select-btn{
+        width: 100%;
+        background-color: rgb(39, 39, 39);
+        margin-bottom: 20px;
     }
 
     /* 스크린 모양 만들기 */
@@ -231,7 +225,7 @@
 <body>
 	<%@ include file="/views/common/header.jsp" %>
 	<div id="wrap">
-        <div id="title">영화예매</div>
+        <div id="title">영화 예매</div>
 
         <div id="selectPersonArea">
             <div id="selectText">
@@ -240,7 +234,7 @@
                     최대 8명까지 선택 가능
                 </div>
             </div>
-            <div id="movie-info"><%= movieTitle %> <%= screenName %> <%= screenDate %></div>
+            <div id="movie-info"><%= movieTitle %> <%= theaterName %> <%= screenName %> <%= screenDate %></div>
             <div id="select-wrap">
                 <div id="selectAge">
                     <button class="people-teen ageBtn">청소년</button>
@@ -310,23 +304,11 @@
                 </div>
             </div>
         </div>
-        <button id="print-resv-info" >좌석 선택</button>
-
-        <div id="check-area">
-            <div id="check-reservation">
-                <div id="check-movie">
-                    <div id="poster-select">영화포스터</div>
-                    <div id="movie-select">영화 정보</div>
-                </div>
-                <div id="reservation-info">
-                    <div>영화 : </div>
-                    <div>상영 일자 : </div>
-                    <div>상영관 : </div>
-                    <div>인원 : </div>
-                    <div>머시기 :</div>
-                    <div>머시기 : </div>
-                </div>
-            </div>
+        <div id="select-btn">
+            <button id="print-resv-info" >좌석 선택</button>
+        </div>
+        <div id="check-area" hidden>
+            
         </div>
 	</div>
 	<%@ include file="/views/common/footer.jsp" %>
@@ -335,6 +317,88 @@
         .clicked{
             color: rgb(32,32,32);
             background-color: rgb(255, 193, 69);
+        }
+
+        #check-reservation{
+            float: left;
+            width: 250px;
+            height: 400px;
+        }
+
+        #check-info{
+            float: left;
+            width: 500px;
+            height: 350px;
+            margin-top: 20px;
+            margin-left: 25px;
+            border-left: 1px solid rgb(125, 124, 124);
+        }
+
+        #check-movie{
+            float: left;
+            width: 200px;
+            height: 350px;
+            margin-top: 20px;
+            margin-left: 25px;
+        }
+        
+        #check-movie div{
+            font-size: 12px;
+            font-weight: 700;
+        }
+
+        #reservation-info{
+            float: left;
+            width: auto;
+            height: 300px;
+            margin: 10px auto auto 70px;
+        }
+
+        #reservation-info > div {
+            float: left;
+            font-weight: 700;
+        }
+
+        #poster-select{
+            width: 180px;
+            height: 260px;
+            margin: auto;
+        }
+
+        #check-area{
+            width: 800px;
+            height: 400px;
+            margin: 0px auto 50px auto;
+            background-color: #0e0e0e;
+        }
+
+        #check-area div{
+            color: rgb(125, 124, 124);
+        }
+        
+        .select-info{
+            width: 100px;
+        }
+
+        .print-info{
+            width: auto;
+        }
+
+        .select-info, .print-info{
+            height: 40px;
+            line-height: 40px;
+        }
+
+        #payment-btn{
+            margin-top: 305px;
+            margin-left: 20px;
+            height: 40px;
+            width: 100px;
+            border: 0;
+            color: rgb(32,32,32);
+            background-color: rgb(255, 193, 69);
+            font-size: 18px;
+            font-weight: 700;
         }
 
     </style>
@@ -346,6 +410,7 @@
         var resvTeen = ['', 0]; 
         var resvAdult = ['', 0];
 
+        // 상영관 예약정보 가져와서 좌석 선택 가능여부 조작
         window.onload = function() {
             $.ajax({
                 url : 'seat.reservationAjax',
@@ -355,6 +420,7 @@
             	},
                 success : function(result){
                     console.log(result);
+                    console.log('스크린 정보 가져왔음');
                 },
                 error : function(){
 
@@ -378,6 +444,7 @@
             
             printPeople();
         });
+
         // 청소년 성인 구분하여 숫자넣기
         $('.ageBtn').click(e => {
             if($(e.target).hasClass('clicked')){
@@ -389,25 +456,25 @@
                 $('.ageBtn').removeClass('clicked');
                 $('.people-Count').removeClass('clicked');
                 $(e.target).addClass('clicked');
+                
                 ageType = ($(e.target).html() == '성인' ? 'adult' : 'teen');
             };
             
             printPeople();
         });
+
         // 선택한 인원 보여주기
         function printPeople(){
             if(ageType == 'teen'){
                 resvTeen = [ageType, peopleCount];
-                
             }
             else if(ageType == 'adult') {
                 resvAdult = [ageType, peopleCount];
-
             };
 
             selectPeople = resvTeen[1] + resvAdult[1];
 
-            if(Number(resvTeen[1] + resvAdult[1]) < 9){
+            if(selectPeople < 9){
                 $('#select-people').html(
                     '<div>청소년 : ' + resvTeen[1] + '명</div>'
                    +'<div>  성인 : ' + resvAdult[1] + '명</div>'
@@ -422,6 +489,7 @@
             peopleCount = 0;
         };
 
+        // 인원수대로 좌석선택
         $('.seats').click(e => {
             if($(e.target).hasClass('clicked')){
                 $(e.target).removeClass('clicked');
@@ -429,12 +497,8 @@
             } 
             else{
                 if(selectPeople < 1 ){
-                    if(!$('.people-Count').hasClass('clicked')){
-                         alert('인원을 먼저 선택해주세요.');
-                    }
-                    else {
-                        alert('좌석을 모두 선택하셨습니다.');
-                    }
+                    if(!$('.people-Count').hasClass('clicked')) alert('인원을 먼저 선택해주세요.');
+                    else alert('좌석을 모두 선택하셨습니다.');
                 }
                 else{
                     $(e.target).addClass('clicked');
@@ -443,8 +507,6 @@
             };
         });
 
-        
-
         // 좌석 선택 후 예매정보 하단에 표시
         $('#print-resv-info').click(function(){
             $.ajax({
@@ -452,17 +514,62 @@
             	type : 'post',
             	data : {
                     screenNo : <%= screenNo %>,
-                    movieNo : <%= movieNo %>
-            	},
+                    movieNo : <%= movieNo %>,
+                    teenAge : resvTeen[1],
+                    adultAge : resvAdult[1] 
+                },
                 success : function(result){
-                    console.log(result);
+                    
+                    $("#check-area").removeAttr("hidden");
+
+                    var resultStr = '';
+                    
+                    resultStr += '<div id="check-reservation">'
+                              +     '<div id="check-movie">'
+                              +         '<div id="poster-select"><img style="width: 100%; height: 100%;" src="<%= contextPath %>/'+ result.movie.filePath + '/' + result.movie.fileName + '" alt="영화포스터"></div>'
+                              +         '<div id="movie-select">'
+                              +             '<div>' + result.movieTitle + '</div>'
+                              +              '<div>' + result.movie.movieRelease + '</div>'
+                              +              '<div>' + result.movie.genreName + ' / ' + result.movie.movieRt + '분</div>'
+                              +         '</div>'
+                              +     '</div>'
+                              + '</div>'
+                              + '<div id="check-info">'
+                              +     '<div id="reservation-info">'
+                              +         '<div>'
+                              +             '<div class="select-info">상영일시</div>'
+                              +             '<div class="select-info">관람극장</div>'
+                              +             '<div class="select-info">상영관</div>'
+                              +             '<div class="select-info">관람인원</div>'
+                              +             '<div class="select-info">선택좌석</div>'
+                              +             '<div class="select-info" style="margin-top: 50px;">결제금액</div>'
+                              +         '</div>'
+                              +         '<div>'
+                              +             '<div class="print-info">'+ result.watchDate +'</div>'
+                              +             '<div class="print-info">' + result.theaterName + '</div>'
+                              +             '<div class="print-info">' + result.screenName + '</div>'
+                              +             '<div class="print-info">' + Number(resvTeen[1] + resvAdult[1]) + '</div>'
+                              +             '<div class="print-info">A1,A2</div>'
+                              +             '<div class="print-info" style="margin-top: 50px;">' + result.price.totalPrice + '원</div>'
+                              +         '</div>'
+                              +     '</div>'
+                              +     '<button id="payment-btn" onclick="payment();">결제 하기</button>'
+                              + '</div>';
+
+                    $('#check-area').html(resultStr);
+
                 },
                 error : function(){
-
+                    alert('예매정보 오류!');
                 }
             });
         });
+        
+        // 결제하기
+        function payment(){
 
+
+        }
 
 
 

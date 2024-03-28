@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.kh.board.model.vo.Category;
+//import com.kh.common.model.vo.PageInfo;
 import com.kh.member.model.vo.Member;
 import com.kh.notice.model.service.NoticeService;
 import com.kh.notice.model.vo.Notice;
@@ -16,21 +17,58 @@ public class NoticeController {
 	// 공지사항 전체 리스트 출력
 	public String selectNoticeList(HttpServletRequest request) {
 		
+//		int listCount;
+//		int currentPage;
+//		int pageLimit;
+//		int boardLimit;	
+//		int maxPage;
+//		int startPage;
+//		int endPage;
+//		
+//		// 전체 공지사항 수 
+//		listCount = new NoticeService().noticeListCount();
+//		
+//		// 현재 페이지 (사용자의 요청 페이지)
+//		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+//		
+//		pageLimit = 10;
+//		boardLimit = 10;
+//		
+//		maxPage = (int)Math.ceil((double)listCount / boardLimit);
+//		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
+//		endPage = startPage + pageLimit - 1;
+//		
+//		if(endPage > maxPage) {
+//			endPage = maxPage;
+//		}
+//		
+//		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit,
+//				   maxPage, startPage, endPage);
+//		
+//		
 		ArrayList<Notice> list = new NoticeService().selectNoticeList();
+		
+		
+//		request.setAttribute("pageInfo", pi);
 		request.setAttribute("noticeList", list);
+		
 		String view = "views/notice/noticeList.jsp";
 		
-		// view 전달 
 		return view;
 	}
 	
-	// 공지사항 조회
-	public String selectNotice(HttpServletRequest request, HttpServletResponse response) {
-		
+	// 글 조회
+	public String detailNotice(HttpServletRequest request, HttpServletResponse response) {
+
+		// 글 조회 목록
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
 		
-		Notice notice = new NoticeService().selectNotice(noticeNo);
+		// 조회수
+		int result = new NoticeService().countNotice(noticeNo);
+		
+		Notice notice = new NoticeService().detailNotice(noticeNo);
 		request.setAttribute("notice", notice);
+		request.setAttribute("count", result);
 		String view = "views/notice/noticeDetail.jsp";
 		
 		return view;
@@ -64,32 +102,6 @@ public class NoticeController {
 		return view;
 	}
 	
-	// 카테고리 (글 수정)
-	public String selectCategory(HttpServletRequest request, HttpServletResponse response) {
-		ArrayList<Category> list = new NoticeService().selectCategoryList();
-		request.setAttribute("category", list);
-		
-		String view = "views/notice/noticeUpdateForm.jsp";
-
-		return view;
-	}
-	
-	
-	// 글 수정 (카테고리, 공지사항 번호 넘겨주기)
-	public String updateNoticeList(HttpServletRequest request, HttpServletResponse response) {
-		ArrayList<Category> list = new NoticeService().selectCategoryList();
-
-		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
-		Notice notice = new NoticeService().selectNotice(noticeNo);
-		
-		request.setAttribute("category", list);
-		request.setAttribute("notice", notice);
-
-		String view = "views/notice/noticeUpdateForm.jsp";
-		
-		return view;
-	}
-	
 	
 	// 공지사항 글쓰기
 	public String insertNotice(HttpServletRequest request, HttpServletResponse response) {
@@ -114,6 +126,7 @@ public class NoticeController {
 		String view = "";
 		
 		if(result > 0) {
+			session.setAttribute("alertMsg", "공지사항이 등록되었습니다.");
 			view = "/list.notice";
 		} else {
 			session.setAttribute("alertMsg", "공지사항 작성 실패");
@@ -127,7 +140,7 @@ public class NoticeController {
 	public String updateNoticeForm(HttpServletRequest request, HttpServletResponse response) {
 		
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
-		Notice notice = new NoticeService().selectNotice(noticeNo);
+		Notice notice = new NoticeService().detailNotice(noticeNo);
 		
 		request.setAttribute("notice", notice);
 		
@@ -140,18 +153,7 @@ public class NoticeController {
 	public String updateNotice(HttpServletRequest request, HttpServletResponse response) {
 		
 		HttpSession session = request.getSession();
-		
-//		int categoryNo = 0;
-//		String noticeCategory = request.getParameter("category");
-//		
-//		switch(noticeCategory) {
-//		case "영화" : categoryNo = 1;
-//		case "영화관" : categoryNo = 2;
-//		case "굿즈" : categoryNo = 3;
-//		case "기타" : categoryNo = 4;
-//		}
-		
-		
+
 		int noticeCategory = Integer.parseInt(request.getParameter("category"));
 		
 		String noticeTitle = request.getParameter("title");
@@ -170,7 +172,8 @@ public class NoticeController {
 		String view = "";
 		
 		if(result > 0) {
-			view = "/update.notice?noticeNo=" + noticeNo;
+			session.setAttribute("alertMsg", "수정 되었습니다.");
+			view = "/detail.notice?noticeNo=" + noticeNo;
 		} else {
 			session.setAttribute("alertMsg", "공지사항 수정 실패");
 			view = "view/notice/noticeUpdateForm.jsp";
@@ -179,7 +182,52 @@ public class NoticeController {
 		return view;
 	}
 	
-	// 페이징
+	// 카테고리 (글 수정)
+	public String selectCategory(HttpServletRequest request, HttpServletResponse response) {
+		ArrayList<Category> list = new NoticeService().selectCategoryList();
+		request.setAttribute("category", list);
+		
+		String view = "views/notice/noticeUpdateForm.jsp";
+
+		return view;
+	}
+	
+	
+	// 글 수정 (카테고리, 공지사항 번호 넘겨주기)
+	public String updateNoticeList(HttpServletRequest request, HttpServletResponse response) {
+		ArrayList<Category> list = new NoticeService().selectCategoryList();
+
+		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+		Notice notice = new NoticeService().detailNotice(noticeNo);
+		
+		request.setAttribute("category", list);
+		request.setAttribute("notice", notice);
+
+		String view = "views/notice/noticeUpdateForm.jsp";
+		
+		return view;
+	}
+	
+	// 삭제
+	public String removeNotice(HttpServletRequest request, HttpServletResponse response) {
+		
+		HttpSession session = request.getSession();
+		
+		String noticeNo = request.getParameter("noticeNo");
+		int result = new NoticeService().removeNotice(noticeNo);
+		
+		String view ="";
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "삭제되었습니다.");
+			view = "/list.notice";
+		} else {
+			session.setAttribute("alertMsg", "삭제 실패");
+			view = "/list.notice";
+		}
+		
+		return view;
+	}
 	
 	
 

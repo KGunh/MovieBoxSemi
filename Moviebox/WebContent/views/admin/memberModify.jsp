@@ -31,18 +31,7 @@
 
         #content{height : 1500px;}
 
-        #logo{
-            position: absolute; 
-            top: 50%;
-            margin-top: -25px;
-            width: 100%;
-            height: 50px;
-            font-size: 50px;
-            font-weight: bold;
-            color: #FFC145;
-            line-height: 45px;
-            
-            text-align: center;
+      
         }
         a {
             text-decoration-line: none;
@@ -111,7 +100,7 @@
             width: 1200px;
             height : 800px;
             margin: 0 auto;
-            background-color:white
+            
         }
         .content_1{
             display: inline-block;
@@ -128,7 +117,7 @@
             height : 800px;
             padding-left: 50px;
             padding-top: 20px;
-            color: #323232;
+            color: white;
         }
         .menu {
             width: 200px;
@@ -253,142 +242,13 @@
             box-sizing : border-box;
         }
 
-        /* 전체를 감싸는 #wrap div */
-        #wrap{
-            /*width: 1200px;*/
-            margin: 0 auto;
-            /*border : 1px solid red;*/
-        }
-
-        #top_wrap{
-            width: 1200px;
-            height : 150px;
-            margin: 0 auto;
-            background-color: #212121;
-        }
-
-        .top_1{
-            display: inline-block;
-            width: 200px;
-            height: 150px;
-            background-color: #212121;
-        }
-
-
-
-        #content{
-            width: 1200px;
-            height : 800px;
-            margin: 0 auto;
-
-
-        }
-
-        .content_1{
-            display: inline-block;
-            vertical-align: top;
-            width : 200px;
-            height : 800px;
-            padding-top: 20px;
-            background-color: #212121;
-
-
-        }
-
-        .content_2{
-            display: inline-block;
-            vertical-align: top;
-            width : 880px;
-            height : 800px;
-            padding-left: 50px;
-            padding-top: 20px;
-            background-color : black;
-
-        }
-
-
-
-        .menu {
-            width: 200px;
-            overflow: hidden;
-            margin: 20px auto;
-            padding: 0%;
-            
-        }
-
-        .menu > li {
-            width: 198px;
-            text-align: center; /*텍스트 중앙에 배치*/
-            line-height: 40px;
-            background-color: #323232;
-            list-style: none;
-
-        }
-
-
-        .menu a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-            display : block; /* 인라인 요소를 블럭요소로 바꿔줌 */
-        }
-
-        .menu a:hover {
-            color: #1a1a1a;
-            text-decoration: none;
-            
-        }
-
-
-        .submenu > li { /*게시글관리 - 공지관리/문의 게시글 관리*/
-            line-height: 50px;
-            background-color: #FFC145;
-            list-style: none;
-            
-        }
-
-        .submenu {
-            height: 0; /*ul의 높이를 안보이게 처리*/
-            overflow: hidden;
-            
-        }
-
-        .menu > li:hover {
-            background-color: #FFC145;
-            transition-duration: 0.5s;
-        }
-
-
-        .menu > li.post:hover .submenu {
-            height: 100px; /*서브메뉴 li한개의 높이 50*5*/
-            transition-duration: 1s;
-        }
-
-
-
-
-        .top_1 > h1{
-            color: #FFC145;
-            text-align: center;
-            line-height: 150px;
-        }
-
-
-
-        .menu .submenu{
-            padding-left: 0;
-        } 
-
-
+      
         /*-----------------------여기까지는 테두리------*/
 
 
         /* -------------------------------------------*/
 
-        #content_2_box { /*컨텐트2 전체 div*/
-            width: 770px;
-            height: 690px;
-        }
+       
 
 
         #p{
@@ -480,56 +340,57 @@
                 <div class="content_2_top">
                  
                       <table class="table table-hover"  style="height: 490px;">
+                      <tbody>
                         <tr>
-                            <tbody>
+                            
                             <th class="title">회원번호</th>
-                            <td><input type="text" class="input1"></td>
+                            <td><input type="text" class="input1" value="<%=m.getMemberNo()%>"></td>
                         </tr>
                            
                             <tr>  
                               <th class="title">이름</th>
-                              <td><input type="text" class="input1"></td>
+                              <td><input type="text" class="input1" value="<%=m.getMemberName()%>"></td>
                               
                             </tr>
                             
                              <tr>
                               <th class="title">아이디</th>
-                              <td><input type="text" class="input1"></td>
+                              <td><input type="text" class="input1" value="<%=m.getMemberId()%>"></td>
                             </tr>
                             
                              <tr>
                               <th class="title">비밀번호</th>
-                              <td><input type="text" class="input1"></td>
+                              <td><input type="text" class="input1" value="<%=m.getMemberPwd()%>"></td>
                             </tr>
                             
                             <tr>  
                             
                               <th class="title">성별</th>
-                              <td><input type="text" class="input1"></td>
+                              <td><input type="text" class="input1" value="<%=m.getGender()%>"></td>
                             </tr>  
                             <tr>
                               <th class="title">생년월일</th>
-                              <td><input type="text" class="input1"></td> 
+                              <td><input type="text" class="input1" value="<%=m.getBirthday()%>"></td> 
                             </tr>
                              <tr>
                               <th class="title">이메일</th>
-                              <td><input type="text" class="input1"></td> 
+                              <td><input type="text" class="input1" value="<%=m.getEmail()%>"></td> 
                             </tr>
                             <tr>
                               <th class="title">주소</th>
-                              <td><input type="text" class="input1"></td>
+                              <td><input type="text" class="input1" value="<%=m.getAddress()%>"></td>
                             </tr>
                             <tr>  
                               <th class="title">전화번호</th>
-                              <td><input type="text" class="input1"></td>
+                              <td><input type="text" class="input1" value="<%=m.getPhone()%>"></td>
                             </tr>
                             <tr>
                               <th class="title">가입일</th>
-                              <td><input type="text" class="input1"></td>
+                              <td><input type="text" class="input1" value="<%=m.getEnrollDate()%>"></td>
                             </tr>  
                             <tr>
                               <th class="title">탈퇴여부</th>
-                              <td><input type="text" class="input1"></td>
+                              <td><input type="text" class="input1" value="<%=m.getStatus()%>"></td>
                             </tr>
                             
                            
@@ -556,7 +417,7 @@
  	<!-- 푸터 -->
   
         </div>
-
+</div>
 
 
     

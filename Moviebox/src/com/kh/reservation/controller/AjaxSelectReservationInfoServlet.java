@@ -7,6 +7,9 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.kh.common.model.vo.Reservation;
+
 /**
  * Servlet implementation class AjaxSelectReservationInfoServlet
  */
@@ -26,12 +29,12 @@ public class AjaxSelectReservationInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
 		
-	
-	
-	
-	
+        Reservation reservation =  new ReservationController().checkReservationInfo(request);
+        
+        response.setContentType("application/json; charset=UTF-8");
+		
+		new Gson().toJson(reservation, response.getWriter());
 	
 	}
 

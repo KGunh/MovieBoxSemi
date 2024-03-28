@@ -5,7 +5,8 @@
  				 java.util.ArrayList"%>
     
 <%
-	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("qnaList");
+	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("boardList");
+	Board board = (Board)request.getAttribute("board");
 
 %>
 
@@ -66,6 +67,7 @@
             float: left;
             font-weight: bolder;
             cursor: pointer;
+            color: #FFC145;
         }
         
         .qna-tap{
@@ -289,7 +291,7 @@
                         <% } else { %>
                         
                         	<% for(Board b : list) { %>
-                        <tr>
+                        <tr class="list">
                             <td id="list-no"><%= b.getBoardNo() %></td>
                             <td id="list-ca"><%= b.getBoardCategory() %></td>
                             <td id="list-title"><%= b.getBoardTitle() %></td>
@@ -322,9 +324,13 @@
     		}
     		
     		function openQnaPage(){
-    			location.href = '<%=contextPath %>/list.qna';
-    			
+    			location.href = '<%=contextPath %>/list.board';
     		}
+    		
+    		$('tbody > tr.list').click(function(){
+    			const boardNo = $(this).children().eq(0).text();
+    			location.href = '<%=contextPath%>/detail.board?boardNo=' + boardNo;
+            });
     	
     	</script>
 

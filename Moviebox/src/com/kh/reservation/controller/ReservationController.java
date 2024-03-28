@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.kh.common.model.vo.Reservation;
 import com.kh.reservation.model.service.ReservationService;
 import com.kh.reservation.model.vo.Seat;
 import com.kh.theater.model.vo.Screen;
@@ -95,23 +96,33 @@ public class ReservationController {
 
 	// 영화 선택 후 좌석 선택화면으로 보내는 메소드
 	public String connectSeatList(HttpServletRequest request) {
-		request.setAttribute("movieNo", request.getParameter("movieNo"));
+		request.setAttribute("theaterName", request.getParameter("theaterName"));
 		request.setAttribute("movieTitle", request.getParameter("movieTitle"));
 		request.setAttribute("screenDate", request.getParameter("screenDate"));
-		request.setAttribute("screenNo", request.getParameter("screenNo"));
 		request.setAttribute("screenName", request.getParameter("screenName"));
+		request.setAttribute("screenNo", request.getParameter("screenNo"));
+		request.setAttribute("movieNo", request.getParameter("movieNo"));
 		
 		String view = "views/reservation/seatReservation.jsp";
 		
 		return view;
 	}
-	
+	// 상영관 예매된 좌석 조회
 	public List<Seat> selectSeatList(HttpServletRequest request) {
 		int screenNo = Integer.parseInt(request.getParameter("screenNo"));
 
 		return new ReservationService().selectSeatList(screenNo);		
 	}
-	
+	// 예약내용 확인
+	public Reservation checkReservationInfo(HttpServletRequest request) {
+		int screenNo = Integer.parseInt(request.getParameter("screenNo"));
+		int movieNo = Integer.parseInt(request.getParameter("movieNo"));
+		int teenAge = Integer.parseInt(request.getParameter("teenAge"));
+		int adultAge = Integer.parseInt(request.getParameter("adultAge"));
+		
+		return new ReservationService().checkReservationInfo(screenNo, movieNo, teenAge, adultAge); 
+	}
+	// 예약
 	public void insertReservation() {
 		// 예약 정보를 가지고 결제 페이지로 연결
 		// 예약내용 insert

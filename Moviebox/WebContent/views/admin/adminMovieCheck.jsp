@@ -4,7 +4,7 @@
     
 <%
 ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("adminMovieCheck");
-System.out.println(list);
+//System.out.println(list);
 %> 
 <!DOCTYPE html>
 <html>

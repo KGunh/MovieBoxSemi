@@ -11,14 +11,14 @@ import javax.servlet.http.HttpServletResponse;
 /**
  * Servlet implementation class QnaServlet
  */
-@WebServlet("*.qna")
-public class QnaServlet extends HttpServlet {
+@WebServlet("*.board")
+public class BoardServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public QnaServlet() {
+    public BoardServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,7 +32,7 @@ public class QnaServlet extends HttpServlet {
 		
 		// 변수 선언 
 		
-		QnaController qc = new QnaController();
+		BoardController qc = new BoardController();
 		
 		// URI 담기
 		String uri = request.getRequestURI();
@@ -42,7 +42,8 @@ public class QnaServlet extends HttpServlet {
 		boolean flag = true;
 		
 		switch(mapping) {
-		case "list" : view = qc.selectQnaList(request); flag = false; break; // dispatcher
+		case "list" : view = qc.selectBoardList(request); flag = false; break; // dispatcher
+		case "detail" : view = "views/board/BoardDetail.jsp";
 		}
 		
 		
