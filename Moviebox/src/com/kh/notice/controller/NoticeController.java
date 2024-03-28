@@ -29,8 +29,12 @@ public class NoticeController {
 		
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
 		
+		// 조회수
+		int result = new NoticeService().countNotice(noticeNo);
+		
 		Notice notice = new NoticeService().selectNotice(noticeNo);
 		request.setAttribute("notice", notice);
+		request.setAttribute("count", result);
 		String view = "views/notice/noticeDetail.jsp";
 		
 		return view;
@@ -146,7 +150,7 @@ public class NoticeController {
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "수정 되었습니다.");
-			view = "/update.notice?noticeNo=" + noticeNo;
+			view = "/detail.notice?noticeNo=" + noticeNo;
 		} else {
 			session.setAttribute("alertMsg", "공지사항 수정 실패");
 			view = "view/notice/noticeUpdateForm.jsp";
