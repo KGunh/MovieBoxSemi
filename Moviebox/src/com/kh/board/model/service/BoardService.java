@@ -5,15 +5,15 @@ import static com.kh.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
-import com.kh.board.model.dao.QnaDao;
+import com.kh.board.model.dao.BoardDao;
 import com.kh.board.model.vo.Board;
 
-public class QnaService {
+public class BoardService {
 
-	public ArrayList<Board> selectQnaList() {
+	public ArrayList<Board> selectBoardList() {
 		Connection conn = getConnection();
 		
-		ArrayList<Board> list = new QnaDao().selectQnaList(conn);
+		ArrayList<Board> list = new BoardDao().selectBoardList(conn);
 		
 		close(conn);
 		

@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.board.model.vo.Category;
+import com.kh.common.model.vo.PageInfo;
 import com.kh.notice.model.vo.Notice;
 
 public class NoticeDao {
@@ -41,12 +42,18 @@ public class NoticeDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
+			
+//			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+//			int endRow = startRow + pi.getBoardLimit() - 1;
+//			
+//			pstmt.setInt(1, startRow);
+//			pstmt.setInt(2, endRow);
+			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
 				
 				Notice notice = new Notice();
-				
 				notice.setNoticeNo(rset.getInt("NOTICE_NO"));
 				notice.setNoticeCategory(rset.getString("CATEGORY_NAME"));
 				notice.setNoticeTitle(rset.getString("NOTICE_TITLE"));
@@ -91,12 +98,12 @@ public class NoticeDao {
 	
 
 	// 공지사항 조회
-	public Notice selectNotice(Connection conn, int noticeNo) {
+	public Notice detailNotice(Connection conn, int noticeNo) {
 		
 		Notice notice = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("selectNotice");
+		String sql = prop.getProperty("detailNotice");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -203,8 +210,6 @@ public class NoticeDao {
 			
 			result = pstmt.executeUpdate();
 			
-			System.out.println(result);
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -257,6 +262,35 @@ public class NoticeDao {
 		}
 		
 		return result;
+	}
+
+
+	public int noticeListCount(Connection conn) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("noticeListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			listCount = rset.getInt("COUNT(*)");
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return listCount;
 	}
 
 
