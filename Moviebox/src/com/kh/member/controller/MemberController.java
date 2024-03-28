@@ -337,7 +337,7 @@ public class MemberController {
 		if(result > 0) {
 			session.setAttribute("alertMsg", "수정에 성공했습니다.");
 			
-			
+			loginUser.setMemberPwd(changePwd);
 			Member updateMem = new MemberService().login(loginUser);
 			
 			session.setAttribute("loginUser", updateMem);
@@ -349,6 +349,32 @@ public class MemberController {
 		}
 		
 		return view;
+		
+	}
+	
+	public String idSearch(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		String view = "";
+		String memberName = request.getParameter("memberName");
+		String birthday = request.getParameter("birthday");
+		String phone = request.getParameter("phone");
+		
+		Member m = new Member();
+		
+		m.setMemberName(memberName);
+		m.setBirthday(birthday);
+		m.setPhone(phone);
+		
+		String memberId = new MemberService().idSearch(m);
+		
+		if(memberId != null) {
+			view = "views/member/idSearchResult.jsp";
+		} else {
+			session.setAttribute("alertMsg", "아이디를 찾지 못했습니다. 다시입력해주세요");
+			view = "views/member/idSearchForm.jsp";
+		}
+		return view;
+		
 		
 	}
 	
