@@ -382,7 +382,10 @@ System.out.println(list);
                               	<% for(Notice n : list) {%>	
 	                                <tr>
 	                                    <td><%= n.getNoticeNo() %></td>
-	                                    <td><%= n.getCategoryNo() %></td>
+	                                    <td><%= n.getNoticeCategory() %></td>
+	                                    <!-- NOTICE_CATEGORY = CATEGORY_NO로 조인해서 getNoticeNo에는 값이 없음 그래서 0으로 출력됨 dao에서
+	                                    	notice.setNoticeCategory(rset.getString("CATEGORY_NAME")); 이렇게 값을 담은 NoticeCategory출력해야함
+	                                      -->
 	                                    <td><%= n.getNoticeTitle() %></td>
 	                                    <td><%= n.getCreateDate() %></td>
 	                                    <td><%= n.getCount() %></td>
