@@ -337,7 +337,7 @@ public class MemberController {
 		if(result > 0) {
 			session.setAttribute("alertMsg", "수정에 성공했습니다.");
 			
-			
+			loginUser.setMemberPwd(changePwd);
 			Member updateMem = new MemberService().login(loginUser);
 			
 			session.setAttribute("loginUser", updateMem);

@@ -46,7 +46,7 @@
             border-bottom: 4px solid#FFC145;
         }
         #input-list{
-            height: 320px;
+            height: auto;
             width: 100%;
 
         }
@@ -63,7 +63,7 @@
             margin: 0;
             position: absolute;
             bottom: 0;
-            font-size: 12px;
+            font-size: 14px;
             font-weight: bold;
             padding-left: 10px;
             
@@ -72,7 +72,7 @@
 
         .input-span {
             color: rgb(158, 158, 158);
-            font-size: 12px;
+            font-size: 14px;
             font-weight: bold;
             width: 70%;
             float: left;
@@ -97,15 +97,51 @@
             height: 100%;
             width: 100%;
             text-align: center;
-            text-align: center;
             border: none;
             border-radius: 8px;
-            font-size: 12px;
-            font-weight: bold;
+            font-size: 16px;
+            font-weight: bolder;
             line-height: 50px;
             background-color: #FFC145;
             
         }
+        .search{
+            float: left;
+            width: 49%;
+            height: 100%;
+            text-align: center;
+            line-height: 50px;
+
+        }
+        .find_text{
+            display: block;
+            width: 100%;
+            height: 100%;
+            
+        }
+        .regis, .register{
+            float: left;
+            height: 100%;
+            text-align: center;
+            line-height: 50px;
+        }
+
+        .regis{
+            width: 60%;
+        }
+        .register{
+            width: 40%;
+        }
+        .colorWhite, .colorWhite a{
+            color: white;
+            font-size: 14px;
+            font-weight: bold;
+        }
+        .find_text:hover{
+            text-decoration: none;
+            color: white;
+        }
+
     </style>
 
 </head>
@@ -133,6 +169,21 @@
                 <div class="input-button">
 					<input id="idSearch" type="submit" value="로그인">
 				</div>
+				<div class="inputdiv colorWhite" style="height: 50px;">
+                    <div class="search">
+                        <a href="#" class="find_text">아이디 찾기</a>
+                    </div>
+                    <div style="width: 2%; height: 100%; float: left;text-align: center;
+                    line-height: 50px;">|</div>
+                    <div class="search">
+                        <a href="#" class="find_text">비밀번호 찾기</a>
+                    </div>
+                </div>
+        		
+        		<div class="inputdiv colorWhite" style="height: 50px;">
+            		<div class="regis">MOVIE BOX 회원이 아니신가요?</div>
+            		<div class="register" ><a href="#" class="find_text">회원가입하기</a></div>
+        		</div>
 
             </form>
 
