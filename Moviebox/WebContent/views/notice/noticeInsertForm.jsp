@@ -4,7 +4,8 @@
 <%@ page import="com.kh.board.model.vo.Category, java.util.ArrayList "%>
     
 <%
-	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("categoryList");
+	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("category");
+	System.out.println(list);
 %>
     
     

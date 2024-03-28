@@ -191,5 +191,17 @@ public class MemberService {
 		return memberId;
 	}
 	
+	public int deleteMember(Member loginUser) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().deleteMember(conn, loginUser);
+		
+		if(result > 0) commit(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+	
 
 }

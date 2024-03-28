@@ -364,10 +364,10 @@ public class MemberController {
 		m.setMemberName(memberName);
 		m.setBirthday(birthday);
 		m.setPhone(phone);
-		
 		String memberId = new MemberService().idSearch(m);
 		
-		if(memberId != null) {
+		if(memberId != "") {
+			request.setAttribute("memberId", memberId);
 			view = "views/member/idSearchResult.jsp";
 		} else {
 			session.setAttribute("alertMsg", "아이디를 찾지 못했습니다. 다시입력해주세요");
@@ -376,6 +376,39 @@ public class MemberController {
 		return view;
 		
 		
+	}
+	
+	public String delete(HttpServletRequest request, HttpServletResponse response) {
+		String view = "";
+		
+		HttpSession session = request.getSession();
+		
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		String CheckPwd = request.getParameter("memberPwd");
+
+		
+		
+		String loginUserPwd = loginUser.getMemberPwd();
+		
+		if(CheckPwd.equals(loginUserPwd)) {
+			int result = new MemberService().deleteMember(loginUser);
+			
+			if(result > 0) {
+				session.invalidate();
+			} else {
+				session.setAttribute("alertMsg", "회원 탈퇴에 실패했습니다.");
+				view = "/Updateform.me";
+			}
+			
+			
+		} else {
+			session.setAttribute("alertMsg", "잘못된 비밀번호 입니다.");
+			view = "/Updateform.me";
+		}
+		
+		
+		return view;
 	}
 	
 	

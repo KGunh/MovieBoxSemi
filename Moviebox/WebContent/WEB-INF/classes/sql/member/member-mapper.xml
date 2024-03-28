@@ -308,4 +308,13 @@
 		   	   STATUS = 'Y'	   
 	
 	</entry>
+	
+	<entry key="deleteMember">
+		UPDATE
+			   TB_MEMBER
+		   SET
+		   	   STATUS = 'N'
+		 WHERE
+		 	   MEMBER_NO = ?
+	</entry>
 </properties>
