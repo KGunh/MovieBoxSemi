@@ -25,47 +25,9 @@
         body {
             background-color: #1A1A1A
         }
-        #header{
-           margin: auto;
-            height : 200px;
-            width: 1200px;
-        }
+       
 
-        #top-header{
-            height: 75px;
-            position: relative;
-            border-bottom: 1px solid lightgray;
-        }
-        #login-area{
-            position: absolute;
-            right: 30px;
-            top: 20px;
-
-        }
-        #login-area > a{
-            display: block;
-            float: right;
-            text-decoration-line: none;
-            color: white;
-            font-size: 16px;
-            margin-left: 30px;
-            font-weight: bold;
-        }
         
-
-        #header-navigator{
-            height : 125px;
-            
-            border-bottom: 1px solid lightgray;
-        }
-
-        #logo-div{
-            position: relative;
-            float: left;
-            height: 100%;
-            width: 30%;
-
-        }
 
         #content{height : 1500px;}
 
@@ -231,14 +193,14 @@
         .table table-hover{
             
             
-            border: 2px solid #eaeaea             
+            border: 1px solid white;             
         }
 
         .title{
             background-color: rgba(211, 211, 211, 0.171);
-            width: 60px;
+            width: 100px;
             text-align: center;
-            color: rgb(77, 77, 77);
+            color: rgb(255, 255, 255);
             font-size: 14px;
             font-weight: bolder;
            
@@ -253,7 +215,7 @@
             margin-top: 10px;
             margin-right: 10px;
             color:white;
-            border-bottom: 1px solid lightgray;
+            border-bottom: 1px solid white;
             
             
         }
@@ -265,7 +227,7 @@
        
        #buttoon{
         float: right;
-        margin-top: 70px;
+        margin-top: 50px;
         margin-right: 30px;
        }
             
@@ -435,7 +397,29 @@
             font-size: x-large;
             font-weight: bold;
             
-        }  
+        }
+        
+         .input1{
+        width: 500px;
+        height: 27px;
+        border: none;
+        color: rgba(255, 255, 255, 0.959);
+        background-color: #1A1A1A;
+        border-radius: 5px;
+       }
+        
+         #content2{
+        height: 800px;
+        width: 995.6px;
+        display: inline-block;
+        background-color: #1A1A1A;
+        
+       }
+        
+        
+        
+        
+          
 
    
 
@@ -490,68 +474,68 @@
             </div>
 
             <!------------------------------------------------------------>
-
+			 <div id="content2">
             <div class="content_2">
                 <h2> 회원 기본 정보</h2>
                 <div class="content_2_top">
                  
-                    <table class="table table-hover"  style="height: 490px;">
-                       
-                          <tr>
+                      <table class="table table-hover"  style="height: 490px;">
+                        <tr>
                             <tbody>
                             <th class="title">회원번호</th>
-                            <td><%=m.getMemberNo() %></td>
+                            <td><input type="text" class="input1"></td>
                         </tr>
                            
                             <tr>  
                               <th class="title">이름</th>
-                              <td><%=m.getMemberName() %></td>
+                              <td><input type="text" class="input1"></td>
                               
                             </tr>
                             
                              <tr>
                               <th class="title">아이디</th>
-                              <td><%=m.getMemberId() %></td>
+                              <td><input type="text" class="input1"></td>
                             </tr>
                             
                              <tr>
                               <th class="title">비밀번호</th>
-                              <td><%=m.getMemberPwd() %></td>
+                              <td><input type="text" class="input1"></td>
                             </tr>
                             
                             <tr>  
                             
                               <th class="title">성별</th>
-                              <td><%=m.getGender() %></td>
+                              <td><input type="text" class="input1"></td>
                             </tr>  
                             <tr>
                               <th class="title">생년월일</th>
-                              <td><%=m.getBirthday() %></td> 
+                              <td><input type="text" class="input1"></td> 
                             </tr>
                              <tr>
                               <th class="title">이메일</th>
-                              <td><%=m.getEmail() %></td> 
+                              <td><input type="text" class="input1"></td> 
                             </tr>
                             <tr>
                               <th class="title">주소</th>
-                              <td><%=m.getAddress() %></td>
+                              <td><input type="text" class="input1"></td>
                             </tr>
                             <tr>  
                               <th class="title">전화번호</th>
-                              <td><%=m.getPhone() %></td>
+                              <td><input type="text" class="input1"></td>
                             </tr>
                             <tr>
                               <th class="title">가입일</th>
-                              <td><%=m.getEmail() %></td>
+                              <td><input type="text" class="input1"></td>
                             </tr>  
                             <tr>
                               <th class="title">탈퇴여부</th>
-                              <td><%=m.getStatus() %></td>
+                              <td><input type="text" class="input1"></td>
                             </tr>
                             
                            
                           </tbody>
                               </table>
+
 
                 </div>
                 <div id="buttoon">
@@ -567,7 +551,7 @@
                 
                 </script>
             </div>
-            
+            </div>
             <%@ include file="/views/common/footer.jsp" %>
  	<!-- 푸터 -->
   
@@ -575,7 +559,7 @@
 
 
 
-    </div>
+    
 
  	
   

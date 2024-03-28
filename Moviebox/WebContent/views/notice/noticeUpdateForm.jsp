@@ -2,12 +2,12 @@
     pageEncoding="UTF-8"%>
     
 <%@ page import="com.kh.board.model.vo.Category, java.util.ArrayList,
-				 com.kh.notice.model.vo.Notice "%>
+				 com.kh.notice.model.vo.Notice"%>
     
 <%
-	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("categoryList");
 	Notice notice = (Notice)request.getAttribute("notice");
-	Category category = (Category)request.getAttribute("category");
+	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("category");
+
 %>
     
     
@@ -255,15 +255,13 @@
                     <div class="notice-tap">공지사항</div>
                     <div class="qna-tap">QnA</div>
                 </div>-->
-
                 <div class="notice-content">
                     <div class="detail-box1">
                         <div class="detail-title-box1">
                             <div class="detail-category"><span>공지사항 작성</span></div>
                         </div>
                     </div>
-
-
+                    
                     <div class="detail-content-box">
                         <form action="<%= contextPath %>/update.notice" method="post" id="insert-box">
                         
@@ -274,9 +272,9 @@
                                 
                                 
                                 <select name="category" id="select-category">
-                                
+                               
                                 <% for(Category c : list) { %>
-									<option class="<%= c.getCategoryNo()%>" value="<%= c.getCategoryNo() %>">
+									<option class="<%= c.getCategoryName()%>" value="<%= c.getCategoryName() %>">
 										<%= c.getCategoryName() %>
 									</option>
 								<% } %>
@@ -285,7 +283,7 @@
                                 
                                     <script>
 								    	$(function(){
-								    		$('option[class="<%=notice.getCategoryNo()%>"]').attr('selected', 'true');
+								    		$('option[class="<%=notice.getNoticeCategory()%>"]').attr('selected', 'true');
 								    	})
     
 								    </script>
