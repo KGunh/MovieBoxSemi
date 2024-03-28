@@ -336,10 +336,10 @@
             
         }
 
-        #select_1{ /*장르셀렉박스1*/
+        #select_1{ /*장르셀렉박스*/
             border: 1px solid gainsboro;
             border-radius: 8px;
-            width: 256px;
+            width: 533px;
             height: 40px;
             font-size: 15px;
             margin-top: 9px;
@@ -349,16 +349,7 @@
 
         }
 
-        #select_2{ /*장르셀렉박스2*/
-            border: 1px solid gainsboro;
-            border-radius: 8px;
-            width: 256px;
-            height: 40px;
-            font-size: 15px;
-            margin-top: 9px;
-            color: #727272;
-            padding-left: 7px;
-        }
+
 
         #date{ /*개봉일 선택창*/
             width: 533px;
@@ -462,14 +453,6 @@
                         <div id="sub_3">
                             <select name="#" id="select_1" >
                                 <option value="">장르</option>
-                                <option value="">액션</option>
-                                <option value="">로맨스</option>
-                                <option value="">공포/스릴러</option>
-                                <option value="">코미디</option>
-                                <option value="">애니메이션</option>
-                            </select>
-                            <select name="#" id="select_2" >
-                                <option value="">장르2</option>
                                 <option value="">액션</option>
                                 <option value="">로맨스</option>
                                 <option value="">공포/스릴러</option>
