@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kh.board.model.vo.Board, java.util.ArrayList"%>
+    
+<%
+ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("adminQnACheck");
+System.out.println(list);
+%> 
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -365,86 +373,22 @@
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                              <% if(list == null || list.isEmpty()) { %>
+                              	<tr>
+                              		<td colspan="6">조회 된 문의 목록이 없습니다. </td>
+                              	</tr>
+                              <% }else{ %>
+                              	<% for(Board b : list) {%>	
+	                                <tr>
+	                                    <td><%= b.getBoardNo() %></td>
+	                                    <td><%= b.getBoardCategory() %></td>
+	                                    <td><%= b.getBoardTitle() %></td>
+	                                    <td><%= b.getBoardWriter() %></td>
+	                                    <td><%= b.getCreateDate() %></td>
+	                                    <td><%= b.getCount() %></td>
+	                                </tr>
+	                            <% } %>    
+                              <% } %> 
                               </tbody>
                             </table>
                           </div>
