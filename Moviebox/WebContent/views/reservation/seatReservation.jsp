@@ -7,7 +7,7 @@
 	String movieTitle = (String)request.getAttribute("movieTitle");
 	String screenNo = (String)request.getAttribute("screenNo");
 	String movieNo = (String)request.getAttribute("movieNo");
-	String theaterName = (String)request.getAttribute("theaterName");
+    String theaterName = (String)request.getAttribute("theaterName");
 %>
 
 <!DOCTYPE html>
@@ -21,7 +21,7 @@
         color: rgb(32,32,32);
     }
 	div{
-        border: 1px solid red;
+        /*border: 1px solid red;*/
         box-sizing: border-box;
     }
     a{
@@ -320,13 +320,24 @@
             </div>
             <div id="check-info">
                 <div id="reservation-info">
-                    <div>상영일시</div>
-                    <div>관람극장</div>
-                    <div>상영관</div>
-                    <div>관람인원</div>
-                    <div>선택좌석</div>
-                    <div>결제금액</div>
+                    <div>
+                        <div class="select-info">상영일시</div>
+                        <div class="select-info">관람극장</div>
+                        <div class="select-info">상영관</div>
+                        <div class="select-info">관람인원</div>
+                        <div class="select-info">선택좌석</div>
+                        <div class="select-info" style="margin-top: 50px;">결제금액</div>
+                    </div>
+                    <div>
+                        <div class="print-info">2024-03-28 23:10~24:00</div>
+                        <div class="print-info">CGV 용산</div>
+                        <div class="print-info">2관</div>
+                        <div class="print-info">2명</div>
+                        <div class="print-info">A1,A2</div>
+                        <div class="print-info" style="margin-top: 50px;">28000원</div>
+                    </div>
                 </div>
+                <button id="payment-btn" onclick="payment();">결제 하기</button>
             </div>
         </div>
 	</div>
@@ -350,6 +361,7 @@
             height: 350px;
             margin-top: 20px;
             margin-left: 25px;
+            border-left: 1px solid rgb(125, 124, 124);
         }
 
         #check-movie{
@@ -365,6 +377,13 @@
         }
 
         #reservation-info{
+            float: left;
+            width: auto;
+            height: 300px;
+            margin: 10px auto auto 70px;
+        }
+
+        #reservation-info > div {
             float: left;
         }
 
@@ -383,6 +402,31 @@
 
         #check-area div{
             color: rgb(125, 124, 124);
+        }
+        
+        .select-info{
+            width: 100px;
+        }
+
+        .print-info{
+            width: auto;
+        }
+
+        .select-info, .print-info{
+            height: 40px;
+            line-height: 40px;
+        }
+
+        #payment-btn{
+            margin-top: 305px;
+            margin-left: 20px;
+            height: 40px;
+            width: 100px;
+            border: 0;
+            color: rgb(32,32,32);
+            background-color: rgb(255, 193, 69);
+            font-size: 16px;
+            font-weight: 700;
         }
 
     </style>
@@ -513,7 +557,12 @@
                 }
             });
         });
+        
+        // 결제하기
+        function payment(){
 
+
+        }
 
 
 
