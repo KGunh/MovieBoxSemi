@@ -114,15 +114,13 @@ public class ReservationController {
 		return new ReservationService().selectSeatList(screenNo);		
 	}
 	// 예약내용 확인
-	public void checkReservationInfo(HttpServletRequest request) {
+	public Reservation checkReservationInfo(HttpServletRequest request) {
 		int screenNo = Integer.parseInt(request.getParameter("screenNo"));
 		int movieNo = Integer.parseInt(request.getParameter("movieNo"));
 		int teenAge = Integer.parseInt(request.getParameter("teenAge"));
 		int adultAge = Integer.parseInt(request.getParameter("adultAge"));
-
-		Reservation reservation =  new ReservationService().checkReservationInfo(screenNo, movieNo, teenAge, adultAge);
 		
-		
+		return new ReservationService().checkReservationInfo(screenNo, movieNo, teenAge, adultAge); 
 	}
 	// 예약
 	public void insertReservation() {

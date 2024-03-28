@@ -161,7 +161,7 @@ public class ReservationDao {
 	}
 
 	public Reservation checkReservationInfo(Connection conn, int screenNo, int movieNo, int teenAge, int adultAge) {
-		Reservation reservation = null;
+		Reservation reservation = new Reservation();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
@@ -174,6 +174,8 @@ public class ReservationDao {
 			pstmt.setInt(2, adultAge);
 			pstmt.setInt(3, movieNo);
 			pstmt.setInt(4, screenNo);
+			
+			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
 				reservation.setMemberNo(rset.getInt("MOVIE_NO"));
@@ -198,8 +200,10 @@ public class ReservationDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
 		}
-		
 		return reservation;
 	}
 	

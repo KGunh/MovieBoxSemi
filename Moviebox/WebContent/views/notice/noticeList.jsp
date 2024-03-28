@@ -2,11 +2,20 @@
     pageEncoding="UTF-8"%>
     
 <%@ page import="com.kh.notice.model.vo.Notice,
+				 com.kh.common.model.vo.PageInfo,
 				 java.util.ArrayList"%>
     
 <%
-ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
-Notice notice = (Notice)request.getAttribute("notice");
+	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
+	Notice notice = (Notice)request.getAttribute("notice");
+	
+//	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
+	
+//	int currentPage = pi.getCurrentPage();
+//	int startPage = pi.getStartPage();
+//	int endPage = pi.getEndPage();
+//	int maxPage = pi.getMaxPage();
+	
 %>    
     
     
@@ -320,7 +329,8 @@ Notice notice = (Notice)request.getAttribute("notice");
                 </table>
             </div>
 
-
+	        
+           <!--  -->
             <div id="page">
                 <div class="paging-area" align="center" style="margin-top:12px;">
                     <button class="btn btn-outline-secondary" style="color:white; background: none; border: 1px solid white;"> < </button>
