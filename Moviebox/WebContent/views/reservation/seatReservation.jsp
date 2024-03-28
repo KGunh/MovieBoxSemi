@@ -549,11 +549,43 @@
                     adultAge : resvAdult[1] 
                 },
                 success : function(result){
-                    console.log(result);
-                    console.log('예매 정보 가져옴~');
+                    var resultStr = '<div id="check-reservation">'
+                                  +     '<div id="check-movie">'
+                                  +         '<div id="poster-select"><img src="<%= contextPath %>/'+ result.movie.filePath + '/' + result.movie.fileName + '" alt="영화포스터"></div>'
+                                  +         '<div id="movie-select">'
+                                  +             '<div>' + result.movieTitle + '</div>'
+                                  +              '<div>' + result.movie.movieRelease + '</div>'
+                                  +              '<div>' + result.movie.genreName + ' / ' + result.movie.movieRt + '분</div>'
+                                  +         '</div>'
+                                  +     '</div>'
+                                  + '</div>'
+                                  + '<div id="check-info">'
+                                  +     '<div id="reservation-info">'
+                                  +         '<div>'
+                                  +             '<div class="select-info">상영일시</div>'
+                                  +             '<div class="select-info">관람극장</div>'
+                                  +             '<div class="select-info">상영관</div>'
+                                  +             '<div class="select-info">관람인원</div>'
+                                  +             '<div class="select-info">선택좌석</div>'
+                                  +             '<div class="select-info" style="margin-top: 50px;">결제금액</div>'
+                                  +         '</div>'
+                                  +         '<div>'
+                                  +             '<div class="print-info">'+ result.watchDate +'</div>'
+                                  +             '<div class="print-info">' + result.theaterName + '</div>'
+                                  +             '<div class="print-info">' + result.screenName + '</div>'
+                                  +             '<div class="print-info">' +  + '</div>'
+                                  +             '<div class="print-info">A1,A2</div>'
+                                  +             '<div class="print-info" style="margin-top: 50px;">' + result.Price.totalPrice + '</div>'
+                                  +         '</div>'
+                                  +     '</div>'
+                                  +     '<button id="payment-btn" onclick="payment();">결제 하기</button>'
+                                  + '</div>';
+
+                    $('check-area').html(result);
+
                 },
                 error : function(){
-
+                    alert('예매정보 오류!');
                 }
             });
         });

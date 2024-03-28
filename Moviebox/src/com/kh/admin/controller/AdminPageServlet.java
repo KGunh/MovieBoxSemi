@@ -65,11 +65,15 @@ public class AdminPageServlet extends HttpServlet {
 			view = "/views/admin/adminBoardInsert.jsp"; break; //공지등록
 			
 			
+//		case "adminQnACheck" :
+//			view = "/views/admin/adminQnACheck.jsp"; break; //문의목록
+			
 		case "adminQnACheck" :
-			view = "/views/admin/adminQnACheck.jsp"; break; //문의목록
+			view = admin.adminSelectQnAList(request); flag = false; break; //문의목록
 			
 		case "adminQnAInsert" :
 			view = "/views/admin/adminQnAInsert.jsp"; break; //문의관리
+			
 			
 		
 			
