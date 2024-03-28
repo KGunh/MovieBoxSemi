@@ -14,7 +14,11 @@ public class Movie {
 	private int directorNo;
 	private String filePath;
     private String fileName;
-	
+    
+	private String movieUpdate;
+    
+    
+
 	public Movie() {
 		super();
 	}
@@ -98,6 +102,20 @@ public class Movie {
 	public void setFileName(String fileName) {
 		this.fileName = fileName;
 	}
+	
+	
+	
+	public String getMovieUpdate() {
+		return movieUpdate;
+	}
+	public void setMovieUpdate(String movieUpdate) {
+		this.movieUpdate = movieUpdate;
+	}
+	
+	
+	
+	
+	
 	@Override
 	public String toString() {
 		return "Movie [movieNo=" + movieNo + ", movieTitle=" + movieTitle + ", movieRt=" + movieRt + ", movieRated="
