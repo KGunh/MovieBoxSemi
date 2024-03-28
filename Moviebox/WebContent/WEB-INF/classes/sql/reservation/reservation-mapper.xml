@@ -81,33 +81,33 @@
 		       MOVIE_NO,
 		       MOVIE_TITLE,
 		       MOVIE_RT,
-		       MOVIE_RELEASE,
+		       TO_CHAR(MOVIE_RELEASE, 'YYYY-MM-DD') AS MOVIE_RELEASE,
 		       GENRE_NAME,
 		       FILE_PATH,
 		       CHANGE_NAME,
 		       SCREEN_NAME||'관' AS SCREEN_NAME,
 		       THEATER_NAME,
-		       (TO_CHAR(WATCH_DATE,'YYYY-MM-DD') || '   ' || TO_CHAR(WATCH_DATE,'HH24:MI') || '~' || TO_CHAR(WATCH_DATE + NUMTODSINTERVAL(TO_NUMBER(MOVIE_RT), 'MINUTE'), 'HH24:MI')) AS WATCH_DATE,
+		       (TO_CHAR(WATCH_DATE,'YYYY-MM-DD') || ' ' || TO_CHAR(WATCH_DATE,'HH24:MI') || '~' || TO_CHAR(WATCH_DATE + NUMTODSINTERVAL(TO_NUMBER(MOVIE_RT), 'MINUTE'), 'HH24:MI')) AS WATCH_DATE,
 		       TO_CHAR(SYSDATE, 'YYYY-MM-DD') AS RESERVATION_DATE,
-		       (
-		        (
-		         SELECT 
-		                TO_NUMBER(PRICE * ?)
-		           FROM 
-		                TB_PRICE
-		          WHERE 
-		                GRADE = 1
-		        )
-		        +
-		        (
-		         SELECT 
-		                TO_NUMBER(PRICE * ?)
-		           FROM 
-		                TB_PRICE
-		          WHERE 
-		                GRADE = 2
-		        )
-		       ) AS TOTAL_PRICE
+		       TO_CHAR(
+		       			(
+				         SELECT 
+				                PRICE * ?
+				           FROM 
+				                TB_PRICE
+				          WHERE 
+				                GRADE = 1
+				        )
+				        +
+				        (
+				         SELECT 
+				                PRICE * ?
+				           FROM 
+				                TB_PRICE
+				          WHERE 
+				                GRADE = 2
+				        )
+				         ) AS TOTAL_PRICE
 		  FROM
 		       TB_MOVIE
 		  JOIN

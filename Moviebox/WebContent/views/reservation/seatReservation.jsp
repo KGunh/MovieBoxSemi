@@ -409,7 +409,7 @@
         var ageType = ''; // 연령
         var resvTeen = ['', 0]; 
         var resvAdult = ['', 0];
-
+        var selectSeat = [];
         // 상영관 예약정보 가져와서 좌석 선택 가능여부 조작
         window.onload = function() {
             $.ajax({
@@ -491,9 +491,13 @@
 
         // 인원수대로 좌석선택
         $('.seats').click(e => {
+            var seat = $(e.target).html();
+            var index = selectSeat.indexOf(seat);
+
             if($(e.target).hasClass('clicked')){
                 $(e.target).removeClass('clicked');
                 selectPeople += 1;
+                selectSeat.splice(index, 1);
             } 
             else{
                 if(selectPeople < 1 ){
@@ -503,6 +507,7 @@
                 else{
                     $(e.target).addClass('clicked');
                     selectPeople -= 1;
+                    selectSeat.push(seat);
                 };
             };
         });
@@ -525,36 +530,36 @@
                     var resultStr = '';
                     
                     resultStr += '<div id="check-reservation">'
-                              +     '<div id="check-movie">'
-                              +         '<div id="poster-select"><img style="width: 100%; height: 100%;" src="<%= contextPath %>/'+ result.movie.filePath + '/' + result.movie.fileName + '" alt="영화포스터"></div>'
-                              +         '<div id="movie-select">'
-                              +             '<div>' + result.movieTitle + '</div>'
-                              +              '<div>' + result.movie.movieRelease + '</div>'
-                              +              '<div>' + result.movie.genreName + ' / ' + result.movie.movieRt + '분</div>'
-                              +         '</div>'
-                              +     '</div>'
-                              + '</div>'
-                              + '<div id="check-info">'
-                              +     '<div id="reservation-info">'
-                              +         '<div>'
-                              +             '<div class="select-info">상영일시</div>'
-                              +             '<div class="select-info">관람극장</div>'
-                              +             '<div class="select-info">상영관</div>'
-                              +             '<div class="select-info">관람인원</div>'
-                              +             '<div class="select-info">선택좌석</div>'
-                              +             '<div class="select-info" style="margin-top: 50px;">결제금액</div>'
-                              +         '</div>'
-                              +         '<div>'
-                              +             '<div class="print-info">'+ result.watchDate +'</div>'
-                              +             '<div class="print-info">' + result.theaterName + '</div>'
-                              +             '<div class="print-info">' + result.screenName + '</div>'
-                              +             '<div class="print-info">' + Number(resvTeen[1] + resvAdult[1]) + '</div>'
-                              +             '<div class="print-info">A1,A2</div>'
-                              +             '<div class="print-info" style="margin-top: 50px;">' + result.price.totalPrice + '원</div>'
-                              +         '</div>'
-                              +     '</div>'
-                              +     '<button id="payment-btn" onclick="payment();">결제 하기</button>'
-                              + '</div>';
+                               +     '<div id="check-movie">'
+                               +         '<div id="poster-select"><img style="width: 100%; height: 100%;" src="<%= contextPath %>/'+ result.movie.filePath + '/' + result.movie.fileName + '" alt="영화포스터"></div>'
+                               +         '<div id="movie-select">'
+                               +             '<div style="text-align: center; font-size:20px; font-weight: 700; margin-top: 5px; margin-bottom: 5px;">' + result.movieTitle + '</div>'
+                               +             '<div style="text-align: center;">' + result.movie.movieRelease + '</div>'
+                               +             '<div style="text-align: center;">' + result.movie.genreName + ' / ' + result.movie.movieRt + '분</div>'
+                               +         '</div>'
+                               +     '</div>'
+                               + '</div>'
+                               + '<div id="check-info">'
+                               +     '<div id="reservation-info">'
+                               +         '<div>'
+                               +             '<div class="select-info">상영일시</div>'
+                               +             '<div class="select-info">관람극장</div>'
+                               +             '<div class="select-info">상영관</div>'
+                               +             '<div class="select-info">관람인원</div>'
+                               +             '<div class="select-info">선택좌석</div>'
+                               +             '<div class="select-info" style="margin-top: 50px;">결제금액</div>'
+                               +         '</div>'
+                               +         '<div>'
+                               +             '<div class="print-info">'+ result.watchDate +'</div>'
+                               +             '<div class="print-info">' + result.theaterName + '</div>'
+                               +             '<div class="print-info">' + result.screenName + '</div>'
+                               +             '<div class="print-info">' + Number(resvTeen[1] + resvAdult[1]) + '인</div>'
+                               +             '<div class="print-info">' + selectSeat.join(', ') + '</div>'
+                               +             '<div class="print-info" style="margin-top: 50px;">' + result.price.totalPrice + '원</div>'
+                               +         '</div>'
+                               +     '</div>'
+                               +     '<button id="payment-btn" onclick="payment();">결제 하기</button>'
+                               + '</div>';
 
                     $('#check-area').html(resultStr);
 
