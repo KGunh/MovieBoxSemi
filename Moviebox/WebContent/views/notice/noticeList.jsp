@@ -93,6 +93,7 @@
             display: inline-block;
             left: 0;
             cursor: pointer;
+            color: #FFC145;
         }
 
         .notice-tap:hover{
@@ -103,10 +104,6 @@
             background-color: #FFC145;
             color: #1A1A1A;
         }
-
-
-        
-
 
         /* 검색 */
         #search-notice{
@@ -351,7 +348,7 @@
     		}
     		
     		function openQnaPage(){
-    			location.href = '<%=contextPath %>/list.qna'; 			
+    			location.href = '<%=contextPath %>/list.board'; 			
     		}
     		
     		function insert(){
