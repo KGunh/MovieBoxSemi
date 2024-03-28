@@ -31,7 +31,6 @@ public class AdminPageServlet extends HttpServlet {
 
 		// 인코딩
 		request.setCharacterEncoding("UTF-8");
-
 		
 		// uri담기
 		String uri = request.getRequestURI();
@@ -39,7 +38,6 @@ public class AdminPageServlet extends HttpServlet {
 		
 		// 변수선언
 		AdminPageController admin = new AdminPageController();
-		
 		
 		String view = "";
 		boolean flag = true;
