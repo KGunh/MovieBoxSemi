@@ -166,6 +166,12 @@ public class ReservationDao {
 		
 		String sql = prop.getProperty("checkReservationInfo");
 		
+		try {
+			pstmt = conn.prepareStatement(sql);
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
 		return null;
 	}
