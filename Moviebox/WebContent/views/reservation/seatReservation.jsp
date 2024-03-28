@@ -549,12 +549,43 @@
                     adultAge : resvAdult[1] 
                 },
                 success : function(result){
-                    console.log(result);
+                    var resultStr = '<div id="check-reservation">'
+                                  +     '<div id="check-movie">'
+                                  +         '<div id="poster-select"><img src="<%= contextPath %>/'+ result.movie.filePath + '/' + result.movie.fileName + '" alt="영화포스터"></div>'
+                                  +         '<div id="movie-select">'
+                                  +             '<div>' + result.movieTitle + '</div>'
+                                  +              '<div>' + result.movie.movieRelease + '</div>'
+                                  +              '<div>' + result.movie.genreName + ' / ' + result.movie.movieRt + '분</div>'
+                                  +         '</div>'
+                                  +     '</div>'
+                                  + '</div>'
+                                  + '<div id="check-info">'
+                                  +     '<div id="reservation-info">'
+                                  +         '<div>'
+                                  +             '<div class="select-info">상영일시</div>'
+                                  +             '<div class="select-info">관람극장</div>'
+                                  +             '<div class="select-info">상영관</div>'
+                                  +             '<div class="select-info">관람인원</div>'
+                                  +             '<div class="select-info">선택좌석</div>'
+                                  +             '<div class="select-info" style="margin-top: 50px;">결제금액</div>'
+                                  +         '</div>'
+                                  +         '<div>'
+                                  +             '<div class="print-info">2024-03-28 23:10~24:00</div>'
+                                  +             '<div class="print-info">CGV 용산</div>'
+                                  +             '<div class="print-info">2관</div>'
+                                  +             '<div class="print-info">2명</div>'
+                                  +             '<div class="print-info">A1,A2</div>'
+                                  +             '<div class="print-info" style="margin-top: 50px;">28000원</div>'
+                                  +         '</div>'
+                                  +     '</div>'
+                                  +     '<button id="payment-btn" onclick="payment();">결제 하기</button>'
+                                  + '</div>';
 
+                    $('check-area').html(result);
 
                 },
                 error : function(){
-                    console.log('실패')
+                    alert('예매정보 오류!');
                 }
             });
         });
