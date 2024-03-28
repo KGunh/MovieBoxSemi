@@ -7,6 +7,7 @@ import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 
+import com.kh.common.model.vo.Reservation;
 import com.kh.reservation.model.service.ReservationService;
 import com.kh.reservation.model.vo.Seat;
 import com.kh.theater.model.vo.Screen;
@@ -114,8 +115,12 @@ public class ReservationController {
 	}
 	// 예약내용 확인
 	public void checkReservationInfo(HttpServletRequest request) {
-		request.getAttribute("screenNo");
-		request.getAttribute("movieNo");
+		int screenNo = Integer.parseInt(request.getParameter("screenNo"));
+		int movieNo = Integer.parseInt(request.getParameter("movieNo"));
+		int teenAge = Integer.parseInt(request.getParameter("teenAge"));
+		int adultAge = Integer.parseInt(request.getParameter("adultAge"));
+
+		Reservation reservation =  new ReservationService().checkReservationInfo(screenNo, movieNo, teenAge, adultAge);
 		
 		
 	}

@@ -545,8 +545,8 @@
             	data : {
                     screenNo : <%= screenNo %>,
                     movieNo : <%= movieNo %>,
-                    teenAge : resvTeen,
-                    AdultAge : resvAdult 
+                    teenAge : resvTeen[1],
+                    adultAge : resvAdult[1] 
                 },
                 success : function(result){
                     console.log(result);
