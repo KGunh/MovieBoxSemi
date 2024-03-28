@@ -34,7 +34,7 @@
 		    CREATE_DATE,                  
 		    COUNT      
 		FROM
-		    TB_NOTICE
+		    TB_NOTICE    
 		JOIN
 		    TB_CATEGORY ON (NOTICE_CATEGORY = CATEGORY_NO)
 		ORDER

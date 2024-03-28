@@ -3,7 +3,7 @@
 <%@ page import="com.kh.notice.model.vo.Notice, java.util.ArrayList"%>
     
 <%
-ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("adminMovieInsert");
+ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("adminBoardCheck");
 System.out.println(list);
 %> 
 
@@ -374,13 +374,21 @@ System.out.println(list);
                                 </tr>
                               </thead>
                               <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+                              <% if(list == null || list.isEmpty()) { %>
+                              	<tr>
+                              		<td colspan="5">조회 된 공지 목록이 없습니다. </td>
+                              	</tr>
+                              <% }else{ %>
+                              	<% for(Notice n : list) {%>	
+	                                <tr>
+	                                    <td><%= n.getNoticeNo() %></td>
+	                                    <td><%= n.getCategoryNo() %></td>
+	                                    <td><%= n.getNoticeTitle() %></td>
+	                                    <td><%= n.getCreateDate() %></td>
+	                                    <td><%= n.getCount() %></td>
+	                                </tr>
+	                            <% } %>    
+                              <% } %>    
                               </tbody>
                             </table>
                           </div>
