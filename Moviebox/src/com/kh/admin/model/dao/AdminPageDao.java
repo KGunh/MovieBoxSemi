@@ -72,7 +72,7 @@ public class AdminPageDao {
 	}
 	
 	
-	
+	//공지 목록 전체 출력
 	public ArrayList<Notice> adminSelectNoticeList(Connection conn){
 		
 		ArrayList<Notice> list = new ArrayList();

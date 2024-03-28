@@ -4,7 +4,7 @@
     
 <%
 ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("adminMovieCheck");
-System.out.println(list);
+//System.out.println(list);
 %> 
 <!DOCTYPE html>
 <html>
@@ -381,8 +381,8 @@ System.out.println(list);
 			                                    <td><%= m.getMovieNo() %></td>
 			                                    <td><%= m.getMovieRelease() %></td>
 			                                    <td><%= m.getMovieTitle() %></td>
-			                                    <td><%= m.getMovieRated() %></td>
 			                                    <td><%= m.getGenreNo() %></td>
+			                                    <td><%= m.getMovieRated() %></td>
 			                                    <td><%= m.getMovieUpdate() %></td>
 			                                </tr>
 			                      	<% } %>          

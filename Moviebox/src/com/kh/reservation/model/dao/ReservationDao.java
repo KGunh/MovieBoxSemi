@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.kh.common.model.vo.Location;
+import com.kh.common.model.vo.Reservation;
 import com.kh.movie.model.vo.Movie;
 import com.kh.reservation.model.vo.Seat;
 import com.kh.theater.model.vo.Screen;
@@ -156,6 +157,17 @@ public class ReservationDao {
 			close(pstmt);
 		}
 		return seatList;
+	}
+
+	public Reservation checkReservationInfo(Connection conn, int screenNo, int movieNo, int teenAge, int adultAge) {
+		Reservation reservation = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("checkReservationInfo");
+		
+		
+		return null;
 	}
 	
 	

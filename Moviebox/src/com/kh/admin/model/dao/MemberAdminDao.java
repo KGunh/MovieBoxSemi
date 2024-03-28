@@ -71,8 +71,9 @@ public class MemberAdminDao {
 	
 	public Member editAdmin(Connection conn, int memberNo){
 		
-		Member m = new Member(); 
 		
+		System.out.println(memberNo);
+		Member m = new Member(); 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("editAdmin");

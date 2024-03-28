@@ -2,6 +2,7 @@ package com.kh.common.model.vo;
 
 import java.util.List;
 
+import com.kh.movie.model.vo.Movie;
 import com.kh.reservation.model.vo.Seat;
 
 public class Reservation {
@@ -17,7 +18,7 @@ public class Reservation {
 	private Price price;
 	
 	private List<Seat> seatList;
-	
+	private Movie movie;
 	
 	
 	public Reservation() {
@@ -31,11 +32,6 @@ public class Reservation {
 		this.screenNo = screenNo;
 		this.status = status;
 	}
-	
-	
-	
-	
-	
 	public List<Seat> getSeatList() {
 		return seatList;
 	}
@@ -101,6 +97,12 @@ public class Reservation {
 	}
 	public void setStatus(String status) {
 		this.status = status;
+	}
+	public Movie getMovie() {
+		return movie;
+	}
+	public void setMovie(Movie movie) {
+		this.movie = movie;
 	}
 	@Override
 	public String toString() {

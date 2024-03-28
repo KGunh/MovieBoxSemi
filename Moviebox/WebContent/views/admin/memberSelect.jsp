@@ -6,7 +6,7 @@
 <%
 
 ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
-String contextPath = request.getContextPath();
+//String contextPath = request.getContextPath(); 
 %>    
 
     <!DOCTYPE html>
@@ -155,7 +155,7 @@ String contextPath = request.getContextPath();
             width: 1200px;
             height : 800px;
             margin: 0 auto;
-            background-color:white
+            
         }
         .content_1{
             display: inline-block;
@@ -172,7 +172,7 @@ String contextPath = request.getContextPath();
             height : 800px;
             padding-left: 50px;
             padding-top: 20px;
-            color: #323232;
+            color: white;
         }
 
         .content_2_top{
@@ -269,8 +269,8 @@ String contextPath = request.getContextPath();
             text-align: center;
             margin-top: 10px;
             margin-right: 10px;
-            
-            border-bottom: 2px solid lightgray;
+            color: white;
+            border-bottom: 1px solid lightgray;
             
             
         }
@@ -287,12 +287,12 @@ String contextPath = request.getContextPath();
       
 
        #select{
-        border: 1px solid gainsboro;
+        border: 1px solid white;
         border-radius: 5px;
         width: 150px;
         height: 35px;
         
-        font-size: 15px;
+        font-size: 14px;
         
        }
    
@@ -301,7 +301,7 @@ String contextPath = request.getContextPath();
         height: 35px;
         border-radius: 5px;
         border: 1px solid lightgray;
-        font-size: 15px;
+        font-size: 14px;
        }
 
        .content_2_top{
@@ -366,6 +366,8 @@ String contextPath = request.getContextPath();
 
         .page-link{
             color: #212121;
+            background-color: #FFC145;
+            border: 1px solid rgba(0, 0, 0, 0.123)
         }
 
         #inputBox-2 {
@@ -387,49 +389,29 @@ String contextPath = request.getContextPath();
 
         }
 
-
+		
+		
+        #content2{
+        height: 800px;
+        width: 995.6px;
+        display: inline;
+        background-color: #1A1A1A;
+        
+       }
+		
      
 
 
     </style>
 </head>
+
+
+
 <body>
-   <div id="header">
-      <div id="top-header">
-         <div id="login-area">
-            <a href="#" class="member">회원가입</a> <a href="#" class="member">로그인</a>
-         </div>
-      </div>
-      <div id="header-navigator">
-         <div id="logo-div">
-            <div id="logo">
-               <a href="#">MOVIE MOX</a>
-            </div>
-         </div>
-         <div id="navigator">
-            <div class="navi">
-               <a href="#" id="reservation">예매</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="movie">영화</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="theater">영화관</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="notice">고객센터</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="myPage">마이페이지</a>
-            </div>
-         </div>
 
-      </div>
-
-   </div>
+ <%@ include file = "/views/common/header.jsp" %>
 <!-- 여기까지가 헤더 -->
 
-<body>
     <div id="wrap">
         <!-- jsp에서 header include하기 -->
     
@@ -437,9 +419,7 @@ String contextPath = request.getContextPath();
             <div class="top_1">
                 <h1>관리자</h1>
             </div>
-            <div class="top_2" style="color: white;">
-                
-            </div>
+
         </div>
         <div id="content" >
             <div class="content_1">
@@ -468,6 +448,7 @@ String contextPath = request.getContextPath();
                     </li>
                 </ul>
             </div>
+             <div id="content2"></div>
             <div class="content_2">
                 <h2>회원 관리</h2>
                 <div class="content_2_top">
@@ -498,7 +479,7 @@ String contextPath = request.getContextPath();
                           <thead>
                             <tr style="background-color: #eaeaea; margin-top: 0; height: 40px; color: #212121; border: 0px solid #cfcfcf; opacity: 0.8; text-align: center;">
                                 <th><input type="checkbox" name="check" value="check" id="check" checked></th>
-                                <th class="num">순번</th>
+                                <th class="num">회원번호</th>
                                 <th>이름</th>
                                 <th>가입일</th>
                                 <th>탈퇴여부</th> 
@@ -563,16 +544,16 @@ String contextPath = request.getContextPath();
                 </div>
                       
                 </div>
+				</div>
 
-
-                
-
-               
+                </div>
+	 	</div>
+              
            
 
               
 
-               </div > 
+              
                 
              
 
