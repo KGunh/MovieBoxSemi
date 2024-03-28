@@ -313,14 +313,14 @@
                 </script>
 				<div class="inputdiv">
 					<span class="input-span">이름</span><br> 
-                    <input type="text" class="input-text" name="memberName">
+                    <input type="text" class="input-text" name="memberName" placeholder="이름">
                     <span class="input-bottom"></span>
 				</div>
 
                 
 				<div class="inputdiv">
 					<span class="input-span">생년월일</span><br> 
-                    <input type="text" class="input-text" name="birthday">
+                    <input type="text" class="input-text" name="birthday" placeholder="생년월일ex)19901218(YYYYMMDD)" maxlength="8">
                     <span class="input-bottom"></span>
 				</div>
 				<div class="inputdiv">
@@ -341,7 +341,7 @@
 				</div>
 				<div class="inputdiv">
 					<span class="input-span">전화번호</span><br> 
-                    <input type="text" class="input-text" name="phone">
+                    <input type="text" class="input-text" name="phone" maxlength="11">
                     <span class="input-bottom"></span>
 				</div>
 
@@ -417,16 +417,21 @@
             const $input = $('.inputdiv > input');
 
             let birthdayReg =  /^\d{8}$/;
+            let phoneReg = /^\d{11}$/;
 
             $input.each(function(){
                 if ($(this).val() == ''){
                     $(this).css('border','2px solid red');
                     $(this).siblings('.input-bottom').html('필수 정보입니다.').css('color','red');
                 }
+                else if(phoneReg.test($('input[name=phone]').val())){
+                    $(this).removeAttr('style');
+                    $(this).siblings('.input-bottom').html('');
+                }
                 else if(birthdayReg.test($('input[name=birthday]').val())){
                     $(this).removeAttr('style');
                     $(this).siblings('.input-bottom').html('');
-                } 
+                }
                 else {
                     $(this).css('border','2px solid red');
                     $(this).siblings('.input-bottom').html('형식에 맞지않습니다.').css('color','red');
