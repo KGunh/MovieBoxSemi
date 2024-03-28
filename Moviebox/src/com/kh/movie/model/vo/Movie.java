@@ -16,6 +16,7 @@ public class Movie {
     private String fileName;
     
 	private String movieUpdate;
+	private String genreName;
     
     
 
@@ -114,8 +115,12 @@ public class Movie {
 	
 	
 	
-	
-	
+	public String getGenreName() {
+		return genreName;
+	}
+	public void setGenreName(String genreName) {
+		this.genreName = genreName;
+	}
 	@Override
 	public String toString() {
 		return "Movie [movieNo=" + movieNo + ", movieTitle=" + movieTitle + ", movieRt=" + movieRt + ", movieRated="

@@ -85,8 +85,10 @@
 		       GENRE_NAME,
 		       FILE_PATH,
 		       CHANGE_NAME,
-		       SCREEN_NAME,
+		       SCREEN_NAME||'관' AS SCREEN_NAME,
+		       THEATER_NAME,
 		       (TO_CHAR(WATCH_DATE,'YYYY-MM-DD') || ',' || TO_CHAR(WATCH_DATE,'HH24:MI') || '~' || TO_CHAR(WATCH_DATE + NUMTODSINTERVAL(TO_NUMBER(MOVIE_RT), 'MINUTE'), 'HH24:MI')) AS WATCH_DATE,
+		       (SYSDATE) AS RESERVATION_DATE,
 		       (
 		        (
 		         SELECT 
@@ -114,6 +116,8 @@
 		       TB_GENRE ON(GENRE_NO = GENRE_CODE)
 		  JOIN
 		       TB_SCREEN USING(MOVIE_NO)
+		  JOIN
+		       TB_THEATER USING(THEATER_NO)
 		 WHERE 
 		       MOVIE_NO = ?
 		   AND
