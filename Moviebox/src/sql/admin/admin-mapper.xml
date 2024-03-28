@@ -17,6 +17,7 @@
 		    TO_CHAR(MOVIE_UPDATE, 'YY/MM/DD') MOVIE_UPDATE
 		FROM
 		    TB_MOVIE
+		LEFT
 		JOIN
 		    TB_GENRE ON(GENRE_NO = GENRE_CODE)
 		ORDER
@@ -30,15 +31,15 @@
 		    NOTICE_NO,
 		    CATEGORY_NAME,
 		    NOTICE_TITLE,                  
-		    CREATE_DATE,                  
+		    TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE,                   
 		    COUNT      
 		FROM
-		    TB_NOTICE
+		    TB_NOTICE    
 		JOIN
 		    TB_CATEGORY ON (NOTICE_CATEGORY = CATEGORY_NO)
 		ORDER
 		   BY
-		    CATEGORY_NAME
+		    NOTICE_NO DESC
 	</entry>
 
 

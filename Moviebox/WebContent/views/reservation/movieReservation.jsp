@@ -334,9 +334,8 @@
                 $(e).addClass('clicked');
             }
             $('#screenNo').val(e.children[1].value);
-            $('#screenName').val(e.children[2].value)
-            $('#theaterName').val();
-            console.log(e.closest(e));
+            $('#screenName').val(e.children[2].value);
+            $('#theaterName').val($(e).parent().children().eq(0).html());
         };
        
         function selectScreen(){

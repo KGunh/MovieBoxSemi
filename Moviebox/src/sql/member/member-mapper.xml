@@ -317,4 +317,22 @@
 		 WHERE
 		 	   MEMBER_NO = ?
 	</entry>
+	
+	<entry key="memberNoSearch">
+		SELECT
+			   MEMBER_NO
+		  FROM
+		 	   TB_MEMBER
+		 WHERE
+		 	   MEMBER_ID = ?
+		   AND
+		  	   MEMBER_NAME = ?
+		   AND
+		   	   BIRTHDAY = ?
+		   AND
+		   	   PHONE = ?
+		   AND
+		   	   STATUS = 'Y'	   
+	
+	</entry>
 </properties>

@@ -631,6 +631,37 @@ public class MemberDao {
 		return result;
 		
 	}
+	public int memberNoSearch(Connection conn, Member m) {
+		int memberNo = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("memberNoSearch");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getMemberId());
+			pstmt.setString(2, m.getMemberName());
+			pstmt.setString(3, m.getBirthday());
+			pstmt.setString(4, m.getPhone());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				memberNo = rset.getInt("MEMBER_NO");
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return memberNo;
+	}
 	
 	
 	
