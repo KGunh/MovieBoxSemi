@@ -67,4 +67,17 @@ public class BoardDao {
 		return list;
 	}
 
+	public Board detailBoard(Connection conn, int boardNo) {
+		
+		Board board = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("detailBoard");
+		
+		
+		
+		
+		return null;
+	}
+
 }

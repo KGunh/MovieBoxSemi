@@ -21,4 +21,15 @@ public class BoardService {
 		return list;
 	}
 
+	public Board detailBoard(int boardNo) {
+		
+		Connection conn = getConnection();
+		
+		Board board = new BoardDao().detailBoard(conn, boardNo);
+		
+		close(conn);
+		
+		return board;
+	}
+
 }
