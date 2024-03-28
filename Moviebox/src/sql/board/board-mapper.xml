@@ -3,21 +3,36 @@
 <properties>
 
 	<comment>
-		Qna Mapper
+		Board Mapper
 	</comment>
 	
 	<entry key="selectBoardList">
 		SELECT
-			  BOARD_NO,
-			  CATEGORY_NO,
-			  BOARD_TITLE,
-			  BOARD_WRITER,
-			  TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE
+		      BOARD_NO,
+		      CATEGORY_NAME,
+		      BOARD_TITLE,
+		      BOARD_WRITER,
+		      TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE
+		  FROM
+		      TB_BOARD
+		  JOIN
+		      TB_CATEGORY USING (CATEGORY_NO)
+		 WHERE
+		      STATUS = 'Y'
+		 ORDER
+		    BY
+		      BOARD_NO DESC
+	</entry>
+	
+	
+	<entry key="selectListCount">
+		SELECT
+			  COUNT(*)
 		  FROM
 		  	  TB_BOARD
-		 ORDER
-		 	BY
-		 	  BOARD_NO DESC	
+		 WHERE
+		 	  STATUS = 'Y'
+	
 	</entry>
 	
 	
