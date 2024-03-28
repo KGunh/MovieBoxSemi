@@ -62,7 +62,14 @@
 		    BOARD_NO DESC
 	</entry>
 
-	
+	<entry key="selectListCount">
+		SELECT
+		    COUNT(*)
+		  FROM
+		    TB_MOVIE
+		 WHERE
+		    STATUS = 'Y'
+	</entry>
 
 
 
