@@ -28,7 +28,6 @@
         .input-title{
             height: 10%;
             width: 100%;
-            margin-bottom: 50px; 
         }
         .tit{
             font-size: 30px;
@@ -433,7 +432,7 @@
                     </div>
                 </div>
                 <div class="input-button">
-                    <a id="secession" href="">회원 탈퇴</a>
+                    <a id="secession" href="<%=contextPath%>/deleteForm.me">회원 탈퇴</a>
                     <input id="edit" type="submit" value="정보수정">
                 </div>
             </form>
