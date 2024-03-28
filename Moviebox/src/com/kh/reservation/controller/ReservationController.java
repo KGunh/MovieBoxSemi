@@ -106,13 +106,18 @@ public class ReservationController {
 		
 		return view;
 	}
-	
+	// 상영관 예매된 좌석 조회
 	public List<Seat> selectSeatList(HttpServletRequest request) {
 		int screenNo = Integer.parseInt(request.getParameter("screenNo"));
 
 		return new ReservationService().selectSeatList(screenNo);		
 	}
-	
+	// 예약내용 확인
+	public void checkReservationInfo(HttpServletRequest request) {
+		
+		
+	}
+	// 예약
 	public void insertReservation() {
 		// 예약 정보를 가지고 결제 페이지로 연결
 		// 예약내용 insert

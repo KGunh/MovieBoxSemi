@@ -26,9 +26,11 @@ public class AjaxSelectReservationInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-
-		
-	
+		/*
+		screenNo
+        movieNo
+        */
+        new ReservationController().checkReservationInfo(request);
 	
 	
 	

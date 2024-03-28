@@ -374,6 +374,7 @@
         
         #check-movie div{
             font-size: 12px;
+            font-weight: 700;
         }
 
         #reservation-info{
@@ -385,6 +386,7 @@
 
         #reservation-info > div {
             float: left;
+            font-weight: 700;
         }
 
         #poster-select{
@@ -425,7 +427,7 @@
             border: 0;
             color: rgb(32,32,32);
             background-color: rgb(255, 193, 69);
-            font-size: 16px;
+            font-size: 18px;
             font-weight: 700;
         }
 
@@ -525,12 +527,8 @@
             } 
             else{
                 if(selectPeople < 1 ){
-                    if(!$('.people-Count').hasClass('clicked')){
-                         alert('인원을 먼저 선택해주세요.');
-                    }
-                    else {
-                        alert('좌석을 모두 선택하셨습니다.');
-                    }
+                    if(!$('.people-Count').hasClass('clicked')) alert('인원을 먼저 선택해주세요.');
+                    else alert('좌석을 모두 선택하셨습니다.');
                 }
                 else{
                     $(e.target).addClass('clicked');
