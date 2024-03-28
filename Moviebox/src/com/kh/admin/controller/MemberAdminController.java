@@ -48,6 +48,8 @@ public class MemberAdminController {
 		
 			int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		
+			System.out.println(memberNo);
+			
 			Member m =new MemberAdminService().editAdmin(memberNo);
 			
 		

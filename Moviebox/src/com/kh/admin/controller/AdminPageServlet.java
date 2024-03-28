@@ -29,31 +29,37 @@ public class AdminPageServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 
-		
+		// 인코딩
 		request.setCharacterEncoding("UTF-8");
 		
+		// uri담기
 		String uri = request.getRequestURI();
-
 		String mapping = uri.substring(uri.lastIndexOf("/") + 1, uri.lastIndexOf("."));
 		
+		// 변수선언
 		AdminPageController admin = new AdminPageController();
-		
-		
-		
 		
 		String view = "";
 		boolean flag = true;
 	
 		switch(mapping) {
+//		case "adminMovieCheck" :
+//			view = "/views/admin/adminMovieCheck.jsp"; break; //영화목록
+		
 		case "adminMovieCheck" :
-			view = "/views/admin/adminMovieCheck.jsp"; break; //영화목록
+			view = admin.adminSelectMovieList(request); flag = false; break; //영화목록전체
 			
 		case "adminMovieInsert" :
 			view = "/views/admin/adminMovieInsert.jsp"; break; //영화등록
+
+
 			
 			
+//		case "adminBoardCheck" :
+//			view = "/views/admin/adminBoardCheck.jsp"; break; //공지목록
+//			
 		case "adminBoardCheck" :
-			view = "/views/admin/adminBoardCheck.jsp"; break; //공지목록
+			view = admin.adminSelectNoticeList(request); flag = false; break; //영화등록
 			
 		case "adminBoardInsert" :
 			view = "/views/admin/adminBoardInsert.jsp"; break; //공지등록

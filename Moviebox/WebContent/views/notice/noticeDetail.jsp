@@ -197,7 +197,6 @@
 <body>
 
 <%@ include file="../common/header.jsp" %>
-
     <div id="wrap">
         <div id="notice-detail">
             <!-- 전체 감싸는 부분 -->
@@ -214,7 +213,7 @@
                 <div class="notice-content">
                     <div class="detail-box1">
                         <div class="detail-title-box1">
-                            <div class="detail-category"><span>[<%= notice.getNoticeCategory() %>]</span></div>
+                            <div class="detail-category"><span>No.<%=notice.getNoticeNo() %> [<%= notice.getNoticeCategory() %>]</span></div>
                             <div class="detail-title"><span><%= notice.getNoticeTitle() %> </span></div>
                         </div>
                     </div>

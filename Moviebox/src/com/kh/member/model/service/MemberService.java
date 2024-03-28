@@ -181,5 +181,36 @@ public class MemberService {
 		return result;
 	}
 	
+	public String idSearch(Member m) {
+		Connection conn = getConnection();
+		
+		String memberId = new MemberDao().idSerach(conn,m);
+		
+		close(conn);
+		
+		return memberId;
+	}
+	public int memberNoSearch(Member m) {
+		Connection conn = getConnection();
+		
+		int memberId = new MemberDao().memberNoSearch(conn,m);
+		
+		close(conn);
+		
+		return memberId;
+	}
+	
+	public int deleteMember(Member loginUser) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().deleteMember(conn, loginUser);
+		
+		if(result > 0) commit(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+	
 
 }

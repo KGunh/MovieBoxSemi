@@ -141,49 +141,48 @@
             text-decoration: none;
             color: white;
         }
+        .text-area{
+            width: 100%;
+            height: 30px;
+            line-height: 30px;
+            text-align: center;
+            color: rgb(158, 158, 158);
+            font-size: 14px;
+        }
 
     </style>
 
 </head>
 
+<%
+    	int memberNo = (int)request.getAttribute("memberNo");
+    %>
 <body>
 
 	<%@ include file="../common/header.jsp" %>
 	
     <div class="content">
         <div class="title-area">
-            <div class="title-content"><span class="tit">로그인</span></div>
+            <div class="title-content"><span class="tit">비밀번호 재설정</span></div>
         </div>
         <div id="input-list">
-            <form action="<%=contextPath%>/login.me" method="post">
+            <form action="<%=contextPath%>/pwdSearchUpdate.me" method="post">
                 <div class="inputdiv">
-                    <span class="input-span">아이디</span><br>
-                    <input type="text" class="input-text" name="memberId" placeholder="아이디" required>
+                    <span class="input-span">새 비밀번호</span><br>
+                    <input type="password" class="input-text" name="memberPwd" placeholder="새 비밀번호" required>
+                    <input type="hidden" name="memberNo" value="<%=memberNo%>">
                 </div>
 
                 <div class="inputdiv">
-                    <span class="input-span">비밀번호</span><br>
-                    <input type="password" class="input-text" name="memberPwd" placeholder="비밀번호" required>
+                    <span class="input-span">새 비밀번호 확인</span><br>
+                    <input type="password" class="input-text" placeholder="비밀번호" required>
                 </div>
+
+                <div class="text-area">입력하신 새로운 비밀번호로 변경하시겠습니까?</div>
 
                 <div class="input-button">
-					<input id="idSearch" type="submit" value="로그인">
+					<input id="idSearch" type="submit" value="확인">
 				</div>
-				<div class="inputdiv colorWhite" style="height: 50px;">
-                    <div class="search">
-                        <a href="<%=contextPath%>/idSearchForm.me" class="find_text">아이디 찾기</a>
-                    </div>
-                    <div style="width: 2%; height: 100%; float: left;text-align: center;
-                    line-height: 50px;">|</div>
-                    <div class="search">
-                        <a href="<%=contextPath%>/pwdSearchForm.me" class="find_text">비밀번호 찾기</a>
-                    </div>
-                </div>
-        		
-        		<div class="inputdiv colorWhite" style="height: 50px;">
-            		<div class="regis">MOVIE BOX 회원이 아니신가요?</div>
-            		<div class="register" ><a href="<%=contextPath%>/insertForm.me" class="find_text">회원가입하기</a></div>
-        		</div>
 
             </form>
 

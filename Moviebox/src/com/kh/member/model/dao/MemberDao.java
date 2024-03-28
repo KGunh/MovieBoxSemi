@@ -13,6 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import javax.naming.spi.DirStateFactory.Result;
+
 import com.kh.board.model.vo.Answer;
 import com.kh.board.model.vo.Board;
 import com.kh.common.model.vo.Genre;
@@ -575,6 +577,91 @@ public class MemberDao {
 		
 	}
 	
+	
+	public String idSerach(Connection conn, Member m) {
+		String memberId = "";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("idSerach");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getMemberName());
+			pstmt.setString(2, m.getBirthday());
+			pstmt.setString(3, m.getPhone());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				memberId = rset.getString("MEMBER_ID");
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return memberId;
+	}
+	
+	public int deleteMember(Connection conn,Member loginUser) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("deleteMember");
+	
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, loginUser.getMemberNo());
+			
+			result = pstmt.executeUpdate();			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+		
+	}
+	public int memberNoSearch(Connection conn, Member m) {
+		int memberNo = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("memberNoSearch");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, m.getMemberId());
+			pstmt.setString(2, m.getMemberName());
+			pstmt.setString(3, m.getBirthday());
+			pstmt.setString(4, m.getPhone());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				memberNo = rset.getInt("MEMBER_NO");
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		return memberNo;
+	}
 	
 	
 	

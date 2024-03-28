@@ -292,4 +292,47 @@
 		
 		
 	</entry>
+	
+	<entry key="idSerach">
+		SELECT
+			   MEMBER_ID
+		  FROM
+		 	   TB_MEMBER
+		 WHERE
+		  	   MEMBER_NAME = ?
+		   AND
+		   	   BIRTHDAY = ?
+		   AND
+		   	   PHONE = ?
+		   AND
+		   	   STATUS = 'Y'	   
+	
+	</entry>
+	
+	<entry key="deleteMember">
+		UPDATE
+			   TB_MEMBER
+		   SET
+		   	   STATUS = 'N'
+		 WHERE
+		 	   MEMBER_NO = ?
+	</entry>
+	
+	<entry key="memberNoSearch">
+		SELECT
+			   MEMBER_NO
+		  FROM
+		 	   TB_MEMBER
+		 WHERE
+		 	   MEMBER_ID = ?
+		   AND
+		  	   MEMBER_NAME = ?
+		   AND
+		   	   BIRTHDAY = ?
+		   AND
+		   	   PHONE = ?
+		   AND
+		   	   STATUS = 'Y'	   
+	
+	</entry>
 </properties>

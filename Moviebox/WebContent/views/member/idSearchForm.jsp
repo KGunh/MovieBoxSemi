@@ -46,7 +46,7 @@
             border-bottom: 4px solid#FFC145;
         }
         #input-list{
-            height: auto;
+            height: 320px;
             width: 100%;
 
         }
@@ -63,7 +63,7 @@
             margin: 0;
             position: absolute;
             bottom: 0;
-            font-size: 14px;
+            font-size: 12px;
             font-weight: bold;
             padding-left: 10px;
             
@@ -72,7 +72,7 @@
 
         .input-span {
             color: rgb(158, 158, 158);
-            font-size: 14px;
+            font-size: 12px;
             font-weight: bold;
             width: 70%;
             float: left;
@@ -97,93 +97,52 @@
             height: 100%;
             width: 100%;
             text-align: center;
+            text-align: center;
             border: none;
             border-radius: 8px;
-            font-size: 16px;
-            font-weight: bolder;
+            font-size: 12px;
+            font-weight: bold;
             line-height: 50px;
             background-color: #FFC145;
             
         }
-        .search{
-            float: left;
-            width: 49%;
-            height: 100%;
-            text-align: center;
-            line-height: 50px;
-
-        }
-        .find_text{
-            display: block;
-            width: 100%;
-            height: 100%;
-            
-        }
-        .regis, .register{
-            float: left;
-            height: 100%;
-            text-align: center;
-            line-height: 50px;
-        }
-
-        .regis{
-            width: 60%;
-        }
-        .register{
-            width: 40%;
-        }
-        .colorWhite, .colorWhite a{
+        .tit:hover{
             color: white;
-            font-size: 14px;
-            font-weight: bold;
-        }
-        .find_text:hover{
             text-decoration: none;
-            color: white;
         }
-
     </style>
 
 </head>
 
 <body>
 
-	<%@ include file="../common/header.jsp" %>
-	
+<%@ include file="../common/header.jsp" %>
+
     <div class="content">
         <div class="title-area">
-            <div class="title-content"><span class="tit">로그인</span></div>
+            <div class="title-content"><a class="tit">아이디 찾기</a></div>
+            <div class="title-content" ><a href="<%=contextPath%>/pwdSearchForm.me" class="tit" style="border-bottom: none;">비밀번호 찾기</a></div>
         </div>
         <div id="input-list">
-            <form action="<%=contextPath%>/login.me" method="post">
+            <form action="<%=contextPath%>/idSearch.me" method="post">
                 <div class="inputdiv">
-                    <span class="input-span">아이디</span><br>
-                    <input type="text" class="input-text" name="memberId" placeholder="아이디" required>
+                    <span class="input-span">이름</span><br>
+                    <input type="text" class="input-text" name="memberName" placeholder="이름" required>
                 </div>
 
                 <div class="inputdiv">
-                    <span class="input-span">비밀번호</span><br>
-                    <input type="password" class="input-text" name="memberPwd" placeholder="비밀번호" required>
+                    <span class="input-span">생년월일</span><br>
+                    <input type="text" class="input-text" name="birthday" placeholder="생년월일" required>
+                </div>
+
+                <div class="inputdiv">
+                    <span class="input-span">전화번호</span><br>
+                    <input type="text" class="input-text" name="phone" placeholder="전화번호" required>
                 </div>
 
                 <div class="input-button">
-					<input id="idSearch" type="submit" value="로그인">
+					<input id="idSearch" type="submit" value="아이디 찾기">
 				</div>
-				<div class="inputdiv colorWhite" style="height: 50px;">
-                    <div class="search">
-                        <a href="<%=contextPath%>/idSearchForm.me" class="find_text">아이디 찾기</a>
-                    </div>
-                    <div style="width: 2%; height: 100%; float: left;text-align: center;
-                    line-height: 50px;">|</div>
-                    <div class="search">
-                        <a href="<%=contextPath%>/pwdSearchForm.me" class="find_text">비밀번호 찾기</a>
-                    </div>
-                </div>
-        		
-        		<div class="inputdiv colorWhite" style="height: 50px;">
-            		<div class="regis">MOVIE BOX 회원이 아니신가요?</div>
-            		<div class="register" ><a href="<%=contextPath%>/insertForm.me" class="find_text">회원가입하기</a></div>
-        		</div>
 
             </form>
 
