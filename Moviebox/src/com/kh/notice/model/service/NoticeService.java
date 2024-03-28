@@ -36,6 +36,18 @@ public class NoticeService {
 		
 	}
 	
+	// 공지사항 조회
+	public Notice updateNoticeForm(int noticeNo) {
+		Connection conn = getConnection();
+		
+		Notice notice = new NoticeDao().selectNotice(conn, noticeNo);
+		
+		close(conn);
+		
+		return notice;
+		
+	}
+	
 	
 	// 공지사항 글쓰기
 	public int insertNotice(Notice notice) {
@@ -49,6 +61,8 @@ public class NoticeService {
 		} else {
 			rollback(conn);
 		}
+		
+		close(conn);
 		
 		return result;
 		
@@ -79,6 +93,8 @@ public class NoticeService {
 		} else {
 			rollback(conn);
 		}
+		
+		close(conn);
 		
 		return result;
 		

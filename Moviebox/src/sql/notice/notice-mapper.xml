@@ -21,10 +21,11 @@
 		    BY
 		      NOTICE_NO DESC
 	</entry>
-
+	
 
 	<entry key="selectNotice">
 		SELECT
+			  NOTICE_NO,
 		      CATEGORY_NAME,
 		      NOTICE_TITLE,
 		      TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE,
