@@ -219,7 +219,6 @@ public class MemberDao {
 				price.setStudentPrice(rset.getInt("STUDENT_PRICE"));
 				price.setCommonPrice(rset.getInt("COMMON_PRICE"));
 				price.setTotalPrice(rset.getInt("TOTAL_PRICE"));
-				
 				r.setPrice(price);
 				r.setSeatList(seatList(conn, r.getTicketNo()));
 				list.add(r);
@@ -661,6 +660,36 @@ public class MemberDao {
 		}
 		
 		return memberNo;
+	}
+	
+	public int idCheck(Connection conn, String checkId) {
+		int count = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("idCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, checkId);
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			count = rset.getInt("COUNT(*)");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		
+		return count;
 	}
 	
 	
