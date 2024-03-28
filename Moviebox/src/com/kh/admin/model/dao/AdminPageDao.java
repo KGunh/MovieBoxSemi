@@ -1,5 +1,7 @@
 package com.kh.admin.model.dao;
 
+import static com.kh.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -8,8 +10,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
-import static com.kh.common.JDBCTemplate.*;
+
 import com.kh.movie.model.vo.Movie;
+import com.kh.notice.model.vo.Notice;
 
 public class AdminPageDao {
 
@@ -70,7 +73,41 @@ public class AdminPageDao {
 	
 	
 	
-	
+	public ArrayList<Notice> adminSelectNoticeList(Connection conn){
+		
+		ArrayList<Notice> list = new ArrayList();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("adminSelectNoticeList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			Notice notice = new Notice();
+			
+			notice.setNoticeNo(rset.getInt("NOTICE_NO"));
+			notice.setNoticeCategory(rset.getString("CATEGORY_NAME"));
+			notice.setNoticeTitle(rset.getString("NOTICE_TITLE"));
+			notice.setCreateDate(rset.getString("CREATE_DATE"));
+			notice.setCount(rset.getInt("COUNT"));
+			
+			list.add(notice);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+		
+		
+	}	
 	
 	
 	
