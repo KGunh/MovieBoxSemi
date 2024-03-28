@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 
 import com.kh.admin.model.service.AdminPageService;
+import com.kh.board.model.vo.Board;
 import com.kh.movie.model.vo.Movie;
 import com.kh.notice.model.vo.Notice;
 
@@ -33,7 +34,14 @@ public class AdminPageController {
 	}
 	
 	
-	
+	// 문의 목록 전체 출력
+	public String adminSelectQnAList(HttpServletRequest request) {
+		ArrayList<Board> list = new AdminPageService().adminSelectQnAList();
+		request.setAttribute("adminQnACheck", list);
+		String view = "views/admin/adminQnACheck.jsp";
+		
+		return view;
+	}
 
 
 

@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.board.model.vo.Board;
 import com.kh.movie.model.vo.Movie;
 import com.kh.notice.model.vo.Notice;
 
@@ -112,7 +113,45 @@ public class AdminPageDao {
 	}	
 	
 	
-	
+	//문의 목록 전체 출력
+	public ArrayList<Board> adminSelectQnAList(Connection conn){
+		
+		ArrayList<Board> list = new ArrayList();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("adminSelectQnAList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				Board board = new Board();
+				
+				board.setBoardNo(rset.getInt("BOARD_NO"));
+				board.setBoardCategory(rset.getString("CATEGORY_NO"));
+				board.setBoardTitle(rset.getString("BOARD_TITLE"));
+				board.setBoardWriter(rset.getString("MEMBER_ID"));
+				board.setCreateDate(rset.getString("CREATE_DATE"));
+				board.setCount(rset.getInt("COUNT"));
+				
+				list.add(board);
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+		
+		
+	}	
 	
 	
 	
