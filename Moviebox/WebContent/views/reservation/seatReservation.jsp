@@ -550,10 +550,11 @@
                 },
                 success : function(result){
                     console.log(result);
-                    console.log('예매 정보 가져옴~');
+
+
                 },
                 error : function(){
-
+                    console.log('실패')
                 }
             });
         });
