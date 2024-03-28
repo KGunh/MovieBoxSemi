@@ -14,14 +14,14 @@ import java.util.Properties;
 import com.kh.board.model.vo.Board;
 import com.kh.notice.model.dao.NoticeDao;
 
-public class QnaDao {
+public class BoardDao {
 	
 	private Properties prop = new Properties();
 	
-	public QnaDao() {
+	public BoardDao() {
 		
 		String fileName = NoticeDao.class
-				.getResource("/sql/board/qna-mapper.xml")
+				.getResource("/sql/board/board-mapper.xml")
 				.getPath();
 		
 		try {
@@ -31,14 +31,13 @@ public class QnaDao {
 		}
 	}
 
-	public ArrayList<Board> selectQnaList(Connection conn) {
+	public ArrayList<Board> selectBoardList(Connection conn) {
 		
 		ArrayList<Board> list = new ArrayList();
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
 		
-		String sql = prop.getProperty("selectQnaList");
-		
+		String sql = prop.getProperty("selectBoardList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -56,8 +55,6 @@ public class QnaDao {
 				board.setCreateDate(rset.getString("CREATE_DATE"));
 				
 				list.add(board);
-				
-				
 			}
 			
 		} catch (SQLException e) {

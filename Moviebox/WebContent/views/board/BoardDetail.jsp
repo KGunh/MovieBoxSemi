@@ -1,13 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%@ page import="com.kh.notice.model.vo.*" %>
-    
-
-<%
-	Notice notice = (Notice)request.getAttribute("notice");
-%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -64,32 +56,27 @@
             width: 600px;
             height: 90px;
             float: left;
-            background-color: #FFC145;
             font-weight: bolder;
             cursor: pointer;
-            color: #1A1A1A;
+            color: #FFC145;
         }
-
+        
         .qna-tap{
             width: 600px;
             height: 90px;
-            color: white;
+            color: #1A1A1A;
             display: inline-block;
             left: 0;
             cursor: pointer;
-            color: #FFC145;
+            background-color: #FFC145;
         }
 
         .notice-tap:hover{
             background-color: #FFC145;
-        }
-        
-        .qna-tap:hover{
-            background-color: #FFC145;
             color: #1A1A1A;
         }
 
-
+        
         /* 내용 입력 */
         .notice-content{
             width: 1200px;
@@ -168,12 +155,32 @@
         .detail-content{
             padding: 10px;
             padding-top: 20px;
-            padding-bottom: 100px;
+            padding-bottom: 25px;
             border-bottom: 1px solid #3f3f3f;
         }
 
-        /* 버튼 */
+        .detail-content-a-box{
+            width: 1200px;
+            height: auto;
+            color: white;
+        }
 
+        .detail-a{
+            padding: 10px;
+            padding: 20px;
+            border: 1px solid #3f3f3f;
+        }
+
+        #a-title{
+            width: 1200px;
+            font-size: 20px;
+            color: white;
+            font-weight: bold;
+            padding-top: 50px;
+            padding-bottom: 20px;
+        }
+
+        /* 버튼 */
         .notice-btn{
             margin-top: 30px;
             margin-bottom: 30px;
@@ -190,15 +197,14 @@
             text-decoration: none;
             color: #1A1A1A;
             margin-right: 10px;
-
         }
-
     </style>
-    
+
 </head>
 <body>
 
-<%@ include file="../common/header.jsp" %>
+	<%@ include file="../common/header.jsp" %>
+	
     <div id="wrap">
         <div id="notice-detail">
             <!-- 전체 감싸는 부분 -->
@@ -215,76 +221,79 @@
                 <div class="notice-content">
                     <div class="detail-box1">
                         <div class="detail-title-box1">
-                            <div class="detail-category"><span>No.<%=notice.getNoticeNo() %> [<%= notice.getNoticeCategory() %>]</span></div>
-                            <div class="detail-title"><span><%= notice.getNoticeTitle() %> </span></div>
+                            <div class="detail-category"><span>[QnA 카테고리]</span></div>
+                            <div class="detail-title"><span>문의 제목 들어가는 부분 </span></div>
                         </div>
                     </div>
 
                     <div class="detail-box2">
                         <div class="detail-title-box2">
-                            <div class="detail-date"><a>작성일 : <%= notice.getCreateDate() %></a></div>
-                            <div class="detail-count"><a> 조회수 : <%= notice.getCount() %></div>
+                            <div class="detail-date"><a>2024.03.20 16:34</a></div>
+                            <div class="detail-count"><a>작성자 : 김유나</div>
                         </div>
                     </div>
 
                     <div class="detail-content-box">
                         <div class="detail-content">
-                        <%= notice.getNoticeContent() %>
+                            아아아 내용내용 출력식 <br>
+                            아아아 내용내용 출력식 <br>
+                            아아아 내용내용 출력식 <br>
+                            아아아 내용내용 출력식 <br>
+                            아아아 내용내용 출력식 <br>
+                            아아아 내용내용 출력식 <br>
+                            아아아 내용내용 출력식 <br>
+                            아아아 내용내용 출력식 <br>
+                            아아아 내용내용 출력식 <br>
+                            아아아 내용내용 출력식 <br>
+                            아아아 내용내용 출력식 <br>
+                            아아아 내용내용 출력식 <br>
                         </div>
                     </div>
                 </div> <!-- notice-content -->
 
+                <div id="a-title">답변</div>
+
+                <div class="detail-content-a-box">
+                    <div class="detail-a">
+                        아아아 내용내용 출력식 <br>
+                        아아아 내용내용 출력식 <br>
+                        아아아 내용내용 출력식 <br>
+                        아아아 내용내용 출력식 <br>
+                        아아아 내용내용 출력식 <br>
+                        아아아 내용내용 출력식 <br>
+                        아아아 내용내용 출력식 <br>
+                        아아아 내용내용 출력식 <br>
+                        아아아 내용내용 출력식 <br>
+                        아아아 내용내용 출력식 <br>
+                        아아아 내용내용 출력식 <br>
+                        아아아 내용내용 출력식 <br>
+                    </div>
+                </div>
+            </div> <!-- notice-content -->
+
                 <div class="notice-btn" align="center">
-                    <button class="notice-detail-btn" onclick="backPage();">목록</button>
-                    <!-- 관리자로 로그인 했을 때만 보이기 -->
-                    <% if(loginUser != null && loginUser.getMemberId().equals("admin")) { %>
-                    <button class="notice-detail-btn" onclick="noticeUpdatePage();">수정</button> 
-                    <button class="notice-detail-btn" onclick="noticeDelete();">삭제</button>
-                    <% } %>
+                    <button class="notice-detail-btn">목록</button>
+                    <button class="notice-detail-btn">수정</button> <!-- 관리자로 로그인 했을 때만 보이기 -->
+                    <button class="notice-detail-btn">삭제</button> <!-- 관리자로 로그인 했을 때만 보이기 -->
                 </div>
 
 
 
             </div> <!-- notice-list -->
         </div> <!-- notice-detail -->
-    </div> <!-- wrap -->
     
-    <%@ include file="../common/footer.jsp" %>
-    
-      	<script>
-    		function openNoticePage(){
-    			location.href = '<%=contextPath %>/list.notice';
-    		}
-    		
-    		function openQnaPage(){
-    			location.href = '<%=contextPath %>/list.qna'; 			
-    		}
-    		
-    		function backPage(){
-    			location.href = '<%=contextPath%>/list.notice';
-    		}
-    		
-    		function noticeUpdatePage(){
-    			location.href = '<%=contextPath%>/updateForm.notice?noticeNo=<%=notice.getNoticeNo()%>';
-    		}
-    		
-    		function noticeDelete(){
-    			const result = confirm('삭제하려면 확인을 눌러주세요.');
-                if(result){
-                	location.href = '<%=contextPath%>/remove.notice?noticeNo=<%=notice.getNoticeNo()%>';
-                } 
-                else{
-            		$('tbody > tr.list').click(function(){
-            			const noticeNo = $(this).children().eq(0).text();
-            			location.href = '<%=contextPath%>/detail.notice?noticeNo=' + noticeNo;
-                    });
-                }
-    			
-    		}
+    	<%@ include file="../common/footer.jsp" %>
+    	
+    	<script>
+			function openNoticePage(){
+				location.href = '<%=contextPath %>/list.notice';
+			}
+			
+			function openQnaPage(){
+				location.href = '<%=contextPath %>/list.qna'; 			
+			}
+    	
     	</script>
-    
-    
-    
     
 </body>
 </html>
