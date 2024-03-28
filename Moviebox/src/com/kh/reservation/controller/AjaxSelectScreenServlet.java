@@ -32,7 +32,6 @@ public class AjaxSelectScreenServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		List<Screen> screenList = new ReservationController().selectScreen(request);
 		
 		response.setContentType("application/json; charset=UTF-8");

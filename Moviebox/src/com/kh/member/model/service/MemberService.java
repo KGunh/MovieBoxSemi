@@ -190,6 +190,15 @@ public class MemberService {
 		
 		return memberId;
 	}
+	public int memberNoSearch(Member m) {
+		Connection conn = getConnection();
+		
+		int memberId = new MemberDao().memberNoSearch(conn,m);
+		
+		close(conn);
+		
+		return memberId;
+	}
 	
 	public int deleteMember(Member loginUser) {
 		Connection conn = getConnection();

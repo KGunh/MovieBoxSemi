@@ -411,6 +411,60 @@ public class MemberController {
 		return view;
 	}
 	
+	public String pwdSearch(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		String view = "";
+		
+		String memberId = request.getParameter("memberId");
+		String memberName = request.getParameter("memberName");
+		String birthday = request.getParameter("birthday");
+		String phone = request.getParameter("phone");
+		
+		Member m = new Member();
+		
+		m.setMemberId(memberId);
+		m.setMemberName(memberName);
+		m.setBirthday(birthday);
+		m.setPhone(phone);
+		int memberNo = new MemberService().memberNoSearch(m);
+		
+		
+		if(memberNo > 0) {
+			request.setAttribute("memberNo", memberNo);
+			view = "views/member/pwdSearchResult.jsp";
+		} else {
+			session.setAttribute("alertMsg", "아이디를 찾지 못했습니다. 다시입력해주세요");
+			view = "views/member/pwdSearchForm.jsp";
+		}
+		return view;
+	}
+	
+	public String pwdSearchUpdate(HttpServletRequest request, HttpServletResponse response) {
+		String view = "";
+		HttpSession session = request.getSession();
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+		String changePwd = request.getParameter("memberPwd");
+		
+		Member m = new Member();
+		
+		m.setMemberNo(memberNo);
+		m.setMemberPwd(changePwd);
+		
+		int result = new MemberService().updatePwd(m);
+		
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "수정에 성공하였습니다 로그인화면으로 이동합니다.");
+			
+			view = "/loginForm.me";
+		}else {
+			session.setAttribute("alertMsg", "수정에 실패했습니다.");
+			view = "/pwdSearchForm.me";
+		}
+		
+		return view;
+	}
+	
 	
 	
 	
