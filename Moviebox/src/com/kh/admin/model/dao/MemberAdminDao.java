@@ -71,19 +71,19 @@ public class MemberAdminDao {
 	
 	public Member editAdmin(Connection conn, int memberNo){
 		
-		
-		System.out.println(memberNo);
 		Member m = new Member(); 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("editAdmin");
+
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, memberNo);
-			rset = pstmt.executeQuery(sql);
 			
-		if(rset.next()) {
+			rset = pstmt.executeQuery();
+			
+		if(rset.next()) { 
 			
 			
 						m.setMemberNo(rset.getInt("MEMBER_NO"));
