@@ -86,16 +86,18 @@ public class AdminPageDao {
 			
 			rset = pstmt.executeQuery();
 			
-			Notice notice = new Notice();
-			
-			notice.setNoticeNo(rset.getInt("NOTICE_NO"));
-			notice.setNoticeCategory(rset.getString("CATEGORY_NAME"));
-			notice.setNoticeTitle(rset.getString("NOTICE_TITLE"));
-			notice.setCreateDate(rset.getString("CREATE_DATE"));
-			notice.setCount(rset.getInt("COUNT"));
-			
-			list.add(notice);
-			
+			while(rset.next()) {
+				
+				Notice notice = new Notice();
+				
+				notice.setNoticeNo(rset.getInt("NOTICE_NO"));
+				notice.setNoticeCategory(rset.getString("CATEGORY_NAME"));
+				notice.setNoticeTitle(rset.getString("NOTICE_TITLE"));
+				notice.setCreateDate(rset.getString("CREATE_DATE"));
+				notice.setCount(rset.getInt("COUNT"));
+				
+				list.add(notice);
+			}
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
