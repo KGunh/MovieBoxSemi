@@ -10,11 +10,11 @@
 	<entry key="adminSelectMovieList">
 		SELECT
 		    MOVIE_NO,
-		    MOVIE_RELEASE,
+		    TO_CHAR(MOVIE_RELEASE, 'YY/MM/DD') MOVIE_RELEASE,
 		    MOVIE_TITLE,
 		    MOVIE_RATED,
 		    GENRE_NAME,
-		    MOVIE_UPDATE
+		    TO_CHAR(MOVIE_UPDATE, 'YY/MM/DD') MOVIE_UPDATE
 		FROM
 		    TB_MOVIE
 		JOIN

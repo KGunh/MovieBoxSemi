@@ -14,7 +14,7 @@ public class AdminPageController {
 		
 		ArrayList<Movie> list = new AdminPageService().adminSelectMovieList();
 		request.setAttribute("adminMovieCheck", list);
-		String view = "/views/admin/adminMovieCheck.jsp";
+		String view = "views/admin/adminMovieCheck.jsp";
 		
 		return view;
 		

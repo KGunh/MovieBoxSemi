@@ -4,6 +4,7 @@
     
 <%
 ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("adminMovieCheck");
+System.out.println(list);
 %> 
 <!DOCTYPE html>
 <html>
@@ -375,7 +376,7 @@ ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("adminMovieCheck"
 			                            <td colspan="6">조회 된 영화 목록이 없습니다. </td>
 			                        </tr>
 			                     <% } else { %>
-			                     	<% for(Movie m : list) { %>                                    <td>1</td>
+			                     	<% for(Movie m : list) { %>                                   
 											<tr>
 			                                    <td><%= m.getMovieNo() %></td>
 			                                    <td><%= m.getMovieRelease() %></td>

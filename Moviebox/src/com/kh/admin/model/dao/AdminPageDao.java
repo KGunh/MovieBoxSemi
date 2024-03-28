@@ -51,7 +51,7 @@ public class AdminPageDao {
 				movie.setMovieRelease(rset.getString("MOVIE_RELEASE"));
 				movie.setMovieTitle(rset.getString("MOVIE_TITLE"));
 				movie.setMovieRated(rset.getString("MOVIE_RATED"));
-				movie.setGenreNo(rset.getString(" GENRE_NAME"));
+				movie.setGenreNo(rset.getString("GENRE_NAME"));
 				movie.setMovieUpdate(rset.getString("MOVIE_UPDATE"));
 				
 				list.add(movie);
