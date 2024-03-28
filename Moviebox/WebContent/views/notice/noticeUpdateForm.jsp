@@ -274,7 +274,7 @@
                                 <select name="category" id="select-category">
                                
                                 <% for(Category c : list) { %>
-									<option class="<%= c.getCategoryName()%>" value="<%= c.getCategoryName() %>">
+									<option class="<%= c.getCategoryName()%>" value="<%= c.getCategoryNo() %>">
 										<%= c.getCategoryName() %>
 									</option>
 								<% } %>

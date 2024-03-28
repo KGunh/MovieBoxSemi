@@ -101,33 +101,42 @@ public class NoticeService {
 	}
 	
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	// 글쓰기
-//	public int insert(Notice notice) {
-//		
-//		Connection conn = getConnection();
-//		int result = new NoticeDao().insert(conn, notice);
-//		
-//		// 트랜잭션?
-//		if(result > 0) {
-//			commit(conn);
-//		} else {
-//			rollback(conn);
-//		}
-//		
-//		close(conn);
-//		
-//		return result;
-//	}
+	public int removeNotice(String noticeNo) {
+		
+		Connection conn = getConnection();
+		int result = new NoticeDao().removeNotice(conn, noticeNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
 
+	public int countNotice(int noticeNo) {
+		
+		Connection conn = getConnection();
+		int result = new NoticeDao().countNotice(conn, noticeNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 }

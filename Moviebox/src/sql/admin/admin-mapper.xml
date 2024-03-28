@@ -31,15 +31,15 @@
 		    NOTICE_NO,
 		    CATEGORY_NAME,
 		    NOTICE_TITLE,                  
-		    CREATE_DATE,                  
+		    TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE,                   
 		    COUNT      
 		FROM
-		    TB_NOTICE
+		    TB_NOTICE    
 		JOIN
 		    TB_CATEGORY ON (NOTICE_CATEGORY = CATEGORY_NO)
 		ORDER
 		   BY
-		    CATEGORY_NAME
+		    NOTICE_NO DESC
 	</entry>
 
 
