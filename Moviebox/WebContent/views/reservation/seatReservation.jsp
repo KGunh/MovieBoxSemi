@@ -7,7 +7,7 @@
 	String movieTitle = (String)request.getAttribute("movieTitle");
 	String screenNo = (String)request.getAttribute("screenNo");
 	String movieNo = (String)request.getAttribute("movieNo");
-
+	String theaterName = (String)request.getAttribute("theaterName");
 %>
 
 <!DOCTYPE html>
@@ -111,6 +111,7 @@
         width: 600px;
         margin-left: 300px;
     }
+
     #movie-info{
         width: 600px;
         height: 50px;
@@ -158,7 +159,8 @@
         width: 800px;
         height: 450px;
         margin: auto;
-        border: 1px solid rgb(125, 124, 124);
+        margin-bottom: 20px;
+        background-color: #0e0e0e;
     }
 
     #select-seat{
@@ -190,18 +192,9 @@
         margin-left: 850px;
     }
 
-    #check-area{
-        width: 800px;
-        height: 400px;
-        margin: auto;
-        margin-bottom: 50px;
-    }
-
-    #check-movie, #reservation-info{
-        float: left;
-    }
-    #check-area div{
-        color: rgb(125, 124, 124);
+    #select-btn{
+        width: 100%;
+        background-color: rgb(39, 39, 39);
     }
 
     /* 스크린 모양 만들기 */
@@ -231,7 +224,7 @@
 <body>
 	<%@ include file="/views/common/header.jsp" %>
 	<div id="wrap">
-        <div id="title">영화예매</div>
+        <div id="title">영화 예매</div>
 
         <div id="selectPersonArea">
             <div id="selectText">
@@ -240,7 +233,7 @@
                     최대 8명까지 선택 가능
                 </div>
             </div>
-            <div id="movie-info"><%= movieTitle %> <%= screenName %> <%= screenDate %></div>
+            <div id="movie-info"><%= movieTitle %> <%= theaterName %> <%= screenName %> <%= screenDate %></div>
             <div id="select-wrap">
                 <div id="selectAge">
                     <button class="people-teen ageBtn">청소년</button>
@@ -310,21 +303,29 @@
                 </div>
             </div>
         </div>
-        <button id="print-resv-info" >좌석 선택</button>
-
+        <div id="select-btn">
+            <button id="print-resv-info" >좌석 선택</button>
+        </div>
         <div id="check-area">
             <div id="check-reservation">
                 <div id="check-movie">
                     <div id="poster-select">영화포스터</div>
-                    <div id="movie-select">영화 정보</div>
+                    <div id="movie-select">
+                        <div>영화 이름</div>
+                        <div>~세 이상관람가</div>
+                        <div>개봉일</div>
+                        <div>장르,러닝타임</div>
+                    </div>
                 </div>
+            </div>
+            <div id="check-info">
                 <div id="reservation-info">
-                    <div>영화 : </div>
-                    <div>상영 일자 : </div>
-                    <div>상영관 : </div>
-                    <div>인원 : </div>
-                    <div>머시기 :</div>
-                    <div>머시기 : </div>
+                    <div>상영일시</div>
+                    <div>관람극장</div>
+                    <div>상영관</div>
+                    <div>관람인원</div>
+                    <div>선택좌석</div>
+                    <div>결제금액</div>
                 </div>
             </div>
         </div>
@@ -337,6 +338,53 @@
             background-color: rgb(255, 193, 69);
         }
 
+        #check-reservation{
+            float: left;
+            width: 250px;
+            height: 400px;
+        }
+
+        #check-info{
+            float: left;
+            width: 500px;
+            height: 350px;
+            margin-top: 20px;
+            margin-left: 25px;
+        }
+
+        #check-movie{
+            float: left;
+            width: 200px;
+            height: 350px;
+            margin-top: 20px;
+            margin-left: 25px;
+        }
+        
+        #check-movie div{
+            font-size: 12px;
+        }
+
+        #reservation-info{
+            float: left;
+        }
+
+        #poster-select{
+            width: 180px;
+            height: 260px;
+            margin: auto;
+        }
+
+        #check-area{
+            width: 800px;
+            height: 400px;
+            margin: 20px auto 50px auto;
+            background-color: #0e0e0e;
+        }
+
+        #check-area div{
+            color: rgb(125, 124, 124);
+        }
+
     </style>
 
     <script>
@@ -346,6 +394,7 @@
         var resvTeen = ['', 0]; 
         var resvAdult = ['', 0];
 
+        // 상영관 예약정보 가져와서 좌석 선택 가능여부 조작
         window.onload = function() {
             $.ajax({
                 url : 'seat.reservationAjax',
@@ -355,6 +404,7 @@
             	},
                 success : function(result){
                     console.log(result);
+                    console.log('스크린 정보 가져왔음');
                 },
                 error : function(){
 
@@ -378,6 +428,7 @@
             
             printPeople();
         });
+
         // 청소년 성인 구분하여 숫자넣기
         $('.ageBtn').click(e => {
             if($(e.target).hasClass('clicked')){
@@ -389,20 +440,20 @@
                 $('.ageBtn').removeClass('clicked');
                 $('.people-Count').removeClass('clicked');
                 $(e.target).addClass('clicked');
+                
                 ageType = ($(e.target).html() == '성인' ? 'adult' : 'teen');
             };
             
             printPeople();
         });
+
         // 선택한 인원 보여주기
         function printPeople(){
             if(ageType == 'teen'){
                 resvTeen = [ageType, peopleCount];
-                
             }
             else if(ageType == 'adult') {
                 resvAdult = [ageType, peopleCount];
-
             };
 
             selectPeople = resvTeen[1] + resvAdult[1];
@@ -422,6 +473,7 @@
             peopleCount = 0;
         };
 
+        // 인원수대로 좌석선택
         $('.seats').click(e => {
             if($(e.target).hasClass('clicked')){
                 $(e.target).removeClass('clicked');
@@ -443,8 +495,6 @@
             };
         });
 
-        
-
         // 좌석 선택 후 예매정보 하단에 표시
         $('#print-resv-info').click(function(){
             $.ajax({
@@ -456,6 +506,7 @@
             	},
                 success : function(result){
                     console.log(result);
+                    console.log('예매 정보 가져옴~');
                 },
                 error : function(){
 
