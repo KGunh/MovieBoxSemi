@@ -335,4 +335,13 @@
 		   	   STATUS = 'Y'	   
 	
 	</entry>
+	
+	<entry key="idCheck">
+		SELECT
+			   COUNT(*)
+		  FROM
+		  	   TB_MEMBER
+		 WHERE
+		 	   MEMBER_ID = ?
+	</entry>
 </properties>

@@ -65,6 +65,7 @@ public class MemberServlet extends HttpServlet {
 		case "deleteForm" : view = "views/member/memberDelete.jsp"; break;
 		case "delete" : view = mc.delete(request,response); flag=1; break;
 		case "pwdSearchUpdate" : view = mc.pwdSearchUpdate(request, response); break; 
+		case "idCheck" : mc.idCheck(request,response); flag = 3; break; 
 		default : return;
 			
 	
