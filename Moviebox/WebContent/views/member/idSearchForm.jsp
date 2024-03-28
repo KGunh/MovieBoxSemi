@@ -112,26 +112,28 @@
 
 <body>
 
+<%@ include file="../common/header.jsp" %>
+
     <div class="content">
         <div class="title-area">
             <div class="title-content"><span class="tit">아이디 찾기</span></div>
             <div class="title-content"><span class="tit">비밀번호 찾기</span></div>
         </div>
         <div id="input-list">
-            <form>
+            <form action="<%=contextPath%>/idSearch.me" method="post">
                 <div class="inputdiv">
                     <span class="input-span">이름</span><br>
-                    <input type="text" class="input-text" placeholder="이름" required>
+                    <input type="text" class="input-text" name="memberName" placeholder="이름" required>
                 </div>
 
                 <div class="inputdiv">
                     <span class="input-span">생년월일</span><br>
-                    <input type="text" class="input-text" placeholder="생년월일" required>
+                    <input type="text" class="input-text" name="birthday" placeholder="생년월일" required>
                 </div>
 
                 <div class="inputdiv">
-                    <span class="input-span">생년월일</span><br>
-                    <input type="text" class="input-text" placeholder="생년월일" required>
+                    <span class="input-span">전화번호</span><br>
+                    <input type="text" class="input-text" name="phone" placeholder="전화번호" required>
                 </div>
 
                 <div class="input-button">

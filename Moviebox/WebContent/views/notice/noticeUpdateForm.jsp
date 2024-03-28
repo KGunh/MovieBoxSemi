@@ -2,11 +2,12 @@
     pageEncoding="UTF-8"%>
     
 <%@ page import="com.kh.board.model.vo.Category, java.util.ArrayList,
-				 com.kh.notice.model.vo.Notice "%>
+				 com.kh.notice.model.vo.Notice"%>
     
 <%
-	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("categoryList");
 	Notice notice = (Notice)request.getAttribute("notice");
+	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("category");
+
 %>
     
     
@@ -254,15 +255,13 @@
                     <div class="notice-tap">공지사항</div>
                     <div class="qna-tap">QnA</div>
                 </div>-->
-
                 <div class="notice-content">
                     <div class="detail-box1">
                         <div class="detail-title-box1">
                             <div class="detail-category"><span>공지사항 작성</span></div>
                         </div>
                     </div>
-
-
+                    
                     <div class="detail-content-box">
                         <form action="<%= contextPath %>/update.notice" method="post" id="insert-box">
                         
@@ -271,18 +270,29 @@
                             <div id="category-box">
                                 <div id="box-name">분류</div>
                                 
+                                
                                 <select name="category" id="select-category">
+                               
                                 <% for(Category c : list) { %>
-									<option class="<%= c.getCategoryName()%>" value="<%= c.getCategoryNo() %>">
+									<option class="<%= c.getCategoryName()%>" value="<%= c.getCategoryName() %>">
 										<%= c.getCategoryName() %>
 									</option>
 								<% } %>
+								
                                 </select>
+                                
+                                    <script>
+								    	$(function(){
+								    		$('option[class="<%=notice.getNoticeCategory()%>"]').attr('selected', 'true');
+								    	})
+    
+								    </script>
+								    
                             </div> <!-- category box -->
 
                             <div id="title-box">
                                 <div id="box-name">제목</div>
-                                <input type="text" id="select-title" name="title" value="">
+                                <input type="text" id="select-title" name="title" value="<%= notice.getNoticeTitle() %>">
                             </div>
 
                             <div id="content-box">
@@ -309,20 +319,7 @@
     
     <%@ include file="../common/footer.jsp" %>
     
-    <script>
-    
-    	$(function(){
-    		
-    		$('option[class="<%=notice.getCategoryNo()%>"]').attr('selected', 'true');
-    		
-    	})
-    	
-    	
-    	
-    	
-    	
-    
-    </script>
+
 
     
 </body>

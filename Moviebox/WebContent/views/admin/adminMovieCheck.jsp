@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kh.movie.model.vo.Movie, java.util.ArrayList"%>
+    
+<%
+ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("adminMovieCheck");
+System.out.println(list);
+%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -364,87 +370,23 @@
                                     <th>등록일</th>
                                 </tr>
                               </thead>
-                              <tbody>
-                                <tr>
-                                    <td>1</td>
-                                    <td>2024/02/01</td>
-                                    <td>파묘</td>
-                                    <td>미스터리</td>
-                                    <td>15</td>
-                                    <td>2024/02/22</td>
-                                </tr>
-                                <tr>
-                                    <td>2</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>3</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>4</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>5</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>6</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>7</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>8</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>9</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
-                                <tr>
-                                    <td>10</td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                    <td></td>
-                                </tr>
+			                    <tbody>
+			                    <% if(list == null || list.isEmpty()) { %>
+			                        <tr>
+			                            <td colspan="6">조회 된 영화 목록이 없습니다. </td>
+			                        </tr>
+			                     <% } else { %>
+			                     	<% for(Movie m : list) { %>                                   
+											<tr>
+			                                    <td><%= m.getMovieNo() %></td>
+			                                    <td><%= m.getMovieRelease() %></td>
+			                                    <td><%= m.getMovieTitle() %></td>
+			                                    <td><%= m.getMovieRated() %></td>
+			                                    <td><%= m.getGenreNo() %></td>
+			                                    <td><%= m.getMovieUpdate() %></td>
+			                                </tr>
+			                      	<% } %>          
+			                     <% } %>          
                               </tbody>
                             </table>
                           </div>

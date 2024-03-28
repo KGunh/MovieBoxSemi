@@ -54,16 +54,42 @@ public class NoticeController {
 		return view;
 	}
 	
-	// 카테고리
+	// 카테고리 (글 작성)
 	public String selectCategoryList(HttpServletRequest request, HttpServletResponse response) {
 		ArrayList<Category> list = new NoticeService().selectCategoryList();
-		request.setAttribute("categoryList", list);
+		request.setAttribute("category", list);
 		
 		String view = "views/notice/noticeInsertForm.jsp";
+
+		return view;
+	}
+	
+	// 카테고리 (글 수정)
+	public String selectCategory(HttpServletRequest request, HttpServletResponse response) {
+		ArrayList<Category> list = new NoticeService().selectCategoryList();
+		request.setAttribute("category", list);
+		
+		String view = "views/notice/noticeUpdateForm.jsp";
+
+		return view;
+	}
+	
+	
+	// 글 수정 (카테고리, 공지사항 번호 넘겨주기)
+	public String updateNoticeList(HttpServletRequest request, HttpServletResponse response) {
+		ArrayList<Category> list = new NoticeService().selectCategoryList();
+
+		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+		Notice notice = new NoticeService().selectNotice(noticeNo);
+		
+		request.setAttribute("category", list);
+		request.setAttribute("notice", notice);
+
+		String view = "views/notice/noticeUpdateForm.jsp";
 		
 		return view;
-		
 	}
+	
 	
 	// 공지사항 글쓰기
 	public String insertNotice(HttpServletRequest request, HttpServletResponse response) {
@@ -97,7 +123,7 @@ public class NoticeController {
 		return view;
 	}
 	
-	// 공지사항 글 수정
+	//  글 수정
 	public String updateNoticeForm(HttpServletRequest request, HttpServletResponse response) {
 		
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
@@ -110,11 +136,51 @@ public class NoticeController {
 		return view;
 	}
 	
+	// 글 수정
 	public String updateNotice(HttpServletRequest request, HttpServletResponse response) {
 		
+		HttpSession session = request.getSession();
 		
-		return null;
+//		int categoryNo = 0;
+//		String noticeCategory = request.getParameter("category");
+//		
+//		switch(noticeCategory) {
+//		case "영화" : categoryNo = 1;
+//		case "영화관" : categoryNo = 2;
+//		case "굿즈" : categoryNo = 3;
+//		case "기타" : categoryNo = 4;
+//		}
+		
+		
+		int noticeCategory = Integer.parseInt(request.getParameter("category"));
+		
+		String noticeTitle = request.getParameter("title");
+		String noticeContent = request.getParameter("content");
+		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+		
+		Notice notice = new Notice();
+		notice.setCategoryNo(noticeCategory);
+		notice.setNoticeTitle(noticeTitle);
+		notice.setNoticeContent(noticeContent);
+		notice.setNoticeNo(noticeNo);
+		
+		int result = new NoticeService().updateNotice(notice);
+		request.setAttribute("notice", result);
+		
+		String view = "";
+		
+		if(result > 0) {
+			view = "/update.notice?noticeNo=" + noticeNo;
+		} else {
+			session.setAttribute("alertMsg", "공지사항 수정 실패");
+			view = "view/notice/noticeUpdateForm.jsp";
+		}
+		
+		return view;
 	}
+	
+	// 페이징
+	
 	
 
 	

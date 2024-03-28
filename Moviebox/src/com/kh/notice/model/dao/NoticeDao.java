@@ -88,11 +88,12 @@ public class NoticeDao {
 		
 		return result;
 	}
+	
 
 	// 공지사항 조회
 	public Notice selectNotice(Connection conn, int noticeNo) {
 		
-		Notice n = null;
+		Notice notice = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectNotice");
@@ -105,13 +106,14 @@ public class NoticeDao {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				n = new Notice();
-				n.setNoticeCategory(rset.getString("CATEGORY_NAME"));
-				n.setNoticeTitle(rset.getString("NOTICE_TITLE"));
-				n.setCreateDate(rset.getString("CREATE_DATE"));
-				n.setCount(rset.getInt("COUNT"));
-				n.setNoticeWriter(rset.getString("NOTICE_WRITER"));
-				n.setNoticeContent(rset.getString("NOTICE_CONTENT"));
+				notice = new Notice();
+				notice.setNoticeNo(rset.getInt("NOTICE_NO"));
+				notice.setNoticeCategory(rset.getString("CATEGORY_NAME"));
+				notice.setNoticeTitle(rset.getString("NOTICE_TITLE"));
+				notice.setCreateDate(rset.getString("CREATE_DATE"));
+				notice.setCount(rset.getInt("COUNT"));
+				notice.setNoticeWriter(rset.getString("NOTICE_WRITER"));
+				notice.setNoticeContent(rset.getString("NOTICE_CONTENT"));
 			}
 			
 		} catch (SQLException e) {
@@ -121,7 +123,7 @@ public class NoticeDao {
 			close(pstmt);
 		}
 		
-		return n;
+		return notice;
 	}
 	
 	
@@ -176,12 +178,43 @@ public class NoticeDao {
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
 		}
 		
 		return list;
 	}
 	
 	
+	public int updateNotice(Connection conn, Notice notice) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, notice.getCategoryNo());
+			pstmt.setString(2, notice.getNoticeTitle());
+			pstmt.setString(3, notice.getNoticeContent());
+			pstmt.setInt(4, notice.getNoticeNo());
+			
+			result = pstmt.executeUpdate();
+			
+			System.out.println(result);
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+
 	
 	
 	

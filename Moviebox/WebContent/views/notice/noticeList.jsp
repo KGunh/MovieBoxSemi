@@ -6,6 +6,7 @@
     
 <%
 ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
+Notice notice = (Notice)request.getAttribute("notice");
 %>    
     
     

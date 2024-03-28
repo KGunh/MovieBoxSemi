@@ -280,4 +280,41 @@
 	</entry>
 	
 	
+	<entry key="updatePwd">
+		UPDATE
+			   TB_MEMBER
+		   SET
+		   	   MEMBER_PWD = ?
+		 WHERE
+		 	   MEMBER_NO = ?
+		
+		
+		
+		
+	</entry>
+	
+	<entry key="idSerach">
+		SELECT
+			   MEMBER_ID
+		  FROM
+		 	   TB_MEMBER
+		 WHERE
+		  	   MEMBER_NAME = ?
+		   AND
+		   	   BIRTHDAY = ?
+		   AND
+		   	   PHONE = ?
+		   AND
+		   	   STATUS = 'Y'	   
+	
+	</entry>
+	
+	<entry key="deleteMember">
+		UPDATE
+			   TB_MEMBER
+		   SET
+		   	   STATUS = 'N'
+		 WHERE
+		 	   MEMBER_NO = ?
+	</entry>
 </properties>

@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.kh.notice.model.vo.Notice, java.util.ArrayList"%>
+    
+<%
+ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("adminMovieInsert");
+System.out.println(list);
+%> 
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -361,7 +369,6 @@
                                     <th>번호</th>
                                     <th>카테고리</th>
                                     <th>제목</th>
-                                    <th>작성일</th>
                                     <th>등록일</th>
                                     <th>조회수</th>
                                 </tr>
@@ -373,11 +380,9 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>2</td>
-                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -389,11 +394,9 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>4</td>
-                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -405,11 +408,9 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>6</td>
-                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -421,11 +422,9 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>8</td>
-                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
@@ -437,11 +436,9 @@
                                     <td></td>
                                     <td></td>
                                     <td></td>
-                                    <td></td>
                                 </tr>
                                 <tr>
                                     <td>10</td>
-                                    <td></td>
                                     <td></td>
                                     <td></td>
                                     <td></td>
