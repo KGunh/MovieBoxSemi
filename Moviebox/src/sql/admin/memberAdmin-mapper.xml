@@ -17,7 +17,55 @@
 
 </entry>
 
+<entry key="editAdmin">
 
+			SELECT
+				MEMBER_NO,
+				MEMBER_NAME,
+				MEMBER_ID,
+				MEMBER_PWD,
+				GENDER,
+				BIRTHDAY,
+				EMAIL,
+				ADDRESS,
+				PHONE,
+				ENROLL_DATE,
+				STATUS
+			FROM
+				TB_MEMBER	
+			WHERE
+				MEMBER_NO = ?
+		
+</entry>
+
+
+
+
+
+
+
+
+
+
+<entry key="updateMember">
+
+		UPDATE
+			TB_MEMBER
+		SET
+			MEMBER_NAME =? ,
+			EMAIL =?,
+			ADDRESS =?,
+			PHONE =?,
+			STATUS =?,
+			UPDATE_DATE = SYSDATE
+		FROM
+			TB_MEMBER
+		WHERE 
+			MEMBER_ID = ?
+		AND
+			STATUS = 'Y'
+						
+</entry>
 
 
 
