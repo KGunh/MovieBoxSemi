@@ -333,7 +333,7 @@
             color: black;
             pointer-events: none;
         }
-
+        
         #check-reservation{
             float: left;
             width: 250px;
@@ -579,7 +579,7 @@
                     if(selectPeople == 0){
                         $("#check-area").removeAttr("hidden");
                         $("#check-area").show();
-                        
+
                         var resultStr = '';
                         
                         resultStr += '<div id="check-reservation">'
@@ -611,7 +611,15 @@
                                     +             '<div class="print-info" style="margin-top: 50px;">' + result.price.totalPrice + '원</div>'
                                     +         '</div>'
                                     +     '</div>'
-                                    +     '<button id="payment-btn" onclick="payment();">결제 하기</button>'
+                                    +     '<form id="payment-form" action="/moviebox/payment.reservation" method="post">'
+                                    +         '<input type="hidden" name="movieNo" value="' + <%= movieNo %> + '">'
+                                    +         '<input type="hidden" name="screenNo" value="' + <%= screenNo %> + '">'
+                                    +         '<input type="hidden" name="memberNo" value="' + <%= loginUser.getMemberNo() %> + '">'
+                                    +         '<input type="hidden" name="teen" value="' + resvTeen[0] + '">'
+                                    +         '<input type="hidden" name="adult" value="' + resvAdult[0] + '">'
+                                    +         '<input type="hidden" name="seatNo"value="' + selectSeat.join(',') + '">'
+                                    +         '<button type="submit" id="payment-btn" onclick="return payment()">결제 하기</button>'
+                                    +     '</form>'
                                     + '</div>';
 
                         $('#check-area').html(resultStr);
@@ -619,9 +627,9 @@
                     else {
                         alert('좌석을 모두 선택해주세요!');
                         $("#check-area").hide();
-                    }
+                    };
                 },
-                error : function(){
+                error : function(e){
                     alert('예매정보 오류!');
                 }
             });
@@ -629,22 +637,13 @@
         
         // 결제하기
         function payment(){
+            if(confirm('현재 예매 정보로 결제하시겠습니까?')) {
+                return true;
+            };
 
-
-        }
-
-
-
-
-
-         
-    	
-        
-
-
+            return false;
+        };
     </script>
-
-
 
 </body>
 </html>
