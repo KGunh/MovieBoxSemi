@@ -43,7 +43,7 @@ public class BoardServlet extends HttpServlet {
 		
 		switch(mapping) {
 		case "list" : view = bc.selectBoardList(request, response); flag = false; break; // dispatcher
-//		case "detail" : view = "views/board/boardDetail.jsp";
+		case "detail" : view = bc.detailBoard(request, response); flag = false; break;
 		}
 		
 		

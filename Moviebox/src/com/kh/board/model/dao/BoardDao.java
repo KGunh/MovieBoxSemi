@@ -14,6 +14,7 @@ import java.util.Properties;
 import com.kh.board.model.vo.Board;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.notice.model.dao.NoticeDao;
+import com.kh.notice.model.vo.Notice;
 
 public class BoardDao {
 	
@@ -62,7 +63,6 @@ public class BoardDao {
 				
 				list.add(board);
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -111,10 +111,29 @@ public class BoardDao {
 		ResultSet rset = null;
 		String sql = prop.getProperty("detailBoard");
 		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, boardNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				board = new Board();
+				board.setBoardNo(rset.getInt("BOARD_NO"));
+				board.setBoardCategory(rset.getString("CATEGORY_NAME"));
+				board.setBoardTitle(rset.getString("BOARD_TITLE"));
+				board.setCreateDate(rset.getString("CREATE_DATE"));
+				board.setBoardWriter(rset.getString("BOARD_WRITER"));
+				board.setBoardContent(rset.getString("BOARD_CONTENT"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
 		
-		
-		
-		return null;
+		return board;
 	}
 
 }

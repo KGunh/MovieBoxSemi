@@ -272,7 +272,7 @@
             
             <!-- 회원만 작성 할 수 있게  -->
             <div id="qna-insert">
-                <button id="qna-insert-btn">글쓰기</button>
+                <button id="qna-insert-btn" onclick="boardInsert();">글쓰기</button>
             </div>
 
 
@@ -332,6 +332,8 @@
 		                onclick="location.href='<%=contextPath%>/list.board?currentPage=<%= currentPage + 1 %>'"> > </button>
 		            <% } %>
                 </div>
+                
+
             </div>
 
         </div>
@@ -348,8 +350,13 @@
     			location.href = '<%= contextPath %>/list.board?currentPage=1';
     		}
     		
-    		$('.board').click(function(){
-    			location.href = '<%=contextPath%>/detail.board?boardNo='+$(this).attr('id');
+    		function boardInsert(){
+    			location.href = '<%=contextPath%>/enrollForm.board';
+    		}
+    		
+    		$('tbody > tr.board').click(function(){
+    			const boardNo = $(this).children().eq(0).text();
+    			location.href = '<%=contextPath%>/detail.board?boardNo=' + boardNo;
             });
     		
     	

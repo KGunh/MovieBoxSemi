@@ -62,6 +62,19 @@ public class BoardController {
 		return view;
 	}
 	
+	public String detailBoard(HttpServletRequest request, HttpServletResponse response) {
+		
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		
+		Board board = new BoardService().detailBoard(boardNo);
+		request.setAttribute("board", board);
+		
+		String view = "views/board/boardDetail.jsp";
+		
+		return view; 
+		
+	}
+	
 	
 	
 	

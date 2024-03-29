@@ -29,6 +29,7 @@ public class BoardService {
 		return result;
 	}
 
+	// 상세보기
 	public Board detailBoard(int boardNo) {
 		Connection conn = getConnection();
 		Board board = new BoardDao().detailBoard(conn, boardNo);

@@ -285,7 +285,7 @@
 	            <!-- 관리자로 로그인 했을 때만 보이게 해야함! -->
 	        <div id="qna-insert">
 	            <% if(loginUser != null && loginUser.getMemberId().equals("admin")) { %>
-	                <button id="qna-insert-btn" onclick="insert();">글쓰기</button>
+	                <button id="qna-insert-btn" onclick="noticeInsert();">글쓰기</button>
 	            <% } %>
 	        </div>
 
@@ -309,7 +309,7 @@
                      <% } else { %>
                      
                      	<% for(Notice n : list) { %>
-                        <tr class="notice">
+                        <tr class="list">
                             <td id="list-no"><%= n.getNoticeNo() %></td>
                             <td id="list-ca"><%= n.getNoticeCategory() %></td>
                             <td id="list-title"><%= n.getNoticeTitle() %></td>
@@ -366,14 +366,14 @@
     			location.href = '<%= contextPath %>/list.board?currentPage=1';
     		}
     		
-    		function insert(){
+    		function noticeInsert(){
     			location.href = '<%=contextPath%>/enrollForm.notice';
     		}
     		
-    		$('.notice').click(function(){
-    			location.href = '<%=contextPath%>/detail.notice?noticeNo='+$(this).attr('id');
+    		$('tbody > tr.list').click(function(){
+    			const noticeNo = $(this).children().eq(0).text();
+    			location.href = '<%=contextPath%>/detail.notice?noticeNo=' + noticeNo;
             });
-    		
     	
     	</script>
 

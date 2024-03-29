@@ -40,6 +40,26 @@
 		 	  STATUS = 'Y'
 	</entry>
 	
+	<entry key="detailBoard">
+		SELECT
+	      BOARD_NO,
+	      CATEGORY_NAME,
+	      BOARD_TITLE,
+	      TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE,
+	      BOARD_WRITER,
+	      BOARD_CONTENT
+	  FROM
+	      TB_BOARD
+	  JOIN
+	      TB_CATEGORY USING(CATEGORY_NO)
+	  JOIN
+	      TB_MEMBER USING(MEMBER_NO)
+	 WHERE
+	      BOARD_NO = ?
+	   AND
+	      TB_BOARD.STATUS = 'Y'
+	</entry>
+	
 	
 
 	

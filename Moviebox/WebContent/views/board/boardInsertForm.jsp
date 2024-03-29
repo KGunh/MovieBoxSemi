@@ -1,19 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%@ page import="com.kh.board.model.vo.Category, java.util.ArrayList "%>
-    
-<%
-	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("category");
-%>
-    
-    
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
     <style>
         body{
             background-color: #1A1A1A;
@@ -45,9 +36,7 @@
             padding-bottom: 50px;
             font-size: 30px;
             font-weight: bold;
-            border-bottom: 1px solid #3f3f3f;
         }
-        
 
         /* 카테고리*/
         #board-category{
@@ -87,6 +76,19 @@
         .qna-tap:hover{
             color: #1A1A1A;
             background-color: #FFC145;
+        }
+
+        /* insert-title */
+        #insert-title{
+            width: 1200px;
+            font-size: 25px;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            padding-top: 50px;
+            padding-bottom: 5%;
+            border-bottom: 1px solid #3f3f3f;
+
         }
 
         /* 내용 입력 */
@@ -225,21 +227,13 @@
             margin-right: 10px;
         }
 
-
-
     </style>
-    
+
 </head>
 <body>
 
-    <%@ include file="../common/header.jsp" %>
-    
-    <% if(loginUser == null) { %>
-    	<script>
-    		alert('관리자만 작성 가능합니다.');
-    	</script>
-
-	<% } else { %>
+	<%@ include file="../common/header.jsp" %>
+	
     <div id="wrap">
         <div id="notice-detail">
             <!-- 전체 감싸는 부분 -->
@@ -247,66 +241,69 @@
 
                 <div id="title">고객센터</div>
         
-                <!-- 고객센터 큰 분류 카테고리 
+                <!-- 카테고리 -->
                 <div id="board-category">
                     <div class="notice-tap">공지사항</div>
                     <div class="qna-tap">QnA</div>
-                </div>-->
+                </div> <!-- board-category -->
+
+                <div id="insert-title">고객 문의사항</div>
 
                 <div class="notice-content">
                     <div class="detail-box1">
                         <div class="detail-title-box1">
-                            <div class="detail-category"><span>공지사항 작성</span></div>
+                            <div class="detail-category"><span>문의사항 작성</span></div>
                         </div>
                     </div>
 
 
                     <div class="detail-content-box">
-                        <form action="<%= contextPath %>/insert.notice" method="post" id="insert-box">
-                        
-                        <input type="hidden" name="userNo" value="<%= loginUser.getMemberNo()%>" />
-                            
+                        <div id="insert-box">
                             <div id="category-box">
                                 <div id="box-name">분류</div>
-                                
-                                <select name="category" id="select-category">
-                                <% for(Category c : list) { %>
-									<option value="<%= c.getCategoryNo() %>">
-										<%= c.getCategoryName() %>
-									</option>
-								<% } %>
+                                <select name="#" id="select-category" >
+                                    <option value="">장르</option>
+                                    <option value="">액션</option>
+                                    <option value="">로맨스</option>
+                                    <option value="">공포/스릴러</option>
+                                    <option value="">코미디</option>
+                                    <option value="">애니메이션</option>
                                 </select>
                             </div> <!-- category box -->
 
                             <div id="title-box">
                                 <div id="box-name">제목</div>
-                                <input type="text" id="select-title" name="title">
+                                <input type="text" id="select-title">
                             </div>
 
                             <div id="content-box">
                                 <div id="box-name">내용</div>
-                                <textarea id="select-content" cols="30" rows="10" name="content"></textarea>
+                                <textarea id="select-content" cols="30" rows="10"></textarea>
                             </div>
-	
-	                        <div id="insert-btn" align="center">
-	                        
-	                            <button type="submit" class="notice-detail-btn">등록</button>
-                				<button type="button" class="notice-detail-btn1" onclick="history.back()">취소</button>
-                
-	                        </div>
-                    	</form> <!-- insert box -->
+
+                            
+
+                        </div> <!-- insert box -->
+
+                        <div id="insert-btn" align="center">
+                            <button class="notice-detail-btn">등록</button>
+                            <button class="notice-detail-btn1">취소</button>
+                        </div>
+
                     </div> <!-- detail-content-box -->
 
+
                 </div> <!-- notice-content -->
+
+
+
 
             </div> <!-- notice-list -->
         </div> <!-- notice-detail -->
     </div> <!-- wrap -->
-	
-	<% } %>
-    
-    <%@ include file="../common/footer.jsp" %>
 
-    
+	<%@ include file="../common/footer.jsp" %>
+	
+	
 </body>
 </html>
