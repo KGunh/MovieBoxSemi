@@ -1,4 +1,5 @@
 package com.kh.admin.model.service;
+import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
 
 import java.sql.Connection;
@@ -10,6 +11,9 @@ import com.kh.common.JDBCTemplate;
 import com.kh.common.JDBCTemplate.*;
 
 public class MemberAdminService {
+	
+	
+	Member member = new Member();
 	
 
 	public ArrayList<Member>selectMemberAdmin(){
@@ -28,12 +32,12 @@ public class MemberAdminService {
 		
 	}
 	
-	public Member editAdmin(int memberNo){
+	public Member detailAdmin(int memberNo){
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
 		
-		Member member = new MemberAdminDao().editAdmin(conn,memberNo);
+		Member member = new MemberAdminDao().detailAdmin(conn,memberNo);
 		
 		JDBCTemplate.close(conn);
 		
@@ -43,7 +47,26 @@ public class MemberAdminService {
 	
 	
 	
-	
+	public int updateAdmin(Member member) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		Member updateMember = null;
+		
+		int result = new MemberAdminDao().updateAdmin(member,conn);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		JDBCTemplate.close(conn);
+		
+		return result;
+		
+		
+	}
 	
 	
 	

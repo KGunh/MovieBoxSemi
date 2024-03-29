@@ -32,7 +32,7 @@ public class CinemaAdminContorller {
 		case "충남" : String 충남;
 		case "충북" : String 충북;
 		case "대구" : String 대구;
-		case "경북" : String 경북;  // 울산 부산 경남 광주 제주 
+		case "경북" : String 경북;  
 		case "울산" : String 울산;
 		case "부산" : String 부산;
 		case "경남" : String 경남;
