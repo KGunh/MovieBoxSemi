@@ -404,7 +404,11 @@
 					
                     
                     <div class="paging-area" align="center" style="margin-top:12px;">
-                    	
+                    
+                    	<% if(currentPage > 1) { %>
+                    	<button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
+					        onclick="location.href='<%=contextPath%>/adminMovieCheck.admin?currentPage=<%= currentPage - 1 %>'"> < </button>
+                    	<% } %>
                     	<% for(int i = startPage; i <= endPage; i++) { %>
                     	
                     		<% if(currentPage != i) { %>
@@ -415,6 +419,11 @@
 								 <%= i %></button>                       
 	                        <%} %>
                         <% } %>
+                        
+                        <% if(currentPage != maxPage) { %>
+                        <button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
+					        onclick="location.href='<%=contextPath%>/adminMovieCheck.admin?currentPage=<%= currentPage + 1 %>'"> > </button>
+					    <% } %>    
                     </div>
                     <!--페이지 숫자-->
 
