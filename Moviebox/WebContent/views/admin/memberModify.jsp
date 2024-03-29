@@ -407,7 +407,7 @@
                 </div>
                 <div id="buttoon">
                    <button type="submit" class="btn1" >수정</button>
-                   <button class="btn1" onclick="history.back();">닫기</button>
+                   <button type="button" class="btn1" onclick="enrollment();">닫기</button>
                 </div>
                 
                 </form>
@@ -415,7 +415,7 @@
                 <script>
                 
                 function enrollment(){                	
-                	location.href='<%=contextPath%>/revisedAdmin.mb';
+                	location.href='<%=contextPath%>/selectAdmin.mb';
                 }
                 
                 </script>
