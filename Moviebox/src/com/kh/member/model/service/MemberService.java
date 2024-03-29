@@ -223,5 +223,18 @@ public class MemberService {
 		
 	}
 	
+	public int reservationCancel(int ticketNo) {
+		Connection conn = getConnection();
+		
+		int result = new MemberDao().reservationCancel(conn, ticketNo);
+		
+		if(result > 0) commit(conn);
+		
+		close(conn);
+		
+		
+		return result;
+	}
+	
 
 }

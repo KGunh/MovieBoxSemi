@@ -213,6 +213,7 @@ public class MemberDao {
 				r.setTheaterName(rset.getString("THEATER_NAME"));
 				r.setWatchDate(rset.getString("WATCH_DATE"));
 				r.setStatus(rset.getString("STATUS"));
+				r.setReservationDate(rset.getString("RESERVATION_DATE"));
 				Price price = new Price();
 				price.setStudentCount(rset.getInt("GRADE_1_COUNT"));
 				price.setCommonCount(rset.getInt("GRADE_2_COUNT"));
@@ -692,7 +693,27 @@ public class MemberDao {
 		return count;
 	}
 	
+	public int reservationCancel(Connection conn, int ticketNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("reservationCancel");
 	
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, ticketNo);
+			
+			result = pstmt.executeUpdate();			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
+	}
 	
 	
 	
