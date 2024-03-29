@@ -15,7 +15,7 @@ public class Reservation {
 	private String movieTitle;
 	private String theaterName;
 	private String watchDate;
-	
+	private String reservationDate;
 	private Price price;
 	private List<Seat> seatList;
 	private Movie movie;
@@ -32,6 +32,15 @@ public class Reservation {
 		this.memberNo = memberNo;
 		this.screenNo = screenNo;
 		this.status = status;
+	}
+	
+	
+	
+	public String getReservationDate() {
+		return reservationDate;
+	}
+	public void setReservationDate(String reservationDate) {
+		this.reservationDate = reservationDate;
 	}
 	public List<Seat> getSeatList() {
 		return seatList;

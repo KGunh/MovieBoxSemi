@@ -1,6 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.reservation.model.vo.Seat,com.kh.common.model.vo.Price,java.util.ArrayList,com.kh.member.model.vo.MemberGenre,java.util.List,com.kh.common.model.vo.Reservation,com.kh.movie.model.vo.Movie"%>
+    pageEncoding="UTF-8" import="java.util.Date,java.text.SimpleDateFormat,com.kh.reservation.model.vo.Seat,com.kh.common.model.vo.Price,java.util.ArrayList,com.kh.member.model.vo.MemberGenre,java.util.List,com.kh.common.model.vo.Reservation,com.kh.movie.model.vo.Movie"%>
 <!DOCTYPE html>
+<%
+%>
 <html>
 <head>
 <meta charset="UTF-8">
@@ -145,15 +147,7 @@
             margin: auto;
             width: 75px;
         }
-        #cancelBtn{
-            width: 100%;
-            height: 30px;
-            color: black;
-            font-size: 15px;
-            font-weight: bold;
-            padding: 0;
-            
-        }
+
         .res-result > div{
             width: 100%;
             height: 100%;
@@ -205,7 +199,8 @@
 		List<Reservation> resList = (ArrayList)request.getAttribute("list");
 		List<Movie> movieList = (ArrayList)request.getAttribute("movieList");
 
-	
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd, HH:mm");
+		Date currentDate = new Date();
 	%>
 	
 	<% if(loginUser == null) {%>
@@ -288,16 +283,26 @@
                                     <%} %>				
                                     </td>
                                     <td>예매일시</td>
-                                    <td>2024-02-25</td>   
+                                    <td><%=resList.get(i).getReservationDate() %></td>   
                                 </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
                 <div class="res-btn">
-                    <div><button type="button" id="cancelBtn" class="btn btn-warning">취소</button></div>
-                    
+                    <% if(resList.get(i).getStatus().equals("Y") ) {%>
+                   			<% if(dateFormat.parse(resList.get(i).getWatchDate()).before(currentDate) ){ %>
+                   				<div><button type="button" id="<%=resList.get(i).getTicketNo() %>" class="btn btn-warning" disabled style="width: 100%; height: 30px; color: black; font-size: 15px; font-weight: bold; padding: 0; background: gray; border:none" >취소불가</button></div>
+                   			<%} else {%>
+								<div><button style="width: 100%; height: 30px; color: black; font-size: 15px; font-weight: bold; padding: 0;" type="button" id="<%=resList.get(i).getTicketNo() %>" class="btn btn-warning" >취소</button><input type="hidden" id="ticketNo" value="<%=resList.get(i).getTicketNo()%>"></div>      
+								  			
+                   			<%} %>
+                   	<%} else {%>
+                   		<div><button type="button" id="<%=resList.get(i).getTicketNo() %>" class="btn btn-warning" disabled style="width: 100%; height: 30px; color: black; font-size: 15px; font-weight: bold; padding: 0; background: gray; border:none">취소됨</button></div>
+                   	<%} %> 
                 </div>
+
+                
                 <div class="res-result">
                     <div>
                         <div class="totalCount">
@@ -314,7 +319,8 @@
                 </div>
                 
             </div>
-            <%}} else { %>
+            <%}
+            	} else { %>
                 		<div id="noData">
 								<h3> 예매내역이 존재하지 않습니다.</h3>
             			</div>
@@ -325,6 +331,32 @@
     </div>
 	
 	<%} %>
+	<script>
+		$('.res-btn button').click(function(){
+			const $ticketNo = $(this);
+			
+			$.ajax({
+				url : 'reservationCancel.me',
+				data : {
+					cancelKey : $ticketNo.attr('id')
+				},
+				success : function(result) {
+					if (result == 'Y') {
+						$ticketNo.css('background', 'gray').css('border','none');
+						$ticketNo.html('취소됨');
+						$ticketNo.attr('disabled',true);
+					}
+				},
+				error : function() {
+					console.log('AJAX통신 실패');
+				}
+			});
+			
+			
+			
+		})
+					
+				</script>
 	<%@ include file="../common/footer.jsp" %>
 </body>
 </html>
