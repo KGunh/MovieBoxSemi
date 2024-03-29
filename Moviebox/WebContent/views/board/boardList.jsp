@@ -1,12 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ page import="com.kh.board.model.vo.Board,
+<%@ page import="com.kh.board.model.vo.Board, com.kh.common.model.vo.PageInfo,
  				 java.util.ArrayList"%>
     
 <%
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("boardList");
-	Board board = (Board)request.getAttribute("board");
+	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
+	
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
 
 %>
 
@@ -265,6 +270,7 @@
 
             </div> <!-- search-notice -->
             
+            <!-- 회원만 작성 할 수 있게  -->
             <div id="qna-insert">
                 <button id="qna-insert-btn">글쓰기</button>
             </div>
@@ -283,22 +289,21 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <% if (list == null || list.isEmpty()) { %>
+                    <% if (list.isEmpty()) { %>
                         <tr>
                             <td colspan="5">조회 된 공지사항이 없습니다. </td>
                         </tr>
                         
                         <% } else { %>
                         
-                        	<% for(Board b : list) { %>
-                        <tr class="list">
-                            <td id="list-no"><%= b.getBoardNo() %></td>
-                            <td id="list-ca"><%= b.getBoardCategory() %></td>
-                            <td id="list-title"><%= b.getBoardTitle() %></td>
-                            <td id="list-count"><%= b.getBoardWriter() %></td>
-                            <td id="list-date"><%= b.getCreateDate() %></td>
+                        	<% for(Board board : list) { %>
+                        <tr class="board">
+                            <td id="list-no"><%= board.getBoardNo() %></td>
+                            <td id="list-ca"><%= board.getBoardCategory() %></td>
+                            <td id="list-title"><%= board.getBoardTitle() %></td>
+                            <td id="list-count"><%= board.getBoardWriter() %></td>
+                            <td id="list-date"><%= board.getCreateDate() %></td>
                         </tr>
-      
                         	<% } %>
                         <% } %>
                     </tbody>
@@ -307,9 +312,25 @@
 
             <div id="page">
                 <div class="paging-area" align="center" style="margin-top:12px;">
-                    <button class="btn btn-outline-secondary" style="color:white; background: none; border: 1px solid white;"> < </button>
-                    <button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;">1</button>
-                    <button class="btn btn-outline-secondary" style="color:white; background: none; border: 1px solid white;"> > </button>
+          			
+          			<% if(currentPage > 1) { %>
+	          			<button class="btn btn-outline-secondary" style="color:white; background: none; border: 1px solid white;"
+	          			onclick="location.href='<%=contextPath%>/list.board?currentPage=<%= currentPage - 1 %>'"> < </button>
+	               	<% } %>
+	                    
+	                <% for(int i = startPage; i <= endPage; i++) { %>
+	                	<% if(currentPage != i) { %>
+					        <button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
+					        onclick="location.href='<%=contextPath%>/list.board?currentPage=<%=i%>'"><%= i %></button>
+					    <% } else { %>
+					    	<button disabled class="btn btn-outline-secondary" style="color:white; background-color:#6c757d; border: 1px solid white;"><%=i%></button>
+					    <% } %>
+	                <% } %>
+	                
+	                <% if(currentPage != maxPage) { %>
+		                <button class="btn btn-outline-secondary" style="color:white; background: none; border: 1px solid white;"
+		                onclick="location.href='<%=contextPath%>/list.board?currentPage=<%= currentPage + 1 %>'"> > </button>
+		            <% } %>
                 </div>
             </div>
 
@@ -320,17 +341,17 @@
    	
  	    <script>
     		function openNoticePage(){
-    			location.href = '<%=contextPath %>/list.notice';
+    			location.href = '<%=contextPath %>/list.notice?currentPage=1';
     		}
     		
     		function openQnaPage(){
     			location.href = '<%= contextPath %>/list.board?currentPage=1';
     		}
     		
-    		$('tbody > tr.list').click(function(){
-    			const boardNo = $(this).children().eq(0).text();
-    			location.href = '<%=contextPath%>/detail.board?boardNo=' + boardNo;
+    		$('.board').click(function(){
+    			location.href = '<%=contextPath%>/detail.board?boardNo='+$(this).attr('id');
             });
+    		
     	
     	</script>
 

@@ -1,6 +1,6 @@
 package com.kh.board.model.dao;
 
-import static com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.close;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.board.model.vo.Board;
+import com.kh.common.model.vo.PageInfo;
 import com.kh.notice.model.dao.NoticeDao;
 
 public class BoardDao {
@@ -20,9 +21,7 @@ public class BoardDao {
 	
 	public BoardDao() {
 		
-		String fileName = NoticeDao.class
-				.getResource("/sql/board/board-mapper.xml")
-				.getPath();
+		String fileName = NoticeDao.class.getResource("/sql/board/board-mapper.xml").getPath();
 		
 		try {
 			prop.loadFromXML(new FileInputStream(fileName));
@@ -32,7 +31,7 @@ public class BoardDao {
 	}
 
 	// 전체 목록 출력
-	public ArrayList<Board> selectBoardList(Connection conn) {
+	public ArrayList<Board> selectBoardList(Connection conn, PageInfo pi) {
 		
 		ArrayList<Board> list = new ArrayList();
 		ResultSet rset = null;
@@ -42,6 +41,12 @@ public class BoardDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
 			

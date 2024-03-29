@@ -32,7 +32,7 @@ public class NoticeDao {
 	
 
 	// 공지사항 목록 전체 출력 
-	public ArrayList<Notice> selectNoticeList(Connection conn) {
+	public ArrayList<Notice> selectNoticeList(Connection conn, PageInfo pi) {
 		ArrayList<Notice> list = new ArrayList();
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
@@ -42,12 +42,11 @@ public class NoticeDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
 			
-//			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
-//			int endRow = startRow + pi.getBoardLimit() - 1;
-//			
-//			pstmt.setInt(1, startRow);
-//			pstmt.setInt(2, endRow);
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
 			
@@ -72,6 +71,36 @@ public class NoticeDao {
 		
 		return list;
 	}
+	
+	// 페이징바
+	public int selectListCount(Connection conn) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			listCount = rset.getInt("COUNT(*)");
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return listCount;
+	}
+	
 	
 	
 	public int increaseCount(Connection conn, int noticeNo) {
