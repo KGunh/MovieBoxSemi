@@ -6,7 +6,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
+import com.kh.board.model.service.BoardService;
+import com.kh.board.model.vo.Board;
 import com.kh.board.model.vo.Category;
+import com.kh.common.model.vo.PageInfo;
 //import com.kh.common.model.vo.PageInfo;
 import com.kh.member.model.vo.Member;
 import com.kh.notice.model.service.NoticeService;
@@ -17,40 +20,46 @@ public class NoticeController {
 	// 공지사항 전체 리스트 출력
 	public String selectNoticeList(HttpServletRequest request) {
 		
-//		int listCount;
-//		int currentPage;
-//		int pageLimit;
-//		int boardLimit;	
-//		int maxPage;
-//		int startPage;
-//		int endPage;
-//		
-//		// 전체 공지사항 수 
-//		listCount = new NoticeService().noticeListCount();
-//		
-//		// 현재 페이지 (사용자의 요청 페이지)
-//		currentPage = Integer.parseInt(request.getParameter("currentPage"));
-//		
-//		pageLimit = 10;
-//		boardLimit = 10;
-//		
-//		maxPage = (int)Math.ceil((double)listCount / boardLimit);
-//		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
-//		endPage = startPage + pageLimit - 1;
-//		
-//		if(endPage > maxPage) {
-//			endPage = maxPage;
-//		}
-//		
-//		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit,
-//				   maxPage, startPage, endPage);
-//		
-//		
-		ArrayList<Notice> list = new NoticeService().selectNoticeList();
+		// 페이징바 
+		int listCount;
+		int currentPage;
+		int pageLimit;
+		int boardLimit;
+		int maxPage;
+		int startPage;
+		int endPage;
+
+		listCount = new NoticeService().selectListCount();
+
+
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		
+		pageLimit = 5;
+		boardLimit = 10;
 		
-//		request.setAttribute("pageInfo", pi);
+		maxPage = (int)Math.ceil((double)listCount / boardLimit);
+		
+		// 5 => 1, 6, 11, 16 ... n * 5(페이징단위) + 1 
+		//			 startPage = n * pageLimit  + 1;
+		// n = (currentPage - 1) / pageLimit
+		
+		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
+		endPage = startPage + pageLimit - 1;
+		
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+//		System.out.println(pi);
+		
+		ArrayList<Notice> list = new NoticeService().selectNoticeList(pi);
+		
+
+//		ArrayList<Notice> list = new NoticeService().selectNoticeList();
+		
 		request.setAttribute("noticeList", list);
+		request.setAttribute("pageInfo", pi);
 		
 		String view = "views/notice/noticeList.jsp";
 		
@@ -86,7 +95,7 @@ public class NoticeController {
 			view = "views/notice/noticeInsertForm.jsp";
 		} else {
 			session.setAttribute("alertMsg", "관리자로 로그인 해주세요.");
-			view = "/list.notice";
+			view = "/list.notice?currentPage=1";
 		}
 		
 		return view;
@@ -127,7 +136,7 @@ public class NoticeController {
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "공지사항이 등록되었습니다.");
-			view = "/list.notice";
+			view = "/list.notice?currentPage=1";
 		} else {
 			session.setAttribute("alertMsg", "공지사항 작성 실패");
 			view = "views/member/noticeInsertForm.jsp";
@@ -195,6 +204,7 @@ public class NoticeController {
 	
 	// 글 수정 (카테고리, 공지사항 번호 넘겨주기)
 	public String updateNoticeList(HttpServletRequest request, HttpServletResponse response) {
+		
 		ArrayList<Category> list = new NoticeService().selectCategoryList();
 
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
@@ -220,10 +230,10 @@ public class NoticeController {
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "삭제되었습니다.");
-			view = "/list.notice";
+			view = "/list.notice?currentPage=1";
 		} else {
 			session.setAttribute("alertMsg", "삭제 실패");
-			view = "/list.notice";
+			view = "/list.notice?currentPage=1";
 		}
 		
 		return view;

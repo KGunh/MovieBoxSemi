@@ -19,9 +19,7 @@ public class ReservationController {
 		request.setAttribute("movieList", new ReservationService().selectMovieList()); 
 		request.setAttribute("locationList", new ReservationService().selectLocationList()); 
 		
-		String view = "views/reservation/movieReservation.jsp";
-		
-		return view;
+		return "views/reservation/movieReservation.jsp";
 	}
 	
 	// 예매페이지 영화 상영 시간의 리스트 조회
@@ -103,9 +101,7 @@ public class ReservationController {
 		request.setAttribute("screenNo", request.getParameter("screenNo"));
 		request.setAttribute("movieNo", request.getParameter("movieNo"));
 		
-		String view = "views/reservation/seatReservation.jsp";
-		
-		return view;
+		return "views/reservation/seatReservation.jsp";
 	}
 	// 상영관 예매된 좌석 조회
 	public List<Seat> selectSeatList(HttpServletRequest request) {
@@ -123,9 +119,12 @@ public class ReservationController {
 		return new ReservationService().checkReservationInfo(screenNo, movieNo, teenAge, adultAge); 
 	}
 	// 예약
-	public void insertReservation() {
+	public String insertReservation() {
+		
 		// 예약 정보를 가지고 결제 페이지로 연결
+		
 		// 예약내용 insert
+		return "views/reservation/infoReservation.jsp";
 	}
 
 	
