@@ -47,7 +47,7 @@ public class AdminPageServlet extends HttpServlet {
 //			view = "/views/admin/adminMovieCheck.jsp"; break; //영화목록
 		
 		case "adminMovieCheck" :
-			view = admin.adminSelectMovieList(request); flag = false; break; //영화목록전체
+			view = admin.adminSelectMovieList(request, response); flag = false; break; //영화목록전체
 			
 		case "adminMovieInsert" :
 			view = "/views/admin/adminMovieInsert.jsp"; break; //영화등록

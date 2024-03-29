@@ -146,7 +146,7 @@
             width: 1200px;
             height : 800px;
             margin: 0 auto;
-            background-color:white
+            
         }
         .content_1{
             display: inline-block;
@@ -260,8 +260,8 @@
             text-align: center;
             margin-top: 10px;
             margin-right: 10px;
-            
-            border-bottom: 2px solid lightgray;
+            color : white;
+            border-bottom: 1px solid lightgray;
             
             
         }
@@ -283,7 +283,7 @@
         width: 150px;
         height: 35px;
         
-        font-size: 15px;
+        font-size: 14px;
         
        }
    
@@ -292,7 +292,7 @@
         height: 35px;
         border-radius: 5px;
         border: 1px solid lightgray;
-        font-size: 15px;
+        font-size: 14px;
        }
 
        .content_2_top{
@@ -306,8 +306,7 @@
 
        }
 
-       #table tr{
-        border-bottom: 2px solid lightgray;
+     
         
        
        }
@@ -327,7 +326,7 @@
         border-radius: 5px;
         margin-top: 44px;
         float: left;
-        background-color: lightgray
+        background-color: #FFC145;
       }
 
 
@@ -357,7 +356,7 @@
         }
 
         .page-link{
-            color: #212121;
+            color: #FFC145;
         }
 
         #inputBox-2 {
@@ -440,7 +439,7 @@
 
             
                          <div class="content_2">
-                <h2>영화관 관리</h2>
+                <h2 style="color : white;">영화관 관리</h2>
                 <div class="content_2_top">
                  
                    <select name="#" id="select" >
@@ -484,11 +483,12 @@
                           <thead>
                             <tr style="background-color: #eaeaea; margin-top: 0; height: 40px; color: #212121; border: 0px solid #cfcfcf; opacity: 0.8; text-align: center;">
                                
-                                <th class="num">순번</th>
+                                <th class="num">번호</th>
                                 <th>등록일</th>
                                 <th>지역</th>
                                 <th>영화관 이름</th> 
                                 <th>상영관수</th>
+                                <th>지도 링크</th>
                               
                             </tr>
                           </thead>
@@ -500,88 +500,10 @@
                                 <td>서울시 마포구</td>
                                 <td>롯데시네마 홍대점</td>
                                 <td>9</td>
+                                <td>지도 링크 </td>
                                 
                             </tr>
-                            <tr>
-                               
-                                <td class="num">2</td>
-                                <td>01/01/01</td>
-                                <td>서울시 마포구</td>
-                                <td>롯데시네마 홍대점</td>
-                                <td>9</td>
-                                
-                                
-                            </tr>
-                            <tr>
-                                <td class="num">3</td>
-                                <td>01/01/01</td>
-                                <td>서울시 마포구</td>
-                                <td>롯데시네마 홍대점</td>
-                                <td>9</td>
-                                
-                            </tr>
-                            <tr>
-                               
-                                <td class="num">4</td>
-                                <td>01/01/01</td>
-                                <td>서울시 마포구</td>
-                                <td>롯데시네마 홍대점</td>
-                                <td>9</td>
-                                
-                            </tr>
-                            <tr>
-                              
-                                <td class="num">5</td>
-                                <td>01/01/01</td>
-                                <td>서울시 마포구</td>
-                                <td>롯데시네마 홍대점</td>
-                                <td>9</td>
-                                
-                            </tr>
-                            <tr>
-                               
-                                <td class="num">6</td>
-                                <td>01/01/01</td>
-                                <td>서울시 마포구</td>
-                                <td>롯데시네마 홍대점</td>
-                                <td>9</td>
-                                
-                            </tr>
-                            <tr>
-                                <td class="num">7</td>
-                                <td>01/01/01</td>
-                                <td>서울시 마포구</td>
-                                <td>롯데시네마 홍대점</td>
-                                <td>9</td>
-                                
-                               
-                            </tr>
-                            <tr>
-                                
-                                <td class="num">8</td>
-                                <td>01/01/01</td>
-                                <td>서울시 마포구</td>
-                                <td>롯데시네마 홍대점</td>
-                                <td>9</td>
-                                
-                            </tr>
-                            <tr>
-                           
-                                <td class="num">9</td>
-                                <td>01/01/01</td>
-                                <td>서울시 마포구</td>
-                                <td>롯데시네마 홍대점</td>
-                                <td>9</td>
-                                
-                            </tr>
-                            <tr>
-                                <td class="num">10</td>
-                                <td>01/01/01</td>
-                                <td>서울시 마포구</td>
-                                <td>롯데시네마 홍대점</td>
-                                <td>9</td>
-                                
-                            </tr>
+                            
                           </tbody>
                         </table>
                         

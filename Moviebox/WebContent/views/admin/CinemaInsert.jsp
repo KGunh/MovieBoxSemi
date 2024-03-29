@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    <%
+    String contextPath = request.getContextPath();
+    
+    %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -146,7 +151,7 @@
             width: 1200px;
             height : 800px;
             margin: 0 auto;
-            background-color:white
+            
         }
         .content_1{
             display: inline-block;
@@ -163,14 +168,17 @@
             height : 800px;
             padding-left: 50px;
             padding-top: 20px;
-            color: #323232;
+            color: white;
+            
+        
         }
 
         .content_2_top{
             padding: 20px 0px 0px 40px;
             height: 80px;
             width: 880px;
-            border-bottom: 3px solid lightgray;
+            border-bottom: 2px solid lightgray;
+            
         }
         .menu {
             width: 200px;
@@ -291,7 +299,7 @@
        #content_2_content{
         height: 500px;
         width: 880px;
-        margin-top: 20px;
+        margin-top: 110px;
         
        
        }
@@ -300,7 +308,7 @@
         
         height: 40px;
       
-        margin: 40px 0px 20px;
+        margin: 20px 0px 20px;
        
        }
      
@@ -312,27 +320,42 @@
        height: 39px;
        width: 650px;
        border-radius: 5px;
-       font-size: 18px;
-       border: 2px solid lightgray;
-       color: gray;
+       font-size: 15px;
+       border: 1px solid white;
+       color: dimgray;
+       
     }
 
     .input1{
         float: right;
         text-align: center;
         height: 39px;
-        width: 200px;
-        font-size: 18px;
+        width: 527px;
+        font-size: 15px;
         border-radius: 5px;
         margin-left: 25px;
-        border: 2px solid lightgray;
-        color: gray;
+        border: 1px solid white;
+        color: dimgray
+     
+
     }
 
+    .input2{
+        float: right;
+        text-align: center;
+        height: 39px;
+        width: 99px;
+        font-size: 15px;
+        border-radius: 5px;
+        margin-left: 25px;
+        border: 1px solid #fff;
+        color: dimgray
+      
+    }
     .name {
         font-size: 20px;
-        font-weight:400;
-        color: #323232;
+        font-weight:600;
+        color: #a7a6a6;
         margin-left: 15px;
     }
 
@@ -340,6 +363,23 @@
         width: 200px;
         display: inline;
         
+    }
+    
+    #map {
+    
+     	float: right;
+        text-align: center;
+        height: 39px;
+        width: 650px;
+        font-size: 15px;
+        border-radius: 5px;
+        margin-left: 25px;
+        border: 1px solid #fff;
+        color: dimgray;
+       	background-color:white;
+    
+    
+    
     }
 
     
@@ -434,81 +474,78 @@
             </div>
             <div id="content_2_content" >
                 
+                <form action="<%=contextPath%>/insertAdmin.cm" method="get"> 
                
                 <div>
-                    <span class="name">지역</span>
+                    <span class="name" id="region">지역</span>
                     <select name="region" class="input" style="width: 650px; height: 39px;">
-                        <option value="지역">서울</option>
-                        <option value="지역">경기도</option>
-                        <option value="지역">강원도</option>
-                        <option value="지역">충정도</option>
-                        <option value="지역">전라도</option>
-                        <option value="지역">경상도</option>
-                        <option value="지역">제주도</option>
+                        <option value="지역" name="서울">서울</option>
+                        <option value="지역">경기</option>
+                        <option vlaue="지역">인천</option>
+                        <option value="지역">강원</option>
+                        <option value="지역">충남</option>
+                        <option value="지역">충북</option>
+                        <option value="지역">대구</option>
+                        <option value="지역">경북</option>
+                        <option value="지역">울산</option>
+                        <option value="지역">부산</option>
+                        <option value="지역">경남</option>
+                        <option value="지역">광주</option>
+                        <option value="지역">제주</option>
                     </select>
                 
                 </div>
                 <div>
                     <span class="name">영화관 이름</span>
-                    <input type="text" class="input" placeholder="영화관 이름을 입력하시오">
+                    <input type="text" class="input" placeholder="영화관 이름을 입력하시오" name="name">
                 </div>
-                <div><span class="name">상영관 수</span>
-                    <input type="text" class="input" placeholder="총 상영관 수를 입력하시오">
-                </div>
-
-                <div><span class="name">좌석 수</span>
-                    <input type="text" class="input" placeholder="총 좌석 수를 입력하시오">
-                </div>
+              
                 <div><span class="name">주소</span>
                     <div id="address">
-                    <select name="" id="province" class="input1">
-                        <option value="시" >읍/면/동</option>
-                        <option value="">서울시</option>
-                        <option value="">경기도</option>
+                        <input type="text" class="input1" placeholder="상세주소를 입력해주시오" name="address">
 
-                    </select>
+                   <script>
+                   
+                   
+                   
+                   </script>
 
-                    <select name="" id="city" class="input1">
+                   
+
+                    <select name="" id="city" class="input2">
                         <option value="시" >시/군/구</option>
                         <option value=""></option>
                         <option value=""></option>
 
                     </select>
-                    <select name="" id="city" class="input1">
-                        <option value="시" >시/도</option>
-                        <option value=""></option>
-                        <option value=""></option>
-
-                    </select>
+                    <div>
+                       
+                          
+                      </div>   
                 </div>
 
                 </div>
                 <div>
-                    <input type="text" class="input" placeholder="상세주소를 입력해주시오">
+                    <span class="name">지도</span>
+                    <div id="map">
+                    a태그 자리
+                    </div>
                 </div>
                 <div id="delete" >
-                    <button id="btn1">등록</button>
+                    <input type="submit" id="btn1" value="등록"></button>
                 </div>
+                
+                </form>
+                
             </div>
-           
-                
-                </div>
                
-                
-
-                   
-        
+                </div>
+       
                 </div>
                       
                 </div>
 
-
-                
-
-               
-           
-
-              
+       
 
                </div > 
                 

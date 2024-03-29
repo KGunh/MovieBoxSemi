@@ -8,6 +8,7 @@ import static com.kh.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.board.model.dao.BoardDao;
 import com.kh.board.model.vo.Category;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.notice.model.dao.NoticeDao;
@@ -15,10 +16,10 @@ import com.kh.notice.model.vo.Notice;
 
 public class NoticeService {
 
-	public ArrayList<Notice> selectNoticeList() {
+	public ArrayList<Notice> selectNoticeList(PageInfo pi) {
 		
 		Connection conn = getConnection();
-		ArrayList<Notice> list = new NoticeDao().selectNoticeList(conn);
+		ArrayList<Notice> list = new NoticeDao().selectNoticeList(conn, pi);
 		
 		close(conn);
 		
@@ -137,6 +138,14 @@ public class NoticeService {
 			rollback(conn);
 		}
 		
+		return result;
+	}
+
+	// 페이징바
+	public int selectListCount() {
+		Connection conn = getConnection();
+		int result = new NoticeDao().selectListCount(conn);
+		close(conn);
 		return result;
 	}
 

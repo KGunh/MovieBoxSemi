@@ -6,16 +6,16 @@
 		Notice Mapper
 	</comment>
 	
-	<!-- <entry key="selectNoticeList">
+	<entry key="selectNoticeList">
 		SELECT *
-  		  FROM (
-		        SELECT A.*, ROWNUM RNUM
+		  FROM (
+		        SELECT A.*, ROWNUM SNUM
 		          FROM (SELECT
-                              NOTICE_NO,
-                              CATEGORY_NAME,
-                              NOTICE_TITLE,
-                              COUNT,
-                              TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE
+		                      NOTICE_NO,
+		                      CATEGORY_NAME,
+		                      NOTICE_TITLE,
+		                      COUNT,
+		                      TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE
 		                  FROM
 		                      TB_NOTICE
 		                  JOIN
@@ -25,28 +25,17 @@
 		                 ORDER
 		                    BY
 		                      CREATE_DATE DESC) A)
-	 WHERE RNUM BETWEEN ? AND ?
-	</entry> -->
-	
-	<entry key="selectNoticeList">
-		SELECT
-		      NOTICE_NO,
-		      CATEGORY_NAME,
-		      NOTICE_TITLE,
-		      COUNT,
-		      TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE
-		  FROM
-		      TB_NOTICE
-		  JOIN
-		      TB_CATEGORY ON(NOTICE_CATEGORY = CATEGORY_NO)
-		 WHERE
-		      STATUS = 'Y'
-		 ORDER
-		    BY
-		      NOTICE_NO DESC
-	
+		 WHERE SNUM BETWEEN ? AND ?
 	</entry>
 	
+	<entry key="selectListCount">
+		SELECT
+			  COUNT(*)
+		  FROM
+		  	  TB_NOTICE
+		 WHERE
+		 	  STATUS = 'Y'
+	</entry>
 
 	<entry key="detailNotice">
 		SELECT
@@ -145,19 +134,8 @@
 	</entry>
 
 
-	<entry key="noticeListCount">
+
 	
-		SELECT
-		      COUNT(*)
-		  FROM
-		      TB_NOTICE
-		 WHERE
-		      STATUS = 'Y'
-	</entry>
-
-
-
-
 
 
 

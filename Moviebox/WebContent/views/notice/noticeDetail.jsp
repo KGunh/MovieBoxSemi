@@ -253,15 +253,15 @@
     
       	<script>
     		function openNoticePage(){
-    			location.href = '<%=contextPath %>/list.notice';
+    			location.href = '<%=contextPath %>/list.notice?currentPage=1';
     		}
     		
     		function openQnaPage(){
-    			location.href = '<%=contextPath %>/list.board'; 			
+    			location.href = '<%=contextPath %>/list.board?currentPage=1'; 			
     		}
     		
     		function backPage(){
-    			location.href = '<%=contextPath%>/list.notice';
+    			location.href = '<%=contextPath%>/list.notice?currentPage=1';
     		}
     		
     		function noticeUpdatePage(){

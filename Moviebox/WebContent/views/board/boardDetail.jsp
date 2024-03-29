@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ page import="com.kh.board.model.vo.*" %>
+    
+<%
+	Board board = (Board)request.getAttribute("board");
+
+%>    
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -186,7 +195,7 @@
             margin-bottom: 30px;
         }
 
-        .notice-detail-btn{
+        .board-detail-btn{
             width: 80px;
             padding: 8px;
             font-size: 20px;
@@ -221,32 +230,21 @@
                 <div class="notice-content">
                     <div class="detail-box1">
                         <div class="detail-title-box1">
-                            <div class="detail-category"><span>[QnA 카테고리]</span></div>
-                            <div class="detail-title"><span>문의 제목 들어가는 부분 </span></div>
+                            <div class="detail-category"><span>No.<%=board.getBoardNo() %> [<%= board.getBoardCategory() %>]</span></div>
+                            <div class="detail-title"><span><%= board.getBoardTitle() %></span></div>
                         </div>
                     </div>
 
                     <div class="detail-box2">
                         <div class="detail-title-box2">
-                            <div class="detail-date"><a>2024.03.20 16:34</a></div>
-                            <div class="detail-count"><a>작성자 : 김유나</div>
+                            <div class="detail-date"><a><%= board.getCreateDate() %></a></div>
+                            <div class="detail-count"><a>작성자 : <%= board.getBoardWriter() %></div>
                         </div>
                     </div>
 
                     <div class="detail-content-box">
                         <div class="detail-content">
-                            아아아 내용내용 출력식 <br>
-                            아아아 내용내용 출력식 <br>
-                            아아아 내용내용 출력식 <br>
-                            아아아 내용내용 출력식 <br>
-                            아아아 내용내용 출력식 <br>
-                            아아아 내용내용 출력식 <br>
-                            아아아 내용내용 출력식 <br>
-                            아아아 내용내용 출력식 <br>
-                            아아아 내용내용 출력식 <br>
-                            아아아 내용내용 출력식 <br>
-                            아아아 내용내용 출력식 <br>
-                            아아아 내용내용 출력식 <br>
+                        <%= board.getBoardContent() %>
                         </div>
                     </div>
                 </div> <!-- notice-content -->
@@ -255,43 +253,39 @@
 
                 <div class="detail-content-a-box">
                     <div class="detail-a">
-                        아아아 내용내용 출력식 <br>
-                        아아아 내용내용 출력식 <br>
-                        아아아 내용내용 출력식 <br>
-                        아아아 내용내용 출력식 <br>
-                        아아아 내용내용 출력식 <br>
-                        아아아 내용내용 출력식 <br>
-                        아아아 내용내용 출력식 <br>
-                        아아아 내용내용 출력식 <br>
-                        아아아 내용내용 출력식 <br>
-                        아아아 내용내용 출력식 <br>
-                        아아아 내용내용 출력식 <br>
-                        아아아 내용내용 출력식 <br>
-                    </div>
+			        	댓글로 해야하나
                 </div>
             </div> <!-- notice-content -->
 
                 <div class="notice-btn" align="center">
-                    <button class="notice-detail-btn">목록</button>
-                    <button class="notice-detail-btn">수정</button> <!-- 관리자로 로그인 했을 때만 보이기 -->
-                    <button class="notice-detail-btn">삭제</button> <!-- 관리자로 로그인 했을 때만 보이기 -->
+                    <button class="board-detail-btn" onclick="backPage();">목록</button>
+                    <% if(loginUser != null && loginUser.getMemberName() == board.getBoardWriter()) { %>
+	                    <button class="notice-detail-btn" onclick="noticeUpdatePage();">수정</button> 
+	                    <button class="notice-detail-btn" onclick="noticeDelete();">삭제</button>
+                    <% } %>
                 </div>
 
 
 
             </div> <!-- notice-list -->
         </div> <!-- notice-detail -->
+	</div>
     
     	<%@ include file="../common/footer.jsp" %>
     	
     	<script>
 			function openNoticePage(){
-				location.href = '<%=contextPath %>/list.notice';
+				location.href = '<%=contextPath %>/list.notice?currentPage=1';
 			}
 			
 			function openQnaPage(){
-				location.href = '<%=contextPath %>/list.qna'; 			
+				location.href = '<%= contextPath %>/list.board?currentPage=1';
 			}
+			
+    		function backPage(){
+    			location.href = '<%=contextPath%>/list.board?currentPage=1';
+    		}
+
     	
     	</script>
     

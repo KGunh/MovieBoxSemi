@@ -69,7 +69,7 @@ public class MemberAdminDao {
 			
 	}
 	
-	public Member editAdmin(Connection conn, int memberNo){
+	public Member detailAdmin(Connection conn, int memberNo){
 		
 		Member m = new Member(); 
 		PreparedStatement pstmt = null;
@@ -88,6 +88,7 @@ public class MemberAdminDao {
 			
 						m.setMemberNo(rset.getInt("MEMBER_NO"));
 						m.setMemberId(rset.getString("MEMBER_ID"));
+						m.setMemberPwd(rset.getString("MEMBER_PWD"));
 						m.setMemberName(rset.getString("MEMBER_NAME"));
 						m.setGender(rset.getString("GENDER"));
 						m.setBirthday(rset.getString("BIRTHDAY"));
@@ -118,6 +119,36 @@ public class MemberAdminDao {
 		
 		return m;
 		
+		
+	}
+	
+	
+	public int updateAdmin(Member member, Connection conn) {
+		
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("updateMember");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, member.getEmail());
+			pstmt.setString(2, member.getAddress());
+			pstmt.setString(3, member.getPhone());
+			pstmt.setString(4, member.getStatus());
+			pstmt.setString(5, member.getMemberId());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		return result; 
 		
 	}
 	

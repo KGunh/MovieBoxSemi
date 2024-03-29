@@ -32,7 +32,7 @@ public class BoardServlet extends HttpServlet {
 		
 		// 변수 선언 
 		
-		BoardController qc = new BoardController();
+		BoardController bc = new BoardController();
 		
 		// URI 담기
 		String uri = request.getRequestURI();
@@ -42,8 +42,8 @@ public class BoardServlet extends HttpServlet {
 		boolean flag = true;
 		
 		switch(mapping) {
-		case "list" : view = qc.selectBoardList(request); flag = false; break; // dispatcher
-		case "detail" : view = "views/board/BoardDetail.jsp";
+		case "list" : view = bc.selectBoardList(request, response); flag = false; break; // dispatcher
+		case "detail" : view = bc.detailBoard(request, response); flag = false; break;
 		}
 		
 		
