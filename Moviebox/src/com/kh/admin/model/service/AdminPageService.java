@@ -49,16 +49,33 @@ public class AdminPageService {
 	
 	
 	// 공지 목록 전체 출력
-	public ArrayList<Notice> adminSelectNoticeList(){
+	public ArrayList<Notice> adminSelectNoticeList(PageInfo pi){
 		
 		Connection conn = getConnection();
 		
-		ArrayList<Notice> list = new AdminPageDao().adminSelectNoticeList(conn);
+		ArrayList<Notice> list = new AdminPageDao().adminSelectNoticeList(conn, pi);
 		
 		close(conn);
 		
 		return list;
 	}
+	
+	
+	//페이징바
+	public int selectListCountNotice() {
+		
+		Connection conn = getConnection();
+		
+		int result = new AdminPageDao().selectListCountNotice(conn);
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	
+	
+	
 	
 	
 	

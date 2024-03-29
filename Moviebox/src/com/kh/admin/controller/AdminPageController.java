@@ -72,13 +72,69 @@ public class AdminPageController {
 	
 	
 	// 공지 목록 전체 출력
-	public String adminSelectNoticeList(HttpServletRequest request) {
-		ArrayList<Notice> list = new AdminPageService().adminSelectNoticeList();
-		request.setAttribute("adminBoardCheck", list);
+	public String adminBoardCheckList(HttpServletRequest request, HttpServletResponse response) {
+		
+		int listCount;
+		int currentPage;
+		int pageLimit;
+		int boardLimit;
+		int maxPage;
+		int startPage;
+		int endPage;
+		
+		listCount = new AdminPageService().selectListCountNotice();
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		pageLimit = 10;
+		boardLimit = 10;
+		
+		maxPage = (int)Math.ceil((double)listCount / boardLimit);
+
+		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
+		
+		
+		endPage = startPage + pageLimit - 1;
+		
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit,
+				   maxPage, startPage, endPage);
+		
+		ArrayList<Notice> list = new AdminPageService().adminSelectNoticeList(pi);
+		//응답화면지정
+		request.setAttribute("adminBoardCheckList", list);
+		request.setAttribute("pageInfo", pi);
 		String view = "views/admin/adminBoardCheck.jsp";
+		
+		
+		
+		
+//		ArrayList<Notice> list = new AdminPageService().adminSelectNoticeList();
+//		request.setAttribute("adminBoardCheck", list);
+//		String view = "views/admin/adminBoardCheck.jsp";
 		
 		return view;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	// 문의 목록 전체 출력
