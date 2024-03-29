@@ -299,19 +299,19 @@ System.out.println(list);
             <div class="content_1">
                 <ul class="menu">
                     <li>
-                        <a href="#">회원 관리</a>
+                        <a href="<%=contextPath %>/selectAdmin.mb">회원 관리</a>
                         <ul class="submenu">
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminMovieCheck.admin">영화 관리</a>
-                        <ul class="submenu">
+                        <a href="<%=contextPath %>/adminMovieCheck.admin?currentPage=1">영화 관리</a>
+                        <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="#">영화관 관리</a>
+                        <a href="<%=contextPath%>/checkAdmin.cm">영화관 관리</a>
                         <ul class="submenu">
 
                         </ul>

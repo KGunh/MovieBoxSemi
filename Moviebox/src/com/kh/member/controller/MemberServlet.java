@@ -41,7 +41,7 @@ public class MemberServlet extends HttpServlet {
 
 		String view = "";
 		int flag = 0;
-
+		
 		
 		switch (mapping) {
 		case "login": view = mc.login(request,response);break;
@@ -66,6 +66,7 @@ public class MemberServlet extends HttpServlet {
 		case "delete" : view = mc.delete(request,response); flag=1; break;
 		case "pwdSearchUpdate" : view = mc.pwdSearchUpdate(request, response); break; 
 		case "idCheck" : mc.idCheck(request,response); flag = 3; break; 
+		case "reservationCancel" : mc.reservationCancel(request,response); flag = 3; break;
 		default : return;
 			
 	

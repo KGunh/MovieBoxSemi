@@ -480,7 +480,22 @@ public class MemberController {
 	}
 	
 	
-	
+	public void reservationCancel(HttpServletRequest request, HttpServletResponse response) {
+		
+		int ticketNo = Integer.parseInt(request.getParameter("cancelKey"));
+		
+
+		
+		int result = new MemberService().reservationCancel(ticketNo);
+		
+		response.setContentType("text/html; charset=UTF-8");
+
+		try {
+			response.getWriter().print(result > 0 ? "Y" : "N");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 	

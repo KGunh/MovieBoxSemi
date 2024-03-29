@@ -94,7 +94,8 @@
        				GRADE_2_COUNT,
        				STUDENT_PRICE,
        				COMMON_PRICE,
-       				TOTAL_PRICE
+       				TOTAL_PRICE,
+       				RESERVATION_DATE
   			FROM
        				TB_RESERVATION
   			 JOIN
@@ -144,14 +145,17 @@
 	</entry>
 	
 	<entry key="seatList">
-		SELECT
-       			    SEAT_NO
+	 	 SELECT
+       			SEAT_NO
  		   FROM   
-       			    TB_SEAT
+       			TB_SEAT
  		  WHERE
-       				TICKET_NO = ?
+       			TICKET_NO = ?
  		  ORDER
-    		    BY SEAT_NO
+   		     BY
+       			SUBSTR(SEAT_NO, 1, 1),
+	   			CAST(SUBSTR(SEAT_NO, 2) AS NUMBER),
+       			SEAT_NO
 	
 	
 	</entry>
@@ -343,5 +347,15 @@
 		  	   TB_MEMBER
 		 WHERE
 		 	   MEMBER_ID = ?
+	</entry>
+	
+	<entry key="reservationCancel">
+		UPDATE
+			   TB_RESERVATION
+		   SET
+       		   STATUS = 'N'
+ 		 WHERE
+      		   TICKET_NO = ?
+	
 	</entry>
 </properties>

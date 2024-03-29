@@ -49,19 +49,28 @@
             height: 170px;
             margin-bottom: 20px;
             padding: 30px;
-            color: black;
+            color: white;
             font-weight: bold;
-            background-color: rgb(224, 224, 224);
+            background-color: rgb(33, 33, 33);
             border-radius: 8px;
             position: relative;
         }
-        .history-area , .QNA-area , .store-area{ 
+        .history-area{
+            height: 110px;
+            margin-bottom: 20px;
+            background-color: rgb(33, 33, 33);
+            border-radius: 8px;
+            padding-left: 15px;
+            padding-right: 15px;
+        }
+        .QNA-area , .store-area{ 
             height: 110px;
             padding: 15px;
             margin-bottom: 20px;
-            background-color: rgb(224, 224, 224);
+            background-color: rgb(33, 33, 33);
             border-radius: 8px;
         }
+        
 
         .content > div{
             width: 100%;
@@ -90,7 +99,7 @@
             height: 100%;
             position: relative;
             padding: 10px;
-            background-color: white;
+            background-color: rgb(33, 33, 33);
         }
         .info-name{
             position: relative;
@@ -102,20 +111,20 @@
             top: 8px;
             right:20px;
             font-size: 20px;
-            color: rgb(51, 51, 51);
+            color: white;
         }
         .info-address, .info-email{
             font-size: 12px;
             position: absolute;
-            color: rgb(51, 51, 51);
+            color: white;
             left: 10px;
         }
         .info-genre{
         	font-size: 12px;
             position: absolute;
-            color: rgb(51, 51, 51);
-            bottom: 10px;
-            right: 10px;
+            color: white;
+            bottom: 12px;
+            right: 31px;
         }
         .info-address{
             top: 60px;
@@ -127,12 +136,16 @@
             float: left;
             height: 100%;
             width: 18%;
-            border: 1px solid rgb(158, 157, 157);
+            
+
+
         }
         .history-area-list{
             float:left;
             height: 100%;
             width: 55%;
+            padding-top: 15px;
+            padding-bottom: 15px;
         }
         .history-area-list > div{
             font-weight: bold;
@@ -143,39 +156,42 @@
             float:right;
             height: 100%;
             width: 25%;
-            background-color: white;
             border-radius: 5px;
-            position: relative;
-            border: 1px solid rgb(158, 157, 157);
+            padding-top: 15px;
+            padding-bottom: 15px;
+
         }
         .history-area-price > div{
-            position: absolute;
             font-size: 12px;
             font-weight: bold;
             width: 100%;
+            background-color: rgb(33, 33, 33);
            
         }
         .count{
+            border-bottom: 1px solid white;
+            border-top: 1px solid white;
             height: 100%;
         }
         .history-area-price span{
             padding-top: 3px;
             padding-left: 3px;
             display: block;
+            color: white;
         }
         .history-area-content{
             width: 100%;
             height: 100%;
             border-radius: 5px;
-            background-color: white;
+            color: white;
+            background-color: rgb(33, 33, 33);
             padding: 5px;
-            border: 1px solid rgb(158, 157, 157);
         }
         .store-area-content{
         	width: 100%;
             height: 100%;
             border-radius: 5px;
-            background-color: white;
+            background-color: rgb(33, 33, 33);
             padding: 5px;
             border: 1px solid rgb(158, 157, 157);
         }
@@ -183,7 +199,7 @@
             width: 100%;
             height: 100%;
             border-radius: 5px;
-            background-color: white;
+            background-color: rgb(33, 33, 33);
             border: 1px solid rgb(158, 157, 157);
         }
         .QNA-area-list{
@@ -196,6 +212,7 @@
             text-align: center;
             line-height: 40px;
             font-size: 16px;
+            color: white;
         }
         #QNA-title{   
             width: 60%;
@@ -210,8 +227,9 @@
             float: left;
             width: 100%;
             height: 100%;
-            background: white;
-            border: 1px solid black;
+            color: white;
+            background: rgb(33, 33, 33);
+          
         }
         .store-area-list2{
             float: right;

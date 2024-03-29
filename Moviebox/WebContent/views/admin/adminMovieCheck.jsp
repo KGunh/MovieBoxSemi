@@ -305,19 +305,19 @@
             <div class="content_1">
                 <ul class="menu">
                     <li>
-                        <a href="#">회원 관리</a>
+                        <a href="<%=contextPath %>/selectAdmin.mb">회원 관리</a>
                         <ul class="submenu">
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminMovieCheck.admin">영화 관리</a>
+                        <a href="<%=contextPath %>/adminMovieCheck.admin?currentPage=1">영화 관리</a>
                         <ul class="submenu">
 
                         </ul>
                     </li>
                     <li>
-                        <a href="#">영화관 관리</a>
+                        <a href="<%=contextPath%>/checkAdmin.cm">영화관 관리</a>
                         <ul class="submenu">
 
                         </ul>
@@ -335,7 +335,6 @@
     <!------------------------------------------------------------>
             <div class="content_2">
                 <p id="p">영화 관리</p>
-                <form>
                 <div id="content_2_box"><!--컨텐트2 전체박스-->
 
                     <div id="cnt2_box_wrap"> <!-- 셀렉, 인풋, 버튼 전체 -->
@@ -405,25 +404,34 @@
 					
                     
                     <div class="paging-area" align="center" style="margin-top:12px;">
-                    	
-                    	<% for(int i = startPage; i <= endPage; i++) { System.out.println(i); %>
+                    
+                    	<% if(currentPage > 1) { %>
+                    	<button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
+					        onclick="location.href='<%=contextPath%>/adminMovieCheck.admin?currentPage=<%= currentPage - 1 %>'"> < </button>
+                    	<% } %>
+                    	<% for(int i = startPage; i <= endPage; i++) { %>
                     	
                     		<% if(currentPage != i) { %>
-	                        	<button class="btn btn-outline-secondary" style="color:#ffffff" onclick="location.href='<%=contextPath %>/adminMovieCheck.admin?currentPage=<%=i%>'"><%= i %></button>
+							<button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
+					        onclick="location.href='<%=contextPath%>/adminMovieCheck.admin?currentPage=<%=i%>'"><%= i %></button>
 	                        <%} else {%>
 								 <button disabled class="btn btn-outline-secondary" style="color:#ffffff">
 								 <%= i %></button>                       
 	                        <%} %>
-                        <%} %>
+                        <% } %>
+                        
+                        <% if(currentPage != maxPage) { %>
+                        <button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
+					        onclick="location.href='<%=contextPath%>/adminMovieCheck.admin?currentPage=<%= currentPage + 1 %>'"> > </button>
+					    <% } %>    
                     </div>
-                    
                     <!--페이지 숫자-->
 
 
 
 
-                    </form>
                 </div><!--content_2_box끝 컨텐트2 전체박스임-->
+
 
 
 
