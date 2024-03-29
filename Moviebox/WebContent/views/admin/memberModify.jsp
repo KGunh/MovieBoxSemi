@@ -336,16 +336,18 @@
             <!------------------------------------------------------------>
 			 <div id="content2">
             <div class="content_2">
+            
+            	<form action="<%=contextPath%>/revisedAdmin.mb">
                 <h2> 회원 기본 정보</h2>
                 <div class="content_2_top">
                  
                  
                  
-                 
+                 	
                       <table class="table table-hover"  style="height: 490px;">
                       <tbody>
                         <tr>
-                            
+                           
                             <th class="title">회원번호</th>
                             <td><input type="text" class="input1" name="memberNo" value="<%=m.getMemberNo()%>" readonly></td>
                         </tr>
@@ -373,11 +375,11 @@
                             </tr>  
                             <tr>
                               <th class="title">생년월일</th>
-                              <td><input type="text" class="input1" value="<%=m.getBirthday()%>"></td> 
+                              <td><input type="text" class="input1" value="<%=m.getBirthday()%>" readonly></td> 
                             </tr>
                              <tr>
                               <th class="title">이메일</th>
-                              <td><input type="text" class="input1" name="Email" value="<%=m.getEmail()%>" readonly></td> 
+                              <td><input type="text" class="input1" name="Email" value="<%=m.getEmail()%>" ></td> 
                             </tr>
                             <tr>
                               <th class="title">주소</th>
@@ -399,13 +401,16 @@
                            
                           </tbody>
                               </table>
-
+						
+						
 
                 </div>
                 <div id="buttoon">
-                   <button class="btn1" onclick="enrollment();">수정</button>
-                   <button class="btn1" onclick=>닫기</button>
+                   <button type="submit" class="btn1" >수정</button>
+                   <button class="btn1" onclick="history.back();">닫기</button>
                 </div>
+                
+                </form>
                 
                 <script>
                 
