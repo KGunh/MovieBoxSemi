@@ -76,6 +76,7 @@
 			   CAST(SUBSTR(SEAT_NO, 2) AS NUMBER),
 		       SEAT_NO
 	</entry>
+	
 	<entry key="checkReservationInfo">
 		SELECT        
 		       MOVIE_NO,
@@ -123,5 +124,36 @@
 		   AND
 		       SCREEN_NO = ?
        </entry>
+	
+	<entry key="insertReservation">
+		INSERT 
+		  INTO 
+		       TB_RESERVATION
+		       (
+		       TICKET_NO,
+		       PERSONNEL,
+		       MEMBER_NO,
+		       SCREEN_NO,
+		       STATUS,
+		       RESERVATION_DATE
+		       ) 
+		VALUES 
+		       (
+		       SEQ_TKNO.NEXTVAL,
+		       ?,
+		       ?,
+		       ?,
+		       DEFAULT,
+		       SYSDATE
+		       )
+	
+	</entry>
+	
+	
+	
+	
+	
+	
+	
 	
 </properties>

@@ -210,13 +210,16 @@ public class ReservationDao {
 	public int insertReservation(Connection conn, Reservation reservation) {
 		int result = 0;
 		PreparedStatement pstmt =null;
+		reservation.getSeatList();
 		
 		String sql = prop.getProperty("insertReservation");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			
+			//pstmt.set   PERSONNEL			
+			pstmt.setInt(2, reservation.getMemberNo());
+			pstmt.setInt(3, reservation.getScreenNo());
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -231,6 +234,16 @@ public class ReservationDao {
 		
 		
 		return result;
+	}
+
+	public int insertPriceSheet(Connection conn, int teenPersonNo, int adultPersonNo) {
+
+		return 0;
+	}
+
+	public int insertSeat(Connection conn, Reservation reservation) {
+
+		return 0;
 	}
 	
 	

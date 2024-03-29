@@ -70,6 +70,7 @@ public class ReservationService {
 	}
 
 	public void insertReservation(Reservation reservation, int teenPersonNo, int adultPersonNo) throws SQLException {
+		
 		Connection conn = getConnection();
 	        
 		int priceSheetResult = 0;

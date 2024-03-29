@@ -131,12 +131,12 @@ public class ReservationController {
 		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		// 선택한 좌석 데이터 가공 -> 문자배열 -> seat객체에 필드set -> seatList에 add 
 		String seatNo = request.getParameter("seatNo");
-		String[] array = seatNo.split(",");
+		String[] seatArray = seatNo.split(","); // 좌석 ex) A1,A2... 나누기
 		
-		for(int i = 0; i < array.length; i++) {
+		for(int i = 0; i < seatArray.length; i++) {
 			Seat seat = new Seat();
 			
-			seat.setSeatNo(seatNo);
+			seat.setSeatNo(seatArray[i]);
 			
 			seatList.add(seat);
 		}
@@ -149,6 +149,9 @@ public class ReservationController {
 		// 예매 연령의 인원수는 따로 보냄
 		int teenPersonNo = Integer.parseInt(request.getParameter("teen"));
 		int adultPersonNo = Integer.parseInt(request.getParameter("adult"));
+		
+		int peopleNum = teenPersonNo + adultPersonNo; // 아직 사용안했음!
+		
 		try {
 			new ReservationService().insertReservation(reservation, teenPersonNo, adultPersonNo);
 			
