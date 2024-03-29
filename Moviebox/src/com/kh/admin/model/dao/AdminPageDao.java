@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.board.model.vo.Board;
+import com.kh.common.model.vo.PageInfo;
 import com.kh.movie.model.vo.Movie;
 import com.kh.notice.model.vo.Notice;
 
@@ -31,19 +32,50 @@ public class AdminPageDao {
 	}
 	
 	
+	public int selectListCount(Connection conn) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			listCount = rset.getInt("COUNT(*)");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return listCount;
+	}
+	
+	
 	
 	//영화 목록 전체 출력
-	public ArrayList<Movie> adminSelectMovieList(Connection conn){
+	public ArrayList<Movie> adminSelectMovieList(Connection conn, PageInfo pi){
 		
 		
 		ArrayList<Movie> list = new ArrayList();
-		ResultSet rset = null;
 		PreparedStatement pstmt = null;
-		
+		ResultSet rset = null;
 		String sql = prop.getProperty("adminSelectMovieList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
 			

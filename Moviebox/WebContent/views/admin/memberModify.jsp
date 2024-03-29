@@ -347,18 +347,18 @@
                         <tr>
                             
                             <th class="title">회원번호</th>
-                            <td><input type="text" class="input1"  value="<%=m.getMemberNo()%>" readonly></td>
+                            <td><input type="text" class="input1" name="memberNo" value="<%=m.getMemberNo()%>" readonly></td>
                         </tr>
                            
                             <tr>  
                               <th class="title">이름</th>
-                              <td><input type="text" class="input1" value="<%=m.getMemberName()%>" ></td>
+                              <td><input type="text" class="input1" name="memberName" value="<%=m.getMemberName()%>" ></td>
                               
                             </tr>
                             
                              <tr>
                               <th class="title">아이디</th>
-                              <td><input type="text" class="input1" value="<%=m.getMemberId()%>" readonly></td>
+                              <td><input type="text" class="input1" name=memberId value="<%=m.getMemberId()%>" readonly></td>
                             </tr>
                             
                              <tr>
@@ -377,15 +377,15 @@
                             </tr>
                              <tr>
                               <th class="title">이메일</th>
-                              <td><input type="text" class="input1" value="<%=m.getEmail()%>" readonly></td> 
+                              <td><input type="text" class="input1" name="Email" value="<%=m.getEmail()%>" readonly></td> 
                             </tr>
                             <tr>
                               <th class="title">주소</th>
-                              <td><input type="text" class="input1" value="<%=m.getAddress()%>" ></td>
+                              <td><input type="text" class="input1" name="address" value="<%=m.getAddress()%>" ></td>
                             </tr>
                             <tr>  
                               <th class="title">전화번호</th>
-                              <td><input type="text" class="input1" value="<%=m.getPhone()%>" ></td>
+                              <td><input type="text" class="input1" name="phone" value="<%=m.getPhone()%>" ></td>
                             </tr>
                             <tr>
                               <th class="title">가입일</th>
@@ -393,7 +393,7 @@
                             </tr>  
                             <tr>
                               <th class="title">탈퇴여부</th>
-                              <td><input type="text" class="input1" value="<%=m.getStatus()%>"></td>
+                              <td><input type="text" class="input1" name="status" value="<%=m.getStatus()%>"></td>
                             </tr>
                             
                            
@@ -410,7 +410,7 @@
                 <script>
                 
                 function enrollment(){                	
-                location.href = "<%=contextPath%>/views/admin/memberModify.jsp";	
+                	location.href='<%=contextPath%>/revisedAdmin.mb';
                 }
                 
                 </script>
