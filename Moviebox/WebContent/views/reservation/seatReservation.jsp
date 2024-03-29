@@ -427,7 +427,7 @@
         var resvAdult = ['', 0];
         var selectSeat = []; // 선택 좌석
 
-        // 상영관 예약정보 가져와서 좌석 선택 가능여부 조작
+        // 상영관 예약정보 가져와서 예약좌석 비활성화
         window.onload = function() {
             $.ajax({
                 url : 'seat.reservationAjax',

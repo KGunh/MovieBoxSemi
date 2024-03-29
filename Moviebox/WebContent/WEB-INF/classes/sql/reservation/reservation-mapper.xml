@@ -149,7 +149,37 @@
 	
 	</entry>
 	
+	<entry key="insertPriceSheetTeen">
+		INSERT
+		  INTO
+		  	   TB_PRICESHEET
+		  	   (
+		  	  	GRADE,
+		  	  	TICKET_NO
+		  	   )
+	  	VALUES
+		  	   (
+		  	   1,
+		  	   ?
+		  	   )
 	
+	</entry>
+	
+	<entry key="insertPriceSheetAdult">
+		INSERT
+		  INTO
+		  	   TB_PRICESHEET
+		  	   (
+		  	  	GRADE,
+		  	  	TICKET_NO
+		  	   )
+	  	VALUES
+		  	   (
+		  	   2,
+		  	   ?
+		  	   )
+	
+	</entry>
 	
 	
 	

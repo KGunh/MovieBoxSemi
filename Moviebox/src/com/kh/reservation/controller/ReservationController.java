@@ -149,9 +149,7 @@ public class ReservationController {
 		// 예매 연령의 인원수는 따로 보냄
 		int teenPersonNo = Integer.parseInt(request.getParameter("teen"));
 		int adultPersonNo = Integer.parseInt(request.getParameter("adult"));
-		
-		int peopleNum = teenPersonNo + adultPersonNo; // 아직 사용안했음!
-		
+		// map을써서 키워드로 성인 청소년 구분 할지 고민해봐야함!!
 		try {
 			new ReservationService().insertReservation(reservation, teenPersonNo, adultPersonNo);
 			

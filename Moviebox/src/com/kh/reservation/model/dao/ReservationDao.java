@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -208,37 +209,56 @@ public class ReservationDao {
 	}
 
 	public int insertReservation(Connection conn, Reservation reservation) {
-		int result = 0;
+		int key = 0;
 		PreparedStatement pstmt =null;
-		reservation.getSeatList();
+		ResultSet rset = null;
 		
 		String sql = prop.getProperty("insertReservation");
+		// insert하고 자동으로 pk값 빼오는 메서드가 있음!!!
+		// pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+		// rset = pstmt.getGeneratedKeys();
+		// insert한 행의 pk값을 반환해줌
 		
+		try {
+			pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			
+			pstmt.setInt(1, reservation.getSeatList().size());			
+			pstmt.setInt(2, reservation.getMemberNo());
+			pstmt.setInt(3, reservation.getScreenNo());
+
+			pstmt.executeUpdate();
+			
+			rset = pstmt.getGeneratedKeys();
+			// pk반환 받음
+			if(rset.next()) key = rset.getInt("TICKET_NO");
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return key;
+	}
+
+	public int insertPriceSheet(Connection conn, int reservationResult, int teenPersonNo, int adultPersonNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertPriceSheet");
+		// 청소년 성인 구분해서 반복문 돌리기
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			//pstmt.set   PERSONNEL			
-			pstmt.setInt(2, reservation.getMemberNo());
-			pstmt.setInt(3, reservation.getScreenNo());
+			pstmt.setInt(1, reservationResult);
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
 		
-		
-		
-		
-		
-		
-		
-		
-		
 		return result;
-	}
-
-	public int insertPriceSheet(Connection conn, int teenPersonNo, int adultPersonNo) {
-
-		return 0;
 	}
 
 	public int insertSeat(Connection conn, Reservation reservation) {

@@ -78,7 +78,7 @@ public class ReservationService {
 		
         int reservationResult = new ReservationDao().insertReservation(conn, reservation);
         
-        if (reservationResult > 0) priceSheetResult = new ReservationDao().insertPriceSheet(conn, teenPersonNo, adultPersonNo);
+        if (reservationResult > 0) priceSheetResult = new ReservationDao().insertPriceSheet(conn, reservationResult, teenPersonNo, adultPersonNo);
         
         if (priceSheetResult > 0) seatResult = new ReservationDao().insertSeat(conn, reservation);
         // 숏서킷
