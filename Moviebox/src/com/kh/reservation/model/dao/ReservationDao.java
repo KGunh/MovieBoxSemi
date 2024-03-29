@@ -206,6 +206,32 @@ public class ReservationDao {
 		}
 		return reservation;
 	}
+
+	public int insertReservation(Connection conn, Reservation reservation) {
+		int result = 0;
+		PreparedStatement pstmt =null;
+		
+		String sql = prop.getProperty("insertReservation");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		return result;
+	}
 	
 	
 	

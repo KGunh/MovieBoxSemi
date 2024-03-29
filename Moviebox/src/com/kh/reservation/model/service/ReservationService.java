@@ -2,9 +2,10 @@ package com.kh.reservation.model.service;
 
 import static com.kh.common.JDBCTemplate.close;
 import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
 
 import com.kh.common.model.vo.Location;
@@ -68,15 +69,26 @@ public class ReservationService {
 		return reservation;
 	}
 
-	public void insertReservation(Reservation reservation, int teenPersonNo, int adultPersonNo) {
+	public void insertReservation(Reservation reservation, int teenPersonNo, int adultPersonNo) throws SQLException {
 		Connection conn = getConnection();
+	        
+		int priceSheetResult = 0;
+		int seatResult = 0;
 		
-		new ReservationDao().insertReservation(conn, reservation);
-		new ReservationDao().insert
-		// seat
-		// pricesheet
-		
-		
+        int reservationResult = new ReservationDao().insertReservation(conn, reservation);
+        
+        if (reservationResult > 0) priceSheetResult = new ReservationDao().insertPriceSheet(conn, teenPersonNo, adultPersonNo);
+        
+        if (priceSheetResult > 0) seatResult = new ReservationDao().insertSeat(conn, reservation);
+        // 숏서킷
+        if (reservationResult > 0 && priceSheetResult > 0 && seatResult > 0) {
+            conn.commit();
+        } else {
+            rollback(conn);
+            throw new SQLException("트랜잭션 처리 실패");
+        }
+        
+        close(conn);
 	}
 
 

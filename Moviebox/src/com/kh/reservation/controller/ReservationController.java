@@ -1,5 +1,6 @@
 package com.kh.reservation.controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
@@ -148,8 +149,12 @@ public class ReservationController {
 		// 예매 연령의 인원수는 따로 보냄
 		int teenPersonNo = Integer.parseInt(request.getParameter("teen"));
 		int adultPersonNo = Integer.parseInt(request.getParameter("adult"));
-		
-		new ReservationService().insertReservation(reservation, teenPersonNo, adultPersonNo);
+		try {
+			new ReservationService().insertReservation(reservation, teenPersonNo, adultPersonNo);
+			
+		} catch(SQLException e) {
+			e.printStackTrace();
+		}
 		
 		return "views/reservation/infoReservation.jsp";
 	}
