@@ -3,6 +3,7 @@ package com.kh.admin.controller;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import com.kh.admin.model.service.AdminPageService;
 import com.kh.board.model.vo.Board;
@@ -12,7 +13,7 @@ import com.kh.notice.model.vo.Notice;
 
 public class AdminPageController {
 	
-	public String adminSelectMovieList(HttpServletRequest request) {
+	public String adminSelectMovieList(HttpServletRequest request, HttpServletResponse response) {
 		
 		// 페이징
 		int listCount;
