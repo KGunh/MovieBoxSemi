@@ -60,7 +60,39 @@
 	      TB_BOARD.STATUS = 'Y'
 	</entry>
 	
+	<entry key="selectCategoryList">
+		SELECT
+			  CATEGORY_NO,
+			  CATEGORY_NAME
+		  FROM
+		  	  TB_CATEGORY
+	</entry>
 	
+	
+	<entry key="insertBoard">
+		INSERT
+		  INTO 
+		      TB_BOARD
+		      (
+		      BOARD_NO,
+		      BOARD_TITLE,
+		      BOARD_CONTENT,
+		      CREATE_DATE,
+		      MEMBER_NO,
+		      CATEGORY_NO,
+		      BOARD_WRITER
+		      )
+		VALUES
+		      (
+		      SEQ_BOARDNO.NEXTVAL,
+		      ?,
+		      ?,
+		      SYSDATE,
+		      ?,
+		      ?,
+		      ?
+		      )
+	</entry>
 
 	
 </properties>

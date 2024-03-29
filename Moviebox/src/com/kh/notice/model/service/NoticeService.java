@@ -84,9 +84,7 @@ public class NoticeService {
 	// 카테고리
 	public ArrayList<Category> selectCategoryList(){
 		Connection conn = getConnection();
-		
 		ArrayList<Category> list = new NoticeDao().selectCategoryList(conn);
-		
 		close(conn);
 		
 		return list;

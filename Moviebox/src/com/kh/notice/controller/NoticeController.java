@@ -145,7 +145,7 @@ public class NoticeController {
 		return view;
 	}
 	
-	//  글 수정
+	// 글 수정
 	public String updateNoticeForm(HttpServletRequest request, HttpServletResponse response) {
 		
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));

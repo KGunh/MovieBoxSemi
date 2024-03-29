@@ -119,7 +119,6 @@
 		 	  NOTICE_NO = ?
 	</entry>
 	
-	
 
 	<entry key="countNotice">
 		UPDATE
