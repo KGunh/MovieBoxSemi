@@ -238,11 +238,10 @@
 		</div>
 
 		<div id="input-list">
-			<form action="<%=contextPath%>/insert.me" method="post" >
+			<form action="<%=contextPath%>/insert.me" method="post" id="insertForm">
 				<div class="inputdiv">
 					<span class="input-span id" >아이디</span><br> 
-                    <input type="text"
-						class="input-text id" id="memberId" name="memberId">
+                    <input type="text" class="input-text id" id="memberId" name="memberId" placeholder="아이디입력(영문/숫자만 가능 12글자 제한)" maxlength="12">
 					<button type="button" class="idCheck" onclick="idCheck();">중복확인</button>
                     <span class="input-bottom"></span>
 				</div>
@@ -282,12 +281,12 @@
 				
 				<div class="inputdiv">
 					<span class="input-span">비밀번호</span><br> 
-                    <input type="password" id="memberPwd" class="input-text" name="memberPwd">
+                    <input type="password" id="memberPwd" class="input-text" name="memberPwd" placeholder="비밀번호(영문/숫자만 가능 16글자 제한)" maxlength="16">
                     <span class="input-bottom"></span>
 				</div>
 				<div class="inputdiv">
 					<span class="input-span">비밀번호 확인</span><br> 
-                    <input type="password" id="checkPwd" class="input-text">
+                    <input type="password" id="checkPwd" class="input-text" placeholder="비밀번호확인 (위와 동일한 비밀번호를 입력해주세요)" maxlength="16">
                     <span class="input-bottom"></span>
 				</div>
                 <script>
@@ -336,7 +335,7 @@
 				</div>
 				<div class="inputdiv">
 					<span class="input-span">이메일</span><br> 
-                    <input type="email" class="input-text" name="email">
+                    <input type="email" class="input-text" name="email" placeholder="이메일입력 | ex)aaa@movie.box (***@***.***)" >
                     <span class="input-bottom"></span>
 				</div>
 				<div class="inputdiv">
@@ -398,51 +397,134 @@
 		</div>
 	</div>
     <script>
-        $('.inputdiv > input').blur(function(){
-            const $input = $(this);
-
-            if($input.val() == ''){
-                $(this).css('border','2px solid red');
-                $(this).siblings('.input-bottom').html('필수 정보입니다.').css('color','red');
-            } else{
-                $(this).removeAttr('style');
-                $(this).siblings('.input-bottom').html('');
-            }
-
-        });
+       
 
     </script>
     <script>
+
+    </script>
+    <script>
+        let birthdayReg =  /^\d{8}$/;
+        let phoneReg = /^\d{11}$/;
+        let emailReg = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+        $('.inputdiv > input').blur(function(){
+            checkInput($(this));
+        });
+        
+        $('input[name=phone]').blur(function(){
+            checkInputPhone($(this));  
+        });
+        $('input[name=email]').blur(function(){
+            checkInputEmail($(this));  
+        });
+        $('input[name=birthday]').blur(function(){
+            checkInputBirthday($(this));  
+        });
+    
         $('.input-button > button').click(function(){
             const $input = $('.inputdiv > input');
-
-            let birthdayReg =  /^\d{8}$/;
-            let phoneReg = /^\d{11}$/;
-
+            let flag = false;
             $input.each(function(){
                 if ($(this).val() == ''){
                     $(this).css('border','2px solid red');
                     $(this).siblings('.input-bottom').html('필수 정보입니다.').css('color','red');
                 }
-                else if(phoneReg.test($('input[name=phone]').val())){
-                    $(this).removeAttr('style');
-                    $(this).siblings('.input-bottom').html('');
-                }
-                else if(birthdayReg.test($('input[name=birthday]').val())){
-                    $(this).removeAttr('style');
-                    $(this).siblings('.input-bottom').html('');
-                }
                 else {
-                    $(this).css('border','2px solid red');
-                    $(this).siblings('.input-bottom').html('형식에 맞지않습니다.').css('color','red');
+                    checkInputAll();
+                    if(phoneReg.test($('input[name=phone]').val()) && birthdayReg.test($('input[name=birthday]').val()) && emailReg.test($('input[name=email]').val())){
+                        $('#insertForm').submit();
+                    }
                 }
-
+                
             });
 
         });
+        function checkInputAll(){
+            if(phoneReg.test($('input[name=phone]').val())){
+                $('input[name=phone]').removeAttr('style');
+                $('input[name=phone]').siblings('.input-bottom').html('');
+            }
+            else {
+                $('input[name=phone]').css('border','2px solid red');
+                $('input[name=phone]').siblings('.input-bottom').html('형식에 맞지않습니다(-를 제외한 11자리 숫자만 입력해주세요).').css('color','red');
+            }
+            if(birthdayReg.test($('input[name=birthday]').val())){
+                $('input[name=birthday]').removeAttr('style');
+                $('input[name=birthday]').siblings('.input-bottom').html('');
+            }
+            else{
+                $('input[name=birthday]').css('border','2px solid red');
+                $('input[name=birthday]').siblings('.input-bottom').html('형식에 맞지않습니다 | ex)19001124(YYYYMMDD).').css('color','red');
+
+            }
+            if(emailReg.test($('input[name=email]').val())){
+                $('input[name=email]').removeAttr('style');
+                $('input[name=email]').siblings('.input-bottom').html('');
+            }
+            else{
+                $('input[name=email]').css('border','2px solid red');
+                $('input[name=email]').siblings('.input-bottom').html('형식에 맞지않습니다 | ex)aaa@movie.box(***@***.***).').css('color','red');
+
+            }
+            
+        };
     </script>
 
+    <script>
+        function checkInput($input){
+            if($input.val() == ''){
+                    $input.css('border','2px solid red');
+                    $input.siblings('.input-bottom').html('필수 정보입니다.').css('color','red');
+            } 
+            else {
+                $input.removeAttr('style');
+                $input.siblings('.input-bottom').html('');
+            }     
+        }
+        function checkInputPhone($input){
+            if($input.val() == ''){
+                    $input.css('border','2px solid red');
+                    $input.siblings('.input-bottom').html('필수 정보입니다.').css('color','red');
+            } 
+            else if(phoneReg.test($input.val())){
+                $input.removeAttr('style');
+                $input.siblings('.input-bottom').html('');
+            }     
+            else {
+                $input.css('border','2px solid red');
+                $input.siblings('.input-bottom').html('형식에 맞지않습니다(-를 제외한 11자리 숫자만 입력해주세요).').css('color','red');
+            }
+        }
+        function checkInputEmail($input){
+            if($input.val() == ''){
+                    $input.css('border','2px solid red');
+                    $input.siblings('.input-bottom').html('필수 정보입니다.').css('color','red');
+            } 
+            else if(emailReg.test($input.val())){
+                $input.removeAttr('style');
+                $input.siblings('.input-bottom').html('');
+            }     
+            else {
+                $input.css('border','2px solid red');
+                $input.siblings('.input-bottom').html('형식에 맞지않습니다 | ex)aaa@movie.box(***@***.***).').css('color','red');
+            }
+        }
 
+        function checkInputBirthday($input){
+            if($input.val() == ''){
+                    $input.css('border','2px solid red');
+                    $input.siblings('.input-bottom').html('필수 정보입니다.').css('color','red');
+            } 
+            else if(birthdayReg.test($input.val())){
+                $input.removeAttr('style');
+                $input.siblings('.input-bottom').html('');
+            }     
+            else {
+                $input.css('border','2px solid red');
+                $input.siblings('.input-bottom').html('형식에 맞지않습니다 | ex)19001124(YYYYMMDD).').css('color','red');
+            }
+        }
+    </script>
 
 
 

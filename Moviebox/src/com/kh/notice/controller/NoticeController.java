@@ -95,7 +95,7 @@ public class NoticeController {
 			view = "views/notice/noticeInsertForm.jsp";
 		} else {
 			session.setAttribute("alertMsg", "관리자로 로그인 해주세요.");
-			view = "/list.notice";
+			view = "/list.notice?currentPage=1";
 		}
 		
 		return view;
@@ -136,7 +136,7 @@ public class NoticeController {
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "공지사항이 등록되었습니다.");
-			view = "/list.notice";
+			view = "/list.notice?currentPage=1";
 		} else {
 			session.setAttribute("alertMsg", "공지사항 작성 실패");
 			view = "views/member/noticeInsertForm.jsp";
@@ -145,7 +145,7 @@ public class NoticeController {
 		return view;
 	}
 	
-	//  글 수정
+	// 글 수정
 	public String updateNoticeForm(HttpServletRequest request, HttpServletResponse response) {
 		
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
@@ -230,10 +230,10 @@ public class NoticeController {
 		
 		if(result > 0) {
 			session.setAttribute("alertMsg", "삭제되었습니다.");
-			view = "/list.notice";
+			view = "/list.notice?currentPage=1";
 		} else {
 			session.setAttribute("alertMsg", "삭제 실패");
-			view = "/list.notice";
+			view = "/list.notice?currentPage=1";
 		}
 		
 		return view;

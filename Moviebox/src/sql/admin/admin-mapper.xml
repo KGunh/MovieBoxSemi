@@ -6,42 +6,82 @@
 		Admin Mapper
 	</comment>
 
+
+
+
 	<!-- 영화목록전체 -->
 	<entry key="adminSelectMovieList">
-		SELECT
-		    MOVIE_NO,
-		    TO_CHAR(MOVIE_RELEASE, 'YY/MM/DD') MOVIE_RELEASE,
-		    MOVIE_TITLE,
-		    MOVIE_RATED,
-		    GENRE_NAME,
-		    TO_CHAR(MOVIE_UPDATE, 'YY/MM/DD') MOVIE_UPDATE
-		FROM
-		    TB_MOVIE
-		LEFT
-		JOIN
-		    TB_GENRE ON(GENRE_NO = GENRE_CODE)
-		ORDER
-		   BY
-		     MOVIE_NO DESC
+		SELECT *
+		FROM (SELECT A.*, ROWNUM RNUM
+		      FROM (SELECT
+				    MOVIE_NO,
+				    TO_CHAR(MOVIE_RELEASE, 'YY/MM/DD') MOVIE_RELEASE,
+				    MOVIE_TITLE,
+				    MOVIE_RATED,
+				    GENRE_NAME,
+				    TO_CHAR(MOVIE_UPDATE, 'YY/MM/DD') MOVIE_UPDATE
+				FROM
+				    TB_MOVIE
+				LEFT
+				JOIN
+				    TB_GENRE ON(GENRE_NO = GENRE_CODE)
+				ORDER
+				   BY
+				     MOVIE_NO DESC) A)
+		WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	
+	
+		<entry key="selectListCount">
+		SELECT
+		    COUNT(*)
+		  FROM
+		    TB_MOVIE
+		 WHERE
+		    STATUS = 'Y'
+	</entry>
+	
+	
+	
 
 
 	<!-- 공지목록전체 -->
 	<entry key="adminSelectNoticeList">
-		SELECT
-		    NOTICE_NO,
-		    CATEGORY_NAME,
-		    NOTICE_TITLE,                  
-		    TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE,                   
-		    COUNT      
-		FROM
-		    TB_NOTICE    
-		JOIN
-		    TB_CATEGORY ON (NOTICE_CATEGORY = CATEGORY_NO)
-		ORDER
-		   BY
-		    NOTICE_NO DESC
+		SELECT *
+		FROM (SELECT A.*, ROWNUM RNUM
+		      FROM (SELECT
+				    NOTICE_NO,
+				    CATEGORY_NAME,
+				    NOTICE_TITLE,                  
+				    TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE,                   
+				    COUNT      
+				FROM
+				    TB_NOTICE    
+				JOIN
+				    TB_CATEGORY ON (NOTICE_CATEGORY = CATEGORY_NO)
+				ORDER
+				   BY
+				    NOTICE_NO DESC) A)
+		WHERE RNUM BETWEEN ? AND ?
 	</entry>
+
+
+	<entry key="selectListCountNotice">
+		SELECT
+		    COUNT(*)
+		  FROM
+		    TB_NOTICE
+		 WHERE
+		    STATUS = 'Y'
+	</entry>
+
+
+
+
+
+
+
+
 
 
 	<!-- 문의목록전체 -->
@@ -62,18 +102,7 @@
 		    BOARD_NO DESC
 	</entry>
 
-	<entry key="selectListCount">
-		SELECT
-		    COUNT(*)
-		  FROM
-		    TB_MOVIE
-		 WHERE
-		    STATUS = 'Y'
-	</entry>
 
-	<entry key="selectList">
-
-	</entry>
 
 
 

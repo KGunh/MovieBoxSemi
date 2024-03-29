@@ -1,20 +1,19 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-<%@ page import="com.kh.board.model.vo.*" %>
+
+<%@ page import="com.kh.board.model.vo.Category, java.util.ArrayList" %>
     
 <%
-	Board board = (Board)request.getAttribute("board");
+	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("category");
 
-%>    
-    
-    
+	System.out.println(list);
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
     <style>
         body{
             background-color: #1A1A1A;
@@ -84,15 +83,27 @@
             background-color: #FFC145;
             color: #1A1A1A;
         }
-
         
+        /* insert-title */
+        #insert-title{
+            width: 1200px;
+            font-size: 25px;
+            color: white;
+            font-weight: bold;
+            text-align: center;
+            padding-top: 50px;
+            padding-bottom: 5%;
+            border-bottom: 1px solid #3f3f3f;
+
+        }
+
         /* 내용 입력 */
         .notice-content{
             width: 1200px;
             height: auto;
             /* border: 1px solid pink; */
             color: white;
-            margin-top: 30px;
+            margin-top: 20px;
         }
 
         .detail-box1{
@@ -100,78 +111,78 @@
             /* border: 1px solid #FFC145; */
         }
 
-        .detail-box2{
-            width: 1200px;
-            /* border: 1px solid red; */
-        }
-
         .detail-title-box1{
-            width: 1200px;
-            padding-top: 20px;
-            border-top: 1px solid #3f3f3f;
-        }
-
-        .detail-title-box2{
-            width: 1200px;
+            width: 670px;
             padding-bottom: 20px;
-            border-bottom: 1px solid #3f3f3f;
-        }
-
-
-        .detail-category{
-            width: 170px;
-            height: 60px;
-            line-height: 55px;
             font-size: 20px;
             font-weight: bold;
-            padding-left: 10px;
-            float: left;
+            text-align: center;
         }
 
-        .detail-title{
-            width: 1030px;
-            height: 60px;
-            line-height: 55px;
-            font-size: 20px;
-            font-weight: bold;
-            display: inline-block;
-            
-        }
-
-        .detail-date{
-            width: 170px;
-            height: 30px;
-            line-height: 25px;
-            float: left;
-            color: #8a8a8a;
-            padding-left: 10px;
-        }
-
-        .detail-count{
-            width: 1030px;
-            height: 30px;
-            line-height: 25px;
-            color: #8a8a8a;
-            display: inline-block;
-        }
 
         /* 글 내용 */
         .detail-content-box{
             width: 1200px;
-            height: auto;
+            margin-bottom: 40px;
+            border-top: 1px solid #3f3f3f;
         }
 
-        .detail-content{
-            padding: 10px;
-            padding-top: 20px;
-            padding-bottom: 25px;
-            border-bottom: 1px solid #3f3f3f;
+        #insert-box{
+            width: 670px;
+            margin: 0 auto;
+        }
+
+        #category-box{
+            height: auto;
+            line-height: 35px;
+            margin-top: 20px;
+        }
+
+        #title-box{
+            width: 1200px;
+            height: 40px;
+            line-height: 35px;
+            margin-top: 20px;
+        }
+
+        #content-box{
+            line-height: 35px;
+            margin-top: 20px;
+            margin-bottom: 20px;
+        }
+
+        #box-name{
+            width: 100px;
+            float: left;
+            padding-left: 20px;
+        }
+
+        #select-category{
+            width: 200px;
+            height: 40px;
+            padding-left: 10px;
+            border-radius: 10px;
         }
 
         .detail-content-a-box{
             width: 1200px;
             height: auto;
             color: white;
+        }
+
+        #select-title{
+            width: 500px;
+            height: 40px;
+            padding-left: 10px;
+            border-radius: 10px;
+        }
+
+        #select-content{
+            width: 500px;
+            height: 300px;
+            padding-left: 10px;
+            border-radius: 10px;
+            padding-top: 10px;
         }
 
         .detail-a{
@@ -191,11 +202,12 @@
 
         /* 버튼 */
         .notice-btn{
+            width: 670px;
             margin-top: 30px;
             margin-bottom: 30px;
         }
 
-        .board-detail-btn{
+        .notice-detail-btn{
             width: 80px;
             padding: 8px;
             font-size: 20px;
@@ -207,6 +219,20 @@
             color: #1A1A1A;
             margin-right: 10px;
         }
+
+        .notice-detail-btn1{
+            width: 80px;
+            padding: 8px;
+            font-size: 20px;
+            font-weight: bold;
+            border: none;
+            border-radius: 10px;
+            background-color: #ffffff;
+            text-decoration: none;
+            color: #1A1A1A;
+            margin-right: 10px;
+        }
+
     </style>
 
 </head>
@@ -227,53 +253,64 @@
 	                <div class="qna-tap" onclick="openQnaPage();">QnA</div>
                 </div> <!-- board-category -->
 
+                <div id="insert-title">고객 문의사항</div>
+
                 <div class="notice-content">
                     <div class="detail-box1">
                         <div class="detail-title-box1">
-                            <div class="detail-category"><span>No.<%=board.getBoardNo() %> [<%= board.getBoardCategory() %>]</span></div>
-                            <div class="detail-title"><span><%= board.getBoardTitle() %></span></div>
+                            <div class="detail-category"><span>문의사항 작성</span></div>
                         </div>
                     </div>
 
-                    <div class="detail-box2">
-                        <div class="detail-title-box2">
-                            <div class="detail-date"><a><%= board.getCreateDate() %></a></div>
-                            <div class="detail-count"><a>작성자 : <%= board.getBoardWriter() %></div>
-                        </div>
-                    </div>
 
                     <div class="detail-content-box">
-                        <div class="detail-content">
-                        <%= board.getBoardContent() %>
-                        </div>
-                    </div>
+	                    <form action="<%= contextPath %>/insert.board" method="post" id="insert-box">
+	                    
+	                    <input type="hidden" name="userNo" value="<%= loginUser.getMemberNo()%>" />
+	                    
+                            <div id="category-box">
+                                <div id="box-name">분류</div>
+                                
+                                <select name="category" id="select-category">
+                                <% for(Category c : list) { %>
+									<option value="<%= c.getCategoryNo() %>">
+										<%= c.getCategoryName() %>
+									</option>
+								<% } %>
+                                </select>
+                           	</div> 
+
+                            <div id="title-box">
+                                <div id="box-name">제목</div>
+                                <input type="text" id="select-title" name="title">
+                            </div>
+
+                            <div id="content-box">
+                                <div id="box-name">내용</div>
+                                <textarea id="select-content" cols="30" rows="10" name="content"></textarea>
+                            </div>
+	
+	
+	                        <div id="insert-btn" align="center">
+	                            <button class="notice-detail-btn">등록</button>
+	                            <button class="notice-detail-btn1">취소</button>
+	                        </div>
+						</form>
+                    </div> <!-- detail-content-box -->
+
+
                 </div> <!-- notice-content -->
 
-                <div id="a-title">답변</div>
-
-                <div class="detail-content-a-box">
-                    <div class="detail-a">
-			        	댓글로 해야하나
-                </div>
-            </div> <!-- notice-content -->
-
-                <div class="notice-btn" align="center">
-                    <button class="board-detail-btn" onclick="backPage();">목록</button>
-                    <% if(loginUser != null && loginUser.getMemberName() == board.getBoardWriter()) { %>
-	                    <button class="notice-detail-btn" onclick="noticeUpdatePage();">수정</button> 
-	                    <button class="notice-detail-btn" onclick="noticeDelete();">삭제</button>
-                    <% } %>
-                </div>
 
 
 
             </div> <!-- notice-list -->
         </div> <!-- notice-detail -->
-	</div>
-    
-    	<%@ include file="../common/footer.jsp" %>
-    	
-    	<script>
+    </div> <!-- wrap -->
+
+	<%@ include file="../common/footer.jsp" %>
+	
+	    	<script>
 			function openNoticePage(){
 				location.href = '<%=contextPath %>/list.notice?currentPage=1';
 			}
@@ -288,6 +325,7 @@
 
     	
     	</script>
-    
+	
+	
 </body>
 </html>

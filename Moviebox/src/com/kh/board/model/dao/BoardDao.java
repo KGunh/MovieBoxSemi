@@ -12,8 +12,10 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.board.model.vo.Board;
+import com.kh.board.model.vo.Category;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.notice.model.dao.NoticeDao;
+import com.kh.notice.model.vo.Notice;
 
 public class BoardDao {
 	
@@ -62,7 +64,6 @@ public class BoardDao {
 				
 				list.add(board);
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -111,10 +112,81 @@ public class BoardDao {
 		ResultSet rset = null;
 		String sql = prop.getProperty("detailBoard");
 		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, boardNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				board = new Board();
+				board.setBoardNo(rset.getInt("BOARD_NO"));
+				board.setBoardCategory(rset.getString("CATEGORY_NAME"));
+				board.setBoardTitle(rset.getString("BOARD_TITLE"));
+				board.setCreateDate(rset.getString("CREATE_DATE"));
+				board.setBoardWriter(rset.getString("BOARD_WRITER"));
+				board.setBoardContent(rset.getString("BOARD_CONTENT"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
 		
+		return board;
+	}
+
+	public ArrayList<Category> selectCategoryList(Connection conn) {
 		
+		ArrayList<Category> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
 		
-		return null;
+		String sql = prop.getProperty("selectCategoryList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				list.add(new Category(
+									 rset.getInt("CATEGORY_NO"),
+									 rset.getString("CATEGORY_NAME")));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+
+	public int insertBoard(Connection conn, Board board) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("inserBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, board.getBoardTitle());
+			pstmt.setString(2, board.getBoardContent());
+			pstmt.setInt(3, board.getUserNo());
+			pstmt.setInt(4, board.getCategoryNo());
+			pstmt.setString(5, board.getBoardWriter());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		return result;
 	}
 
 }

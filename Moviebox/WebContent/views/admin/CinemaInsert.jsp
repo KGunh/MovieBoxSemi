@@ -477,7 +477,7 @@
                 <form action="<%=contextPath%>/insertAdmin.cm" method="get"> 
                
                 <div>
-                    <span class="name">지역</span>
+                    <span class="name" id="region">지역</span>
                     <select name="region" class="input" style="width: 650px; height: 39px;">
                         <option value="지역" name="서울">서울</option>
                         <option value="지역">경기</option>
@@ -504,7 +504,11 @@
                     <div id="address">
                         <input type="text" class="input1" placeholder="상세주소를 입력해주시오" name="address">
 
+                   <script>
                    
+                   
+                   
+                   </script>
 
                    
 
@@ -518,9 +522,6 @@
                        
                           
                       </div>   
-                   
-
-
                 </div>
 
                 </div>
@@ -537,26 +538,14 @@
                 </form>
                 
             </div>
-           	
-           
-                
-                </div>
                
-                
-
-                   
-        
+                </div>
+       
                 </div>
                       
                 </div>
 
-
-                
-
-               
-           
-
-              
+       
 
                </div > 
                 

@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ page import="com.kh.board.model.vo.Board, com.kh.common.model.vo.PageInfo,
+<%@ page import="com.kh.board.model.vo.Board,
+				 com.kh.common.model.vo.PageInfo,
  				 java.util.ArrayList"%>
     
 <%
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("boardList");
+	Board board = (Board)request.getAttribute("board");
 	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
 	
 	int currentPage = pi.getCurrentPage();
@@ -272,7 +274,7 @@
             
             <!-- 회원만 작성 할 수 있게  -->
             <div id="qna-insert">
-                <button id="qna-insert-btn">글쓰기</button>
+                <button id="qna-insert-btn" onclick="boardInsert();">글쓰기</button>
             </div>
 
 
@@ -296,13 +298,13 @@
                         
                         <% } else { %>
                         
-                        	<% for(Board board : list) { %>
+                        	<% for(Board b : list) { %>
                         <tr class="board">
-                            <td id="list-no"><%= board.getBoardNo() %></td>
-                            <td id="list-ca"><%= board.getBoardCategory() %></td>
-                            <td id="list-title"><%= board.getBoardTitle() %></td>
-                            <td id="list-count"><%= board.getBoardWriter() %></td>
-                            <td id="list-date"><%= board.getCreateDate() %></td>
+                            <td id="list-no"><%= b.getBoardNo() %></td>
+                            <td id="list-ca"><%= b.getBoardCategory() %></td>
+                            <td id="list-title"><%= b.getBoardTitle() %></td>
+                            <td id="list-count"><%= b.getBoardWriter() %></td>
+                            <td id="list-date"><%= b.getCreateDate() %></td>
                         </tr>
                         	<% } %>
                         <% } %>
@@ -332,6 +334,8 @@
 		                onclick="location.href='<%=contextPath%>/list.board?currentPage=<%= currentPage + 1 %>'"> > </button>
 		            <% } %>
                 </div>
+                
+
             </div>
 
         </div>
@@ -348,8 +352,13 @@
     			location.href = '<%= contextPath %>/list.board?currentPage=1';
     		}
     		
-    		$('.board').click(function(){
-    			location.href = '<%=contextPath%>/detail.board?boardNo='+$(this).attr('id');
+    		function boardInsert(){
+    			location.href = '<%=contextPath%>/enrollForm.board';
+    		}
+    		
+    		$('tbody > tr.board').click(function(){
+    			const boardNo = $(this).children().eq(0).text();
+    			location.href = '<%=contextPath%>/detail.board?boardNo=' + boardNo;
             });
     		
     	
