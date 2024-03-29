@@ -68,10 +68,16 @@ public class ReservationService {
 		return reservation;
 	}
 
-	
-	// 지역 조회
-	
-	// 영화관, 스크린은 AJAX로
-			
+	public void insertReservation(Reservation reservation, int teenPersonNo, int adultPersonNo) {
+		Connection conn = getConnection();
+		
+		new ReservationDao().insertReservation(conn, reservation);
+		new ReservationDao().insert
+		// seat
+		// pricesheet
+		
+		
+	}
+
 
 }

@@ -10,6 +10,7 @@ public class Reservation {
 	private int personNum;
 	private int memberNo;
 	private int screenNo;
+	private int movieNo;
 	private String runningTime;
 	private String status;
 	private String movieTitle;
@@ -108,6 +109,12 @@ public class Reservation {
 	
 	
 	
+	public int getMovieNo() {
+		return movieNo;
+	}
+	public void setMovieNo(int movieNo) {
+		this.movieNo = movieNo;
+	}
 	public String getScreenName() {
 		return screenName;
 	}
