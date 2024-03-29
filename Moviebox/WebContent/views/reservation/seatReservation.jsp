@@ -212,7 +212,7 @@
         width: 400px;
         height: 80px;
         background-color: white;
-        box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+        box-shadow: 0 5px 15px rgba(255, 255, 255, 0.7);
     }
     
     .rotate {
@@ -439,7 +439,7 @@
 
                     result.forEach(function(seat) {
                         
-                        //line div요소 html과 배열요소 비교
+                        // .line div요소 html과 배열요소 비교
                         $('.seats').each(function() {
                             if ($(this).html() === seat.seatNo) {
                                 // 값이 같으면 disabled 속성 부여

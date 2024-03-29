@@ -1,8 +1,10 @@
 package com.kh.reservation.controller;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -119,11 +121,37 @@ public class ReservationController {
 		return new ReservationService().checkReservationInfo(screenNo, movieNo, teenAge, adultAge); 
 	}
 	// 예약
-	public String insertReservation() {
+	public String insertReservation(HttpServletRequest request) {
 		
-		// 예약 정보를 가지고 결제 페이지로 연결
+		int movieNo = Integer.parseInt(request.getParameter("movieNo"));
+		int screenNo = Integer.parseInt(request.getParameter("screenNo"));
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		
-		// 예약내용 insert
+		Map<String, Integer> personMap = new HashMap<>(); 
+		
+		personMap.put("teen", Integer.parseInt(request.getParameter("teen")));
+		personMap.put("adult", Integer.parseInt(request.getParameter("adult")));
+		
+		request.getParameter("seatNo");
+		/*
+		   private int ticketNo;
+			private int personNum;
+			private int memberNo;
+			private int screenNo;
+			private String runningTime;
+			private String status;
+			private String movieTitle;
+			private String theaterName;
+			private String watchDate;
+			
+			private Price price;
+			private List<Seat> seatList;
+			private Movie movie;
+			private String screenName;
+		 * 
+		 * */
+		
+		
 		return "views/reservation/infoReservation.jsp";
 	}
 

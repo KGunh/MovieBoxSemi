@@ -42,7 +42,7 @@ public class ReservationServlet extends HttpServlet {
 		case "movie" : view = rc.selectReservationInfo(request); break; 
 		case "seat" : view = rc.connectSeatList(request); break;
 		//case "seat" : view = rc.setSeat(request); break; 온보드 ajax 바꿀 것
-		case "payment" : view = rc.insertReservation(); flag = true; break;
+		case "payment" : view = rc.insertReservation(request); flag = true; break;
 		}
 		
 		if(flag) {
