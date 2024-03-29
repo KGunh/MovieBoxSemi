@@ -3,7 +3,7 @@
 <%@ page import="com.kh.movie.model.vo.Movie, java.util.ArrayList"%>
     
 <%
-ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("adminMovieCheck");
+ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("adminMovieCheckList");
 //System.out.println(list);
 %> 
 <!DOCTYPE html>
@@ -370,6 +370,7 @@ ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("adminMovieCheck"
                                     <th>등록일</th>
                                 </tr>
                               </thead>
+                              
 			                    <tbody>
 			                    <% if(list == null || list.isEmpty()) { %>
 			                        <tr>
@@ -395,7 +396,7 @@ ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("adminMovieCheck"
                           
                     </div><!--게시판끝-->
 
-
+					
                     
                     <div class="paging-area" align="center" style="margin-top:12px;">
                         <button class="btn btn-outline-secondary" style="color:#ffffff"> < </button>
