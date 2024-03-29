@@ -1,10 +1,16 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.kh.movie.model.vo.Movie, java.util.ArrayList"%>
+<%@ page import="com.kh.movie.model.vo.Movie, java.util.ArrayList, com.kh.common.model.vo.PageInfo" %>
     
 <%
-ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("adminMovieCheck");
-//System.out.println(list);
+	ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("adminMovieCheckList");
+	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
+	System.out.print(pi);
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+
 %> 
 <!DOCTYPE html>
 <html>
@@ -370,6 +376,7 @@ ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("adminMovieCheck"
                                     <th>등록일</th>
                                 </tr>
                               </thead>
+                              
 			                    <tbody>
 			                    <% if(list == null || list.isEmpty()) { %>
 			                        <tr>
@@ -395,12 +402,19 @@ ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("adminMovieCheck"
                           
                     </div><!--게시판끝-->
 
-
+					
                     
                     <div class="paging-area" align="center" style="margin-top:12px;">
-                        <button class="btn btn-outline-secondary" style="color:#ffffff"> < </button>
-                        <button class="btn btn-outline-secondary" style="color:#ffffff">1</button>
-                        <button class="btn btn-outline-secondary" style="color:#ffffff"> > </button>
+                    	
+                    	<% for(int i = startPage; i <= endPage; i++) { System.out.println(i); %>
+                    	
+                    		<% if(currentPage != i) { %>
+	                        	<button class="btn btn-outline-secondary" style="color:#ffffff" onclick="location.href='<%=contextPath %>/adminMovieCheck.admin?currentPage=<%=i%>'"><%= i %></button>
+	                        <%} else {%>
+								 <button disabled class="btn btn-outline-secondary" style="color:#ffffff">
+								 <%= i %></button>                       
+	                        <%} %>
+                        <%} %>
                     </div>
                     
                     <!--페이지 숫자-->

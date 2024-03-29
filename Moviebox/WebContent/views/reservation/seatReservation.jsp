@@ -113,9 +113,9 @@
     }
 
     #movie-info{
-        width: 600px;
+        width: 800px;
         height: 50px;
-        margin-left: 300px;
+        margin: auto;
         color: rgb(255, 193, 69);
         text-align: center;
         font-size: 24px;
@@ -319,6 +319,21 @@
             background-color: rgb(255, 193, 69);
         }
 
+        .disabled{
+            height: 28px;
+            width: 30px;
+            margin-top: 8px;
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            line-height: 30px;
+            border-top-left-radius: 12px;
+            border-top-right-radius: 12px;
+            background-color: crimson;
+            color: black;
+            pointer-events: none;
+        }
+        
         #check-reservation{
             float: left;
             width: 250px;
@@ -351,7 +366,7 @@
             float: left;
             width: auto;
             height: 300px;
-            margin: 10px auto auto 70px;
+            margin: 0px auto auto 50px;
         }
 
         #reservation-info > div {
@@ -390,8 +405,9 @@
         }
 
         #payment-btn{
-            margin-top: 305px;
-            margin-left: 20px;
+            float: right;
+            margin-top: 310px;
+            margin-right: 0px;
             height: 40px;
             width: 100px;
             border: 0;
@@ -409,7 +425,8 @@
         var ageType = ''; // 연령
         var resvTeen = ['', 0]; 
         var resvAdult = ['', 0];
-        var selectSeat = [];
+        var selectSeat = []; // 선택 좌석
+
         // 상영관 예약정보 가져와서 좌석 선택 가능여부 조작
         window.onload = function() {
             $.ajax({
@@ -419,8 +436,18 @@
                     screenNo : <%= screenNo %>
             	},
                 success : function(result){
-                    console.log(result);
-                    console.log('스크린 정보 가져왔음');
+
+                    result.forEach(function(seat) {
+                        
+                        //line div요소 html과 배열요소 비교
+                        $('.seats').each(function() {
+                            if ($(this).html() === seat.seatNo) {
+                                // 값이 같으면 disabled 속성 부여
+                                $(this).addClass('disabled');
+                                $(this).html('X');
+                            };
+                        });
+                    });
                 },
                 error : function(){
 
@@ -431,50 +458,53 @@
         // 인원수 버튼에 대한 스타일동작 및 값처리
         $('.people-Count').click(e => {
             peopleCount = (Number)($(e.target).html());
+            // 청소년,성인 선택 -> 좌석선택 초기화
             $('.seats').removeClass('clicked');
-
-            if($(e.target).hasClass('clicked')){
+            // 클래스 속성을 부여하여 스타일 조작
+            if($(e.target).hasClass('clicked')) {
                 $('.people-Count').removeClass('clicked');
                 peopleCount = 0;
             } 
-            else{
+            else {
                 $('.people-Count').removeClass('clicked');
                 $(e.target).addClass('clicked');
             }
-            
+            // 인원 선택 초기화 -> 선택한 좌석 배열 초기화
+            selectSeat = [];
+
             printPeople();
         });
 
-        // 청소년 성인 구분하여 숫자넣기
+        // 청소년, 성인 선택버튼 조작
         $('.ageBtn').click(e => {
-            if($(e.target).hasClass('clicked')){
+            if($(e.target).hasClass('clicked')) {
                 $('.ageBtn').removeClass('clicked');
 
                 ageType = '';
             } 
-            else{
+            else {
                 $('.ageBtn').removeClass('clicked');
                 $('.people-Count').removeClass('clicked');
                 $(e.target).addClass('clicked');
                 
-                ageType = ($(e.target).html() == '성인' ? 'adult' : 'teen');
+                ageType = ($(e.target).html());
             };
             
             printPeople();
         });
 
         // 선택한 인원 보여주기
-        function printPeople(){
-            if(ageType == 'teen'){
+        function printPeople() {
+            if(ageType == '청소년') {
                 resvTeen = [ageType, peopleCount];
             }
-            else if(ageType == 'adult') {
+            else if(ageType == '성인') {
                 resvAdult = [ageType, peopleCount];
             };
 
             selectPeople = resvTeen[1] + resvAdult[1];
 
-            if(selectPeople < 9){
+            if(selectPeople < 9) {
                 $('#select-people').html(
                     '<div>청소년 : ' + resvTeen[1] + '명</div>'
                    +'<div>  성인 : ' + resvAdult[1] + '명</div>'
@@ -494,22 +524,43 @@
             var seat = $(e.target).html();
             var index = selectSeat.indexOf(seat);
 
-            if($(e.target).hasClass('clicked')){
+            if($(e.target).hasClass('clicked')) {
                 $(e.target).removeClass('clicked');
                 selectPeople += 1;
                 selectSeat.splice(index, 1);
             } 
-            else{
-                if(selectPeople < 1 ){
+            else {
+                if(selectPeople < 1 ) {
                     if(!$('.people-Count').hasClass('clicked')) alert('인원을 먼저 선택해주세요.');
                     else alert('좌석을 모두 선택하셨습니다.');
                 }
-                else{
+                else {
                     $(e.target).addClass('clicked');
                     selectPeople -= 1;
                     selectSeat.push(seat);
                 };
             };
+            // 좌석 배열 오름차순 정렬 -> 정규표현식 활용
+            selectSeat.sort(function(a, b) {
+                // 배열요소의 문자 추출
+                var strA = a.match(/[A-Z]+/)[0];
+                var strB = b.match(/[A-Z]+/)[0];
+
+                // 문자 비교
+                if (strA < strB) {
+                    return -1;
+                } 
+                else if (strA > strB) {
+                    return 1;
+                };
+
+                // 문자가 같을때 숫자 추출
+                var numA = parseInt(a.match(/\d+/)[0], 10);
+                var numB = parseInt(b.match(/\d+/)[0], 10);
+
+                // 숫자를 비교
+                return numA - numB;
+            });
         });
 
         // 좌석 선택 후 예매정보 하단에 표시
@@ -524,47 +575,61 @@
                     adultAge : resvAdult[1] 
                 },
                 success : function(result){
-                    
-                    $("#check-area").removeAttr("hidden");
 
-                    var resultStr = '';
-                    
-                    resultStr += '<div id="check-reservation">'
-                               +     '<div id="check-movie">'
-                               +         '<div id="poster-select"><img style="width: 100%; height: 100%;" src="<%= contextPath %>/'+ result.movie.filePath + '/' + result.movie.fileName + '" alt="영화포스터"></div>'
-                               +         '<div id="movie-select">'
-                               +             '<div style="text-align: center; font-size:20px; font-weight: 700; margin-top: 5px; margin-bottom: 5px;">' + result.movieTitle + '</div>'
-                               +             '<div style="text-align: center;">' + result.movie.movieRelease + '</div>'
-                               +             '<div style="text-align: center;">' + result.movie.genreName + ' / ' + result.movie.movieRt + '분</div>'
-                               +         '</div>'
-                               +     '</div>'
-                               + '</div>'
-                               + '<div id="check-info">'
-                               +     '<div id="reservation-info">'
-                               +         '<div>'
-                               +             '<div class="select-info">상영일시</div>'
-                               +             '<div class="select-info">관람극장</div>'
-                               +             '<div class="select-info">상영관</div>'
-                               +             '<div class="select-info">관람인원</div>'
-                               +             '<div class="select-info">선택좌석</div>'
-                               +             '<div class="select-info" style="margin-top: 50px;">결제금액</div>'
-                               +         '</div>'
-                               +         '<div>'
-                               +             '<div class="print-info">'+ result.watchDate +'</div>'
-                               +             '<div class="print-info">' + result.theaterName + '</div>'
-                               +             '<div class="print-info">' + result.screenName + '</div>'
-                               +             '<div class="print-info">' + Number(resvTeen[1] + resvAdult[1]) + '인</div>'
-                               +             '<div class="print-info">' + selectSeat.join(', ') + '</div>'
-                               +             '<div class="print-info" style="margin-top: 50px;">' + result.price.totalPrice + '원</div>'
-                               +         '</div>'
-                               +     '</div>'
-                               +     '<button id="payment-btn" onclick="payment();">결제 하기</button>'
-                               + '</div>';
+                    if(selectPeople == 0){
+                        $("#check-area").removeAttr("hidden");
+                        $("#check-area").show();
 
-                    $('#check-area').html(resultStr);
+                        var resultStr = '';
+                        
+                        resultStr += '<div id="check-reservation">'
+                                    +     '<div id="check-movie">'
+                                    +         '<div id="poster-select"><img style="width: 100%; height: 100%;" src="<%= contextPath %>/'+ result.movie.filePath + '/' + result.movie.fileName + '" alt="영화포스터"></div>'
+                                    +         '<div id="movie-select">'
+                                    +             '<div style="text-align: center; font-size:20px; font-weight: 700; margin-top: 5px; margin-bottom: 5px;">' + result.movieTitle + '</div>'
+                                    +             '<div style="text-align: center;">개봉일 ' + result.movie.movieRelease + '</div>'
+                                    +             '<div style="text-align: center;">' + result.movie.genreName + ' / ' + result.movie.movieRt + '분</div>'
+                                    +         '</div>'
+                                    +     '</div>'
+                                    + '</div>'
+                                    + '<div id="check-info">'
+                                    +     '<div id="reservation-info">'
+                                    +         '<div>'
+                                    +             '<div class="select-info">상영일시</div>'
+                                    +             '<div class="select-info">관람극장</div>'
+                                    +             '<div class="select-info">상영관</div>'
+                                    +             '<div class="select-info">관람인원</div>'
+                                    +             '<div class="select-info">선택좌석</div>'
+                                    +             '<div class="select-info" style="margin-top: 50px;">결제금액</div>'
+                                    +         '</div>'
+                                    +         '<div>'
+                                    +             '<div class="print-info">'+ result.watchDate +'</div>'
+                                    +             '<div class="print-info">' + result.theaterName + '</div>'
+                                    +             '<div class="print-info">' + result.screenName + '</div>'
+                                    +             '<div class="print-info">' + Number(resvTeen[1] + resvAdult[1]) + '인</div>'
+                                    +             '<div class="print-info">' + selectSeat.join(', ') + '</div>'
+                                    +             '<div class="print-info" style="margin-top: 50px;">' + result.price.totalPrice + '원</div>'
+                                    +         '</div>'
+                                    +     '</div>'
+                                    +     '<form id="payment-form" action="/moviebox/payment.reservation" method="post">'
+                                    +         '<input type="hidden" name="movieNo" value="' + <%= movieNo %> + '">'
+                                    +         '<input type="hidden" name="screenNo" value="' + <%= screenNo %> + '">'
+                                    +         '<input type="hidden" name="memberNo" value="' + <%= loginUser.getMemberNo() %> + '">'
+                                    +         '<input type="hidden" name="teen" value="' + resvTeen[0] + '">'
+                                    +         '<input type="hidden" name="adult" value="' + resvAdult[0] + '">'
+                                    +         '<input type="hidden" name="seatNo"value="' + selectSeat.join(',') + '">'
+                                    +         '<button type="submit" id="payment-btn" onclick="return payment()">결제 하기</button>'
+                                    +     '</form>'
+                                    + '</div>';
 
+                        $('#check-area').html(resultStr);
+                    }
+                    else {
+                        alert('좌석을 모두 선택해주세요!');
+                        $("#check-area").hide();
+                    };
                 },
-                error : function(){
+                error : function(e){
                     alert('예매정보 오류!');
                 }
             });
@@ -572,22 +637,13 @@
         
         // 결제하기
         function payment(){
+            if(confirm('현재 예매 정보로 결제하시겠습니까?')) {
+                return true;
+            };
 
-
-        }
-
-
-
-
-
-         
-    	
-        
-
-
+            return false;
+        };
     </script>
-
-
 
 </body>
 </html>

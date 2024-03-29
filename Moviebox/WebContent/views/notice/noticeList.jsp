@@ -8,14 +8,13 @@
 <%
 	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
 	Notice notice = (Notice)request.getAttribute("notice");
-	
 	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
 	
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
 	int maxPage = pi.getMaxPage();
-	
+
 %>    
     
     
@@ -286,7 +285,7 @@
 	            <!-- 관리자로 로그인 했을 때만 보이게 해야함! -->
 	        <div id="qna-insert">
 	            <% if(loginUser != null && loginUser.getMemberId().equals("admin")) { %>
-	                <button id="qna-insert-btn" onclick="insert();">글쓰기</button>
+	                <button id="qna-insert-btn" onclick="noticeInsert();">글쓰기</button>
 	            <% } %>
 	        </div>
 
@@ -303,7 +302,7 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <% if(list == null || list.isEmpty()) { %>
+                    <% if(list.isEmpty()) { %>
                         <tr>
                             <td colspan="5">조회 된 공지사항이 없습니다. </td>
                         </tr>
@@ -330,9 +329,25 @@
            <!--  -->
             <div id="page">
                 <div class="paging-area" align="center" style="margin-top:12px;">
-                    <button class="btn btn-outline-secondary" style="color:white; background: none; border: 1px solid white;"> < </button>
-                    <button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;">1</button>
-                    <button class="btn btn-outline-secondary" style="color:white; background: none; border: 1px solid white;"> > </button>
+          			
+          			<% if(currentPage > 1) { %>
+	          			<button class="btn btn-outline-secondary" style="color:white; background: none; border: 1px solid white;"
+	          			onclick="location.href='<%=contextPath%>/list.notice?currentPage=<%= currentPage - 1 %>'"> < </button>
+	               	<% } %>
+	                    
+	                <% for(int i = startPage; i <= endPage; i++) { %>
+	                	<% if(currentPage != i) { %>
+					        <button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
+					        onclick="location.href='<%=contextPath%>/list.notice?currentPage=<%=i%>'"><%= i %></button>
+					    <% } else { %>
+					    	<button disabled class="btn btn-outline-secondary" style="color:white; background-color:#6c757d; border: 1px solid white;"><%=i%></button>
+					    <% } %>
+	                <% } %>
+	                
+	                <% if(currentPage != maxPage) { %>
+		                <button class="btn btn-outline-secondary" style="color:white; background: none; border: 1px solid white;"
+		                onclick="location.href='<%=contextPath%>/list.notice?currentPage=<%= currentPage + 1 %>'"> > </button>
+		            <% } %>
                 </div>
             </div>
 
@@ -344,14 +359,14 @@
     	
     	<script>
     		function openNoticePage(){
-    			location.href = '<%=contextPath %>/list.notice';
+    			location.href = '<%=contextPath %>/list.notice?currentPage=1';
     		}
     		
     		function openQnaPage(){
-    			location.href = '<%=contextPath %>/list.board'; 			
+    			location.href = '<%= contextPath %>/list.board?currentPage=1';
     		}
     		
-    		function insert(){
+    		function noticeInsert(){
     			location.href = '<%=contextPath%>/enrollForm.notice';
     		}
     		

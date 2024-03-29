@@ -1,6 +1,6 @@
 package com.kh.board.model.dao;
 
-import static com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.close;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -12,7 +12,9 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.board.model.vo.Board;
+import com.kh.common.model.vo.PageInfo;
 import com.kh.notice.model.dao.NoticeDao;
+import com.kh.notice.model.vo.Notice;
 
 public class BoardDao {
 	
@@ -20,9 +22,7 @@ public class BoardDao {
 	
 	public BoardDao() {
 		
-		String fileName = NoticeDao.class
-				.getResource("/sql/board/board-mapper.xml")
-				.getPath();
+		String fileName = NoticeDao.class.getResource("/sql/board/board-mapper.xml").getPath();
 		
 		try {
 			prop.loadFromXML(new FileInputStream(fileName));
@@ -32,7 +32,7 @@ public class BoardDao {
 	}
 
 	// 전체 목록 출력
-	public ArrayList<Board> selectBoardList(Connection conn) {
+	public ArrayList<Board> selectBoardList(Connection conn, PageInfo pi) {
 		
 		ArrayList<Board> list = new ArrayList();
 		ResultSet rset = null;
@@ -42,6 +42,12 @@ public class BoardDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
 			
@@ -57,7 +63,6 @@ public class BoardDao {
 				
 				list.add(board);
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -106,10 +111,29 @@ public class BoardDao {
 		ResultSet rset = null;
 		String sql = prop.getProperty("detailBoard");
 		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, boardNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				board = new Board();
+				board.setBoardNo(rset.getInt("BOARD_NO"));
+				board.setBoardCategory(rset.getString("CATEGORY_NAME"));
+				board.setBoardTitle(rset.getString("BOARD_TITLE"));
+				board.setCreateDate(rset.getString("CREATE_DATE"));
+				board.setBoardWriter(rset.getString("BOARD_WRITER"));
+				board.setBoardContent(rset.getString("BOARD_CONTENT"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
 		
-		
-		
-		return null;
+		return board;
 	}
 
 }
