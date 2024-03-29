@@ -335,7 +335,6 @@
     <!------------------------------------------------------------>
             <div class="content_2">
                 <p id="p">영화 관리</p>
-                <form>
                 <div id="content_2_box"><!--컨텐트2 전체박스-->
 
                     <div id="cnt2_box_wrap"> <!-- 셀렉, 인풋, 버튼 전체 -->
@@ -406,15 +405,16 @@
                     
                     <div class="paging-area" align="center" style="margin-top:12px;">
                     	
-                    	<% for(int i = startPage; i <= endPage; i++) { System.out.println(i); %>
+                    	<% for(int i = startPage; i <= endPage; i++) { %>
                     	
                     		<% if(currentPage != i) { %>
-	                        	<button class="btn btn-outline-secondary" style="color:#ffffff" onclick="location.href='<%=contextPath %>/adminMovieCheck.admin?currentPage=<%=i%>'"><%= i %></button>
+							<button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
+					        onclick="location.href='<%=contextPath%>/adminMovieCheck.admin?currentPage=<%=i%>'"><%= i %></button>
 	                        <%} else {%>
 								 <button disabled class="btn btn-outline-secondary" style="color:#ffffff">
 								 <%= i %></button>                       
 	                        <%} %>
-                        <%} %>
+                        <% } %>
                     </div>
                     
                     <!--페이지 숫자-->
@@ -422,8 +422,8 @@
 
 
 
-                    </form>
                 </div><!--content_2_box끝 컨텐트2 전체박스임-->
+
 
 
 
