@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ page import="com.kh.board.model.vo.Board, com.kh.common.model.vo.PageInfo,
+<%@ page import="com.kh.board.model.vo.Board,
+				 com.kh.common.model.vo.PageInfo,
  				 java.util.ArrayList"%>
     
 <%
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("boardList");
+	Board board = (Board)request.getAttribute("board");
 	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
 	
 	int currentPage = pi.getCurrentPage();
@@ -296,13 +298,13 @@
                         
                         <% } else { %>
                         
-                        	<% for(Board board : list) { %>
+                        	<% for(Board b : list) { %>
                         <tr class="board">
-                            <td id="list-no"><%= board.getBoardNo() %></td>
-                            <td id="list-ca"><%= board.getBoardCategory() %></td>
-                            <td id="list-title"><%= board.getBoardTitle() %></td>
-                            <td id="list-count"><%= board.getBoardWriter() %></td>
-                            <td id="list-date"><%= board.getCreateDate() %></td>
+                            <td id="list-no"><%= b.getBoardNo() %></td>
+                            <td id="list-ca"><%= b.getBoardCategory() %></td>
+                            <td id="list-title"><%= b.getBoardTitle() %></td>
+                            <td id="list-count"><%= b.getBoardWriter() %></td>
+                            <td id="list-date"><%= b.getCreateDate() %></td>
                         </tr>
                         	<% } %>
                         <% } %>

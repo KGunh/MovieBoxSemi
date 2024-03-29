@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+
+<%@ page import="com.kh.board.model.vo.Category, java.util.ArrayList" %>
+    
+<%
+	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("category");
+
+	System.out.println(list);
+%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -41,7 +50,7 @@
         /* 카테고리*/
         #board-category{
             width: 1200px;
-            height: 90px;
+            height: 92px;
             text-align: center;
             line-height: 90px;
             font-size: 20px;
@@ -52,32 +61,29 @@
         }
 
         .notice-tap{
-            width: 595px;
+            width: 600px;
             height: 90px;
-            display: inline-block;
+            float: left;
+            font-weight: bolder;
+            cursor: pointer;
             color: #FFC145;
-            /* border: 1px solid palegreen; */
         }
-
+        
         .qna-tap{
-            width: 595px;
+            width: 600px;
             height: 90px;
-            color: #FFC145;
+            color: #1A1A1A;
             display: inline-block;
             left: 0;
+            cursor: pointer;
+            background-color: #FFC145;
         }
 
         .notice-tap:hover{
-            color: #1A1A1A;
             background-color: #FFC145;
-
-        }
-
-        .qna-tap:hover{
             color: #1A1A1A;
-            background-color: #FFC145;
         }
-
+        
         /* insert-title */
         #insert-title{
             width: 1200px;
@@ -243,8 +249,8 @@
         
                 <!-- 카테고리 -->
                 <div id="board-category">
-                    <div class="notice-tap">공지사항</div>
-                    <div class="qna-tap">QnA</div>
+	                <div class="notice-tap" onclick="openNoticePage();">공지사항</div>
+	                <div class="qna-tap" onclick="openQnaPage();">QnA</div>
                 </div> <!-- board-category -->
 
                 <div id="insert-title">고객 문의사항</div>
@@ -258,38 +264,38 @@
 
 
                     <div class="detail-content-box">
-                        <div id="insert-box">
+	                    <form action="<%= contextPath %>/insert.board" method="post" id="insert-box">
+	                    
+	                    <input type="hidden" name="userNo" value="<%= loginUser.getMemberNo()%>" />
+	                    
                             <div id="category-box">
                                 <div id="box-name">분류</div>
-                                <select name="#" id="select-category" >
-                                    <option value="">장르</option>
-                                    <option value="">액션</option>
-                                    <option value="">로맨스</option>
-                                    <option value="">공포/스릴러</option>
-                                    <option value="">코미디</option>
-                                    <option value="">애니메이션</option>
+                                
+                                <select name="category" id="select-category">
+                                <% for(Category c : list) { %>
+									<option value="<%= c.getCategoryNo() %>">
+										<%= c.getCategoryName() %>
+									</option>
+								<% } %>
                                 </select>
-                            </div> <!-- category box -->
+                           	</div> 
 
                             <div id="title-box">
                                 <div id="box-name">제목</div>
-                                <input type="text" id="select-title">
+                                <input type="text" id="select-title" name="title">
                             </div>
 
                             <div id="content-box">
                                 <div id="box-name">내용</div>
-                                <textarea id="select-content" cols="30" rows="10"></textarea>
+                                <textarea id="select-content" cols="30" rows="10" name="content"></textarea>
                             </div>
-
-                            
-
-                        </div> <!-- insert box -->
-
-                        <div id="insert-btn" align="center">
-                            <button class="notice-detail-btn">등록</button>
-                            <button class="notice-detail-btn1">취소</button>
-                        </div>
-
+	
+	
+	                        <div id="insert-btn" align="center">
+	                            <button class="notice-detail-btn">등록</button>
+	                            <button class="notice-detail-btn1">취소</button>
+	                        </div>
+						</form>
                     </div> <!-- detail-content-box -->
 
 
@@ -303,6 +309,22 @@
     </div> <!-- wrap -->
 
 	<%@ include file="../common/footer.jsp" %>
+	
+	    	<script>
+			function openNoticePage(){
+				location.href = '<%=contextPath %>/list.notice?currentPage=1';
+			}
+			
+			function openQnaPage(){
+				location.href = '<%= contextPath %>/list.board?currentPage=1';
+			}
+			
+    		function backPage(){
+    			location.href = '<%=contextPath%>/list.board?currentPage=1';
+    		}
+
+    	
+    	</script>
 	
 	
 </body>

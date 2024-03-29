@@ -11,6 +11,9 @@ public class Board {
 	private String boardWriter;
 	private String boardCategory;
 	
+	private int categoryNo;
+	private int userNo;
+	
 	public Board() {
 		super();
 	}
@@ -30,6 +33,23 @@ public class Board {
 	
 	
 	
+	
+	public int getUserNo() {
+		return userNo;
+	}
+
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
+	}
+
+	public int getCategoryNo() {
+		return categoryNo;
+	}
+
+	public void setCategoryNo(int categoryNo) {
+		this.categoryNo = categoryNo;
+	}
+
 	public String getBoardCategory() {
 		return boardCategory;
 	}

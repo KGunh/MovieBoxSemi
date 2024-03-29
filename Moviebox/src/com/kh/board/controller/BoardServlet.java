@@ -44,6 +44,8 @@ public class BoardServlet extends HttpServlet {
 		switch(mapping) {
 		case "list" : view = bc.selectBoardList(request, response); flag = false; break; // dispatcher
 		case "detail" : view = bc.detailBoard(request, response); flag = false; break;
+		case "enrollForm" : view = bc.selectCategoryList(request, response); flag = false; break;
+		case "insert" : view = bc.insertBoard(request, response); flag = false; break;
 		}
 		
 		
