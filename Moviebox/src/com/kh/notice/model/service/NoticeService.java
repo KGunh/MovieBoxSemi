@@ -9,6 +9,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.board.model.vo.Category;
+import com.kh.common.model.vo.PageInfo;
 import com.kh.notice.model.dao.NoticeDao;
 import com.kh.notice.model.vo.Notice;
 
@@ -23,12 +24,22 @@ public class NoticeService {
 		
 		return list;
 	}
+	
+	// 페이징바
+	public int noticeListCount() {
+		
+		Connection conn = getConnection();
+		int result = new NoticeDao().noticeListCount(conn);
+		close(conn);
+		
+		return result;
+	}
 
 	// 공지사항 조회
-	public Notice selectNotice(int noticeNo) {
+	public Notice detailNotice(int noticeNo) {
 		Connection conn = getConnection();
 		
-		Notice notice = new NoticeDao().selectNotice(conn, noticeNo);
+		Notice notice = new NoticeDao().detailNotice(conn, noticeNo);
 		
 		close(conn);
 		
@@ -40,7 +51,7 @@ public class NoticeService {
 	public Notice updateNoticeForm(int noticeNo) {
 		Connection conn = getConnection();
 		
-		Notice notice = new NoticeDao().selectNotice(conn, noticeNo);
+		Notice notice = new NoticeDao().detailNotice(conn, noticeNo);
 		
 		close(conn);
 		
@@ -114,7 +125,22 @@ public class NoticeService {
 		
 		return result;
 	}
-	
+
+	public int countNotice(int noticeNo) {
+		
+		Connection conn = getConnection();
+		int result = new NoticeDao().countNotice(conn, noticeNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+
+
 	
 	
 	

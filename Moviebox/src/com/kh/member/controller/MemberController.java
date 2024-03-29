@@ -465,7 +465,19 @@ public class MemberController {
 		return view;
 	}
 	
-	
+	public void idCheck(HttpServletRequest request, HttpServletResponse response) {
+		String checkId = request.getParameter("checkId");
+		
+		int count = new MemberService().idCheck(checkId);
+		
+		response.setContentType("text/html; charset=UTF-8");
+
+		try {
+			response.getWriter().print(count > 0 ? "N" : "Y");
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 	

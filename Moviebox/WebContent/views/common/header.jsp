@@ -33,7 +33,7 @@
         }
         
         .content{
-            height: 910px;
+            height: auto;
             width: 500px;
             margin: auto;
             margin-top: 50px;
@@ -41,7 +41,8 @@
         }
 
         body {
-            background-color: #1A1A1A
+            background-color: #1A1A1A;
+
         }
 
         .header {

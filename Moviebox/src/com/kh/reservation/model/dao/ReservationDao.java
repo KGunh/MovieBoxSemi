@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.kh.common.model.vo.Location;
+import com.kh.common.model.vo.Price;
 import com.kh.common.model.vo.Reservation;
 import com.kh.movie.model.vo.Movie;
 import com.kh.reservation.model.vo.Seat;
@@ -160,14 +161,50 @@ public class ReservationDao {
 	}
 
 	public Reservation checkReservationInfo(Connection conn, int screenNo, int movieNo, int teenAge, int adultAge) {
-		Reservation reservation = null;
+		Reservation reservation = new Reservation();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("checkReservationInfo");
 		
-		
-		return null;
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, teenAge);
+			pstmt.setInt(2, adultAge);
+			pstmt.setInt(3, movieNo);
+			pstmt.setInt(4, screenNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				reservation.setMemberNo(rset.getInt("MOVIE_NO"));
+				reservation.setMovieTitle(rset.getString("MOVIE_TITLE"));
+				reservation.setWatchDate(rset.getString("WATCH_DATE"));
+				reservation.setTheaterName(rset.getString("THEATER_NAME"));
+				reservation.setScreenName(rset.getNString("SCREEN_NAME"));
+				
+				Movie m = new Movie();
+				m.setGenreName(rset.getString("GENRE_NAME"));
+				m.setFilePath(rset.getString("FILE_PATH"));
+				m.setFileName(rset.getString("CHANGE_NAME"));
+				m.setMovieRt(rset.getString("MOVIE_RT"));
+				m.setMovieRelease(rset.getNString("MOVIE_RELEASE"));
+				
+				Price p = new Price();
+				p.setTotalPrice(rset.getInt("TOTAL_PRICE"));
+				
+			    reservation.setMovie(m);
+			    reservation.setPrice(p);
+			}			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return reservation;
 	}
 	
 	

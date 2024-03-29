@@ -246,7 +246,7 @@
             <!-- 카테고리 -->
             <div id="board-category">
                 <div class="notice-tap"><a href="noticeList.jsp">공지사항</a></div>
-                <div class="qna-tap"><a href="../board/qnaList.jsp">QnA</a></div>
+                <div class="qna-tap"><a href="../board/boardList.jsp">QnA</a></div>
             </div> <!-- board-category -->
 
             <!-- 검색 -->

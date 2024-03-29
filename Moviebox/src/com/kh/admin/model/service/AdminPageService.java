@@ -7,6 +7,7 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.admin.model.dao.AdminPageDao;
+import com.kh.board.model.vo.Board;
 import com.kh.movie.model.vo.Movie;
 import com.kh.notice.model.vo.Notice;
 
@@ -40,8 +41,21 @@ public class AdminPageService {
 	
 	
 	
+	// 문의 목록 전체 출력
+	public ArrayList<Board> adminSelectQnAList(){
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Board> list = new AdminPageDao().adminSelectQnAList(conn);
+		
+		close(conn);
+		
+		return list;
+	}
 	
 	
+	//페이징ㅇㅇㅇㅇㅂ바....................
+	public
 	
 	
 	

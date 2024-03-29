@@ -14,14 +14,14 @@ import java.util.Properties;
 import com.kh.board.model.vo.Board;
 import com.kh.notice.model.dao.NoticeDao;
 
-public class QnaDao {
+public class BoardDao {
 	
 	private Properties prop = new Properties();
 	
-	public QnaDao() {
+	public BoardDao() {
 		
 		String fileName = NoticeDao.class
-				.getResource("/sql/board/qna-mapper.xml")
+				.getResource("/sql/board/board-mapper.xml")
 				.getPath();
 		
 		try {
@@ -31,14 +31,14 @@ public class QnaDao {
 		}
 	}
 
-	public ArrayList<Board> selectQnaList(Connection conn) {
+	// 전체 목록 출력
+	public ArrayList<Board> selectBoardList(Connection conn) {
 		
 		ArrayList<Board> list = new ArrayList();
 		ResultSet rset = null;
 		PreparedStatement pstmt = null;
 		
-		String sql = prop.getProperty("selectQnaList");
-		
+		String sql = prop.getProperty("selectBoardList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -50,14 +50,12 @@ public class QnaDao {
 				Board board = new Board();
 				
 				board.setBoardNo(rset.getInt("BOARD_NO"));
-				board.setBoardCategory(rset.getString("CATEGORY_NO"));
+				board.setBoardCategory(rset.getString("CATEGORY_NAME"));
 				board.setBoardTitle(rset.getString("BOARD_TITLE"));
 				board.setBoardWriter(rset.getString("BOARD_WRITER"));
 				board.setCreateDate(rset.getString("CREATE_DATE"));
 				
 				list.add(board);
-				
-				
 			}
 			
 		} catch (SQLException e) {
@@ -68,6 +66,50 @@ public class QnaDao {
 		}
 		
 		return list;
+	}
+	
+	
+	// 페이징바
+	public int selectListCount(Connection conn) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectListCount");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			listCount = rset.getInt("COUNT(*)");
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return listCount;
+	}
+	
+
+	public Board detailBoard(Connection conn, int boardNo) {
+		
+		Board board = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("detailBoard");
+		
+		
+		
+		
+		return null;
 	}
 
 }

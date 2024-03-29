@@ -15,10 +15,11 @@ public class Reservation {
 	private String movieTitle;
 	private String theaterName;
 	private String watchDate;
-	private Price price;
 	
+	private Price price;
 	private List<Seat> seatList;
 	private Movie movie;
+	private String screenName;
 	
 	
 	public Reservation() {
@@ -103,6 +104,15 @@ public class Reservation {
 	}
 	public void setMovie(Movie movie) {
 		this.movie = movie;
+	}
+	
+	
+	
+	public String getScreenName() {
+		return screenName;
+	}
+	public void setScreenName(String screenName) {
+		this.screenName = screenName;
 	}
 	@Override
 	public String toString() {
