@@ -273,8 +273,13 @@
             </div> <!-- search-notice -->
             
             <!-- 회원만 작성 할 수 있게  -->
+
             <div id="qna-insert">
-                <button id="qna-insert-btn" onclick="boardInsert();">글쓰기</button>
+            <% if (loginUser == null) { %>
+                <button id="qna-insert-btn" onclick="noMember();">글쓰기</button>
+            <% } else { %>
+            	<button id="qna-insert-btn" onclick="boardInsert();">글쓰기</button>
+            <% } %>
             </div>
 
 
@@ -361,6 +366,10 @@
     			location.href = '<%=contextPath%>/detail.board?boardNo=' + boardNo;
             });
     		
+    		function noMember(){
+    			location.href = '<%= contextPath %>/list.board?currentPage=1';
+    			alert('로그인이 필요한 서비스 입니다.');
+    		}
     	
     	</script>
 

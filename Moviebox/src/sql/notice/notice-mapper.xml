@@ -24,7 +24,7 @@
 		                      TB_NOTICE.STATUS = 'Y'
 		                 ORDER
 		                    BY
-		                      CREATE_DATE DESC) A)
+		                      NOTICE_NO DESC) A)
 		 WHERE SNUM BETWEEN ? AND ?
 	</entry>
 	

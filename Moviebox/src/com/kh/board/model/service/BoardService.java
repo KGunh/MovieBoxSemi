@@ -54,6 +54,8 @@ public class BoardService {
 		
 		if(result > 0) {
 			commit(conn);
+		} else {
+			rollback(conn);
 		}
 		
 		close(conn);
@@ -61,4 +63,15 @@ public class BoardService {
 		return result;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
