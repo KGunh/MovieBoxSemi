@@ -135,7 +135,7 @@ public class ReservationController {
 		
 		for(int i = 0; i < seatArray.length; i++) {
 			Seat seat = new Seat();
-			
+
 			seat.setSeatNo(seatArray[i]);
 			
 			seatList.add(seat);
