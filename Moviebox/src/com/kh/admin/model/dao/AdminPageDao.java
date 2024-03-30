@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.board.model.vo.Board;
+import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.movie.model.vo.Movie;
 import com.kh.notice.model.vo.Notice;
@@ -270,6 +271,60 @@ public class AdminPageDao {
 		}
 		return listCount;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	public ArrayList<Genre> SelectGenreList(Connection conn){
+		
+		ArrayList<Genre> genrelist = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("SelectGenreList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				genrelist.add(
+						new Genre(
+								rset.getString("GENRE_CODE"),
+								rset.getString("GENRE_NAME")
+								));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return genrelist;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

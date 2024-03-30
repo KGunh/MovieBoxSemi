@@ -48,7 +48,7 @@ public class AdminPageServlet extends HttpServlet {
 			view = admin.adminSelectMovieList(request, response); flag = false; break; //영화목록전체
 			
 		case "adminMovieInsert" :
-			view = "/views/admin/adminMovieInsert.jsp"; break; //영화등록
+			view = admin.adminMovieInsert(request, response); flag = false; break; //영화등록
 
 			
 		case "adminBoardCheck" :
@@ -57,9 +57,7 @@ public class AdminPageServlet extends HttpServlet {
 		case "adminBoardInsert" :
 			view = "/views/admin/adminBoardInsert.jsp"; break; //공지등록
 			
-			
-//		case "adminQnACheck" :
-//			view = "/views/admin/adminQnACheck.jsp"; break; //문의목록
+
 			
 		case "adminQnACheck" :
 			view = admin.adminSelectQnAList(request, response); flag = false; break; //문의목록전체

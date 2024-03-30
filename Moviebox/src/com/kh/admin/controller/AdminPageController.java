@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.kh.admin.model.service.AdminPageService;
 import com.kh.board.model.vo.Board;
+import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.movie.model.vo.Movie;
 import com.kh.notice.model.vo.Notice;
@@ -135,16 +136,33 @@ public class AdminPageController {
 		request.setAttribute("adminQnACheckList", list);
 		request.setAttribute("pageInfo", pi);
 		String view = "views/admin/adminQnACheck.jsp";
-	
-		
-
 		
 		return view;
 	}
 
 
 
-
+	public String adminMovieInsert(HttpServletRequest request, HttpServletResponse response) {
+		
+		ArrayList<Genre> genrelist = new AdminPageService().SelectGenreList();
+		
+		request.setAttribute("genreList", genrelist);
+		
+		
+		
+		String view = "views/admin/adminMovieInsert.jsp";
+		return view;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

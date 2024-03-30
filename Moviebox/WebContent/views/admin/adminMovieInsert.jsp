@@ -1,5 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList, com.kh.common.model.vo.Genre, com.kh.common.model.vo.PageInfo" %>    
+
+<%
+	ArrayList<Genre> genrelist = (ArrayList<Genre>)request.getAttribute("genreList");
+%>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -302,6 +309,7 @@
             margin-top: 10px;
             text-align: center;
             
+            
         }
 
         /*---------------------------------------*/
@@ -366,7 +374,10 @@
             padding-left: 7px;
             
         }
-
+        input{
+            padding-left: 5px;
+            
+        }
 
 
 
@@ -424,89 +435,72 @@
             <div class="content_2"><!--content_2 시작-->
                 <p id="p">영화 관리 > 영화 등록</p>
 
-            <form>
-                <div id="content_2_box"><!--컨텐트2 전체박스-->
-                    <div id="box_1">
-                        <div class="title">포스터</div>
-                        <div class="title">제목</div>
-                        <div class="title">장르</div>
-                        <div class="title">러닝타임</div>
-                        <div class="title">관람등급</div>
-                        <div class="title">개봉일</div>
-                        <div class="title">감독</div>
-                        <div class="title">출연진</div>
-                        <div class="title">줄거리</div>
-                    </div>
-                    <div id="box_2">
-                        <div id="sub_1">
-                            <div class="fileBox">
-                                <input type="file" name="file" id="file">
-                            </div>
-                            <div class="fileBox_2"></div>
-                        </div>
-
-                        
-                        <div id="sub_2">
-                            <input type="text" id="movieTitle" placeholder="영화 제목을 입력해 주세요.">
-                        </div>
-
-                        <div id="sub_3">
-                            <select name="#" id="select_1" >
-                                <option value="">장르</option>
-                                <option value="">액션</option>
-                                <option value="">로맨스</option>
-                                <option value="">공포/스릴러</option>
-                                <option value="">코미디</option>
-                                <option value="">애니메이션</option>
-                            </select>
-                        </div>
-
-                        <div id="sub_4">
-                            <input type="text" id="runningTime" placeholder="러닝타임을 입력해 주세요.">
-                        </div>
-
-                        <div id="sub_5">
-                            <input type="text" id="rating" placeholder="관람 등급을 입력해 주세요.">
-                        </div>
-
-                        <div id="sub_6">
-                            <input type="date" name="date" id="date">
-                        </div>
-
-                        <div id="sub_7">
-                            <input type="text" id="director" placeholder="감독을 입력해 주세요.">
-                        </div>
-
-                        <div id="sub_8">
-                            <input type="text" id="cast" placeholder="출연진을 입력해 주세요.">
-                        </div>
-
-                        <div id="sub_9">
-                            <textarea name="text" id="plot" cols="30" rows="10" placeholder="줄거리를 입력해 주세요."></textarea>
-                        </div>
-
-                        <div id="sub_10"><!--등록 버튼-->
-                            <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right;">등록</button>
-                        </div><!--등록 버튼-->
-
-
-
-
-
-
-
-
-
-
-                    </div><!--box2-->
-                    
-
-
-
-
-
-                </div><!--컨텐트2 전체박스 끝-->
-            </form>
+			<form action="InsertMovieServlet" method="post" enctype="multipart/form-data">
+			    <div id="content_2_box"><!--컨텐트2 전체박스-->
+			        <div id="box_1">
+			            <div class="title">포스터</div>
+			            <div class="title">제목</div>
+			            <div class="title">장르</div>
+			            <div class="title">러닝타임</div>
+			            <div class="title">관람등급</div>
+			            <div class="title">개봉일</div>
+			            <div class="title">감독</div>
+			            <div class="title">출연진</div>
+			            <div class="title">줄거리</div>
+			        </div>
+			        <div id="box_2">
+			            <div id="sub_1">
+			                <div class="fileBox">
+			                    <input type="file" id="file" name="poster" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
+			                </div>
+			                <div class="fileBox_2"></div>
+			            </div>
+			
+			            
+			            <div id="sub_2">
+			                <input type="text" name="title" id="movieTitle" placeholder="영화 제목을 입력해 주세요.">
+			            </div>
+			
+			            <div id="sub_3">
+			                <select name="genre" id="select_1" >
+								<% for(Genre g : genrelist) { %>
+									<option value="<%= g.getGenreCode()%>">
+										<%= g.getGenreName() %>
+									</option>
+								<% } %>
+			                </select>
+			            </div>
+			
+			            <div id="sub_4">
+			                <input type="text" name="running_time" id="runningTime" placeholder="러닝타임을 입력해 주세요.">
+			            </div>
+			
+			            <div id="sub_5">
+			                <input type="text" name="rated" id="rating" placeholder="관람 등급을 입력해 주세요.">
+			            </div>
+			
+			            <div id="sub_6">
+			                <input type="date" name="release_date" id="date">
+			            </div>
+			
+			            <div id="sub_7">
+			                <input type="text" name="director" id="director" placeholder="감독을 입력해 주세요.">
+			            </div>
+			
+			            <div id="sub_8">
+			                <input type="text" name="actors" id="cast" placeholder="출연진을 입력해 주세요.">
+			            </div>
+			
+			            <div id="sub_9">
+			                <textarea name="story" id="plot" cols="30" rows="10" placeholder="줄거리를 입력해 주세요."></textarea>
+			            </div>
+			
+			            <div id="sub_10"><!--등록 버튼-->
+			                <input type="submit" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right;" value="등록">
+			            </div><!--등록 버튼-->
+			        </div><!--box2-->
+			    </div><!--컨텐트2 전체박스 끝-->
+			</form>
 
 
 
