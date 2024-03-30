@@ -6,7 +6,6 @@
 <%
 	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("category");
 
-	System.out.println(list);
 %>
 
 <!DOCTYPE html>

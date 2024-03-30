@@ -139,7 +139,7 @@ public class NoticeController {
 			view = "/list.notice?currentPage=1";
 		} else {
 			session.setAttribute("alertMsg", "공지사항 작성 실패");
-			view = "views/member/noticeInsertForm.jsp";
+			view = "views/notice/noticeInsertForm.jsp";
 		}
 		
 		return view;

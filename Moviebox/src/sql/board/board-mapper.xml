@@ -14,19 +14,19 @@
 		                      BOARD_NO,
 		                      CATEGORY_NAME,
 		                      BOARD_TITLE,
-		                      BOARD_WRITER,
+		                      MEMBER_NAME,
 		                      TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE
 		                  FROM
 		                      TB_BOARD
 		                  JOIN
 		                      TB_CATEGORY USING (CATEGORY_NO)
 		                  JOIN
-		                      TB_MEMBER USING (MEMBER_NO)
+		                      TB_MEMBER ON (MEMBER_NO = BOARD_WRITER)
 		                 WHERE
 		                      TB_BOARD.STATUS = 'Y'
 		                 ORDER
 		                    BY
-		                      CREATE_DATE DESC) A)
+		                      BOARD_NO DESC) A)
 		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
@@ -46,19 +46,20 @@
 	      CATEGORY_NAME,
 	      BOARD_TITLE,
 	      TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE,
-	      BOARD_WRITER,
+	      MEMBER_NAME,
 	      BOARD_CONTENT
 	  FROM
 	      TB_BOARD
 	  JOIN
 	      TB_CATEGORY USING(CATEGORY_NO)
 	  JOIN
-	      TB_MEMBER USING(MEMBER_NO)
+	      TB_MEMBER ON(MEMBER_NO = BOARD_WRITER)
 	 WHERE
 	      BOARD_NO = ?
 	   AND
 	      TB_BOARD.STATUS = 'Y'
 	</entry>
+	
 	
 	<entry key="selectCategoryList">
 		SELECT
@@ -68,8 +69,40 @@
 		  	  TB_CATEGORY
 	</entry>
 	
-	
+
 	<entry key="insertBoard">
+		INSERT
+		  INTO
+	          TB_BOARD
+	          (
+	          BOARD_NO,
+	          BOARD_TITLE,
+	          BOARD_CONTENT,
+	          CREATE_DATE,
+	          CATEGORY_NO,
+	          BOARD_WRITER
+	          )
+	    VALUES
+		      (
+		      SEQ_BOARDNO.NEXTVAL,
+		      ?,
+		      ?,
+		      SYSDATE,
+	          ?,
+	          (
+	          SELECT
+		            MEMBER_NO
+		        FROM
+		            TB_MEMBER
+		       WHERE
+		            MEMBER_NO = ?
+		      )
+		      )
+
+	
+	</entry>
+	
+	<!-- <entry key="insertBoard">
 		INSERT
 		  INTO 
 		      TB_BOARD
@@ -78,7 +111,6 @@
 		      BOARD_TITLE,
 		      BOARD_CONTENT,
 		      CREATE_DATE,
-		      MEMBER_NO,
 		      CATEGORY_NO,
 		      BOARD_WRITER
 		      )
@@ -89,10 +121,9 @@
 		      ?,
 		      SYSDATE,
 		      ?,
-		      ?,
 		      ?
 		      )
-	</entry>
+	</entry> -->
 
 	
 </properties>

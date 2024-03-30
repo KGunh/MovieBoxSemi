@@ -59,7 +59,7 @@ public class BoardDao {
 				board.setBoardNo(rset.getInt("BOARD_NO"));
 				board.setBoardCategory(rset.getString("CATEGORY_NAME"));
 				board.setBoardTitle(rset.getString("BOARD_TITLE"));
-				board.setBoardWriter(rset.getString("BOARD_WRITER"));
+				board.setBoardWriter(rset.getString("MEMBER_NAME"));
 				board.setCreateDate(rset.getString("CREATE_DATE"));
 				
 				list.add(board);
@@ -124,7 +124,7 @@ public class BoardDao {
 				board.setBoardCategory(rset.getString("CATEGORY_NAME"));
 				board.setBoardTitle(rset.getString("BOARD_TITLE"));
 				board.setCreateDate(rset.getString("CREATE_DATE"));
-				board.setBoardWriter(rset.getString("BOARD_WRITER"));
+				board.setBoardWriter(rset.getString("MEMBER_NAME"));
 				board.setBoardContent(rset.getString("BOARD_CONTENT"));
 			}
 		} catch (SQLException e) {
@@ -168,16 +168,15 @@ public class BoardDao {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("inserBoard");
+		String sql = prop.getProperty("insertBoard");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, board.getBoardTitle());
 			pstmt.setString(2, board.getBoardContent());
-			pstmt.setInt(3, board.getUserNo());
-			pstmt.setInt(4, board.getCategoryNo());
-			pstmt.setString(5, board.getBoardWriter());
+			pstmt.setInt(3, board.getCategoryNo());
+			pstmt.setInt(4, board.getUserNo());
 			
 			result = pstmt.executeUpdate();
 			

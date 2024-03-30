@@ -107,7 +107,7 @@ public class BoardController {
 		String view = "";
 		
 		if(result > 0) {
-			request.setAttribute("alertMsg", "문의사항이 등록되었습니다.");
+			session.setAttribute("alertMsg", "문의사항이 등록되었습니다.");
 			view = "/list.board?currentPage=1";
 		} else {
 			session.setAttribute("alertMsg", "문의사항 작성 실패");
