@@ -8,6 +8,7 @@ import java.util.ArrayList;
 
 import com.kh.admin.model.dao.AdminPageDao;
 import com.kh.board.model.vo.Board;
+import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.movie.model.vo.Movie;
 import com.kh.notice.model.vo.Notice;
@@ -89,6 +90,39 @@ public class AdminPageService {
 		
 		return result;
 	}
+	
+	
+	
+	
+	
+	
+	public ArrayList<Genre> SelectGenreList() {
+		
+		Connection conn = getConnection();
+		
+		ArrayList<Genre> genrelist = new AdminPageDao().SelectGenreList(conn);
+		
+		close(conn);
+		
+		return genrelist;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	
