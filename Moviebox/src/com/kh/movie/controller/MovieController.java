@@ -17,6 +17,7 @@ public class MovieController {
 		String view = "views/movie/movieList.jsp";
 		
 		return view;
+		
 	}
 
 }

@@ -5,7 +5,7 @@
     
 <%
 	ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("movie");
-	System.out.println(list);
+	System.out.println(list); // 리스트 출력 확인 
 %>
     
 <!DOCTYPE html>
@@ -225,7 +225,7 @@
             <div class="movie-content-body">
 				
 			<% if(list.isEmpty()) { %>
-				등록된 게시글이 존재하지 않습니다. <br>
+				등록된 영화가 존재하지 않습니다. <br>
 			<% } else { %>
                 <div class="movie-conten1">
                     <div class="movie-content">
@@ -378,7 +378,6 @@
             
             <script>
             function detailPage(){
-            	
             	location.href = '<%= contextPath %>/views/movie/movieDetail.jsp';
             }
             

@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
@@ -32,8 +33,17 @@ public class MovieDao {
 		
 		String sql = prop.getProperty("selectMovieList");
 		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			// 담기 24.03.30
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
 		
-		return null;
+		
+		return movieList;
 	}
 
 }
