@@ -223,7 +223,7 @@
                     <div class="detail-box2">
                         <div class="detail-title-box2">
                             <div class="detail-date"><a>작성일 : <%= notice.getCreateDate() %></a></div>
-                            <div class="detail-count"><a> 조회수 : <%= notice.getCount() %></div>
+                            <div class="detail-count"><a> 조회수 : <%= notice.getCount() %></a></div>
                         </div>
                     </div>
 
@@ -271,7 +271,7 @@
     		function noticeDelete(){
     			const result = confirm('삭제하려면 확인을 눌러주세요.');
                 if(result){
-                	location.href = '<%=contextPath%>/remove.notice?noticeNo=<%=notice.getNoticeNo()%>';
+                	location.href = '<%=contextPath%>/delete.notice?noticeNo=<%=notice.getNoticeNo()%>';
                 } 
                 else{
             		$('tbody > tr.list').click(function(){

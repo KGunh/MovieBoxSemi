@@ -367,7 +367,7 @@
             });
     		
     		function noMember(){
-    			location.href = '<%= contextPath %>/list.board?currentPage=1';
+    			location.href = ('<%=contextPath%>/loginForm.me');
     			alert('로그인이 필요한 서비스 입니다.');
     		}
     	

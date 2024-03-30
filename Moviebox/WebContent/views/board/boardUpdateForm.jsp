@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 
-<%@ page import="com.kh.board.model.vo.Category, java.util.ArrayList" %>
+<%@ page import="com.kh.board.model.vo.*, java.util.ArrayList" %>
     
 <%
 	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("category");
-
+	Board board = (Board)request.getAttribute("board");
 %>
 
 <!DOCTYPE html>
@@ -239,6 +239,12 @@
 
 	<%@ include file="../common/header.jsp" %>
 	
+	<% if(loginUser == null) { %>
+		<script>
+			alert('작성자만 수정 가능합니다.');
+		</script>
+	
+	<% } else { %>
     <div id="wrap">
         <div id="notice-detail">
             <!-- 전체 감싸는 부분 -->
@@ -263,35 +269,42 @@
 
 
                     <div class="detail-content-box">
-	                    <form action="<%= contextPath %>/insert.board" method="post" id="insert-box">
+	                    <form action="<%= contextPath %>/update.board" method="post" id="insert-box">
 	                    
-	                    <input type="hidden" name="userNo" value="<%= loginUser.getMemberNo()%>" />
+	                    <input type="hidden" name="boardNo" value="<%= board.getBoardNo()%>" />
 	                    
                             <div id="category-box">
                                 <div id="box-name">분류</div>
                                 
                                 <select name="category" id="select-category">
                                 <% for(Category c : list) { %>
-									<option value="<%= c.getCategoryNo() %>">
+									<option value="<%= c.getCategoryNo() %>" class="<%= c.getCategoryName() %>">
 										<%= c.getCategoryName() %>
 									</option>
 								<% } %>
                                 </select>
+                                
+                                <script>
+                                	$(function(){
+                                		$('option[class="<%=board.getBoardCategory()%>"]').attr('selected', 'true');
+                                	})
+                                </script>
+                                
                            	</div> 
 
                             <div id="title-box">
                                 <div id="box-name">제목</div>
-                                <input type="text" id="select-title" name="title">
+                                <input type="text" id="select-title" name="title" value="<%= board.getBoardTitle() %>">
                             </div>
 
                             <div id="content-box">
                                 <div id="box-name">내용</div>
-                                <textarea id="select-content" cols="30" rows="10" name="content"></textarea>
+                                <textarea id="select-content" cols="30" rows="10" name="content"><%= board.getBoardContent() %></textarea>
                             </div>
 	
 	
 	                        <div id="insert-btn" align="center">
-	                            <button class="notice-detail-btn">등록</button>
+	                            <button type="submit" class="notice-detail-btn">등록</button>
                 				<button type="button" class="notice-detail-btn1" onclick="history.back()">취소</button>
 	                        </div>
 						</form>
@@ -306,7 +319,8 @@
             </div> <!-- notice-list -->
         </div> <!-- notice-detail -->
     </div> <!-- wrap -->
-
+	
+	<% } %> <!-- 상단 if문 끝 -->
 	<%@ include file="../common/footer.jsp" %>
 	
 	    	<script>

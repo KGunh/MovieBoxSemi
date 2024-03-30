@@ -117,12 +117,86 @@ public class BoardController {
 		return view;
 	}
 	
-//	
-//	public String insertCategoryList(HttpServletRequest request, HttpServletResponse response) {
-//		Array
-//	}
+	
+	// 글 수정
+	public String updateBoard(HttpServletRequest request, HttpServletResponse response) {
+		
+		HttpSession session = request.getSession();
+		
+		int boardCategory = Integer.parseInt(request.getParameter("category"));
+		
+		String boardTitle = request.getParameter("title");
+		String boardContent = request.getParameter("content");
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		
+		Board board = new Board();
+		board.setCategoryNo(boardCategory);
+		board.setBoardTitle(boardTitle);
+		board.setBoardContent(boardContent);
+		board.setBoardNo(boardNo);
+		
+		int result = new BoardService().updateBoard(board);
+		request.setAttribute("board", result);
+		
+		String view = "";
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "수정 완료");
+			view = "/detail.board?boardNo=" + boardNo;
+		} else {
+			session.setAttribute("alertMsg", "수정 실패");
+			view = "view/board/boardUpdateForm.jsp";
+		}
+		
+		return view;
+	}
 	
 	
+	public String updateBoardForm(HttpServletRequest request, HttpServletResponse response) {
+		
+		ArrayList<Category> list = new BoardService().selectCategoryList();
+		
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		Board board = new BoardService().detailBoard(boardNo);
+		
+		request.setAttribute("category", list);
+		request.setAttribute("board", board);
+		
+		String view = "views/board/boardUpdateForm.jsp";
+		
+		return view;
+	}
+	
+	
+	public String deleteBoard(HttpServletRequest request, HttpServletResponse response) {
+		
+		HttpSession session = request.getSession();
+		String boardNo = request.getParameter("boardNo");
+		int result = new BoardService().deleteBoard(boardNo);
+		
+		String view = "";
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "문의글이 삭제되었습니다.");
+			view ="/list.board?currentPage=1";
+		} else {
+			session.setAttribute("alertMsg", "문의글 삭제 실패");
+			view = "/list.board?currentPage=1";
+		}
+		
+		return view;
+	}
 	
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

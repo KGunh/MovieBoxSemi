@@ -111,10 +111,10 @@ public class NoticeService {
 	}
 	
 	
-	public int removeNotice(String noticeNo) {
+	public int deleteNotice(String noticeNo) {
 		
 		Connection conn = getConnection();
-		int result = new NoticeDao().removeNotice(conn, noticeNo);
+		int result = new NoticeDao().deleteNotice(conn, noticeNo);
 		
 		if(result > 0) {
 			commit(conn);
@@ -149,11 +149,7 @@ public class NoticeService {
 
 
 	
-	
-	
-	
-	
-	
+
 	
 	
 

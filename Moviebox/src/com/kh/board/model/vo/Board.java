@@ -115,11 +115,15 @@ public class Board {
 		this.status = status;
 	}
 
+
+	
+
 	@Override
 	public String toString() {
-		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
-				+ ", boardWriter=" + boardWriter + ", count=" + count + ", createString=" + createDate + ", status="
-				+ status + "]";
+		return "Board [userNo =" + userNo + ", boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
+				+ ", createDate=" + createDate + ", count=" + count + ", status=" + status + ", boardWriter="
+				+ boardWriter + ", boardCategory=" + boardCategory + ", categoryNo=" + categoryNo
+				+ "]";
 	}
 
 	@Override

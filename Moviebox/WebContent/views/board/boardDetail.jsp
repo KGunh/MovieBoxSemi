@@ -5,7 +5,6 @@
     
 <%
 	Board board = (Board)request.getAttribute("board");
-
 %>    
     
     
@@ -230,6 +229,8 @@
                 <div class="notice-content">
                     <div class="detail-box1">
                         <div class="detail-title-box1">
+                        
+                        
                             <div class="detail-category"><span>No.<%=board.getBoardNo() %> [<%= board.getBoardCategory() %>]</span></div>
                             <div class="detail-title"><span><%= board.getBoardTitle() %></span></div>
                         </div>
@@ -238,7 +239,7 @@
                     <div class="detail-box2">
                         <div class="detail-title-box2">
                             <div class="detail-date"><a><%= board.getCreateDate() %></a></div>
-                            <div class="detail-count"><a>작성자 : <%= board.getBoardWriter() %></div>
+                            <div class="detail-count"><a>작성자 : <%= board.getBoardWriter() %></a></div>
                         </div>
                     </div>
 
@@ -258,11 +259,12 @@
             </div> <!-- notice-content -->
 
                 <div class="notice-btn" align="center">
+                
                     <button class="board-detail-btn" onclick="backPage();">목록</button>
-                    <% if(loginUser != null && loginUser.getMemberName() == board.getBoardWriter()) { %>
-	                    <button class="notice-detail-btn" onclick="noticeUpdatePage();">수정</button> 
-	                    <button class="notice-detail-btn" onclick="noticeDelete();">삭제</button>
-                    <% } %>
+                    <% if(loginUser != null && loginUser.getMemberNo() == board.getUserNo()) { %>
+	                    <button class="board-detail-btn" onclick="boardUpdatePage();">수정</button> 
+	                    <button class="board-detail-btn" onclick="boardDelete();">삭제</button>
+	                <% } %>
                 </div>
 
 
@@ -284,6 +286,23 @@
 			
     		function backPage(){
     			location.href = '<%=contextPath%>/list.board?currentPage=1';
+    		}
+
+    		function boardUpdatePage(){
+    			location.href = '<%=contextPath%>/updateForm.board?boardNo=<%=board.getBoardNo()%>';
+    		}
+    		
+    		function boardDelete(){
+    			const result = confirm('문의글을 삭제하시겠습니까?');
+                if(result){
+                	location.href = '<%=contextPath%>/delete.board?boardNo=<%=board.getBoardNo()%>';
+                } 
+                else{
+            		$('tbody > tr.list').click(function(){
+            			const boardNo = $(this).children().eq(0).text();
+            			location.href = '<%=contextPath%>/detail.board?boardNo=' + boardNo;
+                    });
+                }
     		}
 
     	

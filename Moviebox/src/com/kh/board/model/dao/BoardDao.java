@@ -126,6 +126,7 @@ public class BoardDao {
 				board.setCreateDate(rset.getString("CREATE_DATE"));
 				board.setBoardWriter(rset.getString("MEMBER_NAME"));
 				board.setBoardContent(rset.getString("BOARD_CONTENT"));
+				board.setUserNo(rset.getInt("MEMBER_NO"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -185,6 +186,51 @@ public class BoardDao {
 		} finally {
 			close(pstmt);
 		}
+		return result;
+	}
+
+	public int updateBoard(Connection conn, Board board) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("updateBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, board.getCategoryNo());
+			pstmt.setString(2, board.getBoardTitle());
+			pstmt.setString(3, board.getBoardContent());
+			pstmt.setInt(4, board.getBoardNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public int deleteBoard(Connection conn, String boardNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("deleteBoard");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, Integer.parseInt(boardNo));
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
 		return result;
 	}
 

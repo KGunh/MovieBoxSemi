@@ -109,7 +109,7 @@
 	
 	
 	
-	<entry key="removeNotice">
+	<entry key="deleteNotice">
 	
 		UPDATE
 			  TB_NOTICE

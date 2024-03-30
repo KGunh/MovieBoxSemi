@@ -49,7 +49,6 @@ public class BoardService {
 	public int insertBoard(Board board) {
 		
 		Connection conn = getConnection();
-		
 		int result = new BoardDao().insertBoard(conn, board);
 		
 		if(result > 0) {
@@ -64,7 +63,35 @@ public class BoardService {
 	}
 
 	
-	
+	public int updateBoard(Board board) {
+		
+		Connection conn = getConnection();
+		int result = new BoardDao().updateBoard(conn, board);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+
+	public int deleteBoard(String boardNo) {
+		
+		Connection conn = getConnection();
+		int result = new BoardDao().deleteBoard(conn, boardNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
 	
 	
 	
