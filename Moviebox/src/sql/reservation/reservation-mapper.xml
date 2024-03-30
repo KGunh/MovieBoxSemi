@@ -139,17 +139,16 @@
 		       ) 
 		VALUES 
 		       (
-		       SEQ_TKNO.NEXTVAL,
+		       ?,
 		       ?,
 		       ?,
 		       ?,
 		       DEFAULT,
 		       SYSDATE
 		       )
-	
 	</entry>
 	
-	<entry key="insertPriceSheetTeen">
+	<entry key="insertPriceSheet">
 		INSERT
 		  INTO
 		  	   TB_PRICESHEET
@@ -159,26 +158,29 @@
 		  	   )
 	  	VALUES
 		  	   (
-		  	   1,
+		  	   ?,
 		  	   ?
 		  	   )
 	
 	</entry>
 	
-	<entry key="insertPriceSheetAdult">
+	<entry key="insertSeat">
 		INSERT
 		  INTO
-		  	   TB_PRICESHEET
+		  	   TB_SEAT
 		  	   (
-		  	  	GRADE,
-		  	  	TICKET_NO
+		  	    SEAT_NO,
+				SCREEN_NO,
+				TICKET_NO
 		  	   )
 	  	VALUES
 		  	   (
-		  	   2,
-		  	   ?
+		  	    ?,
+		  	    ?,
+		  	    ?
 		  	   )
-	
+		  
+		  
 	</entry>
 	
 	
