@@ -8,7 +8,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
@@ -214,33 +213,35 @@ public class ReservationDao {
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("insertReservation");
-		// insert하고 자동으로 pk값 빼오는 메서드가 있음!!!
-		// pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
-		// rset = pstmt.getGeneratedKeys();
-		// insert한 행의 pk값을 반환해줌
 		
 		try {
-			pstmt = conn.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS);
+			// 시퀀스 값을 먼저 반환받고
+			pstmt = conn.prepareStatement("SELECT SEQ_TKNO.NEXTVAL AS KEY FROM DUAL");
+			rset = pstmt.executeQuery();
 			
-			pstmt.setInt(1, reservation.getSeatList().size());			
-			pstmt.setInt(2, reservation.getMemberNo());
-			pstmt.setInt(3, reservation.getScreenNo());
+			if(rset.next()) {
+				key = rset.getInt("KEY");
+			}
+			// 반환받은 시컨스 값을 사용하여 insert -> 다음 테이블에 key값을 사용하여 insert하기 위해서
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, key);
+			pstmt.setInt(2, reservation.getSeatList().size());			
+			pstmt.setInt(3, reservation.getMemberNo());
+			pstmt.setInt(4, reservation.getScreenNo());
 
 			pstmt.executeUpdate();
-			
-			rset = pstmt.getGeneratedKeys();
-			// pk반환 받음
-			if(rset.next()) key = rset.getInt("TICKET_NO");
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
+			close(rset);
 			close(pstmt);
 		}
 		
 		return key;
 	}
 
-	public int insertPriceSheet(Connection conn, int reservationResult, int teenPersonNo, int adultPersonNo) {
+	public int insertPriceSheet(Connection conn, int reservationKey, int teenPersonNo, int adultPersonNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
@@ -249,8 +250,46 @@ public class ReservationDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, reservationResult);
+			if(teenPersonNo != 0) {
+				for(int i = 0; i < teenPersonNo; i++) {
+					pstmt.setInt(1, 1);
+					pstmt.setInt(2, reservationKey);
+					result += pstmt.executeUpdate();
+				}
+			}
 			
+			if(adultPersonNo != 0) {
+				for(int i = 0; i < adultPersonNo; i++) {
+					pstmt.setInt(1, 2);
+					pstmt.setInt(2, reservationKey);
+					result += pstmt.executeUpdate();
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result == (teenPersonNo + adultPersonNo) ? 1 : 0;
+	}
+
+	public int insertSeat(Connection conn, Reservation reservation, int reservationKey) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertSeat");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			// 예약된 좌석 만큼 반복
+			for(int i = 0; i < reservation.getSeatList().size(); i++) {
+				pstmt.setString(1, reservation.getSeatList().get(i).getSeatNo());
+				pstmt.setInt(2, reservation.getScreenNo());
+				pstmt.setInt(3, reservationKey);
+				
+				result += pstmt.executeUpdate();
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -258,12 +297,7 @@ public class ReservationDao {
 			close(pstmt);
 		}
 		
-		return result;
-	}
-
-	public int insertSeat(Connection conn, Reservation reservation) {
-
-		return 0;
+		return result == reservation.getSeatList().size() ? 1 : 0;
 	}
 	
 	

@@ -28,7 +28,15 @@
 <%@ include file="/views/common/header.jsp" %>
 <div id="wrap">
 
-
+<div id="content-info">
+    <div id="print-info">
+        <div id="movie-info-area">
+            <div id="movie-poster"></div>
+            <div id="movie-info"></div>
+        </div>
+        <div id="reservation-info-area"></div>
+    </div>
+</div>
 
 
 

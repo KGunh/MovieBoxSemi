@@ -43,20 +43,13 @@ public class AdminPageServlet extends HttpServlet {
 		boolean flag = true;
 	
 		switch(mapping) {
-//		case "adminMovieCheck" :
-//			view = "/views/admin/adminMovieCheck.jsp"; break; //영화목록
-		
+
 		case "adminMovieCheck" :
 			view = admin.adminSelectMovieList(request, response); flag = false; break; //영화목록전체
 			
 		case "adminMovieInsert" :
 			view = "/views/admin/adminMovieInsert.jsp"; break; //영화등록
 
-
-			
-			
-//		case "adminBoardCheck" :
-//			view = "/views/admin/adminBoardCheck.jsp"; break; //공지목록
 			
 		case "adminBoardCheck" :
 			view = admin.adminBoardCheckList(request, response); flag = false; break; //공지목록전체
@@ -69,7 +62,7 @@ public class AdminPageServlet extends HttpServlet {
 //			view = "/views/admin/adminQnACheck.jsp"; break; //문의목록
 			
 		case "adminQnACheck" :
-			view = admin.adminSelectQnAList(request); flag = false; break; //문의목록
+			view = admin.adminSelectQnAList(request, response); flag = false; break; //문의목록전체
 			
 		case "adminQnAInsert" :
 			view = "/views/admin/adminQnAInsert.jsp"; break; //문의관리

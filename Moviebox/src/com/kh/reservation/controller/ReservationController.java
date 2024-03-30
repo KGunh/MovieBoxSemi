@@ -135,7 +135,7 @@ public class ReservationController {
 		
 		for(int i = 0; i < seatArray.length; i++) {
 			Seat seat = new Seat();
-			
+
 			seat.setSeatNo(seatArray[i]);
 			
 			seatList.add(seat);
@@ -146,16 +146,15 @@ public class ReservationController {
 		reservation.setScreenNo(screenNo);
 		reservation.setMemberNo(memberNo);
 		reservation.setMovieNo(movieNo);
+		
 		// 예매 연령의 인원수는 따로 보냄
-		int teenPersonNo = Integer.parseInt(request.getParameter("teen"));
-		int adultPersonNo = Integer.parseInt(request.getParameter("adult"));
-		// map을써서 키워드로 성인 청소년 구분 할지 고민해봐야함!!
-		try {
-			new ReservationService().insertReservation(reservation, teenPersonNo, adultPersonNo);
-			
-		} catch(SQLException e) {
-			e.printStackTrace();
-		}
+		int teenPersonNo = 0;
+		if(request.getParameter("teen") != "") teenPersonNo = Integer.parseInt(request.getParameter("teen"));
+		
+		int adultPersonNo = 0;
+		if(request.getParameter("adult") != "") adultPersonNo = Integer.parseInt(request.getParameter("adult"));
+		
+		new ReservationService().insertReservation(reservation, teenPersonNo, adultPersonNo);
 		
 		return "views/reservation/infoReservation.jsp";
 	}
