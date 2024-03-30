@@ -43,7 +43,7 @@ public class MovieServlet extends HttpServlet {
 		}
 		
 		if(flag) {
-			response.sendRedirect(view);
+			response.sendRedirect(request.getContextPath() + view);
 		} else {
 			request.getRequestDispatcher(view).forward(request, response);
 		}
