@@ -15,7 +15,7 @@ import com.kh.notice.model.vo.Notice;
 public class AdminPageService {
 	
 
-	// 영화 목록 전체 출력
+	// 영화
 	public ArrayList<Movie> adminSelectMovieList(PageInfo pi){
 		
 		Connection conn = getConnection();
@@ -27,8 +27,7 @@ public class AdminPageService {
 		return list;
 	}
 	
-	
-	//페이징바
+
 	public int selectListCount() {
 		
 		Connection conn = getConnection();
@@ -40,15 +39,8 @@ public class AdminPageService {
 		return result;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	// 공지 목록 전체 출력
+
+	// 공지 
 	public ArrayList<Notice> adminSelectNoticeList(PageInfo pi){
 		
 		Connection conn = getConnection();
@@ -60,8 +52,7 @@ public class AdminPageService {
 		return list;
 	}
 	
-	
-	//페이징바
+
 	public int selectListCountNotice() {
 		
 		Connection conn = getConnection();
@@ -75,26 +66,29 @@ public class AdminPageService {
 	
 	
 	
-	
-	
-	
-	
-	// 문의 목록 전체 출력
-	public ArrayList<Board> adminSelectQnAList(){
+	// 문의
+	public ArrayList<Board> adminSelectQnAList(PageInfo pi){
 		
 		Connection conn = getConnection();
 		
-		ArrayList<Board> list = new AdminPageDao().adminSelectQnAList(conn);
+		ArrayList<Board> list = new AdminPageDao().adminSelectQnAList(conn, pi);
 		
 		close(conn);
 		
 		return list;
 	}
 	
-	
 
-	
-	
+	public int selectListCountQnA() {
+		
+		Connection conn = getConnection();
+		
+		int result = new AdminPageDao().selectListCountQnA(conn);
+		
+		close(conn);
+		
+		return result;
+	}
 	
 	
 	

@@ -1,10 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="com.kh.board.model.vo.Board, java.util.ArrayList"%>
+<%@ page import="com.kh.board.model.vo.Board, java.util.ArrayList, com.kh.common.model.vo.PageInfo"%>
     
 <%
-ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("adminQnACheck");
-System.out.println(list);
+	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("adminQnACheckList");
+	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
+	System.out.print(pi);
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
 %> 
 
 
@@ -327,7 +332,7 @@ System.out.println(list);
             </div>
             <div class="content_2">
                 <p id="p">게시글관리 > 문의 게시글 관리</p>
-                <form>
+               
                 <div id="content_2_box"><!--컨텐트2 전체박스-->
 
                     <div id="cnt2_box_wrap"> <!-- 셀렉, 인풋, 버튼 전체 -->
@@ -400,16 +405,33 @@ System.out.println(list);
 
                     
                     <div class="paging-area" align="center" style="margin-top:12px;">
-                        <button class="btn btn-outline-secondary" style="color:#ffffff"> < </button>
-                        <button class="btn btn-outline-secondary" style="color:#ffffff">1</button>
-                        <button class="btn btn-outline-secondary" style="color:#ffffff"> > </button>
+                    
+                    	<% if(currentPage > 1) { %>
+                    	<button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
+					        onclick="location.href='<%=contextPath%>/adminQnACheck.admin?currentPage=<%= currentPage - 1 %>'"> < </button>
+                    	<% } %>
+                    	<% for(int i = startPage; i <= endPage; i++) { %>
+                    	
+                    		<% if(currentPage != i) { %>
+							<button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
+					        onclick="location.href='<%=contextPath%>/adminQnACheck.admin?currentPage=<%=i%>'"><%= i %></button>
+	                        <%} else {%>
+								 <button disabled class="btn btn-outline-secondary" style="color:#ffffff">
+								 <%= i %></button>                       
+	                        <%} %>
+                        <% } %>
+                        
+                        <% if(currentPage != maxPage) { %>
+                        <button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
+					        onclick="location.href='<%=contextPath%>/adminQnACheck.admin?currentPage=<%= currentPage + 1 %>'"> > </button>
+					    <% } %>    
                     </div>
                     <!--페이지 숫자-->
 
 
 
 
-                    </form>
+                    
                 </div><!--content_2_box끝 컨텐트2 전체박스임-->
 
 

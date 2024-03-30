@@ -201,16 +201,21 @@ public class AdminPageDao {
 	
 	
 	//문의 목록 전체 출력
-	public ArrayList<Board> adminSelectQnAList(Connection conn){
+	public ArrayList<Board> adminSelectQnAList(Connection conn,  PageInfo pi){
 		
 		ArrayList<Board> list = new ArrayList();
-		ResultSet rset = null;
 		PreparedStatement pstmt = null;
-		
+		ResultSet rset = null;
 		String sql = prop.getProperty("adminSelectQnAList");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setInt(1, startRow);
+			pstmt.setInt(2, endRow);
 			
 			rset = pstmt.executeQuery();
 			
@@ -241,7 +246,30 @@ public class AdminPageDao {
 	}	
 	
 	
-	
+	public int selectListCountQnA(Connection conn) {
+		
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectListCountQnA");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			listCount = rset.getInt("COUNT(*)");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return listCount;
+	}
 	
 	
 	
