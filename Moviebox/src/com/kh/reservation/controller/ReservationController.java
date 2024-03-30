@@ -148,7 +148,6 @@ public class ReservationController {
 		reservation.setMovieNo(movieNo);
 		
 		// 예매 연령의 인원수는 따로 보냄
-		// 넙버포맷익셉션 예외처리
 		int teenPersonNo = 0;
 		if(request.getParameter("teen") != "") teenPersonNo = Integer.parseInt(request.getParameter("teen"));
 		

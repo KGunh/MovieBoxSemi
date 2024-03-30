@@ -80,7 +80,7 @@ public class ReservationService {
         if (reservationKey > 0) priceSheetResult = new ReservationDao().insertPriceSheet(conn, reservationKey, teenPersonNo, adultPersonNo);
         // 예약 좌석 테이블에 insert
         if (priceSheetResult > 0) seatResult = new ReservationDao().insertSeat(conn, reservation, reservationKey);
-        // 숏서킷
+
         if (reservationKey > 0 && priceSheetResult > 0 && seatResult > 0) {
             commit(conn);
         } else {
