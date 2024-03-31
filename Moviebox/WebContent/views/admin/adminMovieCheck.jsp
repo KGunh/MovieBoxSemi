@@ -5,7 +5,7 @@
 <%
 	ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("adminMovieCheckList");
 	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
-	System.out.print(pi);
+	//System.out.print(pi);
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();

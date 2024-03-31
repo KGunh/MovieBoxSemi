@@ -160,11 +160,12 @@ public class AdminPageController {
 	}
 	
 	public String adminMovieInsert (HttpServletRequest request, HttpServletResponse response) throws IOException {
-		
+		HttpSession session = request.getSession();
+		String view = "views/admin/adminMovieInsert.jsp";
 		if(ServletFileUpload.isMultipartContent(request)) {
 			//1) 전송되는 파일을 처리할 작업
 			int maxSize = 1024 * 1024 * 10;
-			HttpSession session = request.getSession();
+
 			ServletContext application = session.getServletContext();
 			String savePath = application.getRealPath("/resources/img/poster/");
 			//2) 서버에 업로드
@@ -180,6 +181,8 @@ public class AdminPageController {
 			// String title = request.getParameter("title");
 			// 이렇게 request로 쓰면 null이 나옴...
 			// 그래서 multiRequest로 뽑아줘야함!!!		
+			
+			
 	        String title = multiRequest.getParameter("title");
 	        String genreCode = multiRequest.getParameter("genre");
 	        String runningTime = multiRequest.getParameter("running_time");
@@ -190,6 +193,7 @@ public class AdminPageController {
 	        String story = multiRequest.getParameter("story");
 	        String genre = multiRequest.getParameter("genre");
 	        // 위쪽까지 form 데이터 받기완료
+	        
 	        // 등록정리
 	        // 1. TB_DIRECTOR 테이블에 감독정보가 들어가야함 - 존재할 경우 감독번호(DIRECTOR_NO)만 들고있기
 	        // 2. TB_ACTOR 테이블에 배우 정보가 들어가야함 - 존재할 경우 배우번호(ACTOR_NO)만 들고있기
@@ -199,6 +203,7 @@ public class AdminPageController {
 	        int actorResult;
 	        int castResult;
 	        int movieResult;
+	        
 	        // 1.)을 하기위해 감독이름이 한글로 들어오기 때문에, 한글로 DB에 감독 이름 검색
 	        // 기존에 있다면 감독 번호가 나오고, 없다면 0
 	        int directorNo = new AdminPageService().SelectDirectorName(directorName);
@@ -208,11 +213,13 @@ public class AdminPageController {
 	        	// 감독 insert
 	        	directorResult = new AdminPageService().InsertDirector(directorNo, directorName);
 	        }
+	        
 	        // 2.)를 하기 위해서는 출연진은 여러명이기 때문에 콤마를 구분으로 들어오는걸 약속해둬야함!
 	        String[] actorArray = actors.split(",");
 	        // 최종 TB_CAST테이블에 넣을때 사용할 것
 	        int[] resultActorNo = new int[actorArray.length];
 //	        System.out.println("actorArray length: " + actorArray.length);
+	        
 	        // 배우가 등록되어 있는지 여부를 판단하고, 없으면 넣어줘야함.
 	        for (int i = 0; i < actorArray.length; i++) {
 	        	// trim -> 콤마로 구분시 공백이 들어온다면 공백제거용
@@ -220,6 +227,7 @@ public class AdminPageController {
 		        // 배우 이름이 한글로 들어오기 때문에, 한글로 DB에 배우 이름을 검색하는 로직
 		        // 기존에 있다면 배우 번호가 나오고 없다면 0
 	            int actorNo = new AdminPageService().SelectActorName(actorArray[i]);
+	           
 	            if(actorNo == 0) {
 	            	// 배우 번호 시퀀스를 뽑기
 	            	actorNo = new AdminPageService().SelectActorNo();
@@ -244,18 +252,15 @@ public class AdminPageController {
 	        for (int i = 0; i < resultActorNo.length; i++) {
 	        	castResult = new AdminPageService().InsertCast(movieNo, resultActorNo[i]);
 	        }
-			String view = "";
 			if(movieResult > 0) {
 				session.setAttribute("alertMsg", "영화가 등록되었습니다.");
 				view = "/adminMovieCheck.admin?currentPage=1";
-			} else {
-				session.setAttribute("alertMsg", "영화가 등록에 실패했습니다.");
-				view = "views/admin/adminMovieInsert.jsp";
 			}
 		}
+
 		ArrayList<Genre> genrelist = new AdminPageService().SelectGenreList();
 		request.setAttribute("genreList", genrelist);
-		String view = "views/admin/adminMovieInsert.jsp";
+
 		return view;
 	}
 	
