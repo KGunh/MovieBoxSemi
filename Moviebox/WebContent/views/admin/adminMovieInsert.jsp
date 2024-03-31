@@ -474,11 +474,11 @@
 			            </div>
 			
 			            <div id="sub_4">
-			                <input type="text" name="running_time" id="runningTime" placeholder="러닝타임을 입력해 주세요.">
+			                <input type="text" name="running_time" id="runningTime" placeholder="러닝타임을 입력해 주세요.(ex - 120)">
 			            </div>
 			
 			            <div id="sub_5">
-			                <input type="text" name="rated" id="rating" placeholder="관람 등급을 입력해 주세요.">
+			                <input type="text" name="rated" id="rating" placeholder="관람 등급을 입력해 주세요.(ex - 12세)">
 			            </div>
 			
 			            <div id="sub_6">
@@ -490,7 +490,7 @@
 			            </div>
 			
 			            <div id="sub_8">
-			                <input type="text" name="actors" id="cast" placeholder="출연진을 입력해 주세요.">
+			                <input type="text" name="actors" id="cast" placeholder="출연진을 입력해 주세요.(ex - 잉어빵, 붕어빵 )">
 			            </div>
 			
 			            <div id="sub_9">
