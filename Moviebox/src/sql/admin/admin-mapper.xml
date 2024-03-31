@@ -30,7 +30,7 @@
 	</entry>
 	
 	
-	<!-- 영화 글 전체 개수 (그 개수로 페이징바 생성하게 하기위함)-->
+
 		<entry key="selectListCount">
 		SELECT
 		    COUNT(*)
@@ -62,7 +62,7 @@
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
 
-<!-- 공지 글 전체 개수 (그 개수로 페이징바 생성하게 하기위함)-->
+
 	<entry key="selectListCountNotice">
 		SELECT
 		    COUNT(*)
@@ -94,7 +94,7 @@
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
 
-<!-- 문의 글 전체 개수 (그 개수로 페이징바 생성하게 하기위함)-->
+
 	<entry key="selectListCountQnA">
 		SELECT
 		    COUNT(*)
@@ -107,7 +107,7 @@
 
 
 
-<!--장르카테고리(adminMovieEnrollForm화면에서 보여주기 + adminMovieInsert에서도) -->
+<!--장르카테고리-->
 	<entry key="SelectGenreList">
 		SELECT
 		    GENRE_CODE,

@@ -262,6 +262,16 @@ public class AdminPageController {
 	        for (int i = 0; i < resultActorNo.length; i++) {
 	        	castResult = new AdminPageService().InsertCast(movieNo, resultActorNo[i]);
 	        }
+	        
+			String view = "";
+			
+			if(movieResult > 0) {
+				session.setAttribute("alertMsg", "영화가 등록되었습니다.");
+				view = "/adminMovieCheck.admin?currentPage=1";
+			} else {
+				session.setAttribute("alertMsg", "영화가 등록에 실패했습니다.");
+				view = "views/notice/adminMovieInsert.jsp";
+			}
 		
 		}
 		
