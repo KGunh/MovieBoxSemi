@@ -32,6 +32,7 @@
     }
     .main-board-content{
         height: 460px;
+        padding: 90px 120px 90px 120px;
     }
     /* 이미지 영역 사이즈 조절 */
     .swiper {
@@ -52,7 +53,7 @@
     }
     
     .title{
-        height: 140px;
+        height: 90px;
         width: 100%;
     }
     .movie-chart{
@@ -66,6 +67,19 @@
         width: 190px;
         height: 100%;
     }
+    .main-board-content > div{
+        float: left;
+        height: 100%;
+    }
+    .center-number{     
+    	width: 40%;
+    }
+    .board-content{
+        float: left;
+        margin-left: 5%;
+        width: 55%;
+    }
+
     </style>
 </head>
 <body>
@@ -137,7 +151,8 @@
         </div>
 
         <div class="main-board-content">
-
+            <div class="center-number"></div>
+            <div class="board-content"></div>
         </div>
 
     </div>
