@@ -318,7 +318,7 @@
         #movieTitle, /*제목입력창*/
         #runningTime, /*러닝타임입력창*/
         #rating, /*관람등급입력창*/
-        #director,/*감독입력창*/
+        #director_name,/*감독입력창*/
         #cast /*출연진입력창*/
         { 
             width: 533px;
@@ -434,8 +434,9 @@
 
             <div class="content_2"><!--content_2 시작-->
                 <p id="p">영화 관리 > 영화 등록</p>
-
-			<form action="InsertMovieServlet" method="post" enctype="multipart/form-data">
+			<!-- /adminMovieInsert.admin 이름을 가진 서블릿으로 폼 데이터를 post방식으로 전달,
+					 파일업로드가 있기 때문에 enctype="multipart/form-data"로 전달 -->
+			<form action="<%= contextPath %>/adminMovieInsert.admin" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
 			    <div id="content_2_box"><!--컨텐트2 전체박스-->
 			        <div id="box_1">
 			            <div class="title">포스터</div>
@@ -451,16 +452,17 @@
 			        <div id="box_2">
 			            <div id="sub_1">
 			                <div class="fileBox">
-			                    <input type="file" id="file" name="poster" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
+			                    <input type="file" id="file" name="upposter" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
 			                </div>
 			                <div class="fileBox_2"></div>
 			            </div>
 			
 			            
 			            <div id="sub_2">
-			                <input type="text" name="title" id="movieTitle" placeholder="영화 제목을 입력해 주세요.">
+			                <input type="text" name="title" id="movieTitle" placeholder="영화 제목을 입력해 주세요."> <!-- 영화제목 = name="title" 로 전달!  -->
 			            </div>
-			
+									
+									<!--장르카테고리-->
 			            <div id="sub_3">
 			                <select name="genre" id="select_1" >
 								<% for(Genre g : genrelist) { %>
@@ -484,7 +486,7 @@
 			            </div>
 			
 			            <div id="sub_7">
-			                <input type="text" name="director" id="director" placeholder="감독을 입력해 주세요.">
+			                <input type="text" name="director_name" id="director_name" placeholder="감독을 입력해 주세요.">
 			            </div>
 			
 			            <div id="sub_8">
@@ -496,7 +498,8 @@
 			            </div>
 			
 			            <div id="sub_10"><!--등록 버튼-->
-			                <input type="submit" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right;" value="등록">
+			                <input type="submit" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right;" value="등록" onclick="insertButton();">
+			            	<button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;" onclick="history.back();">목록</button>
 			            </div><!--등록 버튼-->
 			        </div><!--box2-->
 			    </div><!--컨텐트2 전체박스 끝-->
@@ -512,6 +515,54 @@
 
 	 <%@ include file="/views/common/footer.jsp" %>
  	 <!-- 푸터 -->
+ 	 
+ 	 
+ 	<script>
+	 	function validateForm() { 
+	 	    var fileInput = document.getElementById('file');
+	 	    var fileName = fileInput.value; 
+	 	    if (fileName === "" || fileInput.files.length === 0) {
+	 	        alert('포스터 파일을 첨부해 주세요.');
+	 	        return false;
+	 	    }
+	 	    var movieTitle = document.getElementById('movieTitle').value;
+	 	    if (movieTitle === "" || movieTitle.length === 0) {
+	 	        alert('영화 제목을 입력해 주세요.');
+	 	        return false;
+	 	    }
+   	 	    var runningTime = document.getElementById('runningTime').value;
+	 	    if (runningTime === "" || runningTime.length === 0) {
+	 	        alert('러닝타임을 입력해 주세요.');
+	 	        return false;
+	 	    }
+   	 	    var rating = document.getElementById('rating').value;
+	 	    if (rating === "" || rating.length === 0) {
+	 	        alert('관람등급을 입력해 주세요.');
+	 	        return false;
+	 	    }
+   	 	    var date = document.getElementById('date').value;
+	 	    if (date === "" || date.length === 0) {
+	 	        alert('개봉일을 선택해 주세요.');
+	 	        return false;
+	 	    }
+  	 	    var director_name = document.getElementById('director_name').value;
+	 	    if (director_name === "" || director_name.length === 0) {
+	 	        alert('감독을 입력해 주세요.');
+	 	        return false;
+	 	    }
+  	 	    var cast = document.getElementById('cast').value;
+	 	    if (cast === "" || cast.length === 0) {
+	 	        alert('출연진을 입력해 주세요.');
+	 	        return false;
+	 	    }
+  	 	    var plot = document.getElementById('plot').value;
+	 	    if (plot === "" || plot.length === 0) {
+	 	        alert('줄거리를 입력해 주세요.');
+	 	        return false;
+	 	    }
+	 	    return true;
+	 	}
+	</script>
 
 
 </body>
