@@ -167,7 +167,7 @@ public class AdminPageController {
 			int maxSize = 1024 * 1024 * 10;
 
 			ServletContext application = session.getServletContext();
-			String savePath = application.getRealPath("/resources/img/poster/");
+			String savePath = application.getRealPath("/resources/img/upposter/");
 			//2) 서버에 업로드
 			
 			// enctype="multipart/form-data" 는 아래처럼 request를 한번 더 가공 해줘야함!
@@ -255,6 +255,9 @@ public class AdminPageController {
 			if(movieResult > 0) {
 				session.setAttribute("alertMsg", "영화가 등록되었습니다.");
 				view = "/adminMovieCheck.admin?currentPage=1";
+			} else {
+				session.setAttribute("alertMsg", "영화 등록에 실패했습니다..");
+				view = "views/admin/adminMovieInsert.jsp";
 			}
 		}
 
