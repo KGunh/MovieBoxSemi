@@ -191,6 +191,8 @@
         font-weight: bold;
     }
     .long-div{
+    	margin:auto;
+    	width: 1200px;
         height: 290px;
         background-color: #FFC145;
         
