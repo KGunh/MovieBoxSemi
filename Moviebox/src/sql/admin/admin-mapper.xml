@@ -42,71 +42,6 @@
 	
 	
 	
-	<!-- 공지 -->
-	<entry key="adminSelectNoticeList">
-		SELECT *
-		FROM (SELECT A.*, ROWNUM RNUM
-		      FROM (SELECT
-				    NOTICE_NO,
-				    CATEGORY_NAME,
-				    NOTICE_TITLE,                  
-				    TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE,                   
-				    COUNT      
-				FROM
-				    TB_NOTICE    
-				JOIN
-				    TB_CATEGORY ON (NOTICE_CATEGORY = CATEGORY_NO)
-				ORDER
-				   BY
-				    NOTICE_NO DESC) A)
-		WHERE RNUM BETWEEN ? AND ?
-	</entry>
-
-
-	<entry key="selectListCountNotice">
-		SELECT
-		    COUNT(*)
-		  FROM
-		    TB_NOTICE
-		 WHERE
-		    STATUS = 'Y'
-	</entry>
-
-
-	<!-- 문의 -->
-	<entry key="adminSelectQnAList">
-		SELECT *
-		FROM (SELECT A.*, ROWNUM RNUM
-		      FROM (SELECT
-		    BOARD_NO,
-		    CATEGORY_NO,
-		    BOARD_TITLE,
-		    MEMBER_ID,
-		    TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE,
-		    COUNT
-		FROM
-		   TB_BOARD
-		JOIN 
-		    TB_MEMBER USING (MEMBER_NO)
-		ORDER
-		   BY
-		    BOARD_NO DESC) A)
-		WHERE RNUM BETWEEN ? AND ?
-	</entry>
-
-
-	<entry key="selectListCountQnA">
-		SELECT
-		    COUNT(*)
-		  FROM
-		    TB_BOARD
-		 WHERE
-		    STATUS = 'Y'
-	</entry>
-
-
-
-
 <!--장르카테고리-->
 	<entry key="SelectGenreList">
 		SELECT
@@ -243,5 +178,74 @@
 			  ?
 			  )
 	</entry>
+	
+	
+	
+	
+	<!-- 공지 -->
+	<entry key="adminSelectNoticeList">
+		SELECT *
+		FROM (SELECT A.*, ROWNUM RNUM
+		      FROM (SELECT
+				    NOTICE_NO,
+				    CATEGORY_NAME,
+				    NOTICE_TITLE,                  
+				    TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE,                   
+				    COUNT      
+				FROM
+				    TB_NOTICE    
+				JOIN
+				    TB_CATEGORY ON (NOTICE_CATEGORY = CATEGORY_NO)
+				ORDER
+				   BY
+				    NOTICE_NO DESC) A)
+		WHERE RNUM BETWEEN ? AND ?
+	</entry>
+
+
+	<entry key="selectListCountNotice">
+		SELECT
+		    COUNT(*)
+		  FROM
+		    TB_NOTICE
+		 WHERE
+		    STATUS = 'Y'
+	</entry>
+
+
+	<!-- 문의 -->
+	<entry key="adminSelectQnAList">
+		SELECT *
+		FROM (SELECT A.*, ROWNUM RNUM
+		      FROM (SELECT
+		    BOARD_NO,
+		    CATEGORY_NO,
+		    BOARD_TITLE,
+		    MEMBER_ID,
+		    TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE,
+		    COUNT
+		FROM
+		   TB_BOARD
+		JOIN 
+		    TB_MEMBER USING (MEMBER_NO)
+		ORDER
+		   BY
+		    BOARD_NO DESC) A)
+		WHERE RNUM BETWEEN ? AND ?
+	</entry>
+
+
+	<entry key="selectListCountQnA">
+		SELECT
+		    COUNT(*)
+		  FROM
+		    TB_BOARD
+		 WHERE
+		    STATUS = 'Y'
+	</entry>
+
+
+
+
 
 </properties>
