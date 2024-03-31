@@ -50,6 +50,7 @@
             height: 200px;
             margin: auto;
             border-bottom: 1px solid lightgray;
+
         }
         .header-line{
         	width: 100%;
@@ -85,6 +86,8 @@
         	margin: auto;
         	width: 1200px;
             height: 125px;
+            border-left: 1px solid rgb(33, 33, 33);
+            border-right: 1px solid rgb(33, 33, 33);
         }
 
         #logo-div {

@@ -8,31 +8,165 @@
 <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 <style>
-    div{
-        border: 1px solid red;
-    }
+
     #main-cotent{
-        width: 1200px;
         height: auto;
         margin: auto;
     }
-    #main-cotent > div{
-        width: 100%;
-    }
     #content_1{
         height: 350px;
-        padding: 25px 100px 25px 100px;
+        padding: 25px 100px;
+        width: 1200px;
+        margin: auto;
+        
     }
     .movie-chart-content{
         height: 400px;
+        width: 1200px;
+        margin: auto;
     }
     .movie-genre-content{
+        margin: auto;
         height: 290px;
         background-color: #FFC145;
+        width: 1200px;
+        margin: auto;
+        padding: 40px 100px;
+        display: flex;
+        justify-content : space-between
+        
     }
     .main-board-content{
         height: 460px;
-        padding: 90px 120px 90px 120px;
+        padding: 105px 120px;
+        width: 1200px;
+        margin: auto;
+    }
+    
+    
+    .movie-title{
+        height: 90px;
+        width: 100%;
+        padding: 45px 0 0 100px;
+
+    }
+    .movie-chart{
+        height: 260px;
+        width: 100%;
+        padding: 0 100px;
+        display: flex;
+        justify-content : space-between
+        
+    }
+    .movie-chart > div{
+        width: 190px;
+        height: 100%;
+    }
+
+    .genre-content{
+        width: 190px;
+        height: 100%;
+        padding: 35px 0px;
+        font-size: 32px;
+    }
+    .genre-content-img{
+        width: 100%;
+        height: 100%;
+        text-align: center;
+        font-size: 20px;
+        font-weight: bold;
+        line-height: 50px;
+    }
+    .genre-content-img > img{
+        display: block;
+        margin: auto;
+        width: 92px;
+        height: 92px;
+    }
+
+    .main-board-content > div{
+        float: left;
+        height: 100%;
+    }
+    .center-number{
+        background-color: white;
+        border-radius: 8px;
+        padding: 70px 40px;    
+    	width: 40%;
+    }
+    .board-content{
+        background-color: white;
+        border-radius: 8px;
+        padding: 30px;
+        float: left;
+        margin-left: 5%;
+        width: 55%;
+    }
+    .tit{
+        color: #FFC145;
+        font-size: 32px;
+    }
+    .board-area{
+        font-size: 16px;
+    }
+    .board-content table{
+        width: 100%;
+        border-collapse: collapse;
+    }
+    .board-content thead{
+        height: 65px;
+    }
+    .tit{
+        text-align: left;
+        vertical-align: top;
+    }
+    .board-content td{
+        width: 50%;
+        height: 30px;
+    }
+    .board-area td:first-child {
+    text-align: left;
+    }
+    .board-area td:last-child {
+    text-align: right;
+    }
+    .number-area{
+        float: left;
+        width: 65%;
+        height: 100%;
+        position: relative;
+    }
+    .phone-img{
+        float: left;
+        width: 35%;
+        height: 100%;
+    }
+    .phone-title{
+        font-size: 32px;
+        font-weight: bold;
+        position: absolute;
+        top: 0;
+    }
+    .phone-number{
+        color: #FFC145;
+        font-size: 36px;
+        font-weight: bold;
+        position: absolute;
+        bottom: 0;
+    }
+    .phone-img {
+        display: flex;
+        justify-content: center; 
+        align-items: center; 
+        height: 100%; 
+    }
+    .phone-img > img{
+        width: 90px;
+        height: 90px;
+    }
+    .movie-chart img{
+        width: 100%;
+        height: 100%;
     }
     /* 이미지 영역 사이즈 조절 */
     .swiper {
@@ -51,35 +185,16 @@
         color : white;
         /* display : none; */ /* 아니면 안보이게 숨기기도 가능 */
     }
-    
-    .title{
-        height: 90px;
-        width: 100%;
+    .movie-title > div{
+        color:white;
+        font-size: 20px;
+        font-weight: bold;
     }
-    .movie-chart{
-        height: 260px;
-        width: 100%;
-        padding: 0 100px 0 100px;
-        display: flex;
-        justify-content : space-between
+    .long-div{
+        height: 290px;
+        background-color: #FFC145;
+        
     }
-    .movie-chart > div{
-        width: 190px;
-        height: 100%;
-    }
-    .main-board-content > div{
-        float: left;
-        height: 100%;
-    }
-    .center-number{     
-    	width: 40%;
-    }
-    .board-content{
-        float: left;
-        margin-left: 5%;
-        width: 55%;
-    }
-
     </style>
 </head>
 <body>
@@ -94,11 +209,12 @@
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper" >
                     <!-- Slides -->
-                    <div class="swiper-slide"><img src="https://i.namu.wiki/i/TOLSsGuigpIRPbZd4dBmJlSF0kVPpg_qKSxkJvzMM1478mNcNoAUvxvNeyhQ2FMv1Fbgd9n6nifRywMwp-R2niA3I3HtdKmDj-AHvCNEOxwAduOa3aCSJyREcDPq9itjO48cKiSPsUX3Nh3w21R2KQ.webp"></div>
-                    <div class="swiper-slide"><img src="https://i.namu.wiki/i/4OFuqB8CBzUOpov4yJSBbzcaiHJKXBAWHh1P_xuIk3_83Hy65uwvLueqhFsosYwAE_Wm2aZJyj6NA4sv-Py14tqqr330nRPIBTn9hpwWBeVap_9Lkl8-Ewb1zobrTQ3rmhvbOsB0Dl9kNCrrtTefnw.webp"></div>
-                    <div class="swiper-slide"><img src="https://i.namu.wiki/i/de5ZWH6baNks1yd7Ofo1TF8-vH-xndzsgkY0RGZ_RmW_swC35y99b_oCN60r3m1cFRSc9byHZBVu_eBCwPcw1jGS34ekCLqhgHHVPr19gxFHdEdOjT7XqGJxoQf-Knpui_CcZS94DP8mZ7fqqDQNDg.webp"></div>
-                    <div class="swiper-slide"><img src="https://i.namu.wiki/i/UirbKQshXu0s_HnQPxDnKUblnfGyOK-Uzd1yERWftA49Li-j7k8KJ0cQJafOws8vmHLPbbBW1JIGf8SrMeFBVkxfosqId5HBRvOeGtt3rxIs1RotopHa_G2lhAoroNR0r0hikC1FHTWSBh-yh5DQUw.webp"></div>
-                    <div class="swiper-slide"><img src="https://i.namu.wiki/i/jAZO3nN76J2qw032OpWmGM-LCyRog0hpVo5HWjgSTXWV_W1DIAHcoSVEzAKu8w-k8r42SlJWksOotiS5DudHOWm7YrCUP3-KfIQK9G_nkWSr9Unjm3r9Fd9YHsWWLmGbFmLyK9xzdaS9IbdXBlq91g.webp"></div>
+                    <div class="swiper-slide"><img src="<%=contextPath%>/resources/img/poster/ad_Dune.jpg"></div>
+                    <div class="swiper-slide"><img src="<%=contextPath%>/resources/img/poster/ad_SpyXFamily.jpg"></div>
+                    <div class="swiper-slide"><img src="<%=contextPath%>/resources/img/poster/ad_Exhuma.jpg"></div>
+                    <div class="swiper-slide"><img src="<%=contextPath%>/resources/img/poster/ad_SlamDunk.jpg"></div>
+                    <div class="swiper-slide"><img src="<%=contextPath%>/resources/img/poster/ad_Topgun.jpg"></div>
+                    <div class="swiper-slide"><img src="<%=contextPath%>/resources/img/poster/ad_Wonka.jpg"></div>
                 </div>
             
                 <!-- If we need pagination -->
@@ -117,7 +233,7 @@
             // 슬라이더 동작 정의
             const swiper = new Swiper('.swiper', {
                 autoplay : {
-                    delay : 1000 // 3초마다 이미지 변경
+                    delay : 10000 // 3초마다 이미지 변경
                 },
                 loop : true, //반복 재생 여부
                 slidesPerView : 1, // 이전, 이후 사진 미리보기 갯수
@@ -133,26 +249,74 @@
         </script>
         
         <div class="movie-chart-content">
-            <div class="title">
-
+            <div class="movie-title">
+                <div>무비차트</div>
             </div>
             <div class="movie-chart">
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
-                <div></div>
+                <div><img src="<%=contextPath%>/resources/img/poster/poster_Dune.jpg" alt=""></div>
+                <div><img src="<%=contextPath%>/resources/img/poster/poster_Exhuma.jpg" alt=""></div>
+                <div><img src="<%=contextPath%>/resources/img/poster/poster_SlamDunk.jpg" alt=""></div>
+                <div><img src="<%=contextPath%>/resources/img/poster/poster_SpyXFamily.jpg" alt=""></div>
+                <div><img src="<%=contextPath%>/resources/img/poster/poster_topgun.jpg" alt=""></div>
             </div>
         </div>
-
-        <div class="movie-genre-content">
-
-
+        <div class="long-div">
+            <div class="movie-genre-content">
+                <div class="genre-content">
+                    <div class="genre-content-img"><img src="" alt="">액션</div>
+                </div>
+                <div class="genre-content">
+                    <div class="genre-content-img"><img src="" alt="">로맨스</div>
+                </div>
+                <div class="genre-content">
+                    <div class="genre-content-img"><img src="" alt="">공포/스릴러</div>
+                </div>
+                <div class="genre-content">
+                    <div class="genre-content-img"><img src="" alt="">코미디</div>
+                </div>
+                <div class="genre-content">
+                    <div class="genre-content-img"><img src="" alt="">애니메이션</div>
+                </div>
+            </div>
         </div>
 
         <div class="main-board-content">
-            <div class="center-number"></div>
-            <div class="board-content"></div>
+            <div class="center-number">
+                <div class="number-area">
+                    <div class="phone-title">고객센터</div>
+                    <div class="phone-number">1588-8888</div>
+                </div>
+                <div class="phone-img">
+                    <img src="" alt="">
+                </div>
+            </div>
+            <div class="board-content">
+                <table>
+                    <thead>
+                        <tr>
+                            <th class="tit">공지사항</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr class="board-area">
+                            <td >첫번째</td>
+                            <td >2024.02.01</td>
+                        </tr>
+                        <tr class="board-area">
+                            <td >드번째</td>
+                            <td >날짜</td>
+                        </tr>
+                        <tr class="board-area">
+                            <td >세번째</td>
+                            <td >날짜</td>
+                        </tr>
+                        <tr class="board-area">
+                            <td >네번째</td>
+                            <td >날짜</td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
         </div>
 
     </div>
