@@ -39,11 +39,11 @@ public class MovieService {
 	public String detailMovieCast(int movieNo) {
 		Connection conn = getConnection();
 		
-		String casts = new MovieDao().detailMovieCast(conn, movieNo);
+		String cast = new MovieDao().detailMovieCast(conn, movieNo);
 		
 		close(conn);
 		
-		return casts;
+		return cast;
 	}
 
 

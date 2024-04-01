@@ -23,7 +23,7 @@ public class MovieController {
 	}
 
 	
-	// 영화 카테고리
+	// 영화 카테고리 네비바
 	public String movieCategory(HttpServletRequest request, HttpServletResponse response) {
 		
 		ArrayList<Movie> list = new MovieService().selectMovieList();
@@ -46,26 +46,58 @@ public class MovieController {
 	}
 	
 	
+	
 	// 영화 상세정보
 	public String detailMovie(HttpServletRequest request, HttpServletResponse response) {
+				
 		int movieNo = Integer.parseInt(request.getParameter("movieNo"));
 		
+
 		Movie movie = new MovieService().detailMovie(movieNo);
 		String cast = new MovieService().detailMovieCast(movieNo);
-		
-		System.out.println(cast);
-		
 		String view = "";
+
+//		request.setAttribute("movie", movie);
+//		request.setAttribute("cast", cast);
+		
+//		String view = "views/movie/movieDetail.jsp";
+		
 		if(movie != null) {
 			request.setAttribute("movie", movie);
 			request.setAttribute("cast", cast);
 			view = "views/movie/movieDetail.jsp";
 		} else {
 			view = "index.jsp";
+		
 		}
 		
 		return view;
-		
-		
 	}
+	
+	public String detailMovieList(HttpServletRequest request) {
+		
+		ArrayList<Movie> movieList = new MovieService().selectMovieList();
+		request.setAttribute("movieList", movieList);
+		
+		String view = "views/movie/movieDetail.jsp";
+		
+		return view;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

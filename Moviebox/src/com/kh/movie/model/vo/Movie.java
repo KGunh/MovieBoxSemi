@@ -38,6 +38,7 @@ public class Movie {
 		this.genreNo = genreNo;
 		this.directorNo = directorNo;
 	}
+	
 	public int getMovieNo() {
 		return movieNo;
 	}
