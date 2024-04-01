@@ -42,8 +42,15 @@ public class BoardServlet extends HttpServlet {
 		boolean flag = true;
 		
 		switch(mapping) {
-		case "list" : view = bc.selectBoardList(request, response); flag = false; break; // dispatcher
-		case "detail" : view = bc.detailBoard(request, response); flag = false; break;
+		case "list" : view = bc.selectBoardList(request, response); flag= false; break; // dispatcher
+		case "detail" : view = bc.detailBoard(request, response); flag= false; break;
+		case "insert" : view = bc.insertBoard(request, response); flag= false; break;
+		case "enrollForm" : view = bc.selectCategoryList(request, response); flag= false; break;
+		// 수정 페이지에서 등록 누를 시 연결되는 페이지
+		case "update" : view = bc.updateBoard(request, response); flag= false; break;
+		// 디테일 페이지에서 수정 누를 시 연결되는 페이지
+		case "updateForm" : view = bc.updateBoardForm(request, response); flag= false; break;
+		case "delete" : view = bc.deleteBoard(request, response); flag= false; break;
 		}
 		
 		

@@ -84,9 +84,7 @@ public class NoticeService {
 	// 카테고리
 	public ArrayList<Category> selectCategoryList(){
 		Connection conn = getConnection();
-		
 		ArrayList<Category> list = new NoticeDao().selectCategoryList(conn);
-		
 		close(conn);
 		
 		return list;
@@ -113,10 +111,10 @@ public class NoticeService {
 	}
 	
 	
-	public int removeNotice(String noticeNo) {
+	public int deleteNotice(String noticeNo) {
 		
 		Connection conn = getConnection();
-		int result = new NoticeDao().removeNotice(conn, noticeNo);
+		int result = new NoticeDao().deleteNotice(conn, noticeNo);
 		
 		if(result > 0) {
 			commit(conn);
@@ -151,11 +149,7 @@ public class NoticeService {
 
 
 	
-	
-	
-	
-	
-	
+
 	
 	
 

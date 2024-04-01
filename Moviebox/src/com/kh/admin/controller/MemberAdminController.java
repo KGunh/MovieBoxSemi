@@ -73,19 +73,20 @@ public class MemberAdminController {
 	
 	public void updateAdmin(HttpServletRequest request, HttpServletResponse response) {
 		
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		Member member  = new Member();
 		
 		String view = "";	
 		
 		String memberId = request.getParameter("memberId");
 		String memeberName = request.getParameter("memberName");
-		String email = request.getParameter("email");
+		String email = request.getParameter("Email");
 		String address = request.getParameter("address");
 		String phone = request.getParameter("phone");
 		String status = request.getParameter("status");
-		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		
-	
+		
+		member.setMemberNo(memberNo);
 		member.setMemberId(memberId);
 		member.setMemberName(memeberName);
 		member.setEmail(email);
@@ -94,6 +95,7 @@ public class MemberAdminController {
 		member.setStatus(status);
 		member.setMemberId(memberId);
 		
+		System.out.println(member);
 		
 		//
 		

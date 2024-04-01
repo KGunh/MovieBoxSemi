@@ -1,8 +1,11 @@
 package com.kh.reservation.controller;
 
+import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
@@ -119,11 +122,40 @@ public class ReservationController {
 		return new ReservationService().checkReservationInfo(screenNo, movieNo, teenAge, adultAge); 
 	}
 	// 예약
-	public String insertReservation() {
+	public String insertReservation(HttpServletRequest request) {
+		List<Seat> seatList = new ArrayList<Seat>();
+		Reservation reservation = new Reservation();
 		
-		// 예약 정보를 가지고 결제 페이지로 연결
+		int movieNo = Integer.parseInt(request.getParameter("movieNo"));
+		int screenNo = Integer.parseInt(request.getParameter("screenNo"));
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+		// 선택한 좌석 데이터 가공 -> 문자배열 -> seat객체에 필드set -> seatList에 add 
+		String seatNo = request.getParameter("seatNo");
+		String[] seatArray = seatNo.split(","); // 좌석 ex) A1,A2... 나누기
 		
-		// 예약내용 insert
+		for(int i = 0; i < seatArray.length; i++) {
+			Seat seat = new Seat();
+
+			seat.setSeatNo(seatArray[i]);
+			
+			seatList.add(seat);
+		}
+		
+		// reservation VO에 set
+		reservation.setSeatList(seatList);
+		reservation.setScreenNo(screenNo);
+		reservation.setMemberNo(memberNo);
+		reservation.setMovieNo(movieNo);
+		
+		// 예매 연령의 인원수는 따로 보냄
+		int teenPersonNo = 0;
+		if(request.getParameter("teen") != "") teenPersonNo = Integer.parseInt(request.getParameter("teen"));
+		
+		int adultPersonNo = 0;
+		if(request.getParameter("adult") != "") adultPersonNo = Integer.parseInt(request.getParameter("adult"));
+		
+		new ReservationService().insertReservation(reservation, teenPersonNo, adultPersonNo);
+		
 		return "views/reservation/infoReservation.jsp";
 	}
 

@@ -1,5 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ page import="com.kh.movie.model.vo.*, java.util.ArrayList" %>
+    
+<%
+	ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("movie");
+	System.out.println(list); // 리스트 출력 확인 
+%>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -215,7 +223,10 @@
             </div> <!-- movie-list-header -->
 
             <div class="movie-content-body">
-
+				
+			<% if(list.isEmpty()) { %>
+				등록된 영화가 존재하지 않습니다. <br>
+			<% } else { %>
                 <div class="movie-conten1">
                     <div class="movie-content">
                         <div class="movie-list-img"> 포스터 </div>
@@ -223,52 +234,15 @@
                         <button id="movie-content-btn1" onclick="detailPage();">상세정보</button>
                         <button id="movie-content-btn2">예매정보</button>
                     </div>
-
                     <div class="movie-content">
                         <div class="movie-list-img"> 포스터 </div>
                         <div class="movie-list-title"> 영화 타이틀 </div>
                         <button id="movie-content-btn1">상세정보</button>
                         <button id="movie-content-btn2">예매정보</button>
                     </div>
+             <% } %>
 
-                    <div class="movie-content">
-                        <div class="movie-list-img"> 포스터 </div>
-                        <div class="movie-list-title"> 영화 타이틀 </div>
-                        <button id="movie-content-btn1">상세정보</button>
-                        <button id="movie-content-btn2">예매정보</button>
-                    </div>
-
-                    <div class="movie-content">
-                        <div class="movie-list-img"> 포스터 </div>
-                        <div class="movie-list-title"> 영화 타이틀 </div>
-                        <button id="movie-content-btn1">상세정보</button>
-                        <button id="movie-content-btn2">예매정보</button>
-                    </div>
-
-                    <div class="movie-content">
-                        <div class="movie-list-img"> 포스터 </div>
-                        <div class="movie-list-title"> 영화 타이틀 </div>
-                        <button id="movie-content-btn1">상세정보</button>
-                        <button id="movie-content-btn2">예매정보</button>
-                    </div>
-                </div>
-
-                <div class="movie-conten1">
-                    <div class="movie-content">
-                        <div class="movie-list-img"> 포스터 </div>
-                        <div class="movie-list-title"> 영화 타이틀 </div>
-                        <button id="movie-content-btn1">상세정보</button>
-                        <button id="movie-content-btn2">예매정보</button>
-                    </div>
-
-                    <div class="movie-content">
-                        <div class="movie-list-img"> 포스터 </div>
-                        <div class="movie-list-title"> 영화 타이틀 </div>
-                        <button id="movie-content-btn1">상세정보</button>
-                        <button id="movie-content-btn2">예매정보</button>
-                    </div>
-
-                    <div class="movie-content">
+                     <!--<div class="movie-content">
                         <div class="movie-list-img"> 포스터 </div>
                         <div class="movie-list-title"> 영화 타이틀 </div>
                         <button id="movie-content-btn1">상세정보</button>
@@ -363,11 +337,47 @@
                         <button id="movie-content-btn2">예매정보</button>
                     </div>
                 </div>
+
+                <div class="movie-conten1">
+                    <div class="movie-content">
+                        <div class="movie-list-img"> 포스터 </div>
+                        <div class="movie-list-title"> 영화 타이틀 </div>
+                        <button id="movie-content-btn1">상세정보</button>
+                        <button id="movie-content-btn2">예매정보</button>
+                    </div>
+
+                    <div class="movie-content">
+                        <div class="movie-list-img"> 포스터 </div>
+                        <div class="movie-list-title"> 영화 타이틀 </div>
+                        <button id="movie-content-btn1">상세정보</button>
+                        <button id="movie-content-btn2">예매정보</button>
+                    </div>
+
+                    <div class="movie-content">
+                        <div class="movie-list-img"> 포스터 </div>
+                        <div class="movie-list-title"> 영화 타이틀 </div>
+                        <button id="movie-content-btn1">상세정보</button>
+                        <button id="movie-content-btn2">예매정보</button>
+                    </div>
+
+                    <div class="movie-content">
+                        <div class="movie-list-img"> 포스터 </div>
+                        <div class="movie-list-title"> 영화 타이틀 </div>
+                        <button id="movie-content-btn1">상세정보</button>
+                        <button id="movie-content-btn2">예매정보</button>
+                    </div>
+
+                    <div class="movie-content">
+                        <div class="movie-list-img"> 포스터 </div>
+                        <div class="movie-list-title"> 영화 타이틀 </div>
+                        <button id="movie-content-btn1">상세정보</button>
+                        <button id="movie-content-btn2">예매정보</button>
+                    </div>-->
+                </div> 
             </div>
             
             <script>
             function detailPage(){
-            	
             	location.href = '<%= contextPath %>/views/movie/movieDetail.jsp';
             }
             

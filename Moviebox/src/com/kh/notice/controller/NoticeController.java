@@ -79,7 +79,6 @@ public class NoticeController {
 		request.setAttribute("notice", notice);
 		request.setAttribute("count", result);
 		String view = "views/notice/noticeDetail.jsp";
-		
 		return view;
 		
 	}
@@ -139,13 +138,13 @@ public class NoticeController {
 			view = "/list.notice?currentPage=1";
 		} else {
 			session.setAttribute("alertMsg", "공지사항 작성 실패");
-			view = "views/member/noticeInsertForm.jsp";
+			view = "views/notice/noticeInsertForm.jsp";
 		}
 		
 		return view;
 	}
 	
-	//  글 수정
+	// 글 수정
 	public String updateNoticeForm(HttpServletRequest request, HttpServletResponse response) {
 		
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
@@ -191,16 +190,6 @@ public class NoticeController {
 		return view;
 	}
 	
-	// 카테고리 (글 수정)
-	public String selectCategory(HttpServletRequest request, HttpServletResponse response) {
-		ArrayList<Category> list = new NoticeService().selectCategoryList();
-		request.setAttribute("category", list);
-		
-		String view = "views/notice/noticeUpdateForm.jsp";
-
-		return view;
-	}
-	
 	
 	// 글 수정 (카테고리, 공지사항 번호 넘겨주기)
 	public String updateNoticeList(HttpServletRequest request, HttpServletResponse response) {
@@ -219,12 +208,12 @@ public class NoticeController {
 	}
 	
 	// 삭제
-	public String removeNotice(HttpServletRequest request, HttpServletResponse response) {
+	public String deleteNotice(HttpServletRequest request, HttpServletResponse response) {
 		
 		HttpSession session = request.getSession();
 		
 		String noticeNo = request.getParameter("noticeNo");
-		int result = new NoticeService().removeNotice(noticeNo);
+		int result = new NoticeService().deleteNotice(noticeNo);
 		
 		String view ="";
 		

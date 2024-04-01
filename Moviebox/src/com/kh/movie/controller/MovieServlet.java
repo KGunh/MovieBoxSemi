@@ -33,6 +33,7 @@ public class MovieServlet extends HttpServlet {
 		// 변수 
 		MovieController mc = new MovieController();
 		String uri = request.getRequestURI();
+		
 		String view = "";
 		boolean flag = true;
 		
@@ -40,10 +41,11 @@ public class MovieServlet extends HttpServlet {
 		
 		switch(mapping) {
 		case "list" : view = "views/movie/movieList.jsp"; break;
+		
 		}
 		
 		if(flag) {
-			response.sendRedirect(view);
+			response.sendRedirect(request.getContextPath() + view);
 		} else {
 			request.getRequestDispatcher(view).forward(request, response);
 		}

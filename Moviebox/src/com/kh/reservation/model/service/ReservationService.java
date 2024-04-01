@@ -1,10 +1,9 @@
 package com.kh.reservation.model.service;
 
-import static com.kh.common.JDBCTemplate.close;
-import static com.kh.common.JDBCTemplate.getConnection;
+import static com.kh.common.JDBCTemplate.*;
 
 import java.sql.Connection;
-import java.util.ArrayList;
+import java.sql.SQLException;
 import java.util.List;
 
 import com.kh.common.model.vo.Location;
@@ -13,6 +12,8 @@ import com.kh.movie.model.vo.Movie;
 import com.kh.reservation.model.dao.ReservationDao;
 import com.kh.reservation.model.vo.Seat;
 import com.kh.theater.model.vo.Screen;
+
+import oracle.jdbc.OracleConnection.CommitOption;
 
 public class ReservationService {
 	
@@ -68,10 +69,26 @@ public class ReservationService {
 		return reservation;
 	}
 
-	
-	// 지역 조회
-	
-	// 영화관, 스크린은 AJAX로
-			
+	public void insertReservation(Reservation reservation, int teenPersonNo, int adultPersonNo) {
+		Connection conn = getConnection();
+	        
+		int priceSheetResult = 0;
+		int seatResult = 0;
+		// 예약테이블에 insert후 pk값 반환받기
+        int reservationKey = new ReservationDao().insertReservation(conn, reservation);
+        // 청소년/성인요금 테이블에 insert
+        if (reservationKey > 0) priceSheetResult = new ReservationDao().insertPriceSheet(conn, reservationKey, teenPersonNo, adultPersonNo);
+        // 예약 좌석 테이블에 insert
+        if (priceSheetResult > 0) seatResult = new ReservationDao().insertSeat(conn, reservation, reservationKey);
+
+        if (reservationKey > 0 && priceSheetResult > 0 && seatResult > 0) {
+            commit(conn);
+        } else {
+            rollback(conn);
+        }
+        
+        close(conn);
+	}
+
 
 }

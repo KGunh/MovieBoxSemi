@@ -24,7 +24,7 @@
 		                      TB_NOTICE.STATUS = 'Y'
 		                 ORDER
 		                    BY
-		                      CREATE_DATE DESC) A)
+		                      NOTICE_NO DESC) A)
 		 WHERE SNUM BETWEEN ? AND ?
 	</entry>
 	
@@ -109,7 +109,7 @@
 	
 	
 	
-	<entry key="removeNotice">
+	<entry key="deleteNotice">
 	
 		UPDATE
 			  TB_NOTICE
@@ -118,7 +118,6 @@
 		 WHERE
 		 	  NOTICE_NO = ?
 	</entry>
-	
 	
 
 	<entry key="countNotice">

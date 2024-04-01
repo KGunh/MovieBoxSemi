@@ -132,11 +132,13 @@ public class MemberAdminDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setString(1, member.getEmail());
-			pstmt.setString(2, member.getAddress());
-			pstmt.setString(3, member.getPhone());
-			pstmt.setString(4, member.getStatus());
-			pstmt.setString(5, member.getMemberId());
+			
+			pstmt.setString(1, member.getMemberName());
+			pstmt.setString(2, member.getEmail());
+			pstmt.setString(3, member.getAddress());
+			pstmt.setString(4, member.getPhone());
+			pstmt.setString(5, member.getStatus());
+			pstmt.setString(6, member.getMemberId());
 			
 			result = pstmt.executeUpdate();
 			

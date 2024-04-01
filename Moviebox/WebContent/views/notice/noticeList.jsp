@@ -324,7 +324,7 @@
                     </tbody>
                 </table>
             </div>
-
+			
 	        
            <!--  -->
             <div id="page">
@@ -369,7 +369,7 @@
     		function noticeInsert(){
     			location.href = '<%=contextPath%>/enrollForm.notice';
     		}
-    		
+
     		$('tbody > tr.list').click(function(){
     			const noticeNo = $(this).children().eq(0).text();
     			location.href = '<%=contextPath%>/detail.notice?noticeNo=' + noticeNo;

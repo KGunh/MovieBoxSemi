@@ -212,7 +212,7 @@
         width: 400px;
         height: 80px;
         background-color: white;
-        box-shadow: 0 3px 10px rgba(255, 255, 255, 0.7);
+        box-shadow: 0 5px 15px rgba(255, 255, 255, 0.7);
     }
     
     .rotate {
@@ -427,7 +427,7 @@
         var resvAdult = ['', 0];
         var selectSeat = []; // 선택 좌석
 
-        // 상영관 예약정보 가져와서 좌석 선택 가능여부 조작
+        // 상영관 예약정보 가져와서 예약좌석 비활성화
         window.onload = function() {
             $.ajax({
                 url : 'seat.reservationAjax',
@@ -439,7 +439,7 @@
 
                     result.forEach(function(seat) {
                         
-                        //line div요소 html과 배열요소 비교
+                        // .line div요소 html과 배열요소 비교
                         $('.seats').each(function() {
                             if ($(this).html() === seat.seatNo) {
                                 // 값이 같으면 disabled 속성 부여
@@ -615,8 +615,8 @@
                                     +         '<input type="hidden" name="movieNo" value="' + <%= movieNo %> + '">'
                                     +         '<input type="hidden" name="screenNo" value="' + <%= screenNo %> + '">'
                                     +         '<input type="hidden" name="memberNo" value="' + <%= loginUser.getMemberNo() %> + '">'
-                                    +         '<input type="hidden" name="teen" value="' + resvTeen[0] + '">'
-                                    +         '<input type="hidden" name="adult" value="' + resvAdult[0] + '">'
+                                    +         '<input type="hidden" name="teen" value="' + resvTeen[1] + '">'
+                                    +         '<input type="hidden" name="adult" value="' + resvAdult[1] + '">'
                                     +         '<input type="hidden" name="seatNo"value="' + selectSeat.join(',') + '">'
                                     +         '<button type="submit" id="payment-btn" onclick="return payment()">결제 하기</button>'
                                     +     '</form>'

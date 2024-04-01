@@ -11,6 +11,9 @@ public class Board {
 	private String boardWriter;
 	private String boardCategory;
 	
+	private int categoryNo;
+	private int userNo;
+	
 	public Board() {
 		super();
 	}
@@ -30,6 +33,23 @@ public class Board {
 	
 	
 	
+	
+	public int getUserNo() {
+		return userNo;
+	}
+
+	public void setUserNo(int userNo) {
+		this.userNo = userNo;
+	}
+
+	public int getCategoryNo() {
+		return categoryNo;
+	}
+
+	public void setCategoryNo(int categoryNo) {
+		this.categoryNo = categoryNo;
+	}
+
 	public String getBoardCategory() {
 		return boardCategory;
 	}
@@ -95,11 +115,15 @@ public class Board {
 		this.status = status;
 	}
 
+
+	
+
 	@Override
 	public String toString() {
-		return "Board [boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
-				+ ", boardWriter=" + boardWriter + ", count=" + count + ", createString=" + createDate + ", status="
-				+ status + "]";
+		return "Board [userNo =" + userNo + ", boardNo=" + boardNo + ", boardTitle=" + boardTitle + ", boardContent=" + boardContent
+				+ ", createDate=" + createDate + ", count=" + count + ", status=" + status + ", boardWriter="
+				+ boardWriter + ", boardCategory=" + boardCategory + ", categoryNo=" + categoryNo
+				+ "]";
 	}
 
 	@Override

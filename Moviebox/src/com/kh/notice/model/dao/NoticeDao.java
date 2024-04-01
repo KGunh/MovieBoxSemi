@@ -249,11 +249,11 @@ public class NoticeDao {
 	}
 
 
-	public int removeNotice(Connection conn, String noticeNo) {
+	public int deleteNotice(Connection conn, String noticeNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String sql = prop.getProperty("removeNotice");
+		String sql = prop.getProperty("deleteNotice");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
