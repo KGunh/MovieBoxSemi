@@ -181,7 +181,66 @@
 	</entry>
 	
 	<entry key="checkReservationInfo">
-		
+		SELECT
+		       MOVIE_NO,
+		       MOVIE_TITLE,
+		       MOVIE_RT,
+		       MOVIE_RELEASE,
+		       TICKET_NO,
+		       TEEN_PEOPLE,
+		       ADULT_PEOPLE,
+		       TEEN_PRICE,
+		       ADULT_PRICE,
+		       TOTAL_PRICE,
+		       GENRE_NAME,
+		       FILE_PATH,
+		       CHANGE_NAME,
+		       SCREEN_NAME||'관' AS SCREEN_NAME,
+		       THEATER_NAME,
+		       (TO_CHAR(WATCH_DATE,'YYYY-MM-DD') || '   ' || TO_CHAR(WATCH_DATE,'HH24:MI') || '~' || TO_CHAR(WATCH_DATE + NUMTODSINTERVAL(TO_NUMBER(MOVIE_RT), 'MINUTE'), 'HH24:MI')) AS WATCH_DATE,
+		       TO_CHAR(SYSDATE, 'YYYY-MM-DD') AS RESERVATION_DATE
+		  FROM
+		       TB_RESERVATION
+		  JOIN (
+		        SELECT
+		               TICKET_NO,
+		               TEEN_PEOPLE,
+		               ADULT_PEOPLE,
+		               (TEEN_PEOPLE * TP.PRICE) AS TEEN_PRICE,
+		               (ADULT_PEOPLE * AP.PRICE) AS ADULT_PRICE,
+		               ((TEEN_PEOPLE * TP.PRICE) + (ADULT_PEOPLE * AP.PRICE)) AS TOTAL_PRICE
+		          FROM
+		               (
+		                SELECT
+		                       TICKET_NO,
+		                       COUNT(CASE WHEN GRADE = 1 THEN 1 ELSE NULL END) AS TEEN_PEOPLE,
+		                       COUNT(CASE WHEN GRADE = 2 THEN 2 ELSE NULL END) AS ADULT_PEOPLE
+		                  FROM
+		                       TB_PRICESHEET
+		                  JOIN
+		                       TB_PRICE USING(GRADE)
+		                 WHERE
+		                       TICKET_NO = ?
+		                 GROUP
+		                    BY
+		                       TICKET_NO
+		               )
+		          JOIN
+		               TB_PRICE TP ON(TP.GRADE = 1)
+		          JOIN
+		               TB_PRICE AP ON(AP.GRADE = 2)
+		        ) USING(TICKET_NO)      
+		   JOIN
+		        TB_SCREEN USING(SCREEN_NO)
+		   JOIN
+		        TB_MOVIE USING(MOVIE_NO)
+		   JOIN
+		        TB_THEATER USING(THEATER_NO)
+		   JOIN
+		        TB_ATTACHMENT USING(MOVIE_NO)
+		   JOIN
+		        TB_GENRE ON(GENRE_NO =GENRE_CODE)
+				
 	</entry>
 	
 	
