@@ -13,12 +13,14 @@ import com.kh.admin.model.dao.AdminPageDao;
 import com.kh.admin.model.dao.MemberAdminDao;
 import com.kh.board.model.vo.Board;
 import com.kh.common.JDBCTemplate;
+import com.kh.common.model.service.MainService;
 import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.Location;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.member.model.vo.Member;
 import com.kh.movie.model.vo.Movie;
 import com.kh.notice.model.vo.Notice;
+import com.kh.theater.model.vo.Theater;
 
 public class AdminPageService {
 	
@@ -274,7 +276,13 @@ public class AdminPageService {
 		return casts;
 	}
 	
-	
+	public List<Theater> selectTheaterList(String locationCode){
+		Connection conn = getConnection();
+		List<Theater> list = new AdminPageDao().selectTheaterList(conn, locationCode);
+		close(conn);
+		
+		return list;
+	}
 	
 	
 	
