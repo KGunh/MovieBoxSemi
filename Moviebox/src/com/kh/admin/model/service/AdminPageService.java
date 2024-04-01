@@ -258,7 +258,7 @@ public class AdminPageService {
 		
 		Movie movie = new AdminPageDao().detailAdmin(conn,movieNo);
 		
-		JDBCTemplate.close(conn);
+		close(conn);
 		
 		return movie;
 	}
@@ -269,7 +269,7 @@ public class AdminPageService {
 		
 		String casts = new AdminPageDao().adminMovieCast(conn, movieNo);
 		
-		JDBCTemplate.close(conn);
+		close(conn);
 		
 		return casts;
 	}
