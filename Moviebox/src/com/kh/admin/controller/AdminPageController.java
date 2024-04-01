@@ -278,6 +278,8 @@ public class AdminPageController {
 		Movie m = new AdminPageService().adminMovieDetail(movieNo);
 		String cast = new AdminPageService().adminMovieCast(movieNo);
 		
+		
+		
 		if(m != null) {
 			request.setAttribute("movie", m);
 			request.setAttribute("cast", cast);
