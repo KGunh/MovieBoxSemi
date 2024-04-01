@@ -94,7 +94,12 @@
 
 
 </entry>
+<entry key="category">
 
+	SELECT * FROM TB_LOCATION
+
+
+</entry>
 
 
 

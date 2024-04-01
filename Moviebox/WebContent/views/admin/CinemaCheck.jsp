@@ -21,105 +21,16 @@
 
     <style>
         
- *{
+ 		*{
             box-sizing: border-box;
-        }
-        body {
+        	}
+        	
+        body 
+        	{
             background-color: #1A1A1A
-        }
-        #header{
-           margin: auto;
-            height : 200px;
-            width: 1200px;
-        }
-
-        #top-header{
-            height: 75px;
-            position: relative;
-            border-bottom: 1px solid lightgray;
-        }
-        #login-area{
-            position: absolute;
-            right: 30px;
-            top: 20px;
-
-        }
-        #login-area > a{
-            display: block;
-            float: right;
-            text-decoration-line: none;
-            color: white;
-            font-size: 16px;
-            margin-left: 30px;
-            font-weight: bold;
-        }
-        
-
-        #header-navigator{
-            height : 125px;
-            
-            border-bottom: 1px solid lightgray;
-        }
-
-        #logo-div{
-            position: relative;
-            float: left;
-            height: 100%;
-            width: 30%;
-
-        }
-
-        #content{height : 1500px;}
-
-        #logo{
-            position: absolute; 
-            top: 50%;
-            margin-top: -25px;
-            width: 100%;
-            height: 50px;
-            font-size: 50px;
-            font-weight: bold;
-            color: #FFC145;
-            line-height: 45px;
-            
-            text-align: center;
-        }
-        a {
-            text-decoration-line: none;
-        }
-        #logo > a{
-            text-decoration-line: none;
-            color: #FFC145;
-        }
-        #navigator{
-            float: right;
-            width: 50%;
-            height: 100%;
-            margin-right: 15%;
-        }
-        .navi{
-            float:left;
-            width: 20%;
-            height: 100%;
-            text-align:center;
-            margin: 0 auto;
-        }
-        .navi > a{
-            display: block;
-            text-align: center;
-            width: 100%;
-            height: 100%;
-            color: white;
-            text-decoration-line: none;
-            line-height: 125px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-          
+        	}
+      
             div{
-           
-           
           
             box-sizing : border-box;
         }
@@ -312,10 +223,7 @@
 
        }
 
-     
-        
-       
-       }
+
 
        .check{
         height: 20px;
@@ -473,15 +381,15 @@
                     </button>
 
                     <div id="delete" >
-                        <button class="btn1" onclick="enrollment();">등록</button>
+                       <button type="button" class="btn1" onclick="enrollment();">등록</button>
                        <!-- 수정/ 삭제 클릭해서 상세조회에서 함-->
                     </div>
                     
                     <script>
                     	function enrollment(){
+                    		console.log('<%=contextPath%>/insertAdmin.cm');
                     		
-                    		location.href = '<%=contextPath%>/views/admin/CinemaInsert.jsp'; 
-                    		
+                    		location.href = '<%=contextPath%>/insertAdmin.cm';
                     	}
                     
                     

@@ -192,7 +192,13 @@
                         조상의 묫자리가 화근임을 알아챈 ‘화림’은 이장을 권하고,<br>
                         돈 냄새를 맡은 최고의 풍수사 ‘상덕’(최민식)과 장의사 ‘영근’(유해진)이 합류한다.
                     </div>
-                    <button id="movie-detail-btn">예매하기</button>
+                    
+                    <% if(loginUser == null) { %>
+                    	<button id="movie-detail-btn" onclick="noMember();">예매하기</button>
+                	<%} else { %>
+                		<button id="movie-detail-btn" onclick="reservationPage();">예매하기</button>
+                	<% } %>
+                
                 </div>
             </div>
 
@@ -207,13 +213,13 @@
                 <h1>스틸컷</h1>
                 <div id="detail-still-img">
                     <div class="still-img">
-                        스틸컷
+                        	스틸컷
                     </div>
                     <div class="still-img">
-                        스틸컷
+                        	스틸컷
                     </div>
                     <div class="still-img">
-                        스틸컷
+                        	스틸컷
                     </div>
                 </div>
             </div>
@@ -222,6 +228,18 @@
     </div> <!-- wrap -->
     
         <%@ include file="/views/common/footer.jsp" %>
+        
+    <script>
+    	// 예매하기 버튼 -> 예매 페이지
+    	function reservationPage(){
+    		location.href = '<%= contextPath %>/movie.reservation';
+    	}
+    	
+		function noMember(){
+			location.href = ('<%=contextPath%>/loginForm.me');
+			alert('로그인이 필요한 서비스 입니다.');
+		}
+    </script>
     
 </body>
 
