@@ -80,6 +80,21 @@
            C.LOCATION_CODE = L.LOCATION_CODE 
 </entry>
 
+<entry key="cinemaInsert">
+
+		INSERT 
+			INTO TB_THEATER
+					VALUES(
+							
+		
+		
+		)	 
+				
+
+
+
+</entry>
+
 
 
 

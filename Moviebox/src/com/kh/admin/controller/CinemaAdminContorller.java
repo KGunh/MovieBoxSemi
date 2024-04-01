@@ -1,5 +1,6 @@
 package com.kh.admin.controller;
 
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -37,12 +38,21 @@ public class CinemaAdminContorller {
 	public String cinemaInsert(HttpServletRequest request, HttpServletResponse response) {
 		
 		
+			try {
+				request.setCharacterEncoding("UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		
+		Theater theater = new Theater();
 		String view = "/views/admin/CinemaInsert.jsp";
 		
 		String name = request.getParameter("name");
 		String address = request.getParameter("address");
 		String region = request.getParameter("region");
-		String city = request.getParameter("city");
+		String link = request.getParameter("link");
 		
 		
 		switch(region) {
@@ -63,6 +73,12 @@ public class CinemaAdminContorller {
 		
 		
 		}
+		
+		theater.setTheaterName(name);
+		theater.setTheaterAddr(address);
+		theater.setLocationName(region);
+		theater.setMapLink(link);
+
 		
 		
 		return view; 
