@@ -575,8 +575,7 @@
                     adultAge : resvAdult[1] 
                 },
                 success : function(result){
-
-                    if(selectPeople == 0){
+                    if(!(selectSeat.length === 0) && selectPeople === 0){
                         $("#check-area").removeAttr("hidden");
                         $("#check-area").show();
 

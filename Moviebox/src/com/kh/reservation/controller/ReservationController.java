@@ -11,6 +11,8 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
 import com.kh.common.model.vo.Reservation;
+import com.kh.member.model.service.MemberService;
+import com.kh.reservation.model.dao.ReservationDao;
 import com.kh.reservation.model.service.ReservationService;
 import com.kh.reservation.model.vo.Seat;
 import com.kh.theater.model.vo.Screen;
@@ -113,13 +115,13 @@ public class ReservationController {
 		return new ReservationService().selectSeatList(screenNo);		
 	}
 	// 예약내용 확인
-	public Reservation checkReservationInfo(HttpServletRequest request) {
+	public Reservation printReservationInfo(HttpServletRequest request) {
 		int screenNo = Integer.parseInt(request.getParameter("screenNo"));
 		int movieNo = Integer.parseInt(request.getParameter("movieNo"));
 		int teenAge = Integer.parseInt(request.getParameter("teenAge"));
 		int adultAge = Integer.parseInt(request.getParameter("adultAge"));
 		
-		return new ReservationService().checkReservationInfo(screenNo, movieNo, teenAge, adultAge); 
+		return new ReservationService().printReservationInfo(screenNo, movieNo, teenAge, adultAge); 
 	}
 	// 예약
 	public String insertReservation(HttpServletRequest request) {
@@ -154,10 +156,22 @@ public class ReservationController {
 		int adultPersonNo = 0;
 		if(request.getParameter("adult") != "") adultPersonNo = Integer.parseInt(request.getParameter("adult"));
 		
-		new ReservationService().insertReservation(reservation, teenPersonNo, adultPersonNo);
+		HashMap<String, Integer> reservationKey = new ReservationService().insertReservation(reservation, teenPersonNo, adultPersonNo);
+		
+		request.setAttribute("ticketNo", reservationKey.get("ticketNo"));
 		
 		return "views/reservation/infoReservation.jsp";
 	}
 
+	public Reservation checkReservationInfo(HttpServletRequest request) {
+		int ticketNo = Integer.parseInt(request.getParameter("ticketNo"));
+				
+		Reservation reservation = new ReservationService().checkReservationInfo(ticketNo);
+		
+		
+		return reservation;
+	}
+
+	
 	
 }
