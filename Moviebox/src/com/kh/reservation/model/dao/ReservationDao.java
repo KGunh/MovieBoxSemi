@@ -307,7 +307,7 @@ public class ReservationDao {
 		return result == reservation.getSeatList().size() ? 1 : 0;
 	}
 
-	public Reservation checkReservationInfo(Connection conn, int ticketNo, int loginUserNo) {
+	public Reservation checkReservationInfo(Connection conn, int ticketNo) {
 		Reservation reservation = new Reservation();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -318,11 +318,26 @@ public class ReservationDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(1, ticketNo);
-			pstmt.setInt(2, loginUserNo);
 			
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
 				//reservation.set
+				/*
+				MOVIE_NO,
+			       MOVIE_TITLE,
+			       MOVIE_RT,
+			       MOVIE_RELEASE,
+			       TICKET_NO,
+			       GENRE_NAME,
+			       FILE_PATH,
+			       CHANGE_NAME,
+			       SCREEN_NAME||'관' AS SCREEN_NAME,
+			       THEATER_NAME,
+			       (TO_CHAR(WATCH_DATE,'YYYY-MM-DD') || '   ' || TO_CHAR(WATCH_DATE,'HH24:MI') || '~' || TO_CHAR(WATCH_DATE + NUMTODSINTERVAL(TO_NUMBER(MOVIE_RT), 'MINUTE'), 'HH24:MI')) AS WATCH_DATE,
+			       TO_CHAR(SYSDATE, 'YYYY-MM-DD') AS RESERVATION_DATE,
+			       PEOPLE,
+			       TOTAL_PRICE
+		       */
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

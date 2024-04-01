@@ -93,10 +93,10 @@ public class ReservationService {
         return reservationKey;
 	}
 
-	public Reservation checkReservationInfo(int ticketNo, int loginUserNo) {
+	public Reservation checkReservationInfo(int ticketNo) {
 		Connection conn = getConnection();
 		
-		Reservation reservation = new ReservationDao().checkReservationInfo(conn, ticketNo, loginUserNo);
+		Reservation reservation = new ReservationDao().checkReservationInfo(conn, ticketNo);
 		
 		close(conn);
 		

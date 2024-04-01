@@ -154,6 +154,7 @@
             <div id="reservation-info-area">
                 <div id="reservation-info">
                     <div>
+                        <div class="select-info">티켓번호</div>
                         <div class="select-info">상영일시</div>
                         <div class="select-info">관람극장</div>
                         <div class="select-info">상영관</div>
@@ -162,6 +163,7 @@
                         <div class="select-info" style="margin-top: 50px;">결제금액</div>
                     </div>
                     <div>
+                        <div class="print-info">티켓번호</div>
                         <div class="print-info">일시</div>
                         <div class="print-info">이름</div>
                         <div class="print-info">상영관</div>
@@ -186,8 +188,7 @@
             url : 'checkInfo.reservationAjax',
             type : 'post',
             data : {
-                ticketNo : <%= ticketNo %>,
-                loginUser : <%= loginUser.getMemberNo() %>
+                ticketNo : <%= ticketNo %>
             },
             success : function(result) {
 

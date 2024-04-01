@@ -165,9 +165,8 @@ public class ReservationController {
 
 	public Reservation checkReservationInfo(HttpServletRequest request) {
 		int ticketNo = Integer.parseInt(request.getParameter("ticketNo"));
-		int loginUserNo = Integer.parseInt(request.getParameter("loginUserNo")); 
 				
-		Reservation reservation = new ReservationService().checkReservationInfo(ticketNo, loginUserNo);
+		Reservation reservation = new ReservationService().checkReservationInfo(ticketNo);
 		
 		
 		return reservation;
