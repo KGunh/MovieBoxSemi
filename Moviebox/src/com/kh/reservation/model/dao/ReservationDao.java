@@ -235,7 +235,7 @@ public class ReservationDao {
 
 			result = pstmt.executeUpdate();
 			
-			reservationKey.put("key", key);
+			reservationKey.put("ticketNo", key);
 			reservationKey.put("result", result);
 			
 		} catch (SQLException e) {
@@ -248,7 +248,7 @@ public class ReservationDao {
 		return reservationKey;
 	}
 
-	public int insertPriceSheet(Connection conn, int reservationKey, int teenPersonNo, int adultPersonNo) {
+	public int insertPriceSheet(Connection conn, int ticketNo, int teenPersonNo, int adultPersonNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
@@ -260,7 +260,7 @@ public class ReservationDao {
 			if(teenPersonNo != 0) {
 				for(int i = 0; i < teenPersonNo; i++) {
 					pstmt.setInt(1, 1);
-					pstmt.setInt(2, reservationKey);
+					pstmt.setInt(2, ticketNo);
 					result += pstmt.executeUpdate();
 				}
 			}
@@ -268,7 +268,7 @@ public class ReservationDao {
 			if(adultPersonNo != 0) {
 				for(int i = 0; i < adultPersonNo; i++) {
 					pstmt.setInt(1, 2);
-					pstmt.setInt(2, reservationKey);
+					pstmt.setInt(2, ticketNo);
 					result += pstmt.executeUpdate();
 				}
 			}
@@ -305,6 +305,32 @@ public class ReservationDao {
 		}
 		
 		return result == reservation.getSeatList().size() ? 1 : 0;
+	}
+
+	public Reservation checkReservationInfo(Connection conn, int ticketNo, int loginUserNo) {
+		Reservation reservation = new Reservation();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("checkReservationInfo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, ticketNo);
+			pstmt.setInt(2, loginUserNo);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				//reservation.set
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		return reservation;
 	}
 	
 	

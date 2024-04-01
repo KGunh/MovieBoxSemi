@@ -11,6 +11,8 @@ import java.util.Set;
 import javax.servlet.http.HttpServletRequest;
 
 import com.kh.common.model.vo.Reservation;
+import com.kh.member.model.service.MemberService;
+import com.kh.reservation.model.dao.ReservationDao;
 import com.kh.reservation.model.service.ReservationService;
 import com.kh.reservation.model.vo.Seat;
 import com.kh.theater.model.vo.Screen;
@@ -156,16 +158,19 @@ public class ReservationController {
 		
 		HashMap<String, Integer> reservationKey = new ReservationService().insertReservation(reservation, teenPersonNo, adultPersonNo);
 		
-		request.setAttribute("ticketNo", reservationKey.get("key"));
+		request.setAttribute("ticketNo", reservationKey.get("ticketNo"));
 		
 		return "views/reservation/infoReservation.jsp";
 	}
 
-	public void checkReservationInfo(HttpServletRequest request) {
+	public Reservation checkReservationInfo(HttpServletRequest request) {
+		int ticketNo = Integer.parseInt(request.getParameter("ticketNo"));
+		int loginUserNo = Integer.parseInt(request.getParameter("loginUserNo")); 
+				
+		Reservation reservation = new ReservationService().checkReservationInfo(ticketNo, loginUserNo);
 		
-	
-	
-	
+		
+		return reservation;
 	}
 
 	

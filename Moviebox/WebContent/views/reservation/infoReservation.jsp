@@ -184,9 +184,10 @@
     window.onload = function(){
         $.ajax({
             url : 'checkInfo.reservationAjax',
-            type : ,
+            type : 'post',
             data : {
-
+                ticketNo : <%= ticketNo %>,
+                loginUser : <%= loginUser.getMemberNo() %>
             },
             success : function(result) {
 
