@@ -1,5 +1,7 @@
 package com.kh.movie.model.dao;
 
+import static com.kh.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -35,15 +37,65 @@ public class MovieDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			rset= pstmt.executeQuery();
 			
-			// 담기 24.03.30
+			while(rset.next()) {
+				Movie movie = new Movie();
+				movie.setMovieNo(rset.getInt("MOVIE_NO"));
+				movie.setMovieTitle(rset.getString("MOVIE_TITLE"));
+				movie.setStatus(rset.getString("STATUS"));
+				movie.setGenreName(rset.getString("GENRE_NAME"));
+				movie.setMovieUpdate(rset.getString("MOVIE_UPDATE"));
+				
+				movieList.add(movie);
+			}
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
 		}
 		
 		
 		return movieList;
+	}
+
+	public ArrayList<Movie> movieCategory(Connection conn, String genre) {
+		
+		ArrayList<Movie> list = new ArrayList<Movie>();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("movieCategory");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, genre);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Movie movie = new Movie(rset.getInt("MOVIE_NO"),
+										rset.getString("MOVIE_TITLE"),
+										rset.getString("MOVIE_RT"),
+										rset.getString("MOVIE_RATED"),
+										rset.getString("MOVIE_RELEASE"),
+										rset.getString("MOVIE_STORY"),
+										rset.getString("STATUS"),
+										rset.getString("GENRE_NAME"),
+										rset.getInt("DIRECTOR_NO"));
+				list.add(movie);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
 }

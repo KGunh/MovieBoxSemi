@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Properties;
 
@@ -160,12 +161,12 @@ public class ReservationDao {
 		return seatList;
 	}
 
-	public Reservation checkReservationInfo(Connection conn, int screenNo, int movieNo, int teenAge, int adultAge) {
+	public Reservation printReservationInfo(Connection conn, int screenNo, int movieNo, int teenAge, int adultAge) {
 		Reservation reservation = new Reservation();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		String sql = prop.getProperty("checkReservationInfo");
+		String sql = prop.getProperty("printReservationInfo");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -207,7 +208,9 @@ public class ReservationDao {
 		return reservation;
 	}
 
-	public int insertReservation(Connection conn, Reservation reservation) {
+	public HashMap<String,Integer> insertReservation(Connection conn, Reservation reservation) {
+		HashMap<String, Integer> reservationKey = new HashMap<String, Integer>( );
+		int result = 0;
 		int key = 0;
 		PreparedStatement pstmt =null;
 		ResultSet rset = null;
@@ -230,7 +233,11 @@ public class ReservationDao {
 			pstmt.setInt(3, reservation.getMemberNo());
 			pstmt.setInt(4, reservation.getScreenNo());
 
-			pstmt.executeUpdate();
+			result = pstmt.executeUpdate();
+			
+			reservationKey.put("ticketNo", key);
+			reservationKey.put("result", result);
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -238,10 +245,10 @@ public class ReservationDao {
 			close(pstmt);
 		}
 		
-		return key;
+		return reservationKey;
 	}
 
-	public int insertPriceSheet(Connection conn, int reservationKey, int teenPersonNo, int adultPersonNo) {
+	public int insertPriceSheet(Connection conn, int ticketNo, int teenPersonNo, int adultPersonNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
@@ -253,7 +260,7 @@ public class ReservationDao {
 			if(teenPersonNo != 0) {
 				for(int i = 0; i < teenPersonNo; i++) {
 					pstmt.setInt(1, 1);
-					pstmt.setInt(2, reservationKey);
+					pstmt.setInt(2, ticketNo);
 					result += pstmt.executeUpdate();
 				}
 			}
@@ -261,7 +268,7 @@ public class ReservationDao {
 			if(adultPersonNo != 0) {
 				for(int i = 0; i < adultPersonNo; i++) {
 					pstmt.setInt(1, 2);
-					pstmt.setInt(2, reservationKey);
+					pstmt.setInt(2, ticketNo);
 					result += pstmt.executeUpdate();
 				}
 			}
@@ -298,6 +305,47 @@ public class ReservationDao {
 		}
 		
 		return result == reservation.getSeatList().size() ? 1 : 0;
+	}
+
+	public Reservation checkReservationInfo(Connection conn, int ticketNo) {
+		Reservation reservation = new Reservation();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("checkReservationInfo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, ticketNo);
+			
+			rset = pstmt.executeQuery();
+			if(rset.next()) {
+				//reservation.set
+				/*
+				MOVIE_NO,
+			       MOVIE_TITLE,
+			       MOVIE_RT,
+			       MOVIE_RELEASE,
+			       TICKET_NO,
+			       GENRE_NAME,
+			       FILE_PATH,
+			       CHANGE_NAME,
+			       SCREEN_NAME||'관' AS SCREEN_NAME,
+			       THEATER_NAME,
+			       (TO_CHAR(WATCH_DATE,'YYYY-MM-DD') || '   ' || TO_CHAR(WATCH_DATE,'HH24:MI') || '~' || TO_CHAR(WATCH_DATE + NUMTODSINTERVAL(TO_NUMBER(MOVIE_RT), 'MINUTE'), 'HH24:MI')) AS WATCH_DATE,
+			       TO_CHAR(SYSDATE, 'YYYY-MM-DD') AS RESERVATION_DATE,
+			       PEOPLE,
+			       TOTAL_PRICE
+		       */
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		
+		
+		return reservation;
 	}
 	
 	

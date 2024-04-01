@@ -510,7 +510,7 @@
 			            </div>
 			
 			            <div id="sub_7">
-			                <input type="text" name="director_name" id="director_name" placeholder="감독을 입력해 주세요.">
+			                <input type="text" name="director_name" id="director_name" placeholder="감독을 입력해 주세요.(ex - 호빵맨, 식빵맨 )">
 			            </div>
 			
 			            <div id="sub_8">

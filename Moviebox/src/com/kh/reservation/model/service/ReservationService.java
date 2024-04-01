@@ -4,6 +4,7 @@ import static com.kh.common.JDBCTemplate.*;
 
 import java.sql.Connection;
 import java.sql.SQLException;
+import java.util.HashMap;
 import java.util.List;
 
 import com.kh.common.model.vo.Location;
@@ -59,35 +60,47 @@ public class ReservationService {
 		return seatlist;
 	}
 
-	public Reservation checkReservationInfo(int screenNo, int movieNo, int teenAge, int adultAge) {
+	public Reservation printReservationInfo(int screenNo, int movieNo, int teenAge, int adultAge) {
 		Connection conn = getConnection();
 		
-		Reservation reservation = new ReservationDao().checkReservationInfo(conn, screenNo, movieNo, teenAge, adultAge);
+		Reservation reservation = new ReservationDao().printReservationInfo(conn, screenNo, movieNo, teenAge, adultAge);
 		
 		close(conn);
 		
 		return reservation;
 	}
 
-	public void insertReservation(Reservation reservation, int teenPersonNo, int adultPersonNo) {
+	public HashMap<String,Integer> insertReservation(Reservation reservation, int teenPersonNo, int adultPersonNo) {
 		Connection conn = getConnection();
 	        
 		int priceSheetResult = 0;
 		int seatResult = 0;
 		// 예약테이블에 insert후 pk값 반환받기
-        int reservationKey = new ReservationDao().insertReservation(conn, reservation);
+		HashMap<String, Integer> reservationKey = new ReservationDao().insertReservation(conn, reservation);
         // 청소년/성인요금 테이블에 insert
-        if (reservationKey > 0) priceSheetResult = new ReservationDao().insertPriceSheet(conn, reservationKey, teenPersonNo, adultPersonNo);
+        if (reservationKey.get("result") > 0) priceSheetResult = new ReservationDao().insertPriceSheet(conn, reservationKey.get("ticketNo"), teenPersonNo, adultPersonNo);
         // 예약 좌석 테이블에 insert
-        if (priceSheetResult > 0) seatResult = new ReservationDao().insertSeat(conn, reservation, reservationKey);
+        if (priceSheetResult > 0) seatResult = new ReservationDao().insertSeat(conn, reservation, reservationKey.get("ticketNo"));
 
-        if (reservationKey > 0 && priceSheetResult > 0 && seatResult > 0) {
+        if (reservationKey.get("result") > 0 && priceSheetResult > 0 && seatResult > 0) {
             commit(conn);
         } else {
             rollback(conn);
         }
         
         close(conn);
+        
+        return reservationKey;
+	}
+
+	public Reservation checkReservationInfo(int ticketNo) {
+		Connection conn = getConnection();
+		
+		Reservation reservation = new ReservationDao().checkReservationInfo(conn, ticketNo);
+		
+		close(conn);
+		
+		return reservation;
 	}
 
 

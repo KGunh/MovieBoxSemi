@@ -385,7 +385,7 @@
                                 <div id="button"><!--등록 버튼-->
                                     <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">삭제</button>
                                     <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">수정</button>
-                                    <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">목록</button>
+                                    <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;"" onclick="history.back();">목록</button>
                                 </div><!--등록 버튼-->
                             </div>
                         </div>
