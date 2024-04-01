@@ -1,9 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import = "java.util.ArrayList, com.kh.common.model.vo.Location"%>
     
     <%
-    String contextPath = request.getContextPath();
-    
+   	ArrayList<Location> location = (ArrayList<Location>)request.getAttribute("location");
     %>
 <!DOCTYPE html>
 <html lang="en">
@@ -26,96 +25,7 @@
         body {
             background-color: #1A1A1A
         }
-        #header{
-           margin: auto;
-            height : 200px;
-            width: 1200px;
-        }
-
-        #top-header{
-            height: 75px;
-            position: relative;
-            border-bottom: 1px solid lightgray;
-        }
-        #login-area{
-            position: absolute;
-            right: 30px;
-            top: 20px;
-
-        }
-        #login-area > a{
-            display: block;
-            float: right;
-            text-decoration-line: none;
-            color: white;
-            font-size: 16px;
-            margin-left: 30px;
-            font-weight: bold;
-        }
-        
-
-        #header-navigator{
-            height : 125px;
-            
-            border-bottom: 1px solid lightgray;
-        }
-
-        #logo-div{
-            position: relative;
-            float: left;
-            height: 100%;
-            width: 30%;
-
-        }
-
-        #content{height : 1500px;}
-
-        #logo{
-            position: absolute; 
-            top: 50%;
-            margin-top: -25px;
-            width: 100%;
-            height: 50px;
-            font-size: 50px;
-            font-weight: bold;
-            color: #FFC145;
-            line-height: 45px;
-            
-            text-align: center;
-        }
-        a {
-            text-decoration-line: none;
-        }
-        #logo > a{
-            text-decoration-line: none;
-            color: #FFC145;
-        }
-        #navigator{
-            float: right;
-            width: 50%;
-            height: 100%;
-            margin-right: 15%;
-        }
-        .navi{
-            float:left;
-            width: 20%;
-            height: 100%;
-            text-align:center;
-            margin: 0 auto;
-        }
-        .navi > a{
-            display: block;
-            text-align: center;
-            width: 100%;
-            height: 100%;
-            color: white;
-            text-decoration-line: none;
-            line-height: 125px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-          
+     
             div{
            
            
@@ -392,77 +302,45 @@
 
     </style>
 </head>
-<body>
-   <div id="header">
-      <div id="top-header">
-         <div id="login-area">
-            <a href="#" class="member">회원가입</a> <a href="#" class="member">로그인</a>
-         </div>
-      </div>
-      <div id="header-navigator">
-         <div id="logo-div">
-            <div id="logo">
-               <a href="#">MOVIE MOX</a>
-            </div>
-         </div>
-         <div id="navigator">
-            <div class="navi">
-               <a href="#" id="reservation">예매</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="movie">영화</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="theater">영화관</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="notice">고객센터</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="myPage">마이페이지</a>
-            </div>
-         </div>
 
-      </div>
-
-   </div>
 <!-- 여기까지가 헤더 -->
 
 <body>
+<%@ include file = "/views/common/header.jsp" %>
     <div id="wrap">
+    
+    
         <!-- jsp에서 header include하기 -->
     
         <div id="top_wrap">
             <div class="top_1">
                 <h1>관리자</h1>
             </div>
-            <div class="top_2" style="color: white;">
-               
-            </div>
+
         </div>
         <div id="content" >
             <div class="content_1">
                 <ul class="menu">
                     <li>
-                        <a href="#">회원 관리</a>
+                        <a href="<%=contextPath %>/selectAdmin.mb">회원 관리</a>
                         <ul class="submenu">
                         </ul>
                     </li>
                     <li>
-                        <a href="#">영화 관리</a>
+                        <a href="<%=contextPath %>/adminMovieCheck.admin?currentPage=1">영화 관리</a>
                         <ul class="submenu">
                         </ul>
                     </li>
                     <li>
-                        <a href="#">영화관 관리</a>
+                        <a href="<%=contextPath%>/checkAdmin.cm">영화관 관리</a>
                         <ul class="submenu">
                         </ul>
                     </li>
                     <li class="post">
                         <a href="#">게시글 관리</a>
                         <ul class="submenu">
-                        <li><a href="#">공지 관리</a></li>
-                        <li><a href="#">문의 게시글 관리</a></li>
+                         <li><a href="<%=contextPath %>/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
+                        <li><a href="<%=contextPath %>/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -472,30 +350,22 @@
                 <div class="content_2_top">
                 
             </div>
-             <form action="<%=contextPath%>/insertAdmin.cm" method="post"> 
+             <form action="" method="post"> 
             
             
             <div id="content_2_content" >
                 
                
                
-                <div>
+                <div> 
+                <%for(Location l : location) { %>
                     <span class="name" id="region">지역</span>
                     <select name="region" class="input" style="width: 650px; height: 39px;">
-                        <option value="지역" name="서울">서울</option>
-                        <option value="지역">경기</option>
-                        <option vlaue="지역">인천</option>
-                        <option value="지역">강원</option>
-                        <option value="지역">충남</option>
-                        <option value="지역">충북</option>
-                        <option value="지역">대구</option>
-                        <option value="지역">경북</option>
-                        <option value="지역">울산</option>
-                        <option value="지역">부산</option>
-                        <option value="지역">경남</option>
-                        <option value="지역">광주</option>
-                        <option value="지역">제주</option>
+                       <option value="<%=l.getLocationCode()%>">
+                       <%=l.getLocationName() %>
+                       </option>
                     </select>
+                <% } %>
                 
                 </div>
                 <div>
@@ -504,34 +374,28 @@
                 </div>
               
                 <div><span class="name">주소</span>
-                    <div id="address">
-                        <input type="text" class="input" placeholder="상세주소를 입력해주시오" name="address">
-
-                   <script>
-                   
-                   
-                   
-                   </script>
-
-                   
-
                     
-                    <div>
-                       
-                          
-                      </div>   
-                </div>
-
-                </div>
-                <div>
+                        <input type="text" class="input" placeholder="상세주소를 입력해주시오" name="address">
+					</div>
+                   
+				  <div>
                     <span class="name">지도</span>
-                    <div id="map">
+                    <div id="map" name="maplink">
                     a태그 자리
                     </div>
                 </div>
+                   
+	 			<div></div>
                 <div id="delete" >
                     <input type="submit" id="btn1" value="등록"></button>
                 </div>
+                    
+                     
+                </div>
+
+                </div>
+              
+               
                 
               
                 

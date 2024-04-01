@@ -29,6 +29,13 @@ public class MovieService {
 		return list;
 	}
 
+	public Movie detailMovie(int movieNo) {
+		Connection conn = getConnection();
+		Movie movie = new MovieDao().detailMovie(conn, movieNo);
+		close(conn);
+		return movie;
+	}
+
 
 
 }

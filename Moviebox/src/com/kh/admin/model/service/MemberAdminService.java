@@ -10,6 +10,7 @@ import java.util.List;
 import com.kh.admin.model.dao.MemberAdminDao;
 import com.kh.common.JDBCTemplate;
 import com.kh.common.JDBCTemplate.*;
+import com.kh.common.model.vo.Location;
 
 public class MemberAdminService {
 	
@@ -93,4 +94,17 @@ public class MemberAdminService {
 		JDBCTemplate.close(conn);
 		
 	}
+	
+	
+	public ArrayList<Location> category() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Location> location = new MemberAdminDao().category(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return location;
+		
+	}
+	
 }

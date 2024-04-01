@@ -343,7 +343,7 @@ public class ReservationDao {
 				reservation.setTicketNo(rset.getInt("TICKET_NO"));
 				reservation.setScreenName(rset.getString("SCREEN_NAME"));
 				reservation.setTheaterName(rset.getString("THEATER_NAME"));
-				reservation.setStatus(rset.getString("WATCH_DATE"));
+				reservation.setWatchDate(rset.getString("WATCH_DATE"));
 				reservation.setReservationDate(rset.getString("RESERVATION_DATE"));
 				
 			}

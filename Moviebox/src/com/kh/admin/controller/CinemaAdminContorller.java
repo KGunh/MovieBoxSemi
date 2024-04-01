@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import com.kh.admin.model.service.MemberAdminService;
+import com.kh.common.model.vo.Location;
 import com.kh.theater.model.vo.Theater;
 
 public class CinemaAdminContorller {
@@ -35,7 +36,22 @@ public class CinemaAdminContorller {
 		
 	}
 	
-	public String cinemaInsert(HttpServletRequest request, HttpServletResponse response) {
+	
+	public String category(HttpServletRequest request, HttpServletResponse response) {
+		
+		String view ="/views/admin/CinemaInsert.jsp"; 
+		
+		ArrayList<Location> location =  new MemberAdminService().category();
+		System.out.println(location);
+		
+		request.setAttribute("location", location);
+		
+		return view;
+		
+	}
+	
+	
+	public void cinemaInsert(HttpServletRequest request, HttpServletResponse response) {
 		
 		
 			try {
@@ -81,7 +97,7 @@ public class CinemaAdminContorller {
 
 		new MemberAdminService().cinemaInsert(theater);
 		
-		return view; 
+		
 		
 	}
 	

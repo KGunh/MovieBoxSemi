@@ -88,6 +88,11 @@
         margin: 10px auto auto auto;
     }
 
+    #movie-poster img{
+        height: 100%;
+        width: 100%;
+    }
+
     .movie-detail-info{
         text-align: center;
         font-size: 16px;
@@ -142,7 +147,7 @@
         <div id="print-info-area">
             <div id="movie-info-area">
                 <div id="movie-poster">
-                    <img src="" alt="영화포스터">
+                   
                 </div>
                 <div id="movie-info">
                     <div class="movie-detail-info" style="font-size: 24px; margin-top: 10px;">제목</div>
@@ -162,7 +167,7 @@
                         <div class="select-info">선택좌석</div>
                         <div class="select-info" style="margin-top: 50px;">결제금액</div>
                     </div>
-                    <div>
+                    <div id="print-reservation-info">
                         <div class="print-info">티켓번호</div>
                         <div class="print-info">일시</div>
                         <div class="print-info">이름</div>
@@ -191,11 +196,35 @@
                 ticketNo : <%= ticketNo %>
             },
             success : function(result) {
+                var imgFilePath = '<%= contextPath %>/' + result.movie.filePath + '/' + result.movie.fileName;
+                var selectSeatList = '';
+
+                $('#movie-poster').html('<img src="' + imgFilePath + '" alt="영화포스터">');
+                $('#movie-info').children().eq(0).html(result.movie.movieTitle);
+                $('#movie-info').children().eq(1).html('개봉일 : ' + result.movie.movieRelease);
+                $('#movie-info').children().eq(2).html('장르 : ' + result.movie.genreName);
+                $('#movie-info').children().eq(3).html('러닝타임 : ' + result.movie.movieRt + '분');
+               
+                $('#print-reservation-info').children().eq(0).html(result.ticketNo);
+                $('#print-reservation-info').children().eq(1).html(result.watchDate);
+                $('#print-reservation-info').children().eq(2).html(result.theaterName);
+                $('#print-reservation-info').children().eq(3).html(result.screenName);
+                $('#print-reservation-info').children().eq(4).html(Number(result.price.studentCount + result.price.commonCount));
+
+                for(let i = 0; i < result.seatList.length; i++){
+                    selectSeatList += result.seatList[i].seatNo;
+                    if (i < result.seatList.length - 1) {
+                        selectSeatList += ', ';
+                    }
+                }
+
+                $('#print-reservation-info').children().eq(5).html(selectSeatList);
+                $('#print-reservation-info').children().eq(6).html(result.price.totalPrice + '원');
 
             },
-            else{
+            error : function(e) {
 
-            };
+            }
         });
     }
 

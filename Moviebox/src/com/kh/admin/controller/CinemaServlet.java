@@ -40,14 +40,15 @@ public class CinemaServlet extends HttpServlet {
 		
 		switch(mapping) {
 		
-		case "insertAdmin" :  view = CAC.cinemaInsert(request,response);
+		case "insertAdmin" :  view = "index.jsp";//CAC.category(request, response); 
 		case "editAdmin"   :  view= CAC.cinemaEdit(request,response);
 		case "checkAdmin"  :  view = CAC.cinemaCheck(request,response);
+		//case ""			   :  view = CAC.cinemaInsert(request,response);
 		
 		}
 		
 		if(false != flag) {
-		response.sendRedirect(view);
+			response.sendRedirect(view);
 			
 		}else {
 			System.out.println(view);
