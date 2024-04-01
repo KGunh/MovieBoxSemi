@@ -1,10 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.ArrayList, com.kh.movie.model.vo.*" %>
 
 <%
+	//ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("list");
+	Movie movie = (Movie)request.getAttribute("movie");
+	String cast = (String)request.getAttribute("cast");
 	
+	
+	//System.out.println(list);
+	System.out.println(movie);
+	System.out.println(cast);
 	
 	
 %>
