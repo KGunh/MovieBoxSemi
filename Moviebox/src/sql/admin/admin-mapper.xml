@@ -303,6 +303,29 @@
 	
 	
 	</entry>
+	
+	<entry key="adminDetailTheater">
+		SELECT
+       			   SCREEN_NAME,
+       			   WATCH_DATE,
+       			   THEATER_NAME,
+       			   MOVIE_TITLE
+  		   FROM
+       			   TB_SCREEN
+  			JOIN
+       			   TB_MOVIE USING(MOVIE_NO)
+  			JOIN
+       			   TB_THEATER USING(THEATER_NO)
+ 	     WHERE
+       			   THEATER_NO = ?
+   			 AND
+       			   TRUNC(WATCH_DATE) = TO_DATE(?,'YYYYMMDD')
+ 		 ORDER
+    		  BY 
+       			    SCREEN_NAME
+			      
+	
+	</entry>
 
 
 </properties>

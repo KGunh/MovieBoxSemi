@@ -9,6 +9,7 @@ public class Screen {
 	private String watchDate;
 	private String screenName;
 	private String theaterName;
+	private String movieTitle;
 	private int movieRt;
 	private List<String> watchDateList;
 	private List<Integer> screenNoList;
@@ -24,6 +25,13 @@ public class Screen {
 		this.movieNo = movieNo;
 		this.watchDate = watchDate;
 		this.screenName = screenName;
+	}
+	
+	public String getMovieTitle() {
+		return movieTitle;
+	}
+	public void setMovieTitle(String movieTitle) {
+		this.movieTitle = movieTitle;
 	}
 	public int getScreenNo() {
 		return screenNo;

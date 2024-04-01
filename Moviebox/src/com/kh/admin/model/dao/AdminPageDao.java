@@ -19,6 +19,7 @@ import com.kh.common.model.vo.PageInfo;
 import com.kh.member.model.vo.Member;
 import com.kh.movie.model.vo.Movie;
 import com.kh.notice.model.vo.Notice;
+import com.kh.theater.model.vo.Screen;
 import com.kh.theater.model.vo.Theater;
 
 public class AdminPageDao {
@@ -658,6 +659,43 @@ public class AdminPageDao {
 		
 		
 		
+	}
+	
+	public List<Screen> adminDetailTheater(Connection conn, Screen sc) {
+		List<Screen> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminDetailTheater");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, sc.getTheaterNo());
+			pstmt.setString(2, sc.getWatchDate());
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				Screen s = new Screen();
+
+				s.setScreenName(rset.getString("SCREEN_NAME"));
+				s.setWatchDate(rset.getString("WATCH_DATE"));
+				s.setTheaterName(rset.getString("THEATER_NAME"));
+				s.setMovieTitle(rset.getString("MOVIE_TITLE"));
+				
+				
+				list.add(s);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+
 	}
 
 }
