@@ -55,11 +55,11 @@
         width: 100%;
         padding: 0 100px;
         display: flex;
-        justify-content : space-between
+        justify-content : space-between;
         
     }
     .movie-chart > div{
-        width: 190px;
+        width: 170px;
         height: 100%;
     }
 

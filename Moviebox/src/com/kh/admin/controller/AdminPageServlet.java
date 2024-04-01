@@ -73,6 +73,8 @@ public class AdminPageServlet extends HttpServlet {
 			
 		case "adminQnAInsert" :
 			view = "/views/admin/adminQnAInsert.jsp"; break; //문의관리
+		case "adminScreenList":
+			view = "/views/admin/adminScreenList.jsp"; flag = false; break;
 			
 			
 		
