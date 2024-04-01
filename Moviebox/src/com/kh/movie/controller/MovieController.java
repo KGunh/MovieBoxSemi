@@ -27,6 +27,7 @@ public class MovieController {
 	public String movieCategory(HttpServletRequest request, HttpServletResponse response) {
 		
 		ArrayList<Movie> list = new MovieService().selectMovieList();
+		
 		String genre = request.getParameter("genre");
 		String type = request.getParameter("type");
 		
@@ -38,10 +39,11 @@ public class MovieController {
 		
 		request.setAttribute("genre", genre);
 		request.setAttribute("type", type);
-		request.setAttribute("list", list);
+		request.setAttribute("movieList", list);
 		
 		String view = "views/movie/movieList.jsp";
 		
 		return view;
+		
 	}
 }

@@ -41,7 +41,7 @@ public class MovieServlet extends HttpServlet {
 		
 		switch(mapping) {
 		case "list" : view = mc.selectMovieList(request); flag = false; break;
-		case "category" : view = mc.movieCategory(request, response); flag= false; break;
+		case "selectGenre" : view = mc.movieCategory(request, response); flag= false; break;
 		
 		}
 		

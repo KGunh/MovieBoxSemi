@@ -5,11 +5,8 @@
     
 <%
 	ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("movieList");
-	String genre = (String)request.getAttribute("genre");
 	String type = (String)request.getAttribute("type");
-	
-	System.out.println("장르 이름 : " + genre);
-	System.out.println("타입 : " + type);
+	String genre = (String)request.getAttribute("genre");
 %>
     
 <!DOCTYPE html>
@@ -108,7 +105,7 @@
             color: #FFC145;
         }
 
-        #searchMovieInput{
+        #movie-list-search{
             width: 180px;
             height: 27px;
             border-radius: 7px;
@@ -148,6 +145,7 @@
             color: white;
             border: 1px solid pink;
             display: inline-block;
+            margin-bottom: 20px;
         }
 
         .movie-conten1{
@@ -203,26 +201,24 @@
                     <div class="movie-list-genre">전체</div>
                     <div class="movie-list-genre">액션</div>
                     <div class="movie-list-genre">로맨스</div>
-                    <div class="movie-list-genre1">공포/스릴러</div>
+                    <div class="movie-list-genre">스릴러</div>
                     <div class="movie-list-genre">코미디</div>
-                    <div class="movie-list-genre1">애니메이션</div>
+                    <div class="movie-list-genre">애니</div>
                 </div>
                 
-                <!-- 지역 눌렀을 때  -->
-                <form id="genreForm" action="<%=contextPath %>/category.movie" method="get">
-                	<input id="selectGenre" type="hidden" name="type" value="genre">
+                <!-- 장르 버튼 -->
+                <form id="selectGenreForm" action="<%=contextPath%>/selectGenre.movie" method="get">
+                	<input id="selectTypeGenre" type="hidden" name="type" value="genre">
                 	<input id="genreInput" type="hidden" name="genre">
                 </form>
                 
-			               	
-				<script>
-					document.getElementById('movie-list-category').onclick = function(e){
-						var genreCategory = e.target.innerHTML;
-						document.getElementById('genreInput').value = genreCategory;
-						document.getElementById('genreForm').submit();
-					}
-					
-				</script>
+                <script>
+	                document.getElementById('movie-list-category').onclick = function(e){
+	                    var selectGenre = e.target.innerHTML;
+	                    document.getElementById('genreInput').value = selectGenre;
+	                    document.getElementById('selectGenreForm').submit();
+	            }
+                </script>
 
                 <!-- 정렬 / 검색창 -->
                 <div id="searchalign">
@@ -230,14 +226,11 @@
                         <a class="align-a">예매순</a> | <a class="align-a">가나다순</a>
                     </div>
 
-                     <div id="search-img" onclick="searchMovieBtn">
+                     <div id="search-img">
                        <img src="<%= contextPath %>/resources/img/search.PNG" alt="검색 아이콘">
                     </div>
                     <div id="movie-list-input">
-                    	<form id="searchMovie" action="<%=contextPath%>/search.movie" method="get">
-	                    	<input type="hidden" id="searchMovie" name="type" value="search">
-	                        <input type="text" id="searchMovieInput" name="searchInput" placeholder="검색창">
-                        </form>
+                        <input type="text" id="movie-list-search" placeholder="검색창">
                     </div>
                 </div>
             </div> <!-- movie-list-header -->
@@ -245,7 +238,7 @@
             <div id="movie-content-body">
 				
 			<% if(list.isEmpty()) { %>
-				등록된 영화가 존재하지 않습니다. <br>
+				<a style="color: white;">등록된 영화가 존재하지 않습니다.</a> <br>
 			<% } else { %>
 
                 <% for(Movie m : list) { %>
@@ -265,18 +258,15 @@
             	location.href = '<%= contextPath %>/views/movie/movieDetail.jsp';
             }
             
-            // 검색어 입력 후 검색 버튼 눌렀을 때
-            function searchMovieBtn(){
-            	document.getElementById('searchMovie').submit();
-            }
             </script>
             
+
+
         </div> <!-- movie-list -->
     </div> <!-- wrap -->
     
     
 	<%@ include file="/views/common/footer.jsp" %>
-
     
 </body>
 </html>

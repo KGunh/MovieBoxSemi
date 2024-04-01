@@ -44,7 +44,7 @@ public class MovieDao {
 				movie.setMovieNo(rset.getInt("MOVIE_NO"));
 				movie.setMovieTitle(rset.getString("MOVIE_TITLE"));
 				movie.setStatus(rset.getString("STATUS"));
-				movie.setGenreName(rset.getString("GENRE_NAME"));
+				movie.setGenreName(rset.getString("GENRE_CODE"));
 				movie.setMovieUpdate(rset.getString("MOVIE_UPDATE"));
 				
 				movieList.add(movie);
@@ -71,8 +71,8 @@ public class MovieDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
 			pstmt.setString(1, genre);
+			
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
@@ -85,6 +85,7 @@ public class MovieDao {
 										rset.getString("STATUS"),
 										rset.getString("GENRE_NAME"),
 										rset.getInt("DIRECTOR_NO"));
+				
 				list.add(movie);
 			}
 			
@@ -95,7 +96,9 @@ public class MovieDao {
 			close(pstmt);
 		}
 		
+		
 		return list;
 	}
+
 
 }
