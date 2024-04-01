@@ -381,7 +381,7 @@
                         <div id="plot">
                             <p id="plotStyle">줄거리</p>
                             <div id="plotPage">
-                                <textarea name="text" class="form-control" id="sub8plot" cols="30" rows="10" placeholder="줄거리를 입력해 주세요." readonly><%=m.getMovieStory() %>></textarea>
+                                <textarea name="text" class="form-control" id="sub8plot" cols="30" rows="10" placeholder="줄거리를 입력해 주세요." readonly><%=m.getMovieStory() %></textarea>
                                 <div id="button"><!--등록 버튼-->
                                     <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">삭제</button>
                                     <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">수정</button>
