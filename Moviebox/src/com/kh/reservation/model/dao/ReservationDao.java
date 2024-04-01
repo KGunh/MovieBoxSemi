@@ -321,22 +321,32 @@ public class ReservationDao {
 			
 			rset = pstmt.executeQuery();
 			if(rset.next()) {
-				//reservation.set
+				Movie m = new Movie();
+				m.setMovieNo(rset.getInt("MOVIE_NO"));
+				m.setMovieTitle(rset.getString("MOVIE_TITLE"));
+				m.setMovieRt(rset.getString("MOVIE_RT"));
+				m.setMovieRelease(rset.getString("MOVIE_RELEASE"));
+				m.setFilePath(rset.getString("FILE_PATH"));
+				m.setFileName(rset.getString("CHANGE_NAME"));
+				m.setGenreName(rset.getString("GENRE_NAME"));
+				
+				
+				reservation.setMovie(m);
+				reser
 				/*
-				MOVIE_NO,
-			       MOVIE_TITLE,
-			       MOVIE_RT,
-			       MOVIE_RELEASE,
-			       TICKET_NO,
-			       GENRE_NAME,
-			       FILE_PATH,
-			       CHANGE_NAME,
-			       SCREEN_NAME||'관' AS SCREEN_NAME,
-			       THEATER_NAME,
-			       (TO_CHAR(WATCH_DATE,'YYYY-MM-DD') || '   ' || TO_CHAR(WATCH_DATE,'HH24:MI') || '~' || TO_CHAR(WATCH_DATE + NUMTODSINTERVAL(TO_NUMBER(MOVIE_RT), 'MINUTE'), 'HH24:MI')) AS WATCH_DATE,
-			       TO_CHAR(SYSDATE, 'YYYY-MM-DD') AS RESERVATION_DATE,
-			       PEOPLE,
-			       TOTAL_PRICE
+		       TICKET_NO,
+		       TEEN_PEOPLE,
+		       ADULT_PEOPLE,
+		       TEEN_PRICE,
+		       ADULT_PRICE,
+		       TOTAL_PRICE,
+		       ,
+		       ,
+		       ,
+		       SCREEN_NAME,
+		       THEATER_NAME,
+		       WATCH_DATE,
+		       RESERVATION_DATE
 		       */
 			}
 		} catch (SQLException e) {
