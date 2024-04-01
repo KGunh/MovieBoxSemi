@@ -350,7 +350,7 @@
                 <div class="content_2_top">
                 
             </div>
-             <form action="" method="post"> 
+             <form action="<%=contextPath%>/enroll.cm" method="post"> 
             
             
             <div id="content_2_content" >
@@ -358,19 +358,22 @@
                
                
                 <div> 
-                <%for(Location l : location) { %>
+                
                     <span class="name" id="region">지역</span>
+                     
                     <select name="region" class="input" style="width: 650px; height: 39px;">
+                       <%for(Location l : location) { %>
                        <option value="<%=l.getLocationCode()%>">
                        <%=l.getLocationName() %>
                        </option>
+                       <% } %>
                     </select>
-                <% } %>
+                
                 
                 </div>
                 <div>
                     <span class="name">영화관 이름</span>
-                    <input type="text" class="input" placeholder="영화관 이름을 입력하시오" name="name">
+                    <input type="text" class="input" placeholder="영화관 이름을 입력하시오" name="cinemaname">
                 </div>
               
                 <div><span class="name">주소</span>
@@ -380,9 +383,7 @@
                    
 				  <div>
                     <span class="name">지도</span>
-                    <div id="map" name="maplink">
-                    a태그 자리
-                    </div>
+                     <textarea name="link" id="map" cols="30" rows="10"></textarea>
                 </div>
                    
 	 			<div></div>

@@ -29,7 +29,6 @@ public class CinemaServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		String uri =request.getRequestURI();
-		
 		String mapping = uri.substring(uri.lastIndexOf("/")+1,uri.lastIndexOf("."));
 		System.out.println(mapping);
 		String view = "";
@@ -40,9 +39,10 @@ public class CinemaServlet extends HttpServlet {
 		
 		switch(mapping) {
 		
-		case "insertAdmin" :  view = "index.jsp";//CAC.category(request, response); 
+		case "insertAdmin" :  view = CAC.category(request, response); 
 		case "editAdmin"   :  view= CAC.cinemaEdit(request,response);
 		case "checkAdmin"  :  view = CAC.cinemaCheck(request,response);
+		case "enroll" 	   : view = CAC.cinemaInsert(request, response);
 		//case ""			   :  view = CAC.cinemaInsert(request,response);
 		
 		}
