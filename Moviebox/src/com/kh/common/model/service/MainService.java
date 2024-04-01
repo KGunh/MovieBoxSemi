@@ -50,7 +50,7 @@ public class MainService {
 	public List<Location> locationList(){
 		Connection conn = getConnection();
 		
-		List<Location> list = new MainDao().locationList();
+		List<Location> list = new MainDao().locationList(conn);
 		
 		
 		close(conn);
