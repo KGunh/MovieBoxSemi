@@ -5,6 +5,7 @@ import static com.kh.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.common.model.vo.Genre;
 import com.kh.movie.model.dao.MovieDao;
 import com.kh.movie.model.vo.Movie;
 
@@ -16,6 +17,15 @@ public class MovieService {
 		
 		close(conn);
 		return movieList;
+	}
+
+	public ArrayList<Movie> movieCategory(String genre) {
+		Connection conn = getConnection();
+		ArrayList<Movie> list = new MovieDao().movieCategory(conn, genre);
+		
+		close(conn);
+		
+		return list;
 	}
 
 }

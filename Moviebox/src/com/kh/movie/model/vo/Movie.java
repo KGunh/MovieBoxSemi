@@ -23,6 +23,8 @@ public class Movie {
 	public Movie() {
 		super();
 	}
+
+
 	public Movie(int movieNo, String movieTitle, String movieRt, String movieRated, String movieRelease,
 			String movieStory, String status, String genreNo, int directorNo) {
 		super();
