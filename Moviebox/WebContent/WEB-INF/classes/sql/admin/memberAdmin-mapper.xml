@@ -52,14 +52,12 @@
 		UPDATE
 			TB_MEMBER
 		SET
-			MEMBER_NAME =? ,
+			MEMBER_NAME =?,
 			EMAIL =?,
 			ADDRESS =?,
 			PHONE =?,
 			STATUS =?,
 			UPDATE_DATE = SYSDATE
-		FROM
-			TB_MEMBER
 		WHERE 
 			MEMBER_ID = ?
 		AND
@@ -67,6 +65,20 @@
 						
 </entry>
 
+<entry key="cinemaCheck">
+
+	SELECT
+		THEATER_NO,
+		THEATER_UPDATE,
+		LOCATION_NAME,
+		THEATER_NAME,
+		C.LOCATION_CODE,
+		MAP_LINK
+	FROM
+		TB_THEATER C, TB_LOCATION L
+     WHERE 
+           C.LOCATION_CODE = L.LOCATION_CODE 
+</entry>
 
 
 
