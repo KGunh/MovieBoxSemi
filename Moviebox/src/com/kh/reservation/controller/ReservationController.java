@@ -48,7 +48,7 @@ public class ReservationController {
 
 		Set<Screen> set = new LinkedHashSet<>();
 	    // set으로 중복값 제거
-		for (Screen screen : list) {
+		for(Screen screen : list) {
 			Screen sc = new Screen();
 			
 			sc.setTheaterNo(screen.getTheaterNo());

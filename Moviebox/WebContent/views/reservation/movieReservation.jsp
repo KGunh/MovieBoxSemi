@@ -225,6 +225,12 @@
 </head>
 <body>
     <%@ include file="/views/common/header.jsp" %>
+
+    <% if(loginUser == null) {%>
+		<script>
+			location.href = ('<%=contextPath%>/loginForm.me');
+		</script>
+	<%} else {%>
     <div id="wrap">
         <form action="/moviebox/seat.reservation" method="post">
             <div id="title">영화예매</div>
@@ -279,6 +285,7 @@
             </div>
         </form>
     </div>
+    <%} %>
 
     <%@ include file="/views/common/footer.jsp" %>
 
@@ -333,6 +340,7 @@
                 $('.screenName').removeClass('clicked');
                 $(e).addClass('clicked');
             }
+            
             $('#screenNo').val(e.children[1].value);
             $('#screenName').val(e.children[2].value);
             $('#theaterName').val($(e).parent().children().eq(0).html());

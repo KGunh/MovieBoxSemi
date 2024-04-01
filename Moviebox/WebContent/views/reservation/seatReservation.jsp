@@ -224,6 +224,11 @@
 
 <body>
 	<%@ include file="/views/common/header.jsp" %>
+    <% if(loginUser == null) {%>
+		<script>
+			location.href = ('<%=contextPath%>/loginForm.me');
+		</script>
+	<%} else {%>
 	<div id="wrap">
         <div id="title">영화 예매</div>
 
@@ -311,6 +316,7 @@
             
         </div>
 	</div>
+    <% } %>
 	<%@ include file="/views/common/footer.jsp" %>
 
     <style>
@@ -582,44 +588,44 @@
                         var resultStr = '';
                         
                         resultStr += '<div id="check-reservation">'
-                                    +     '<div id="check-movie">'
-                                    +         '<div id="poster-select"><img style="width: 100%; height: 100%;" src="<%= contextPath %>/'+ result.movie.filePath + '/' + result.movie.fileName + '" alt="영화포스터"></div>'
-                                    +         '<div id="movie-select">'
-                                    +             '<div style="text-align: center; font-size:20px; font-weight: 700; margin-top: 5px; margin-bottom: 5px;">' + result.movieTitle + '</div>'
-                                    +             '<div style="text-align: center;">개봉일 ' + result.movie.movieRelease + '</div>'
-                                    +             '<div style="text-align: center;">' + result.movie.genreName + ' / ' + result.movie.movieRt + '분</div>'
-                                    +         '</div>'
-                                    +     '</div>'
-                                    + '</div>'
-                                    + '<div id="check-info">'
-                                    +     '<div id="reservation-info">'
-                                    +         '<div>'
-                                    +             '<div class="select-info">상영일시</div>'
-                                    +             '<div class="select-info">관람극장</div>'
-                                    +             '<div class="select-info">상영관</div>'
-                                    +             '<div class="select-info">관람인원</div>'
-                                    +             '<div class="select-info">선택좌석</div>'
-                                    +             '<div class="select-info" style="margin-top: 50px;">결제금액</div>'
-                                    +         '</div>'
-                                    +         '<div>'
-                                    +             '<div class="print-info">'+ result.watchDate +'</div>'
-                                    +             '<div class="print-info">' + result.theaterName + '</div>'
-                                    +             '<div class="print-info">' + result.screenName + '</div>'
-                                    +             '<div class="print-info">' + Number(resvTeen[1] + resvAdult[1]) + '인</div>'
-                                    +             '<div class="print-info">' + selectSeat.join(', ') + '</div>'
-                                    +             '<div class="print-info" style="margin-top: 50px;">' + result.price.totalPrice + '원</div>'
-                                    +         '</div>'
-                                    +     '</div>'
-                                    +     '<form id="payment-form" action="/moviebox/payment.reservation" method="post">'
-                                    +         '<input type="hidden" name="movieNo" value="' + <%= movieNo %> + '">'
-                                    +         '<input type="hidden" name="screenNo" value="' + <%= screenNo %> + '">'
-                                    +         '<input type="hidden" name="memberNo" value="' + <%= loginUser.getMemberNo() %> + '">'
-                                    +         '<input type="hidden" name="teen" value="' + resvTeen[1] + '">'
-                                    +         '<input type="hidden" name="adult" value="' + resvAdult[1] + '">'
-                                    +         '<input type="hidden" name="seatNo"value="' + selectSeat.join(',') + '">'
-                                    +         '<button type="submit" id="payment-btn" onclick="return payment()">결제 하기</button>'
-                                    +     '</form>'
-                                    + '</div>';
+                                   +     '<div id="check-movie">'
+                                   +         '<div id="poster-select"><img style="width: 100%; height: 100%;" src="<%= contextPath %>/'+ result.movie.filePath + '/' + result.movie.fileName + '" alt="영화포스터"></div>'
+                                   +         '<div id="movie-select">'
+                                   +             '<div style="text-align: center; font-size:20px; font-weight: 700; margin-top: 5px; margin-bottom: 5px;">' + result.movieTitle + '</div>'
+                                   +             '<div style="text-align: center;">개봉일 ' + result.movie.movieRelease + '</div>'
+                                   +             '<div style="text-align: center;">' + result.movie.genreName + ' / ' + result.movie.movieRt + '분</div>'
+                                   +         '</div>'
+                                   +     '</div>'
+                                   + '</div>'
+                                   + '<div id="check-info">'
+                                   +     '<div id="reservation-info">'
+                                   +         '<div>'
+                                   +             '<div class="select-info">상영일시</div>'
+                                   +             '<div class="select-info">관람극장</div>'
+                                   +             '<div class="select-info">상영관</div>'
+                                   +             '<div class="select-info">관람인원</div>'
+                                   +             '<div class="select-info">선택좌석</div>'
+                                   +             '<div class="select-info" style="margin-top: 50px;">결제금액</div>'
+                                   +         '</div>'
+                                   +         '<div>'
+                                   +             '<div class="print-info">'+ result.watchDate +'</div>'
+                                   +             '<div class="print-info">' + result.theaterName + '</div>'
+                                   +             '<div class="print-info">' + result.screenName + '</div>'
+                                   +             '<div class="print-info">' + Number(resvTeen[1] + resvAdult[1]) + '인</div>'
+                                   +             '<div class="print-info">' + selectSeat.join(', ') + '</div>'
+                                   +             '<div class="print-info" style="margin-top: 50px;">' + result.price.totalPrice + '원</div>'
+                                   +         '</div>'
+                                   +     '</div>'
+                                   +     '<form id="payment-form" action="/moviebox/payment.reservation" method="post">'
+                                   +         '<input type="hidden" name="movieNo" value="' + <%= movieNo %> + '">'
+                                   +         '<input type="hidden" name="screenNo" value="' + <%= screenNo %> + '">'
+                                   +         '<input type="hidden" name="memberNo" value="' + <%= loginUser.getMemberNo() %> + '">'
+                                   +         '<input type="hidden" name="teen" value="' + resvTeen[1] + '">'
+                                   +         '<input type="hidden" name="adult" value="' + resvAdult[1] + '">'
+                                   +         '<input type="hidden" name="seatNo"value="' + selectSeat.join(',') + '">'
+                                   +         '<button type="submit" id="payment-btn" onclick="return payment()">결제 하기</button>'
+                                   +     '</form>'
+                                   + '</div>';
 
                         $('#check-area').html(resultStr);
                     }
