@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.kh.common.model.vo.Location;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
 import com.kh.theater.model.vo.Theater;
@@ -203,6 +204,47 @@ public class MemberAdminDao {
 		String sql = prop.getProperty("cinemaInsert");
 		
 		return result; 
+		
+		
+	}
+	
+	
+	public ArrayList<Location> category(Connection conn) {
+		
+		ArrayList<Location> location = new ArrayList<Location>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("category");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				Location loca = new Location();
+								loca.setLocationCode(rset.getString("LOCATION_CODE"));
+								loca.setLocationName(rset.getString("LOCATION_NAME"));	
+			
+								location.add(loca);
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		
+		return location;
+		
+		
+		
 		
 		
 	}
