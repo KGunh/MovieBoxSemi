@@ -49,10 +49,20 @@ public class MovieController {
 	// 영화 상세정보
 	public String detailMovie(HttpServletRequest request, HttpServletResponse response) {
 		int movieNo = Integer.parseInt(request.getParameter("movieNo"));
-		Movie movie = new MovieService().detailMovie(movieNo);
 		
-		request.setAttribute("movie", movie);
-		String view = "views/movie/movieDetail.jsp";
+		Movie movie = new MovieService().detailMovie(movieNo);
+		String cast = new MovieService().detailMovieCast(movieNo);
+		
+		System.out.println(cast);
+		
+		String view = "";
+		if(movie != null) {
+			request.setAttribute("movie", movie);
+			request.setAttribute("cast", cast);
+			view = "views/movie/movieDetail.jsp";
+		} else {
+			view = "index.jsp";
+		}
 		
 		return view;
 		

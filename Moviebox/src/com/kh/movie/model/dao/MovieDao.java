@@ -102,22 +102,83 @@ public class MovieDao {
 
 	public Movie detailMovie(Connection conn, int movieNo) {
 		
-		Movie movie = null;
+		Movie m = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("detailMovie");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, movieNo);
 			
+			rset = pstmt.executeQuery();
 			
+			if(rset.next()) {
+				m.setMovieNo(rset.getInt("MOVIE_NO"));
+				m.setMovieTitle(rset.getString("MOVIE_TITLE"));
+				m.setMovieRt(rset.getString("MOVIE_RT"));
+				m.setMovieRated(rset.getString("MOVIE_RATED"));
+				m.setMovieRelease(rset.getString("MOVIE_RELEASE"));
+				m.setMovieStory(rset.getString("MOVIE_STORY"));
+				m.setStatus(rset.getString("STATUS"));
+				m.setGenreNo(rset.getString("GENRE_NO"));
+				m.setGenreName(rset.getString("GENRE_NAME"));
+				m.setDirectorNo(rset.getInt("DIRECTOR_NO"));
+				m.setDirectorName(rset.getString("DIRECTOR_NAME"));
+				m.setMovieUpdate(rset.getString("MOVIE_UPDATE"));
+			}
+			
+			System.out.println(m);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally{
+			close(rset);
+			close(pstmt);
 		}
 		
-		return null;
+		return m;
 	}
 
+	public String detailMovieCast(Connection conn, int movieNo) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("detailMovieCast");
+		
+		String cast = "";
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, movieNo);
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			cast = rset.getString("ACTOR_NAMES");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return cast;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 }

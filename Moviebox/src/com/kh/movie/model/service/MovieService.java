@@ -36,6 +36,16 @@ public class MovieService {
 		return movie;
 	}
 
+	public String detailMovieCast(int movieNo) {
+		Connection conn = getConnection();
+		
+		String casts = new MovieDao().detailMovieCast(conn, movieNo);
+		
+		close(conn);
+		
+		return casts;
+	}
+
 
 
 }

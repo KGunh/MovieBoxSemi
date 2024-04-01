@@ -44,9 +44,43 @@
 	
 	
 	<entry key="detailMovie">
-	
-	
-	
+		SELECT 
+	       A.MOVIE_NO AS MOVIE_NO,
+	       A.MOVIE_TITLE AS MOVIE_TITLE,
+	       A.MOVIE_RT AS MOVIE_RT,
+	       A.MOVIE_RATED AS MOVIE_RATED,
+	       A.MOVIE_RELEASE AS MOVIE_RELEASE,
+	       A.MOVIE_STORY AS MOVIE_STORY,
+	       A.STATUS AS STATUS,
+	       A.GENRE_NO AS GENRE_NO,
+	       B.GENRE_NAME AS GENRE_NAME,
+	       A.DIRECTOR_NO AS DIRECTOR_NO,
+	       C.DIRECTOR_NAME AS DIRECTOR_NAME,
+	       A.MOVIE_UPDATE AS MOVIE_UPDATE
+		FROM
+		   TB_MOVIE A
+		LEFT 
+		OUTER
+		JOIN 
+			TB_GENRE B ON A.GENRE_NO = B.GENRE_CODE
+		LEFT
+		OUTER
+		JOIN 
+			TB_DIRECTOR C ON A.DIRECTOR_NO = C.DIRECTOR_NO
+		WHERE
+		   A.MOVIE_NO = ?
 	</entry>
 	
+	<entry key="detailMovieCast">
+		SELECT 
+		    LISTAGG(A.ACTOR_NAME, ', ') 
+		    WITHIN GROUP 
+		           (ORDER BY A.ACTOR_NO) AS ACTOR_NAMES
+		FROM 
+		    TB_ACTOR A
+		JOIN 
+		    TB_CAST C ON A.ACTOR_NO = C.ACTOR_NO
+		WHERE
+		    C.MOVIE_NO = ?
+	</entry>
 </properties>
