@@ -20,6 +20,7 @@ import com.kh.common.model.vo.Location;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.movie.model.vo.Movie;
 import com.kh.notice.model.vo.Notice;
+import com.kh.theater.model.vo.Theater;
 import com.oreilly.servlet.MultipartRequest;
 
 public class AdminPageController {
@@ -291,5 +292,45 @@ public class AdminPageController {
 		
 		return view;
 	}
+	
+	public List<Theater> selectTheaterList(HttpServletRequest request) {
+		String locationCode = request.getParameter("locationCode");
+		
+		List<Theater> list = new MainService().selectTheaterList(locationCode);
+				
+		return list;
+	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

@@ -20,6 +20,15 @@ public class Theater {
 	public Theater() {
 		super();
 	}
+	
+	public Theater(int theaterNo, String theaterName, String theaterAddr, String mapLink, String locationName) {
+		super();
+		this.theaterNo = theaterNo;
+		this.theaterName = theaterName;
+		this.theaterAddr = theaterAddr;
+		this.mapLink = mapLink;
+		this.locationName = locationName;
+	}
 	public Theater(int theaterNo, String theaterName, String theaterAddr, String mapLink, String localCode,Date updateDate) {
 		super();
 		this.theaterNo = theaterNo;

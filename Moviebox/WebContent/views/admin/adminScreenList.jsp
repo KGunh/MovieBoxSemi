@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import="java.util.List,java.util.ArrayList,com.kh.common.model.vo.Location"%>
+<%
+	List<Location> locationList = (ArrayList)request.getAttribute("locationList");
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -178,8 +181,12 @@
            background-color: #FFC145;
            font-weight: bold;
         }
+        .theater-content{
+            height: 90%;
+            width: 100%;
+            padding: 20px 20px;
+        }
         
-
 
 
     </style>
@@ -242,19 +249,65 @@
                 <div class="theater-area">
                     <div class="theater-location-list">
                         <select name="location" id="location-area">
-                            <option value="">서울</option>
+
                         </select>
 
                     </div>
+                    <div class="theater-content">
+                        
+                    </div>
+
+
                 </div>
-            
-
-
-
-            </div><!--content_2끝-->
+         
         </div>
 
     </div>
+
+    <script>
+        $(function(){
+
+            $.ajax({
+                url : 'locationList.admin',   
+                success : result => {
+
+                    let value = '';
+                    for(let i in result){
+                        value = '<option value=' + result[i].locationCode +'>' + result[i].locationName + '</option>'
+                        $('#location-area').append(value);
+                    }
+                }
+
+            })
+
+            $('')
+            $.ajax({
+                url : 'selectLocation.admin',
+                type : 'get',
+                data : {
+                    locationCode : $('#location-area').val()
+                },
+                success : function(result){
+                    var resultStr = '';
+                    for(let i = 0; i < result.length; i++){
+                        
+                        if(i != 0 && i % 3 == 0){
+                            resultStr += '<div class="printTheaterName"><a href="#">'+'</a></div><br>';
+                        }
+                        else{
+                            resultStr += '<div class="printTheaterName"><a href="#">'+'</a></div>';
+                        }
+                    }
+                    console.log(resultStr);
+                    $('.theater-content').html(resultStr);
+                }
+                
+            });
+
+        })
+
+    </script>
+
 
  	<%@ include file="/views/common/footer.jsp" %>
  	<!-- 푸터 -->

@@ -17,7 +17,9 @@
 		  JOIN
 		       TB_ATTACHMENT USING(MOVIE_NO)
 		 WHERE
-		       STATUS = 'Y'  
+		       STATUS = 'Y'
+		   AND
+			   FILE_LEVEL = 1  
 		 ORDER
 		    BY
 		       MOVIE_NO
@@ -185,7 +187,7 @@
 		       MOVIE_NO,
 		       MOVIE_TITLE,
 		       MOVIE_RT,
-		       MOVIE_RELEASE,
+		       TO_CHAR(MOVIE_RELEASE, 'YYYY-MM-DD') AS MOVIE_RELEASE,
 		       TICKET_NO,
 		       TEEN_PEOPLE,
 		       ADULT_PEOPLE,
