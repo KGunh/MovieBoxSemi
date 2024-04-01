@@ -306,14 +306,14 @@
             <div class="content_1">
                 <ul class="menu">
                     <li>
-                        <a href="#">회원 관리</a>
+                        <a href="<%=contextPath %>/selectAdmin.mb">회원 관리</a>
                         <ul class="submenu">
 
                         </ul>
                     </li>
                     <li>
-                        <a href="#">영화 관리</a>
-                        <ul class="submenu">
+                        <a href="<%=contextPath %>/adminMovieCheck.admin?currentPage=1">영화 관리</a>
+                        <ul class="submenu" >
 
                         </ul>
                     </li>
@@ -326,13 +326,12 @@
                     <li class="post">
                         <a href="#">게시글 관리</a>
                         <ul class="submenu">
-                        <li><a href="#">공지 관리</a></li>
-                        <li><a href="#">문의 게시글 관리</a></li>
+                        <li><a href="<%=contextPath %>/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
+                        <li><a href="<%=contextPath %>/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
                         </ul>
                     </li>
                 </ul>    
             </div>
-
             <!------------------------------------------------------------>
 			 <div id="content2">
             <div class="content_2">

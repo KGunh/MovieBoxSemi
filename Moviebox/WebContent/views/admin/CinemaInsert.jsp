@@ -1,10 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
-    <%
-    String contextPath = request.getContextPath();
-    
-    %>
+   
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -392,44 +388,14 @@
 
     </style>
 </head>
-<body>
-   <div id="header">
-      <div id="top-header">
-         <div id="login-area">
-            <a href="#" class="member">회원가입</a> <a href="#" class="member">로그인</a>
-         </div>
-      </div>
-      <div id="header-navigator">
-         <div id="logo-div">
-            <div id="logo">
-               <a href="#">MOVIE MOX</a>
-            </div>
-         </div>
-         <div id="navigator">
-            <div class="navi">
-               <a href="#" id="reservation">예매</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="movie">영화</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="theater">영화관</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="notice">고객센터</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="myPage">마이페이지</a>
-            </div>
-         </div>
 
-      </div>
-
-   </div>
 <!-- 여기까지가 헤더 -->
 
 <body>
+<%@ include file= "/views/common/header.jsp" %>  
     <div id="wrap">
+  
+    
         <!-- jsp에서 header include하기 -->
     
         <div id="top_wrap">
@@ -504,7 +470,7 @@
                 </div>
               
                 <div><span class="name">주소</span>
-                    <div id="address">
+                    <div>
                         <input type="text" class="input" placeholder="상세주소를 입력해주시오" name="address">
 
                    <script>
@@ -525,7 +491,7 @@
                 </div>
                 <div>
                     <span class="name">지도</span>
-                    <div id="map">
+                    <div id="map" name="maplink">
                     a태그 자리
                     </div>
                 </div>
