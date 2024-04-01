@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<comment>
+		Board Mapper
+	</comment>
+	
+	<entry key="selectBoardList">
+		SELECT *
+		  FROM (
+		  		SELECT A.*, ROWNUM RNUM
+		          FROM (SELECT
+		                      BOARD_NO,
+		                      CATEGORY_NAME,
+		                      BOARD_TITLE,
+		                      BOARD_WRITER,
+		                      TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE
+		                  FROM
+		                      TB_BOARD
+		                  JOIN
+		                      TB_CATEGORY USING (CATEGORY_NO)
+		                  JOIN
+		                      TB_MEMBER USING (MEMBER_NO)
+		                 WHERE
+		                      TB_BOARD.STATUS = 'Y'
+		                 ORDER
+		                    BY
+		                      CREATE_DATE DESC) A)
+		 WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	
+	<entry key="selectListCount">
+		SELECT
+			  COUNT(*)
+		  FROM
+		  	  TB_BOARD
+		 WHERE
+		 	  STATUS = 'Y'
+	</entry>
+	
+	<entry key="detailBoard">
+		SELECT
+	      BOARD_NO,
+	      CATEGORY_NAME,
+	      BOARD_TITLE,
+	      TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE,
+	      BOARD_WRITER,
+	      BOARD_CONTENT
+	  FROM
+	      TB_BOARD
+	  JOIN
+	      TB_CATEGORY USING(CATEGORY_NO)
+	  JOIN
+	      TB_MEMBER USING(MEMBER_NO)
+	 WHERE
+	      BOARD_NO = ?
+	   AND
+	      TB_BOARD.STATUS = 'Y'
+	</entry>
+	
+	
+
+	
+</properties>
