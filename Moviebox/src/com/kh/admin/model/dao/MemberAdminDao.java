@@ -195,6 +195,17 @@ public class MemberAdminDao {
 		
 		
 	}
+	
+	public int cinemaInsert(Connection conn) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("cinemaInsert");
+		
+		return result; 
+		
+		
+	}
 }
 	
 	

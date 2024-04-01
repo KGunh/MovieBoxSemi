@@ -85,5 +85,12 @@ public class MemberAdminService {
 	
 	
 	
-
+	public void cinemaInsert(Theater theater) {
+		
+		Connection conn=JDBCTemplate.getConnection();
+		new MemberAdminDao().cinemaInsert(conn);
+		
+		JDBCTemplate.close(conn);
+		
+	}
 }
