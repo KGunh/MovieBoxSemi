@@ -85,6 +85,7 @@
        				PERSONNEL,
        				MEMBER_NO,
                     SCREEN_NO,
+                    SCREEN_NAME,
        				MOVIE_TITLE,
                     TO_CHAR(WATCH_DATE,'HH24:MI') || '~' || TO_CHAR(WATCH_DATE + NUMTODSINTERVAL(TO_NUMBER(MOVIE_RT), 'MINUTE'), 'HH24:MI') AS RT,
        				THEATER_NAME,
@@ -357,5 +358,13 @@
  		 WHERE
       		   TICKET_NO = ?
 	
+	</entry>
+	
+	<entry key="seatCancel">
+		DELETE
+			   TB_SEAT
+	     WHERE
+	     	   TICKET_NO = ?
+	    	   
 	</entry>
 </properties>
