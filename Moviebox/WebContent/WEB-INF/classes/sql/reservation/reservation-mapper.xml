@@ -181,49 +181,7 @@
 	</entry>
 	
 	<entry key="checkReservationInfo">
-		SELECT
-		       MOVIE_NO,
-		       MOVIE_TITLE,
-		       MOVIE_RT,
-		       MOVIE_RELEASE,
-		       TICKET_NO,
-		       GENRE_NAME,
-		       FILE_PATH,
-		       CHANGE_NAME,
-		       SCREEN_NAME||'관' AS SCREEN_NAME,
-		       THEATER_NAME,
-		       (TO_CHAR(WATCH_DATE,'YYYY-MM-DD') || '   ' || TO_CHAR(WATCH_DATE,'HH24:MI') || '~' || TO_CHAR(WATCH_DATE + NUMTODSINTERVAL(TO_NUMBER(MOVIE_RT), 'MINUTE'), 'HH24:MI')) AS WATCH_DATE,
-		       TO_CHAR(SYSDATE, 'YYYY-MM-DD') AS RESERVATION_DATE,
-		       PEOPLE,
-		       TOTAL_PRICE
-		  FROM
-		       TB_RESERVATION
-		  JOIN 
-		       (
-		        SELECT
-		               COUNT(*) AS PEOPLE,
-		               SUM(PRICE) AS TOTAL_PRICE,
-		               TICKET_NO
-		          FROM
-		               TB_PRICESHEET
-		          JOIN
-		               TB_PRICE USING(GRADE)
-		         WHERE
-		               TICKET_NO = ?
-		         GROUP
-		            BY
-		               TICKET_NO
-		       )USING(TICKET_NO)
-		  JOIN
-		       TB_SCREEN USING(SCREEN_NO)
-		  JOIN
-		       TB_MOVIE USING(MOVIE_NO)
-		  JOIN
-		       TB_THEATER USING(THEATER_NO)
-		  JOIN
-		       TB_ATTACHMENT USING(MOVIE_NO)
-		  JOIN
-		       TB_GENRE ON(GENRE_NO = GENRE_CODE)
+		
 	</entry>
 	
 	
