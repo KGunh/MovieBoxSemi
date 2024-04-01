@@ -292,14 +292,35 @@
                         value = '<option value=' + result[i].locationCode +'>' + result[i].locationName + '</option>'
                         $('#location-area').append(value);
                     }
-                }
-
-            })
+                },
+                async : false
+            });
+            $.ajax({
+                    url : 'selectLocation.admin',
+                    type : 'get',
+                    data : {
+                        locationCode : $('option:selected').val()
+                    },
+                    success : function(result){
+                        var resultStr = '';
+                        for(let i = 0; i < result.length; i++){
+                            
+                            if(i != 0 && i % 3 == 0){
+                                resultStr += '<div class="printTheaterName"><a href="#">'+ result[i].theaterName +'</a></div><br>';
+                            }
+                            else{
+                                resultStr += '<div class="printTheaterName"><a href="#">'+ result[i].theaterName +'</a></div>';
+                            }
+                        }
+                        console.log(resultStr);
+                        $('.theater-content').html(resultStr);
+                    }
+                    
+                });
 
         });
-        window.onload = function() {
-            $('#location-area').change(function(){
-                $.ajax({
+        $('#location-area').change(function(){
+            $.ajax({
                     url : 'selectLocation.admin',
                     type : 'get',
                     data : {
@@ -322,8 +343,7 @@
                     
                 });
             });
-        }
-        
+
     </script>
 
 
