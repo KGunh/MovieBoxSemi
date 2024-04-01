@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.kh.common.model.vo.Location;
 import com.kh.common.model.vo.Reservation;
+import com.kh.member.model.dao.MemberDao;
 import com.kh.movie.model.vo.Movie;
 import com.kh.reservation.model.dao.ReservationDao;
 import com.kh.reservation.model.vo.Seat;
@@ -77,7 +78,8 @@ public class ReservationService {
 		int seatResult = 0;
 		// 예약테이블에 insert후 pk값 반환받기
 		HashMap<String, Integer> reservationKey = new ReservationDao().insertReservation(conn, reservation);
-        // 청소년/성인요금 테이블에 insert
+		// 청소년/성인요금 테이블에 insert
+		
         if (reservationKey.get("result") > 0) priceSheetResult = new ReservationDao().insertPriceSheet(conn, reservationKey.get("ticketNo"), teenPersonNo, adultPersonNo);
         // 예약 좌석 테이블에 insert
         if (priceSheetResult > 0) seatResult = new ReservationDao().insertSeat(conn, reservation, reservationKey.get("ticketNo"));
@@ -97,6 +99,10 @@ public class ReservationService {
 		Connection conn = getConnection();
 		
 		Reservation reservation = new ReservationDao().checkReservationInfo(conn, ticketNo);
+		
+		List<Seat> seatList = new MemberDao().seatList(conn, ticketNo);
+		
+		reservation.setSeatList(seatList);
 		
 		close(conn);
 		

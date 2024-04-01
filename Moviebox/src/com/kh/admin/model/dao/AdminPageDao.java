@@ -9,14 +9,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.kh.board.model.vo.Board;
 import com.kh.common.model.vo.Genre;
+import com.kh.common.model.vo.Location;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.member.model.vo.Member;
 import com.kh.movie.model.vo.Movie;
 import com.kh.notice.model.vo.Notice;
+import com.kh.theater.model.vo.Theater;
 
 public class AdminPageDao {
 
@@ -621,6 +624,36 @@ public class AdminPageDao {
 		}
 		
 		return cast;
+	}
+	
+	public List<Theater> selectTheaterList(Connection conn,String locationCode){
+		List<Theater> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectTheaterList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, locationCode);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Theater t = new Theater();
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+		
+		
 	}
 
 }

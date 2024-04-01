@@ -289,7 +289,20 @@
 		    C.MOVIE_NO = ?
 	</entry>
 
-
+	<entry key="selectTheaterList">
+		SELECT
+		       THEATER_NO,
+		       THEATER_NAME
+		  FROM
+		       TB_THEATER
+         WHERE
+         	   LOCATION_CODE = ?
+		 ORDER
+		    BY
+		       THEATER_NO ASC
+	
+	
+	</entry>
 
 
 </properties>

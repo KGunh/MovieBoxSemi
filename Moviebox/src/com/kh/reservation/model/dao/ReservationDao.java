@@ -320,6 +320,7 @@ public class ReservationDao {
 			pstmt.setInt(1, ticketNo);
 			
 			rset = pstmt.executeQuery();
+
 			if(rset.next()) {
 				Movie m = new Movie();
 				m.setMovieNo(rset.getInt("MOVIE_NO"));
@@ -330,30 +331,28 @@ public class ReservationDao {
 				m.setFileName(rset.getString("CHANGE_NAME"));
 				m.setGenreName(rset.getString("GENRE_NAME"));
 				
+				Price p = new Price();
+				p.setStudentCount(rset.getInt("TEEN_PEOPLE"));
+				p.setStudentPrice(rset.getInt("TEEN_PRICE"));
+				p.setCommonCount(rset.getInt("ADULT_PEOPLE"));
+				p.setCommonPrice(rset.getInt("ADULT_PRICE"));
+				p.setTotalPrice(rset.getInt("TOTAL_PRICE"));
 				
 				reservation.setMovie(m);
-				reser
-				/*
-		       TICKET_NO,
-		       TEEN_PEOPLE,
-		       ADULT_PEOPLE,
-		       TEEN_PRICE,
-		       ADULT_PRICE,
-		       TOTAL_PRICE,
-		       ,
-		       ,
-		       ,
-		       SCREEN_NAME,
-		       THEATER_NAME,
-		       WATCH_DATE,
-		       RESERVATION_DATE
-		       */
+				reservation.setPrice(p);
+				reservation.setTicketNo(rset.getInt("TICKET_NO"));
+				reservation.setScreenName(rset.getString("SCREEN_NAME"));
+				reservation.setTheaterName(rset.getString("THEATER_NAME"));
+				reservation.setWatchDate(rset.getString("WATCH_DATE"));
+				reservation.setReservationDate(rset.getString("RESERVATION_DATE"));
+				
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
 		}
-		
-		
 		
 		return reservation;
 	}

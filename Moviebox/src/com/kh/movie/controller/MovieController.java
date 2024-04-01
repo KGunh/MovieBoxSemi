@@ -27,6 +27,7 @@ public class MovieController {
 	public String movieCategory(HttpServletRequest request, HttpServletResponse response) {
 		
 		ArrayList<Movie> list = new MovieService().selectMovieList();
+		
 		String genre = request.getParameter("genre");
 		String type = request.getParameter("type");
 		
@@ -35,13 +36,26 @@ public class MovieController {
 				list = new MovieService().movieCategory(genre);
 			}
 		}
-		
 		request.setAttribute("genre", genre);
 		request.setAttribute("type", type);
-		request.setAttribute("list", list);
+		request.setAttribute("movieList", list);
 		
 		String view = "views/movie/movieList.jsp";
 		
 		return view;
+	}
+	
+	
+	// 영화 상세정보
+	public String detailMovie(HttpServletRequest request, HttpServletResponse response) {
+		int movieNo = Integer.parseInt(request.getParameter("movieNo"));
+		Movie movie = new MovieService().detailMovie(movieNo);
+		
+		request.setAttribute("movie", movie);
+		String view = "views/movie/movieDetail.jsp";
+		
+		return view;
+		
+		
 	}
 }

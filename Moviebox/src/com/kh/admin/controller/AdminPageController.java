@@ -14,11 +14,13 @@ import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 import com.kh.admin.model.service.AdminPageService;
 import com.kh.board.model.vo.Board;
 import com.kh.common.PosterFileRenamePolicy;
+import com.kh.common.model.service.MainService;
 import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.Location;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.movie.model.vo.Movie;
 import com.kh.notice.model.vo.Notice;
+import com.kh.theater.model.vo.Theater;
 import com.oreilly.servlet.MultipartRequest;
 
 public class AdminPageController {
@@ -278,7 +280,7 @@ public class AdminPageController {
 		
 		String view = "";
 		
-		List<Location> list = new AdminPageService().adminScreenList();
+		List<Location> list = new MainService().locationList();
 		
 		
 		if(!list.isEmpty()) {
@@ -290,5 +292,45 @@ public class AdminPageController {
 		
 		return view;
 	}
+	
+	public List<Theater> selectTheaterList(HttpServletRequest request) {
+		String locationCode = request.getParameter("locationCode");
+		
+		List<Theater> list = new MainService().selectTheaterList(locationCode);
+				
+		return list;
+	}
 
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

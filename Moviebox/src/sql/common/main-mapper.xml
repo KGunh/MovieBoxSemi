@@ -59,4 +59,15 @@
 		 	BY
 		 	   NOTICE_NO DESC
 	</entry>
+	
+	<entry key="locationList">
+		SELECT
+			   LOCATION_NAME,
+			   LOCATION_CODE
+		  FROM
+		 	   TB_LOCATION
+		
+	</entry>
+	
+	
 </properties>

@@ -1,5 +1,7 @@
 package com.kh.common.model.dao;
 
+import static com.kh.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,8 +11,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
-import static com.kh.common.JDBCTemplate.*;
+
 import com.kh.common.model.vo.Attachment;
+import com.kh.common.model.vo.Location;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.notice.model.vo.Notice;
 
@@ -132,6 +135,37 @@ private Properties prop = new Properties();
 			
 		}
 		
+		return list;
+	}
+	
+	public List<Location> locationList(Connection conn){
+		List<Location> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("locationList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Location l = new Location();
+				
+				l.setLocationCode(rset.getString("LOCATION_CODE"));
+				l.setLocationName(rset.getString("LOCATION_NAME"));
+				
+				list.add(l);
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
 		return list;
 	}
 	

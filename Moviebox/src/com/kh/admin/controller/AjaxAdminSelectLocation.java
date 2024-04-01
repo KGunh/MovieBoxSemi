@@ -1,23 +1,29 @@
-package com.kh.movie.controller;
+package com.kh.admin.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.kh.common.model.service.MainService;
+import com.kh.common.model.vo.Location;
+
 /**
- * Servlet implementation class MovieServlet
+ * Servlet implementation class AjaxAdminSelectLocation
  */
-@WebServlet("*.movie")
-public class MovieServlet extends HttpServlet {
+@WebServlet("/locationList.admin")
+public class AjaxAdminSelectLocation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MovieServlet() {
+    public AjaxAdminSelectLocation() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,33 +32,11 @@ public class MovieServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		List<Location> list = new MainService().locationList();
 		
-		// 인코딩
-		request.setCharacterEncoding("UTF-8");
+		response.setContentType("application/json; charset=UTF-8");
 		
-		// 변수 
-		MovieController mc = new MovieController();
-		String uri = request.getRequestURI();
-		
-		String view = "";
-		boolean flag = true;
-		
-		String mapping = uri.substring(uri.lastIndexOf("/") + 1, uri.lastIndexOf("."));
-		
-		switch(mapping) {
-		case "list" : view = mc.selectMovieList(request); flag = false; break;
-		case "selectGenre" : view = mc.movieCategory(request, response); flag= false; break;
-		case "detail" : view = mc.detailMovie(request, response); flag= false; break;
-		
-		}
-		
-		if(flag) {
-			response.sendRedirect(request.getContextPath() + view);
-		} else {
-			request.getRequestDispatcher(view).forward(request, response);
-		}
-		
-		
+		new Gson().toJson(list, response.getWriter());
 	}
 
 	/**
