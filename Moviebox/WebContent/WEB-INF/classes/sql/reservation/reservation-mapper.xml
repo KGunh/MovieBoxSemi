@@ -77,7 +77,7 @@
 		       SEAT_NO
 	</entry>
 	
-	<entry key="checkReservationInfo">
+	<entry key="printReservationInfo">
 		SELECT        
 		       MOVIE_NO,
 		       MOVIE_TITLE,
@@ -180,7 +180,9 @@
 		  	   )
 	</entry>
 	
-	
+	<entry key="checkReservationInfo">
+		
+	</entry>
 	
 	
 	

@@ -79,7 +79,7 @@ public class CinemaAdminContorller {
 		theater.setLocationName(region);
 		theater.setMapLink(link);
 
-		
+		new MemberAdminService().cinemaInsert(theater);
 		
 		return view; 
 		
