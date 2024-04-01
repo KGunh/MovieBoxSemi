@@ -100,5 +100,24 @@ public class MovieDao {
 		return list;
 	}
 
+	public Movie detailMovie(Connection conn, int movieNo) {
+		
+		Movie movie = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("detailMovie");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return null;
+	}
+
 
 }
