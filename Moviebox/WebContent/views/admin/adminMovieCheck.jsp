@@ -383,7 +383,7 @@
 			                        </tr>
 			                     <% } else { %>
 			                     	<% for(Movie m : list) { %>                                   
-											<tr>
+											<tr class="mvDetail">
 			                                    <td><%= m.getMovieNo() %></td>
 			                                    <td><%= m.getMovieRelease() %></td>
 			                                    <td><%= m.getMovieTitle() %></td>
@@ -449,6 +449,14 @@
  		function insertButton(){
  			location.href = '<%= contextPath %>/adminMovieInsert.admin';
  		}
+ 		
+    	$(function(){
+    		$('.mvDetail').click(function(){
+    			console.log("aaa");
+    			const movieNo = $(this).children().eq(0).text();
+    			location.href='<%= contextPath %>/adminMovieDetail.admin?movieNo=' + movieNo;
+    		})
+    	}) 
 	</script>
 </body>
 </html>
