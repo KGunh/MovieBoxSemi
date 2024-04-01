@@ -1,21 +1,43 @@
 package com.kh.admin.controller;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import com.kh.admin.model.service.MemberAdminService;
+import com.kh.theater.model.vo.Theater;
 
 public class CinemaAdminContorller {
 
-	public void cinemaCheck () {
+	public String cinemaCheck (HttpServletRequest request, HttpServletResponse response) {
 				
 		
 		
+		String view = "views/admin/CinemaCheck.jsp";
+		
+		ArrayList<Theater> theater = new MemberAdminService().cinemaCheck();
+		
+		
+		
+		request.setAttribute("theater", theater);
+		
+		return view; 
 		
 	}
 	
-	public void cinemaEdit() {
+	public String cinemaEdit(HttpServletRequest request, HttpServletResponse response) {
+		
+		String view = "/views/admin/CinemaEdit.jsp";
+		
+		return view;
 		
 	}
 	
-	public void cinemaInsert(HttpServletRequest request) {
+	public String cinemaInsert(HttpServletRequest request, HttpServletResponse response) {
+		
+		
+		String view = "/views/admin/CinemaInsert.jsp";
 		
 		String name = request.getParameter("name");
 		String address = request.getParameter("address");
@@ -43,7 +65,7 @@ public class CinemaAdminContorller {
 		}
 		
 		
-		
+		return view; 
 		
 	}
 	

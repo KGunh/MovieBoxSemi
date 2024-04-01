@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import = "java.util.ArrayList, com.kh.theater.model.vo.Theater"%>
+    
+    <%
+    
+    ArrayList<Theater> theater =(ArrayList<Theater>)request.getAttribute("theater");
+    
+    %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -379,7 +385,17 @@
 
         }
         
+        .test123{
+        	width: 70px;
+        }
         
+        .theatername{
+        width: 350px
+        }
+        
+        .code{
+        width: 120px
+        }
 
 
      
@@ -445,7 +461,8 @@
                    <select name="#" id="select" >
                     <option value="">전체</option>
                     <option value="">가입일</option>
-                    <option value="">취향</option>
+                    <option value="">지역코드</option>
+                    <option vlaue="">지역</option>
                    </select>
                     <input type="search" id="find">
                     <button type="submit" id="btn" style="background-color: #FFC145;">
@@ -485,24 +502,28 @@
                                
                                 <th class="num">번호</th>
                                 <th>등록일</th>
-                                <th>지역</th>
-                                <th>영화관 이름</th> 
-                                <th>상영관수</th>
+                                <th class="test123">지역</th>
+                                <th class="theatername">영화관 이름</th> 
+                                <th class="code">지역코드</th>
                                 <th>지도 링크</th>
                               
                             </tr>
                           </thead>
                           <tbody>
+                          
+                         <% for (Theater t : theater) { %>
                             <tr>
                                
-                                <td class="num">1</td>
-                                <td>01/01/01</td>
-                                <td>서울시 마포구</td>
-                                <td>롯데시네마 홍대점</td>
-                                <td>9</td>
-                                <td>지도 링크 </td>
+                                <td class="num"><%=t.getTheaterNo() %></td>
+                                <td><%=t.getUpdateDate() %></td>
+                                <td class="test123"><%=t.getLocationName() %></td>
+                                <td class="theatername"><%=t.getTheaterName() %></td>
+                                <td class="code"><%=t.getLocalCode() %></td>
+                                <td><%=t.getMapLink() %></td>
                                 
                             </tr>
+                            
+                            <% } %>
                             
                           </tbody>
                         </table>

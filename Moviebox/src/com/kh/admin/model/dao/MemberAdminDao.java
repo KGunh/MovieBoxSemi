@@ -14,6 +14,7 @@ import java.util.Properties;
 
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
+import com.kh.theater.model.vo.Theater;
 
 public class MemberAdminDao {
 	
@@ -154,6 +155,46 @@ public class MemberAdminDao {
 		
 	}
 	
+	
+	
+	public ArrayList<Theater> cinemaCheck(Connection conn){
+		
+		ArrayList<Theater> theater = new ArrayList<Theater>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("cinemaCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Theater Cinema = new Theater(); 
+						Cinema.setTheaterNo(rset.getInt("THEATER_NO"));
+						Cinema.setUpdateDate(rset.getDate("THEATER_UPDATE"));
+						Cinema.setLocationName(rset.getString("LOCATION_NAME"));
+						Cinema.setTheaterName(rset.getString("THEATER_NAME"));
+						Cinema.setLocalCode(rset.getString("LOCATION_CODE"));
+						Cinema.setMapLink(rset.getString("MAP_LINK"));
+						
+					theater.add(Cinema);	
+						
+						
+			}	
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return theater;
+		
+		
+	}
 }
 	
 	
