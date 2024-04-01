@@ -9,6 +9,7 @@ import java.util.List;
 
 import com.kh.common.model.vo.Location;
 import com.kh.common.model.vo.Reservation;
+import com.kh.member.model.dao.MemberDao;
 import com.kh.movie.model.vo.Movie;
 import com.kh.reservation.model.dao.ReservationDao;
 import com.kh.reservation.model.vo.Seat;
@@ -97,6 +98,10 @@ public class ReservationService {
 		Connection conn = getConnection();
 		
 		Reservation reservation = new ReservationDao().checkReservationInfo(conn, ticketNo);
+		
+		List<Seat> seatList = new MemberDao().seatList(conn, ticketNo);
+		
+		reservation.setSeatList(seatList);
 		
 		close(conn);
 		

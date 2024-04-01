@@ -7,12 +7,14 @@ import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kh.admin.model.dao.AdminPageDao;
 import com.kh.admin.model.dao.MemberAdminDao;
 import com.kh.board.model.vo.Board;
 import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.Genre;
+import com.kh.common.model.vo.Location;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.member.model.vo.Member;
 import com.kh.movie.model.vo.Movie;

@@ -5,8 +5,10 @@ import static com.kh.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.List;
 
+import com.kh.admin.model.dao.AdminPageDao;
 import com.kh.common.model.dao.MainDao;
 import com.kh.common.model.vo.Attachment;
+import com.kh.common.model.vo.Location;
 import com.kh.notice.model.vo.Notice;
 
 public class MainService {
@@ -45,4 +47,14 @@ public class MainService {
 		
 	}
 
+	public List<Location> locationList(){
+		Connection conn = getConnection();
+		
+		List<Location> list = new MainDao().locationList(conn);
+		
+		
+		close(conn);
+		
+		return list;
+	}
 }
