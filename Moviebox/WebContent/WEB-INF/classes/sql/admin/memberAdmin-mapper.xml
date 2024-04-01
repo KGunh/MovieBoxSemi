@@ -52,12 +52,14 @@
 		UPDATE
 			TB_MEMBER
 		SET
-			MEMBER_NAME =?,
+			MEMBER_NAME =? ,
 			EMAIL =?,
 			ADDRESS =?,
 			PHONE =?,
 			STATUS =?,
 			UPDATE_DATE = SYSDATE
+		FROM
+			TB_MEMBER
 		WHERE 
 			MEMBER_ID = ?
 		AND

@@ -14,19 +14,19 @@
 		                      BOARD_NO,
 		                      CATEGORY_NAME,
 		                      BOARD_TITLE,
-		                      MEMBER_NAME,
+		                      BOARD_WRITER,
 		                      TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE
 		                  FROM
 		                      TB_BOARD
 		                  JOIN
 		                      TB_CATEGORY USING (CATEGORY_NO)
 		                  JOIN
-		                      TB_MEMBER ON (MEMBER_NO = BOARD_WRITER)
+		                      TB_MEMBER USING (MEMBER_NO)
 		                 WHERE
 		                      TB_BOARD.STATUS = 'Y'
 		                 ORDER
 		                    BY
-		                      BOARD_NO DESC) A)
+		                      CREATE_DATE DESC) A)
 		 WHERE RNUM BETWEEN ? AND ?
 	</entry>
 	
@@ -42,90 +42,25 @@
 	
 	<entry key="detailBoard">
 		SELECT
-	          BOARD_NO,
-	          CATEGORY_NAME,
-	          BOARD_TITLE,
-	          TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE,
-	          MEMBER_NAME,
-	          MEMBER_NO,
-	          BOARD_CONTENT
-		  FROM
-	          TB_BOARD
-		  LEFT		
-		  JOIN
-	          TB_MEMBER ON (MEMBER_NO = BOARD_WRITER)
-		  JOIN
-	          TB_CATEGORY USING(CATEGORY_NO)
-		 WHERE
-	          BOARD_NO = ?
-		   AND
-	          TB_BOARD.STATUS = 'Y'
-	
+	      BOARD_NO,
+	      CATEGORY_NAME,
+	      BOARD_TITLE,
+	      TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE,
+	      BOARD_WRITER,
+	      BOARD_CONTENT
+	  FROM
+	      TB_BOARD
+	  JOIN
+	      TB_CATEGORY USING(CATEGORY_NO)
+	  JOIN
+	      TB_MEMBER USING(MEMBER_NO)
+	 WHERE
+	      BOARD_NO = ?
+	   AND
+	      TB_BOARD.STATUS = 'Y'
 	</entry>
 	
-	
-	<entry key="selectCategoryList">
-		SELECT
-			  CATEGORY_NO,
-			  CATEGORY_NAME
-		  FROM
-		  	  TB_CATEGORY
-	</entry>
 	
 
-	<entry key="insertBoard">
-		INSERT
-		  INTO
-	          TB_BOARD
-	          (
-	          BOARD_NO,
-	          BOARD_TITLE,
-	          BOARD_CONTENT,
-	          CREATE_DATE,
-	          CATEGORY_NO,
-	          BOARD_WRITER
-	          )
-	    VALUES
-		      (
-		      SEQ_BOARDNO.NEXTVAL,
-		      ?,
-		      ?,
-		      SYSDATE,
-	          ?,
-	          (
-	          SELECT
-		            MEMBER_NO
-		        FROM
-		            TB_MEMBER
-		       WHERE
-		            MEMBER_NO = ?
-		      )
-		      )
-	</entry>
-	
-	
-	<entry key="updateBoard">
-		UPDATE
-			  TB_BOARD
-		   SET
-		   	  CATEGORY_NO = ?,
-		   	  BOARD_TITLE = ?,
-		   	  BOARD_CONTENT = ?
-		 WHERE
-		 	  BOARD_NO = ?
-		   AND
-		   	  STATUS = 'Y'
-	</entry>
-	
-	
-	<entry key="deleteBoard">
-	
-		UPDATE
-			  TB_BOARD
-		   SET
-		   	  STATUS = 'N'
-		 WHERE
-			  BOARD_NO = ?
-	</entry>
 	
 </properties>
