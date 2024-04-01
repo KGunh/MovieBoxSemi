@@ -1,4 +1,4 @@
-package com.kh.movie.controller;
+package com.kh.reservation.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,17 +7,20 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.kh.common.model.vo.Reservation;
+
 /**
- * Servlet implementation class MovieServlet
+ * Servlet implementation class CheckInfoReservation
  */
-@WebServlet("*.movie")
-public class MovieServlet extends HttpServlet {
+@WebServlet("/checkInfo.reservationAjax")
+public class CheckInfoReservation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MovieServlet() {
+    public CheckInfoReservation() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,31 +30,11 @@ public class MovieServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		// 인코딩
-		request.setCharacterEncoding("UTF-8");
-		
-		// 변수 
-		MovieController mc = new MovieController();
-		String uri = request.getRequestURI();
-		
-		String view = "";
-		boolean flag = true;
-		
-		String mapping = uri.substring(uri.lastIndexOf("/") + 1, uri.lastIndexOf("."));
-		
-		switch(mapping) {
-		case "list" : view = mc.selectMovieList(request); flag = false; break;
-		case "category" : view = mc.movieCategory(request, response); flag= false; break;
-		
-		}
-		
-		if(flag) {
-			response.sendRedirect(request.getContextPath() + view);
-		} else {
-			request.getRequestDispatcher(view).forward(request, response);
-		}
-		
-		
+		Reservation reservation =  new ReservationController().checkReservationInfo(request);
+	        
+        response.setContentType("application/json; charset=UTF-8");
+			
+		new Gson().toJson(reservation, response.getWriter());
 	}
 
 	/**

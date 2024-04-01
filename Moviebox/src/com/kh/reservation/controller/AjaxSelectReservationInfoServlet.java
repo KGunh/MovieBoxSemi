@@ -30,7 +30,7 @@ public class AjaxSelectReservationInfoServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-        Reservation reservation =  new ReservationController().checkReservationInfo(request);
+        Reservation reservation =  new ReservationController().printReservationInfo(request);
         
         response.setContentType("application/json; charset=UTF-8");
 		
