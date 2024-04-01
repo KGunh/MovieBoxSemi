@@ -2,6 +2,7 @@ package com.kh.admin.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletContext;
 import javax.servlet.http.HttpServletRequest;
@@ -273,9 +274,21 @@ public class AdminPageController {
 
 	}
 	
-	public Location adminScreenList(HttpServletRequest request, HttpServletResponse response) {
+	public String adminScreenList(HttpServletRequest request, HttpServletResponse response) {
+		
+		String view = "";
+		
+		List<Location> list = new AdminPageService().adminScreenList();
 		
 		
+		if(!list.isEmpty()) {
+			request.setAttribute("locationList", list);
+			view = "views/admin/adminScreenList.jsp";
+		} else {
+			view = "index.jsp";
+		}
+		
+		return view;
 	}
 
 }
