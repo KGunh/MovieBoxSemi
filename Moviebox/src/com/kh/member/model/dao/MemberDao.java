@@ -208,6 +208,7 @@ public class MemberDao {
 				r.setPersonNum(rset.getInt("PERSONNEL"));
 				r.setMemberNo(rset.getInt("MEMBER_NO"));
 				r.setScreenNo(rset.getInt("SCREEN_NO"));
+				r.setScreenName(rset.getString("SCREEN_NAME"));
 				r.setMovieTitle(rset.getString("MOVIE_TITLE"));
 				r.setRunningTime(rset.getString("RT"));
 				r.setTheaterName(rset.getString("THEATER_NAME"));
@@ -716,7 +717,29 @@ public class MemberDao {
 	}
 	
 	
-	
+	public int seatCancel(Connection conn, int ticketNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("seatCancel");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, ticketNo);
+			
+			result = pstmt.executeUpdate();	
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		
+		
+		return result;
+	}
 	
 	
 	

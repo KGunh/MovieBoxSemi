@@ -250,7 +250,7 @@
                                     <td>예약번호</td>
                                     <td><%=resList.get(i).getTicketNo() %></td>
                                     <td>상영관</td>
-                                    <td><%=resList.get(i).getScreenNo() %>관</td>
+                                    <td><%=resList.get(i).getScreenName() %>관</td>
                                 </tr>
                                 <tr>
                                     <td>극장</td>

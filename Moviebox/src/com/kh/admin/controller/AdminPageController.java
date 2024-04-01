@@ -11,10 +11,12 @@ import javax.servlet.http.HttpSession;
 import org.apache.tomcat.util.http.fileupload.servlet.ServletFileUpload;
 
 import com.kh.admin.model.service.AdminPageService;
+import com.kh.admin.model.service.MemberAdminService;
 import com.kh.board.model.vo.Board;
 import com.kh.common.PosterFileRenamePolicy;
 import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.PageInfo;
+import com.kh.member.model.vo.Member;
 import com.kh.movie.model.vo.Movie;
 import com.kh.notice.model.vo.Notice;
 import com.oreilly.servlet.MultipartRequest;
@@ -267,7 +269,26 @@ public class AdminPageController {
 		return view;
 	}
 	
-
+	//영화 상세보기
+	public String adminMovieDetail(HttpServletRequest request, HttpServletResponse response) {
+		
+		int movieNo = Integer.parseInt(request.getParameter("movieNo"));
+		String view = "";
+		
+		Movie m = new AdminPageService().adminMovieDetail(movieNo);
+		String cast = new AdminPageService().adminMovieCast(movieNo);
+		
+		if(m != null) {
+			request.setAttribute("movie", m);
+			request.setAttribute("cast", cast);
+			view = "views/admin/adminMovieDetail.jsp";
+		}else {
+			view = "index.jsp";
+		}
+		
+	return view;
+	
+}
 	
 	
 }

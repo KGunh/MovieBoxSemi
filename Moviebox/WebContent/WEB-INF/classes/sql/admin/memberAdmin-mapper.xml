@@ -65,6 +65,35 @@
 						
 </entry>
 
+<entry key="cinemaCheck">
+
+	SELECT
+		THEATER_NO,
+		THEATER_UPDATE,
+		LOCATION_NAME,
+		THEATER_NAME,
+		C.LOCATION_CODE,
+		MAP_LINK
+	FROM
+		TB_THEATER C, TB_LOCATION L
+     WHERE 
+           C.LOCATION_CODE = L.LOCATION_CODE 
+</entry>
+
+<entry key="cinemaInsert">
+
+		INSERT 
+			INTO TB_THEATER
+					VALUES(
+							
+		
+		
+		)	 
+				
+
+
+
+</entry>
 
 
 

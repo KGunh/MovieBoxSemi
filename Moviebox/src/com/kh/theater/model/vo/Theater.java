@@ -1,24 +1,42 @@
 package com.kh.theater.model.vo;
 
+import java.util.Date;
+
 public class Theater {
 	private int theaterNo;
 	private String theaterName;
 	private String theaterAddr;
 	private String mapLink;
 	private String localCode;
+	private Date updateDate;
+	private String locationName;
+	
+	public String getLocationName() {
+		return locationName;
+	}
+	public void setLocationName(String locationName) {
+		this.locationName = locationName;
+	}
 	public Theater() {
 		super();
 	}
-	public Theater(int theaterNo, String theaterName, String theaterAddr, String mapLink, String localCode) {
+	public Theater(int theaterNo, String theaterName, String theaterAddr, String mapLink, String localCode,Date updateDate) {
 		super();
 		this.theaterNo = theaterNo;
 		this.theaterName = theaterName;
 		this.theaterAddr = theaterAddr;
 		this.mapLink = mapLink;
 		this.localCode = localCode;
+		this.updateDate= updateDate;
 	}
 	public int getTheaterNo() {
 		return theaterNo;
+	}
+	public Date getUpdateDate() {
+		return updateDate;
+	}
+	public void setUpdateDate(Date updateDate) {
+		this.updateDate = updateDate;
 	}
 	public void setTheaterNo(int theaterNo) {
 		this.theaterNo = theaterNo;
@@ -47,10 +65,16 @@ public class Theater {
 	public void setLocalCode(String localCode) {
 		this.localCode = localCode;
 	}
+	
+	
+	
+	
+	
 	@Override
 	public String toString() {
 		return "Theater [theaterNo=" + theaterNo + ", theaterName=" + theaterName + ", theaterAddr=" + theaterAddr
-				+ ", mapLink=" + mapLink + ", localCode=" + localCode + "]";
+				+ ", mapLink=" + mapLink + ", localCode=" + localCode + ", updateDate=" + updateDate + ", locationName="
+				+ locationName + "]";
 	}
 	@Override
 	public int hashCode() {

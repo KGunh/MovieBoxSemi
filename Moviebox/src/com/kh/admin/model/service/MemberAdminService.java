@@ -1,6 +1,7 @@
 package com.kh.admin.model.service;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
+import com.kh.theater.model.vo.Theater;
 
 import java.sql.Connection;
 import java.util.ArrayList;
@@ -70,10 +71,26 @@ public class MemberAdminService {
 	
 	
 	
+	public ArrayList<Theater> cinemaCheck() {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		ArrayList<Theater> theater = new MemberAdminDao().cinemaCheck(conn);
+		
+		JDBCTemplate.close(conn);
+		
+		return theater;
+		
+	}
 	
 	
 	
 	
-	
-
+	public void cinemaInsert(Theater theater) {
+		
+		Connection conn=JDBCTemplate.getConnection();
+		new MemberAdminDao().cinemaInsert(conn);
+		
+		JDBCTemplate.close(conn);
+		
+	}
 }

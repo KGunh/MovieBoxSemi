@@ -7,6 +7,7 @@
 %>
 
 
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,6 +28,7 @@
         div{
            /* border : 1px solid red;  */
             box-sizing : border-box;
+            background-color: #1a1a1a;
         }
 
         /* 전체를 감싸는 #wrap div */
@@ -177,7 +179,18 @@
 
         /* -------------------------------------------*/
 
-        
+        .title-file{
+            /* border: 1px solid rgb(172, 0, 0); */
+            width: 170px;
+            height: 100px;
+            font-size: 15px;
+            font-weight: bold;
+            line-height: 100px;
+            color:#ffffff;
+            text-align: right;
+            padding-right: 30px;
+            
+        }
         .title{
             /* border: 1px solid rgb(172, 0, 0); */
             width: 170px;
@@ -209,7 +222,7 @@
         #sub_1 {
             /* border: 1px solid rgb(0, 236, 39); */
             width: 580px;
-            height: 60px;
+            height: 100px;
             float: left;
         }
 
@@ -263,14 +276,14 @@
         #sub_9 {
             /* border: 1px solid rgb(236, 193, 0); */
             width: 580px;
-            height: 160px;
+            height: 120px;
             float: left;
         }
 
         #sub_10{
             /* border: 1px solid rgb(63, 111, 243); */
             width: 530px;
-            height: 60px;
+            height: 40px;
             float: left;
         }
 
@@ -287,7 +300,8 @@
             width: 135px;
             height: 40px;
             float: left;
-            line-height: 40px;
+            font-size: small;
+            padding-top: 2px;
 
         }
         
@@ -300,14 +314,14 @@
             border-radius: 8px;
         }
         input[type=file]::file-selector-button {
-            width: 130px;
-            height: 40px;
+            width: 80px;
+            height: 20px;
             background-color: #FFC145;
             border: 1px solid lightgray;;
-            border-radius: 8px;
+            border-radius: 5px;
             cursor: pointer;
-            margin-top: 10px;
-            text-align: center;
+            margin-top: 2px;
+
             
             
         }
@@ -332,7 +346,7 @@
 
         #plot{ /*줄거리 입력창*/
             width: 533px;
-            height: 140px;
+            height: 100px;
             border-radius: 8px;
             border: 1px solid lightgray;
             font-size: 15px;
@@ -439,7 +453,7 @@
 			<form action="<%= contextPath %>/adminMovieInsert.admin" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
 			    <div id="content_2_box"><!--컨텐트2 전체박스-->
 			        <div id="box_1">
-			            <div class="title">포스터</div>
+			            <div class="title-file">파일첨부</div>
 			            <div class="title">제목</div>
 			            <div class="title">장르</div>
 			            <div class="title">러닝타임</div>
@@ -451,10 +465,20 @@
 			        </div>
 			        <div id="box_2">
 			            <div id="sub_1">
+			                <div class="fileBox" style="padding-right: 250px;">
+			                    <input type="file" id="file" name="upposter" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
+			                    <input type="file" id="file" name="upposter" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
+			                    <input type="file" id="file" name="upposter" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
+			                    <input type="file" id="file" name="upposter" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
+ 
+                            </div>
 			                <div class="fileBox">
 			                    <input type="file" id="file" name="upposter" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
-			                </div>
-			                <div class="fileBox_2"></div>
+			                    <input type="file" id="file" name="upposter" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
+			                    <input type="file" id="file" name="upposter" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
+			                    <input type="file" id="file" name="upposter" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
+
+                            </div>
 			            </div>
 			
 			            
@@ -486,7 +510,7 @@
 			            </div>
 			
 			            <div id="sub_7">
-			                <input type="text" name="director_name" id="director_name" placeholder="감독을 입력해 주세요.">
+			                <input type="text" name="director_name" id="director_name" placeholder="감독을 입력해 주세요.(ex - 호빵맨, 식빵맨 )">
 			            </div>
 			
 			            <div id="sub_8">
@@ -519,12 +543,13 @@
  	 
  	<script>
 	 	function validateForm() { 
-	 	    var fileInput = document.getElementById('file');
-	 	    var fileName = fileInput.value; 
-	 	    if (fileName === "" || fileInput.files.length === 0) {
-	 	        alert('포스터 파일을 첨부해 주세요.');
-	 	        return false;
-	 	    }
+//
+//	 		var fileInput = document.getElementById('file');
+//	 	    var fileName = fileInput.value; 
+//	 	    if (fileName === "" || fileInput.files.length === 0) {
+//	 	        alert('포스터 파일을 첨부해 주세요.');
+//	 	        return false;
+//	 	    }
 	 	    var movieTitle = document.getElementById('movieTitle').value;
 	 	    if (movieTitle === "" || movieTitle.length === 0) {
 	 	        alert('영화 제목을 입력해 주세요.');

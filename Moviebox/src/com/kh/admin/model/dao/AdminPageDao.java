@@ -14,6 +14,7 @@ import java.util.Properties;
 import com.kh.board.model.vo.Board;
 import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.PageInfo;
+import com.kh.member.model.vo.Member;
 import com.kh.movie.model.vo.Movie;
 import com.kh.notice.model.vo.Notice;
 
@@ -555,5 +556,71 @@ public class AdminPageDao {
 	}
 	
 	
+	//영화 상세
+	public Movie detailAdmin(Connection conn, int movieNo){
+		Movie m = new Movie(); 
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("SelectMovieDetail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, movieNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) { 
+				m.setMovieNo(rset.getInt("MOVIE_NO"));
+				m.setMovieTitle(rset.getString("MOVIE_TITLE"));
+				m.setMovieRt(rset.getString("MOVIE_RT"));
+				m.setMovieRated(rset.getString("MOVIE_RATED"));
+				m.setMovieRelease(rset.getString("MOVIE_RELEASE"));
+				m.setMovieStory(rset.getString("MOVIE_STORY"));
+				m.setStatus(rset.getString("STATUS"));
+				m.setGenreNo(rset.getString("GENRE_NO"));
+				m.setGenreName(rset.getString("GENRE_NAME"));
+				m.setDirectorNo(rset.getInt("DIRECTOR_NO"));
+				m.setDirectorName(rset.getString("DIRECTOR_NAME"));
+				m.setMovieUpdate(rset.getString("MOVIE_UPDATE"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return m;
+	}
+	
+	public String adminMovieCast(Connection conn, int movieNo) {
+		String cast = "";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("SelectCastInfo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			
+			pstmt.setInt(1, movieNo);
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			cast = rset.getString("ACTOR_NAMES");
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return cast;
+	}
 
 }
