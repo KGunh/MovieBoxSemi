@@ -12,7 +12,7 @@
 			  MOVIE_NO,
 		      MOVIE_TITLE,
 		      STATUS,
-              GENRE_NAME,
+              GENRE_CODE,
 		      MOVIE_UPDATE
 		  FROM
 		      TB_MOVIE
@@ -22,7 +22,6 @@
 		    BY
 		      MOVIE_UPDATE DESC
 	</entry>
-	
 	
 	<entry key="movieCategory">
 		SELECT
@@ -40,7 +39,7 @@
 		  JOIN
 		      TB_GENRE ON (GENRE_CODE = GENRE_NO)
 		 WHERE
-		      GENRE_NO = ?
+		      GENRE_NAME = ?
 	</entry>
 	
 </properties>

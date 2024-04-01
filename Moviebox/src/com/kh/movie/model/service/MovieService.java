@@ -20,6 +20,7 @@ public class MovieService {
 	}
 
 	public ArrayList<Movie> movieCategory(String genre) {
+		
 		Connection conn = getConnection();
 		ArrayList<Movie> list = new MovieDao().movieCategory(conn, genre);
 		
@@ -27,5 +28,7 @@ public class MovieService {
 		
 		return list;
 	}
+
+
 
 }
