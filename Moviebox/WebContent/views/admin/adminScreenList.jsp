@@ -6,7 +6,9 @@
 <meta charset="UTF-8">
 <title>예매관리</title>
   <style>
-
+        .content_2 div{
+            border: 1px solid red;
+        }
         
         div{
            /* border : 1px solid red;  */
@@ -160,10 +162,23 @@
 
         /* -------------------------------------------*/
 
+        .theater-area{
+            width: 100%;
+            height: 100%;
+        }
 
-
-
-
+        .theater-location-list{
+            width: 100%;
+            height: 10%;
+        }
+        #location-area{
+            text-align: center;
+           font-size: 20px;
+           width: 30%;
+           background-color: #FFC145;
+           font-weight: bold;
+        }
+        
 
 
 
@@ -222,15 +237,17 @@
 
             <!------------------------------------------------------------>
 
-            <div class="content_2"><!--content_2 시작-->
-                <p id="p">관리자 메인페이지</p>
+            <div class="content_2">
+              
+                <div class="theater-area">
+                    <div class="theater-location-list">
+                        <select name="location" id="location-area">
+                            <option value="">서울</option>
+                        </select>
 
-            <form>
-                <div id="content_2_box"><!--컨텐트2 전체박스-->
- 
-
-                </div><!--컨텐트2 전체박스 끝-->
-            </form>
+                    </div>
+                </div>
+            
 
 
 

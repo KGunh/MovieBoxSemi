@@ -40,7 +40,8 @@ public class MovieServlet extends HttpServlet {
 		String mapping = uri.substring(uri.lastIndexOf("/") + 1, uri.lastIndexOf("."));
 		
 		switch(mapping) {
-		case "list" : view = "views/movie/movieList.jsp"; break;
+		case "list" : view = mc.selectMovieList(request); flag = false; break;
+		case "category" : view = mc.movieCategory(request, response); flag= false; break;
 		
 		}
 		

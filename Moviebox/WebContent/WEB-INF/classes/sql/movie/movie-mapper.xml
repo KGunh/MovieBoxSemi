@@ -9,11 +9,38 @@
 	
 	<entry key="selectMovieList">
 		SELECT
-		
-	
+			  MOVIE_NO,
+		      MOVIE_TITLE,
+		      STATUS,
+              GENRE_NAME,
+		      MOVIE_UPDATE
+		  FROM
+		      TB_MOVIE
+		  JOIN
+      		  TB_GENRE ON (GENRE_CODE = GENRE_NO)
+		 ORDER
+		    BY
+		      MOVIE_UPDATE DESC
 	</entry>
 	
 	
-	
+	<entry key="movieCategory">
+		SELECT
+		      MOVIE_NO,
+		      MOVIE_TITLE,
+		      MOVIE_RT,
+		      MOVIE_RATED,
+		      MOVIE_RELEASE,
+		      MOVIE_STORY,
+		      STATUS,
+		      GENRE_NAME,
+		      DIRECTOR_NO
+		  FROM
+		      TB_MOVIE
+		  JOIN
+		      TB_GENRE ON (GENRE_CODE = GENRE_NO)
+		 WHERE
+		      GENRE_NO = ?
+	</entry>
 	
 </properties>

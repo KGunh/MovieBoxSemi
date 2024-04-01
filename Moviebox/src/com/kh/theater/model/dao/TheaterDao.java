@@ -105,7 +105,6 @@ public class TheaterDao {
 											  rset.getString("THEATER_ADDR"),
 											  rset.getString("MAP_LINK"),
 											  rset.getString("LOCATION_NAME"));
-
 				list.add(theater);
 			}
 		} catch (SQLException e) {
