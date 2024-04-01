@@ -168,7 +168,6 @@ public class ReservationController {
 				
 		Reservation reservation = new ReservationService().checkReservationInfo(ticketNo);
 		
-		
 		return reservation;
 	}
 
