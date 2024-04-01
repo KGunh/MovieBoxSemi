@@ -355,7 +355,7 @@
     .name {
         font-size: 20px;
         font-weight:600;
-        color: #a7a6a6;
+        color: white;
         margin-left: 15px;
     }
 
@@ -472,9 +472,12 @@
                 <div class="content_2_top">
                 
             </div>
+             <form action="<%=contextPath%>/insertAdmin.cm" method="post"> 
+            
+            
             <div id="content_2_content" >
                 
-                <form action="<%=contextPath%>/insertAdmin.cm" method="get"> 
+               
                
                 <div>
                     <span class="name" id="region">지역</span>
@@ -502,7 +505,7 @@
               
                 <div><span class="name">주소</span>
                     <div id="address">
-                        <input type="text" class="input1" placeholder="상세주소를 입력해주시오" name="address">
+                        <input type="text" class="input" placeholder="상세주소를 입력해주시오" name="address">
 
                    <script>
                    
@@ -512,12 +515,7 @@
 
                    
 
-                    <select name="" id="city" class="input2">
-                        <option value="시" >시/군/구</option>
-                        <option value=""></option>
-                        <option value=""></option>
-
-                    </select>
+                    
                     <div>
                        
                           
@@ -535,10 +533,10 @@
                     <input type="submit" id="btn1" value="등록"></button>
                 </div>
                 
-                </form>
+              
                 
             </div>
-               
+                 </form>
                 </div>
        
                 </div>

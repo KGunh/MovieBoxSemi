@@ -9,9 +9,12 @@ import java.sql.Connection;
 import java.util.ArrayList;
 
 import com.kh.admin.model.dao.AdminPageDao;
+import com.kh.admin.model.dao.MemberAdminDao;
 import com.kh.board.model.vo.Board;
+import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.PageInfo;
+import com.kh.member.model.vo.Member;
 import com.kh.movie.model.vo.Movie;
 import com.kh.notice.model.vo.Notice;
 
@@ -246,4 +249,38 @@ public class AdminPageService {
 		return result;
 	}
 
+	//
+	public Movie adminMovieDetail(int movieNo) {
+		
+		Connection conn = getConnection();
+		
+		Movie movie = new AdminPageDao().detailAdmin(conn,movieNo);
+		
+		JDBCTemplate.close(conn);
+		
+		return movie;
+	}
+	
+	
+	public String adminMovieCast(int movieNo) {
+		Connection conn = getConnection();
+		
+		String casts = new AdminPageDao().adminMovieCast(conn, movieNo);
+		
+		JDBCTemplate.close(conn);
+		
+		return casts;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

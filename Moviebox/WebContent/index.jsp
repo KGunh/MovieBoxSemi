@@ -55,11 +55,11 @@
         width: 100%;
         padding: 0 100px;
         display: flex;
-        justify-content : space-between
+        justify-content : space-between;
         
     }
     .movie-chart > div{
-        width: 190px;
+        width: 170px;
         height: 100%;
     }
 
@@ -202,6 +202,82 @@
 <body>
     
     <%@ include file="views/common/header.jsp" %> 
+    <script>
+    window.onload = function(){
+        $.ajax({
+            url : 'ad.main',
+            type : 'get',
+            success : function(result) {
+
+				
+				let resultStr = '';
+				for(let i = 0; i < result.length; i++){
+					resultStr += '<div class="swiper-slide" ><img src="<%=contextPath%>/' + result[i].filePath +'/'+ result[i].changeName+'"' +'/></div>'; 
+
+					
+				}
+				
+
+
+				$('.swiper-wrapper').html(resultStr);
+				
+            },
+            async : false
+        });
+        
+        $.ajax({
+        	url : 'chart.main',
+        	type : 'get',
+        	success : function(result) {
+				
+				
+				let resultStr = '';
+				for(let i = 0; i < result.length; i++){
+					if(i==5) break;
+					resultStr += '<div><img src="<%=contextPath%>/' + result[i].filePath +'/'+ result[i].changeName+'"' +'/></div>'; 
+				}
+				
+				$('.movie-chart').html(resultStr);
+				
+            },
+            async : false
+        });
+        
+        $.ajax({
+        	url : 'board.main',
+        	type : 'get',
+        	success : function(result) {
+
+				
+        		let resultStr = '';
+        		for(let i = 0;i< result.length; i++){
+        			resultStr += '<tr class="board-area"> <td> ' + result[i].noticeTitle + '</td><td> ' + result[i].createDate + '</td> </tr>';
+        			console.log(result[i].noticeTitle);
+        		}
+        		
+        		$('.board-content tbody').html(resultStr);
+        	},
+        	async : false
+        });
+        
+     // 슬라이더 동작 정의
+        const swiper = new Swiper('.swiper', {
+            autoplay : {
+                delay : 10000 // 3초마다 이미지 변경
+            },
+            loop : true, //반복 재생 여부
+            slidesPerView : 1, // 이전, 이후 사진 미리보기 갯수
+            pagination: { // 페이징 버튼 클릭 시 이미지 이동 가능
+                el: '.swiper-pagination',
+                clickable: true
+            },
+            navigation: { // 화살표 버튼 클릭 시 이미지 이동 가능
+                prevEl: '.swiper-button-prev',
+                nextEl: '.swiper-button-next'
+            }
+        }); 
+    }
+    </script>
 
     
     <div id="main-cotent">
@@ -211,12 +287,7 @@
                 <!-- Additional required wrapper -->
                 <div class="swiper-wrapper" >
                     <!-- Slides -->
-                    <div class="swiper-slide"><img src="<%=contextPath%>/resources/img/poster/ad_Dune.jpg"></div>
-                    <div class="swiper-slide"><img src="<%=contextPath%>/resources/img/poster/ad_SpyXFamily.jpg"></div>
-                    <div class="swiper-slide"><img src="<%=contextPath%>/resources/img/poster/ad_Exhuma.jpg"></div>
-                    <div class="swiper-slide"><img src="<%=contextPath%>/resources/img/poster/ad_SlamDunk.jpg"></div>
-                    <div class="swiper-slide"><img src="<%=contextPath%>/resources/img/poster/ad_Topgun.jpg"></div>
-                    <div class="swiper-slide"><img src="<%=contextPath%>/resources/img/poster/ad_Wonka.jpg"></div>
+                    
                 </div>
             
                 <!-- If we need pagination -->
@@ -232,22 +303,7 @@
         </div>
     
         <script>
-            // 슬라이더 동작 정의
-            const swiper = new Swiper('.swiper', {
-                autoplay : {
-                    delay : 10000 // 3초마다 이미지 변경
-                },
-                loop : true, //반복 재생 여부
-                slidesPerView : 1, // 이전, 이후 사진 미리보기 갯수
-                pagination: { // 페이징 버튼 클릭 시 이미지 이동 가능
-                    el: '.swiper-pagination',
-                    clickable: true
-                },
-                navigation: { // 화살표 버튼 클릭 시 이미지 이동 가능
-                    prevEl: '.swiper-button-prev',
-                    nextEl: '.swiper-button-next'
-                }
-            }); 
+            
         </script>
         
         <div class="movie-chart-content">
@@ -255,11 +311,7 @@
                 <div>무비차트</div>
             </div>
             <div class="movie-chart">
-                <div><img src="<%=contextPath%>/resources/img/poster/poster_Dune.jpg" alt=""></div>
-                <div><img src="<%=contextPath%>/resources/img/poster/poster_Exhuma.jpg" alt=""></div>
-                <div><img src="<%=contextPath%>/resources/img/poster/poster_SlamDunk.jpg" alt=""></div>
-                <div><img src="<%=contextPath%>/resources/img/poster/poster_SpyXFamily.jpg" alt=""></div>
-                <div><img src="<%=contextPath%>/resources/img/poster/poster_topgun.jpg" alt=""></div>
+                
             </div>
         </div>
         <div class="long-div">
@@ -300,22 +352,8 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr class="board-area">
-                            <td >첫번째</td>
-                            <td >2024.02.01</td>
-                        </tr>
-                        <tr class="board-area">
-                            <td >드번째</td>
-                            <td >날짜</td>
-                        </tr>
-                        <tr class="board-area">
-                            <td >세번째</td>
-                            <td >날짜</td>
-                        </tr>
-                        <tr class="board-area">
-                            <td >네번째</td>
-                            <td >날짜</td>
-                        </tr>
+                        
+                        
                     </tbody>
                 </table>
             </div>

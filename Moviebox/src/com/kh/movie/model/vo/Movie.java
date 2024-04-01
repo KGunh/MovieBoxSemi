@@ -18,7 +18,7 @@ public class Movie {
 	private String movieUpdate;
 	private String genreName;
     
-    
+	private String directorName;
 
 	public Movie() {
 		super();
@@ -123,6 +123,19 @@ public class Movie {
 	public void setGenreName(String genreName) {
 		this.genreName = genreName;
 	}
+	
+	
+	
+	public String getDirectorName() {
+		return directorName;
+	}
+	public void setDirectorName(String directorName) {
+		this.directorName = directorName;
+	}
+	
+	
+	
+	
 	@Override
 	public String toString() {
 		return "Movie [movieNo=" + movieNo + ", movieTitle=" + movieTitle + ", movieRt=" + movieRt + ", movieRated="

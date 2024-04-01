@@ -52,6 +52,12 @@ public class AdminPageServlet extends HttpServlet {
 			
 		case "adminMovieInsert" :
 			view = admin.adminMovieInsert(request, response); flag = false; break; //영화등록
+
+		case "adminMovieDetail" :
+			view = admin.adminMovieDetail(request, response); flag = false; break; //영화상세보기페이지
+			
+		
+		
 			
 			
 		case "adminBoardCheck" :
@@ -67,6 +73,8 @@ public class AdminPageServlet extends HttpServlet {
 			
 		case "adminQnAInsert" :
 			view = "/views/admin/adminQnAInsert.jsp"; break; //문의관리
+		case "adminScreenList":
+			view = "/views/admin/adminScreenList.jsp"; flag = false; break;
 			
 			
 		

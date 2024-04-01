@@ -65,7 +65,7 @@
 	<!-- 감독 등록전 시퀀스 조회 -->
 	<entry key="SelectDirectorNo">
 		SELECT 
-			SEQ_DIRECTOR_NO.NEXTVAL AS DIRECTOR_NO
+			SEQ_DIRECNO.NEXTVAL AS DIRECTOR_NO
 		FROM
 			  DUAL
 	</entry>
@@ -101,7 +101,7 @@
 	<!-- 출연진 등록전 시퀀스 조회 -->
 	<entry key="SelectActorNo">
 		SELECT 
-			SEQ_ACTOR_NO.NEXTVAL AS ACTOR_NO
+			SEQ_ACTNO.NEXTVAL AS ACTOR_NO
 		FROM
 		  DUAL
 	</entry>
@@ -126,7 +126,7 @@
 	<!-- 영화 등록전 시퀀스 조회 -->
 	<entry key="SelectMovieNo">
 		SELECT
-			 SEQ_MOVIE_NO.NEXTVAL AS MOVIE_NO
+			 SEQ_MVNO.NEXTVAL AS MOVIE_NO
 		FROM
 			 DUAL
 	</entry>
@@ -150,7 +150,7 @@
 		  	)
 		  VALUES
 			  (
-			  ?, 
+			  ?,
 			  ?,
 			  ?, 
 			  ?, 
@@ -244,6 +244,50 @@
 		    STATUS = 'Y'
 	</entry>
 
+
+
+
+	<!-- 영화상세 -->
+	<entry key="SelectMovieDetail">
+		SELECT 
+	       A.MOVIE_NO AS MOVIE_NO,
+	       A.MOVIE_TITLE AS MOVIE_TITLE,
+	       A.MOVIE_RT AS MOVIE_RT,
+	       A.MOVIE_RATED AS MOVIE_RATED,
+	       A.MOVIE_RELEASE AS MOVIE_RELEASE,
+	       A.MOVIE_STORY AS MOVIE_STORY,
+	       A.STATUS AS STATUS,
+	       A.GENRE_NO AS GENRE_NO,
+	       B.GENRE_NAME AS GENRE_NAME,
+	       A.DIRECTOR_NO AS DIRECTOR_NO,
+	       C.DIRECTOR_NAME AS DIRECTOR_NAME,
+	       A.MOVIE_UPDATE AS MOVIE_UPDATE
+		FROM
+		   TB_MOVIE A
+		LEFT 
+		OUTER
+		JOIN 
+			TB_GENRE B ON A.GENRE_NO = B.GENRE_CODE
+		LEFT
+		OUTER
+		JOIN 
+			TB_DIRECTOR C ON A.DIRECTOR_NO = C.DIRECTOR_NO
+		WHERE
+		   A.MOVIE_NO = ?
+	</entry>
+	
+	<entry key="SelectCastInfo">
+		SELECT 
+		    LISTAGG(A.ACTOR_NAME, ', ') 
+		    WITHIN GROUP 
+		           (ORDER BY A.ACTOR_NO) AS ACTOR_NAMES
+		FROM 
+		    TB_ACTOR A
+		JOIN 
+		    TB_CAST C ON A.ACTOR_NO = C.ACTOR_NO
+		WHERE
+		    C.MOVIE_NO = ?
+	</entry>
 
 
 

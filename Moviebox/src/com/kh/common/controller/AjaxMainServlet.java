@@ -1,23 +1,29 @@
-package com.kh.admin.controller;
+package com.kh.common.controller;
 
 import java.io.IOException;
+import java.util.List;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.kh.common.model.service.MainService;
+import com.kh.common.model.vo.Attachment;
+
 /**
- * Servlet implementation class CinemaController
+ * Servlet implementation class AjaxMainServlet
  */
-@WebServlet("*.cm")
-public class CinemaServlet extends HttpServlet {
+@WebServlet("/ad.main")
+public class AjaxMainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public CinemaServlet() {
+    public AjaxMainServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,44 +33,12 @@ public class CinemaServlet extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		
-		request.setCharacterEncoding("UTF-8");
-		String uri =request.getRequestURI();
+		List<Attachment> list = new MainService().adPrint();
 		
-		String mapping = uri.substring(uri.lastIndexOf("/")+1,uri.lastIndexOf("."));
-		System.out.println(mapping);
-		String view = "";
+		response.setContentType("application/json; charset=UTF-8");
 		
-		CinemaAdminContorller CAC = new CinemaAdminContorller();
-		
-		boolean flag = false;
-		
-		switch(mapping) {
-		
-		case "insertAdmin" :  view = CAC.cinemaInsert(request,response);
-		case "editAdmin"   :  view= CAC.cinemaEdit(request,response);
-		case "checkAdmin"  :  view = CAC.cinemaCheck(request,response);
-		
-		}
-		
-		if(false != flag) {
-		response.sendRedirect(view);
-			
-		}else {
-			System.out.println(view);
-			request.getRequestDispatcher(view).forward(request, response);	
-		}
+		new Gson().toJson(list, response.getWriter());
 	
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
 	}
 
 	/**
