@@ -281,7 +281,7 @@ public class ReservationDao {
 		return result == (teenPersonNo + adultPersonNo) ? 1 : 0;
 	}
 
-	public int insertSeat(Connection conn, Reservation reservation, int reservationKey) {
+	public int insertSeat(Connection conn, Reservation reservation, int ticketNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
@@ -293,7 +293,7 @@ public class ReservationDao {
 			for(int i = 0; i < reservation.getSeatList().size(); i++) {
 				pstmt.setString(1, reservation.getSeatList().get(i).getSeatNo());
 				pstmt.setInt(2, reservation.getScreenNo());
-				pstmt.setInt(3, reservationKey);
+				pstmt.setInt(3, ticketNo);
 				
 				result += pstmt.executeUpdate();
 			}
