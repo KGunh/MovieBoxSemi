@@ -1,4 +1,4 @@
-package com.kh.movie.controller;
+package com.kh.goods.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,17 +7,19 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.reservation.controller.ReservationController;
+
 /**
- * Servlet implementation class MovieServlet
+ * Servlet implementation class goodsServlet
  */
-@WebServlet("*.movie")
-public class MovieServlet extends HttpServlet {
+@WebServlet("*.goods")
+public class goodsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public MovieServlet() {
+    public goodsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -26,33 +28,28 @@ public class MovieServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		// 인코딩
 		request.setCharacterEncoding("UTF-8");
 		
-		// 변수 
-		MovieController mc = new MovieController();
 		String uri = request.getRequestURI();
+		String mapping = uri.substring(uri.lastIndexOf("/") + 1 , uri.lastIndexOf("."));
+		ReservationController rc = new ReservationController(); 
 		
 		String view = "";
-		boolean flag = true;
 		
-		String mapping = uri.substring(uri.lastIndexOf("/") + 1, uri.lastIndexOf("."));
+		boolean flag = false;
 		
 		switch(mapping) {
-		case "list" : view = mc.selectMovieList(request); flag = false; break;
-		case "selectGenre" : view = mc.movieCategory(request, response); flag= false; break;
-		case "detail" : view = mc.detailMovieList(request); flag= false; break;
-		
+		case "list" : view = "views/goods/goodsList.jsp"; break; 
+		//case "seat" : view = rc.connectSeatList(request); break;
+		//case "payment" : view = rc.insertReservation(request); break;
 		}
 		
 		if(flag) {
-			response.sendRedirect(request.getContextPath() + view);
+			response.sendRedirect(view);
 		} else {
 			request.getRequestDispatcher(view).forward(request, response);
 		}
-		
-		
+	
 	}
 
 	/**

@@ -4,14 +4,14 @@
 <%@ page import="java.util.ArrayList, com.kh.movie.model.vo.*" %>
 
 <%
-	//ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("list");
+	ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("movieList");
 	Movie movie = (Movie)request.getAttribute("movie");
 	String cast = (String)request.getAttribute("cast");
 	
 	
-	//System.out.println(list);
-	System.out.println(movie);
-	System.out.println(cast);
+	System.out.println("왜 안나와 list : " + list);
+	System.out.println("왜 안나와 movie : " + movie);
+	System.out.println("왜 안나와 cast : " + cast);
 	
 	
 %>
@@ -183,21 +183,21 @@
     <div id="wrap">
         <div id="movie-detail">
             <div id="movie-detail-box">
+            
+            <input type="hidden" name="movieNo" value="<%= movie.getMovieNo()%>" />
+            
                 <div id="movie-detail-poster">
                     포스터
                 </div>
 
                 <div id="movie-detail-content">
-                    <div id="movie-detail-title">파묘 </div>
+                    <div id="movie-detail-title">제목 </div>
                     <div id="movie-detail-etc">
-                        <a>미스터리</a> | <a>134분</a> | <a>15세 이상 관람가</a> | <a>2024.02.22</a>
+                        <a>장르</a> | <a>러닝타임</a> | <a>관람등급</a> | <a>개봉일</a>
                     </div>
-                    <div id="movie-detail-director">장재현</div>
-                    <div id="movie-detail-actor">최민식, 김고은, 유해진, 이도현</div>
-                    <div id="movie-detail-story">미국 LA, 거액의 의뢰를 받은 무당 ‘화림’(김고은)과 ‘봉길’(이도현)은<br>
-                        기이한 병이 대물림되는 집안의 장손을 만난다.<br>
-                        조상의 묫자리가 화근임을 알아챈 ‘화림’은 이장을 권하고,<br>
-                        돈 냄새를 맡은 최고의 풍수사 ‘상덕’(최민식)과 장의사 ‘영근’(유해진)이 합류한다.
+                    <div id="movie-detail-director">감독</div>
+                    <div id="movie-detail-actor">출연진</div>
+                    <div id="movie-detail-story">줄거리
                     </div>
                     
                     <% if(loginUser == null) { %>

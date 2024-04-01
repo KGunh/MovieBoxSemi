@@ -7,6 +7,7 @@
 	ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("movieList");
 	String type = (String)request.getAttribute("type");
 	String genre = (String)request.getAttribute("genre");
+
 %>
     
 <!DOCTYPE html>
@@ -255,8 +256,12 @@
             
             <script>
             function detailPage(){
-            	location.href = '<%= contextPath %>/views/movie/movieDetail.jsp';
-            }
+        			const movieNo = $(this).children().eq(0).text();
+        			location.href = '<%=contextPath%>/detail.movie?movieNo=' + movieNo;
+                }
+            	//const movieNo = $(this).children().eq(0).text();
+            	//location.href = '< %= contextPath %>/detail.movie?movieNo=' + movieNo;
+
             
             </script>
             
