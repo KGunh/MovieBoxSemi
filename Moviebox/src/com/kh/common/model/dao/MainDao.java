@@ -153,8 +153,8 @@ private Properties prop = new Properties();
 			while(rset.next()) {
 				Location l = new Location();
 				
-				l.setLocationCode(rset.getString(""));
-				l.setLocationName(rset.getString(""));
+				l.setLocationCode(rset.getString("LOCATION_CODE"));
+				l.setLocationName(rset.getString("LOCATION_NAME"));
 				
 				list.add(l);
 			}
