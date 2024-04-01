@@ -11,16 +11,16 @@ import com.google.gson.Gson;
 import com.kh.common.model.vo.Reservation;
 
 /**
- * Servlet implementation class AjaxSelectReservationInfoServlet
+ * Servlet implementation class CheckInfoReservation
  */
-@WebServlet("/printInfo.reservationAjax")
-public class AjaxSelectReservationInfoServlet extends HttpServlet {
+@WebServlet("/checkInfo.reservationAjax")
+public class CheckInfoReservation extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public AjaxSelectReservationInfoServlet() {
+    public CheckInfoReservation() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -29,13 +29,11 @@ public class AjaxSelectReservationInfoServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-        Reservation reservation =  new ReservationController().printReservationInfo(request);
-        
+		Reservation reservation =  new ReservationController().checkReservationInfo(request);
+	        
         response.setContentType("application/json; charset=UTF-8");
-		
+			
 		new Gson().toJson(reservation, response.getWriter());
-	
 	}
 
 	/**
