@@ -641,6 +641,10 @@ public class AdminPageDao {
 			
 			while(rset.next()) {
 				Theater t = new Theater();
+				
+				t.setTheaterNo(rset.getInt("THEATER_NO"));
+				t.setTheaterName(rset.getString("THEATER_NAME"));
+				list.add(t);
 			}
 			
 		} catch (SQLException e) {

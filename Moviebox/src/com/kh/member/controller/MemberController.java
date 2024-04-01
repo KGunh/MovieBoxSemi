@@ -195,6 +195,7 @@ public class MemberController {
 		} else {
 			List<Reservation> list = new MemberService().myPagePrint(loginUser);
 			
+			
 			if (list.isEmpty()) {
 				return view ="views/member/myReservation.jsp";
 			} else {
@@ -211,12 +212,14 @@ public class MemberController {
 					movieList.add(m);
 
 				}
+
 				
 				request.setAttribute("list", list);
 				request.setAttribute("movieList", movieList);
 
 				view = "views/member/myReservation.jsp";
 			}
+			
 		}
 		
 		

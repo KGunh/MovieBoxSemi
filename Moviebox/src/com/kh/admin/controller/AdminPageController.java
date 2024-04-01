@@ -296,7 +296,8 @@ public class AdminPageController {
 	public List<Theater> selectTheaterList(HttpServletRequest request) {
 		String locationCode = request.getParameter("locationCode");
 		
-		List<Theater> list = new MainService().selectTheaterList(locationCode);
+		List<Theater> list = new AdminPageService().selectTheaterList(locationCode);
+		
 				
 		return list;
 	}

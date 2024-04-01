@@ -59,11 +59,5 @@ public class MainService {
 		return list;
 	}
 	
-	public List<Theater> selectTheaterList(String locationCode){
-		Connection conn = getConnection();
-		List<Theater> list = new MainService().selectTheaterList(conn, locationCode);
-		close(conn);
-		
-		return list;
-	}
+	
 }

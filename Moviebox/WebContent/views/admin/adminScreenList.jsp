@@ -9,9 +9,7 @@
 <meta charset="UTF-8">
 <title>예매관리</title>
   <style>
-        .content_2 div{
-            border: 1px solid red;
-        }
+
         
         div{
            /* border : 1px solid red;  */
@@ -186,7 +184,25 @@
             width: 100%;
             padding: 20px 20px;
         }
+        .printTheaterName{
+            float: left;
+            height: 60px;
+            width: 33%;
+            padding: 15px 15px 15px 15px;
+            font-size: 20px;
+            text-align: center;
+            
+        }
+        .printTheaterName > a{
+        	color: rgb(238, 238, 238);
+        	text-decoration: none;
+            font-weight: 700;
+        }
         
+        .printTheaterName > a:hover{
+			color: rgb(255, 193, 69);
+            text-decoration: none;
+        }
 
 
     </style>
@@ -276,35 +292,57 @@
                         value = '<option value=' + result[i].locationCode +'>' + result[i].locationName + '</option>'
                         $('#location-area').append(value);
                     }
-                }
-
-            })
-
-            $('')
-            $.ajax({
-                url : 'selectLocation.admin',
-                type : 'get',
-                data : {
-                    locationCode : $('#location-area').val()
                 },
-                success : function(result){
-                    var resultStr = '';
-                    for(let i = 0; i < result.length; i++){
-                        
-                        if(i != 0 && i % 3 == 0){
-                            resultStr += '<div class="printTheaterName"><a href="#">'+'</a></div><br>';
-                        }
-                        else{
-                            resultStr += '<div class="printTheaterName"><a href="#">'+'</a></div>';
-                        }
-                    }
-                    console.log(resultStr);
-                    $('.theater-content').html(resultStr);
-                }
-                
+                async : false
             });
+            $.ajax({
+                    url : 'selectLocation.admin',
+                    type : 'get',
+                    data : {
+                        locationCode : $('option:selected').val()
+                    },
+                    success : function(result){
+                        var resultStr = '';
+                        for(let i = 0; i < result.length; i++){
+                            
+                            if(i != 0 && i % 3 == 0){
+                                resultStr += '<div class="printTheaterName"><a href="#">'+ result[i].theaterName +'</a></div><br>';
+                            }
+                            else{
+                                resultStr += '<div class="printTheaterName"><a href="#">'+ result[i].theaterName +'</a></div>';
+                            }
+                        }
+                        console.log(resultStr);
+                        $('.theater-content').html(resultStr);
+                    }
+                    
+                });
 
-        })
+        });
+        $('#location-area').change(function(){
+            $.ajax({
+                    url : 'selectLocation.admin',
+                    type : 'get',
+                    data : {
+                        locationCode : $('#location-area').val()
+                    },
+                    success : function(result){
+                        var resultStr = '';
+                        for(let i = 0; i < result.length; i++){
+                            
+                            if(i != 0 && i % 3 == 0){
+                                resultStr += '<div class="printTheaterName"><a href="#">'+ result[i].theaterName +'</a></div><br>';
+                            }
+                            else{
+                                resultStr += '<div class="printTheaterName"><a href="#">'+ result[i].theaterName +'</a></div>';
+                            }
+                        }
+                        console.log(resultStr);
+                        $('.theater-content').html(resultStr);
+                    }
+                    
+                });
+            });
 
     </script>
 

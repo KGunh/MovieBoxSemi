@@ -253,6 +253,9 @@
 				
         		let resultStr = '';
         		for(let i = 0;i< result.length; i++){
+
+        			if(i==4) break;
+
         			resultStr += '<tr class="board-area"> <td> ' + result[i].noticeTitle + '</td><td> ' + result[i].createDate + '</td> </tr>';
         			console.log(result[i].noticeTitle);
         		}
