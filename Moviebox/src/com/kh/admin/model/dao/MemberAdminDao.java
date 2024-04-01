@@ -191,17 +191,38 @@ public class MemberAdminDao {
 			close(pstmt);
 		}
 		
-		
 		return theater;
 		
 		
 	}
 	
-	public int cinemaInsert(Connection conn) {
+	public int cinemaInsert(Connection conn,Theater theater) {
 		
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("cinemaInsert");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			
+			pstmt.setString(1, theater.getTheaterName());
+			pstmt.setString(2, theater.getTheaterAddr());
+			pstmt.setString(3, theater.getMapLink());
+			pstmt.setString(4, theater.getLocalCode());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+			close(pstmt);
+			
+		}
+		
+		
 		
 		return result; 
 		

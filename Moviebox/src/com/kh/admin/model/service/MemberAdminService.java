@@ -86,12 +86,22 @@ public class MemberAdminService {
 	
 	
 	
-	public void cinemaInsert(Theater theater) {
+	public int cinemaInsert(Theater theater) {
 		
 		Connection conn=JDBCTemplate.getConnection();
-		new MemberAdminDao().cinemaInsert(conn);
+		int result = new MemberAdminDao().cinemaInsert(conn,theater);
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		
 		
 		JDBCTemplate.close(conn);
+		
+		return result;
 		
 	}
 	

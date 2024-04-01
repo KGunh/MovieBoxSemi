@@ -39,10 +39,10 @@ public class CinemaServlet extends HttpServlet {
 		
 		switch(mapping) {
 		
-		case "insertAdmin" :  view = CAC.category(request, response); 
-		case "editAdmin"   :  view= CAC.cinemaEdit(request,response);
-		case "checkAdmin"  :  view = CAC.cinemaCheck(request,response);
-		case "enroll" 	   : view = CAC.cinemaInsert(request, response);
+		case "insertAdmin" :  view = CAC.category(request, response); break;
+		case "editAdmin"   :  view= CAC.cinemaEdit(request,response); break;
+		case "checkAdmin"  :  view = CAC.cinemaCheck(request,response); break;
+		case "enroll" 	   :  view = CAC.cinemaInsert(request, response); break;
 		//case ""			   :  view = CAC.cinemaInsert(request,response);
 		
 		}

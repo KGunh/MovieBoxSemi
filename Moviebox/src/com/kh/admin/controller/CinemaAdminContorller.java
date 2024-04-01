@@ -5,6 +5,7 @@ import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.admin.model.service.MemberAdminService;
 import com.kh.common.model.vo.Location;
@@ -23,7 +24,6 @@ public class CinemaAdminContorller {
 		
 		
 		request.setAttribute("theater", theater);
-		
 		return view; 
 		
 	}
@@ -75,10 +75,24 @@ public class CinemaAdminContorller {
 		
 		theater.setTheaterName(name);
 		theater.setTheaterAddr(code);
-		theater.setLocationName(region);
+		theater.setLocalCode(region);
 		theater.setMapLink(link);
 
-		new MemberAdminService().cinemaInsert(theater);
+		int result = new MemberAdminService().cinemaInsert(theater);
+		
+		if(result>0) {
+		
+			HttpSession session = request.getSession();
+			session.setAttribute("alertMsg", "영화관 정보가 등록되었습니다.");
+			
+			return view;
+			
+		}else {
+			request.setAttribute("errorMsg", "영화관 정보 등록 실패하였습니다.");
+		}
+		
+		
+		
 		
 		return view;
 		

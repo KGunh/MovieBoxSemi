@@ -83,11 +83,20 @@
 <entry key="cinemaInsert">
 
 		INSERT 
-			INTO TB_THEATER
+			INTO TB_THEATER(
+						THEATER_NO,
+						THEATER_NAME,
+						THEATER_ADDR,
+						MAP_LINK,
+						LOCATION_CODE
+						)
+						
 					VALUES(
-							
-		
-		
+						SEQ_THERNO.NEXTVAL,
+						?,
+						?,
+						?,
+						?
 		)	 
 				
 
