@@ -426,12 +426,12 @@
     </style>
 
     <script>
-        var peopleCount = 0; // 연령별 선택한 인원
-        var selectPeople = 0; // 총 인원
-        var ageType = ''; // 연령
-        var resvTeen = ['', 0]; 
-        var resvAdult = ['', 0];
-        var selectSeat = []; // 선택 좌석
+        let peopleCount = 0; // 연령별 선택한 인원
+        let selectPeople = 0; // 총 인원
+        let ageType = ''; // 연령
+        let resvTeen = ['', 0]; 
+        let resvAdult = ['', 0];
+        let selectSeat = []; // 선택 좌석
 
         // 상영관 예약정보 가져와서 예약좌석 비활성화
         window.onload = function() {
@@ -527,8 +527,8 @@
 
         // 인원수대로 좌석선택
         $('.seats').click(e => {
-            var seat = $(e.target).html();
-            var index = selectSeat.indexOf(seat);
+            let seat = $(e.target).html();
+            let index = selectSeat.indexOf(seat);
 
             if($(e.target).hasClass('clicked')) {
                 $(e.target).removeClass('clicked');
@@ -549,8 +549,8 @@
             // 좌석 배열 오름차순 정렬 -> 정규표현식 활용
             selectSeat.sort(function(a, b) {
                 // 배열요소의 문자 추출
-                var strA = a.match(/[A-Z]+/)[0];
-                var strB = b.match(/[A-Z]+/)[0];
+                let strA = a.match(/[A-Z]+/)[0];
+                let strB = b.match(/[A-Z]+/)[0];
 
                 // 문자 비교
                 if (strA < strB) {
@@ -561,8 +561,8 @@
                 };
 
                 // 문자가 같을때 숫자 추출
-                var numA = parseInt(a.match(/\d+/)[0], 10);
-                var numB = parseInt(b.match(/\d+/)[0], 10);
+                let numA = parseInt(a.match(/\d+/)[0], 10);
+                let numB = parseInt(b.match(/\d+/)[0], 10);
 
                 // 숫자를 비교
                 return numA - numB;
@@ -585,7 +585,7 @@
                         $("#check-area").removeAttr("hidden");
                         $("#check-area").show();
 
-                        var resultStr = '';
+                        let resultStr = '';
                         
                         resultStr += '<div id="check-reservation">'
                                    +     '<div id="check-movie">'
