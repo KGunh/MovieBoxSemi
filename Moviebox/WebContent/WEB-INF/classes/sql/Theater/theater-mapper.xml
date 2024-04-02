@@ -3,7 +3,7 @@
 <properties>
 
 	<comment>
-		Moviebox Mapper
+		Theater Mapper
 	</comment>
 	
 	<entry key="searchTheaterAll">
@@ -76,6 +76,7 @@
 	</entry>
 	
 	
+	<!-- 선택한 영화관 보여주기 -->
 	<entry key="selectTheaterDetail">
 		SELECT
 		      S.SCREEN_NO,
@@ -109,7 +110,7 @@
 		      TB_THEATER
 		 ORDER
 		    BY
-		      THEATER_NO DESC;
+		      THEATER_NO DESC
 	</entry>
 	
 	

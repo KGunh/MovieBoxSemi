@@ -151,7 +151,6 @@
 
         .movie-conten1{
             width: 1200px;
-
         }
 
         .movie-list-img{

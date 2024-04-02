@@ -1,5 +1,7 @@
 package com.kh.theater.model.dao;
 
+import static com.kh.common.JDBCTemplate.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,9 +11,10 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
-import com.kh.theater.model.vo.Theater;
 import com.kh.common.JDBCTemplate;
-import static com.kh.common.JDBCTemplate.*;
+import com.kh.movie.model.dao.MovieDao;
+import com.kh.movie.model.vo.Movie;
+import com.kh.theater.model.vo.Theater;
 public class TheaterDao {
 
 	private Properties prop = new Properties();
@@ -136,7 +139,7 @@ public class TheaterDao {
 				th.setTheaterAddr(rset.getString("THEATER_ADDR"));
 				th.setMapLink(rset.getString("MAP_LINK"));
 				th.setLocationName(rset.getString("LOCATION_NAME"));
-				th.setUpdateDate(rset.getDate("THEATER_UPDATE"));
+				th.setUpdateDate(rset.getString("THEATER_UPDATE"));
 			}
 			
 		} catch (SQLException e) {
@@ -181,8 +184,7 @@ public class TheaterDao {
 //	}
 
 	public Theater selectTheaterDetail(Connection conn, int theaterNo) {
-		
-		Theater th = null;
+		Theater th = new Theater();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("selectTheaterDetail");
@@ -194,7 +196,6 @@ public class TheaterDao {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				th = new Theater();
 				th.setScreenNo(rset.getInt("SCREEN_NO"));
 				th.setTheaterNo(rset.getInt("THEATER_NO"));
 				th.setMovieNo(rset.getInt("MOVIE_NO"));
@@ -210,7 +211,6 @@ public class TheaterDao {
 			close(rset);
 			close(pstmt);
 		}
-		
 		return th;
 	}
 
@@ -228,13 +228,14 @@ public class TheaterDao {
 			
 			while(rset.next()) {
 				Theater t = new Theater();
-				t.setScreenNo(rset.getInt("SCREEN_NO"));
 				t.setTheaterNo(rset.getInt("THEATER_NO"));
-				t.setMovieNo(rset.getInt("MOVIE_NO"));
-				t.setMovieTitle(rset.getString("MOVIE_TITLE"));
 				t.setTheaterName(rset.getString("THEATER_NAME"));
 				t.setTheaterAddr(rset.getString("THEATER_ADDR"));
 				t.setMapLink(rset.getString("MAP_LINK"));
+				t.setLocalCode(rset.getString("LOCATION_CODE"));
+				t.setUpdateDate(rset.getString("THEATER_UPDATE"));
+				
+				list.add(t);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
