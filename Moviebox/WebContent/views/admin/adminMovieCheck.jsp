@@ -457,11 +457,7 @@
     			location.href='<%= contextPath %>/adminMovieDetail.admin?movieNo=' + movieNo;
     		})
     	}) 
-    	
-    	
-    	$.()
-    	
-    	
+
     	
 	</script>
 </body>
