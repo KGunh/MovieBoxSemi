@@ -283,12 +283,12 @@
                     <input type="date" id="today">
                 </div>
 
-                <div >
+                <div id="screenList-top">
                 <%if(screenList != null) {%>
     
                     <div class="row" >
 						  <%for(int i = 0; i< 4; i++) {%>	                      
-                        <div class="screenList col-sm-6 " style=";height: 300px;margin-top: 40px">
+                        <div class="screenList col-sm-6 " style="height: 300px;margin-top: 40px">
                         
                             <div class="screenList-title"><%=screenList.get(i).getScreenName() %>관</div>
                             <% List<Movie> movieList =  screenList.get(i).getMovieList(); %>
@@ -337,16 +337,42 @@
                     url : 'selectDate.admin',
                     type : 'get',
                     data : {
-                        locationCode : $today.val()
+                        watchDate : $today.val(),
+                        theaterNo : <%= th.getTheaterNo()%>
                     },
                     success : function(result){
                         let resultStr = '';
-                        
-                        
+                        let resultOption = '';
+                        $('#screenList-top').html('');
+                        resultStr += '<div class="row">';
+						
+                        for(let i = 0;i< result.length; i++){
+                            resultOption = '';
+                            resultStr += '<div class="screenList col-sm-6 " style="height: 300px;margin-top: 40px">' +
+                                            '<div class="screenList-title">'+ 
+                                                result[i].screenName +'관' +
+                                            '</div>';
+                            for(let j = 0;j< result[i].movieList.length;j++){
+                            	resultOption +='<div>' + 
+                									'<select name="movie" id="' + result[i].movieList[j].screenNo + '">' + 
+               							 				<%for(Movie m : movieNameList) {%>
+                										'<option value="<%=m.getMovieNo()%>"><%=m.getMovieTitle() %></option>' +
+                										<%}%> 
+                										'</select>' + 
+                									'<input type="time" value="'+ result[i].movieList[j].watchDate +'">'  +
+                								'</div>';
+                							
+            				}      
+                            resultStr += resultOption + '</div>';                
+                                            
+                        }
+                        resultStr += '</div>';
+                        $('#screenList-top').html(resultStr);
+                       
                     }
                     
                 });
-
+            //$("'#" + result[i].movieList[j].screenNo + "'").val("'" + result[i].movieList[j].movieNo + "'").prop("selected",true);          
         });
     </script>
 

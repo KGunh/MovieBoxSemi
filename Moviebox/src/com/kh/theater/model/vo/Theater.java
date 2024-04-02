@@ -8,7 +8,7 @@ public class Theater {
 	private String theaterAddr;
 	private String mapLink;
 	private String localCode;
-	private Date updateDate;
+	private String updateDate;
 	private String locationName;
 	
 	private int screenNo;
@@ -33,7 +33,7 @@ public class Theater {
 		this.mapLink = mapLink;
 		this.locationName = locationName;
 	}
-	public Theater(int theaterNo, String theaterName, String theaterAddr, String mapLink, String localCode,Date updateDate) {
+	public Theater(int theaterNo, String theaterName, String theaterAddr, String mapLink, String localCode,String updateDate) {
 		super();
 		this.theaterNo = theaterNo;
 		this.theaterName = theaterName;
@@ -72,10 +72,10 @@ public class Theater {
 	public int getTheaterNo() {
 		return theaterNo;
 	}
-	public Date getUpdateDate() {
+	public String getUpdateDate() {
 		return updateDate;
 	}
-	public void setUpdateDate(Date updateDate) {
+	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
 	public void setTheaterNo(int theaterNo) {

@@ -48,4 +48,33 @@ public class TheaterService {
 		return th;
 	}
 
+	public Theater selectTheaterDetail(int theaterNo) {
+		
+		Connection conn = getConnection();
+		Theater theater = new TheaterDao().selectTheaterDetail(conn, theaterNo);
+		close(conn);
+		
+		return theater;
+	}
+
+	public ArrayList<Theater> theaterAll() {
+		Connection conn = getConnection();
+		ArrayList<Theater> list = new TheaterDao().theaterAll(conn);
+		
+		close(conn);
+		return list;
+	}
+
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

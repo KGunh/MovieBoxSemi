@@ -8,12 +8,6 @@
 	Movie movie = (Movie)request.getAttribute("movie");
 	String cast = (String)request.getAttribute("cast");
 	
-	
-	System.out.println("왜 안나와 list : " + list);
-	System.out.println("왜 안나와 movie : " + movie);
-	System.out.println("왜 안나와 cast : " + cast);
-	
-	
 %>
 <!DOCTYPE html>
 <html>

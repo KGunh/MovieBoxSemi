@@ -695,10 +695,10 @@ public class AdminPageDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			System.out.println(screenName);
+			
 			pstmt.setInt(1, sc.getTheaterNo());
 			pstmt.setString(2, screenName);
-			
+			pstmt.setString(3, sc.getWatchDate());
 			rset = pstmt.executeQuery();
 			
 			while (rset.next()) {
@@ -719,7 +719,6 @@ public class AdminPageDao {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println(list);
 		return list;
 
 		

@@ -39,7 +39,7 @@ public class TheaterServlet extends HttpServlet {
 		boolean flag = true;
 		
 		switch(mapping) {
-		case "detail" : view = "views/theater/theaterDetail.jsp"; flag=false; break;
+		case "detail" : view = tc.ListDetail(request, response); flag=false; break;
 		}
 	
 		if(flag) {

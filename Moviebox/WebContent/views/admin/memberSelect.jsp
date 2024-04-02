@@ -6,7 +6,7 @@
 <%
 
 ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
-//String contextPath = request.getContextPath(); 
+
 %>    
 
     <!DOCTYPE html>
@@ -170,7 +170,7 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
         #table{
             
             width: 800px;
-            border: 1px solid lightgray;
+            border: 1px solid lightpink;
         }
 
         #table > tr,td {
@@ -181,7 +181,7 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
             margin-top: 10px;
             margin-right: 10px;
             color: white;
-            border-bottom: 1px solid lightgray;
+            border-bottom: 1px solid gray;
             
             
         }
@@ -473,7 +473,7 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
 
 
 
-
+<%@ include file="/views/common/footer.jsp" %>
 
 
 </body>

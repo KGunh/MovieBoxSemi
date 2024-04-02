@@ -11,13 +11,6 @@
 	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
 	String type = (String)request.getAttribute("type");
 	
-	
-	System.out.println("리스트 : " + list);
-	System.out.println("pi : " + pi);
-	System.out.println("type : " + type);
-	System.out.println("notice : " + list);
-
-	
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
