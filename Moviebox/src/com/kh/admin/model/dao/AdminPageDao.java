@@ -670,7 +670,7 @@ public class AdminPageDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setInt(1, sc.getTheaterNo());
+			pstmt.setString(1, sc.getTheaterName());
 			pstmt.setString(2, sc.getWatchDate());
 
 			rset = pstmt.executeQuery();

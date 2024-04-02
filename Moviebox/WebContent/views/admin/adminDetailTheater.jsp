@@ -1,12 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.List,java.util.ArrayList,com.kh.theater.model.vo.Screen"%>
+    pageEncoding="UTF-8" import="java.util.List,java.util.ArrayList,com.kh.theater.model.vo.Screen,com.kh.theater.model.vo.Theater,java.text.SimpleDateFormat,java.util.Date"%>
 <%
-	List<Screen> locationList = (ArrayList)request.getAttribute("screenList");
+	List<Screen> screenList = (ArrayList)request.getAttribute("screenList");
     
-    SimpleDateFormat simpleDate = new SimpleDateFormat("yyyy-MM-dd");
+    Theater th = (Theater)request.getAttribute("theater");
 
-    String strDate = simpleDate.format(date);
-    
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    Date currentDate = new Date();
+
 
 %>    
     
@@ -170,6 +171,7 @@
             height: 10%;
             text-align: center;
             padding: 20px;
+            color: white;
         }
         .date-area input{
             width: 30%;
@@ -213,7 +215,15 @@
 <body>
 	<!-- 헤더 -->
     <%@ include file="/views/common/header.jsp" %>
-    
+
+    <script>
+        window.onload = function() {
+            today = new Date();
+            today = today.toISOString().slice(0, 10);
+            bir = document.getElementById("todaybirthday");
+            bir.value = today;
+        }
+    </script>
     <div id="wrap">
 
 
@@ -265,13 +275,17 @@
 
             <div class="content_2"><!--content_2 시작-->
                 <div class="date-area">
-                    <input type="date" value="<%=strDate%>">
+                    <%= th.getTheaterName() %>
+                    <input type="date" id="todaybirthday">
                 </div>
 
                 <div class="screenList-area">
+                <%if(screenList != null) {%>
+                
                     <div>
-                        
+							                        
                         <div class="screenList">
+                        
                             <div class="screenList-title">1관</div>
                             <div><input type="text"><input type="time" value=""></div>
                             <div><input type="text"><input type="time" value=""></div>
@@ -291,6 +305,7 @@
                         <div></div>
                         <div></div>
                     </div>
+                <%} %>
                 </div>
                 
 
@@ -300,6 +315,10 @@
         </div>
 
     </div>
+    <script>
+        
+
+    </script>
 
  	<%@ include file="/views/common/footer.jsp" %>
  	<!-- 푸터 -->
