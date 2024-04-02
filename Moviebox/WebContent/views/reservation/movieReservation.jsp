@@ -208,7 +208,7 @@
 
     #submit-btn{
         height: 60px;
-        width: 180px;
+        width: 160px;
         border-radius: 12px;
         font-weight: 600;
         font-size: 28px;
@@ -217,6 +217,9 @@
         margin-top: 20px;
         margin-right: 65px;
         border: none;
+        position: fixed; 
+        bottom: 50px; 
+        right: 110px;
     }
 
   
