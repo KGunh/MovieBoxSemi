@@ -109,6 +109,21 @@
 
 
 </entry>
+<entry key="cinemaEdit">
+
+	SELECT 
+			THEATER_NO,
+			THEATER_NAME,
+			THEATER_ADDR,
+			MAP_LINK,
+			LOCATION_CODE,
+			THEATER_UPDATE
+	  FROM
+			TB_THEATER
+	  WHERE 
+			THEATER_NO = ? 		
+			
+</entry>
 
 
 

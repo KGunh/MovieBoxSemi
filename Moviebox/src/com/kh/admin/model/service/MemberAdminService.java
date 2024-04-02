@@ -117,4 +117,29 @@ public class MemberAdminService {
 		
 	}
 	
+	public Theater cinemaEdit(int theaterNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		Theater theater = new MemberAdminDao().cinemaEdit(conn,theaterNo);
+		JDBCTemplate.close(conn);
+		
+		return theater;
+		
+		
+		
+	}
+	
+	public void modify(Theater theater) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		new MemberAdminDao().modify(conn, theater);
+		JDBCTemplate.close(conn);
+		
+		
+		
+		
+		
+		
+	}
+	
 }

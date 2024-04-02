@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.List,java.util.ArrayList,com.kh.common.model.vo.Location"%>
-<%
-	List<Location> locationList = (ArrayList)request.getAttribute("locationList");
-%>
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -282,7 +280,7 @@
     <script>
         $(function(){
             var date = new Date();
-
+            
             var year=date.getFullYear();
 
             var month= ('0' + (date.getMonth() + 1)).slice(-2);
@@ -295,6 +293,7 @@
 
                     let value = '';
                     for(let i in result){
+                    	
                         value = '<option value=' + result[i].locationCode +'>' + result[i].locationName + '</option>'
                         $('#location-area').append(value);
                     }
@@ -311,7 +310,7 @@
                         var resultStr = '';
                         for(let i = 0; i < result.length; i++){
                             
-                            resultStr += '<div class="printTheaterName"><a href="<%=contextPath%>/adminDetailTheater.admin?theaterNo=' +result[i].theaterNo +'&createDate='+ year + month + day +'">'+ result[i].theaterName +'</a></div>';
+                            resultStr += '<div class="printTheaterName"><a href="<%=contextPath%>/adminDetailTheater.admin?theaterNo=' +result[i].theaterNo +'&watchDate='+ year + '-' + month + '-' + day +'">'+ result[i].theaterName +'</a></div>';
                         }
                         $('.theater-content').html(resultStr);
                     }
