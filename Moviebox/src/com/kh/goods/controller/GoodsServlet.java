@@ -32,16 +32,14 @@ public class GoodsServlet extends HttpServlet {
 		
 		String uri = request.getRequestURI();
 		String mapping = uri.substring(uri.lastIndexOf("/") + 1 , uri.lastIndexOf("."));
-		GoodsController rc = new GoodsController(); 
+		GoodsController gc = new GoodsController(); 
 		
 		String view = "";
 		
 		boolean flag = false;
 		
-		
-		
 		switch(mapping) {
-		case "list" : view = "views/goods/goodsList.jsp"; break; 
+		case "list" : view = gc.selectGoodsList(request); break; 
 		//case "seat" : view = rc.connectSeatList(request); break;
 		//case "payment" : view = rc.insertReservation(request); break;
 		}

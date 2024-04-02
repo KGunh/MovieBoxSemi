@@ -347,6 +347,7 @@
         }
 
         #check-info{
+            position: relative;
             float: left;
             width: 500px;
             height: 350px;
@@ -377,6 +378,7 @@
 
         #reservation-info > div {
             float: left;
+            font-size: 14px;
             font-weight: 700;
         }
 
@@ -411,9 +413,9 @@
         }
 
         #payment-btn{
-            float: right;
-            margin-top: 310px;
-            margin-right: 0px;
+            position: absolute;
+            right: 30px;
+            bottom: 20px;
             height: 40px;
             width: 100px;
             border: 0;
@@ -622,7 +624,7 @@
                                    +         '<input type="hidden" name="memberNo" value="' + <%= loginUser.getMemberNo() %> + '">'
                                    +         '<input type="hidden" name="teen" value="' + resvTeen[1] + '">'
                                    +         '<input type="hidden" name="adult" value="' + resvAdult[1] + '">'
-                                   +         '<input type="hidden" name="seatNo"value="' + selectSeat.join(',') + '">'
+                                   +         '<input type="hidden" name="seatNo" value="' + selectSeat.join(',') + '">'
                                    +         '<button type="submit" id="payment-btn" onclick="return payment()">결제 하기</button>'
                                    +     '</form>'
                                    + '</div>';
