@@ -269,6 +269,53 @@ public class MemberAdminDao {
 		
 		
 	}
+	
+	
+	public Theater cinemaEdit(Connection conn, int theaterNo) {
+		
+		Theater theater = new Theater();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("cinemaEdit");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, theaterNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+						theater.setTheaterNo(rset.getInt("THEATER_NO"));
+						theater.setTheaterName(rset.getString("THEATER_NAME"));
+						theater.setTheaterAddr(rset.getString("THEATER_ADDR"));
+						theater.setMapLink(rset.getString("MAP_LINK"));
+						theater.setLocalCode(rset.getString("LOCATION_CODE"));
+						theater.setUpdateDate(rset.getString("THEATER_UPDATE"));
+					
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return theater;
+		
+		
+		
+	}
+	
+	public void modify(Connection conn, Theater theater) {
+		
+		
+		
+		
+		
+	}
 }
 	
 	

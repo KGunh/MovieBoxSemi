@@ -420,7 +420,7 @@
                           <tbody>
                           
                          <% for (Theater t : theater) { %>
-                            <tr>
+                            <tr class="theater">
                                
                                 <td class="num"><%=t.getTheaterNo() %></td>
                                 <td><%=t.getUpdateDate() %></td>
@@ -438,6 +438,19 @@
                         
                       </div>
                       </div>
+                      	<script>
+                      	
+                      	$(function(){
+                      		$('.theater').click(function(){
+                      			const theaterNo = $(this).children().eq(0).text();
+                      			location.href='<%=contextPath%>/editAdmin.cm?theaterNo='+theaterNo;
+                      		});
+                      	})
+                      	
+                      	
+                      	
+                      	
+                      	</script>
 
 
                       <div id="cnt2_paging-area"> 

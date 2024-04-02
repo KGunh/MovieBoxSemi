@@ -158,7 +158,7 @@
         .table table-hover{
             
             
-            border: 1px solid white;             
+            background-color:  white;             
         }
 
         .title{
@@ -168,6 +168,7 @@
             color: rgb(255, 255, 255);
             font-size: 14px;
             font-weight: bolder;
+            border-bottom : 1px solid gray;
            
            
         }
@@ -180,7 +181,7 @@
             margin-top: 10px;
             margin-right: 10px;
             color:white;
-            border-bottom: 1px solid white;
+            border-bottom: 1px solid gray;
             
             
         }
@@ -382,14 +383,14 @@
                 </div>
                 <div id="buttoon">
                    <button type="submit" class="btn1" >수정</button>
-                   <button type="button" class="btn1" onclick="enrollment();">닫기</button>
+                   <button type="button" class="btn1" onclick="close();">닫기</button>
                 </div>
                 
                 </form>
                 
                 <script>
                 
-                function enrollment(){                	
+                function close(){                	
                 	location.href='<%=contextPath%>/selectAdmin.mb';
                 }
                 

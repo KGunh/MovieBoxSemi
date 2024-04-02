@@ -2,6 +2,7 @@ package com.kh.admin.controller;
 
 import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
+import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +30,12 @@ public class CinemaAdminContorller {
 	}
 	
 	public String cinemaEdit(HttpServletRequest request, HttpServletResponse response) {
+		
+		int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));
+		
+		Theater theater = new MemberAdminService().cinemaEdit(theaterNo);
+		request.setAttribute("theater", theater);
+		
 		
 		String view = "/views/admin/CinemaEdit.jsp";
 		
@@ -97,6 +104,43 @@ public class CinemaAdminContorller {
 		return view;
 		
 	}
+	
+	public String modify(HttpServletRequest request, HttpServletResponse response) {
+		
+		String name = request.getParameter("name");
+		String address = request.getParameter("address");
+		String link = request.getParameter("link");
+		String code = request.getParameter("code");
+		String enrollDate = request.getParameter("updateDate");
+		
+		Theater theater = new Theater();
+		
+		theater.setTheaterName(name);
+		theater.setTheaterAddr(address);
+		theater.setMapLink(link);
+		theater.setLocalCode(code);
+		theater.setUpdateDate(enrollDate);
+		
+		new MemberAdminService().modify(theater);
+		
+		String view = "/views/admin/CinemaEdit.jsp";
+		
+		
+		
+		return view;
+	}
+	
+	public String dele() {
+		
+		String view = "/views/admin/CinemaEdit.jsp";
+		
+		
+		
+		return view; 
+		
+	}
+	
+	
 	
 	
 }

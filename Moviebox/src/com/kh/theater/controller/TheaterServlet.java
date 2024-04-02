@@ -1,25 +1,24 @@
-package com.kh.goods.controller;
+package com.kh.theater.controller;
 
 import java.io.IOException;
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.reservation.controller.ReservationController;
-
 /**
- * Servlet implementation class goodsServlet
+ * Servlet implementation class TheaterServlet
  */
-@WebServlet("*.goods")
-public class GoodsServlet extends HttpServlet {
+@WebServlet("*.theater")
+public class TheaterServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GoodsServlet() {
+    public TheaterServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,27 +27,27 @@ public class GoodsServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		request.setCharacterEncoding("UTF-8");
 		
+		TheaterController tc = new TheaterController();
+		
 		String uri = request.getRequestURI();
-		String mapping = uri.substring(uri.lastIndexOf("/") + 1 , uri.lastIndexOf("."));
-		GoodsController gc = new GoodsController(); 
+		String mapping = uri.substring(uri.lastIndexOf("/") + 1, uri.lastIndexOf("."));
 		
 		String view = "";
-		
-		boolean flag = false;
+		boolean flag = true;
 		
 		switch(mapping) {
-		case "list" : view = gc.selectGoodsList(request); break; 
-		//case "seat" : view = rc.connectSeatList(request); break;
-		//case "payment" : view = rc.insertReservation(request); break;
+		case "detail" : view = tc.selectTheaterDetail(request, response); flag=false; break;
 		}
-		
+	
 		if(flag) {
-			response.sendRedirect(view);
+			response.sendRedirect(request.getContextPath() + view);
 		} else {
 			request.getRequestDispatcher(view).forward(request, response);
 		}
+	
 	
 	}
 

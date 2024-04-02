@@ -8,8 +8,12 @@ public class Theater {
 	private String theaterAddr;
 	private String mapLink;
 	private String localCode;
-	private Date updateDate;
+	private String updateDate;
 	private String locationName;
+	
+	private int screenNo;
+	private int movieNo;
+	private String movieTitle;
 	
 	public String getLocationName() {
 		return locationName;
@@ -29,7 +33,7 @@ public class Theater {
 		this.mapLink = mapLink;
 		this.locationName = locationName;
 	}
-	public Theater(int theaterNo, String theaterName, String theaterAddr, String mapLink, String localCode,Date updateDate) {
+	public Theater(int theaterNo, String theaterName, String theaterAddr, String mapLink, String localCode,String updateDate) {
 		super();
 		this.theaterNo = theaterNo;
 		this.theaterName = theaterName;
@@ -38,13 +42,40 @@ public class Theater {
 		this.localCode = localCode;
 		this.updateDate= updateDate;
 	}
+	
+	
+	public Theater(int screenNo, int movieNo, String movieTitle) {
+		super();
+		this.screenNo = screenNo;
+		this.movieNo = movieNo;
+		this.movieTitle = movieTitle;
+	}
+	
+	public int getScreenNo() {
+		return screenNo;
+	}
+	public void setScreenNo(int screenNo) {
+		this.screenNo = screenNo;
+	}
+	public int getMovieNo() {
+		return movieNo;
+	}
+	public void setMovieNo(int movieNo) {
+		this.movieNo = movieNo;
+	}
+	public String getMovieTitle() {
+		return movieTitle;
+	}
+	public void setMovieTitle(String movieTitle) {
+		this.movieTitle = movieTitle;
+	}
 	public int getTheaterNo() {
 		return theaterNo;
 	}
-	public Date getUpdateDate() {
+	public String getUpdateDate() {
 		return updateDate;
 	}
-	public void setUpdateDate(Date updateDate) {
+	public void setUpdateDate(String updateDate) {
 		this.updateDate = updateDate;
 	}
 	public void setTheaterNo(int theaterNo) {
