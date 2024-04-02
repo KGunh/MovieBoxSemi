@@ -94,7 +94,22 @@
 		  JOIN
 		      TB_THEATER T ON S.THEATER_NO = T.THEATER_NO
 		 WHERE
-		      S.THEATER_NO = 1 AND M.STATUS = 'Y'
+		      S.THEATER_NO = ? AND M.STATUS = 'Y'
+	</entry>
+	
+	<entry key="selectTheaterList">
+		SELECT
+		      THEATER_NO,
+		      THEATER_NAME,
+		      THEATER_ADDR,
+		      MAP_LINK,
+		      LOCATION_CODE,
+		      THEATER_UPDATE
+		  FROM
+		      TB_THEATER
+		 ORDER
+		    BY
+		      THEATER_NO DESC;
 	</entry>
 	
 	

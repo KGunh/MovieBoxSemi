@@ -1,13 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ page import="com.kh.theater.model.vo.*" %>
+<%@ page import="com.kh.theater.model.vo.*, java.util.ArrayList" %>
     
 <%
-	
-System.out.println("아아");
+	ArrayList<Theater> list = (ArrayList<Theater>)request.getAttribute("theaterList");
 	Theater theater = (Theater)request.getAttribute("theater");
-	System.out.println(theater);
+	System.out.println(list);
 
 %>
 <!DOCTYPE html>
@@ -133,7 +132,7 @@ System.out.println("아아");
 
         <!-- 영화관 안내 전체 박스 -->
         <div id="theater-header">
-                <h1>KH 시네마</h1>
+                <h1><%=  %></h1>
             <div id="theater-content">
                 <!-- <a>총 상영관 수 : 10개 관 </a> | <a>총 좌석수 : 1785석 </a> -->
             </div>
@@ -143,8 +142,25 @@ System.out.println("아아");
         <div id="theater-movie-now">
             <h1>현재 상영작</h1>
             <!-- 현재 상영작 목록 -->
+            
             <div class="movie-content-body">
+
+			
                 <div class="movie-conten1">
+                
+            <% if(list.isEmpty()) { %>
+				<a style="color: white;">등록된 영화가 존재하지 않습니다.</a> <br>
+			<% } else { %>
+			
+                <% for(Theater m : list) { %>
+                    <div class="movie-content">
+                        <div class="movie-list-img"> 포스터 </div>
+                        <div class="movie-list-title"> 영화 타이틀 </div>
+                        <button id="movie-content-btn1">상세정보</button>
+                        <button id="movie-content-btn2">예매정보</button>
+                    </div>
+                 <% } %>
+             <% } %>
                     <div class="movie-content">
                         <div class="movie-list-img"> 포스터 </div>
                         <div class="movie-list-title"> 영화 타이틀 </div>
@@ -172,13 +188,7 @@ System.out.println("아아");
                         <button id="movie-content-btn1">상세정보</button>
                         <button id="movie-content-btn2">예매정보</button>
                     </div>
-
-                    <div class="movie-content">
-                        <div class="movie-list-img"> 포스터 </div>
-                        <div class="movie-list-title"> 영화 타이틀 </div>
-                        <button id="movie-content-btn1">상세정보</button>
-                        <button id="movie-content-btn2">예매정보</button>
-                    </div>
+                    
                 </div>
             </div>
         </div>

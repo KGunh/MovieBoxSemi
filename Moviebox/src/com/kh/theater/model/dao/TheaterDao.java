@@ -179,7 +179,74 @@ public class TheaterDao {
 //		
 //		return null;
 //	}
-	
+
+	public Theater selectTheaterDetail(Connection conn, int theaterNo) {
+		
+		Theater th = null;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectTheaterDetail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, theaterNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				th = new Theater();
+				th.setScreenNo(rset.getInt("SCREEN_NO"));
+				th.setTheaterNo(rset.getInt("THEATER_NO"));
+				th.setMovieNo(rset.getInt("MOVIE_NO"));
+				th.setMovieTitle(rset.getString("MOVIE_TITLE"));
+				th.setTheaterName(rset.getString("THEATER_NAME"));
+				th.setTheaterAddr(rset.getString("THEATER_ADDR"));
+				th.setMapLink(rset.getString("MAP_LINK"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return th;
+	}
+
+	public ArrayList<Theater> theaterAll(Connection conn) {
+		
+		ArrayList<Theater> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectTheaterList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Theater t = new Theater();
+				t.setScreenNo(rset.getInt("SCREEN_NO"));
+				t.setTheaterNo(rset.getInt("THEATER_NO"));
+				t.setMovieNo(rset.getInt("MOVIE_NO"));
+				t.setMovieTitle(rset.getString("MOVIE_TITLE"));
+				t.setTheaterName(rset.getString("THEATER_NAME"));
+				t.setTheaterAddr(rset.getString("THEATER_ADDR"));
+				t.setMapLink(rset.getString("MAP_LINK"));
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return list;
+	}
+		
 	
 	
 	
