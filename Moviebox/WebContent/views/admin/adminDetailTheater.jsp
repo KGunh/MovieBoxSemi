@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.List,java.util.ArrayList,com.kh.theater.model.vo.Screen,com.kh.theater.model.vo.Theater,java.text.SimpleDateFormat,java.util.Date"%>
+    pageEncoding="UTF-8" import="com.kh.movie.model.vo.Movie,java.util.List,java.util.ArrayList,com.kh.theater.model.vo.Screen,com.kh.theater.model.vo.Theater,java.text.SimpleDateFormat,java.util.Date,com.kh.movie.model.vo.Movie"%>
 <%
 	List<Screen> screenList = (ArrayList)request.getAttribute("screenList");
     
     Theater th = (Theater)request.getAttribute("theater");
 
+    List<Movie> movieNameList = (ArrayList)request.getAttribute("movieList");
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     Date currentDate = new Date();
-
 
 %>    
     
@@ -18,9 +18,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
   <style>
-        div{
-            border: 1px solid red;
-        }
+
         
         div{
            /* border : 1px solid red;  */
@@ -190,7 +188,7 @@
             
         }
         .screenList-area > div > div{
-            width: 30%;
+            width: 50%;
             height: 100%;
             position: relative;
         }
@@ -207,7 +205,12 @@
             display: block;
             width: 50%;
         }
-
+        .screenList select{
+            float: left;
+            display: block;
+            width: 50%;
+        }
+        
 
 
     </style>
@@ -220,9 +223,10 @@
         window.onload = function() {
             today = new Date();
             today = today.toISOString().slice(0, 10);
-            bir = document.getElementById("todaybirthday");
+            bir = document.getElementById("today");
             bir.value = today;
         }
+        
     </script>
     <div id="wrap">
 
@@ -276,38 +280,49 @@
             <div class="content_2"><!--content_2 시작-->
                 <div class="date-area">
                     <%= th.getTheaterName() %>
-                    <input type="date" id="todaybirthday">
+                    <input type="date" id="today">
                 </div>
 
-                <div class="screenList-area">
+                <div >
                 <%if(screenList != null) {%>
-                
-                    <div>
-							                        
-                        <div class="screenList">
+    
+                    <div class="row" >
+						  <%for(int i = 0; i< 4; i++) {%>	                      
+                        <div class="screenList col-sm-6 " style=";height: 300px;margin-top: 40px">
                         
-                            <div class="screenList-title">1관</div>
-                            <div><input type="text"><input type="time" value=""></div>
-                            <div><input type="text"><input type="time" value=""></div>
-                            <div><input type="text"><input type="time" value=""></div>
-                            <div><input type="text"><input type="time" value=""></div>
-                            <div><input type="text"><input type="time" value=""></div>
-                            <div><input type="text"><input type="time"></div>
+                            <div class="screenList-title"><%=screenList.get(i).getScreenName() %>관</div>
+                            <% List<Movie> movieList =  screenList.get(i).getMovieList(); %>
+                            <%for(int j = 0; j<movieList.size();j++) {%>
+                            <div>
+                            <select name="movie" id="<%=movieList.get(j).getScreenNo()%>">
+                            
+                            	
+                                <%for(Movie m : movieNameList) {%>
+                                    <option value="<%=m.getMovieNo()%>"><%=m.getMovieTitle() %></option>
+                                <%} %>
+                                
+                                
+                            </select>
+                            
+                            	
+                                    <input type="time" value="<%=movieList.get(j).getWatchDate()%>">
+                              <script>
+                              	
+                              		$('#<%=movieList.get(j).getScreenNo()%>').val('<%=movieList.get(j).getMovieNo()%>').prop("selected",true);
+                              </script>
+                           </div>
+                            	<%} %>
+                            
+                            
+                            
                         </div>
-                        <div></div>
-                        <div></div>
+                    
+                        <%} %>
                     </div>
-                    <div>
-                        
-                        <div>
-                            <div class="screenList-title">4관</div>
-                        </div>
-                        <div></div>
-                        <div></div>
-                    </div>
+
                 <%} %>
                 </div>
-                
+
 
 
 
@@ -316,8 +331,23 @@
 
     </div>
     <script>
-        
+        $('#today').on('change' , function(){
+            let $today = $(this);
+            $.ajax({
+                    url : 'selectDate.admin',
+                    type : 'get',
+                    data : {
+                        locationCode : $today.val()
+                    },
+                    success : function(result){
+                        let resultStr = '';
+                        
+                        
+                    }
+                    
+                });
 
+        });
     </script>
 
  	<%@ include file="/views/common/footer.jsp" %>

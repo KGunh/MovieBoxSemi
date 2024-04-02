@@ -57,7 +57,7 @@
 	
 	
 	</entry>
-	
+
 	<entry key="detailTheater">
 		SELECT
               THEATER_NO,
