@@ -7,9 +7,6 @@
 <title>Insert title here</title>
 
 <style>
-    body{
-        background-color: #eee;
-    }
 
     .container{
         width: 900px;
@@ -100,12 +97,13 @@
     .red{
         background-color: #fff;
         border: 2px solid red;
+
     }
 
     .red:hover {
         border: 3px solid red;
     }
-    
+
     .red:focus {
         background-color: red;
     }
@@ -118,20 +116,20 @@
     .blue:hover {
         border: 3px solid #40C4FF;
     }
-    
+
     .blue:focus {
         background-color: #40C4FF;
     }
-    
+
     .darkblue{
         background-color: #fff;
         border: 2px solid #01579B;
     }
-    
+
     .darkblue:hover {
         border: 3px solid #01579B;
     }
-    
+
     .darkblue:focus {
         background-color: #01579B;
     }
@@ -144,7 +142,7 @@
     .yellow:hover {
         border-radius: 3px solid #FFCA28;
     }
-    
+
     .yellow:focus {
         background-color: #FFCA28;
     }
@@ -166,7 +164,7 @@
     .rating-star{
         font-size: 10px !important;
     }
-    
+
     .rating-number{
         font-size: 10px;
         color: grey;
@@ -194,19 +192,19 @@
     .voutcher-left{
         width: 60%
     }
-    
+
     .voutcher-name{
         color: grey;
         font-size: 9px;
         font-weight: 500;
     }
-    
+
     .voutcher-code{
         color: red;
         font-size: 11px;
         font-weight: bold;
     }
-    
+
     .voutcher-right{
         width: 40%;	 
         background-color: purple;
@@ -219,7 +217,7 @@
         position: relative;
         top: 5px;
     }
-    
+
     .off{
         font-size: 14px;
         position: relative;
@@ -232,7 +230,7 @@
     <%@ include file="/views/common/header.jsp" %>
  
     <div id="wrap" style="padding-bottom: 50px;">
-        <h1 align="center" style="margin-top:50px;">콤보맛있으면 0칼로리, 아는 맛이 제일 맛있어요</h1>
+        <h1 align="center" style="margin-top:50px; color:crimson;">콤보맛있으면 0칼로리, 아는 맛이 제일 맛있어요!</h1>
         <div class="container mt-5">
             <div class="row">
                 <div class="col-md-3">
@@ -240,7 +238,6 @@
                             <div class="image-container">
                                 <div class="first">
                                     <div class="d-flex justify-content-between align-items-center">
-                                    <span class="discount">-25%</span>
                                     <span class="wishlist"><i class="fa fa-heart-o"></i></span>
                                     </div>
                                 </div>
@@ -248,23 +245,12 @@
                             </div>
                             <div class="product-detail-container p-2">
                                     <div class="d-flex justify-content-between align-items-center">
-                                        <h5 class="dress-name">White traditional long dress</h5>
+                                        <h5 class="dress-name">팝콘세트 ㅋ</h5>
                                         <div class="d-flex flex-column mb-2">
-                                            <span class="new-price">$3.99</span>
-                                            <small class="old-price text-right">$5.99</small>
+                                            <span class="new-price">￦13,000</span>
                                         </div>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center pt-1">
-                                        <div class="color-select d-flex ">
-                                            <input type="button" name="grey" class="btn creme">
-                                            <input type="button" name="red" class="btn red ml-2">
-                                            <input type="button" name="blue" class="btn blue ml-2">
-                                        </div>
-                                        <div class="d-flex ">
-                                            <span class="item-size mr-2 btn" type="button">S</span>
-                                            <span class="item-size mr-2 btn" type="button">M</span>
-                                            <span class="item-size btn" type="button">L</span>
-                                        </div>
                                     </div>
                                     <div class="d-flex justify-content-between align-items-center pt-1">
                                         <div>
@@ -275,187 +261,15 @@
                                     </div>
                             </div>
                         </div>
-                        <div class="mt-3">
-                            <div class="card voutchers">
-                                <div class="voutcher-divider">
-                                    <div class="voutcher-left text-center">
-                                        <span class="voutcher-name">Monday Happy</span>
-                                        <h5 class="voutcher-code">#MONHPY</h5>
-                                    </div>
-                                    <div class="voutcher-right text-center border-left">
-                                        <h5 class="discount-percent">20%</h5>
-                                        <span class="off">Off</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
+                        
                 </div>
-                <div class="col-md-3">
-                        <div class="card">
-                            <div class="image-container">
-                                <div class="first">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                    <span class="discount">-25%</span>
-                                    <span class="wishlist"><i class="fa fa-heart-o"></i></span>
-                                    </div>
-                                </div>
-                                <img src="http://img.cgv.co.kr/GiftStore/Product/Pc/List/16678839678420.jpg" class="img-fluid rounded thumbnail-image">
-                            </div>
-                            <div class="product-detail-container p-2">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                        <h5 class="dress-name">Long sleeve denim jacket</h5>
-                                        <div class="d-flex flex-column mb-2">
-                                            <span class="new-price">$3.99</span>
-                                            <small class="old-price text-right">$5.99</small>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center pt-1">
-                                        <div class="color-select d-flex ">
-                                            <input type="button" name="grey" class="btn creme">
-                                            <input type="button" name="darkblue" class="btn darkblue ml-2">
-                                        </div>
-                                        <div class="d-flex ">
-                                            <span class="item-size mr-2 btn" type="button">S</span>
-                                            <span class="item-size mr-2 btn" type="button">M</span>
-                                            <span class="item-size btn" type="button">L</span>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center pt-1">
-                                        <div>
-                                            <i class="fa fa-star-o rating-star"></i>
-                                            <span class="rating-number">4.8</span>
-                                        </div>
-                                        <span class="buy">BUY +</span>
-                                    </div>
-                            </div>
-                        </div>
-                        <div class="mt-3">
-                            <div class="card voutchers">
-                                <div class="voutcher-divider">
-                                    <div class="voutcher-left text-center">
-                                        <span class="voutcher-name">Payday Surprise</span>
-                                        <h5 class="voutcher-code">#SRPSPYDY</h5>
-                                    </div>
-                                    <div class="voutcher-right text-center border-left">
-                                        <h5 class="discount-percent">20%</h5>
-                                        <span class="off">Off</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-                <div class="col-md-3">
-                        <div class="card">
-                            <div class="image-container">
-                                <div class="first">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                    <span class="discount">-25%</span>
-                                    <span class="wishlist"><i class="fa fa-heart-o"></i></span>
-                                    </div>
-                                </div>
-                                <img src="https://i.imgur.com/ePJKs8Q.jpg" class="img-fluid rounded thumbnail-image">
-                            </div>
-                            <div class="product-detail-container p-2">
-                                    <div class="d-flex justify-content-between ">
-                                        <h5 class="dress-name">Hush Puppies</h5>
-                                        <div class="d-flex flex-column mb-2">
-                                            <span class="new-price">$3.99</span>
-                                            <small class="old-price text-right">$5.99</small>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center pt-1">
-                                        <div class="color-select d-flex ">
-                                            <input type="button" name="grey" class="btn creme">
-                                            <input type="button" name="yellow" class="btn yellow ml-2">
-                                            <input type="button" name="blue" class="btn blue ml-2">
-                                        </div>
-                                        <div class="d-flex ">
-                                            <span class="item-size mr-2 btn" type="button">S</span>
-                                            <span class="item-size mr-2 btn" type="button">M</span>
-                                            <span class="item-size btn" type="button">L</span>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center pt-1">
-                                        <div>
-                                            <i class="fa fa-star-o rating-star"></i>
-                                            <span class="rating-number">4.2</span>
-                                        </div>
-                                        <span class="buy">BUY +</span>
-                                    </div>
-                            </div>
-                        </div>
-                        <div class="mt-3">
-                            <div class="card voutchers">
-                                <div class="voutcher-divider">
-                                    <div class="voutcher-left text-center">
-                                        <span class="voutcher-name">First order</span>
-                                        <h5 class="voutcher-code">#HPYFRST</h5>
-                                    </div>
-                                    <div class="voutcher-right text-center border-left">
-                                        <h5 class="discount-percent">20%</h5>
-                                        <span class="off">Off</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                </div>
-                <div class="col-md-3">
-                        <div class="card">
-                            <div class="image-container">
-                                <div class="first">
-                                    <div class="d-flex justify-content-between align-items-center">
-                                    <span class="discount">-25%</span>
-                                    <span class="wishlist"><i class="fa fa-heart-o"></i></span>
-                                    </div>
-                                </div>
-                                <img src="https://i.imgur.com/snffLH3.jpg" class="img-fluid rounded thumbnail-image">
-                            </div>
-                            <div class="product-detail-container p-2">
-                                    <div class="d-flex justify-content-between ">
-                                        <h5 class="dress-name">Athens skirt </h5>
-                                        <div class="d-flex flex-column mb-2">
-                                            <span class="new-price">$3.99</span>
-                                            <small class="old-price text-right">$5.99</small>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center pt-1">
-                                        <div class="color-select d-flex ">
-                                            <input type="button" name="grey" class="btn creme">
-                                            <input type="button" name="red" class="btn red ml-2">
-                                            <input type="button" name="blue" class="btn blue ml-2">
-                                        </div>
-                                        <div class="d-flex ">
-                                            <span class="item-size mr-2 btn" type="button">S</span>
-                                            <span class="item-size mr-2 btn" type="button">M</span>
-                                            <span class="item-size btn" type="button">L</span>
-                                        </div>
-                                    </div>
-                                    <div class="d-flex justify-content-between align-items-center pt-1">
-                                        <div>
-                                            <i class="fa fa-star-o rating-star"></i>
-                                            <span class="rating-number">3.8</span>
-                                        </div>
-                                        <span class="buy">BUY +</span>
-                                    </div>
-                            </div>
-                        </div>
-                        <div class="mt-3">
-                            <div class="card voutchers">
-                                <div class="voutcher-divider">
-                                    <div class="voutcher-left text-center">
-                                        <span class="voutcher-name">Vegetarian Food</span>
-                                        <h5 class="voutcher-code">#VEGANLOVE</h5>
-                                    </div>
-                                    <div class="voutcher-right text-center border-left">
-                                        <h5 class="discount-percent">20%</h5>
-                                        <span class="off">Off</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                </div>
+                
             </div>
         </div>
+    </div>
+
+    <div class="btn btn-lg btn-info" style="width:180px; height:40px; position: fixed; bottom: 300px; right:350px;">
+        무 어쩔 ~ 
     </div>
     <%@ include file="/views/common/footer.jsp" %>
     

@@ -125,6 +125,8 @@
 		       MOVIE_NO = ?
 		   AND
 		       SCREEN_NO = ?
+		   AND
+		   	   FILE_LEVEL = 1
        </entry>
 	
 	<entry key="insertReservation">
@@ -242,6 +244,8 @@
 		        TB_ATTACHMENT USING(MOVIE_NO)
 		   JOIN
 		        TB_GENRE ON(GENRE_NO =GENRE_CODE)
+		  WHERE
+		        FILE_LEVEL = 1
 				
 	</entry>
 	
