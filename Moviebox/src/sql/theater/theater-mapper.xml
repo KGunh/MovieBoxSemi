@@ -58,7 +58,22 @@
 	
 	</entry>
 	
+	<entry key="detailTheater">
+		SELECT
+              THEATER_NO,
+              THEATER_NAME,
+              THEATER_ADDR,
+              MAP_LINK,
+              LOCATION_NAME,
+              THEATER_UPDATE
+         FROM
+              TB_THEATER
+         JOIN
+              TB_LOCATION USING(LOCATION_CODE)
+        WHERE
+              THEATER_NO = ?
 	
+	</entry>
 	
 	
 	
