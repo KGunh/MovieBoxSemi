@@ -273,7 +273,7 @@
                                 <select name="category" id="select-category">
                                 <% for(Category c : list) { %>
 									<option value="<%= c.getCategoryNo() %>">
-										<%= c.getCategoryName() %>
+										<%= c.getCategoryName() + " 문의" %>
 									</option>
 								<% } %>
                                 </select>

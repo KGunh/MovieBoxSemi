@@ -38,12 +38,14 @@ public class TheaterService {
 		
 		return list;
 	}
+	
 	public Theater detailTheater(int theaterNo) {
-		Connection conn = JDBCTemplate.getConnection();
+		Connection conn = getConnection();
 		Theater th = new TheaterDao().detailTheater(conn, theaterNo);
 		
 		close(conn);
 		
 		return th;
 	}
+
 }

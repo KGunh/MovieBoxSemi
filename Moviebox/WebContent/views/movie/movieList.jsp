@@ -247,7 +247,7 @@
                 <% for(Movie m : list) { %>
                     <div class="movie-content">
                     	<input type="hidden" id="inputId" name="movieNo" value="<%= m.getMovieNo()%>" />
-                        <div class="movie-list-img"> 포스터 </div>
+                        <div class="movie-list-img">포스터</div>
                         <div class="movie-list-title"><%= m.getMovieTitle() %></div>
                         <button id="movie-content-btn1" onclick="detailPage(this);">상세정보</button>
                         <button id="movie-content-btn2">예매정보</button>

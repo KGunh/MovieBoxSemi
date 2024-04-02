@@ -14,9 +14,7 @@ import java.util.Properties;
 
 import com.kh.board.model.vo.Board;
 import com.kh.common.model.vo.Genre;
-import com.kh.common.model.vo.Location;
 import com.kh.common.model.vo.PageInfo;
-import com.kh.member.model.vo.Member;
 import com.kh.movie.model.vo.Movie;
 import com.kh.notice.model.vo.Notice;
 import com.kh.theater.model.vo.Screen;
@@ -660,6 +658,73 @@ public class AdminPageDao {
 		
 		
 	}
+	public List<Screen> adminDetailScreenName(Connection conn, Screen sc){
+		List<Screen> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminDetailScreenName");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, sc.getTheaterNo());
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Screen s = new Screen();
+				
+				s.setScreenName(rset.getString("SCREEN_NAME"));
+				
+				list.add(s);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	public List<Movie> adminMovieList(Connection conn,String screenName, Screen sc){
+		List<Movie> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminMovieList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			System.out.println(screenName);
+			pstmt.setInt(1, sc.getTheaterNo());
+			pstmt.setString(2, screenName);
+			
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				Movie m = new Movie();
+				m.setScreenNo(rset.getInt("SCREEN_NO"));
+				m.setMovieNo(rset.getInt("MOVIE_NO"));
+				m.setMovieTitle(rset.getString("MOVIE_TITLE"));
+				m.setWatchDate(rset.getString("WATCH_DATE"));
+				list.add(m);
+				
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		System.out.println(list);
+		return list;
+
+		
+		
+	}
 	
 	public List<Screen> adminDetailTheater(Connection conn, Screen sc) {
 		List<Screen> list = new ArrayList();
@@ -670,7 +735,7 @@ public class AdminPageDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 
-			pstmt.setString(1, sc.getTheaterName());
+			pstmt.setInt(1, sc.getTheaterNo());
 			pstmt.setString(2, sc.getWatchDate());
 
 			rset = pstmt.executeQuery();

@@ -57,7 +57,7 @@
 	
 	
 	</entry>
-	
+
 	<entry key="detailTheater">
 		SELECT
               THEATER_NO,
@@ -75,6 +75,27 @@
 	
 	</entry>
 	
+	
+	<entry key="selectTheaterDetail">
+		SELECT
+		      S.SCREEN_NO,
+		      S.THEATER_NO,
+		      M.MOVIE_NO,
+		      M.MOVIE_TITLE,
+		      T.THEATER_NAME,
+		      T.THEATER_ADDR,
+		      T.MAP_LINK
+		  FROM
+		      TB_SCREEN S
+		 INNER
+		  JOIN
+		  	  TB_MOVIE M ON S.MOVIE_NO = M.MOVIE_NO
+		 INNER
+		  JOIN
+		      TB_THEATER T ON S.THEATER_NO = T.THEATER_NO
+		 WHERE
+		      S.THEATER_NO = 1 AND M.STATUS = 'Y'
+	</entry>
 	
 	
 </properties>
