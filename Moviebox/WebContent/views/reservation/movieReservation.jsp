@@ -221,7 +221,7 @@
         width: 100%;
         text-align: center;
         color: rgb(148, 145, 145);
-        font-size: 16px;
+        font-size: 12px;
         font-weight: 500;
     }
 
@@ -301,14 +301,10 @@
                 <input id="screenNo" type="hidden" name="screenNo">
                 <div id="select-screen-area">
                     <div id="select-screen">
-                        <div>
-                        </div>
-                        <div>
-                        </div>
-                        <div>
-                        </div>
-                        <div>
-                        </div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
                     </div>
                     <button id="submit-btn" type="button">좌석 선택</button>
                 </div>
@@ -316,7 +312,6 @@
         </form>
     </div>
     <%} %>
-
 
     <%@ include file="/views/common/footer.jsp" %>
 

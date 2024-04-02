@@ -268,9 +268,6 @@
         </div>
     </div>
 
-    <div class="btn btn-lg btn-info" style="width:180px; height:40px; position: fixed; bottom: 300px; right:350px;">
-        무 어쩔 ~ 
-    </div>
     <%@ include file="/views/common/footer.jsp" %>
     
 </body>
