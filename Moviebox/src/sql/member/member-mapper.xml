@@ -139,6 +139,8 @@
   											) USING(TICKET_NO)  											 											
  				WHERE
        						MEMBER_NO = ?
+       				AND
+                      		FILE_LEVEL = 1 
  				ORDER
  	  			     BY
  	  	    				TICKET_NO DESC

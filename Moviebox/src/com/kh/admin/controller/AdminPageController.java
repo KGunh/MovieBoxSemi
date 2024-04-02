@@ -20,6 +20,9 @@ import com.kh.common.model.vo.Location;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.movie.model.vo.Movie;
 import com.kh.notice.model.vo.Notice;
+import com.kh.reservation.model.service.ReservationService;
+import com.kh.theater.model.service.TheaterService;
+import com.kh.theater.model.vo.Screen;
 import com.kh.theater.model.vo.Theater;
 import com.oreilly.servlet.MultipartRequest;
 
@@ -302,6 +305,37 @@ public class AdminPageController {
 		return list;
 	}
 
+	public String adminDetailTheater(HttpServletRequest request, HttpServletResponse response){
+		String view = "";
+		
+		int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));
+		String watchDate = request.getParameter("watchDate");
+		
+		Screen sc = new Screen();
+		sc.setTheaterNo(theaterNo);
+		sc.setWatchDate(watchDate);
+
+		List<Screen> list = new AdminPageService().adminDetailTheater(sc);
+		
+		Theater th = new TheaterService().detailTheater(theaterNo);
+		
+		List<Movie> movieList = new ReservationService().selectMovieList();
+		if(th != null) {
+			request.setAttribute("theater", th);
+		}
+		
+		
+		if(!list.isEmpty()) {
+			request.setAttribute("movieList", movieList);
+			request.setAttribute("screenList", list);
+			
+			view = "views/admin/adminDetailTheater.jsp";
+		} else {
+			view = "views/admin/adminDetailTheater.jsp";
+		}
+		
+		return view;
+	}
 	
 	
 	

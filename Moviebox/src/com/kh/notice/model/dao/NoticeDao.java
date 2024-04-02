@@ -323,6 +323,48 @@ public class NoticeDao {
 	}
 
 
+	public ArrayList<Notice> searchNotice(Connection conn, String searchNoticeForm, PageInfo pi) {
+		ArrayList<Notice> list = new ArrayList();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("searchNotice");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+			
+			pstmt.setString(1, searchNoticeForm);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Notice notice = new Notice();
+				notice.setNoticeNo(rset.getInt("NOTICE_NO"));
+				notice.setNoticeCategory(rset.getString("CATEGORY_NAME"));
+				notice.setNoticeTitle(rset.getString("NOTICE_TITLE"));
+				notice.setCount(rset.getInt("COUNT"));
+				notice.setCreateDate(rset.getString("CREATE_DATE"));
+				
+				list.add(notice);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+	}
+
+
+
 	
 	
 	

@@ -2,6 +2,8 @@ package com.kh.theater.model.vo;
 
 import java.util.List;
 
+import com.kh.movie.model.vo.Movie;
+
 public class Screen {
 	private int screenNo;
 	private int theaterNo;
@@ -9,10 +11,16 @@ public class Screen {
 	private String watchDate;
 	private String screenName;
 	private String theaterName;
+	private String movieTitle;
 	private int movieRt;
-	private List<String> watchDateList;
+	
+	
 	private List<Integer> screenNoList;
 	private List<String> screenNameList;
+	
+	private List<String> watchDateList;
+	private List<Movie> movieList;
+	
 	
 	public Screen() {
 		super();
@@ -24,6 +32,20 @@ public class Screen {
 		this.movieNo = movieNo;
 		this.watchDate = watchDate;
 		this.screenName = screenName;
+	}
+	
+	public List<Movie> getMovieList() {
+		return movieList;
+	}
+	public void setMovieList(List<Movie> movieList) {
+		this.movieList = movieList;
+	}
+
+	public String getMovieTitle() {
+		return movieTitle;
+	}
+	public void setMovieTitle(String movieTitle) {
+		this.movieTitle = movieTitle;
 	}
 	public int getScreenNo() {
 		return screenNo;

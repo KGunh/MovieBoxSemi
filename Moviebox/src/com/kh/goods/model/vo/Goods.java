@@ -5,6 +5,7 @@ public class Goods {
 	private String goodsName;
 	private int goodsPrice;
 	private int qty;
+	
 	public Goods() {
 		super();
 	}

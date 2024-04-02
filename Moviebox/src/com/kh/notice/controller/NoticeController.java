@@ -56,7 +56,6 @@ public class NoticeController {
 		ArrayList<Notice> list = new NoticeService().selectNoticeList(pi);
 		
 
-//		ArrayList<Notice> list = new NoticeService().selectNoticeList();
 		
 		request.setAttribute("noticeList", list);
 		request.setAttribute("pageInfo", pi);
@@ -227,11 +226,70 @@ public class NoticeController {
 		
 		return view;
 	}
-	
-	
 
+//	public String searchNotice(HttpServletRequest request, HttpServletResponse response) {
+//		
+//		String searchNoticeForm = request.getParameter("searchNoticeForm");
+//		String type = request.getParameter("type");
+//		ArrayList<Notice> list = new NoticeService().searchNotice(searchNoticeForm, type);
+//		
+//		request.setAttribute("type", type);
+//		request.setAttribute("noticeList", list);
+//		
+//		String view = "views/notice/noticeList.jsp";
+//		
+//		return view;
+//	}
 	
+	public String searchNotice(HttpServletRequest request, HttpServletResponse response) {
+		
 
+		// 페이징바 
+		int listCount;
+		int currentPage;
+		int pageLimit;
+		int boardLimit;
+		int maxPage;
+		int startPage;
+		int endPage;
+
+		listCount = new NoticeService().selectListCount();
+
+
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+		
+		pageLimit = 5;
+		boardLimit = 10;
+		
+		maxPage = (int)Math.ceil((double)listCount / boardLimit);
+		
+		// 5 => 1, 6, 11, 16 ... n * 5(페이징단위) + 1 
+		//			 startPage = n * pageLimit  + 1;
+		// n = (currentPage - 1) / pageLimit
+		
+		startPage = (currentPage - 1) / pageLimit * pageLimit + 1;
+		endPage = startPage + pageLimit - 1;
+		
+		if(endPage > maxPage) {
+			endPage = maxPage;
+		}
+		
+		PageInfo pi = new PageInfo(listCount, currentPage, pageLimit, boardLimit, maxPage, startPage, endPage);
+
+		
+		String searchNoticeForm = request.getParameter("searchNoticeForm");
+		String type = request.getParameter("type");
+		ArrayList<Notice> list = new NoticeService().searchNotice(searchNoticeForm, pi);
+		
+		request.setAttribute("type", type);
+		request.setAttribute("noticeList", list);
+		
+		String view = "views/notice/noticeList.jsp";
+		
+		return view;
+	}
+	
+	
 	
 
 }

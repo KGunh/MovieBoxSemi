@@ -10,17 +10,22 @@
 	<entry key="selectMovieList">
 		SELECT
 			  MOVIE_NO,
-		      MOVIE_TITLE,
-		      STATUS,
-              GENRE_CODE,
-		      MOVIE_UPDATE
+			  MOVIE_TITLE,
+			  MOVIE_RT,
+			  MOVIE_RATED,
+			  MOVIE_RELEASE,
+			  MOVIE_STORY,
+			  STATUS,
+			  GENRE_CODE,
+			  DIRECTOR_NO,
+			  MOVIE_UPDATE
 		  FROM
-		      TB_MOVIE
+			  TB_MOVIE
 		  JOIN
-      		  TB_GENRE ON (GENRE_CODE = GENRE_NO)
+			  TB_GENRE ON (GENRE_CODE = GENRE_NO)
 		 ORDER
 		    BY
-		      MOVIE_UPDATE DESC
+			  MOVIE_UPDATE DESC
 	</entry>
 	
 	<entry key="movieCategory">
@@ -49,7 +54,7 @@
 	       A.MOVIE_TITLE AS MOVIE_TITLE,
 	       A.MOVIE_RT AS MOVIE_RT,
 	       A.MOVIE_RATED AS MOVIE_RATED,
-	       A.MOVIE_RELEASE AS MOVIE_RELEASE,
+   		   TO_CHAR(MOVIE_RELEASE, 'YY/MM/DD') MOVIE_RELEASE,
 	       A.MOVIE_STORY AS MOVIE_STORY,
 	       A.STATUS AS STATUS,
 	       A.GENRE_NO AS GENRE_NO,
@@ -71,9 +76,10 @@
 		   A.MOVIE_NO = ?
 	</entry>
 	
+	
 	<entry key="detailMovieCast">
 		SELECT 
-		    LISTAGG(A.ACTOR_NAME, ', ') 
+		    LISTAGG(A.ACTOR_NAME, ',') 
 		    WITHIN GROUP 
 		           (ORDER BY A.ACTOR_NO) AS ACTOR_NAMES
 		FROM 

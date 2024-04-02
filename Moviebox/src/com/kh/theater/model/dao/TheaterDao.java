@@ -11,7 +11,7 @@ import java.util.Properties;
 
 import com.kh.theater.model.vo.Theater;
 import com.kh.common.JDBCTemplate;
-
+import static com.kh.common.JDBCTemplate.*;
 public class TheaterDao {
 
 	private Properties prop = new Properties();
@@ -116,7 +116,69 @@ public class TheaterDao {
 		return list;
 	}
 	
-	
+	public Theater detailTheater(Connection conn, int theaterNo) {
+		Theater th = new Theater();
+		ResultSet rset = null;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("detailTheater");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, theaterNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				th.setTheaterNo(rset.getInt("THEATER_NO"));
+				th.setTheaterName(rset.getString("THEATER_NAME"));
+				th.setTheaterAddr(rset.getString("THEATER_ADDR"));
+				th.setMapLink(rset.getString("MAP_LINK"));
+				th.setLocationName(rset.getString("LOCATION_NAME"));
+				th.setUpdateDate(rset.getDate("THEATER_UPDATE"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return th;
+		
+	}
+//
+//	public ArrayList<Theater> selectTheaterDetail(Connection conn) {
+//		
+//		ArrayList<Theater> list = new ArrayList();
+//		PreparedStatement pstmt = null;
+//		ResultSet rset = null;
+//		
+//		String sql = prop.getProperty("selectTheaterList");
+//		
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			rset = pstmt.executeQuery();
+//			
+//			while(rset.next()) {
+//				Theater t = new Theater();
+//				t.setScreenNo(rset.getInt("SCREEN_NO"));
+//				t.setTheaterNo(rset.getInt("THEATER_NO"));
+//				t.setMovieNo(rset.getInt("MOVIE_NO"));
+//				t.setMovieTitle(rset.getString("MOVIE_TITLE"));
+//				t.setTheaterName(rset.getString("THEATER_NAME"));
+//				t.setTheaterAddr(rset.getString("THEATER_ADDR"));
+//				t.setMapLink(rset.getString("MAP_LINK"));
+//			}
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		
+//		return null;
+//	}
 	
 	
 	

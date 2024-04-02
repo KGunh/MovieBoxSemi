@@ -339,8 +339,8 @@
 
                     <div id="cnt2_box_wrap"> <!-- 셀렉, 인풋, 버튼 전체 -->
 
-                            <input type="search" id="find" placeholder="영화 제목을 입력해 주세요.">
-                            <button type="submit" id="btn" style="background-color: #FFC145; height: 35px;">
+                            <input type="text" id="find" placeholder="영화 제목을 입력해 주세요.">
+                            <button type="submit" id="btn" style="background-color: #FFC145; height: 35px;" onclick="searchTtitle()">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
                                 </svg>
@@ -452,11 +452,13 @@
  		
     	$(function(){
     		$('.mvDetail').click(function(){
-    			console.log("aaa");
+    			//console.log("aaa");
     			const movieNo = $(this).children().eq(0).text();
     			location.href='<%= contextPath %>/adminMovieDetail.admin?movieNo=' + movieNo;
     		})
     	}) 
+
+    	
 	</script>
 </body>
 </html>

@@ -9,6 +9,7 @@
 	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
 	Notice notice = (Notice)request.getAttribute("notice");
 	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
+	String type = (String)request.getAttribute("type");
 	
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
@@ -272,10 +273,13 @@
             <div id="search-notice">
 
                 <div id="search-notice-input">
-                    <input id="input-notice" type="text" placeholder="검색어를 입력해 주세요.">
+                	<form id="noticeSearch" action="<%=contextPath%>/search.notice" method="get">
+                		<input id="searchType" type="hidden" name="type" value="notice">
+                    	<input name="searchNoticeForm" id="input-notice" type="text" placeholder="검색어를 입력해 주세요.">
+                    </form>
                 </div>
 
-                <div id="search-img">
+                <div id="search-img" onclick="searchNotice();">
                     <img src="<%= contextPath %>/resources/img/search.PNG" width="45" height="45">
                 </div>
 
@@ -374,6 +378,10 @@
     			const noticeNo = $(this).children().eq(0).text();
     			location.href = '<%=contextPath%>/detail.notice?noticeNo=' + noticeNo;
             });
+    		
+    		function searchNotice(){
+    			document.getElementById('noticeSearch').submit();
+    		}
     	
     	</script>
 

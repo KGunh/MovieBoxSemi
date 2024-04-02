@@ -288,6 +288,11 @@
 		WHERE
 		    C.MOVIE_NO = ?
 	</entry>
+	<!-- -->
+
+
+
+
 
 	<entry key="selectTheaterList">
 		SELECT
@@ -303,6 +308,111 @@
 	
 	
 	</entry>
+	<entry key="adminDetailScreenName">
+		SELECT
+       		   SCREEN_NAME
+          FROM
+               TB_SCREEN
+         WHERE
+               THEATER_NO = ?
+         GROUP
+            BY  
+               SCREEN_NAME
+         ORDER
+   			BY
+       		   SCREEN_NAME
+	
+	</entry>
+	
+	<entry key="adminMovieList">
+	SELECT
+		   SCREEN_NO,
+       	   MOVIE_NO,
+           MOVIE_TITLE,
+           TO_CHAR(WATCH_DATE,'HH24:MI:SS') AS WATCH_DATE
+      FROM
+           TB_SCREEN
+      JOIN
+           TB_MOVIE USING(MOVIE_NO)
+     WHERE
+           THEATER_NO = ? AND SCREEN_NAME = ? AND TO_CHAR(WATCH_DATE,'YYYY/MM/DD') = TO_CHAR(SYSDATE,'YYYY/MM/DD')
+	
+	
+	</entry>
+	
+	
+	
+	<entry key="adminDetailTheater">
+		SELECT
+       			   SCREEN_NAME,
+       			   WATCH_DATE,
+       			   THEATER_NAME,
+       			   MOVIE_TITLE
+  		   FROM
+       			   TB_SCREEN
+  			JOIN
+       			   TB_MOVIE USING(MOVIE_NO)
+  			JOIN
+       			   TB_THEATER USING(THEATER_NO)
+ 	     WHERE
+       			   THEATER_NO = ?
+   			 AND
+       			   TRUNC(WATCH_DATE) = TO_DATE(?,'YYYYMMDD')
+ 		 ORDER
+    		  BY 
+       			    SCREEN_NAME
+			      
+	
+	</entry>
+	
+	
+	
+	<!--  -->
+	<entry key="searchTtitle">
+		SELECT *
+		FROM (SELECT A.*, ROWNUM RNUM
+		      FROM (SELECT
+				    MOVIE_NO,
+				    TO_CHAR(MOVIE_RELEASE, 'YY/MM/DD') MOVIE_RELEASE,
+				    MOVIE_TITLE,
+				    MOVIE_RATED,
+				    GENRE_NAME,
+				    TO_CHAR(MOVIE_UPDATE, 'YY/MM/DD') MOVIE_UPDATE
+				FROM
+				    TB_MOVIE
+				LEFT
+				JOIN
+				    TB_GENRE ON(GENRE_NO = GENRE_CODE)
+               WHERE
+                   MOVIE_TITLE LIKE '%'||?||'%' 
+               ORDER
+			      BY
+	  		       MOVIE_NO DESC) A)
+		WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 </properties>

@@ -43,8 +43,13 @@ public class MovieDao {
 				Movie movie = new Movie();
 				movie.setMovieNo(rset.getInt("MOVIE_NO"));
 				movie.setMovieTitle(rset.getString("MOVIE_TITLE"));
+				movie.setMovieRt(rset.getString("MOVIE_RT"));
+				movie.setMovieRated(rset.getString("MOVIE_RATED"));
+				movie.setMovieRelease(rset.getString("MOVIE_RELEASE"));
+				movie.setMovieStory(rset.getString("MOVIE_STORY"));
 				movie.setStatus(rset.getString("STATUS"));
 				movie.setGenreName(rset.getString("GENRE_CODE"));
+				movie.setDirectorName(rset.getString("DIRECTOR_NO"));
 				movie.setMovieUpdate(rset.getString("MOVIE_UPDATE"));
 				
 				movieList.add(movie);
@@ -85,7 +90,6 @@ public class MovieDao {
 										rset.getString("STATUS"),
 										rset.getString("GENRE_NAME"),
 										rset.getInt("DIRECTOR_NO"));
-				
 				list.add(movie);
 			}
 			
@@ -102,7 +106,7 @@ public class MovieDao {
 
 	public Movie detailMovie(Connection conn, int movieNo) {
 		
-		Movie m = null;
+		Movie m = new Movie();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("detailMovie");
@@ -127,8 +131,6 @@ public class MovieDao {
 				m.setDirectorName(rset.getString("DIRECTOR_NAME"));
 				m.setMovieUpdate(rset.getString("MOVIE_UPDATE"));
 			}
-			
-			System.out.println(m);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

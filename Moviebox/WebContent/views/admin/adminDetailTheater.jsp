@@ -1,13 +1,22 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.List,java.util.ArrayList,com.kh.common.model.vo.Location"%>
+    pageEncoding="UTF-8" import="com.kh.movie.model.vo.Movie,java.util.List,java.util.ArrayList,com.kh.theater.model.vo.Screen,com.kh.theater.model.vo.Theater,java.text.SimpleDateFormat,java.util.Date,com.kh.movie.model.vo.Movie"%>
 <%
-	List<Location> locationList = (ArrayList)request.getAttribute("locationList");
-%>
+	List<Screen> screenList = (ArrayList)request.getAttribute("screenList");
+    
+    Theater th = (Theater)request.getAttribute("theater");
+
+    List<Movie> movieNameList = (ArrayList)request.getAttribute("movieList");
+    SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    Date currentDate = new Date();
+
+%>    
+    
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>예매관리</title>
+<title>Insert title here</title>
   <style>
 
         
@@ -63,8 +72,7 @@
             vertical-align: top;
             width : 880px;
             height : 800px;
-            padding-left: 50px;
-            padding-top: 20px;
+            padding:20px 20px 40px 20px;
 
         }
 
@@ -153,56 +161,56 @@
         }
 
 
-        #p{
-            margin-top: 24px;
-            margin-bottom: 30px;
-            font-size: x-large;
-            font-weight: bold;
-            
-        }  
+
 
         /* -------------------------------------------*/
-
-        .theater-area{
-            width: 100%;
-            height: 100%;
-        }
-
-        .theater-location-list{
+        .date-area{
             width: 100%;
             height: 10%;
-        }
-        #location-area{
             text-align: center;
-           font-size: 20px;
-           width: 30%;
-           background-color: #FFC145;
-           font-weight: bold;
+            padding: 20px;
+            color: white;
         }
-        .theater-content{
-            height: 90%;
+        .date-area input{
+            width: 30%;
+        }
+
+        .screenList-area{
             width: 100%;
-            padding: 20px 20px;
+            height: 90%;
         }
-        .printTheaterName{
-            float: left;
-            height: 60px;
-            width: 33%;
-            padding: 15px 15px 15px 15px;
-            font-size: 20px;
-            text-align: center;
+        .screenList-area > div{
+            width: 100%;
+            height: 50%;
+            padding: 5% 5% 0 5%;
+            display:flex;
+            justify-content: space-between;
             
         }
-        .printTheaterName > a{
-        	color: rgb(238, 238, 238);
-        	text-decoration: none;
-            font-weight: 700;
+        .screenList-area > div > div{
+            width: 50%;
+            height: 100%;
+            position: relative;
+        }
+        .screenList-title{
+            position: absolute;
+            color: white;
+            font-size: 25px;
+            top: -40px;
+            left: 50%;
+            transform: translate(-50%, 0%);
+        }
+        .screenList input{
+            float: left;
+            display: block;
+            width: 50%;
+        }
+        .screenList select{
+            float: left;
+            display: block;
+            width: 50%;
         }
         
-        .printTheaterName > a:hover{
-			color: rgb(255, 193, 69);
-            text-decoration: none;
-        }
 
 
     </style>
@@ -210,7 +218,16 @@
 <body>
 	<!-- 헤더 -->
     <%@ include file="/views/common/header.jsp" %>
-    
+
+    <script>
+        window.onload = function() {
+            today = new Date();
+            today = today.toISOString().slice(0, 10);
+            bir = document.getElementById("today");
+            bir.value = today;
+        }
+        
+    </script>
     <div id="wrap">
 
 
@@ -260,92 +277,78 @@
 
             <!------------------------------------------------------------>
 
-            <div class="content_2">
-              
-                <div class="theater-area">
-                    <div class="theater-location-list">
-                        <select name="location" id="location-area">
-
-                        </select>
-
-                    </div>
-                    <div class="theater-content">
-                        
-                    </div>
-
-
+            <div class="content_2"><!--content_2 시작-->
+                <div class="date-area">
+                    <%= th.getTheaterName() %>
+                    <input type="date" id="today">
                 </div>
-            </div>
+
+                <div >
+                <%if(screenList != null) {%>
+    
+                    <div class="row" >
+						  <%for(int i = 0; i< 4; i++) {%>	                      
+                        <div class="screenList col-sm-6 " style=";height: 300px;margin-top: 40px">
+                        
+                            <div class="screenList-title"><%=screenList.get(i).getScreenName() %>관</div>
+                            <% List<Movie> movieList =  screenList.get(i).getMovieList(); %>
+                            <%for(int j = 0; j<movieList.size();j++) {%>
+                            <div>
+                            <select name="movie" id="<%=movieList.get(j).getScreenNo()%>">
+                            
+                            	
+                                <%for(Movie m : movieNameList) {%>
+                                    <option value="<%=m.getMovieNo()%>"><%=m.getMovieTitle() %></option>
+                                <%} %>
+                                
+                                
+                            </select>
+                            
+                            	
+                                    <input type="time" value="<%=movieList.get(j).getWatchDate()%>">
+                              <script>
+                              	
+                              		$('#<%=movieList.get(j).getScreenNo()%>').val('<%=movieList.get(j).getMovieNo()%>').prop("selected",true);
+                              </script>
+                           </div>
+                            	<%} %>
+                            
+                            
+                            
+                        </div>
+                    
+                        <%} %>
+                    </div>
+
+                <%} %>
+                </div>
+
+
+
+
+            </div><!--content_2끝-->
         </div>
+
     </div>
-
     <script>
-        $(function(){
-            var date = new Date();
-
-            var year=date.getFullYear();
-
-            var month= ('0' + (date.getMonth() + 1)).slice(-2);
-
-            var day= ('0' + date.getDate()).slice(-2);
-
+        $('#today').on('change' , function(){
+            let $today = $(this);
             $.ajax({
-                url : 'locationList.admin',   
-                success : result => {
-
-                    let value = '';
-                    for(let i in result){
-                        value = '<option value=' + result[i].locationCode +'>' + result[i].locationName + '</option>'
-                        $('#location-area').append(value);
-                    }
-                },
-                async : false
-            });
-            $.ajax({
-                    url : 'selectLocation.admin',
+                    url : 'selectDate.admin',
                     type : 'get',
                     data : {
-                        locationCode : $('option:selected').val()
+                        locationCode : $today.val()
                     },
                     success : function(result){
-                        var resultStr = '';
-                        for(let i = 0; i < result.length; i++){
-                            
-                            resultStr += '<div class="printTheaterName"><a href="<%=contextPath%>/adminDetailTheater.admin?theaterNo=' +result[i].theaterNo +'&createDate='+ year + month + day +'">'+ result[i].theaterName +'</a></div>';
-                        }
-                        $('.theater-content').html(resultStr);
+                        let resultStr = '';
+                        
+                        
                     }
                     
                 });
 
         });
-        $('#location-area').change(function(){
-            $.ajax({
-                    url : 'selectLocation.admin',
-                    type : 'get',
-                    data : {
-                        locationCode : $('#location-area').val()
-                    },
-                    success : function(result){
-                        var resultStr = '';
-                        for(let i = 0; i < result.length; i++){
-                            
-                            if(i != 0 && i % 3 == 0){
-                                resultStr += '<div class="printTheaterName"><a href="#">'+ result[i].theaterName +'</a></div><br>';
-                            }
-                            else{
-                                resultStr += '<div class="printTheaterName"><a href="#">'+ result[i].theaterName +'</a></div>';
-                            }
-                        }
-                        console.log(resultStr);
-                        $('.theater-content').html(resultStr);
-                    }
-                    
-                });
-            });
-
     </script>
-
 
  	<%@ include file="/views/common/footer.jsp" %>
  	<!-- 푸터 -->

@@ -6,7 +6,7 @@ import java.util.ArrayList;
 import com.kh.common.JDBCTemplate;
 import com.kh.theater.model.dao.TheaterDao;
 import com.kh.theater.model.vo.Theater;
-
+import static com.kh.common.JDBCTemplate.*;
 public class TheaterService {
 
 	public ArrayList<Theater> searchTheaterAll() {
@@ -39,4 +39,13 @@ public class TheaterService {
 		return list;
 	}
 	
+	public Theater detailTheater(int theaterNo) {
+		Connection conn = getConnection();
+		Theater th = new TheaterDao().detailTheater(conn, theaterNo);
+		
+		close(conn);
+		
+		return th;
+	}
+
 }

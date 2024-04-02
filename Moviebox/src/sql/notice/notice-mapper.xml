@@ -133,7 +133,27 @@
 	</entry>
 
 
-
+	<entry key="searchNotice">
+		SELECT *
+		  FROM (
+		        SELECT A.*, ROWNUM SNUM
+		          FROM (SELECT
+		                       NOTICE_NO,
+		                       CATEGORY_NAME,
+		                       NOTICE_TITLE,
+		                       COUNT,
+		                       CREATE_DATE
+		                  FROM
+		                       TB_NOTICE
+		                  JOIN
+		                       TB_CATEGORY ON(NOTICE_CATEGORY = CATEGORY_NO)
+		                 WHERE
+		                       NOTICE_TITLE LIKE '%'||?||'%'
+		                 ORDER
+		                    BY
+		                       CREATE_DATE ASC) A)
+		 WHERE SNUM BETWEEN ? AND ?
+	</entry>
 	
 
 
@@ -144,26 +164,5 @@
 
 
 
-
-<!-- 	<entry key="insert">
-		INSERT
-		  INTO
-		  	  TB_NOTICE
-		  	  (
-		  	  NOTICE_NO,
-		  	  NOTICE_CATEGORY,
-		  	  NOTICE_TITLE,
-		  	  NOTICE_CONTENT,
-		  	  NOTICE_WRITER
-		  	  )
-		VALUES
-			  (
-			  SEQ_NOTICENO.NEXTVAL,
-			  ?,
-			  ?,
-			  ?,
-			  ?
-			  )
-	</entry> -->
 	
 </properties>
