@@ -187,7 +187,7 @@
            
             
                 <div id="movie-detail-poster">
-                    포스터
+                    
                 </div>
 
                 <div id="movie-detail-content">
