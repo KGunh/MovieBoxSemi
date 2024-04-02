@@ -288,6 +288,11 @@
 		WHERE
 		    C.MOVIE_NO = ?
 	</entry>
+	<!-- -->
+
+
+
+
 
 	<entry key="selectTheaterList">
 		SELECT
@@ -326,6 +331,55 @@
 			      
 	
 	</entry>
+	
+	
+	
+	<!--  -->
+	<entry key="searchTtitle">
+		SELECT *
+		FROM (SELECT A.*, ROWNUM RNUM
+		      FROM (SELECT
+				    MOVIE_NO,
+				    TO_CHAR(MOVIE_RELEASE, 'YY/MM/DD') MOVIE_RELEASE,
+				    MOVIE_TITLE,
+				    MOVIE_RATED,
+				    GENRE_NAME,
+				    TO_CHAR(MOVIE_UPDATE, 'YY/MM/DD') MOVIE_UPDATE
+				FROM
+				    TB_MOVIE
+				LEFT
+				JOIN
+				    TB_GENRE ON(GENRE_NO = GENRE_CODE)
+               WHERE
+                   MOVIE_TITLE LIKE '%'||?||'%' 
+               ORDER
+			      BY
+	  		       MOVIE_NO DESC) A)
+		WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 
 
 </properties>
