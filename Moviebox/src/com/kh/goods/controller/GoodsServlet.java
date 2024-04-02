@@ -13,13 +13,13 @@ import com.kh.reservation.controller.ReservationController;
  * Servlet implementation class goodsServlet
  */
 @WebServlet("*.goods")
-public class goodsServlet extends HttpServlet {
+public class GoodsServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public goodsServlet() {
+    public GoodsServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -32,11 +32,13 @@ public class goodsServlet extends HttpServlet {
 		
 		String uri = request.getRequestURI();
 		String mapping = uri.substring(uri.lastIndexOf("/") + 1 , uri.lastIndexOf("."));
-		ReservationController rc = new ReservationController(); 
+		GoodsController rc = new GoodsController(); 
 		
 		String view = "";
 		
 		boolean flag = false;
+		
+		
 		
 		switch(mapping) {
 		case "list" : view = "views/goods/goodsList.jsp"; break; 
