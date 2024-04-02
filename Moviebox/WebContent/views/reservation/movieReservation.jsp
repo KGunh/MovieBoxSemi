@@ -207,9 +207,9 @@
     }
 
     #select-screen-area{
-        height: 300px;
-        width: 140px;
-        border: 1px solid rgb(255, 193, 69);
+        height: 240px;
+        width: 144px;
+        border: 3px solid rgb(255, 193, 69);
         position: fixed; 
         bottom: 300px; 
         right: 150px;
@@ -217,11 +217,11 @@
     }
 
     #select-screen{
-        height: 210px;
+        height: 150px;
         width: 100%;
         text-align: center;
         color: rgb(148, 145, 145);
-        font-size: 16px;
+        font-size: 14px;
         font-weight: 500;
     }
 
@@ -301,14 +301,10 @@
                 <input id="screenNo" type="hidden" name="screenNo">
                 <div id="select-screen-area">
                     <div id="select-screen">
-                        <div>
-                        </div>
-                        <div>
-                        </div>
-                        <div>
-                        </div>
-                        <div>
-                        </div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
                     </div>
                     <button id="submit-btn" type="button">좌석 선택</button>
                 </div>
@@ -316,7 +312,6 @@
         </form>
     </div>
     <%} %>
-
 
     <%@ include file="/views/common/footer.jsp" %>
 
