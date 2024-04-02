@@ -311,7 +311,7 @@
                         var resultStr = '';
                         for(let i = 0; i < result.length; i++){
                             
-                            resultStr += '<div class="printTheaterName"><a href="<%=contextPath%>/adminDetailTheater.admin?theaterName=' +result[i].theaterName +'&createDate='+ year + month + day +'">'+ result[i].theaterName +'</a></div>';
+                            resultStr += '<div class="printTheaterName"><a href="<%=contextPath%>/adminDetailTheater.admin?theaterNo=' +result[i].theaterNo +'&createDate='+ year + month + day +'">'+ result[i].theaterName +'</a></div>';
                         }
                         $('.theater-content').html(resultStr);
                     }

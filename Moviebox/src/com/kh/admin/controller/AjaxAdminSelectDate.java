@@ -1,4 +1,4 @@
-package com.kh.goods.controller;
+package com.kh.admin.controller;
 
 import java.io.IOException;
 import javax.servlet.ServletException;
@@ -7,19 +7,17 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.reservation.controller.ReservationController;
-
 /**
- * Servlet implementation class goodsServlet
+ * Servlet implementation class AjaxAdminSelectDate
  */
-@WebServlet("*.goods")
-public class goodsServlet extends HttpServlet {
+@WebServlet("/selectDate.admin")
+public class AjaxAdminSelectDate extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public goodsServlet() {
+    public AjaxAdminSelectDate() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,28 +26,7 @@ public class goodsServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
 		
-		String uri = request.getRequestURI();
-		String mapping = uri.substring(uri.lastIndexOf("/") + 1 , uri.lastIndexOf("."));
-		ReservationController rc = new ReservationController(); 
-		
-		String view = "";
-		
-		boolean flag = false;
-		
-		switch(mapping) {
-		case "list" : view = "views/goods/goodsList.jsp"; break; 
-		//case "seat" : view = rc.connectSeatList(request); break;
-		//case "payment" : view = rc.insertReservation(request); break;
-		}
-		
-		if(flag) {
-			response.sendRedirect(view);
-		} else {
-			request.getRequestDispatcher(view).forward(request, response);
-		}
-	
 	}
 
 	/**

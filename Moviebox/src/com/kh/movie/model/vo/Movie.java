@@ -20,6 +20,10 @@ public class Movie {
     
 	private String directorName;
 
+	private String watchDate;
+	
+	private int screenNo;
+	
 	public Movie() {
 		super();
 	}
@@ -39,6 +43,27 @@ public class Movie {
 		this.directorNo = directorNo;
 	}
 	
+	
+	public int getScreenNo() {
+		return screenNo;
+	}
+
+
+	public void setScreenNo(int screenNo) {
+		this.screenNo = screenNo;
+	}
+
+
+	public String getWatchDate() {
+		return watchDate;
+	}
+
+
+	public void setWatchDate(String watchDate) {
+		this.watchDate = watchDate;
+	}
+
+
 	public int getMovieNo() {
 		return movieNo;
 	}

@@ -308,6 +308,39 @@
 	
 	
 	</entry>
+	<entry key="adminDetailScreenName">
+		SELECT
+       		   SCREEN_NAME
+          FROM
+               TB_SCREEN
+         WHERE
+               THEATER_NO = ?
+         GROUP
+            BY  
+               SCREEN_NAME
+         ORDER
+   			BY
+       		   SCREEN_NAME
+	
+	</entry>
+	
+	<entry key="adminMovieList">
+	SELECT
+		   SCREEN_NO,
+       	   MOVIE_NO,
+           MOVIE_TITLE,
+           TO_CHAR(WATCH_DATE,'HH24:MI:SS') AS WATCH_DATE
+      FROM
+           TB_SCREEN
+      JOIN
+           TB_MOVIE USING(MOVIE_NO)
+     WHERE
+           THEATER_NO = ? AND SCREEN_NAME = ? AND TO_CHAR(WATCH_DATE,'YYYY/MM/DD') = TO_CHAR(SYSDATE,'YYYY/MM/DD')
+	
+	
+	</entry>
+	
+	
 	
 	<entry key="adminDetailTheater">
 		SELECT

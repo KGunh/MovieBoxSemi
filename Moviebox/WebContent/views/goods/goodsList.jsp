@@ -236,9 +236,9 @@
  
     <div id="wrap" style="padding-bottom: 50px;">
         <h1 align="center" style="margin-top:50px; color:crimson;">
-            <img style="height: 210px; width: 1200px;" src="https://cf.lottecinema.co.kr//Media/WebAdmin/f04df114813f45b18e63e06308211d0f.jpg" alt="스토어상품이미지">
+            <img style="height: 210px; width: 1200px; border:rgba(252, 252, 252, 0.15);" src="https://cf.lottecinema.co.kr//Media/WebAdmin/f04df114813f45b18e63e06308211d0f.jpg" alt="스토어상품이미지">
         </h1>
-        <div class="container mt-5">
+        <div class="container mt-5" >
             <div class="row">
                 <div class="col-md-3">
                     <div class="card">
@@ -247,20 +247,20 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                 </div>
                             </div>
-                            <img src="https://cf.lottecinema.co.kr//Media/WebAdmin/70fc20fe998a4ab7b44d1bfa0d1440e4.jpg" class="img-fluid rounded thumbnail-image">
+                            <img style="box-shadow: 0px 1px 2px lightgray;" src="https://cf.lottecinema.co.kr//Media/WebAdmin/70fc20fe998a4ab7b44d1bfa0d1440e4.jpg" class="img-fluid rounded thumbnail-image">
                         </div>
                         <div class="product-detail-container p-2">
                             <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="dress-name">오리지널팝콘L</h5>
+                                <h5 class="dress-name" style="text-shadow: 0px 1px 2px lightgray;">오리지널팝콘L</h5>
                                 <div class="d-flex flex-column mb-2">
-                                    <span class="new-price">￦6,000</span>
+                                    <span class="new-price"><strong>￦6,000</strong></span>
                                 </div>
                             </div>
                             <div class="d-flex justify-content-between align-items-center pt-1">
                             </div>
                             <div class="d-flex justify-content-between align-items-center pt-1">
                                 <div>
-                                    <span class="rating-number">장바구니</span>
+                                    <span class="rating-number" style="text-shadow: 1px 1px 1px lightgray;">장바구니</span>
                                 </div>
                                 <span class="buy">구매</span>
                             </div>

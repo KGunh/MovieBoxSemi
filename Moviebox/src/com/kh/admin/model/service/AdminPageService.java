@@ -13,6 +13,8 @@ import com.kh.admin.model.dao.AdminPageDao;
 import com.kh.board.model.vo.Board;
 import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.PageInfo;
+import com.kh.goods.model.vo.Goods;
+import com.kh.member.model.dao.MemberDao;
 import com.kh.movie.model.vo.Movie;
 import com.kh.notice.model.vo.Notice;
 import com.kh.theater.model.vo.Screen;
@@ -284,11 +286,24 @@ public class AdminPageService {
 	public List<Screen> adminDetailTheater(Screen sc){
 		Connection conn = getConnection();
 		
-		List<Screen> list = new AdminPageDao().adminDetailTheater(conn, sc);
+		List<Screen> screenList = new AdminPageDao().adminDetailScreenName(conn, sc);
+		
+		if(!screenList.isEmpty()) {
+			for(int i=0;i<screenList.size();i++) {
+				String screenName = screenList.get(i).getScreenName();
+				
+				List<Movie> movieList = new AdminPageDao().adminMovieList(conn,screenName, sc);
+				screenList.get(i).setMovieList(movieList);
+				
+			}
+		}
+		
+		
+		
 		
 		close(conn);
 		
-		return list;
+		return screenList;
 		
 	}
 	

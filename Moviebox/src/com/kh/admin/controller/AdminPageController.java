@@ -20,6 +20,7 @@ import com.kh.common.model.vo.Location;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.movie.model.vo.Movie;
 import com.kh.notice.model.vo.Notice;
+import com.kh.reservation.model.service.ReservationService;
 import com.kh.theater.model.service.TheaterService;
 import com.kh.theater.model.vo.Screen;
 import com.kh.theater.model.vo.Theater;
@@ -317,12 +318,15 @@ public class AdminPageController {
 		List<Screen> list = new AdminPageService().adminDetailTheater(sc);
 		
 		Theater th = new TheaterService().detailTheater(theaterNo);
-
+		
+		List<Movie> movieList = new ReservationService().selectMovieList();
 		if(th != null) {
 			request.setAttribute("theater", th);
 		}
 		
+		
 		if(!list.isEmpty()) {
+			request.setAttribute("movieList", movieList);
 			request.setAttribute("screenList", list);
 			
 			view = "views/admin/adminDetailTheater.jsp";
