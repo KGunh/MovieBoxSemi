@@ -8,8 +8,6 @@
 	String type = (String)request.getAttribute("type");
 	String genre = (String)request.getAttribute("genre");
 	
-	System.out.println(list);
-
 %>
     
 <!DOCTYPE html>

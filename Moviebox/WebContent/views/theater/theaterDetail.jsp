@@ -1,5 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ page import="com.kh.theater.model.vo.*" %>
+    
+<%
+	
+System.out.println("아아");
+	Theater theater = (Theater)request.getAttribute("theater");
+	System.out.println(theater);
+
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -125,7 +135,7 @@
         <div id="theater-header">
                 <h1>KH 시네마</h1>
             <div id="theater-content">
-                <a>총 상영관 수 : 10개 관 </a> | <a>총 좌석수 : 1785석 </a>
+                <!-- <a>총 상영관 수 : 10개 관 </a> | <a>총 좌석수 : 1785석 </a> -->
             </div>
         </div>
 

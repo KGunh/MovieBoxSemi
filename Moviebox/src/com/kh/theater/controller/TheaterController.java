@@ -12,8 +12,9 @@ public class TheaterController {
 	
 	public String selectTheaterDetail(HttpServletRequest request, HttpServletResponse response) {
 		
-		int tNo = Integer.parseInt(request.getParameter("theaterNo"));
-		Theater theater = new TheaterService().detailTheater(tNo);
+		int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));
+		Theater theater = new TheaterService().detailTheater(theaterNo);
+		
 		request.setAttribute("theater", theater);
 		
 		String view = "views/theater/theaterDetail.jsp";
