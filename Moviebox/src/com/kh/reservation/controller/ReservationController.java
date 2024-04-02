@@ -71,7 +71,6 @@ public class ReservationController {
 			screen.setMovieRt(sc.getMovieRt());
 			screen.setScreenNo(sc.getScreenNo());
 			
-			
 			screenList.add(screen);
 		};
 		
