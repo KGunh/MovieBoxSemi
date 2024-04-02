@@ -184,20 +184,20 @@
         <div id="movie-detail">
             <div id="movie-detail-box">
             
-            <input type="hidden" name="movieNo" value="<%= movie.getMovieNo()%>" />
+           
             
                 <div id="movie-detail-poster">
                     포스터
                 </div>
 
                 <div id="movie-detail-content">
-                    <div id="movie-detail-title">제목 </div>
+                    <div id="movie-detail-title"><%= movie.getMovieTitle() %></div>
                     <div id="movie-detail-etc">
-                        <a>장르</a> | <a>러닝타임</a> | <a>관람등급</a> | <a>개봉일</a>
+                        <a><%= movie.getGenreName() %></a> | <a><%= movie.getMovieRt() %>분</a> | <a><%= movie.getMovieRated() %>이상 관람가</a> | <a><%= movie.getMovieRelease() %> 개봉</a>
                     </div>
-                    <div id="movie-detail-director">감독</div>
-                    <div id="movie-detail-actor">출연진</div>
-                    <div id="movie-detail-story">줄거리
+                    <div id="movie-detail-director"><%= movie.getDirectorName() %></div>
+                    <div id="movie-detail-actor"><%= cast %></div>
+                    <div id="movie-detail-story"><%= movie.getMovieStory() %>
                     </div>
                     
                     <% if(loginUser == null) { %>

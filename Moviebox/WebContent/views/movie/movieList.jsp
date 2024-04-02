@@ -7,6 +7,8 @@
 	ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("movieList");
 	String type = (String)request.getAttribute("type");
 	String genre = (String)request.getAttribute("genre");
+	
+	System.out.println(list);
 
 %>
     
@@ -193,6 +195,7 @@
     <%@ include file="/views/common/header.jsp" %>
     
     <div id="wrap">
+    
  
         <div id="movie-list">
 
@@ -237,35 +240,29 @@
             </div> <!-- movie-list-header -->
 
             <div id="movie-content-body">
-				
 			<% if(list.isEmpty()) { %>
 				<a style="color: white;">등록된 영화가 존재하지 않습니다.</a> <br>
 			<% } else { %>
 
                 <% for(Movie m : list) { %>
                     <div class="movie-content">
+                    	<input type="hidden" id="inputId" name="movieNo" value="<%= m.getMovieNo()%>" />
                         <div class="movie-list-img"> 포스터 </div>
-                        <div class="movie-list-title"> <%= m.getMovieTitle() %></div>
-                        <button id="movie-content-btn1" onclick="detailPage();">상세정보</button>
+                        <div class="movie-list-title"><%= m.getMovieTitle() %></div>
+                        <button id="movie-content-btn1" onclick="detailPage(this);">상세정보</button>
                         <button id="movie-content-btn2">예매정보</button>
                     </div>
                  <% } %>
              <% } %>
 
             </div>
-            
-            <script>
-            function detailPage(){
-        			const movieNo = $(this).children().eq(0).text();
-        			location.href = '<%=contextPath%>/detail.movie?movieNo=' + movieNo;
-                }
-            	//const movieNo = $(this).children().eq(0).text();
-            	//location.href = '< %= contextPath %>/detail.movie?movieNo=' + movieNo;
 
-            
-            </script>
-            
-
+			<script>
+			function detailPage(button) {
+			    var movieNo = $(button).siblings('input[type="hidden"]').val();
+			    location.href = '<%=contextPath%>/detail.movie?movieNo=' + movieNo;
+			}
+			</script>
 
         </div> <!-- movie-list -->
     </div> <!-- wrap -->

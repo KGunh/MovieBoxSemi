@@ -1,5 +1,23 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+<%@ page import="com.kh.notice.model.vo.Notice,
+				 com.kh.common.model.vo.PageInfo,
+				 java.util.ArrayList"%>
+    
+<%
+	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
+	Notice notice = (Notice)request.getAttribute("notice");
+	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
+	
+	int currentPage = pi.getCurrentPage();
+	int startPage = pi.getStartPage();
+	int endPage = pi.getEndPage();
+	int maxPage = pi.getMaxPage();
+
+%>    
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -63,41 +81,27 @@
             float: left;
             background-color: #FFC145;
             font-weight: bolder;
-        }
-        
-        .notice-tap a {
-        	color: #1A1A1A;
-        }        
-        
-        .notice-tap a:hover {
-        	color: #1A1A1A;
-        	text-decoration: none;
+            cursor: pointer;
+            color: #1A1A1A;
         }
 
         .qna-tap{
             width: 600px;
             height: 90px;
-            color: #FFC145;
+            color: white;
             display: inline-block;
             left: 0;
             cursor: pointer;
+            color: #FFC145;
         }
 
-        .qna-tap:hover{
+        .notice-tap:hover{
             background-color: #FFC145;
         }
         
-        .qna-tap a {
-        	color: white;
-        }
-        
-        .qna-tap:hover a{
-        	color: #1A1A1A;
-        }
-        
-        .qna-tap a:hover {
-        	color: #1A1A1A;
-        	text-decoration: none;
+        .qna-tap:hover{
+            background-color: #FFC145;
+            color: #1A1A1A;
         }
 
         /* 검색 */
@@ -212,6 +216,7 @@
         }
         
         #list-th-i{
+        	width: 100px;
         	text-align: center;
         	border-bottom: 1px solid #bbbbbb46;
         }
@@ -226,6 +231,20 @@
             width: 1200px;
             margin-top: 40px;
             margin-bottom: 40px;
+        }
+        
+       /* 글쓰기 버튼 */
+        #qna-insert-btn{
+            width: 100px;
+            height: 40px;
+            float: right;
+            border: none;
+            border-radius: 8px;
+            margin-right: 44px;
+            margin-bottom: 15px;
+            font-size: 15px;
+            font-weight: bold;
+            background-color: #FFC145;
         }
 
 
@@ -245,8 +264,8 @@
                 
             <!-- 카테고리 -->
             <div id="board-category">
-                <div class="notice-tap"><a href="noticeList.jsp">공지사항</a></div>
-                <div class="qna-tap"><a href="../board/boardList.jsp">QnA</a></div>
+                <div class="notice-tap" onclick="openNoticePage();">공지사항</div>
+                <div class="qna-tap" onclick="openQnaPage();">QnA</div>
             </div> <!-- board-category -->
 
             <!-- 검색 -->
@@ -261,7 +280,14 @@
                 </div>
 
             </div> <!-- search-notice -->
-
+            
+            
+	            <!-- 관리자로 로그인 했을 때만 보이게 해야함! -->
+	        <div id="qna-insert">
+	            <% if(loginUser != null && loginUser.getMemberId().equals("admin")) { %>
+	                <button id="qna-insert-btn" onclick="noticeInsert();">글쓰기</button>
+	            <% } %>
+	        </div>
 
             <!-- 게시판 -->
             <div class="container">
@@ -271,51 +297,85 @@
                             <th id="list-th-i">번호</th>
                             <th id="list-th-i">카테고리</th>
                             <th id="list-th">제목</th>
-                            <th id="list-th-i">작성일</th>
                             <th id="list-th-i">조회수</th>
+                            <th id="list-th-i">작성일</th>
                         </tr>
                     </thead>
                     <tbody>
+                    <% if(list.isEmpty()) { %>
                         <tr>
-                            <td id="list-no">1</td>
-                            <td id="list-ca">예매</td>
-                            <td id="list-title">공지 제목 제목 공지 제목 공지사항 예매 공지</td>
-                            <td id="list-date">2024-03-21</td>
-                            <td id="list-count">50</td>
+                            <td colspan="5">조회 된 공지사항이 없습니다. </td>
                         </tr>
-                        <tr>
-                            <td id="list-no">2</td>
-                            <td id="list-ca">영화관</td>
-                            <td id="list-title">공지 제목 제목 공지 제목 공지사항 예매 공지</td>
-                            <td id="list-date">2024-03-21</td>
-                            <td id="list-count">777</td>
+                     <% } else { %>
+                     
+                     	<% for(Notice n : list) { %>
+                        <tr class="list">
+                            <td id="list-no"><%= n.getNoticeNo() %></td>
+                            <td id="list-ca"><%= n.getNoticeCategory() %></td>
+                            <td id="list-title"><%= n.getNoticeTitle() %></td>
+                            <td id="list-count"><%= n.getCount() %></td>
+                            <td id="list-date"><%= n.getCreateDate() %></td>
                         </tr>
-                        <tr>
-                            <td id="list-no">3</td>
-                            <td id="list-ca">기타</td>
-                            <td id="list-title">공지 제목 제목 공지 제목 공지사항 예매 공지임 예매</td>
-                            <td id="list-date">2024-03-21</td>
-                            <td id="list-count">58</td>
-                        </tr>
+                        
+                        <% } %>
+                    <% } %>
+
+                     
                     </tbody>
                 </table>
             </div>
-
-
+			
+	        
+           <!--  -->
             <div id="page">
                 <div class="paging-area" align="center" style="margin-top:12px;">
-                    <button class="btn btn-outline-danger" style="color:white; background: none; border: 1px solid white;"> < </button>
-                    <button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;">1</button>
-                    <button class="btn btn-outline-danger" style="color:white; background: none; border: 1px solid white;"> > </button>
+          			
+          			<% if(currentPage > 1) { %>
+	          			<button class="btn btn-outline-secondary" style="color:white; background: none; border: 1px solid white;"
+	          			onclick="location.href='<%=contextPath%>/list.notice?currentPage=<%= currentPage - 1 %>'"> < </button>
+	               	<% } %>
+	                    
+	                <% for(int i = startPage; i <= endPage; i++) { %>
+	                	<% if(currentPage != i) { %>
+					        <button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
+					        onclick="location.href='<%=contextPath%>/list.notice?currentPage=<%=i%>'"><%= i %></button>
+					    <% } else { %>
+					    	<button disabled class="btn btn-outline-secondary" style="color:white; background-color:#6c757d; border: 1px solid white;"><%=i%></button>
+					    <% } %>
+	                <% } %>
+	                
+	                <% if(currentPage != maxPage) { %>
+		                <button class="btn btn-outline-secondary" style="color:white; background: none; border: 1px solid white;"
+		                onclick="location.href='<%=contextPath%>/list.notice?currentPage=<%= currentPage + 1 %>'"> > </button>
+		            <% } %>
                 </div>
             </div>
 
         </div>
     </div>
     
-
-    
     	<%@ include file="../common/footer.jsp" %>
+
+    	
+    	<script>
+    		function openNoticePage(){
+    			location.href = '<%=contextPath %>/list.notice?currentPage=1';
+    		}
+    		
+    		function openQnaPage(){
+    			location.href = '<%= contextPath %>/list.board?currentPage=1';
+    		}
+    		
+    		function noticeInsert(){
+    			location.href = '<%=contextPath%>/enrollForm.notice';
+    		}
+
+    		$('tbody > tr.list').click(function(){
+    			const noticeNo = $(this).children().eq(0).text();
+    			location.href = '<%=contextPath%>/detail.notice?noticeNo=' + noticeNo;
+            });
+    	
+    	</script>
 
 
 </body>
