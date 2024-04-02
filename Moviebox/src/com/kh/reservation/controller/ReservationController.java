@@ -36,11 +36,11 @@ public class ReservationController {
 		
 		if(dateStr.length >= 3) { // 예외처리
 			screenDate = dateStr[0].substring(2) + "/" + dateStr[1] + "/" + dateStr[2];
-		};
+		}
 		
 		if(!request.getParameter("movieNo").equals("")) { // 예외처리
 			movieNo = Integer.parseInt(request.getParameter("movieNo"));
-		};
+		}
 		
 		if(screenLocation.equals("전체")) screenLocation = ""; //예외처리
 		
@@ -57,7 +57,7 @@ public class ReservationController {
 			sc.setMovieRt(screen.getMovieRt());
 			
             set.add(sc);
-        };
+        }
         
 		// 중복이 제거후 list에 담기
 		List<Screen> screenList = new ArrayList<Screen>();
@@ -71,9 +71,8 @@ public class ReservationController {
 			screen.setMovieRt(sc.getMovieRt());
 			screen.setScreenNo(sc.getScreenNo());
 			
-			
 			screenList.add(screen);
-		};
+		}
 		
 		// 영화관마다 상영중인 시간 list필드에 담기
 		for(int i = 0; i < screenList.size(); i++) {
@@ -86,13 +85,13 @@ public class ReservationController {
 		            watchDateList.add(list.get(j).getWatchDate());
 		            screenNoList.add(list.get(j).getScreenNo());
 		            screenNameList.add(list.get(j).getScreenName());
-		        };
-		    };
+		        }
+		    }
 
 		    screenList.get(i).setScreenNameList(screenNameList);
 		    screenList.get(i).setWatchDateList(watchDateList);
 		    screenList.get(i).setScreenNoList(screenNoList);
-		};
+		}
 		
 		return screenList;
 	}

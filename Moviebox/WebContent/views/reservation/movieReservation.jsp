@@ -206,22 +206,39 @@
         cursor: pointer;
     }
 
-    #submit-btn{
-        height: 60px;
-        width: 160px;
-        border-radius: 12px;
-        font-weight: 600;
-        font-size: 28px;
-        background-color: rgb(255, 193, 69);
-        float: right;
-        margin-top: 20px;
-        margin-right: 65px;
-        border: none;
+    #select-screen-area{
+        height: 240px;
+        width: 144px;
+        border: 3px solid rgb(255, 193, 69);
         position: fixed; 
-        bottom: 50px; 
-        right: 110px;
+        bottom: 300px; 
+        right: 150px;
+        border-radius: 12px;
     }
 
+    #select-screen{
+        height: 150px;
+        width: 100%;
+        text-align: center;
+        color: rgb(148, 145, 145);
+        font-size: 14px;
+        font-weight: 500;
+    }
+
+    #select-screen > div{
+        margin-top: 30px;
+    }
+
+    #submit-btn{
+        height: 60px;
+        width: 140px;
+        border-bottom-right-radius: 12px;
+        border-bottom-left-radius: 12px;
+        font-weight: 600;
+        font-size: 24px;
+        background-color: rgb(255, 193, 69);
+        border: none;
+    }
   
 </style>
 
@@ -277,14 +294,20 @@
             </div>
             <div id="selectScreenArea">
                 <div id="printScreen"></div>
-                
                 <input id="movieTitle" type="hidden" name="movieTitle">
                 <input id="movieNo" type="hidden" name="movieNo">
                 <input id="theaterName" type="hidden" name="theaterName">
                 <input id="screenName" type="hidden" name="screenName">
                 <input id="screenNo" type="hidden" name="screenNo">
-                
-                <button id="submit-btn" type="button">좌석 선택</button>
+                <div id="select-screen-area">
+                    <div id="select-screen">
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                        <div></div>
+                    </div>
+                    <button id="submit-btn" type="button">좌석 선택</button>
+                </div>
             </div>
         </form>
     </div>
@@ -315,11 +338,13 @@
             }
         }); 
 
+        let movieTitle = '';
+
         window.onload = function() {
-            var today = new Date();
-            var year = today.getFullYear();
-            var month = (String)(today.getMonth() + 1).padStart(2, '0');
-            var day = (String)(today.getDate()).padStart(2, '0');
+            let today = new Date();
+            let year = today.getFullYear();
+            let month = (String)(today.getMonth() + 1).padStart(2, '0');
+            let day = (String)(today.getDate()).padStart(2, '0');
             document.getElementById('printToday').innerHTML = year + '-' + month + '-' + day;
         };
 
@@ -328,7 +353,9 @@
                 $('.poster').not(this).removeAttr('style');
                 $(this).css('transform', 'scale(1.1)');
                 $('#movieNo').val($(this).children().eq(1).val());
-                $('#movieTitle').val($(this).children().eq(2).val());
+
+                movieTitle = $(this).children().eq(2).val();
+                $('#movieTitle').val(movieTitle);
             });
         });
 		
@@ -343,7 +370,11 @@
                 $('.screenName').removeClass('clicked');
                 $(e).addClass('clicked');
             }
-            
+
+            $('#select-screen').children().eq(0).html($(e).parent().children().eq(0).html());
+            $('#select-screen').children().eq(1).html(movieTitle);
+            $('#select-screen').children().eq(2).html($(e).children().eq(2).html());
+            $('#select-screen').children().eq(3).html($(e).children().eq(0).html());
             $('#screenNo').val(e.children[1].value);
             $('#screenName').val(e.children[2].value);
             $('#theaterName').val($(e).parent().children().eq(0).html());
@@ -359,7 +390,7 @@
                     movieNo : $('#movieNo').val()
             	},
             	success : function(result){
-                    var resultStr = '';
+                    let resultStr = '';
                     for(let i = 0; i < result.length; i++){
                         resultStr += '<div class="screen">'
                                     +     '<div class="theaterName">' + result[i].theaterName + '</div>';
@@ -384,11 +415,11 @@
             });
         };
             
-        $('#screenDate').change(function(){
+        $('.poster').click(function(e){
             selectScreen();
         });
 
-        $('.poster').click(function(){
+        $('#screenDate').change(function(e){
             selectScreen();
         });
 

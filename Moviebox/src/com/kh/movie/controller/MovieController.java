@@ -49,22 +49,17 @@ public class MovieController {
 	
 	// 영화 상세정보
 	public String detailMovie(HttpServletRequest request, HttpServletResponse response) {
-				
-		int movieNo = Integer.parseInt(request.getParameter("movieNo"));
-		
 
+		int movieNo = Integer.parseInt(request.getParameter("movieNo"));
+		String view ="";
+		
 		Movie movie = new MovieService().detailMovie(movieNo);
 		String cast = new MovieService().detailMovieCast(movieNo);
-		String view = "";
-
-//		request.setAttribute("movie", movie);
-//		request.setAttribute("cast", cast);
-		
-//		String view = "views/movie/movieDetail.jsp";
 		
 		if(movie != null) {
 			request.setAttribute("movie", movie);
 			request.setAttribute("cast", cast);
+
 			view = "views/movie/movieDetail.jsp";
 		} else {
 			view = "index.jsp";
@@ -74,7 +69,7 @@ public class MovieController {
 		return view;
 	}
 	
-	public String detailMovieList(HttpServletRequest request) {
+	public String detailMovieList(HttpServletRequest request, HttpServletResponse response) {
 		
 		ArrayList<Movie> movieList = new MovieService().selectMovieList();
 		request.setAttribute("movieList", movieList);
