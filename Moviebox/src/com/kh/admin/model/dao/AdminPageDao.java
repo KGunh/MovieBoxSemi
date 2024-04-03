@@ -695,10 +695,10 @@ public class AdminPageDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			System.out.println(screenName);
+			
 			pstmt.setInt(1, sc.getTheaterNo());
 			pstmt.setString(2, screenName);
-			
+			pstmt.setString(3, sc.getWatchDate());
 			rset = pstmt.executeQuery();
 			
 			while (rset.next()) {
@@ -719,7 +719,6 @@ public class AdminPageDao {
 			close(rset);
 			close(pstmt);
 		}
-		System.out.println(list);
 		return list;
 
 		
@@ -761,6 +760,51 @@ public class AdminPageDao {
 
 		return list;
 
+	}
+	
+	
+	
+	
+	
+	public List<Movie> searchTitle(Connection conn, String keyword, PageInfo pi) {
+		
+		List<Movie> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchTitle");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+
+			pstmt.setString(1, keyword);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+			Movie movie = new Movie();
+			
+				movie.setMovieNo(rset.getInt("MOVIE_NO"));
+				movie.setMovieRelease(rset.getString("MOVIE_RELEASE"));
+				movie.setMovieTitle(rset.getString("MOVIE_TITLE"));
+				movie.setMovieRated(rset.getString("MOVIE_RATED"));
+				movie.setGenreNo(rset.getString("GENRE_NAME"));
+				movie.setMovieUpdate(rset.getString("MOVIE_UPDATE"));
+				
+				list.add(movie);
+			}	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+//		System.out.println(list);
+		return list;
+		
 	}
 
 }

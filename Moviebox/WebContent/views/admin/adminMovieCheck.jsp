@@ -170,7 +170,7 @@
             font-size: 15px;
         }
 
-        #find { /*검색창*/
+        #searchTitle { /*검색창*/
             width: 300px;
             height: 35px;
             border-radius: 5px;
@@ -336,17 +336,17 @@
             <div class="content_2">
                 <p id="p">영화 관리</p>
                 <div id="content_2_box"><!--컨텐트2 전체박스-->
+                    
 
                     <div id="cnt2_box_wrap"> <!-- 셀렉, 인풋, 버튼 전체 -->
-
-                            <input type="text" id="find" placeholder="영화 제목을 입력해 주세요.">
-                            <button type="submit" id="btn" style="background-color: #FFC145; height: 35px;" onclick="searchTtitle()">
+                            <input type="text" id="searchTitle" placeholder="영화 제목을 입력해 주세요.">
+                            <button type="button" id="btn" style="background-color: #FFC145; height: 35px;" class="keyword">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
                                 </svg>
                             </button>
+                            
                     </div><!-- 셀렉, 인풋, 버튼 전체 -->
-
 
 
                     <div id="cnt2_btn"><!--등록 버튼-->
@@ -354,7 +354,7 @@
                         >등록</button>
 
                     </div><!--등록 버튼-->
-                    
+                
 
 
 
@@ -376,7 +376,7 @@
                                 </tr>
                               </thead>
                               
-			                    <tbody>
+			                    <tbody id="tbody">
 			                    <% if(list == null || list.isEmpty()) { %>
 			                        <tr>
 			                            <td colspan="6">조회 된 영화 목록이 없습니다. </td>
@@ -390,6 +390,7 @@
 			                                    <td><%= m.getGenreNo() %></td>
 			                                    <td><%= m.getMovieRated() %></td>
 			                                    <td><%= m.getMovieUpdate() %></td>
+
 			                                </tr>
 			                      	<% } %>          
 			                     <% } %>          
@@ -457,6 +458,37 @@
     			location.href='<%= contextPath %>/adminMovieDetail.admin?movieNo=' + movieNo;
     		})
     	}) 
+    	
+    	$('.keyword').on('click', function(){
+    		console.log( $('#searchTitle').val());
+    		$.ajax({
+				url : 'searchTitle',
+				//		name		value(input일때)
+				data : {keyword : $('#searchTitle').val(),
+					currentPage : 1},
+				type : 'get',
+				success : function(result){
+					console.log(result);
+					$('#tbody').html('');	
+					let resultStr = '';
+					for(let i = 0; i < result.length; i++) {
+						
+						resultStr += '<tr>'
+								  + '<td>' + result[i].movieNo + '</td>'
+								  + '<td>' + result[i].movieRelease + '</td>'
+								  + '<td>' + result[i].movieTitle + '</td>'
+								  + '<td>' + result[i].genreNo + '</td>'
+								  + '<td>' + result[i].movieRated + '</td>'
+								  + '<td>' + result[i].movieUpdate + '</td>'
+								  + '</tr>'
+								  
+					};
+					
+					$('#tbody').html(resultStr);	
+				}
+    		});
+    	})
+    	
 
     	
 	</script>

@@ -12,6 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import com.google.gson.Gson;
 import com.kh.common.model.service.MainService;
 import com.kh.common.model.vo.Location;
+import com.kh.theater.model.vo.Screen;
 
 /**
  * Servlet implementation class AjaxAdminSelectLocation
@@ -32,6 +33,7 @@ public class AjaxAdminSelectLocation extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		List<Location> list = new MainService().locationList();
 		
 		response.setContentType("application/json; charset=UTF-8");

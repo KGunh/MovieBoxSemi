@@ -7,7 +7,6 @@
 	ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("movieList");
 	Movie movie = (Movie)request.getAttribute("movie");
 	String cast = (String)request.getAttribute("cast");
-	
 %>
 <!DOCTYPE html>
 <html>

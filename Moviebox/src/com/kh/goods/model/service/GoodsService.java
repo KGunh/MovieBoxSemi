@@ -1,20 +1,24 @@
 package com.kh.goods.model.service;
 
+import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.getConnection;
+
 import java.sql.Connection;
+import java.util.List;
 
 import com.kh.goods.model.dao.GoodsDao;
-
-import static com.kh.common.JDBCTemplate.*;
+import com.kh.goods.model.vo.Goods;
 
 public class GoodsService {
 
-	public void selectGoodsList() {
+	public List<Goods> selectGoodsList() {
 		Connection conn = getConnection();
 		
-		new GoodsDao().selectGoodsList(conn);
+		List<Goods> goodsList = new GoodsDao().selectGoodsList(conn);
 		
 		close(conn);
 		
+		return goodsList;
 	}
 
 }

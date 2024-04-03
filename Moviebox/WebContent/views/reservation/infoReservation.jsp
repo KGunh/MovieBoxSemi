@@ -48,7 +48,7 @@
         width: 1000px;
         height: 600px;
         margin: 50px auto 100px auto;
-        background-color: rgb(39, 39, 39);
+        background-color: #0e0e0e;
         padding-top: 1px;
     }
 
