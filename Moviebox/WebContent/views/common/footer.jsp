@@ -73,9 +73,7 @@
 </head>
 <body>
 <script>
-let ww = open();
-ww.alert('<h1>나는 새로 열리는 화면이다</h1>');
-ww.close();
+
 </script>
 
 	<div id="footer">

@@ -316,6 +316,23 @@ public class AdminPageService {
 		return movieList;
 	}
 	
+	public int insertScreen(Screen sc) {
+		Connection conn = getConnection();
+		
+		int count = new AdminPageDao().selectScreen(conn,sc);
+		int result = 0;
+		if(count == 0) {
+			result = new AdminPageDao().insertScreen(conn, sc);
+			
+			if(result>0) commit(conn);
+		}
+		
+		
+		
+		close(conn);
+		
+		return result;
+	}
 	
 	
 	

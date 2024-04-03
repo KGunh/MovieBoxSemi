@@ -806,5 +806,64 @@ public class AdminPageDao {
 		return list;
 		
 	}
+	
+	
+	public int insertScreen(Connection conn, Screen sc) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertScreen");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, sc.getTheaterNo());
+			pstmt.setInt(2, sc.getMovieNo());
+			pstmt.setString(3, sc.getWatchDate());
+			pstmt.setString(4, sc.getScreenName());
+			
+			result = pstmt.executeUpdate();
+
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int selectScreen(Connection conn, Screen sc){
+		int count = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectScreen");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, sc.getWatchDate());
+			pstmt.setInt(2, sc.getTheaterNo());
+			pstmt.setString(3, sc.getScreenName());
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			count = rset.getInt("COUNT(*)");
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return count;
+		
+	}
 
 }
