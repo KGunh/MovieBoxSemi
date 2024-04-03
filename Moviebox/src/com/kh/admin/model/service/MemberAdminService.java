@@ -129,16 +129,43 @@ public class MemberAdminService {
 		
 	}
 	
-	public void modify(Theater theater) {
+	public int modify(Theater theater) {
 		
 		Connection conn = JDBCTemplate.getConnection();
-		new MemberAdminDao().modify(conn, theater);
+		int result = new MemberAdminDao().modify(conn, theater);
 		JDBCTemplate.close(conn);
 		
 		
+		if(result > 0) {
+			JDBCTemplate.commit(conn);
+		}else {
+			JDBCTemplate.rollback(conn);
+		}
 		
 		
 		
+		
+		return result; 
+		
+		
+		
+	}
+	
+	public int dele(int theaterNo){
+		
+		
+		Connection conn = JDBCTemplate.getConnection();
+		int result = new MemberAdminDao().dele(conn,theaterNo);
+		JDBCTemplate.close(conn);
+		
+		
+		if(result>0) {
+			JDBCTemplate.commit(conn);
+		} else {
+			JDBCTemplate.rollback(conn);
+		}
+		
+		return result; 
 		
 	}
 	
