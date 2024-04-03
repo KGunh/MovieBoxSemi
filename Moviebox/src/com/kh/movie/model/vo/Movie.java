@@ -24,6 +24,9 @@ public class Movie {
 	
 	private int screenNo;
 	
+	private String changeName;
+	
+	
 	public Movie() {
 		super();
 	}
@@ -44,6 +47,17 @@ public class Movie {
 	}
 	
 	
+	
+	public String getChangeName() {
+		return changeName;
+	}
+
+
+	public void setChangeName(String changeName) {
+		this.changeName = changeName;
+	}
+
+
 	public int getScreenNo() {
 		return screenNo;
 	}
