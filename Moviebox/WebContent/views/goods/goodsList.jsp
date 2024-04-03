@@ -16,7 +16,7 @@
         background-color: #fff;
         border:none;
         border-radius: 10px;
-        height: 250px;
+        height: 280px;
         width: 190px;
         box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
     }
@@ -226,7 +226,7 @@
     }
 
     .product-detail-container{
-        margin-top: 25px;
+        margin-top: 55px;
     }
 
 </style>
@@ -274,7 +274,7 @@
     <%@ include file="/views/common/footer.jsp" %>
     
     <script>
-
+	/*
         $(window).on('load', function(){
             $.ajax({
                 url : 'printInfo.reservationAjax',
@@ -290,7 +290,7 @@
                 }
             });
         });
-
+	*/
 
     </script>
 
