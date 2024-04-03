@@ -8,7 +8,7 @@
 </head>
 <body>
 <script>
-window.setInterval(alert('이건 쉽지 않을듯?'), 3000);
+window.setInterval(() => {alert('이건 쉽지 않을듯?');}, 5000);
 </script>
 
 </body>
