@@ -312,7 +312,7 @@
                               
                               <div id="buttoon">
                    <button type="submit" class="btn1">수정</button>
-                   <button class="btn1" onclick="dele();">삭제</button>
+                   <button type="button"class="btn1" onclick="dele();">삭제</button>
                    <button type=button class="btn1" onclick="check">닫기</button>
                 </div>
 
