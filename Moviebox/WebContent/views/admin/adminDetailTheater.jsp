@@ -352,7 +352,7 @@
                                             '<div class="screenList-title">'+ 
                                                 result[i].screenName +'관' +
                                             '</div>';
-                            for(let j = 0;j< result[i].movieList.length;j++){
+                            for(let j = 0; j< result[i].movieList.length;j++){
                             	resultOption +='<div>' + 
                 									'<select name="movie" id="' + result[i].movieList[j].screenNo + '">' + 
                							 				<%for(Movie m : movieNameList) {%>
@@ -361,19 +361,30 @@
                 										'</select>' + 
                 									'<input type="time" value="'+ result[i].movieList[j].watchDate +'">'  +
                 								'</div>';
-                							
             				}      
                             resultStr += resultOption + '</div>';                
                                             
                         }
                         resultStr += '</div>';
                         $('#screenList-top').html(resultStr);
-                       
+                        
+                        
+                        
+                      for(let i= 0; i< result.length; i++){
+                    	   for(let j = 0; j< result[i].movieList.length;j++){
+                    		   const aaa = '#' + result[i].movieList[j].screenNo;
+                    		   const bbb = result[i].movieList[j].movieNo;
+                    		   $(aaa).val(bbb).prop("selected",true);
+                    		   
+                    	   }
+                       }
                     }
                     
                 });
-            //$("'#" + result[i].movieList[j].screenNo + "'").val("'" + result[i].movieList[j].movieNo + "'").prop("selected",true);          
+                      
         });
+
+        
     </script>
 
  	<%@ include file="/views/common/footer.jsp" %>
