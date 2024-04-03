@@ -241,6 +241,7 @@
         <div class="container mt-5" >
             <div class="row">
                 <div class="col-md-3">
+                <!-- 내일 반복문 배우고 -->
                     <div class="card">
                         <div class="image-container">
                             <div class="first">
@@ -266,6 +267,7 @@
                             </div>
                         </div>
                     </div>
+                    <!--  -->
                 </div>
             </div>
         </div>
