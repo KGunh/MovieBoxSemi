@@ -3,6 +3,8 @@
     
     <%
    	ArrayList<Location> location = (ArrayList<Location>)request.getAttribute("location");
+    
+    
     %>
 <!DOCTYPE html>
 <html lang="en">

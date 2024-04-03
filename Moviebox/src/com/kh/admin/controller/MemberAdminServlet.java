@@ -45,9 +45,9 @@ public class MemberAdminServlet extends HttpServlet {
 		
 		switch(mapping) {
 		
-		case "selectAdmin"    :  view = MAC.selectAdmin(request,response); break;
+		case "selectAdmin"   :  view = MAC.selectAdmin(request,response); break;
 		case "modifyAdmin"   :  view = MAC.detailAdmin(request,response); break;
-		case "revisedAdmin" : MAC.updateAdmin(request,response); break;
+		case "revisedAdmin"  :  view = MAC.updateAdmin(request,response); flag=true; break;
 
 		
 		}

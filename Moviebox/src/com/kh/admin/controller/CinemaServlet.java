@@ -43,8 +43,8 @@ public class CinemaServlet extends HttpServlet {
 		case "editAdmin"   :  view= CAC.cinemaEdit(request,response); break;
 		case "checkAdmin"  :  view = CAC.cinemaCheck(request,response); break;
 		case "enroll" 	   :  view = CAC.cinemaInsert(request, response); break;
-		case "modify"	   :  view = CAC.modify(request,response); break;
-		case "dele"		   :
+		case "modify"	   :  view = CAC.modify(request,response); flag=true; break;
+		case "dele"		   : 
 		
 		
 		
