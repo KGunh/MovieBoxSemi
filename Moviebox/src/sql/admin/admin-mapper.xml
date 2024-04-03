@@ -368,7 +368,7 @@
 	
 	
 	<!--  -->
-	<entry key="searchTtitle">
+	<entry key="searchTitle">
 		SELECT *
 		FROM (SELECT A.*, ROWNUM RNUM
 		      FROM (SELECT
