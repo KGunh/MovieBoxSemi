@@ -451,13 +451,10 @@
  			location.href = '<%= contextPath %>/adminMovieInsert.admin';
  		}
  		
-    	$(function(){
-    		$('.mvDetail').click(function(){
-    			//console.log("aaa");
-    			const movieNo = $(this).children().eq(0).text();
-    			location.href='<%= contextPath %>/adminMovieDetail.admin?movieNo=' + movieNo;
-    		})
-    	}) 
+ 		$('#tbody').on('click', 'tr', function(){
+			const movieNo = $(this).children().eq(0).text();
+			location.href='<%= contextPath %>/adminMovieDetail.admin?movieNo=' + movieNo;
+ 		});
     	
     	$('.keyword').on('click', function(){
     		console.log( $('#searchTitle').val());

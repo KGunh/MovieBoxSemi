@@ -2,12 +2,15 @@
     pageEncoding="UTF-8"%>
     
 <%@ page import="com.kh.theater.model.vo.*, java.util.ArrayList,
-				 com.kh.movie.model.vo.*" %>
+				 com.kh.movie.model.vo.*, com.kh.common.model.vo.*" %>
     
 <%
 	ArrayList<Theater> list = (ArrayList<Theater>)request.getAttribute("theaterList");
 	ArrayList<Movie> movies = (ArrayList<Movie>)request.getAttribute("movie");
+	ArrayList<Attachment> attachment = (ArrayList<Attachment>)request.getAttribute("attachment");
 	Theater theater = (Theater)request.getAttribute("theater");
+
+
 %>
 <!DOCTYPE html>
 <html>
@@ -79,9 +82,10 @@
             width: 235px;
             height: auto;
             color: white;
-            border: 1px solid pink;
             display: inline-block;
             margin-bottom: 20px;
+            border: 1px solid #4E4E4E;
+            padding-bottom: 10px;
         }
 
         .movie-conten1{
@@ -94,7 +98,6 @@
 
         .movie-list-title{
             height: 70px;
-            border: 1px solid seagreen;
             text-align: center;
             font-size: 20px;
             font-weight: bold;
@@ -103,13 +106,22 @@
         }
 
         #movie-content-btn1{
-            width: 100px;
-            height: 35px;
+        	width: 100px;
+        	height: 35px;
+        	float:left;
             margin-right: 10px;
-            margin-left: 5px;
+            margin-left: 10px;
             border-radius: 8px;
-            font-weight: bold;
-            font-size: 15px;
+            background-color: white;
+            text-align: center;
+            line-height: 32px;
+        }
+        
+        #detailbtn{
+        	text-decoration: none;
+        	color: black;
+        	font-size: 15px;
+        	font-weight: bold;
         }
 
         #movie-content-btn2{
@@ -119,6 +131,7 @@
             background-color: #FFC145;
             font-weight: bold;
             font-size: 15px;
+            border: none;
         }
 
         .movie-conten1{
@@ -182,9 +195,13 @@
                 
                     <div class="movie-content">
                     <input type="hidden" id="inputId" name="movieNo" value="<%= m.getMovieNo()%>" />
-                        <div class="movie-list-img"> 포스터 </div>
+                    	
+                        <div class="movie-list-img">
+                        <img src="<%= m.getFilePath() %>/<%= m.getChangeName() %>" width="232" height="300"> </div>
+                    
                         <div class="movie-list-title"><%= m.getMovieTitle() %></div>
-                        <button id="movie-content-btn1" onclick="detailPage(this);">상세정보</button>
+                        
+                        <div id="movie-content-btn1"><a href="<%=contextPath%>/detail.movie?movieNo=<%= m.getMovieNo()%>" id="detailbtn">상세정보</a></div>
 	                    <% if(loginUser == null) { %>
 	                    	<button id="movie-content-btn2" onclick="noMember();">예매하기</button>
 	                	<%} else { %>
@@ -213,10 +230,12 @@
 
         
     <script>
-		function detailPage(button) {
-		    var movieNo = $(button).siblings('input[type="hidden"]').val();
+		 
+		$('#movie-content-btn2').on('click',function(){
+		    var movieNo = $(this).siblings('input[type="hidden"]').val();
 		    location.href = '<%=contextPath%>/detail.movie?movieNo=' + movieNo;
-		}
+		});
+
 		
     	// 예매하기 버튼 -> 예매 페이지
     	function reservationPage(){
