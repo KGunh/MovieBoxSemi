@@ -197,6 +197,9 @@
         background-color: #FFC145;
         
     }
+    img:hover{
+    	cursor : pointer;
+    }
     </style>
 </head>
 <body>
@@ -204,85 +207,7 @@
 	
     
     <%@ include file="views/common/header.jsp" %> 
-    <script>
-    window.onload = function(){
-        $.ajax({
-            url : 'ad.main',
-            type : 'get',
-            success : function(result) {
-
-				
-				let resultStr = '';
-				for(let i = 0; i < result.length; i++){
-					resultStr += '<div class="swiper-slide" ><img src="<%=contextPath%>/' + result[i].filePath +'/'+ result[i].changeName+'"' +'/></div>'; 
-
-					
-				}
-				
-
-
-				$('.swiper-wrapper').html(resultStr);
-				
-            },
-            async : false
-        });
-        
-        $.ajax({
-        	url : 'chart.main',
-        	type : 'get',
-        	success : function(result) {
-				
-				
-				let resultStr = '';
-				for(let i = 0; i < result.length; i++){
-					if(i==5) break;
-					resultStr += '<div><img src="<%=contextPath%>/' + result[i].filePath +'/'+ result[i].changeName+'"' +'/></div>'; 
-				}
-				
-				$('.movie-chart').html(resultStr);
-				
-            },
-            async : false
-        });
-        
-        $.ajax({
-        	url : 'board.main',
-        	type : 'get',
-        	success : function(result) {
-
-				
-        		let resultStr = '';
-        		for(let i = 0;i< result.length; i++){
-
-        			if(i==4) break;
-
-        			resultStr += '<tr class="board-area"> <td> ' + result[i].noticeTitle + '</td><td> ' + result[i].createDate + '</td> </tr>';
-        			console.log(result[i].noticeTitle);
-        		}
-        		
-        		$('.board-content tbody').html(resultStr);
-        	},
-        	async : false
-        });
-        
-     // 슬라이더 동작 정의
-        const swiper = new Swiper('.swiper', {
-            autoplay : {
-                delay : 10000 // 3초마다 이미지 변경
-            },
-            loop : true, //반복 재생 여부
-            slidesPerView : 1, // 이전, 이후 사진 미리보기 갯수
-            pagination: { // 페이징 버튼 클릭 시 이미지 이동 가능
-                el: '.swiper-pagination',
-                clickable: true
-            },
-            navigation: { // 화살표 버튼 클릭 시 이미지 이동 가능
-                prevEl: '.swiper-button-prev',
-                nextEl: '.swiper-button-next'
-            }
-        }); 
-    }
-    </script>
+    
 
     
     <div id="main-cotent">
@@ -365,8 +290,98 @@
         </div>
 
     </div>
+    <script>
+    window.onload = function(){
+        $.ajax({
+            url : 'ad.main',
+            type : 'get',
+            success : function(result) {
+
+				
+				let resultStr = '';
+				for(let i = 0; i < result.length; i++){
+					resultStr += '<div class="swiper-slide" ><img class="'+  result[i].movieNo  +'" src="<%=contextPath%>/' + result[i].filePath +'/'+ result[i].changeName+'"' +'/></div>'; 
+
+					
+				}
+				
+
+
+				$('.swiper-wrapper').html(resultStr);
+				
+				
+				
+            },
+            async : false
+        });
+        
+        $.ajax({
+        	url : 'chart.main',
+        	type : 'get',
+        	success : function(result) {
+				
+				
+				let resultStr = '';
+				for(let i = 0; i < result.length; i++){
+					if(i==5) break;
+					resultStr += '<div><img class="'+   result[i].movieNo  +'" src="<%=contextPath%>/' + result[i].filePath +'/'+ result[i].changeName+'"' +'/></div>'; 
+				}
+				
+				$('.movie-chart').html(resultStr);
+				for(let i = 0; i < result.length; i++){
+					$('.' + result[i].movieNo).on('click',function(){
+						location.href = '<%=contextPath%>/detail.movie?movieNo=' + result[i].movieNo;
+					});
+
+					
+				}
+				
+            },
+            async : false
+        });
+        
+        $.ajax({
+        	url : 'board.main',
+        	type : 'get',
+        	success : function(result) {
+
+				
+        		let resultStr = '';
+        		for(let i = 0;i< result.length; i++){
+
+        			if(i==4) break;
+
+        			resultStr += '<tr class="board-area"> <td> ' + result[i].noticeTitle + '</td><td> ' + result[i].createDate + '</td> </tr>';
+        			console.log(result[i].noticeTitle);
+        		}
+        		
+        		$('.board-content tbody').html(resultStr);
+        	},
+        	async : false
+        });
+        
+     // 슬라이더 동작 정의
+        const swiper = new Swiper('.swiper', {
+            autoplay : {
+                delay : 10000 // 3초마다 이미지 변경
+            },
+            loop : true, //반복 재생 여부
+            slidesPerView : 1, // 이전, 이후 사진 미리보기 갯수
+            pagination: { // 페이징 버튼 클릭 시 이미지 이동 가능
+                el: '.swiper-pagination',
+                clickable: true
+            },
+            navigation: { // 화살표 버튼 클릭 시 이미지 이동 가능
+                prevEl: '.swiper-button-prev',
+                nextEl: '.swiper-button-next'
+            }
+        }); 
+    }
     
+    	
+    </script>
     
+
     
     <%@ include file="views/common/footer.jsp" %>
 </body>
