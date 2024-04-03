@@ -761,5 +761,33 @@ public class AdminPageDao {
 		return list;
 
 	}
+	
+	
+	
+	
+	
+	public List<Movie> searchTtitle(Connection conn, String keyword) {
+		
+		List<Movie> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchTtitle");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, keyword);
+			pstmt.
+			rset = pstmt.executeQuery();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+		
+	}
 
 }

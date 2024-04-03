@@ -1,6 +1,7 @@
-package com.kh.theater.controller;
+package com.kh.admin.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -8,17 +9,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.kh.admin.model.service.AdminPageService;
+import com.kh.movie.model.vo.Movie;
+
 /**
- * Servlet implementation class TheaterServlet
+ * Servlet implementation class AjaxAdminSearchTtitle
  */
-@WebServlet("*.theater")
-public class TheaterServlet extends HttpServlet {
+@WebServlet("/searchTitle")
+public class AjaxAdminSearchTtitle extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public TheaterServlet() {
+    public AjaxAdminSearchTtitle() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -27,28 +32,15 @@ public class TheaterServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		request.setCharacterEncoding("UTF-8");
-		
-		TheaterController tc = new TheaterController();
-		
-		String uri = request.getRequestURI();
-		String mapping = uri.substring(uri.lastIndexOf("/") + 1, uri.lastIndexOf("."));
-		
-		String view = "";
-		boolean flag = true;
-		
-		switch(mapping) {
-		case "detail" : view = tc.selectTheaterDetail(request, response); flag = false; break;
-		}
 	
-		if(flag) {
-			response.sendRedirect(request.getContextPath() + view);
-		} else {
-			request.getRequestDispatcher(view).forward(request, response);
-		}
+		String keyword = request.getParameter("keyword");
 	
+		List<Movie> movieList = new AdminPageService().searchTtitle(keyword);
+		
+		response.setContentType("application/json; charset=UTF-8");
+		new Gson().toJson(movieList, response.getWriter());
 	
+		
 	}
 
 	/**

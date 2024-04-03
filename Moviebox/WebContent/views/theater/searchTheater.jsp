@@ -193,11 +193,10 @@
                 <div id="printTheater">
                     
                     	<% for(int i = 0; i < list.size(); i++){ %>
-                    		<% if(i != 0 && i % 3 == 0){ %>
-                                <div class="printTheaterName"><a href="#"><%= list.get(i).getTheaterName() %>ee</a></div><br>
-                   			<% } else { %>
-                                 <div class="printTheaterName"><a href="#"><%= list.get(i).getTheaterName() %></a></div>
-                            <% } %>
+                        <div class="printTheaterName">
+	                        <a href="#" onclick="goToTheaterDetail('<%= list.get(i).getTheaterNo() %>');">
+	                        <%= list.get(i).getTheaterName() %></a>
+                        </div>
                     	<% } %>
                     
                 </div>
@@ -217,6 +216,11 @@
         function selectName(){
             document.getElementById('nameForm').submit();
         }
+        
+        function goToTheaterDetail(theaterNo) {
+            location.href = '<%=contextPath%>/detail.theater?theaterNo=' + theaterNo;
+        }
+        
         
     </script>
 

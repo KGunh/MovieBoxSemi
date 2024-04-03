@@ -1,6 +1,8 @@
 package com.kh.theater.model.vo;
 
-import java.util.Date;
+import java.util.ArrayList;
+
+import com.kh.movie.model.vo.Movie;
 
 public class Theater {
 	private int theaterNo;
@@ -14,6 +16,9 @@ public class Theater {
 	private int screenNo;
 	private int movieNo;
 	private String movieTitle;
+	
+	private ArrayList<Movie> movies;
+	
 	
 	public String getLocationName() {
 		return locationName;
@@ -107,9 +112,12 @@ public class Theater {
 	}
 	
 	
-	
-	
-	
+	public ArrayList<Movie> getMovies() {
+		return movies;
+	}
+	public void setMovies(ArrayList<Movie> movies) {
+		this.movies = movies;
+	}
 	@Override
 	public String toString() {
 		return "Theater [theaterNo=" + theaterNo + ", theaterName=" + theaterName + ", theaterAddr=" + theaterAddr
