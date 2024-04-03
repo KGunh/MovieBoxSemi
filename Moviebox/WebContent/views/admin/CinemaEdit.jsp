@@ -276,6 +276,11 @@
                         
                             <tbody>
                             
+                            <tr>
+                            <th class="title">영화관 번호</th>
+                            <td><input type="text" class="input1" name="theaterNo" value="<%=theater.getTheaterNo() %>"></td>
+                        </tr>
+                            
                               <tr>
                             <th class="title">영화관 이름</th>
                             <td><input type="text" class="input1" name="name" value="<%=theater.getTheaterName() %>"></td>

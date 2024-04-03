@@ -239,7 +239,7 @@
                     최대 8명까지 선택 가능
                 </div>
             </div>
-            <div id="movie-info"><%= movieTitle %> <%= theaterName %> <%= screenName %> <%= screenDate %></div>
+            <div id="movie-info">${ movieTitle } ${ theaterName } ${ screenName } ${ screenDate }</div>
             <div id="select-wrap">
                 <div id="selectAge">
                     <button class="people-teen ageBtn">청소년</button>

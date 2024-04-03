@@ -217,6 +217,7 @@
             <div id="logo-div">
                 <div id="logo"><a href="<%=contextPath %>"><img class="img-concert" src="<%=contextPath%>/resources/img/4.png"/></a></div>
             </div>
+            <jsp:include page="/views/notice/dummy.jsp"/>
             <div id="navigator">
                 <!-- A grey horizontal navbar that becomes vertical on small screens -->
                 <ul class="nav">
@@ -226,6 +227,9 @@
                         <%} else { %>
                         <a class="nav-link" href="<%=contextPath %>/movie.reservation"><span>예매</span></a>
                         <%} %>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<%=contextPath %>/list.goods"><span>스토어</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<%=contextPath %>/list.movie"><span>영화</span></a>

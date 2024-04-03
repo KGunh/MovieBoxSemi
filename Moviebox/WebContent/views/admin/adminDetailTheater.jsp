@@ -210,6 +210,10 @@
             display: block;
             width: 50%;
         }
+        #insertScreen-area{
+        	text-align:center;
+        	
+        }
         
 
 
@@ -288,7 +292,7 @@
     
                     <div class="row" >
 						  <%for(int i = 0; i< 4; i++) {%>	                      
-                        <div class="screenList col-sm-6 " style="height: 300px;margin-top: 40px">
+                        <div class="screenList col-sm-6 " style="height: 250px;margin-top: 40px">
                         
                             <div class="screenList-title"><%=screenList.get(i).getScreenName() %>관</div>
                             <% List<Movie> movieList =  screenList.get(i).getMovieList(); %>
@@ -322,7 +326,48 @@
 
                 <%} %>
                 </div>
-
+				<div id="insertScreen-area">
+					<select id="screenName">
+						<%for(int i = 1; i<= 4; i++) {%>
+							<option value="<%=i%>"><%=i %>관</option>
+						<%} %>
+						
+					</select>
+					<select id="selectMovie" >
+					
+						<%for(Movie m : movieNameList) {%>
+                           	<option value="<%=m.getMovieNo()%>"><%=m.getMovieTitle() %></option>
+                           <%} %>
+					</select>
+					<select id="watchTime">
+						<option>01:00</option>
+						<option>07:00</option>
+						<option>10:00</option>
+						<option>13:00</option>
+						<option>16:00</option>
+						<option>19:00</option>
+						<option>21:00</option>
+					</select>
+					<button id="insertScreen">추가</button>
+				</div>
+				<script>
+					$('#insertScreen').on('click',function(){
+						let $screenName = $('#screenName');
+						let $selectMovie = $('#selectMovie');
+						let $watchTime = $('#watchTime');
+						
+						 $.ajax({
+							url : 'insertScreen.admin',
+							type : 'get',
+							data : {
+								screenName : $screenName.val(),
+								selectMovie : $selectMovie.val(),
+								watchTime : $watchTime.val()
+							}
+						 });
+					});
+				
+				</script>
 
 
 
@@ -333,6 +378,7 @@
     <script>
         $('#today').on('change' , function(){
             let $today = $(this);
+            
             $.ajax({
                     url : 'selectDate.admin',
                     type : 'get',
@@ -348,11 +394,11 @@
 						
                         for(let i = 0;i< result.length; i++){
                             resultOption = '';
-                            resultStr += '<div class="screenList col-sm-6 " style="height: 300px;margin-top: 40px">' +
+                            resultStr += '<div class="screenList col-sm-6 " style="height: 250px;margin-top: 40px">' +
                                             '<div class="screenList-title">'+ 
                                                 result[i].screenName +'관' +
                                             '</div>';
-                            for(let j = 0;j< result[i].movieList.length;j++){
+                            for(let j = 0; j< result[i].movieList.length;j++){
                             	resultOption +='<div>' + 
                 									'<select name="movie" id="' + result[i].movieList[j].screenNo + '">' + 
                							 				<%for(Movie m : movieNameList) {%>
@@ -361,19 +407,81 @@
                 										'</select>' + 
                 									'<input type="time" value="'+ result[i].movieList[j].watchDate +'">'  +
                 								'</div>';
-                							
             				}      
                             resultStr += resultOption + '</div>';                
                                             
                         }
                         resultStr += '</div>';
                         $('#screenList-top').html(resultStr);
-                       
+                        
+                        
+                        
+                      for(let i= 0; i< result.length; i++){
+                    	   for(let j = 0; j< result[i].movieList.length;j++){
+                    		   const aaa = '#' + result[i].movieList[j].screenNo;
+                    		   const bbb = result[i].movieList[j].movieNo;
+                    		   $(aaa).val(bbb).prop("selected",true);
+                    		   
+                    	   }
+                       }
                     }
                     
                 });
-            //$("'#" + result[i].movieList[j].screenNo + "'").val("'" + result[i].movieList[j].movieNo + "'").prop("selected",true);          
+                      
         });
+        
+        function view(){
+        	$.ajax({
+                url : 'selectDate.admin',
+                type : 'get',
+                data : {
+                    watchDate : $today.val(),
+                    theaterNo : <%= th.getTheaterNo()%>
+                },
+                success : function(result){
+                    let resultStr = '';
+                    let resultOption = '';
+                    $('#screenList-top').html('');
+                    resultStr += '<div class="row">';
+					
+                    for(let i = 0;i< result.length; i++){
+                        resultOption = '';
+                        resultStr += '<div class="screenList col-sm-6 " style="height: 250px;margin-top: 40px">' +
+                                        '<div class="screenList-title">'+ 
+                                            result[i].screenName +'관' +
+                                        '</div>';
+                        for(let j = 0; j< result[i].movieList.length;j++){
+                        	resultOption +='<div>' + 
+            									'<select name="movie" id="' + result[i].movieList[j].screenNo + '">' + 
+           							 				<%for(Movie m : movieNameList) {%>
+            										'<option value="<%=m.getMovieNo()%>"><%=m.getMovieTitle() %></option>' +
+            										<%}%> 
+            										'</select>' + 
+            									'<input type="time" value="'+ result[i].movieList[j].watchDate +'">'  +
+            								'</div>';
+        				}      
+                        resultStr += resultOption + '</div>';                
+                                        
+                    }
+                    resultStr += '</div>';
+                    $('#screenList-top').html(resultStr);
+                    
+                    
+                    
+                  for(let i= 0; i< result.length; i++){
+                	   for(let j = 0; j< result[i].movieList.length;j++){
+                		   const aaa = '#' + result[i].movieList[j].screenNo;
+                		   const bbb = result[i].movieList[j].movieNo;
+                		   $(aaa).val(bbb).prop("selected",true);
+                		   
+                	   }
+                   }
+                }
+                
+            });
+        }
+
+        
     </script>
 
  	<%@ include file="/views/common/footer.jsp" %>

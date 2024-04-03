@@ -72,6 +72,8 @@
     </style>
 </head>
 <body>
+
+
 	<div id="footer">
 		<div class="corp_area">
 			<div id="corp_logo">

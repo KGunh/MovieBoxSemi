@@ -1,6 +1,7 @@
 package com.kh.admin.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -71,12 +72,12 @@ public class MemberAdminController {
 		
 	}
 	
-	public void updateAdmin(HttpServletRequest request, HttpServletResponse response) {
+	public String updateAdmin(HttpServletRequest request, HttpServletResponse response) {
 		
 		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		Member member  = new Member();
 		
-		String view = "";	
+		String view = "views/admin/memberModify.jsp";	
 		
 		String memberId = request.getParameter("memberId");
 		String memeberName = request.getParameter("memberName");
@@ -104,12 +105,13 @@ public class MemberAdminController {
 		if(result > 0) {
 			HttpSession session= request.getSession();
 			session.setAttribute("alertMsg", "회원 정보가 수정되었습니다.");
-			try {
-				response.sendRedirect(request.getContextPath()+"/modifyAdmin.mb?memberNo=" + memberNo);
-			} catch (IOException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
+//			try {
+//				response.sendRedirect(request.getContextPath()+"/modifyAdmin.mb?memberNo=" + memberNo);
+//			} catch (IOException e) {
+//				// TODO Auto-generated catch block
+//				System.out.println("실패");
+//				e.printStackTrace();
+//			}
 			
 		} else {
 			request.setAttribute("errorMgs", "회원 정보에 실패했습니다.");
@@ -119,7 +121,7 @@ public class MemberAdminController {
 		
 		
 		
-		
+		return request.getContextPath()+"/modifyAdmin.mb?memberNo=" + memberNo; 
 		
 		
 	}
