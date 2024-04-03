@@ -11,6 +11,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.kh.goods.model.vo.Goods;
+import static com.kh.common.JDBCTemplate.close;
 
 public class GoodsDao {
 	
@@ -29,24 +30,28 @@ public class GoodsDao {
 	}
 
 	public List<Goods> selectGoodsList(Connection conn) {
-		List<Goods> goodsList = new ArrayList<Goods>();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		String sql = prop.getProperty("selectGoodsList");
 		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			rset = pstmt.executeQuery();
+		List<Goods> goodsList = new ArrayList<Goods>();
+		
+		try(PreparedStatement pstmt = conn.prepareStatement(prop.getProperty("selectGoodsList"));
+			ResultSet rset = pstmt.executeQuery();) {
 			
 			while(rset.next()) {
+				Goods goods = new Goods();
 				
+				goods.setGoodsNo(rset.getInt("GOODS_NO"));
+				goods.setGoodsName(rset.getString("GOODS_NAME"));
+				goods.setGoodsPrice(rset.getInt("GOODS_PRICE"));
+				goods.setTypeName(rset.getString("TYPE_NAME"));
+				goods.setFilePath(rset.getString("FILE_PATH"));
+				goods.setChangeName(rset.getString("CHANGE_NAME"));
+				
+				goodsList.add(goods);
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-
+		
 		return goodsList;
 	}
 
