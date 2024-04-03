@@ -217,7 +217,7 @@
             <div id="logo-div">
                 <div id="logo"><a href="<%=contextPath %>"><img class="img-concert" src="<%=contextPath%>/resources/img/4.png"/></a></div>
             </div>
-            <jsp:include page="/views/notice/dummy.jsp"/>
+            
             <div id="navigator">
                 <!-- A grey horizontal navbar that becomes vertical on small screens -->
                 <ul class="nav">
