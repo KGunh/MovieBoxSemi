@@ -247,25 +247,39 @@
                         <div class="movie-list-img">포스터</div>
                         <div class="movie-list-title"><%= m.getMovieTitle() %></div>
                         <button id="movie-content-btn1" onclick="detailPage(this);">상세정보</button>
-                        <button id="movie-content-btn2">예매정보</button>
+	                    <% if(loginUser == null) { %>
+	                    	<button id="movie-content-btn2" onclick="noMember();">예매하기</button>
+	                	<%} else { %>
+	                		<button id="movie-content-btn2" onclick="reservationPage();">예매하기</button>
+	                	<% } %>
                     </div>
                  <% } %>
              <% } %>
 
             </div>
 
-			<script>
-			function detailPage(button) {
-			    var movieNo = $(button).siblings('input[type="hidden"]').val();
-			    location.href = '<%=contextPath%>/detail.movie?movieNo=' + movieNo;
-			}
-			</script>
-
         </div> <!-- movie-list -->
     </div> <!-- wrap -->
     
     
 	<%@ include file="/views/common/footer.jsp" %>
+	
+    <script>
+		function detailPage(button) {
+		    var movieNo = $(button).siblings('input[type="hidden"]').val();
+		    location.href = '<%=contextPath%>/detail.movie?movieNo=' + movieNo;
+		}
+		
+    	// 예매하기 버튼 -> 예매 페이지
+    	function reservationPage(){
+    		location.href = '<%= contextPath %>/movie.reservation';
+    	}
+    	
+		function noMember(){
+			location.href = ('<%=contextPath%>/loginForm.me');
+			alert('로그인이 필요한 서비스 입니다.');
+		}
+	</script>
     
 </body>
 </html>

@@ -228,6 +228,9 @@
                         <%} %>
                     </li>
                     <li class="nav-item">
+                        <a class="nav-link" href="<%=contextPath %>/list.goods"><span>스토어</span></a>
+                    </li>
+                    <li class="nav-item">
                         <a class="nav-link" href="<%=contextPath %>/list.movie"><span>영화</span></a>
                     </li>
                     <li class="nav-item">
