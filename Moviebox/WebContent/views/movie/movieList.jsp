@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>영화 목록</title>
     <style>
         body{
             background-color: #1A1A1A;
@@ -136,7 +136,6 @@
         #movie-content-body{
             width: 1200px;
             height: auto;
-            /*border: 1px solid red;*/
             margin-bottom: 30px;
         }
 
@@ -144,11 +143,12 @@
             width: 235px;
             height: auto;
             color: white;
-            border: 1px solid pink;
             display: inline-block;
             margin-bottom: 20px;
+            border: 1px solid #383838;
+            padding-bottom: 10px;
         }
-
+        
         .movie-conten1{
             width: 1200px;
         }
@@ -159,7 +159,6 @@
 
         .movie-list-title{
             height: 70px;
-            border: 1px solid seagreen;
             text-align: center;
             font-size: 20px;
             font-weight: bold;
@@ -168,13 +167,23 @@
         }
 
         #movie-content-btn1{
-            width: 100px;
-            height: 35px;
+        	width: 100px;
+        	height: 35px;
+        	float:left;
             margin-right: 10px;
-            margin-left: 5px;
+            margin-left: 10px;
             border-radius: 8px;
-            font-weight: bold;
-            font-size: 15px;
+            background-color: white;
+            text-align: center;
+            line-height: 32px;
+        }
+        
+        #detailbtn{
+        	text-decoration: none;
+        	color: black;
+        	font-size: 15px;
+        	font-weight: bold;
+        	display: block;
         }
 
         #movie-content-btn2{
@@ -184,6 +193,7 @@
             background-color: #FFC145;
             font-weight: bold;
             font-size: 15px;
+            border: none;
         }
 
     </style>
@@ -248,7 +258,8 @@
                         <img src="<%= m.getFilePath() %>/<%= m.getChangeName() %>" width="232" height="300">
                         </div>
                         <div class="movie-list-title"><%= m.getMovieTitle() %></div>
-                        <button id="movie-content-btn1" onclick="detailPage(this);">상세정보</button>
+                        <!-- <button id="movie-content-btn1" onclick="detailPage(this);">상세정보</button>-->
+                        <div id="movie-content-btn1"><a href="<%=contextPath%>/detail.movie?movieNo=<%= m.getMovieNo()%>" id="detailbtn">상세정보</a></div>
 	                    <% if(loginUser == null) { %>
 	                    	<button id="movie-content-btn2" onclick="noMember();">예매하기</button>
 	                	<%} else { %>
@@ -267,10 +278,10 @@
 	<%@ include file="/views/common/footer.jsp" %>
 	
     <script>
-		function detailPage(button) {
-		    var movieNo = $(button).siblings('input[type="hidden"]').val();
-		    location.href = '<%=contextPath%>/detail.movie?movieNo=' + movieNo;
-		}
+	$('#movie-content-btn2').on('click',function(){
+	    var movieNo = $(this).siblings('input[type="hidden"]').val();
+	    location.href = '<%=contextPath%>/detail.movie?movieNo=' + movieNo;
+	});
 		
     	// 예매하기 버튼 -> 예매 페이지
     	function reservationPage(){
