@@ -144,9 +144,10 @@ public class CinemaAdminContorller {
 	
 	public String dele(HttpServletRequest request, HttpServletResponse response) {
 		
-		String view = "/views/admin/CinemaEdit.jsp";
+		String view =request.getContextPath()+"/checkAdmin.cm";
 		
 		int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));
+		System.out.println(theaterNo);
 		int result = new MemberAdminService().dele(theaterNo);
 		
 		if(result>0) {
