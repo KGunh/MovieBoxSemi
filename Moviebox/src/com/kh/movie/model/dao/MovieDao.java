@@ -53,6 +53,7 @@ public class MovieDao {
 				movie.setMovieUpdate(rset.getString("MOVIE_UPDATE"));
 				movie.setFilePath(rset.getString("FILE_PATH"));
 				movie.setChangeName(rset.getString("CHANGE_NAME"));
+				movie.setTrailerVideo(rset.getString("TRAILER_VIDEO"));
 				
 				movieList.add(movie);
 			}
@@ -134,6 +135,7 @@ public class MovieDao {
 				m.setMovieUpdate(rset.getString("MOVIE_UPDATE"));
 				m.setFilePath(rset.getString("FILE_PATH"));
 				m.setChangeName(rset.getString("CHANGE_NAME"));
+				m.setTrailerVideo(rset.getString("TRAILER_VIDEO"));
 			}
 			
 			

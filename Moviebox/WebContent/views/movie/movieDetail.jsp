@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>영화 상세정보</title>
 
     <style>
         body{
@@ -115,8 +115,7 @@
         /* 영화 예고편 */
         #movie-detail-video{
             width: 1200px;
-            padding-bottom: 30px;
-            color:white;
+            margin-top: 20px;
         }
 
         h1{
@@ -151,6 +150,19 @@
             border: 1px solid salmon;
             float: left;
             margin-right: 20px;
+        }
+        
+        #video-src{
+        	margin-bottom: 30px;
+        	padding-top: 20px;
+        	padding-bottom: 20px;
+        }
+        
+        #youtube{
+        	margin-top: 20px;
+        	font-size: 30px;
+        	color: white;
+        	font-weight: bold;
         }
 
 
@@ -194,9 +206,10 @@
             </div>
 
             <div id="movie-detail-video">
-                <h1>예고편</h1>
+                <a id="youtube">예고편</a>
+                
                 <div id="video-src">
-                    <iframe id="detail-video" width="1090" height="600" src="https://www.youtube.com/embed/rjW9E1BR_30?si=v4wZ9R1k-4jWv8RI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <%= movie.getTrailerVideo() %>
                 </div>
             </div>
 

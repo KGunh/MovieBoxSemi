@@ -16,7 +16,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>영화관 정보</title>
 
     <style>
         body{
@@ -73,7 +73,6 @@
         #movie-content-body{
             width: 1200px;
             height: auto;
-            /*border: 1px solid red;*/
             margin-top: 30px;
             margin-bottom: 30px;
         }
@@ -84,7 +83,7 @@
             color: white;
             display: inline-block;
             margin-bottom: 20px;
-            border: 1px solid #4E4E4E;
+            border: 1px solid #383838;
             padding-bottom: 10px;
         }
 
@@ -122,6 +121,7 @@
         	color: black;
         	font-size: 15px;
         	font-weight: bold;
+        	display: block;
         }
 
         #movie-content-btn2{

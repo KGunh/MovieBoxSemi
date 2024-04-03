@@ -26,6 +26,8 @@ public class Movie {
 	
 	private String changeName;
 	
+	private String trailerVideo;
+	
 	
 	public Movie() {
 		super();
@@ -48,6 +50,16 @@ public class Movie {
 	
 	
 	
+	public String getTrailerVideo() {
+		return trailerVideo;
+	}
+
+
+	public void setTrailerVideo(String trailerVideo) {
+		this.trailerVideo = trailerVideo;
+	}
+
+
 	public String getChangeName() {
 		return changeName;
 	}
