@@ -125,6 +125,29 @@
 			
 </entry>
 
+<entry key="modify">
+
+	UPDATE 
+		TB_THEATER 
+	SET
+		THEATER_NAME = ?,
+		THEATER_ADDR = ?,
+		MAP_LINK = ? ,
+		LOCATION_CODE = ?,
+		THEATER_UPDATE = SYSDATE
+	WHERE
+		THEATER_NO = ?	
+</entry>
+
+<entry key="dele">
+
+	DELETE
+		FROM TB_THEATER
+	WHERE 
+		THEATER_NO = ?	
+
+
+</entry>
 
 
 

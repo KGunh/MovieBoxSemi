@@ -276,6 +276,11 @@
                         
                             <tbody>
                             
+                            <tr>
+                            <th class="title">영화관 번호</th>
+                            <td><input type="text" class="input1" name="theaterNo" value="<%=theater.getTheaterNo() %>"></td>
+                        </tr>
+                            
                               <tr>
                             <th class="title">영화관 이름</th>
                             <td><input type="text" class="input1" name="name" value="<%=theater.getTheaterName() %>"></td>
@@ -307,7 +312,7 @@
                               
                               <div id="buttoon">
                    <button type="submit" class="btn1">수정</button>
-                   <button class="btn1" onclick="dele();">삭제</button>
+                   <button type="button"class="btn1" onclick="dele();">삭제</button>
                    <button type=button class="btn1" onclick="check">닫기</button>
                 </div>
 

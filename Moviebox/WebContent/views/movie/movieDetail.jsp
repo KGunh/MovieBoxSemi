@@ -43,7 +43,6 @@
             height: 470px;
             margin-top: 20px;
             color: white;
-            border: 1px solid #FFC145;
             position: relative;
         }
 
@@ -51,9 +50,7 @@
             position: absolute;
             width: 300px;
             height: 422px;
-            border: 1px solid red;            
             left: 0;
-            padding: 10px;
             margin: 20px;
         }
 
@@ -63,7 +60,6 @@
             right: 0;
             padding: 10px;
             margin: 20px;
-            border: 1px solid blue;
         }
 
         #movie-detail-title{
@@ -73,7 +69,6 @@
             font-size: 25px;
             font-weight: bold;
             padding-left: 10px;
-            border: 1px solid lightgreen;
         }
 
         #movie-detail-etc{
@@ -82,7 +77,6 @@
             line-height: 40px;
             padding-left: 10px;
             margin-bottom: 15px;
-            border: 1px solid sienna;
         }
 
         #movie-detail-director{
@@ -90,7 +84,6 @@
             height: 40px;
             line-height: 40px;
             padding-left: 10px;
-            border: 1px solid salmon;
         }
 
         #movie-detail-actor{
@@ -99,7 +92,6 @@
             line-height: 40px;
             margin-bottom: 15px;
             padding-left: 10px;
-            border: 1px solid darkcyan;
         }
 
         #movie-detail-story{
@@ -107,7 +99,6 @@
             height: 130px;
             padding: 10px;
             margin-bottom: 15px;
-            border: 1px solid chartreuse;
         }
 
         #movie-detail-btn{
@@ -126,7 +117,6 @@
             width: 1200px;
             padding-bottom: 30px;
             color:white;
-            border: 1px solid aqua;
         }
 
         h1{
@@ -180,6 +170,7 @@
            
             
                 <div id="movie-detail-poster">
+                    <img src="<%= movie.getFilePath() %>/<%= movie.getChangeName() %>" width="300" height="422">
                     
                 </div>
 
@@ -188,8 +179,8 @@
                     <div id="movie-detail-etc">
                         <a><%= movie.getGenreName() %></a> | <a><%= movie.getMovieRt() %>분</a> | <a><%= movie.getMovieRated() %>이상 관람가</a> | <a><%= movie.getMovieRelease() %> 개봉</a>
                     </div>
-                    <div id="movie-detail-director"><%= movie.getDirectorName() %></div>
-                    <div id="movie-detail-actor"><%= cast %></div>
+                    <div id="movie-detail-director">감독 | <%= movie.getDirectorName() %></div>
+                    <div id="movie-detail-actor">출연진 | <%= cast %></div>
                     <div id="movie-detail-story"><%= movie.getMovieStory() %>
                     </div>
                     

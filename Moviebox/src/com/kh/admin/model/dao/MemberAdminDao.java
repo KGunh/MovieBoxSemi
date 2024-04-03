@@ -172,7 +172,7 @@ public class MemberAdminDao {
 			while(rset.next()) {
 				Theater Cinema = new Theater(); 
 						Cinema.setTheaterNo(rset.getInt("THEATER_NO"));
-						Cinema.setUpdateDate(rset.getDate("THEATER_UPDATE"));
+						Cinema.setUpdateDate(rset.getString("THEATER_UPDATE"));
 						Cinema.setLocationName(rset.getString("LOCATION_NAME"));
 						Cinema.setTheaterName(rset.getString("THEATER_NAME"));
 						Cinema.setLocalCode(rset.getString("LOCATION_CODE"));
@@ -309,13 +309,54 @@ public class MemberAdminDao {
 		
 	}
 	
-	public void modify(Connection conn, Theater theater) {
+	public int modify(Connection conn, Theater theater) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("modify");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, theater.getTheaterName());
+			pstmt.setString(2, theater.getTheaterAddr());
+			pstmt.setString(3, theater.getMapLink());
+			pstmt.setString(4, theater.getLocalCode());
+			pstmt.setInt(5, theater.getTheaterNo());
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result; 
+	}
+	
+	public int dele(Connection conn,int theaterNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("dele");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, theaterNo);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+	
 		
 		
-		
-		
+		return result; 
 		
 	}
+	
 }
 	
 	

@@ -313,7 +313,7 @@
 			 <div id="content2">
             <div class="content_2">
             
-            	<form action="<%=contextPath%>/revisedAdmin.mb">
+            	<form action="<%=contextPath%>/revisedAdmin.mb" method="post">
                 <h2> 회원 기본 정보</h2>
                 <div class="content_2_top">
                  

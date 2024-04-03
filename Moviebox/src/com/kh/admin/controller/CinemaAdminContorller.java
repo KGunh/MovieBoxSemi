@@ -9,6 +9,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.kh.admin.model.service.MemberAdminService;
+import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.Location;
 import com.kh.theater.model.vo.Theater;
 
@@ -107,6 +108,7 @@ public class CinemaAdminContorller {
 	
 	public String modify(HttpServletRequest request, HttpServletResponse response) {
 		
+		int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));
 		String name = request.getParameter("name");
 		String address = request.getParameter("address");
 		String link = request.getParameter("link");
@@ -120,26 +122,45 @@ public class CinemaAdminContorller {
 		theater.setMapLink(link);
 		theater.setLocalCode(code);
 		theater.setUpdateDate(enrollDate);
+		theater.setTheaterNo(theaterNo);
 		
-		new MemberAdminService().modify(theater);
+		int result = new MemberAdminService().modify(theater);
 		
-		String view = "/views/admin/CinemaEdit.jsp";
+		if(result > 0) {
+			HttpSession session = request.getSession();
+			session.setAttribute("alertMsg", "정보수정이 완료되었습니다");
+			
+		}else {
+			request.setAttribute("errorMsg", "영화관 정보 등록 실패하였습니다.");
+		}
+		
+		
+		String view = request.getContextPath()+"/editAdmin.cm?theaterNo=" + theaterNo;
 		
 		
 		
 		return view;
 	}
 	
-	public String dele() {
+	public String dele(HttpServletRequest request, HttpServletResponse response) {
 		
-		String view = "/views/admin/CinemaEdit.jsp";
+		String view =request.getContextPath()+"/checkAdmin.cm";
+		
+		int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));
+		int result = new MemberAdminService().dele(theaterNo);
+		
+		if(result>0) {
+			HttpSession session = request.getSession();
+			session.setAttribute("alertMsg", "삭제되었습니다");
+		} else {
+			request.setAttribute("errorMsg", "삭제되지 않았습니다");
+		}
 		
 		
 		
 		return view; 
 		
 	}
-	
 	
 	
 	
