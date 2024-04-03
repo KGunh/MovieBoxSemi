@@ -206,7 +206,7 @@
         #plotPage {
             /* border: 1px solid rgb(255, 39, 85); */
             width: 650px;
-            height: 300px;
+            height: 260px;
             float: left;
 
             padding-left: 7px;
@@ -218,10 +218,11 @@
             width: 250px;
             height: 350px;
             float: left;
+            margin-left: 60px;
         }
 
         #plot{
-            /* border: 1px solid rgb(109, 0, 235); */
+           /* border: 1px solid rgb(109, 0, 235);*/
             width: 750px;
             height: 300px;
             float: left;
@@ -231,14 +232,16 @@
 
         #left {
             /* border: 1px solid rgb(0, 236, 39); */
-            width: 150px;
+            width: 110px;
             height: 350px;
             float: left;
+            margin-left: 60px;
+            padding-left: 20px;
         }
 
         #right{
             /* border: 1px solid rgb(255, 0, 0); */
-            width: 340px;
+            width: 320px;
             height: 350px;
             float: left;
         }
@@ -252,9 +255,10 @@
         #right_7{
             margin-top: 8px;
             /* border: 1px solid rgb(255, 0, 149); */
-            width: 330px;
+            width: 300px;
             height: 40px;
             float: left;
+            margin-left: 5px;
 
         }
 
@@ -286,7 +290,7 @@
         {
             margin-top: 8px;
             /* border: 1px solid rgb(255, 0, 149); */
-            width: 150px;
+            width: 90px;
             height: 40px;
             float: left;
 
@@ -299,16 +303,20 @@
             color: #ffffff;
             float: left;
             padding-top: 12px;
+            padding-bottom: 2px;
             padding-l: 10px;
+            margin: 0%;
+            margin-left: 8px;
         }
 
         #sub8plot{
-            width: 640px;
-            height: 240px;
+            width: 680px;
+            height: 200px;
             border-radius: 8px;
             border: 1px solid lightgray;
             font-size: 15px;
             margin-top: 9px;
+            margin-left: 8px;
             color: #727272;
             padding-left: 7px;
             padding-top: 7px;
@@ -316,9 +324,12 @@
         }
 
         #button{
+          /*  border: 1px solid rgb(255, 0, 149);*/
+            width: 690px;
+            height: 40px;
             margin-top: 4px;
             margin-right: 20px;
-            
+            padding-left: 450px;
         }
 
 
@@ -377,10 +388,11 @@
 
                 <div id="content_2_box"><!--컨텐트2 전체박스-->
                     <div id="box_1">
-                        <div id="postimg"><img style="width: 250px; height: 350px; border: 1px solid rgb(177, 177, 177);" src="/image/파묘.jpg"></div>
+                        <div id="postimg"><img style="width: 250px; height: 350px; border: 1px solid rgb(177, 177, 177);"  src="/image/파묘.jpg"></div>
                         <div id="plot">
-                            <p id="plotStyle">줄거리</p>
+                            
                             <div id="plotPage">
+                                <p id="plotStyle">줄거리</p>
                                 <textarea name="text" class="form-control" id="sub8plot" cols="30" rows="10" placeholder="줄거리를 입력해 주세요." readonly><%=m.getMovieStory() %></textarea>
                                 <div id="button"><!--등록 버튼-->
                                     <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">삭제</button>
