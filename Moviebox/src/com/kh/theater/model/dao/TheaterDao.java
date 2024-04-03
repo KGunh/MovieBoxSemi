@@ -136,7 +136,7 @@ public class TheaterDao {
 				th.setTheaterAddr(rset.getString("THEATER_ADDR"));
 				th.setMapLink(rset.getString("MAP_LINK"));
 				th.setLocationName(rset.getString("LOCATION_NAME"));
-				th.setUpdateDate(rset.getDate("THEATER_UPDATE"));
+				th.setUpdateDate(rset.getString("THEATER_UPDATE"));
 			}
 			
 		} catch (SQLException e) {
