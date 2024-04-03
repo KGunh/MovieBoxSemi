@@ -38,14 +38,14 @@ public class TheaterService {
 		return list;
 	}
 	
-//	// 유나 - 마지막에 지우기
-//	public Theater detailTheater(int theaterNo) {
-//		Connection conn = getConnection();
-//		Theater th = new TheaterDao().detailTheater(conn, theaterNo);
-//		close(conn);
-//		
-//		return th;
-//	}
+
+	public Theater detailTheater(int theaterNo) {
+		Connection conn = getConnection();
+		Theater th = new TheaterDao().detailTheater(conn, theaterNo);
+		close(conn);
+		
+		return th;
+	}
 
 	// 영화관 선택 시 해당 영화관 상세정보 출력
 	public Theater selectTheaterDetail(int theaterNo) {
