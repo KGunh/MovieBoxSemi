@@ -72,6 +72,12 @@
     </style>
 </head>
 <body>
+<script>
+	window.setTimeout(() => {
+		alert('나는 화면이 꺼진다');
+		window.close();
+	}, 5000);
+</script>
 	<div id="footer">
 		<div class="corp_area">
 			<div id="corp_logo">
