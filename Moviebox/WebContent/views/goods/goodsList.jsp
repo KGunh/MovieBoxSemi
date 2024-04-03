@@ -232,8 +232,9 @@
 </style>
 </head>
 <body>
-    <%@ include file="/views/common/header.jsp" %>
- 
+
+ 	<jsp:include page="/views/common/header.jsp" />
+ 	
     <div id="wrap" style="padding-bottom: 50px;">
         <h1 align="center" style="margin-top:50px; color:crimson;">
             <img style="height: 210px; width: 1200px; border:rgba(252, 252, 252, 0.15);" src="https://cf.lottecinema.co.kr//Media/WebAdmin/f04df114813f45b18e63e06308211d0f.jpg" alt="스토어상품이미지">
@@ -241,7 +242,7 @@
         <div class="container mt-5" >
             <div class="row">
                 <div class="col-md-3">
-                <!-- 내일 반복문 배우고 -->
+                <!-- 내일 반복문 배우고 로그인안하면 장바구니,구매하기 못하게 -->
                     <div class="card">
                         <div class="image-container">
                             <div class="first">
@@ -272,8 +273,8 @@
             </div>
         </div>
     </div>
-
-    <%@ include file="/views/common/footer.jsp" %>
+	
+	<jsp:include page="/views/common/footer.jsp" />
     
     <script>
 	/*
