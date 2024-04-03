@@ -5,13 +5,14 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.movie.model.service.MovieService;
+import com.kh.common.model.vo.Attachment;
 import com.kh.movie.model.vo.Movie;
 import com.kh.theater.model.service.TheaterService;
 import com.kh.theater.model.vo.Theater;
 
 public class TheaterController {
 	
+	// 영화관 상세
 	public String listDetail(HttpServletRequest request, HttpServletResponse response) {
 		ArrayList<Theater> list = new TheaterService().theaterAll();
 		request.setAttribute("theaterList", list);
@@ -25,9 +26,7 @@ public class TheaterController {
 		
 		Theater theater = new TheaterService().selectTheaterDetail(theaterNo);
 		
-//		테스트중
 		ArrayList<Movie> movies = new TheaterService().getMoviesByTheater(theaterNo);
-//		theater.setMovies(movies);
 		
 		request.setAttribute("movie", movies);
 		request.setAttribute("theater", theater);
@@ -37,15 +36,18 @@ public class TheaterController {
 		return view;
 	}
 
+	// 포스터
+	public String theaterImg(HttpServletRequest request, HttpServletResponse response){
+		int movieNo = Integer.parseInt(request.getParameter("movieNo"));
+		System.out.println(movieNo);
+		
+		ArrayList<Attachment> attachment = new TheaterService().theaterImg(movieNo);
+		
+		request.setAttribute("attachment", attachment);
 
-	// 영화 정보 보내기 테스트
-//	public String selectMovieList(HttpServletRequest request) {
-//		
-//		ArrayList<Movie> movieList = new MovieService().selectMovieList();
-//		request.setAttribute("movieList", movieList);
-//		
-//		String view = "views/theater/theaterDetail.jsp";
-//		
-//		return view;
-//	}
+		String view = "views/theater/theaterDetail.jsp";
+		
+		return view;
+	}
+	
 }

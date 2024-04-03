@@ -17,6 +17,9 @@ public class Theater {
 	private int movieNo;
 	private String movieTitle;
 	
+	private String filePath;
+	private String changeName;
+	
 	private ArrayList<Movie> movies;
 	
 	
@@ -111,18 +114,34 @@ public class Theater {
 		this.localCode = localCode;
 	}
 	
-	
 	public ArrayList<Movie> getMovies() {
 		return movies;
 	}
 	public void setMovies(ArrayList<Movie> movies) {
 		this.movies = movies;
 	}
+	
+	public String getFilePath() {
+		return filePath;
+	}
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+	public String getChangeName() {
+		return changeName;
+	}
+	public void setChangeName(String changeName) {
+		this.changeName = changeName;
+	}
+	
+	
+	
 	@Override
 	public String toString() {
 		return "Theater [theaterNo=" + theaterNo + ", theaterName=" + theaterName + ", theaterAddr=" + theaterAddr
 				+ ", mapLink=" + mapLink + ", localCode=" + localCode + ", updateDate=" + updateDate + ", locationName="
-				+ locationName + "]";
+				+ locationName + ", screenNo=" + screenNo + ", movieNo=" + movieNo + ", movieTitle=" + movieTitle
+				+ ", filePath=" + filePath + ", changeName=" + changeName + ", movies=" + movies + "]";
 	}
 	@Override
 	public int hashCode() {

@@ -51,6 +51,8 @@ public class MovieDao {
 				movie.setGenreName(rset.getString("GENRE_CODE"));
 				movie.setDirectorName(rset.getString("DIRECTOR_NO"));
 				movie.setMovieUpdate(rset.getString("MOVIE_UPDATE"));
+				movie.setFilePath(rset.getString("FILE_PATH"));
+				movie.setChangeName(rset.getString("CHANGE_NAME"));
 				
 				movieList.add(movie);
 			}
@@ -130,7 +132,10 @@ public class MovieDao {
 				m.setDirectorNo(rset.getInt("DIRECTOR_NO"));
 				m.setDirectorName(rset.getString("DIRECTOR_NAME"));
 				m.setMovieUpdate(rset.getString("MOVIE_UPDATE"));
+				m.setFilePath(rset.getString("FILE_PATH"));
+				m.setChangeName(rset.getString("CHANGE_NAME"));
 			}
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

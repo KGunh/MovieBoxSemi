@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.Properties;
 
 import com.kh.common.JDBCTemplate;
+import com.kh.common.model.vo.Attachment;
 import com.kh.movie.model.dao.MovieDao;
 import com.kh.movie.model.vo.Movie;
 import com.kh.theater.model.vo.Theater;
@@ -152,36 +153,6 @@ public class TheaterDao {
 		return th;
 		
 	}
-//
-//	public ArrayList<Theater> selectTheaterDetail(Connection conn) {
-//		
-//		ArrayList<Theater> list = new ArrayList();
-//		PreparedStatement pstmt = null;
-//		ResultSet rset = null;
-//		
-//		String sql = prop.getProperty("selectTheaterList");
-//		
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			rset = pstmt.executeQuery();
-//			
-//			while(rset.next()) {
-//				Theater t = new Theater();
-//				t.setScreenNo(rset.getInt("SCREEN_NO"));
-//				t.setTheaterNo(rset.getInt("THEATER_NO"));
-//				t.setMovieNo(rset.getInt("MOVIE_NO"));
-//				t.setMovieTitle(rset.getString("MOVIE_TITLE"));
-//				t.setTheaterName(rset.getString("THEATER_NAME"));
-//				t.setTheaterAddr(rset.getString("THEATER_ADDR"));
-//				t.setMapLink(rset.getString("MAP_LINK"));
-//			}
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		
-//		return null;
-//	}
 
 	public Theater selectTheaterDetail(Connection conn, int theaterNo) {
 		Theater th = new Theater();
@@ -203,6 +174,8 @@ public class TheaterDao {
 				th.setTheaterName(rset.getString("THEATER_NAME"));
 				th.setTheaterAddr(rset.getString("THEATER_ADDR"));
 				th.setMapLink(rset.getString("MAP_LINK"));
+				th.setFilePath(rset.getString("FILE_PATH"));
+				th.setChangeName(rset.getString("CHANGE_NAME"));
 			}
 			
 		} catch (SQLException e) {
@@ -244,6 +217,39 @@ public class TheaterDao {
 			close(pstmt);
 		}
 		
+		
+		return list;
+	}
+
+	public ArrayList<Attachment> theaterImg(Connection conn, int movieNo) {
+		
+		ArrayList<Attachment> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("theaterImg");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, movieNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Attachment attachment = new Attachment();
+				
+				attachment.setMovieNo(rset.getInt("MOVIE_NO"));
+				attachment.setChangeName(rset.getString("CHANGE_NAME"));
+				
+				list.add(attachment);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
 		
 		return list;
 	}
