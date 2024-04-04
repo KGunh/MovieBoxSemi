@@ -90,6 +90,8 @@
             width: 100%;
             border: 1px solid rgb(158, 158, 158);
             border-radius: 8px;
+            display: flex;
+            justify-content: space-evenly;
         }
         .input-button{
             
@@ -385,8 +387,12 @@
                             <input class="checkbox" type="checkbox" name="genre" value="코미디" id="comedy">
 						</div>
 						<div class="checkbox-div-label">
-							<label class="genre" for="anime">애니메이션</label>
-                            <input class="checkbox" type="checkbox" name="genre" value="애니메이션" id="anime">
+							<label class="genre" for="anime">애니</label>
+                            <input class="checkbox" type="checkbox" name="genre" value="애니" id="anime">
+						</div>
+						<div class="checkbox-div-label">
+							<label class="genre" for="anime">판타지</label>
+                            <input class="checkbox" type="checkbox" name="genre" value="판타지" id="fantasy">
 						</div>
 					</div>
 				</div>
@@ -404,7 +410,7 @@
 
     </script>
     <script>
-        let birthdayReg =  /^\d{8}$/;
+        let birthdayReg =  /^\d{2}(0[1-9]|1[0-2])(0[1-9]$/;
         let phoneReg = /^\d{11}$/;
         let emailReg = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
         $('.inputdiv > input').blur(function(){

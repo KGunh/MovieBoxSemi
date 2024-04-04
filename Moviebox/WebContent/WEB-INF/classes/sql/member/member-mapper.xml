@@ -361,12 +361,5 @@
       		   TICKET_NO = ?
 	
 	</entry>
-	
-	<entry key="seatCancel">
-		DELETE
-			   TB_SEAT
-	     WHERE
-	     	   TICKET_NO = ?
-	    	   
-	</entry>
+
 </properties>

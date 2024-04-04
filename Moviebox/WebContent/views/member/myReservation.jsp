@@ -306,7 +306,7 @@
                 <div class="res-result">
                     <div>
                         <div class="totalCount">
-                            <h6>총 인원 : <%=resList.get(i).getPersonNum()%> 명</h6>
+                            <h6>총 인원 : <%=price.getCommonCount() + price.getStudentCount() %> 명</h6>
                         </div>
                         <div class="countPrice">
                             <h6 id="studentText">청소년 : <%=price.getStudentCount()%> X 11000  = <%=price.getStudentPrice() %></h6>
@@ -334,25 +334,27 @@
 	<script>
 		$('.res-btn button').click(function(){
 			const $ticketNo = $(this);
+			const value = confirm('예매취소를 원하신다면 확인버튼을 눌러주세요.');
 			
-			$.ajax({
-				url : 'reservationCancel.me',
-				data : {
-					cancelKey : $ticketNo.attr('id')
-				},
-				success : function(result) {
-					if (result == 'Y') {
-						$ticketNo.css('background', 'gray').css('border','none');
-						$ticketNo.html('취소됨');
-						$ticketNo.attr('disabled',true);
+			if(value){
+				$.ajax({
+					url : 'reservationCancel.me',
+					data : {
+						cancelKey : $ticketNo.attr('id')
+					},
+					success : function(result) {
+						if (result == 'Y') {
+							$ticketNo.css('background', 'gray').css('border','none');
+							$ticketNo.html('취소됨');
+							$ticketNo.attr('disabled',true);
+						}
+					},
+					error : function() {
+						console.log('AJAX통신 실패');
 					}
-				},
-				error : function() {
-					console.log('AJAX통신 실패');
-				}
-			});
+				});
 			
-			
+			}
 			
 		})
 					
