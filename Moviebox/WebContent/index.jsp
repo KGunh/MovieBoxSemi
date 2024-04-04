@@ -262,7 +262,7 @@
                     <div class="genre-content-img"><img src="<%=contextPath%>/resources/img/cartoon.png" alt="">애니</div>
                 </div>
                 <div class="genre-content">
-                    <div class="genre-content-img"><img src="<%=contextPath%>/resources/img/cartoon.png" alt="">판타지</div>
+                    <div class="genre-content-img"><img src="<%=contextPath%>/resources/img/fantasy-movie.png" alt="">판타지</div>
                 </div>
             </div>
         </div>
@@ -293,6 +293,12 @@
         </div>
 
     </div>
+    <script>
+    $('.genre-content-img').on('click',function(){
+    	location.href = '<%=contextPath%>/selectGenre.movie?type=genre&genre=' + $(this).text();
+    });
+    	
+    </script>
     <script>
     window.onload = function(){
         $.ajax({
@@ -355,7 +361,6 @@
         			if(i==4) break;
 
         			resultStr += '<tr class="board-area"> <td> ' + result[i].noticeTitle + '</td><td> ' + result[i].createDate + '</td> </tr>';
-        			console.log(result[i].noticeTitle);
         		}
         		
         		$('.board-content tbody').html(resultStr);

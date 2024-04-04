@@ -312,8 +312,9 @@
                               
                               <div id="buttoon">
                    <button type="submit" class="btn1">수정</button>
-                   <button type="button"class="btn1" onclick="dele();">삭제</button>
-                   <button type=button class="btn1" onclick="check">닫기</button>
+                    </form>
+                   <button type="button" class="btn1" onclick="dele();">삭제</button>
+                   <button  type="button" class="btn1" onclick="check();">닫기</button>
                 </div>
 
                 </div>
@@ -321,17 +322,15 @@
                 
                   </div>
                 
-                </form>
+               
                 <script>
                 
                
                 
-                function revise(){
-                	location.href ='<%=contextPath%>/modify.cm'; 
-                }
-                
+              
                 function dele(){
-                	location.href = '<%=contextPath%>/dele.cm';
+                	console.log('asas');
+                	location.href = '<%=contextPath%>/dele.cm?theaterNo=<%=theater.getTheaterNo() %>';
                 }
                 
                 function check(){

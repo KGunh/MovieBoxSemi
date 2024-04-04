@@ -336,10 +336,11 @@ public class MemberAdminDao {
 	}
 	
 	public int dele(Connection conn,int theaterNo) {
-		
+		System.out.println(theaterNo);
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = prop.getProperty("dele");
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 			pstmt.setInt(1, theaterNo);
