@@ -37,12 +37,12 @@ public class AjaxAnswerInsertController extends HttpServlet {
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		String answerContent = request.getParameter("answerContent");
 		
-		int memberNo = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
+		int answerWriter = ((Member)request.getSession().getAttribute("loginUser")).getMemberNo();
 		
 		Answer answer = new Answer();
 		answer.setBoardNo(boardNo);
 		answer.setAnswerContent(answerContent);
-		answer.setMemberNo(String.valueOf(memberNo));
+		answer.setAnswerWriter(String.valueOf(answerWriter));
 		
 		int result = new BoardService().insertAnswer(answer);
 		

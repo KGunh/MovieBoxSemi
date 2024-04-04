@@ -40,8 +40,8 @@ public class ReservationServlet extends HttpServlet {
 		
 		switch(mapping) {
 		case "movie" : view = rc.selectReservationInfo(request); break; 
-		case "seat" : view = rc.connectSeatList(request); break;
 		case "payment" : view = rc.insertReservation(request); break;
+		case "seat" : view = rc.connectSeatList(request); break;
 		}
 		
 		if(flag) {

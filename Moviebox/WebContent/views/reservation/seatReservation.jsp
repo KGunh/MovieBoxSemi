@@ -58,6 +58,7 @@
         color: rgb(148, 145, 145);
         line-height: 50px;
         text-align: center;
+        margin-top: 50px;
     }
 
     .line{
@@ -107,9 +108,9 @@
     }
     
     #select-wrap{
-        height: 50px;
-        width: 600px;
-        margin-left: 300px;
+        height: 100px;
+        width: 500px;
+        margin: auto;
     }
 
     #movie-info{
@@ -122,19 +123,20 @@
         font-weight: 500;
     }
 
-    #selectAge{
+    .selectAge{
         float: left; 
         margin-left: 70px;
         margin-top: 5px;
     }
 
-    #selectAge > button{
+    .selectAge > button{
         height: 35px;
         width: 65px;
         font-size: 16px;
         font-weight: 700;
         border-radius: 8px;
         border: none;
+        cursor: none;
     }
 
     #selectPerson{
@@ -165,10 +167,6 @@
 
     #select-seat{
         color: rgb(125, 124, 124);
-    }
-
-    .ageBtn:hover{
-        background-color: rgb(255, 193, 69);
     }
 
     #select-people{
@@ -219,6 +217,7 @@
         transform: rotateX(-50deg);
     }
 
+
 </style>
 
 
@@ -241,9 +240,21 @@
             </div>
             <div id="movie-info">${ movieTitle } ${ theaterName } ${ screenName } ${ screenDate }</div>
             <div id="select-wrap">
-                <div id="selectAge">
-                    <button class="people-teen ageBtn">청소년</button>
-                    <button class="people-adult ageBtn">성인</button>
+                <div class="selectAge">
+                    <button class="people-teen ageBtn" style="cursor: auto;">청소년</button>
+                </div>
+                <div id="selectPerson">
+                    <button class="people-Count">1</button>
+                    <button class="people-Count">2</button>
+                    <button class="people-Count">3</button>
+                    <button class="people-Count">4</button>
+                    <button class="people-Count">5</button>
+                    <button class="people-Count">6</button>
+                    <button class="people-Count">7</button>
+                    <button class="people-Count">8</button>
+                </div>
+                <div class="selectAge">
+                    <button class="people-adult ageBtn" style="cursor: auto;">성인</button>
                 </div>
                 <div id="selectPerson">
                     <button class="people-Count">1</button>
@@ -458,14 +469,32 @@
                     });
                 },
                 error : function(){
-
+                    // 경고창 보여주고 영화 선택화면으로 이동시키기
                 }
             });
         };
 
+        // 청소년, 성인 선택버튼 조작
+        // 이거 수정해야함!!!!!!!! 청소년 성인 인원수 선택하면 스타일 바뀌게끔
+        $('.ageBtn').click(e => {
+            if($(e.target).hasClass('clicked')) {
+                $(e.target).removeClass('clicked');
+
+                ageType = '';
+            } 
+            else {
+                $('.people-Count').removeClass('clicked');
+                $(e.target).addClass('clicked');
+                
+                ageType = ($(e.target).html());
+            };
+            
+            printPeople();
+        });
+
         // 인원수 버튼에 대한 스타일동작 및 값처리
         $('.people-Count').click(e => {
-            peopleCount = (Number)($(e.target).html());
+            peopleCount = Number($(e.target).html());
             // 청소년,성인 선택 -> 좌석선택 초기화
             $('.seats').removeClass('clicked');
             // 클래스 속성을 부여하여 스타일 조작
@@ -482,25 +511,7 @@
 
             printPeople();
         });
-
-        // 청소년, 성인 선택버튼 조작
-        $('.ageBtn').click(e => {
-            if($(e.target).hasClass('clicked')) {
-                $('.ageBtn').removeClass('clicked');
-
-                ageType = '';
-            } 
-            else {
-                $('.ageBtn').removeClass('clicked');
-                $('.people-Count').removeClass('clicked');
-                $(e.target).addClass('clicked');
-                
-                ageType = ($(e.target).html());
-            };
-            
-            printPeople();
-        });
-
+        
         // 선택한 인원 보여주기
         function printPeople() {
             if(ageType == '청소년') {
@@ -534,6 +545,7 @@
 
             if($(e.target).hasClass('clicked')) {
                 $(e.target).removeClass('clicked');
+                $("#check-area").hide();
                 selectPeople += 1;
                 selectSeat.splice(index, 1);
             } 
@@ -553,7 +565,7 @@
                 // 배열요소의 문자 추출
                 let strA = a.match(/[A-Z]+/)[0];
                 let strB = b.match(/[A-Z]+/)[0];
-
+                
                 // 문자 비교
                 if (strA < strB) {
                     return -1;
@@ -561,7 +573,7 @@
                 else if (strA > strB) {
                     return 1;
                 };
-
+                
                 // 문자가 같을때 숫자 추출
                 let numA = parseInt(a.match(/\d+/)[0], 10);
                 let numB = parseInt(b.match(/\d+/)[0], 10);

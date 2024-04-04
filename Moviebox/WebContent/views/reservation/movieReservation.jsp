@@ -155,6 +155,8 @@
         display: flex;
         justify-content: space-around;
         margin-left: 80px;
+        white-space: nowrap; 
+        overflow-x: auto;
     }
 
     .screenName{
