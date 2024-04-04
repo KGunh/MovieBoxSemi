@@ -3,7 +3,6 @@
     
 <%
 	int ticketNo = (int)request.getAttribute("ticketNo");
-
 %>    
     
     
@@ -53,15 +52,15 @@
     }
 
     #print-info-area{
-        width: 800px;
+        width: 850px;
         height: 500px;
         margin: 50px auto auto auto;
     }
 
     #movie-info-area{
         float: left;
-        width: 250px;
-        height: 450px;
+        width: 300px;
+        height: 475px;
         margin-top: 5px;
     }
 
@@ -75,7 +74,7 @@
         width: 100px;
         height: 50px;
         font-size: 20px;
-        font-weight: 700;
+        font-weight: 600;
         background-color: rgb(255, 193, 69);
         border: 0;
         float: right;
@@ -83,8 +82,8 @@
     }
 
     #movie-poster{
-        width: 200px;
-        height: 300px;
+        width: 220px;
+        height: 330px;
         margin: 10px auto auto auto;
     }
 
@@ -95,8 +94,10 @@
 
     .movie-detail-info{
         text-align: center;
-        font-size: 16px;
-        font-weight: 700;
+        font-size: 18px;
+        font-weight: 500;
+        margin-bottom: 3px;
+
     }
 
     #movie-info div{
@@ -114,17 +115,17 @@
     }
     .select-info{
         width: 150px;
-        font-size: 18px;
-        font-weight: 700;
+        font-size: 20px;
+        font-weight: 600;
         color: rgb(125, 124, 124);
         margin-top: 15px;
         margin-bottom: 15px;
     }
 
     .print-info{
-        width: 300px;
-        font-size: 18px;
-        font-weight: 400;
+        width: 330px;
+        font-size: 20px;
+        font-weight: 500;
         color: rgb(125, 124, 124);
         margin-top: 15px;
         margin-bottom: 15px;
@@ -218,10 +219,9 @@
 
                     $('#print-reservation-info').children().eq(5).html(selectSeatList);
                     $('#print-reservation-info').children().eq(6).html(result.price.totalPrice + '원');
-
                 },
                 error : function(e) {
-
+                    alert('예매 실패!');
                 }
             });
         };

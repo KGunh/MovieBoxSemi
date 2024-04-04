@@ -336,7 +336,8 @@
            TB_MOVIE USING(MOVIE_NO)
      WHERE
            THEATER_NO = ? AND SCREEN_NAME = ? AND TO_CHAR(WATCH_DATE,'YYYY-MM-DD') = TO_CHAR(TO_DATE(?,'YYYY-MM-DD'),'YYYY-MM-DD')
-	
+	 ORDER
+   	    BY WATCH_DATE
 	
 	</entry>
 	
@@ -360,7 +361,7 @@
        			   TRUNC(WATCH_DATE) = TO_DATE(?,'YYYYMMDD')
  		 ORDER
     		  BY 
-       			    SCREEN_NAME
+       			    SCREEN_NAME, WATCH_DATE
 			      
 	
 	</entry>
@@ -390,7 +391,23 @@
 	  		       MOVIE_NO DESC) A)
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
+	<entry key="selectScreen">
+	SELECT
+       	   COUNT(*)
+  	  FROM
+           TB_SCREEN
+     WHERE
+           TO_CHAR(WATCH_DATE,'YYYY-MM-DD/HH24:MI') = ?
+       AND
+           THEATER_NO = ? AND SCREEN_NAME = ?
 	
+	</entry>
+	<entry key="insertScreen">
+		INSERT
+	      INTO
+	      	   TB_SCREEN
+	    VALUES(SEQ_SCRNO.NEXTVAL,?,?,TO_DATE(?,'YYYY-MM-DD/HH24:MI'),?)
+	</entry>
 	
 	
 	

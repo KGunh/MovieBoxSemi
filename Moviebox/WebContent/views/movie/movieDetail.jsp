@@ -12,7 +12,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>영화 상세정보</title>
 
     <style>
         body{
@@ -100,6 +100,23 @@
             padding: 10px;
             margin-bottom: 15px;
         }
+        
+        #movie-story{
+        	width: 830px;
+        	height: 120px;
+        	border-radius: 8px;
+        	background-color: #1a1a1a;
+        	color: white;
+        	padding: 10px;
+        	border: 1px solid #383838;
+        	resize:none;
+        }
+        
+        /* 스크롤바? */
+        textarea {
+		  scrollbar-width: thin;
+		  scrollbar-color: #383838 transparent;
+		}
 
         #movie-detail-btn{
             width: 300px;
@@ -110,13 +127,12 @@
             font-weight: bold;
             background-color: #FFC145;
         }
-
+        
 
         /* 영화 예고편 */
         #movie-detail-video{
             width: 1200px;
-            padding-bottom: 30px;
-            color:white;
+            margin-top: 20px;
         }
 
         h1{
@@ -152,6 +168,19 @@
             float: left;
             margin-right: 20px;
         }
+        
+        #video-src{
+        	margin-bottom: 30px;
+        	padding-top: 20px;
+        	padding-bottom: 20px;
+        }
+        
+        #youtube{
+        	margin-top: 20px;
+        	font-size: 30px;
+        	color: white;
+        	font-weight: bold;
+        }
 
 
     </style>
@@ -181,7 +210,7 @@
                     </div>
                     <div id="movie-detail-director">감독 | <%= movie.getDirectorName() %></div>
                     <div id="movie-detail-actor">출연진 | <%= cast %></div>
-                    <div id="movie-detail-story"><%= movie.getMovieStory() %>
+                    <div id="movie-detail-story"><textarea id="movie-story" readonly><%= movie.getMovieStory() %></textarea>
                     </div>
                     
                     <% if(loginUser == null) { %>
@@ -194,9 +223,10 @@
             </div>
 
             <div id="movie-detail-video">
-                <h1>예고편</h1>
+                <a id="youtube">예고편</a>
+                
                 <div id="video-src">
-                    <iframe id="detail-video" width="1090" height="600" src="https://www.youtube.com/embed/rjW9E1BR_30?si=v4wZ9R1k-4jWv8RI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <%= movie.getTrailerVideo() %>
                 </div>
             </div>
 
@@ -221,15 +251,18 @@
         <%@ include file="/views/common/footer.jsp" %>
         
     <script>
+
+    	function noMember(){
+			location.href = ('<%=contextPath%>/loginForm.me');
+			alert('로그인이 필요한 서비스 입니다.');
+		}
+    	
     	// 예매하기 버튼 -> 예매 페이지
     	function reservationPage(){
     		location.href = '<%= contextPath %>/movie.reservation';
     	}
     	
-		function noMember(){
-			location.href = ('<%=contextPath%>/loginForm.me');
-			alert('로그인이 필요한 서비스 입니다.');
-		}
+
     </script>
     
 </body>

@@ -228,20 +228,13 @@ public class MemberService {
 		
 		int result = new MemberDao().reservationCancel(conn, ticketNo);
 		
-		int seatResult = 0;
-		if(result > 0) {
-			
-			seatResult = new MemberDao().seatCancel(conn,ticketNo);
-		}
-		if(result * seatResult > 0) {
-			commit(conn);
-		} else {
-			rollback(conn);
-		}
+		
+		if(result > 0) commit(conn);
+		
 		close(conn);
 		
 		
-		return result * seatResult;
+		return result;
 	}
 	
 

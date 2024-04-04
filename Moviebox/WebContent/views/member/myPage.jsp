@@ -201,6 +201,7 @@
             border-radius: 5px;
             background-color: rgb(33, 33, 33);
             border: 1px solid rgb(158, 157, 157);
+            color: white;
         }
         .QNA-area-list{
             height: 50%;

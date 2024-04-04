@@ -83,6 +83,8 @@
             width: 100%;
             border: 1px solid rgb(158, 158, 158);
             border-radius: 8px;
+            display: flex;
+            justify-content: space-evenly;
         }
         .input-button{
             
@@ -154,7 +156,7 @@
         
         .checkbox-div-label{
             position: relative;
-            width: 20%;
+            width: 15%;
             height: 100%;
             float: left;
             text-align: center;
@@ -426,8 +428,12 @@
                             <input class="checkbox" type="checkbox" name="genre" value="코미디" id="comedy">
                         </div>
                         <div class="checkbox-div-label">
-                            <label class="genre" for="anime">애니메이션</label><br>
-                            <input class="checkbox" type="checkbox" name="genre" value="애니메이션" id="anime">
+                            <label class="genre" for="anime">애니</label><br>
+                            <input class="checkbox" type="checkbox" name="genre" value="애니" id="anime">
+                        </div>
+                        <div class="checkbox-div-label">
+                            <label class="genre" for="anime">판타지</label><br>
+                            <input class="checkbox" type="checkbox" name="genre" value="판타지" id="fantasy">
                         </div>
                     </div>
                 </div>

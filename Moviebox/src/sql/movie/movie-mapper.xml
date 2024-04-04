@@ -20,7 +20,8 @@
 			  DIRECTOR_NO,
 			  MOVIE_UPDATE,
 			  FILE_PATH,
-			  CHANGE_NAME
+			  CHANGE_NAME,
+			  TRAILER_VIDEO
 		  FROM
 			  TB_MOVIE
 		  JOIN
@@ -44,13 +45,19 @@
 		      MOVIE_STORY,
 		      STATUS,
 		      GENRE_NAME,
-		      DIRECTOR_NO
+		      DIRECTOR_NO,
+		      FILE_PATH,
+		      CHANGE_NAME
 		  FROM
 		      TB_MOVIE
+          JOIN
+              TB_ATTACHMENT USING (MOVIE_NO)
 		  JOIN
 		      TB_GENRE ON (GENRE_CODE = GENRE_NO)
 		 WHERE
 		      GENRE_NAME = ?
+           AND
+              FILE_LEVEL = 1
 	</entry>
 	
 	
@@ -69,7 +76,8 @@
 		   DIRECTOR_NAME,
 		   MOVIE_UPDATE,
 		   FILE_PATH,
-		   CHANGE_NAME
+		   CHANGE_NAME,
+		   TRAILER_VIDEO
 		FROM
 		   TB_MOVIE
 		JOIN 

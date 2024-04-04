@@ -26,9 +26,29 @@ public class Movie {
 	
 	private String changeName;
 	
+	private String trailerVideo;
+	
 	
 	public Movie() {
 		super();
+	}
+
+	
+	
+	public Movie(int movieNo, String movieTitle, String movieRt, String movieRated, String movieRelease,
+			String movieStory, String status, int directorNo, String filePath, String genreName, String changeName) {
+		super();
+		this.movieNo = movieNo;
+		this.movieTitle = movieTitle;
+		this.movieRt = movieRt;
+		this.movieRated = movieRated;
+		this.movieRelease = movieRelease;
+		this.movieStory = movieStory;
+		this.status = status;
+		this.directorNo = directorNo;
+		this.filePath = filePath;
+		this.genreName = genreName;
+		this.changeName = changeName;
 	}
 
 
@@ -48,6 +68,16 @@ public class Movie {
 	
 	
 	
+	public String getTrailerVideo() {
+		return trailerVideo;
+	}
+
+
+	public void setTrailerVideo(String trailerVideo) {
+		this.trailerVideo = trailerVideo;
+	}
+
+
 	public String getChangeName() {
 		return changeName;
 	}

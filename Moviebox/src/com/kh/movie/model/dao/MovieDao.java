@@ -53,6 +53,7 @@ public class MovieDao {
 				movie.setMovieUpdate(rset.getString("MOVIE_UPDATE"));
 				movie.setFilePath(rset.getString("FILE_PATH"));
 				movie.setChangeName(rset.getString("CHANGE_NAME"));
+				movie.setTrailerVideo(rset.getString("TRAILER_VIDEO"));
 				
 				movieList.add(movie);
 			}
@@ -83,15 +84,19 @@ public class MovieDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				Movie movie = new Movie(rset.getInt("MOVIE_NO"),
-										rset.getString("MOVIE_TITLE"),
-										rset.getString("MOVIE_RT"),
-										rset.getString("MOVIE_RATED"),
-										rset.getString("MOVIE_RELEASE"),
-										rset.getString("MOVIE_STORY"),
-										rset.getString("STATUS"),
-										rset.getString("GENRE_NAME"),
-										rset.getInt("DIRECTOR_NO"));
+				Movie movie = new Movie();
+				movie.setMovieNo(rset.getInt("MOVIE_NO"));
+				movie.setMovieTitle(rset.getString("MOVIE_TITLE"));
+				movie.setMovieRt(rset.getString("MOVIE_RT"));
+				movie.setMovieRated(rset.getString("MOVIE_RATED"));
+				movie.setMovieRelease(rset.getString("MOVIE_RELEASE"));
+				movie.setMovieStory(rset.getString("MOVIE_STORY"));
+				movie.setStatus(rset.getString("STATUS"));
+				movie.setGenreName(rset.getString("GENRE_NAME"));
+				movie.setDirectorNo(rset.getInt("DIRECTOR_NO"));
+				movie.setFilePath(rset.getString("FILE_PATH"));
+				movie.setChangeName(rset.getString("CHANGE_NAME"));
+										
 				list.add(movie);
 			}
 			
@@ -134,6 +139,7 @@ public class MovieDao {
 				m.setMovieUpdate(rset.getString("MOVIE_UPDATE"));
 				m.setFilePath(rset.getString("FILE_PATH"));
 				m.setChangeName(rset.getString("CHANGE_NAME"));
+				m.setTrailerVideo(rset.getString("TRAILER_VIDEO"));
 			}
 			
 			
