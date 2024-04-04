@@ -2,7 +2,7 @@
     pageEncoding="UTF-8" import = "java.util.ArrayList, com.kh.common.model.vo.Location"%>
     
     <%
-   	ArrayList<Location> location = (ArrayList<Location>)request.getAttribute("location");
+   	ArrayList<Location> location = (ArrayList<Location>)session.getAttribute("location");
     
     
     %>

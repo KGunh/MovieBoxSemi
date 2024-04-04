@@ -37,7 +37,7 @@ public class CinemaAdminContorller {
 		Theater theater = new MemberAdminService().cinemaEdit(theaterNo);
 		request.setAttribute("theater", theater);
 		
-		
+		System.out.println(theater.getMapLink());
 		String view = "/views/admin/CinemaEdit.jsp";
 		
 		return view;
@@ -50,9 +50,10 @@ public class CinemaAdminContorller {
 		String view ="/views/admin/CinemaInsert.jsp"; 
 		
 		ArrayList<Location> location =  new MemberAdminService().category();
-		System.out.println(location);
+
 		
-		request.setAttribute("location", location);
+		HttpSession session = request.getSession();
+		session.setAttribute("location", location);
 		
 		return view;
 		
@@ -72,8 +73,8 @@ public class CinemaAdminContorller {
 		
 		Theater theater = new Theater();
 		String view = "/views/admin/CinemaInsert.jsp";
-		
 		String name = request.getParameter("cinemaname");
+		System.out.println(name);
 		String code = request.getParameter("address");
 		String region = request.getParameter("region");
 		String link = request.getParameter("link");
@@ -87,7 +88,7 @@ public class CinemaAdminContorller {
 		theater.setMapLink(link);
 
 		int result = new MemberAdminService().cinemaInsert(theater);
-		
+	
 		if(result>0) {
 		
 			HttpSession session = request.getSession();
@@ -144,10 +145,9 @@ public class CinemaAdminContorller {
 	
 	public String dele(HttpServletRequest request, HttpServletResponse response) {
 		
-		String view =request.getContextPath()+"/checkAdmin.cm";
-		
 		int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));
 		int result = new MemberAdminService().dele(theaterNo);
+		
 		
 		if(result>0) {
 			HttpSession session = request.getSession();
@@ -156,7 +156,7 @@ public class CinemaAdminContorller {
 			request.setAttribute("errorMsg", "삭제되지 않았습니다");
 		}
 		
-		
+		String view ="views/admin/CinemaCheck.jsp";
 		
 		return view; 
 		

@@ -413,7 +413,7 @@
                                 <th class="test123">지역</th>
                                 <th class="theatername">영화관 이름</th> 
                                 <th class="code">지역코드</th>
-                                <th>지도 링크</th>
+              <!--                   <th>지도 링크</th>   -->
                               
                             </tr>
                           </thead>
@@ -427,7 +427,7 @@
                                 <td class="test123"><%=t.getLocationName() %></td>
                                 <td class="theatername"><%=t.getTheaterName() %></td>
                                 <td class="code"><%=t.getLocalCode() %></td>
-                                <td><%=t.getMapLink() %></td>
+                             <!--    <td><%=t.getMapLink() %></td> --> 
                                 
                             </tr>
                             

@@ -2,11 +2,8 @@
     pageEncoding="UTF-8" import = " java.util.ArrayList, com.kh.member.model.vo.Member" 
     %>
     
-    
 <%
-
 ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
-
 %>    
 
     <!DOCTYPE html>
