@@ -251,15 +251,18 @@
         <%@ include file="/views/common/footer.jsp" %>
         
     <script>
+
+    	function noMember(){
+			location.href = ('<%=contextPath%>/loginForm.me');
+			alert('로그인이 필요한 서비스 입니다.');
+		}
+    	
     	// 예매하기 버튼 -> 예매 페이지
     	function reservationPage(){
     		location.href = '<%= contextPath %>/movie.reservation';
     	}
     	
-		function noMember(){
-			location.href = ('<%=contextPath%>/loginForm.me');
-			alert('로그인이 필요한 서비스 입니다.');
-		}
+
     </script>
     
 </body>

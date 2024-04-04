@@ -89,8 +89,6 @@
         	margin: auto;
         	width: 1200px;
             height: 125px;
-            border-left: 1px solid rgb(33, 33, 33);
-            border-right: 1px solid rgb(33, 33, 33);
         }
 
         #logo-div {
