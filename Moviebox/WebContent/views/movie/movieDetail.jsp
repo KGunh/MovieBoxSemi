@@ -100,6 +100,23 @@
             padding: 10px;
             margin-bottom: 15px;
         }
+        
+        #movie-story{
+        	width: 830px;
+        	height: 120px;
+        	border-radius: 8px;
+        	background-color: #1a1a1a;
+        	color: white;
+        	padding: 10px;
+        	border: 1px solid #383838;
+        	resize:none;
+        }
+        
+        /* 스크롤바? */
+        textarea {
+		  scrollbar-width: thin;
+		  scrollbar-color: #383838 transparent;
+		}
 
         #movie-detail-btn{
             width: 300px;
@@ -110,7 +127,7 @@
             font-weight: bold;
             background-color: #FFC145;
         }
-
+        
 
         /* 영화 예고편 */
         #movie-detail-video{
@@ -193,7 +210,7 @@
                     </div>
                     <div id="movie-detail-director">감독 | <%= movie.getDirectorName() %></div>
                     <div id="movie-detail-actor">출연진 | <%= cast %></div>
-                    <div id="movie-detail-story"><%= movie.getMovieStory() %>
+                    <div id="movie-detail-story"><textarea id="movie-story" readonly><%= movie.getMovieStory() %></textarea>
                     </div>
                     
                     <% if(loginUser == null) { %>
