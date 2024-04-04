@@ -8,6 +8,8 @@
 
 
 
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -315,7 +317,7 @@
         }
         input[type=file]::file-selector-button {
             width: 80px;
-            height: 20px;
+            height: 27px;
             background-color: #FFC145;
             border: 1px solid lightgray;;
             border-radius: 5px;
@@ -466,17 +468,12 @@
 			        <div id="box_2">
 			            <div id="sub_1">
 			                <div class="fileBox" style="padding-right: 250px;">
-			                    <input type="file" id="file" name="upposter" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
-			                    <input type="file" id="file" name="upposter" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
-			                    <input type="file" id="file" name="upposter" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
-			                    <input type="file" id="file" name="upposter" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
- 
+			                    <input type="file" id="file" name="upposter" style="padding-top: 35px;" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
                             </div>
 			                <div class="fileBox">
-			                    <input type="file" id="file" name="upposter" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
-			                    <input type="file" id="file" name="upposter" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
-			                    <input type="file" id="file" name="upposter" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
-			                    <input type="file" id="file" name="upposter" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
+			                    <input type="file" id="file" name="upposter" style="padding-top: 3px;" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
+			                    <input type="file" id="file" name="upposter" style="padding-top: 3px;"accept="image/*"> <!-- 이미지 파일 전부 받기 -->
+			                    <input type="file" id="file" name="upposter" style="padding-top: 3px;" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
 
                             </div>
 			            </div>
