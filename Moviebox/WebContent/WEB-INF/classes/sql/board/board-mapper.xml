@@ -21,7 +21,7 @@
 		                  JOIN
 		                      TB_CATEGORY USING (CATEGORY_NO)
 		                  JOIN
-		                      TB_MEMBER ON (MEMBER_NO = BOARD_WRITER)
+		                      TB_MEMBER USING (MEMBER_NO)
 		                 WHERE
 		                      TB_BOARD.STATUS = 'Y'
 		                 ORDER
@@ -53,7 +53,7 @@
 	          TB_BOARD
 		  LEFT		
 		  JOIN
-	          TB_MEMBER ON (MEMBER_NO = BOARD_WRITER)
+	          TB_MEMBER USING (MEMBER_NO)
 		  JOIN
 	          TB_CATEGORY USING(CATEGORY_NO)
 		 WHERE
@@ -83,7 +83,7 @@
 	          BOARD_CONTENT,
 	          CREATE_DATE,
 	          CATEGORY_NO,
-	          BOARD_WRITER
+	          MEMBER_NO
 	          )
 	    VALUES
 		      (
@@ -92,14 +92,7 @@
 		      ?,
 		      SYSDATE,
 	          ?,
-	          (
-	          SELECT
-		            MEMBER_NO
-		        FROM
-		            TB_MEMBER
-		       WHERE
-		            MEMBER_NO = ?
-		      )
+	          ?
 		      )
 	</entry>
 	

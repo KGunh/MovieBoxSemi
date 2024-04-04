@@ -62,11 +62,19 @@
 			font-weight: bold;
 		}
 		
-		#nowMovie{
+		#theaterSubTitle1{
 			font-size: 30px;
 			color: white;
 			font-weight: bold;
 		}
+		
+		#theaterSubTitle2{
+			font-size: 30px;
+			color: white;
+			font-weight: bold;
+		}
+		
+		
 
         
         /* 현재 상영작 목록 */
@@ -164,6 +172,11 @@
         	margin-bottom: 50px;
         }
         
+        #theaterAddress{
+        	color: #cccccc;
+        	font-size: 18px;
+        }
+        
     </style>
     
 </head>
@@ -182,7 +195,7 @@
 
         <!-- 현재 상영작 -->
         <div id="theater-movie-now">
-            <a id="nowMovie">현재 상영작</a>
+            <a id="theaterSubTitle1">현재 상영작</a>
             <!-- 현재 상영작 목록 -->
             
             <div id="movie-content-body">
@@ -217,9 +230,9 @@
 
         <!-- 오시는 길 -->
         <div id="theater-map">
-            <h1>오시는 길</h1>
+            <a id="theaterSubTitle2">오시는 길</a>
             <div id="theater-address">
-                <a><%= theater.getTheaterAddr() %></a>
+                <a id="theaterAddress"><%= theater.getTheaterAddr() %></a>
             </div>
             <div id="theater-mapLink"><%= theater.getMapLink() %></div>
         </div>
@@ -231,7 +244,6 @@
         
     <script>
 		 
-		$('#movie-content-btn2').on('click',function(){
 		    var movieNo = $(this).siblings('input[type="hidden"]').val();
 		    location.href = '<%=contextPath%>/detail.movie?movieNo=' + movieNo;
 		});

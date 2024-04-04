@@ -66,16 +66,20 @@
 	<entry key="selectSeatList">
 		SELECT
 		       SEAT_NO,
-		       SCREEN_NO,
+		       S.SCREEN_NO,
 		       TICKET_NO
 		  FROM
-		       TB_SEAT
+		       TB_SEAT S
+		  JOIN
+		       TB_RESERVATION R USING(TICKET_NO)
 		 WHERE
-		       SCREEN_NO = ?
+		       S.SCREEN_NO = ?
+		   AND
+		       R.STATUS = 'Y'
 		 ORDER
 		    BY
 		       SUBSTR(SEAT_NO, 1, 1),
-			   CAST(SUBSTR(SEAT_NO, 2) AS NUMBER),
+		       CAST(SUBSTR(SEAT_NO, 2) AS NUMBER),
 		       SEAT_NO
 	</entry>
 	
