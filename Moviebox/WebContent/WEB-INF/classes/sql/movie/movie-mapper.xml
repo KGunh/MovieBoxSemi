@@ -50,10 +50,14 @@
 		      CHANGE_NAME
 		  FROM
 		      TB_MOVIE
+          JOIN
+              TB_ATTACHMENT USING (MOVIE_NO)
 		  JOIN
 		      TB_GENRE ON (GENRE_CODE = GENRE_NO)
 		 WHERE
 		      GENRE_NAME = ?
+           AND
+              FILE_LEVEL = 1
 	</entry>
 	
 	

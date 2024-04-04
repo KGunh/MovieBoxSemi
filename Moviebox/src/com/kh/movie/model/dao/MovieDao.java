@@ -93,9 +93,9 @@ public class MovieDao {
 				movie.setMovieStory(rset.getString("MOVIE_STORY"));
 				movie.setStatus(rset.getString("STATUS"));
 				movie.setGenreName(rset.getString("GENRE_NAME"));
-				movie.setMovieTitle(rset.getString("DIRECTOR_NO"));
-				movie.setMovieTitle(rset.getString("FILE_PATH"));
-				movie.setMovieTitle(rset.getString("CHANGE_NAME"));
+				movie.setDirectorNo(rset.getInt("DIRECTOR_NO"));
+				movie.setFilePath(rset.getString("FILE_PATH"));
+				movie.setChangeName(rset.getString("CHANGE_NAME"));
 										
 				list.add(movie);
 			}

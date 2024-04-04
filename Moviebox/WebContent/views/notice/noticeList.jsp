@@ -379,9 +379,6 @@
     			location.href = '<%=contextPath%>/detail.notice?noticeNo=' + noticeNo;
             });
     		
-    		function searchNotice(){
-    			document.getElementById('noticeSearch').submit();
-    		}
     	
     	</script>
 
