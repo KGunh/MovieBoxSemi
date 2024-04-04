@@ -378,7 +378,7 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
 
                 </div>
                 <div id="delete" >
-                    <button id="btn1">탈퇴</button>
+                    <button id="btn1" onclick="deleteadmin();'">탈퇴</button>
                 </div>
 
                 <div id="cnt2_post"><!--게시판-->
@@ -389,7 +389,7 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                         <table class="table table-hover" style="text-align: center; font-size: small;">
                           <thead>
                             <tr style="background-color: #eaeaea; margin-top: 0; height: 40px; color: #212121; border: 0px solid #cfcfcf; opacity: 0.8; text-align: center;">
-                                <th><input type="checkbox" name="check" value="check" id="check" checked></th>
+                                <th ><input type="checkbox" name="check" value="check" id="check" checked></th>
                                 <th class="num">회원번호</th>
                                 <th>이름</th>
                                 <th>가입일</th>
@@ -401,7 +401,8 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                        
                            <% for(Member m : mb){ %>
                                 <tr class="member">
-                                <td><input type="checkbox" name="check" value="check" id="check"></td>
+                                
+                                <td class="ch"><input type="checkbox" name="check" value="check" id="check" ></td>
                                 <td><%= m.getMemberNo() %></td>
                                 <td><%= m.getMemberName()%></td>
                                 <td><%= m.getEnrollDate() %></td>
@@ -421,18 +422,28 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                       
                     	$(function(){
                     		
-                    		$('.member').click(function(){
-                    			
-                    			const memberNo = $(this).children().eq(1).text();
-                    			location.href='<%=contextPath%>/modifyAdmin.mb?memberNo=' + memberNo;
+                    		$('.member>td').click(function(){
+                    			if(!$(this).is('.ch')) {
+	                    			const memberNo = $(this).parent().children().eq(1).text();
+	                    			location.href='<%=contextPath%>/modifyAdmin.mb?memberNo=' + memberNo;
+                        		}
                     			
                     		});
                     		
                     		
-                    	})  
+                    		
+                    	})
+                    	
+                    	function deleteadmin(){
+                    		const memberNo = $(this).parent().children().eq(1).text();
+                    		
+                    		location.href='<%=contextPath%>/deleteAdmin.mb?memberNo='+memberNo;
+                    	}
                       
                       
                       </script>
+                      
+                      
 
 
                       <div id="cnt2_paging-area"> 

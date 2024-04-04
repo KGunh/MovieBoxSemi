@@ -63,7 +63,7 @@
         }
 
         .movie-list-genre1{
-            width: 120px;
+            width: 130px;
             height: 70px;
             color: white;
             text-align: center;
@@ -212,9 +212,10 @@
                     <div class="movie-list-genre">전체</div>
                     <div class="movie-list-genre">액션</div>
                     <div class="movie-list-genre">로맨스</div>
-                    <div class="movie-list-genre">스릴러</div>
+                    <div class="movie-list-genre1">공포/스릴러</div>
                     <div class="movie-list-genre">코미디</div>
                     <div class="movie-list-genre">애니</div>
+                    <div class="movie-list-genre">판타지</div>
                 </div>
                 
                 <!-- 장르 버튼 -->
@@ -225,10 +226,12 @@
                 
                 <script>
 	                document.getElementById('movie-list-category').onclick = function(e){
-	                    var selectGenre = e.target.innerHTML;
+	                	const selectGenre = e.target.innerHTML;
 	                    document.getElementById('genreInput').value = selectGenre;
 	                    document.getElementById('selectGenreForm').submit();
 	            }
+	                
+	                	const genreType = document.getElementById('selectTypeGenre')
                 </script>
 
                 <!-- 정렬 / 검색창 -->

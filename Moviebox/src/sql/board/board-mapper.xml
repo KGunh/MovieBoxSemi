@@ -121,4 +121,48 @@
 			  BOARD_NO = ?
 	</entry>
 	
+	
+	<entry key="selectAnswerList">
+		SELECT
+			  ANSWER_NO,
+			  ANSWER_CONTENT,
+			  MEMBER_NO,
+			  TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE
+		  FROM
+		  	  TB_ANSWER A
+		  JOIN
+		  	  TB_MEMBER USING(MEMBER_NO)
+		 WHERE
+		 	  BOARD_NO = ?
+		   AND
+		   	  A.STATUS = 'Y'
+		 ORDER
+		 	BY
+		 	  CREATE_DATE DESC
+	</entry>
+	
+	
+	<entry key="insertAnswer">
+		INSERT
+  	 	  INTO
+  	 	  	  TB_ANSWER
+  	 	  	  (
+  	 	  	  ANSWER_NO,
+  	 	  	  ANSWER_CONTENT,
+  	 	  	  CREATE_DATE,
+  	 	  	  BOARD_NO,
+  	 	  	  MEMBER_NO
+  	 	  	  )
+		VALUES
+			  (
+			  SEQ_ANSNO.NEXTVAL,
+			  ?,
+			  SYSDATE,
+			  ?,
+			  ?
+			  )
+	</entry>
+	
+	
+	
 </properties>

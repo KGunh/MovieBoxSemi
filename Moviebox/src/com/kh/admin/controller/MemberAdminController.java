@@ -126,7 +126,16 @@ public class MemberAdminController {
 		
 	}
 	
-	
+	public String  deleteAdmin(HttpServletRequest request, HttpServletResponse response) {
+		
+		String view = "views/admin/memberSelect.jsp";
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+		
+		System.out.println(memberNo);
+		
+		return view; 
+		
+	}
 	
 	
 

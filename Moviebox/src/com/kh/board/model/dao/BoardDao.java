@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.board.model.vo.Answer;
 import com.kh.board.model.vo.Board;
 import com.kh.board.model.vo.Category;
 import com.kh.common.model.vo.PageInfo;
@@ -224,6 +225,64 @@ public class BoardDao {
 			
 			pstmt.setInt(1, Integer.parseInt(boardNo));
 			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public ArrayList<Answer> selectAnswerList(Connection conn, int boardNo) {
+		
+		ArrayList<Answer> answer = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectAnswerList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, boardNo);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				answer.add(new Answer(rset.getInt("ANSWER_NO"),
+						  rset.getString("ANSWER_CONTENT"),
+						  rset.getString("CREATE_DATE"),
+						  rset.getString("STATUS"),
+						  rset.getInt("BOARD_NO"),
+						  rset.getString("MEMBER_NO")));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return answer;
+	}
+
+	public int insertAnswer(Connection conn, Answer answer) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("insertAnswer");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, answer.getAnswerContent());
+			pstmt.setInt(2, answer.getBoardNo());
+			pstmt.setInt(3, Integer.parseInt(answer.getMemberNo()));
+			
+			result = pstmt.executeUpdate();
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

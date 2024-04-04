@@ -93,14 +93,14 @@
 	
 	<entry key="detailMovieCast">
 		SELECT 
-		    LISTAGG(A.ACTOR_NAME, ',') 
+		    LISTAGG(ACTOR_NAME, ',') 
 		    WITHIN GROUP 
-		           (ORDER BY A.ACTOR_NO) AS ACTOR_NAMES
+		           (ORDER BY ACTOR_NO) AS ACTOR_NAMES
 		FROM 
-		    TB_ACTOR A
+		    TB_ACTOR
 		JOIN 
-		    TB_CAST C ON A.ACTOR_NO = C.ACTOR_NO
+		    TB_CAST USING(ACTOR_NO)
 		WHERE
-		    C.MOVIE_NO = ?
+		    MOVIE_NO = ?
 	</entry>
 </properties>

@@ -234,7 +234,7 @@
             <div id="theater-address">
                 <a id="theaterAddress"><%= theater.getTheaterAddr() %></a>
             </div>
-            <div id="theater-mapLink"><%= theater.getMapLink() %></div>
+            <div id="theater-mapLink"><iframe src="<%= theater.getMapLink() %>"></iframe></div>
         </div>
 
     </div> <!-- wrap -->
