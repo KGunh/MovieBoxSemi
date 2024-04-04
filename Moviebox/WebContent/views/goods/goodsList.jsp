@@ -169,12 +169,12 @@
     }
 
     .rating-number{
-        font-size: 10px;
+        font-size: 14px;
         color: grey;
     }
 
     .buy{
-        font-size: 12px;
+        font-size: 14px;
         color: purple;
         font-weight: 500;
     }
@@ -231,6 +231,10 @@
         margin-top: 55px;
     }
 
+    .buy:hover, .rating-number:hover, .image-container:hover, .dress-name:hover{
+        cursor: pointer;
+    }
+
 </style>
 </head>
 <body>
@@ -244,10 +248,8 @@
         <div class="container mt-5" >
             <div class="row">
                 <div class="col-md-3">
-                <!-- goodsList -->
-                <c:if test="${ not empty goodsList }">
-                <!-- 내일 반복문 배우고 로그인안하면 장바구니,구매하기 못하게 -->
-                	<!-- 반복 -->
+
+                    <c:if test="${ not empty goodsList }">
                 
                     <div class="card">
                         <div class="image-container">
@@ -255,7 +257,7 @@
                                 <div class="d-flex justify-content-between align-items-center">
                                 </div>
                             </div>
-                            <img style="box-shadow: 0px 1px 2px lightgray;" src="https://cf.lottecinema.co.kr//Media/WebAdmin/70fc20fe998a4ab7b44d1bfa0d1440e4.jpg" class="img-fluid rounded thumbnail-image">
+                            <img src="https://cf.lottecinema.co.kr//Media/WebAdmin/70fc20fe998a4ab7b44d1bfa0d1440e4.jpg" class="img-fluid rounded thumbnail-image">
                         </div>
                         <div class="product-detail-container p-2">
                             <div class="d-flex justify-content-between align-items-center">
@@ -268,16 +270,14 @@
                             </div>
                             <div class="d-flex justify-content-between align-items-center pt-1">
                                 <div>
-                                    <span class="rating-number" style="text-shadow: 1px 1px 1px lightgray;">장바구니</span>
+                                    <span class="rating-number">장바구니</span>
                                 </div>
                                 <span class="buy">구매</span>
                             </div>
                         </div>
                     </div>
-                    
-                    
                 
-                </c:if>
+                    </c:if>
                     
                 </div>
             </div>

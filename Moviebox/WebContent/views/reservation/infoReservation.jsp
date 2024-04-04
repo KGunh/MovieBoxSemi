@@ -1,10 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
+
 <%
 	int ticketNo = (int)request.getAttribute("ticketNo");
 %>    
-    
     
 <!DOCTYPE html>
 <html>
@@ -13,6 +13,7 @@
 <title>예매 완료</title>
 </head>
 <style>
+
     body{
         color: rgb(32,32,32);
     }
@@ -141,7 +142,7 @@
 <body>
 
     <%@ include file="/views/common/header.jsp" %>
-
+    
     <div id="wrap">
         <div id="title">예매 완료</div>
         <div id="content-info">
@@ -184,7 +185,6 @@
 
     <%@ include file="/views/common/footer.jsp" %>
 
-
     <script>
 
         window.onload = function(){
@@ -212,10 +212,11 @@
 
                     for(let i = 0; i < result.seatList.length; i++){
                         selectSeatList += result.seatList[i].seatNo;
+                        
                         if (i < result.seatList.length - 1) {
                             selectSeatList += ', ';
-                        }
-                    }
+                        };
+                    };
 
                     $('#print-reservation-info').children().eq(5).html(selectSeatList);
                     $('#print-reservation-info').children().eq(6).html(result.price.totalPrice + '원');
