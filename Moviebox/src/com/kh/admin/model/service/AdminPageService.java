@@ -11,10 +11,9 @@ import java.util.List;
 
 import com.kh.admin.model.dao.AdminPageDao;
 import com.kh.board.model.vo.Board;
+import com.kh.common.model.vo.Attachment;
 import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.PageInfo;
-import com.kh.goods.model.vo.Goods;
-import com.kh.member.model.dao.MemberDao;
 import com.kh.movie.model.vo.Movie;
 import com.kh.notice.model.vo.Notice;
 import com.kh.theater.model.vo.Screen;
@@ -233,6 +232,23 @@ public class AdminPageService {
 		return result;
 	}
 	
+	//영화 수정
+	public int updateMovie(Movie movie) {
+		Connection conn = getConnection();
+		
+		int result = new AdminPageDao().updateMovie(conn, movie);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
 	
 	//Cast등록
 	public int InsertCast(int movieNo, int actorNo) {
@@ -256,7 +272,7 @@ public class AdminPageService {
 		
 		Connection conn = getConnection();
 		
-		Movie movie = new AdminPageDao().detailAdmin(conn,movieNo);
+		Movie movie = new AdminPageDao().adminMovieDetail(conn,movieNo);
 		
 		close(conn);
 		
@@ -334,7 +350,55 @@ public class AdminPageService {
 		return result;
 	}
 	
+	public int adminMovieDelete(int movieNo) {
+		Connection conn = getConnection();
+		int result = new AdminPageDao().adminMovieDelete(conn, movieNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
 	
 	
+	
+	
+	
+	public String adminMoviePoster(int movieNo) {
+		Connection conn = getConnection();
+		String poster = new AdminPageDao().adminMoviePoster(conn, movieNo);
+		close(conn);
+		return poster;
+	}
+	
+	// 포스터 등록전 fileNo
+	public int SelectFileNo() {
+		Connection conn = getConnection();
+		
+		int fileNo = new AdminPageDao().SelectFileNo(conn);
+		
+		close(conn);
+		
+		return fileNo; 
+	}
+	
+	public int InsertAttach(int movieNo, ArrayList<Attachment> list) {
+		Connection conn = getConnection();
+		
+		int result = new AdminPageDao().InsertAttach(conn, movieNo, list);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
 	
 }

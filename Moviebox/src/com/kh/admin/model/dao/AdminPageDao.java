@@ -13,6 +13,7 @@ import java.util.List;
 import java.util.Properties;
 
 import com.kh.board.model.vo.Board;
+import com.kh.common.model.vo.Attachment;
 import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.movie.model.vo.Movie;
@@ -517,6 +518,7 @@ public class AdminPageDao {
 			pstmt.setString(6, movie.getMovieStory());
 			pstmt.setString(7, movie.getGenreNo());
 			pstmt.setInt(8, movie.getDirectorNo());
+			pstmt.setString(9, movie.getTrailerVideo());
 			
 			result = pstmt.executeUpdate();
 
@@ -530,6 +532,36 @@ public class AdminPageDao {
 		return result;
 	}
 	
+	//영화 등록
+	public int updateMovie(Connection conn, Movie movie) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateMovie");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, movie.getMovieTitle());
+			pstmt.setString(2, movie.getMovieRt());
+			pstmt.setString(3, movie.getMovieRated());
+			pstmt.setString(4, movie.getMovieRelease());
+			pstmt.setString(5, movie.getMovieStory());
+			pstmt.setString(6, movie.getGenreNo());
+			pstmt.setInt(7, movie.getDirectorNo());
+			pstmt.setString(8, movie.getTrailerVideo());
+			pstmt.setInt(9, movie.getMovieNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 	
 	//Cast 등록
@@ -559,11 +591,11 @@ public class AdminPageDao {
 	
 	
 	//영화 상세
-	public Movie detailAdmin(Connection conn, int movieNo){
+	public Movie adminMovieDetail(Connection conn, int movieNo){
 		Movie m = new Movie(); 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("SelectMovieDetail");
+		String sql = prop.getProperty("adminMovieDetail");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -584,6 +616,7 @@ public class AdminPageDao {
 				m.setDirectorNo(rset.getInt("DIRECTOR_NO"));
 				m.setDirectorName(rset.getString("DIRECTOR_NAME"));
 				m.setMovieUpdate(rset.getString("MOVIE_UPDATE"));
+				m.setTrailerVideo(rset.getString("TRAILER_VIDEO"));
 			}
 			
 		} catch (SQLException e) {
@@ -865,5 +898,112 @@ public class AdminPageDao {
 		return count;
 		
 	}
+	
+	public int adminMovieDelete(Connection conn, int movieNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("adminMovieDelete");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, movieNo);
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 
+	
+	
+	public String adminMoviePoster(Connection conn, int movieNo) {
+		String poster = "";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("SelectPoster");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			
+			pstmt.setInt(1, movieNo);
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			poster = rset.getString("FILE_PATH") + "/" + rset.getString("CHANGE_NAME");
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return poster;
+	}
+	
+	//영화 등록전 시퀀스 조회
+	public int SelectFileNo(Connection conn) {
+		int fileNo = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("SelectFileNo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			fileNo = rset.getInt("FILE_NO");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return fileNo;
+	}
+	
+	public int InsertAttach(Connection conn, int movieNo, ArrayList<Attachment> list) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("InsertFile");
+		
+		try {
+			
+			for(Attachment at : list) {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, movieNo);
+				pstmt.setString(2, at.getOrginName());
+				pstmt.setString(3, at.getChangeName());
+				pstmt.setString(4, at.getFilePath());
+				pstmt.setInt(5, at.getFileLevel());
+				
+				result += pstmt.executeUpdate();
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result == list.size() ? 1 : 0;
+	}
 }

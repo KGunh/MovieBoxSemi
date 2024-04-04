@@ -23,6 +23,7 @@
 				LEFT
 				JOIN
 				    TB_GENRE ON(GENRE_NO = GENRE_CODE)
+			   WHERE STATUS = 'Y'
 				ORDER
 				   BY
 				     MOVIE_NO DESC) A)
@@ -146,7 +147,8 @@
 		  	STATUS,
 		  	GENRE_NO,
 		  	DIRECTOR_NO,
-		  	MOVIE_UPDATE
+		  	MOVIE_UPDATE,
+		  	TRAILER_VIDEO
 		  	)
 		  VALUES
 			  (
@@ -159,8 +161,25 @@
 			  'Y', 
 			  ?, 
 			  ?, 
-			  SYSDATE
+			  SYSDATE,
+			  ?
 			  )
+	</entry>
+	
+	<!-- 영화 수정 -->
+	<entry key="updateMovie">
+	UPDATE TB_MOVIE
+	   SET MOVIE_TITLE = ?,
+	       MOVIE_RT = ?,
+	       MOVIE_RATED = ?,
+	       MOVIE_RELEASE = ?,
+	       MOVIE_STORY = ?,
+	       STATUS = 'Y',
+	       GENRE_NO = ?,
+	       DIRECTOR_NO = ?,
+	       MOVIE_UPDATE = SYSDATE,
+	       TRAILER_VIDEO = ?
+	 WHERE MOVIE_NO = ?
 	</entry>
 
 	<!-- Cast 등록 -->
@@ -248,8 +267,8 @@
 
 
 	<!-- 영화상세 -->
-	<entry key="SelectMovieDetail">
-		SELECT 
+	<entry key="adminMovieDetail">
+		SELECT
 	       A.MOVIE_NO AS MOVIE_NO,
 	       A.MOVIE_TITLE AS MOVIE_TITLE,
 	       A.MOVIE_RT AS MOVIE_RT,
@@ -261,16 +280,17 @@
 	       B.GENRE_NAME AS GENRE_NAME,
 	       A.DIRECTOR_NO AS DIRECTOR_NO,
 	       C.DIRECTOR_NAME AS DIRECTOR_NAME,
-	       A.MOVIE_UPDATE AS MOVIE_UPDATE
+	       A.MOVIE_UPDATE AS MOVIE_UPDATE,
+	       A.TRAILER_VIDEO AS TRAILER_VIDEO
 		FROM
 		   TB_MOVIE A
-		LEFT 
+		LEFT
 		OUTER
-		JOIN 
+		JOIN
 			TB_GENRE B ON A.GENRE_NO = B.GENRE_CODE
 		LEFT
 		OUTER
-		JOIN 
+		JOIN
 			TB_DIRECTOR C ON A.DIRECTOR_NO = C.DIRECTOR_NO
 		WHERE
 		   A.MOVIE_NO = ?
@@ -336,6 +356,7 @@
            TB_MOVIE USING(MOVIE_NO)
      WHERE
            THEATER_NO = ? AND SCREEN_NAME = ? AND TO_CHAR(WATCH_DATE,'YYYY-MM-DD') = TO_CHAR(TO_DATE(?,'YYYY-MM-DD'),'YYYY-MM-DD')
+       AND STATUS = 'Y'    
 	 ORDER
    	    BY WATCH_DATE
 	
@@ -385,7 +406,8 @@
 				JOIN
 				    TB_GENRE ON(GENRE_NO = GENRE_CODE)
                WHERE
-                   MOVIE_TITLE LIKE '%'||?||'%' 
+                   MOVIE_TITLE LIKE '%'||?||'%'
+                 AND STATUS = 'Y' 
                ORDER
 			      BY
 	  		       MOVIE_NO DESC) A)
@@ -409,11 +431,28 @@
 	    VALUES(SEQ_SCRNO.NEXTVAL,?,?,TO_DATE(?,'YYYY-MM-DD/HH24:MI'),?)
 	</entry>
 	
+	<entry key="adminMovieDelete">
+		UPDATE
+			  TB_MOVIE
+		   SET
+		   	  STATUS = 'N'
+		 WHERE
+		 	  MOVIE_NO = ?
+	</entry>
 	
 	
 	
-	
-	
+	<entry key="SelectPoster"> 
+		SELECT
+			 FILE_PATH AS FILE_PATH,
+			 CHANGE_NAME AS CHANGE_NAME
+		 FROM
+		 	TB_ATTACHMENT 
+		 WHERE 
+		 	MOVIE_NO = ? 
+		 AND 
+		 	FILE_LEVEL = 1
+	</entry>
 	
 	
 	
