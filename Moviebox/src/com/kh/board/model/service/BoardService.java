@@ -5,8 +5,10 @@ import static com.kh.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kh.board.model.dao.BoardDao;
+import com.kh.board.model.vo.Answer;
 import com.kh.board.model.vo.Board;
 import com.kh.board.model.vo.Category;
 import com.kh.common.model.vo.PageInfo;
@@ -90,6 +92,28 @@ public class BoardService {
 			rollback(conn);
 		}
 		
+		return result;
+	}
+
+	public ArrayList<Answer> selectAnswerList(int boardNo) {
+		
+		Connection conn = getConnection();
+		ArrayList<Answer> answer = new BoardDao().selectAnswerList(conn, boardNo);
+		
+		close(conn);
+		return answer;
+	}
+
+	public int insertAnswer(Answer answer) {
+		
+		Connection conn = getConnection();
+		int result = new BoardDao().insertAnswer(conn, answer);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
 		return result;
 	}
 	
