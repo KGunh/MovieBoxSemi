@@ -6,16 +6,29 @@ public class Answer {
 	private String createDate;
 	private String status;
 	private int boardNo;
+	private String memberNo;
+	
+	
 	public Answer() {
 		super();
 	}
-	public Answer(int answerNo, String answerContent, String createDate, String status, int boardNo) {
+	public Answer(int answerNo, String answerContent, String createDate, String status, int boardNo, String memberNo) {
 		super();
 		this.answerNo = answerNo;
 		this.answerContent = answerContent;
 		this.createDate = createDate;
 		this.status = status;
 		this.boardNo = boardNo;
+		this.memberNo = memberNo;
+	}
+	
+	
+	
+	public String getMemberNo() {
+		return memberNo;
+	}
+	public void setMemberNo(String memberNo) {
+		this.memberNo = memberNo;
 	}
 	public int getAnswerNo() {
 		return answerNo;
