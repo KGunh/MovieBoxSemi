@@ -84,15 +84,19 @@ public class MovieDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				Movie movie = new Movie(rset.getInt("MOVIE_NO"),
-										rset.getString("MOVIE_TITLE"),
-										rset.getString("MOVIE_RT"),
-										rset.getString("MOVIE_RATED"),
-										rset.getString("MOVIE_RELEASE"),
-										rset.getString("MOVIE_STORY"),
-										rset.getString("STATUS"),
-										rset.getString("GENRE_NAME"),
-										rset.getInt("DIRECTOR_NO"));
+				Movie movie = new Movie();
+				movie.setMovieNo(rset.getInt("MOVIE_NO"));
+				movie.setMovieTitle(rset.getString("MOVIE_TITLE"));
+				movie.setMovieRt(rset.getString("MOVIE_RT"));
+				movie.setMovieRated(rset.getString("MOVIE_RATED"));
+				movie.setMovieRelease(rset.getString("MOVIE_RELEASE"));
+				movie.setMovieStory(rset.getString("MOVIE_STORY"));
+				movie.setStatus(rset.getString("STATUS"));
+				movie.setGenreName(rset.getString("GENRE_NAME"));
+				movie.setMovieTitle(rset.getString("DIRECTOR_NO"));
+				movie.setMovieTitle(rset.getString("FILE_PATH"));
+				movie.setMovieTitle(rset.getString("CHANGE_NAME"));
+										
 				list.add(movie);
 			}
 			

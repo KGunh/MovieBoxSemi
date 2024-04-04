@@ -45,7 +45,9 @@
 		      MOVIE_STORY,
 		      STATUS,
 		      GENRE_NAME,
-		      DIRECTOR_NO
+		      DIRECTOR_NO,
+		      FILE_PATH,
+		      CHANGE_NAME
 		  FROM
 		      TB_MOVIE
 		  JOIN

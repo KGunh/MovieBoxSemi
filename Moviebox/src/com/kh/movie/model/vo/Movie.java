@@ -33,6 +33,24 @@ public class Movie {
 		super();
 	}
 
+	
+	
+	public Movie(int movieNo, String movieTitle, String movieRt, String movieRated, String movieRelease,
+			String movieStory, String status, int directorNo, String filePath, String genreName, String changeName) {
+		super();
+		this.movieNo = movieNo;
+		this.movieTitle = movieTitle;
+		this.movieRt = movieRt;
+		this.movieRated = movieRated;
+		this.movieRelease = movieRelease;
+		this.movieStory = movieStory;
+		this.status = status;
+		this.directorNo = directorNo;
+		this.filePath = filePath;
+		this.genreName = genreName;
+		this.changeName = changeName;
+	}
+
 
 	public Movie(int movieNo, String movieTitle, String movieRt, String movieRated, String movieRelease,
 			String movieStory, String status, String genreNo, int directorNo) {
