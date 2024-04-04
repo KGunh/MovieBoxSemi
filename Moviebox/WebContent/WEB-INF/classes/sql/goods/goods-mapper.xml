@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
+<properties>
+
+	<comment>
+		Goods Mapper
+	</comment>
+	
+	<entry key="selectGoodsList">
+		SELECT
+		       GOODS_NO,
+		       GOODS_NAME,
+		       GOODS_PRICE,
+		       TYPE_NAME,
+		       FILE_PATH,
+		       CHANGE_NAME
+		  FROM
+		       TB_GOODS
+		  JOIN
+		       TB_GOODSTYPE USING(TYPE_NO)
+		  LEFT
+		  JOIN
+		       TB_GOODSATTACHMENT USING(GOODS_NO)
+		 WHERE
+		       STATUS = 'Y'
+		 ORDER
+		    BY
+		       TYPE_NAME,
+		       GOODS_NO
+	</entry>
+	
+	
+	
+	
+</properties>
