@@ -13,6 +13,10 @@
             background-color: #ecedee;
         }
 
+        div{
+            box-sizing: border-box;
+        }
+
         .card{
             border: none;
             overflow: hidden;
@@ -76,7 +80,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-
             margin-top: 10px;
             width: 300px;
             height: 50px;
@@ -90,14 +93,18 @@
             border-left: 0;
             border-right: 0;
             text-align: center;
-            line-height: 40px;
+            line-height: 38px;
+            font-size: 20px;
+            font-weight: 400;
         }
 
         #btn-mins, #btn-plus{
-            font-size: 20px;
+            font-size: 26px;
             width: 40px;
             height: 40px;
             background-color: white;
+            line-height: 36px;
+            font-weight: 400;
         }
 
         #btn-mins{
@@ -116,6 +123,7 @@
 
         #txt-price{
             margin-left: 100px;
+            font-weight: 400;
         }
 
         .txt-total{
@@ -179,7 +187,27 @@
 
 
     <script>
-    
+        let productNum = 1; //상품개수
+        // 상품개수 동작기능
+        $('#btn-mins').on('click', function(){
+            productNum = $('#txt-num').html();
+
+            if(productNum != 1) {
+                productNum -= 1;
+            }
+
+            $('#txt-num').html(productNum);
+        });
+
+        $('#btn-plus').on('click', function(){
+            productNum = $('#txt-num').html();
+
+            if(productNum != 10) {
+                productNum += 1;
+            }
+
+            $('#txt-num').html(productNum);
+        });
 
     </script>
 
