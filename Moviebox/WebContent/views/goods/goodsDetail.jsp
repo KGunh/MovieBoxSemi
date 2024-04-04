@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -166,7 +168,7 @@
                         <h3>9,000원</h3>	
                         <div class="bx-num">
                             <button id="btn-mins">-</button>
-                            <div id="txt-num">2</div>
+                            <div id="txt-num">1</div>
                             <button id="btn-plus">+</button>
                         </div>
                         <div id="txt-price">
@@ -190,7 +192,7 @@
         let productNum = 1; //상품개수
         // 상품개수 동작기능
         $('#btn-mins').on('click', function(){
-            productNum = $('#txt-num').html();
+            productNum = Number($('#txt-num').html());
 
             if(productNum != 1) {
                 productNum -= 1;
@@ -200,7 +202,7 @@
         });
 
         $('#btn-plus').on('click', function(){
-            productNum = $('#txt-num').html();
+            productNum = Number($('#txt-num').html());
 
             if(productNum != 10) {
                 productNum += 1;
@@ -208,6 +210,14 @@
 
             $('#txt-num').html(productNum);
         });
+
+
+
+
+
+
+
+
 
     </script>
 
