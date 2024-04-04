@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,6 +13,10 @@
 
         body{
             background-color: #ecedee;
+        }
+
+        div{
+            box-sizing: border-box;
         }
 
         .card{
@@ -76,7 +82,6 @@
             display: flex;
             justify-content: center;
             align-items: center;
-
             margin-top: 10px;
             width: 300px;
             height: 50px;
@@ -90,14 +95,18 @@
             border-left: 0;
             border-right: 0;
             text-align: center;
-            line-height: 40px;
+            line-height: 38px;
+            font-size: 20px;
+            font-weight: 400;
         }
 
         #btn-mins, #btn-plus{
-            font-size: 20px;
+            font-size: 26px;
             width: 40px;
             height: 40px;
             background-color: white;
+            line-height: 36px;
+            font-weight: 400;
         }
 
         #btn-mins{
@@ -116,6 +125,7 @@
 
         #txt-price{
             margin-left: 100px;
+            font-weight: 400;
         }
 
         .txt-total{
@@ -158,7 +168,7 @@
                         <h3>9,000원</h3>	
                         <div class="bx-num">
                             <button id="btn-mins">-</button>
-                            <div id="txt-num">2</div>
+                            <div id="txt-num">1</div>
                             <button id="btn-plus">+</button>
                         </div>
                         <div id="txt-price">
@@ -179,7 +189,35 @@
 
 
     <script>
-    
+        let productNum = 1; //상품개수
+        // 상품개수 동작기능
+        $('#btn-mins').on('click', function(){
+            productNum = Number($('#txt-num').html());
+
+            if(productNum != 1) {
+                productNum -= 1;
+            }
+
+            $('#txt-num').html(productNum);
+        });
+
+        $('#btn-plus').on('click', function(){
+            productNum = Number($('#txt-num').html());
+
+            if(productNum != 10) {
+                productNum += 1;
+            }
+
+            $('#txt-num').html(productNum);
+        });
+
+
+
+
+
+
+
+
 
     </script>
 

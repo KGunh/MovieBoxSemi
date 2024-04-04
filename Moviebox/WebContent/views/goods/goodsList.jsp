@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -242,7 +244,11 @@
         <div class="container mt-5" >
             <div class="row">
                 <div class="col-md-3">
+                <!-- goodsList -->
+                <c:if test="${ not empty goodsList }">
                 <!-- 내일 반복문 배우고 로그인안하면 장바구니,구매하기 못하게 -->
+                	<!-- 반복 -->
+                
                     <div class="card">
                         <div class="image-container">
                             <div class="first">
@@ -268,7 +274,11 @@
                             </div>
                         </div>
                     </div>
-                    <!--  -->
+                    
+                    
+                
+                </c:if>
+                    
                 </div>
             </div>
         </div>
