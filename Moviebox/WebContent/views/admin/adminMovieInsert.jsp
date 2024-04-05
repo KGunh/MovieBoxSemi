@@ -10,6 +10,8 @@
 
 
 
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -196,7 +198,7 @@
         .title{
             /* border: 1px solid rgb(172, 0, 0); */
             width: 170px;
-            height: 60px;
+            height: 50px;
             font-size: 15px;
             font-weight: bold;
             line-height: 60px;
@@ -205,6 +207,30 @@
             padding-right: 30px;
         }
 
+
+        .title-story{
+            /* border: 1px solid rgb(172, 0, 0); */
+            width: 170px;
+            height: 80px;
+            font-size: 15px;
+            font-weight: bold;
+            line-height: 80px;
+            color:#ffffff;
+            text-align: right;
+            padding-right: 30px;
+        }
+
+        .title-trailer{
+            /* border: 1px solid rgb(172, 0, 0); */
+            width: 170px;
+            height: 50px;
+            font-size: 15px;
+            font-weight: bold;
+            line-height: 50px;
+            color:#ffffff;
+            text-align: right;
+            padding-right: 30px;
+        }
 
         #box_1     
         {
@@ -231,64 +257,72 @@
         #sub_2 {
             /* border: 1px solid rgb(0, 155, 216); */
             width: 580px;
-            height: 60px;
+            height: 50px;
             float: left;
         }
 
         #sub_3 {
             /* border: 1px solid rgb(223, 145, 0); */
             width: 580px;
-            height: 60px;
+            height: 50px;
             float: left;
         }
 
         #sub_4 {
             /* border: 1px solid rgb(223, 0, 93); */
             width: 580px;
-            height: 60px;
+            height: 50px;
             float: left;
         }
 
         #sub_5 {
             /* border: 1px solid rgb(255, 57, 255); */
             width: 580px;
-            height: 60px;
+            height: 50px;
             float: left;
         }
         #sub_6 {
             /* border: 1px solid rgb(34, 156, 255); */
             width: 580px;
-            height: 60px;
+            height: 50px;
             float: left;
         }
         #sub_7 {
             /* border: 1px solid rgb(63, 243, 78); */
             width: 580px;
-            height: 60px;
+            height: 50px;
             float: left;
         }
 
         #sub_8 {
             /* border: 1px solid rgb(63, 111, 243); */
             width: 580px;
-            height: 60px;
+            height: 50px;
             float: left;
         }
 
         #sub_9 {
             /* border: 1px solid rgb(236, 193, 0); */
             width: 580px;
-            height: 120px;
+            height: 80px;
             float: left;
         }
 
         #sub_10{
             /* border: 1px solid rgb(63, 111, 243); */
             width: 530px;
-            height: 40px;
+            height: 30px;
             float: left;
+            margin-top: 5px;
         }
 
+        #sub_11 {
+            /* border: 1px solid rgb(236, 193, 0); */
+            width: 580px;
+            height: 50px;
+            float: left;
+            margin-top: 3px;
+        }
 
         /*-------------------------------------------------------*/
         #file { 
@@ -335,24 +369,25 @@
         #runningTime, /*러닝타임입력창*/
         #rating, /*관람등급입력창*/
         #director_name,/*감독입력창*/
-        #cast /*출연진입력창*/
+        #cast, /*출연진입력창*/
+        #trailer/*예고편링크입력창*/
         { 
             width: 533px;
             height: 40px;
             border-radius: 8px;
             border: 1px solid lightgray;
             font-size: 15px;
-            margin-top: 9px;
+            margin-top: 4px;
             color: #727272;
         }
 
         #plot{ /*줄거리 입력창*/
             width: 533px;
-            height: 100px;
+            height: 75px;
             border-radius: 8px;
             border: 1px solid lightgray;
             font-size: 15px;
-            margin-top: 9px;
+            margin-top: 3px;
             color: #727272;
             padding-left: 7px;
             padding-top: 7px;
@@ -366,7 +401,7 @@
             width: 533px;
             height: 40px;
             font-size: 15px;
-            margin-top: 9px;
+            margin-top: 4px;
             margin-right: 14px;
             color: #727272;
             padding-left: 7px;
@@ -381,7 +416,7 @@
             border-radius: 8px;
             border: 1px solid lightgray;
             font-size: 15px;
-            margin-top: 9px;
+            margin-top: 4px;
             color: #727272;
             padding-left: 7px;
         }
@@ -469,7 +504,8 @@
 			            <div class="title">개봉일</div>
 			            <div class="title">감독</div>
 			            <div class="title">출연진</div>
-			            <div class="title">줄거리</div>
+			            <div class="title-story">줄거리</div>
+                        <div class="title-trailer">예고편</div>
 			        </div>
 			        <div id="box_2">
 			            <div id="sub_1">
