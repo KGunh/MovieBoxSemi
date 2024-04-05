@@ -136,6 +136,16 @@ public class MemberAdminController {
 		
 	}
 	
+	public String keyword(HttpServletRequest request, HttpServletResponse response) {
+		
+		String view ="";
+		
+		
+		
+		
+		return view; 
+	}
+	
 	
 
 }
