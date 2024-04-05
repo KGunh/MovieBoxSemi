@@ -6,14 +6,9 @@
 	Movie m =(Movie) request.getAttribute("movie");
 	String cast = (String) request.getAttribute("cast");
 	ArrayList<Genre> genrelist = (ArrayList<Genre>)request.getAttribute("genreList");
-	
-	String originalDateStr = m.getMovieRelease();
-	
-    String formattedDate = originalDateStr.substring(0, 4) + "-" 
-            + originalDateStr.substring(4, 6) + "-" 
-            + originalDateStr.substring(6, 8);
-
 %>
+
+
 
 
 
@@ -23,7 +18,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>영화관리 → 영화등록</title>
+<title>영화관리 → 영화수정</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -205,7 +200,7 @@
         .title{
             /* border: 1px solid rgb(172, 0, 0); */
             width: 170px;
-            height: 60px;
+            height: 50px;
             font-size: 15px;
             font-weight: bold;
             line-height: 60px;
@@ -214,6 +209,30 @@
             padding-right: 30px;
         }
 
+
+        .title-story{
+            /* border: 1px solid rgb(172, 0, 0); */
+            width: 170px;
+            height: 80px;
+            font-size: 15px;
+            font-weight: bold;
+            line-height: 80px;
+            color:#ffffff;
+            text-align: right;
+            padding-right: 30px;
+        }
+
+        .title-trailer{
+            /* border: 1px solid rgb(172, 0, 0); */
+            width: 170px;
+            height: 50px;
+            font-size: 15px;
+            font-weight: bold;
+            line-height: 50px;
+            color:#ffffff;
+            text-align: right;
+            padding-right: 30px;
+        }
 
         #box_1     
         {
@@ -240,64 +259,72 @@
         #sub_2 {
             /* border: 1px solid rgb(0, 155, 216); */
             width: 580px;
-            height: 60px;
+            height: 50px;
             float: left;
         }
 
         #sub_3 {
             /* border: 1px solid rgb(223, 145, 0); */
             width: 580px;
-            height: 60px;
+            height: 50px;
             float: left;
         }
 
         #sub_4 {
             /* border: 1px solid rgb(223, 0, 93); */
             width: 580px;
-            height: 60px;
+            height: 50px;
             float: left;
         }
 
         #sub_5 {
             /* border: 1px solid rgb(255, 57, 255); */
             width: 580px;
-            height: 60px;
+            height: 50px;
             float: left;
         }
         #sub_6 {
             /* border: 1px solid rgb(34, 156, 255); */
             width: 580px;
-            height: 60px;
+            height: 50px;
             float: left;
         }
         #sub_7 {
             /* border: 1px solid rgb(63, 243, 78); */
             width: 580px;
-            height: 60px;
+            height: 50px;
             float: left;
         }
 
         #sub_8 {
             /* border: 1px solid rgb(63, 111, 243); */
             width: 580px;
-            height: 60px;
+            height: 50px;
             float: left;
         }
 
         #sub_9 {
             /* border: 1px solid rgb(236, 193, 0); */
             width: 580px;
-            height: 120px;
+            height: 80px;
             float: left;
         }
 
         #sub_10{
             /* border: 1px solid rgb(63, 111, 243); */
             width: 530px;
-            height: 40px;
+            height: 30px;
             float: left;
+            margin-top: 5px;
         }
 
+        #sub_11 {
+            /* border: 1px solid rgb(236, 193, 0); */
+            width: 580px;
+            height: 50px;
+            float: left;
+            margin-top: 3px;
+        }
 
         /*-------------------------------------------------------*/
         #file { 
@@ -344,24 +371,25 @@
         #runningTime, /*러닝타임입력창*/
         #rating, /*관람등급입력창*/
         #director_name,/*감독입력창*/
-        #cast /*출연진입력창*/
+        #cast, /*출연진입력창*/
+        #trailer/*예고편링크입력창*/
         { 
             width: 533px;
             height: 40px;
             border-radius: 8px;
             border: 1px solid lightgray;
             font-size: 15px;
-            margin-top: 9px;
+            margin-top: 4px;
             color: #727272;
         }
 
         #plot{ /*줄거리 입력창*/
             width: 533px;
-            height: 100px;
+            height: 75px;
             border-radius: 8px;
             border: 1px solid lightgray;
             font-size: 15px;
-            margin-top: 9px;
+            margin-top: 3px;
             color: #727272;
             padding-left: 7px;
             padding-top: 7px;
@@ -375,7 +403,7 @@
             width: 533px;
             height: 40px;
             font-size: 15px;
-            margin-top: 9px;
+            margin-top: 4px;
             margin-right: 14px;
             color: #727272;
             padding-left: 7px;
@@ -390,7 +418,7 @@
             border-radius: 8px;
             border: 1px solid lightgray;
             font-size: 15px;
-            margin-top: 9px;
+            margin-top: 4px;
             color: #727272;
             padding-left: 7px;
         }
@@ -408,6 +436,7 @@
 
 
     </style>
+    
     
 </head>
 <body>
@@ -480,7 +509,8 @@
 			            <div class="title">개봉일</div>
 			            <div class="title">감독</div>
 			            <div class="title">출연진</div>
-			            <div class="title">줄거리</div>
+			            <div class="title-story">줄거리</div>
+                        <div class="title-trailer">예고편</div>
 			        </div>
 			        <div id="box_2">
 			            <div id="sub_1">
@@ -520,7 +550,7 @@
 			            </div>
 			
 			            <div id="sub_6">
-			                <input type="date" name="release_date" id="date" value="<%=formattedDate%>">
+			                <input type="date" name="release_date" id="date" value="">
 			            </div>
 			
 			            <div id="sub_7">
@@ -532,7 +562,7 @@
 			            </div>
 			
 			            <div id="sub_9">
-			                <textarea name="story" id="plot" cols="30" rows="10" placeholder="줄거리를 입력해 주세요."><%=m.getMovieStory()%>></textarea>
+			                <textarea name="story" id="plot" cols="30" rows="10" placeholder="줄거리를 입력해 주세요."><%=m.getMovieStory()%></textarea>
 			            </div>
 			            
 			            <div id="sub_11">
@@ -561,13 +591,13 @@
  	 
  	<script>
 	 	function validateForm() { 
-//
-//	 		var fileInput = document.getElementById('file');
-//	 	    var fileName = fileInput.value; 
-//	 	    if (fileName === "" || fileInput.files.length === 0) {
-//	 	        alert('포스터 파일을 첨부해 주세요.');
-//	 	        return false;
-//	 	    }
+
+	 		var fileInput = document.getElementById('file');
+	 	    var fileName = fileInput.value; 
+	 	    if (fileName === "" || fileInput.files.length === 0) {
+	 	        alert('포스터 파일을 첨부해 주세요.');
+	 	        return false;
+	 	    }
 	 	    var movieTitle = document.getElementById('movieTitle').value;
 	 	    if (movieTitle === "" || movieTitle.length === 0) {
 	 	        alert('영화 제목을 입력해 주세요.');
