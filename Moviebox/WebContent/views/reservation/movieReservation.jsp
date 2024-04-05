@@ -137,9 +137,9 @@
         width: 1070px;
         height: 175px;
         margin-top: 25px;
-        border-radius: 25px;
+        border-radius: 0px;
         background-color: rgb(148, 145, 145);
-        
+        border-radius: 25px;
     }
 
     .theaterName{
@@ -152,20 +152,19 @@
     }
     
     .selectScreen{
-        width: 900px;
-        height: 110px;
+        margin-left: 40px;
+        width: 990px;
+        display: flex;
         white-space: nowrap;
         overflow-x: scroll;
-        align-items: center;
-        justify-content: center;
     }
 
     .screenName{
         float: left;
-        width: 155px;
-        height: 85px;
-        margin-top: 5px;
-        margin-left: 48px;
+        min-width: 155px;
+        min-height: 85px;
+        margin-right: 40px;
+        margin-bottom: 5px;
         border-radius: 25px;
         background-color: rgba(255, 255, 255, 0.6);
         text-align: center;
@@ -243,6 +242,13 @@
         border: none;
     }
   
+    .selectScreen::-webkit-scrollbar {
+        width: 10px; /* 스크롤바 너비 */
+    }
+
+    .selectScreen::-webkit-scrollbar-thumb {
+        background-color: rgb(255, 193, 69); /* 스크롤바 색상 */
+    }
 </style>
 
 </head>
@@ -401,7 +407,7 @@
                                        +            '<span style="color: black;">' + result[i].watchDateList[j] + '</span>'
                                        +            '<input type="hidden" value="' + result[i].screenNoList[j] + '">'
                                        +            '<input type="hidden" value="' + result[i].screenNameList[j] + '">'
-                                       +        '</div>'
+                                       +        '</div>';
                         };
                         
                         resultStr +=        '</div>'
