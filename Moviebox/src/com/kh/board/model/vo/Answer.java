@@ -13,7 +13,9 @@ public class Answer {
 		super();
 	}
 	
-	
+
+
+
 	public Answer(int answerNo, String answerContent, String createDate, String answerWriter) {
 		super();
 		this.answerNo = answerNo;

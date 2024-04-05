@@ -122,12 +122,13 @@
 	</entry>
 	
 	
+	<!-- 문의게시판 답변(댓글) -->
 	<entry key="selectAnswerList">
 		SELECT
 			  ANSWER_NO,
 			  ANSWER_CONTENT,
-			  MEMBER_NO,
-			  TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE
+			  TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE,
+			  MEMBER_NAME
 		  FROM
 		  	  TB_ANSWER A
 		  JOIN
@@ -149,7 +150,6 @@
   	 	  	  (
   	 	  	  ANSWER_NO,
   	 	  	  ANSWER_CONTENT,
-  	 	  	  CREATE_DATE,
   	 	  	  BOARD_NO,
   	 	  	  ANSWER_WRITER
   	 	  	  )
@@ -157,7 +157,6 @@
 			  (
 			  SEQ_ANSNO.NEXTVAL,
 			  ?,
-			  SYSDATE,
 			  ?,
 			  ?
 			  )
