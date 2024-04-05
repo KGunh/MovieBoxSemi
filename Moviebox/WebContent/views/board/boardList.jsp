@@ -4,6 +4,8 @@
 <%@ page import="com.kh.board.model.vo.Board,
 				 com.kh.common.model.vo.PageInfo,
  				 java.util.ArrayList"%>
+ 				 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <%
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("boardList");
@@ -256,7 +258,7 @@
             <!-- 카테고리 -->
             <div id="board-category">
                 <div class="notice-tap" onclick="openNoticePage();">공지사항</div>
-                <div class="qna-tap" onclick="openQnaPage();">QnA</div>
+                <div class="qna-tap" onclick="openQnaPage();">Q&A</div>
             </div> <!-- board-category -->
 
             <!-- 검색 -->
@@ -298,7 +300,7 @@
                     <tbody>
                     <% if (list.isEmpty()) { %>
                         <tr>
-                            <td colspan="5">조회 된 공지사항이 없습니다. </td>
+                            <td colspan="5" style="color: white;">조회 된 문의사항이 없습니다. </td>
                         </tr>
                         
                         <% } else { %>

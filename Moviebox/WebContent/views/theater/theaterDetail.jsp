@@ -3,13 +3,15 @@
     
 <%@ page import="com.kh.theater.model.vo.*, java.util.ArrayList,
 				 com.kh.movie.model.vo.*, com.kh.common.model.vo.*" %>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <%
-	ArrayList<Theater> list = (ArrayList<Theater>)request.getAttribute("theaterList");
 	ArrayList<Movie> movies = (ArrayList<Movie>)request.getAttribute("movie");
 	ArrayList<Attachment> attachment = (ArrayList<Attachment>)request.getAttribute("attachment");
 	Theater theater = (Theater)request.getAttribute("theater");
-
+	
+	System.out.println("theater : " + theater);
 
 %>
 <!DOCTYPE html>
@@ -39,7 +41,7 @@
             color: white;
             font-size: 15px;
         }
-
+        
 
         /* 영화관 안내 전체 박스 */
         #theater-header{
@@ -48,7 +50,6 @@
             padding-bottom: 30px;
             color: #1A1A1A;
             border-bottom: 1px solid #8A8A8A;
-            
         }
 
         #theater-content{
@@ -74,9 +75,21 @@
 			font-weight: bold;
 		}
 		
-		
-
+		/* 조회 결과 없을 때 */
+        #noMovieList{
+        	width:1200px;
+        	height: 500px;
+        	text-align: center;
+        	line-height: 490px;
+        }
         
+        #noMovie{
+        	width: 1200px;
+        	font-size: 20px;
+        	text-align: center;
+        	color:white;
+        }
+		
         /* 현재 상영작 목록 */
         #movie-content-body{
             width: 1200px;
@@ -186,6 +199,14 @@
     <div id="wrap">
 
         <!-- 영화관 안내 전체 박스 -->
+        
+        <c:choose>
+        	<c:when test="${ theater.theaterName eq null }">
+				<div id="noMovieList">
+					<a id="noMovie">조회 된 영화관이 없습니다.</a>
+				</div>
+       	 	</c:when>
+       	 	<c:otherwise>
         <div id="theater-header">
                 <a id="theaterTitle"><%= theater.getTheaterName() %></a>
             <div id="theater-content">
@@ -199,10 +220,6 @@
             <!-- 현재 상영작 목록 -->
             
             <div id="movie-content-body">
-			<% if(movies.isEmpty()) { %>
-				<a style="color: white;">등록된 영화가 존재하지 않습니다.</a> <br>
-			<% } else { %>
-
                 <% for(Movie m : movies) { %>
                <!-- <div class="movie-conten1"> -->
                 
@@ -220,11 +237,9 @@
 	                	<%} else { %>
 	                		<button id="movie-content-btn2" onclick="reservationPage();">예매하기</button>
 	                	<% } %>
-                        
                         <%--<button id="movie-content-btn2">예매하기</button> --%>
                     </div>
 				<% } %>
-			<% } %>
             </div>
         </div>
 
@@ -238,6 +253,10 @@
         </div>
 
     </div> <!-- wrap -->
+		</c:otherwise>
+	</c:choose>
+
+
 
 <%@ include file="../common/footer.jsp" %>
 
