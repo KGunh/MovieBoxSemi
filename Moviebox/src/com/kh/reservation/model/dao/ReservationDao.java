@@ -102,6 +102,7 @@ public class ReservationDao {
 		ResultSet rset = null;
 		
 		String sql = prop.getProperty("selectScreen");
+		
 		try {
 			pstmt = conn.prepareStatement(sql);
 		    
@@ -224,13 +225,11 @@ public class ReservationDao {
 		String sql = prop.getProperty("insertReservation");
 		
 		try {
-			// 시퀀스 값을 먼저 반환받고
 			pstmt = conn.prepareStatement("SELECT SEQ_TKNO.NEXTVAL AS KEY FROM DUAL");
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) key = rset.getInt("KEY");
 				
-			// 반환받은 시컨스 값을 사용하여 insert -> 다음 테이블에 key값을 사용하여 insert하기 위해서
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setInt(2, reservation.getSeatList().size());			
@@ -258,7 +257,7 @@ public class ReservationDao {
 		int result = 0;
 		
 		String sql = prop.getProperty("insertPriceSheet");
-		// 청소년 성인 구분해서 반복문 돌리기
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
@@ -296,7 +295,7 @@ public class ReservationDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			// 예약된 좌석 만큼 반복
+
 			for(int i = 0; i < reservation.getSeatList().size(); i++) {
 				pstmt.setString(1, reservation.getSeatList().get(i).getSeatNo());
 				pstmt.setInt(2, reservation.getScreenNo());

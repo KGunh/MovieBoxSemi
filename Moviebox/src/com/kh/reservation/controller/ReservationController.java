@@ -1,25 +1,21 @@
 package com.kh.reservation.controller;
 
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.LinkedHashSet;
 import java.util.List;
-import java.util.Map;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import com.kh.common.model.vo.Reservation;
-import com.kh.member.model.service.MemberService;
-import com.kh.reservation.model.dao.ReservationDao;
 import com.kh.reservation.model.service.ReservationService;
 import com.kh.reservation.model.vo.Seat;
 import com.kh.theater.model.vo.Screen;
 
 public class ReservationController {
 	
-	// 영화 선택 화면의 영화, 지역정보 리스트 조회
 	public String selectReservationInfo(HttpServletRequest request) {
 		request.setAttribute("locationList", new ReservationService().selectLocationList()); 
 		request.setAttribute("movieList", new ReservationService().selectMovieList()); 
@@ -27,15 +23,12 @@ public class ReservationController {
 		return "views/reservation/movieReservation.jsp";
 	}
 	
-	// 예매페이지 영화 상영 시간의 리스트 조회
 	public List<Screen> selectScreen(HttpServletRequest request) {
-		// 날짜데이터를 '-' 기준으로 자르기
 		String[] dateStr = request.getParameter("date").split("-");
 		String screenLocation = request.getParameter("location");
 		String screenDate = "";
 		int movieNo = 0;
 		
-		// DB 컬럼 포맷에 맞춰 가공 ex)2024/01/01
 		if(dateStr.length >= 3) {
 			screenDate = dateStr[0].substring(2) + "/" + dateStr[1] + "/" + dateStr[2];
 		}
@@ -43,13 +36,13 @@ public class ReservationController {
 		if(!request.getParameter("movieNo").equals("")) {
 			movieNo = Integer.parseInt(request.getParameter("movieNo"));
 		}
-		// DB에서 전체 카테고리로 조회하기 위해서 빈문자로 값을 가공해서 전달
+
 		if(screenLocation.equals("전체")) screenLocation = "";
 		
 		List<Screen> list = new ReservationService().selectScreen(screenDate, screenLocation, movieNo); 
 
 		Set<Screen> set = new LinkedHashSet<>();
-	    // set으로 중복값 제거
+
 		for(Screen screen : list) {
 			Screen sc = new Screen();
 			
@@ -61,7 +54,6 @@ public class ReservationController {
             set.add(sc);
         }
         
-		// 중복이 제거후 list에 담기
 		List<Screen> screenList = new ArrayList<Screen>();
 		
 		for(Screen sc : set) {
@@ -76,7 +68,6 @@ public class ReservationController {
 			screenList.add(screen);
 		}
 		
-		// 영화관마다 상영중인 시간 list필드에 담기
 		for(int i = 0; i < screenList.size(); i++) {
 			List<String> screenNameList = new ArrayList<>();
 		    List<String> watchDateList = new ArrayList<>();
@@ -98,33 +89,51 @@ public class ReservationController {
 		return screenList;
 	}
 
-	// 영화 선택 후 좌석 선택화면으로 보내는 메소드
 	public String connectSeatList(HttpServletRequest request) {
 		request.setAttribute("theaterName", request.getParameter("theaterName"));
 		request.setAttribute("movieTitle", request.getParameter("movieTitle"));
 		request.setAttribute("screenDate", request.getParameter("screenDate"));
 		request.setAttribute("screenName", request.getParameter("screenName"));
-		request.setAttribute("screenNo", request.getParameter("screenNo"));
-		request.setAttribute("movieNo", request.getParameter("movieNo"));
+		
+		if(request.getParameter("screenNo") != null && request.getParameter("movieNo") != null) {
+			request.setAttribute("screenNo", request.getParameter("screenNo"));
+			request.setAttribute("movieNo", request.getParameter("movieNo"));
+		} else {
+			HttpSession session = request.getSession();
+			
+			session.setAttribute("alertMsg", "잘못된 요청입니다.");
+			
+			return "views/common/errorPage.jsp";
+		}
 		
 		return "views/reservation/seatReservation.jsp";
 	}
-	// 상영관 예매된 좌석 조회
-	public List<Seat> selectSeatList(HttpServletRequest request) {
-		int screenNo = Integer.parseInt(request.getParameter("screenNo"));
 
+	public List<Seat> selectSeatList(HttpServletRequest request) {
+		int screenNo = 0;
+		
+		if(request.getParameter("screenNo") != "") {
+			screenNo = Integer.parseInt(request.getParameter("screenNo"));
+		}
+		
 		return new ReservationService().selectSeatList(screenNo);		
 	}
-	// 예약내용 확인
+
 	public Reservation printReservationInfo(HttpServletRequest request) {
+		// 오류 넘버
 		int screenNo = Integer.parseInt(request.getParameter("screenNo"));
 		int adultAge = Integer.parseInt(request.getParameter("adultAge"));
-		int movieNo = Integer.parseInt(request.getParameter("movieNo"));
+		
+		int movieNo = 0;
+		if(request.getParameter("movieNo") != "") {
+			movieNo = Integer.parseInt(request.getParameter("movieNo"));
+		}
+		
 		int teenAge = Integer.parseInt(request.getParameter("teenAge"));
 		
 		return new ReservationService().printReservationInfo(screenNo, movieNo, teenAge, adultAge); 
 	}
-	// 예약
+
 	public String insertReservation(HttpServletRequest request) {
 		List<Seat> seatList = new ArrayList<Seat>();
 		Reservation reservation = new Reservation();
@@ -132,9 +141,8 @@ public class ReservationController {
 		int screenNo = Integer.parseInt(request.getParameter("screenNo"));
 		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		int movieNo = Integer.parseInt(request.getParameter("movieNo"));
-		// 선택한 좌석 데이터 가공 -> 문자배열 -> seat객체에 필드set -> seatList에 add 
 		String seatNo = request.getParameter("seatNo");
-		String[] seatArray = seatNo.split(","); // 좌석 ex) A1,A2... 나누기
+		String[] seatArray = seatNo.split(",");
 		
 		for(int i = 0; i < seatArray.length; i++) {
 			Seat seat = new Seat();
@@ -144,13 +152,11 @@ public class ReservationController {
 			seatList.add(seat);
 		}
 		
-		// reservation VO에 set
 		reservation.setSeatList(seatList);
 		reservation.setScreenNo(screenNo);
 		reservation.setMemberNo(memberNo);
 		reservation.setMovieNo(movieNo);
 		
-		// 예매 연령의 인원수는 따로 보냄
 		int adultPersonNo = 0;
 		if(request.getParameter("adult") != "") adultPersonNo = Integer.parseInt(request.getParameter("adult"));
 

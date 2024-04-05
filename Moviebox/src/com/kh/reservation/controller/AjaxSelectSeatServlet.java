@@ -1,6 +1,7 @@
 package com.kh.reservation.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.ServletException;
@@ -8,6 +9,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.google.gson.Gson;
 import com.kh.reservation.model.vo.Seat;
@@ -31,8 +33,19 @@ public class AjaxSelectSeatServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		List<Seat> seatList = new ReservationController().selectSeatList(request);
-				
+		
+		List<Seat> seatList = new ArrayList<Seat>();
+		
+		if(new ReservationController().selectSeatList(request).size() != 0) {
+			seatList = new ReservationController().selectSeatList(request);
+		} else {
+			HttpSession session = request.getSession();
+			
+			session.setAttribute("alertMsg", "잘못된 요청입니다.");
+			
+			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
+		}
+		
 		response.setContentType("application/json; charset=UTF-8");
 				
 		new Gson().toJson(seatList, response.getWriter());		

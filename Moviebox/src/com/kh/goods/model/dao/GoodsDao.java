@@ -39,12 +39,12 @@ public class GoodsDao {
 			while(rset.next()) {
 				Goods goods = new Goods();
 				
-				goods.setGoodsNo(rset.getInt("GOODS_NO"));
+				goods.setChangeName(rset.getString("CHANGE_NAME"));
 				goods.setGoodsName(rset.getString("GOODS_NAME"));
 				goods.setGoodsPrice(rset.getInt("GOODS_PRICE"));
 				goods.setTypeName(rset.getString("TYPE_NAME"));
 				goods.setFilePath(rset.getString("FILE_PATH"));
-				goods.setChangeName(rset.getString("CHANGE_NAME"));
+				goods.setGoodsNo(rset.getInt("GOODS_NO"));
 				
 				goodsList.add(goods);
 			}
