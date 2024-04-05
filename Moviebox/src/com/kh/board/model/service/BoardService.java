@@ -99,7 +99,6 @@ public class BoardService {
 		
 		Connection conn = getConnection();
 		List<Answer> answer = new BoardDao().selectAnswerList(conn, boardNo);
-		
 		close(conn);
 		return answer;
 	}

@@ -50,8 +50,12 @@
             padding-top: 13px;
             float: left;
         }
+        
+        #movieCategory{
+        	width:600px;
+        }
 
-        .movie-list-genre{
+        #movie-list-genre{
             width: 70px;
             height: 70px;
             color: white;
@@ -60,32 +64,17 @@
             font-weight: bold;
             float: left;
             padding-top: 20px;
+            cursor: pointer;
         }
 
-        .movie-list-genre1{
-            width: 130px;
-            height: 70px;
-            color: white;
-            text-align: center;
-            font-size: 20px;
-            font-weight: bold;
-            float: left;
-            padding-top: 20px;
-        }
 
-        .movie-list-genre:hover{
+        #movie-list-genre:hover{
             background-color: #FFC145;
             border-radius: 25px;
             color: #1A1A1A;
             font-weight: bold;
         }
 
-        .movie-list-genre1:hover{
-            background-color: #FFC145;
-            border-radius: 25px;
-            color: #1A1A1A;
-            font-weight: bold;        
-        }
 
         /* 정렬 / 검색창 */
         #searchalign{
@@ -209,13 +198,15 @@
             <div id="movie-list-header">
             <!-- 카테고리 시작 -->
                 <div id="movie-list-category">
-                    <div class="movie-list-genre">전체</div>
-                    <div class="movie-list-genre">액션</div>
-                    <div class="movie-list-genre">로맨스</div>
-                    <div class="movie-list-genre1">공포/스릴러</div>
-                    <div class="movie-list-genre">코미디</div>
-                    <div class="movie-list-genre">애니</div>
-                    <div class="movie-list-genre">판타지</div>
+                	<div id="movieCategory">
+	                    <div id="movie-list-genre">전체</div>
+	                    <div id="movie-list-genre">액션</div>
+	                    <div id="movie-list-genre">로맨스</div>
+	                    <div id="movie-list-genre" style="width:130px;">공포/스릴러</div>
+	                    <div id="movie-list-genre">코미디</div>
+	                    <div id="movie-list-genre">애니</div>
+	                    <div id="movie-list-genre">판타지</div>
+                    </div>
                 </div>
                 
                 <!-- 장르 버튼 -->
@@ -223,16 +214,6 @@
                 	<input id="selectTypeGenre" type="hidden" name="type" value="genre">
                 	<input id="genreInput" type="hidden" name="genre">
                 </form>
-                
-                <script>
-	                document.getElementById('movie-list-category').onclick = function(e){
-	                	const selectGenre = e.target.innerHTML;
-	                    document.getElementById('genreInput').value = selectGenre;
-	                    document.getElementById('selectGenreForm').submit();
-	            }
-	                
-	                	const genreType = document.getElementById('selectTypeGenre')
-                </script>
 
                 <!-- 정렬 / 검색창 -->
                 <div id="searchalign">
@@ -257,11 +238,12 @@
                 <% for(Movie m : list) { %>
                     <div class="movie-content">
                     	<input type="hidden" id="inputId" name="movieNo" value="<%= m.getMovieNo()%>" />
-                        <div class="movie-list-img">
-                        <img src="<%= m.getFilePath() %>/<%= m.getChangeName() %>" width="232" height="300">
+                    	
+                        <div class="movie-list-img"> <!-- 포스터 -->
+                        	<a href="<%=contextPath%>/detail.movie?movieNo=<%= m.getMovieNo()%>"><img src="<%= m.getFilePath() %>/<%= m.getChangeName() %>" width="232" height="300"></a>
                         </div>
+                        
                         <div class="movie-list-title"><%= m.getMovieTitle() %></div>
-                        <!-- <button id="movie-content-btn1" onclick="detailPage(this);">상세정보</button>-->
                         <div id="movie-content-btn1"><a href="<%=contextPath%>/detail.movie?movieNo=<%= m.getMovieNo()%>" id="detailbtn">상세정보</a></div>
 	                    <% if(loginUser == null) { %>
 	                    	<button id="movie-content-btn2" onclick="noMember();">예매하기</button>
@@ -281,22 +263,31 @@
 	<%@ include file="/views/common/footer.jsp" %>
 	
     <script>
-    
-	function noMember(){
-		location.href = ('<%=contextPath%>/loginForm.me');
-		alert('로그인이 필요한 서비스 입니다.');
-	}
-	
-	$('#movie-content-btn2').on('click',function(){
-	    var movieNo = $(this).siblings('input[type="hidden"]').val();
-	    location.href = '<%=contextPath%>/detail.movie?movieNo=' + movieNo;
-	});
+    	// 비회원 상태에서 예매하기 버튼 클릭 시
+		function noMember(){
+			location.href = ('<%=contextPath%>/loginForm.me');
+			alert('로그인이 필요한 서비스 입니다.');
+		}
 		
-    	// 예매하기 버튼 -> 예매 페이지
-    	function reservationPage(){
-    		location.href = '<%= contextPath %>/movie.reservation';
-    	}
-    	
+    	// 카테고리 네비 바
+	    document.getElementById('movieCategory').onclick = function(e){
+	    	const selectGenre = e.target.innerHTML;
+	        document.getElementById('genreInput').value = selectGenre;
+	        document.getElementById('selectGenreForm').submit();
+	}
+	    	const genreType = document.getElementById('selectTypeGenre')
+		
+	    // 예매하기 버튼 클릭시 
+		$('#movie-content-btn2').on('click',function(){
+		    var movieNo = $(this).siblings('input[type="hidden"]').val();
+		    location.href = '<%=contextPath%>/detail.movie?movieNo=' + movieNo;
+		});
+			
+	    	// 예매하기 버튼 -> 예매 페이지
+	    	function reservationPage(){
+	    		location.href = '<%= contextPath %>/movie.reservation';
+	    	}
+	    	
 
 	</script>
     
