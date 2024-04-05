@@ -378,7 +378,7 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
 
                 </div>
                 <div id="delete" >
-                    <button id="btn1" onclick="deleteadmin();'">탈퇴</button>
+                    <button type="button" id="btn1" onclick="deleteadmin();">탈퇴</button>
                 </div>
 
                 <div id="cnt2_post"><!--게시판-->

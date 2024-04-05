@@ -168,13 +168,13 @@
                             <div class="select-info" style="margin-top: 50px;">결제금액</div>
                         </div>
                         <div id="print-reservation-info">
-                            <div class="print-info">티켓번호</div>
-                            <div class="print-info">일시</div>
-                            <div class="print-info">이름</div>
-                            <div class="print-info">상영관</div>
-                            <div class="print-info">인</div>
-                            <div class="print-info">좌석</div>
-                            <div class="print-info" style="margin-top: 50px;">금액</div>
+                            <div class="print-info"></div>
+                            <div class="print-info"></div>
+                            <div class="print-info"></div>
+                            <div class="print-info"></div>
+                            <div class="print-info"></div>
+                            <div class="print-info"></div>
+                            <div class="print-info" style="margin-top: 50px;"></div>
                         </div>
                     </div>
                 </div>
