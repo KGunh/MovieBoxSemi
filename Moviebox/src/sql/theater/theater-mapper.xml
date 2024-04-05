@@ -78,18 +78,17 @@
 	
 	<!-- 선택한 영화관 정보 보여주기 -->
 	<entry key="selectTheaterDetail">
+		
 		SELECT
-		      SCREEN_NO,
-		      THEATER_NO,
-		      MOVIE_NO,
-		      MOVIE_TITLE,
+              MOVIE_NO,
 		      THEATER_NAME,
-		      THEATER_ADDR,
-		      MAP_LINK,
 		      FILE_PATH,
-		      CHANGE_NAME
+		      CHANGE_NAME,
+		      THEATER_ADDR,
+		      MOVIE_TITLE,
+		      MAP_LINK
 		  FROM
-		      TB_SCREEN 
+		      TB_SCREEN
 		  JOIN
 		      TB_MOVIE M USING(MOVIE_NO)
 		  JOIN
@@ -100,6 +99,11 @@
 		      THEATER_NO = ? AND M.STATUS = 'Y'
 		   AND
 		      FILE_LEVEL = 1
+		GROUP
+		   BY
+		      MOVIE_TITLE,FILE_PATH,CHANGE_NAME,MOVIE_NO,THEATER_NAME,MAP_LINK
+		ORDER
+		   BY MOVIE_NO;
 	</entry>
 	
 	<entry key="selectTheaterList">

@@ -10,8 +10,7 @@
 	ArrayList<Movie> movies = (ArrayList<Movie>)request.getAttribute("movie");
 	ArrayList<Attachment> attachment = (ArrayList<Attachment>)request.getAttribute("attachment");
 	Theater theater = (Theater)request.getAttribute("theater");
-	
-	System.out.println("theater : " + theater);
+
 
 %>
 <!DOCTYPE html>
