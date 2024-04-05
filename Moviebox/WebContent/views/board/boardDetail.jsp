@@ -307,34 +307,38 @@
 
                 <div class="detail-content-a-box">
                     <div class="detail-a">
-                        <table>
-                            <thead>
-                                <tr>
-                                    <th>답변</th>
-                                    
-                                    <!-- loginUser가 비어있을 떄 -->
-                                    <c:choose>
-                                    	<c:when test="${!empty sessionScope.loginUser and sessionScope.loginUser.memberNo eq 1}">
-		                                        <td>
-		                                            <textarea id="answerContent"></textarea>
-		                                        </td>
-		                                        <td><button onclick="insertReply();" id="answerSubmit">등록dd</button></td>
-                                    	</c:when>
-                                    	
-                                    	<c:otherwise>
-	                                        <td>
-	                                            <textarea id="answerContent-else" placeholder="관리자만 작성 가능합니다." readonly></textarea>
-	                                        </td>
-	                                        <td><button id="answerSubmit-else" disabled>등록</button></td>
-                                    	</c:otherwise>
-									</c:choose>
-                                </tr>
-                            </thead>
-
-                            <tbody>
-                            <a>댓글 등록되는 부분</a>
-                            </tbody>
-                        </table>
+	                    <c:choose>
+	                    	<c:when test="${ sessionScope.loginUser.memberNo eq 1}">
+		                        <table>
+		                            <thead>
+		                                <tr>
+		                                	<th>답변</th>
+		                                    <c:choose>
+		                                    	<c:when test="${!empty sessionScope.loginUser and sessionScope.loginUser.memberNo eq 1}">
+				                                        <td>
+				                                            <textarea id="answerContent"></textarea>
+				                                        </td>
+				                                        <td><button onclick="insertReply();" id="answerSubmit">등록dd</button></td>
+		                                    	</c:when>
+		                                    	
+		                                    	<c:otherwise>
+			                                        <td>
+			                                            <textarea id="answerContent-else" placeholder="관리자만 작성 가능합니다." readonly></textarea>
+			                                        </td>
+			                                        <td><button id="answerSubmit-else" disabled>등록</button></td>
+		                                    	</c:otherwise>
+											</c:choose>
+		                                </tr>
+		                            </thead>
+		                            <tbody>
+		                            <a>댓글 등록되는 부분</a>
+		                            </tbody>
+		                        </table>
+	                        </c:when>
+	                        <c:otherwise>
+								<a></a>	                        
+	                        </c:otherwise>
+	                    </c:choose>
                     </div>
                     
                     <script>
