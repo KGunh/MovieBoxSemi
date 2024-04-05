@@ -244,27 +244,27 @@
                     <button class="people-teen ageBtn" style="cursor: auto;">청소년</button>
                 </div>
                 <div id="selectPerson">
-                    <button class="people-Count">1</button>
-                    <button class="people-Count">2</button>
-                    <button class="people-Count">3</button>
-                    <button class="people-Count">4</button>
-                    <button class="people-Count">5</button>
-                    <button class="people-Count">6</button>
-                    <button class="people-Count">7</button>
-                    <button class="people-Count">8</button>
+                    <button class="people-Count teenBtn">1</button>
+                    <button class="people-Count teenBtn">2</button>
+                    <button class="people-Count teenBtn">3</button>
+                    <button class="people-Count teenBtn">4</button>
+                    <button class="people-Count teenBtn">5</button>
+                    <button class="people-Count teenBtn">6</button>
+                    <button class="people-Count teenBtn">7</button>
+                    <button class="people-Count teenBtn">8</button>
                 </div>
                 <div class="selectAge">
                     <button class="people-adult ageBtn" style="cursor: auto;">성인</button>
                 </div>
                 <div id="selectPerson">
-                    <button class="people-Count">1</button>
-                    <button class="people-Count">2</button>
-                    <button class="people-Count">3</button>
-                    <button class="people-Count">4</button>
-                    <button class="people-Count">5</button>
-                    <button class="people-Count">6</button>
-                    <button class="people-Count">7</button>
-                    <button class="people-Count">8</button>
+                    <button class="people-Count adultBtn">1</button>
+                    <button class="people-Count adultBtn">2</button>
+                    <button class="people-Count adultBtn">3</button>
+                    <button class="people-Count adultBtn">4</button>
+                    <button class="people-Count adultBtn">5</button>
+                    <button class="people-Count adultBtn">6</button>
+                    <button class="people-Count adultBtn">7</button>
+                    <button class="people-Count adultBtn">8</button>
                 </div>
             </div>
             <div id="select-people"></div>
@@ -279,42 +279,42 @@
                 <div id="a-line" class="line">
                     <div id="a-line-wrap" class="line-wrap">
                         <% for(int i = 1; i <= 12; i++){ %>
-                        	<div class="a-seat seats">A<%= i %></div>
+                        	<div draggable="true" class="a-seat seats">A<%= i %></div>
                         <% } %>
                     </div>
                 </div>
                 <div id="b-line" class="line">
                     <div id="b-line-wrap" class="line-wrap">
                         <% for(int i = 1; i <= 12; i++){ %>
-                        	<div class="b-seat seats">B<%= i %></div>
+                        	<div draggable="true" class="b-seat seats">B<%= i %></div>
                         <% } %>
                     </div>
                 </div>
                 <div id="c-line" class="line">
                     <div id="c-line-wrap" class="line-wrap">
                          <% for(int i = 1; i <= 12; i++){ %>
-                        	<div class="c-seat seats">C<%= i %></div>
+                        	<div draggable="true" class="c-seat seats">C<%= i %></div>
                          <% } %>
                     </div>
                 </div>
                 <div id="d-line" class="line">
                     <div id="d-line-wrap" class="line-wrap">
                          <% for(int i = 1; i <= 12; i++){ %>
-                        	<div class="d-seat seats">D<%= i %></div>
+                        	<div draggable="true" class="d-seat seats">D<%= i %></div>
                          <% } %>
                     </div>
                 </div>
                 <div id="e-line" class="line">
                     <div id="e-line-wrap" class="line-wrap">
                         <% for(int i = 1; i <= 12; i++){ %>
-                        	<div class="e-seat seats">E<%= i %></div>
+                        	<div draggable="true" class="e-seat seats">E<%= i %></div>
                         <% } %>
                     </div>
                 </div>
                 <div id="f-line" class="line">
                     <div id="e-line-wrap" class="line-wrap">
                          <% for(int i = 1; i <= 12; i++){ %>
-                        	<div class="f-seat seats">F<%= i %></div>
+                        	<div draggable="true" class="f-seat seats">F<%= i %></div>
                          <% } %>
                     </div>
                 </div>
@@ -439,9 +439,10 @@
     </style>
 
     <script>
-        let peopleCount = 0; // 연령별 선택한 인원
+        let teenCount = 0; // 연령별 선택한 인원
+        let adultCount = 0;
+        let peopleCount = 0;
         let selectPeople = 0; // 총 인원
-        let ageType = ''; // 연령
         let resvTeen = ['', 0]; 
         let resvAdult = ['', 0];
         let selectSeat = []; // 선택 좌석
@@ -473,68 +474,100 @@
                 }
             });
         };
-
-        // 청소년, 성인 선택버튼 조작
-        // 이거 수정해야함!!!!!!!! 청소년 성인 인원수 선택하면 스타일 바뀌게끔
-        $('.ageBtn').click(e => {
-            if($(e.target).hasClass('clicked')) {
-                $(e.target).removeClass('clicked');
-
-                ageType = '';
-            } 
-            else {
-                $('.people-Count').removeClass('clicked');
-                $(e.target).addClass('clicked');
-                
-                ageType = ($(e.target).html());
-            };
-            
-            printPeople();
-        });
-
+///////////////////////////////
+        $(document).ready(function() {
+    let isSelecting = false;
+    
+    $('.seats').mousedown(function(e) {
+        isSelecting = true;
+        $(this).addClass('selected');
+        e.preventDefault(); // 드래그 중 선택 영역이 확장되지 않도록 기본 이벤트를 막습니다.
+    });
+    
+    $(document).mousemove(function(e) {
+        if (isSelecting) {
+            $('.seats').each(function() {
+                if ($(this).hasClass('selected')) {
+                    $(this).removeClass('selected');
+                }
+            });
+            $(e.target).addClass('selected');
+        }
+    });
+    
+    $(document).mouseup(function() {
+        isSelecting = false;
+    });
+});
+/////////////////
         // 인원수 버튼에 대한 스타일동작 및 값처리
         $('.people-Count').click(e => {
-            peopleCount = Number($(e.target).html());
-            // 청소년,성인 선택 -> 좌석선택 초기화
-            $('.seats').removeClass('clicked');
-            // 클래스 속성을 부여하여 스타일 조작
-            if($(e.target).hasClass('clicked')) {
-                $('.people-Count').removeClass('clicked');
-                peopleCount = 0;
-            } 
-            else {
-                $('.people-Count').removeClass('clicked');
-                $(e.target).addClass('clicked');
+            // 인원선택 상위 연령요소
+            let ageType = $(e.target).parent().prev().children().eq(0);
+
+            if(ageType.html() == '청소년'){
+                teenCount = Number($(e.target).html());
+                $('.people-teen').addClass('clicked');
+
+                if($(e.target).hasClass('clicked')) {
+                    $('.teenBtn').removeClass('clicked');
+                    ageType.removeClass('clicked');
+                    
+                    teenCount = 0;
+                }
+                else{
+                    $('.teenBtn').removeClass('clicked');
+                    $(e.target).addClass('clicked');
+                    ageType.addClass('clicked');
+                }
             }
-            // 인원 선택 초기화 -> 선택한 좌석 배열 초기화
+            else{
+                adultCount = Number($(e.target).html());
+                $('.people-adult').addClass('clicked');
+
+                if($(e.target).hasClass('clicked')) {
+                    $('.adultBtn').removeClass('clicked');
+                    ageType.removeClass('clicked');
+                    
+                    adultCount = 0;
+                }
+                else{
+                    $('.adultBtn').removeClass('clicked');
+                    $(e.target).addClass('clicked');
+                    ageType.addClass('clicked');
+                }
+            }
+            // 총 인원수
+            peopleCount = teenCount + adultCount;
+            // 인원선택 초기화 -> 선택한 좌석 배열 초기화
             selectSeat = [];
+             // 청소년,성인 선택 -> 좌석선택 초기화
+            $('.seats').removeClass('clicked');
 
             printPeople();
         });
-        
+
         // 선택한 인원 보여주기
         function printPeople() {
-            if(ageType == '청소년') {
-                resvTeen = [ageType, peopleCount];
-            }
-            else if(ageType == '성인') {
-                resvAdult = [ageType, peopleCount];
-            };
-
-            selectPeople = resvTeen[1] + resvAdult[1];
+            selectPeople = teenCount + adultCount;
 
             if(selectPeople < 9) {
                 $('#select-people').html(
-                    '<div>청소년 : ' + resvTeen[1] + '명</div>'
-                   +'<div>  성인 : ' + resvAdult[1] + '명</div>'
+                    '<div>청소년 : ' + teenCount + '명</div>'
+                   +'<div>  성인 : ' + adultCount + '명</div>'
                    +'<div>  전체 : ' + selectPeople + '명</div>'
                 );
             } 
             else {
                 alert('선택 가능한 인원은 최대 8명입니다!');
+                $('.people-Count').removeClass('clicked');
+                $('.ageBtn').removeClass('clicked');
                 $('#select-people').html('');
-            };
 
+                teenCount = 0;
+                adultCount = 0;
+            };
+            
             peopleCount = 0;
         };
 
@@ -546,8 +579,9 @@
             if($(e.target).hasClass('clicked')) {
                 $(e.target).removeClass('clicked');
                 $("#check-area").hide();
-                selectPeople += 1;
+
                 selectSeat.splice(index, 1);
+                selectPeople += 1;
             } 
             else {
                 if(selectPeople < 1 ) {
@@ -556,8 +590,8 @@
                 }
                 else {
                     $(e.target).addClass('clicked');
-                    selectPeople -= 1;
                     selectSeat.push(seat);
+                    selectPeople -= 1;
                 };
             };
             // 좌석 배열 오름차순 정렬 -> 정규표현식 활용
