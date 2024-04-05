@@ -608,8 +608,8 @@
             	data : {
                     screenNo : <%= screenNo %>,
                     movieNo : <%= movieNo %>,
-                    teenAge : resvTeen[1],
-                    adultAge : resvAdult[1] 
+                    teenAge : teenCount,
+                    adultAge : adultCount 
                 },
                 success : function(result){
                     if(!(selectSeat.length === 0) && selectPeople === 0){
@@ -642,7 +642,7 @@
                                    +             '<div class="print-info">'+ result.watchDate +'</div>'
                                    +             '<div class="print-info">' + result.theaterName + '</div>'
                                    +             '<div class="print-info">' + result.screenName + '</div>'
-                                   +             '<div class="print-info">' + Number(resvTeen[1] + resvAdult[1]) + '인</div>'
+                                   +             '<div class="print-info">' + Number(teenCount + adultCount) + '인</div>'
                                    +             '<div class="print-info">' + selectSeat.join(', ') + '</div>'
                                    +             '<div class="print-info" style="margin-top: 50px;">' + result.price.totalPrice + '원</div>'
                                    +         '</div>'
@@ -651,8 +651,8 @@
                                    +         '<input type="hidden" name="movieNo" value="' + <%= movieNo %> + '">'
                                    +         '<input type="hidden" name="screenNo" value="' + <%= screenNo %> + '">'
                                    +         '<input type="hidden" name="memberNo" value="' + <%= loginUser.getMemberNo() %> + '">'
-                                   +         '<input type="hidden" name="teen" value="' + resvTeen[1] + '">'
-                                   +         '<input type="hidden" name="adult" value="' + resvAdult[1] + '">'
+                                   +         '<input type="hidden" name="teen" value="' + teenCount + '">'
+                                   +         '<input type="hidden" name="adult" value="' + adultCount + '">'
                                    +         '<input type="hidden" name="seatNo" value="' + selectSeat.join(',') + '">'
                                    +         '<button type="submit" id="payment-btn" onclick="return payment()">결제 하기</button>'
                                    +     '</form>'
