@@ -214,6 +214,10 @@
         margin-top: 70px;
         height: 550px;
        }
+       
+       #toptitle{
+       margin-bottom : 40px
+       }
 
    
 
@@ -269,8 +273,9 @@
             </div>
             <div class="content_2">
             <form action="<%=contextPath%>/modify.cm" method="post">
+                <div id=toptitle>
                 <h2> 영화관 상세 정보</h2>              
-                 <div class="content_2_top">
+                </div>
                     <table class="table table-hover"  style="height: 290px;">
                        
                         
@@ -299,8 +304,8 @@
                                
                             </tr>  
                             <tr>
-                              <th class="title">지역코드</th>
-                              <td><input type="text" id="map" class="input1" name="code" value="<%=theater.getLocalCode()%>"></td>
+                              <th class="title">지역</th>
+                              <td><input type="text" id="map" class="input1" name="code" value="<%=theater.getLocationName()%>"></td>
                             </tr>
                             <tr>  
                               <th class="title">등록일</th>
@@ -316,11 +321,13 @@
                    <button type="button" class="btn1" onclick="dele();">삭제</button>
                    <button  type="button" class="btn1" onclick="check();">닫기</button>
                 </div>
-
                 </div>
+                </div>
+
+               
                 
                 
-                  </div>
+                 
                 
                
                 <script>

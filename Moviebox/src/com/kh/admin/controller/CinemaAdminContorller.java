@@ -36,8 +36,7 @@ public class CinemaAdminContorller {
 		
 		Theater theater = new MemberAdminService().cinemaEdit(theaterNo);
 		request.setAttribute("theater", theater);
-		
-		System.out.println(theater.getMapLink());
+		System.out.println(theater);
 		String view = "/views/admin/CinemaEdit.jsp";
 		
 		return view;
