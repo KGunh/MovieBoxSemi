@@ -474,25 +474,37 @@
                 }
             });
         };
-///////////////////////////////
+        /*
         $('.seats').mousedown(function() {
-            $(this).addClass('aa');
+            if($(this).hasClass('clicked')){
+                $(this).removeClass('clicked');
+            }
+            else{
+                $(this).addClass('clicked');
+            }
+
+            $('.seats').mouseenter(function() {
+                if($(this).hasClass('clicked')){
+                    $(this).removeClass('clicked');
+                }
+                else{
+                    $(this).addClass('clicked');
+                }
+            });
         });
-        
-        $('.seats').mouseenter(function() {
-            $(this).addClass('aa');
-        });
-/////////////////
+        */
+
+
         // 인원수 버튼에 대한 스타일동작 및 값처리
-        $('.people-Count').click(e => {
+        $('.people-Count').on('click', function() {
             // 인원선택 상위 연령요소
-            let ageType = $(e.target).parent().prev().children().eq(0);
+            let ageType = $(this).parent().prev().children().eq(0);
 
             if(ageType.html() == '청소년'){
-                teenCount = Number($(e.target).html());
+                teenCount = Number($(this).html());
                 $('.people-teen').addClass('clicked');
 
-                if($(e.target).hasClass('clicked')) {
+                if($(this).hasClass('clicked')) {
                     $('.teenBtn').removeClass('clicked');
                     ageType.removeClass('clicked');
                     
@@ -500,15 +512,15 @@
                 }
                 else{
                     $('.teenBtn').removeClass('clicked');
-                    $(e.target).addClass('clicked');
+                    $(this).addClass('clicked');
                     ageType.addClass('clicked');
                 }
             }
             else{
-                adultCount = Number($(e.target).html());
+                adultCount = Number($(this).html());
                 $('.people-adult').addClass('clicked');
 
-                if($(e.target).hasClass('clicked')) {
+                if($(this).hasClass('clicked')) {
                     $('.adultBtn').removeClass('clicked');
                     ageType.removeClass('clicked');
                     
@@ -516,7 +528,7 @@
                 }
                 else{
                     $('.adultBtn').removeClass('clicked');
-                    $(e.target).addClass('clicked');
+                    $(this).addClass('clicked');
                     ageType.addClass('clicked');
                 }
             }
@@ -555,12 +567,12 @@
         };
 
         // 인원수대로 좌석선택
-        $('.seats').click(e => {
-            let seat = $(e.target).html();
+        $('.seats').on('click', function() {
+            let seat = $(this).html();
             let index = selectSeat.indexOf(seat);
 
-            if($(e.target).hasClass('clicked')) {
-                $(e.target).removeClass('clicked');
+            if($(this).hasClass('clicked')) {
+                $(this).removeClass('clicked');
                 $("#check-area").hide();
 
                 selectSeat.splice(index, 1);
@@ -572,7 +584,7 @@
                     else alert('좌석을 모두 선택하셨습니다.');
                 }
                 else {
-                    $(e.target).addClass('clicked');
+                    $(this).addClass('clicked');
                     selectSeat.push(seat);
                     selectPeople -= 1;
                 };
