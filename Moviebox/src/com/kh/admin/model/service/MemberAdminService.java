@@ -47,6 +47,18 @@ public class MemberAdminService {
 	}
 	
 	
+	public void deleteAdmin(int memberNo) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		new MemberAdminDao().deleteAdmin(conn,memberNo);
+		
+		JDBCTemplate.close(conn);
+		
+		
+	}
+	
+	
 	
 	
 	public int updateAdmin(Member member) {

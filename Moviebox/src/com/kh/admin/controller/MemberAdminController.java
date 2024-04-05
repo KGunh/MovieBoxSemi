@@ -130,8 +130,7 @@ public class MemberAdminController {
 		
 		String view = "views/admin/memberSelect.jsp";
 		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
-		
-		System.out.println(memberNo);
+		new MemberAdminService().deleteAdmin(memberNo);
 		
 		return view; 
 		

@@ -125,6 +125,8 @@ public class MemberAdminDao {
 	}
 	
 	
+	
+	
 	public int updateAdmin(Member member, Connection conn) {
 		
 		
@@ -154,6 +156,17 @@ public class MemberAdminDao {
 		
 		return result; 
 		
+	}
+	
+	public int deleteAdmin(Connection conn,int memberNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("deleteAdmin");
+		
+		
+		
+		return result;
 	}
 	
 	
@@ -287,9 +300,11 @@ public class MemberAdminDao {
 						theater.setTheaterNo(rset.getInt("THEATER_NO"));
 						theater.setTheaterName(rset.getString("THEATER_NAME"));
 						theater.setTheaterAddr(rset.getString("THEATER_ADDR"));
+						theater.setLocationName(rset.getString("LOCATION_NAME"));
 						theater.setMapLink(rset.getString("MAP_LINK"));
 						theater.setLocalCode(rset.getString("LOCATION_CODE"));
 						theater.setUpdateDate(rset.getString("THEATER_UPDATE"));
+						
 					
 			}
 			
