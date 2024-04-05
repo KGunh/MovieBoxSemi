@@ -5,17 +5,16 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-<%
-	ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("movieList");
-	Movie movie = (Movie)request.getAttribute("movie");
-	String cast = (String)request.getAttribute("cast");
-%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>영화 상세정보</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <style>
         body{
@@ -208,6 +207,11 @@
         	color: white;
         	font-weight: bold;
         }
+        
+          .carousel-inner img {
+		    width: 100%;
+		    height: 100%;
+		  }
 
 
     </style>
@@ -267,11 +271,46 @@
                 <a id="videoTitle">예고편</a>
                 
                 <div id="video-src">
-                    ${ movie.trailerVideo }
+                    <iframe width="1200" height="600" src="${ movie.trailerVideo }"></iframe>
                 </div>
             </div>
-
+            
+            
+        <!-- 
             <div id="movie-detail-still">
+				<div id="demo" class="carousel slide" data-ride="carousel">
+				
+				  <ul class="carousel-indicators">
+				    <li data-target="#demo" data-slide-to="0" class="active"></li>
+				    <li data-target="#demo" data-slide-to="1"></li>
+				    <li data-target="#demo" data-slide-to="2"></li>
+				  </ul>
+				  
+				  <div class="carousel-inner">
+				    <div class="carousel-item active">
+				  <c:forEach var="stil" items="${ requestScope.attachment }">
+				      <img src="${ stil.filePath }/${ stil.changeName }" width="1100" height="500">
+				  </c:forEach>
+				    </div>
+				    <div class="carousel-item">
+				      <img src="${ stil.filePath }/${ stil.changeName }" alt="Chicago" width="1100" height="500">
+				    </div>
+				    <div class="carousel-item">
+				      <img src="${ stil.filePath }/${ stil.changeName }" alt="New York" width="1100" height="500">
+				    </div>
+				  </div>
+				  
+				  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+				    <span class="carousel-control-prev-icon"></span>
+				  </a>
+				  <a class="carousel-control-next" href="#demo" data-slide="next">
+				    <span class="carousel-control-next-icon"></span>
+				  </a>
+				</div>
+            </div>
+        -->
+            
+             <div id="movie-detail-still">
                 <a id="stilTitle">스틸컷</a>
                 <div id="detail-still-img">
                     <div class="still-img">

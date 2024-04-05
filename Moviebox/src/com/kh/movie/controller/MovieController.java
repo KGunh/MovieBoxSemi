@@ -5,9 +5,11 @@ import java.util.ArrayList;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.kh.common.model.vo.Attachment;
 import com.kh.common.model.vo.Genre;
 import com.kh.movie.model.service.MovieService;
 import com.kh.movie.model.vo.Movie;
+import com.kh.theater.model.service.TheaterService;
 
 public class MovieController {
 	
@@ -80,7 +82,16 @@ public class MovieController {
 	}
 	
 	
-	
+	// 스틸컷
+	public String stilCut(HttpServletRequest request, HttpServletResponse response) {
+		
+		int movieNo = Integer.parseInt(request.getParameter("movieNo"));
+		ArrayList<Attachment> attachment = new MovieService().stilCut(movieNo);
+		request.setAttribute("attachment", attachment);
+		String view = "views/movie/movieDetail.jsp";
+		
+		return view;
+	}
 	
 	
 	

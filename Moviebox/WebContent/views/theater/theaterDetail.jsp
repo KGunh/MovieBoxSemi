@@ -9,9 +9,6 @@
 <%
 	ArrayList<Movie> movies = (ArrayList<Movie>)request.getAttribute("movie");
 	ArrayList<Attachment> attachment = (ArrayList<Attachment>)request.getAttribute("attachment");
-	Theater theater = (Theater)request.getAttribute("theater");
-
-
 %>
 <!DOCTYPE html>
 <html>
@@ -200,17 +197,15 @@
         <!-- 영화관 안내 전체 박스 -->
         
         <c:choose>
-        	<c:when test="${ theater.theaterName eq null }">
+        	<c:when test="${ empty theater }">
 				<div id="noMovieList">
 					<a id="noMovie">조회 된 영화관이 없습니다.</a>
 				</div>
        	 	</c:when>
        	 	<c:otherwise>
+
         <div id="theater-header">
-                <a id="theaterTitle"><%= theater.getTheaterName() %></a>
-            <div id="theater-content">
-                <!-- <a>총 상영관 수 : 10개 관 </a> | <a>총 좌석수 : 1785석 </a> -->
-            </div>
+			    <a id="theaterTitle">${ theater[0].theaterName }</a>
         </div>
 
         <!-- 현재 상영작 -->
@@ -219,41 +214,48 @@
             <!-- 현재 상영작 목록 -->
             
             <div id="movie-content-body">
-                <% for(Movie m : movies) { %>
+
                <!-- <div class="movie-conten1"> -->
-                
+               <c:forEach var="t" items="${ requestScope.theater }">
                     <div class="movie-content">
-                    <input type="hidden" id="inputId" name="movieNo" value="<%= m.getMovieNo()%>" />
+                    <input type="hidden" id="inputId" name="movieNo" value="${ t.movieNo }" />
                     	
                         <div class="movie-list-img">
-                        <img src="<%= m.getFilePath() %>/<%= m.getChangeName() %>" width="232" height="300"> </div>
+                        <img src="${ t.filePath }/${ t.changeName }" width="232" height="300"> </div>
                     
-                        <div class="movie-list-title"><%= m.getMovieTitle() %></div>
+                        <div class="movie-list-title">${ t.movieTitle }</div>
                         
-                        <div id="movie-content-btn1"><a href="<%=contextPath%>/detail.movie?movieNo=<%= m.getMovieNo()%>" id="detailbtn">상세정보</a></div>
-	                    <% if(loginUser == null) { %>
-	                    	<button id="movie-content-btn2" onclick="noMember();">예매하기</button>
-	                	<%} else { %>
+                        <div id="movie-content-btn1"><a href="<%=contextPath%>/detail.movie?movieNo=${ t.movieNo }" id="detailbtn">상세정보</a></div>
+	                    <c:choose>
+	                    	<c:when test="${ empty loginUser }">
+	                    		<button id="movie-content-btn2" onclick="noMember();">예매하기</button>
+	                    	</c:when>
+	                		<c:otherwise>
 	                		<button id="movie-content-btn2" onclick="reservationPage();">예매하기</button>
-	                	<% } %>
+	                		</c:otherwise>
+	                	</c:choose>
                         <%--<button id="movie-content-btn2">예매하기</button> --%>
                     </div>
-				<% } %>
+        				</c:forEach>
             </div>
         </div>
 
         <!-- 오시는 길 -->
         <div id="theater-map">
+
             <a id="theaterSubTitle2">오시는 길</a>
             <div id="theater-address">
-                <a id="theaterAddress"><%= theater.getTheaterAddr() %></a>
+                <a id="theaterAddress">${ theater[0].theaterAddr }</a>
             </div>
-            <div id="theater-mapLink"><iframe src="<%= theater.getMapLink() %>"></iframe></div>
+            <div id="theater-mapLink">${ theater[0].mapLink }</div>
         </div>
 
-    </div> <!-- wrap -->
-		</c:otherwise>
+
+			</c:otherwise>
 	</c:choose>
+	
+    </div> <!-- wrap -->
+
 
 
 
@@ -262,8 +264,8 @@
         
     <script>
 		function noMember(){
-			location.href = ('<%=contextPath%>/loginForm.me');
 			alert('로그인이 필요한 서비스 입니다.');
+			location.href = ('<%=contextPath%>/loginForm.me');
 		}
     	// 예매하기 버튼 -> 예매 페이지
     	function reservationPage(){

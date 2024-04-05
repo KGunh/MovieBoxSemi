@@ -103,4 +103,29 @@
 		WHERE
 		    MOVIE_NO = ?
 	</entry>
+	
+	
+	<entry key="stilCut">
+		SELECT
+			  MOVIE_NO,
+			  FILE_PATH,
+			  CHANGE_NAME
+		  FROM
+			  TB_ATTACHMENT
+		  JOIN
+			  TB_MOVIE USING(MOVIE_NO)
+		 WHERE
+			  MOVIE_NO = ?
+		   AND
+			  FILE_LEVEL = 2
+	</entry>
+	
+	
+	
+	
+	
+	
+	
+	
+	
 </properties>

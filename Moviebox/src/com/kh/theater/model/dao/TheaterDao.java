@@ -164,19 +164,25 @@ public class TheaterDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, theaterNo);
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
 				Theater theater = new Theater();
 				theater.setTheaterNo(rset.getInt("THEATER_NO"));
+				theater.setMovieNo(rset.getInt("MOVIE_NO"));
 				theater.setTheaterName(rset.getString("THEATER_NAME"));
-				theater.setTheaterName(rset.getString("THEATER_NAME"));
+				theater.setFilePath(rset.getString("FILE_PATH"));
+				theater.setChangeName(rset.getString("CHANGE_NAME"));
 				theater.setTheaterAddr(rset.getString("THEATER_ADDR"));
+				theater.setMovieTitle(rset.getString("MOVIE_TITLE"));
 				theater.setMapLink(rset.getString("MAP_LINK"));
-				theater.setLocalCode(rset.getString("LOCATION_CODE"));
 				
 				theaterList.add(theater);
 			}
+			
+			System.out.println(theaterList);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

@@ -11,6 +11,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Properties;
 
+import com.kh.common.model.vo.Attachment;
 import com.kh.movie.model.vo.Movie;
 
 public class MovieDao {
@@ -179,6 +180,40 @@ public class MovieDao {
 		}
 
 		return cast;
+	}
+
+	public ArrayList<Attachment> stilCut(Connection conn, int movieNo) {
+
+		ArrayList<Attachment> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("stilCut");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, movieNo);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Attachment attachment = new Attachment();
+				
+				attachment.setMovieNo(rset.getInt("MOVIE_NO"));
+				attachment.setFilePath(rset.getString("FILE_PATH"));
+				attachment.setChangeName(rset.getString("CHANGE_NAME"));
+				
+				list.add(attachment);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
 	}
 
 	

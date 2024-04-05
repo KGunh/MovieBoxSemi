@@ -5,9 +5,11 @@ import static com.kh.common.JDBCTemplate.*;
 import java.sql.Connection;
 import java.util.ArrayList;
 
+import com.kh.common.model.vo.Attachment;
 import com.kh.common.model.vo.Genre;
 import com.kh.movie.model.dao.MovieDao;
 import com.kh.movie.model.vo.Movie;
+import com.kh.theater.model.dao.TheaterDao;
 
 public class MovieService {
 
@@ -44,6 +46,14 @@ public class MovieService {
 		close(conn);
 		
 		return cast;
+	}
+
+	public ArrayList<Attachment> stilCut(int movieNo) {
+		Connection conn = getConnection();
+		ArrayList<Attachment> attachment = new MovieDao().stilCut(conn, movieNo);
+		close(conn);
+		
+		return attachment;
 	}
 
 

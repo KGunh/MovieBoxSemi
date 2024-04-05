@@ -53,7 +53,8 @@ public class TheaterService {
 		Connection conn = getConnection();
 		ArrayList<Theater> theater = new TheaterDao().selectTheaterDetail(conn, theaterNo);
 		close(conn);
-		return null;
+		
+		return theater;
 	}
 
 
