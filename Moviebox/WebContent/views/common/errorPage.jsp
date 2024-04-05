@@ -14,7 +14,7 @@
 			color : rgb(255, 193, 69);
 			margin-top : 20px;
 			text-align : center;
-			font-size : 40px;
+			font-size : 50px;
 			font-weight : bold;
 		}
 
@@ -40,23 +40,14 @@
 			text-decoration: none;
 		}
 
-		#errortype{
-			color : crimson;
-			margin-top : 80px;
-			text-align : center;
-			font-size : 60px;
-			font-weight : bold;
-		}
-
 
 	</style>
 </head>
 <body>
 
 	<%@ include file="header.jsp" %>
-
-	<h1 id="errortype">404</h1>
-	<h2 id="errorMsg">페이지를 찾을 수 없습니다.</h2>
+	
+	<h1 id="errorMsg">페이지를 찾을 수 없습니다.</h1>
 
 	<h4 id="msg">
 		페이지가 존재하지 않거나, 사용할 수 없는 페이지 입니다. <br>

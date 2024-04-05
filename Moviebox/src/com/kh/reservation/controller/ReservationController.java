@@ -99,10 +99,6 @@ public class ReservationController {
 			request.setAttribute("screenNo", request.getParameter("screenNo"));
 			request.setAttribute("movieNo", request.getParameter("movieNo"));
 		} else {
-			HttpSession session = request.getSession();
-			
-			session.setAttribute("alertMsg", "잘못된 요청입니다.");
-			
 			return "views/common/errorPage.jsp";
 		}
 		
@@ -138,9 +134,16 @@ public class ReservationController {
 		List<Seat> seatList = new ArrayList<Seat>();
 		Reservation reservation = new Reservation();
 		
-		int screenNo = Integer.parseInt(request.getParameter("screenNo"));
+		int screenNo = 0;
+		int movieNo = 0;
+		if(request.getParameter("screenNo") != null && request.getParameter("movieNo")!= null) {
+			screenNo = Integer.parseInt(request.getParameter("screenNo"));
+			movieNo = Integer.parseInt(request.getParameter("movieNo"));
+		} else {
+			return "views/common/errorPage.jsp";
+		}
+		
 		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
-		int movieNo = Integer.parseInt(request.getParameter("movieNo"));
 		String seatNo = request.getParameter("seatNo");
 		String[] seatArray = seatNo.split(",");
 		

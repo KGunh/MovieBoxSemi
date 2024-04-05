@@ -51,7 +51,7 @@ public class ReservationServlet extends HttpServlet {
 			} else {
 				request.getRequestDispatcher(view).forward(request, response);
 			}
-		} else {
+		} else if(view.contains("errorPage")) {
 			HttpSession session = request.getSession();
 			
 			session.setAttribute("alertMsg", "잘못된 요청입니다.");

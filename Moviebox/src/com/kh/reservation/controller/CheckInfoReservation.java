@@ -29,7 +29,6 @@ public class CheckInfoReservation extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
 		Reservation reservation =  new ReservationController().checkReservationInfo(request);
 	        
         response.setContentType("application/json; charset=UTF-8");
