@@ -13,6 +13,8 @@ public class Attachment {
 	public Attachment() {
 		super();
 	}
+	
+
 	public Attachment(int fileNo, int movieNo, String orginName, String changeName, String filePath, int fileLevel,
 			String uploadDate) {
 		super();

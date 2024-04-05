@@ -1,9 +1,15 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ page import="java.util.ArrayList, com.kh.movie.model.vo.*" %>
+<%@ page import="java.util.ArrayList, com.kh.movie.model.vo.*, com.kh.common.model.vo.*" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
+<%
+
+	ArrayList<Attachment> list = (ArrayList<Attachment>)request.getAttribute("attach");
+%>
 
 <!DOCTYPE html>
 <html>
@@ -50,7 +56,6 @@
         	width: 1200px;
         	font-size: 20px;
         	text-align: center;
-        
         }
 
 
@@ -314,7 +319,7 @@
                 <a id="stilTitle">스틸컷</a>
                 <div id="detail-still-img">
                     <div class="still-img">
-                        	스틸컷
+                        	${ requestScope.filePath }/${ requestScope.changeName }
                     </div>
                     <div class="still-img">
                         	스틸컷

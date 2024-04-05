@@ -182,7 +182,6 @@ public class TheaterDao {
 				theaterList.add(theater);
 			}
 			
-			System.out.println(theaterList);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

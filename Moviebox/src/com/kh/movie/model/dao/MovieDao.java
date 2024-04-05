@@ -184,7 +184,7 @@ public class MovieDao {
 
 	public ArrayList<Attachment> stilCut(Connection conn, int movieNo) {
 
-		ArrayList<Attachment> list = new ArrayList();
+		ArrayList<Attachment> attach = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
@@ -199,11 +199,10 @@ public class MovieDao {
 			while(rset.next()) {
 				Attachment attachment = new Attachment();
 				
-				attachment.setMovieNo(rset.getInt("MOVIE_NO"));
 				attachment.setFilePath(rset.getString("FILE_PATH"));
 				attachment.setChangeName(rset.getString("CHANGE_NAME"));
 				
-				list.add(attachment);
+				attach.add(attachment);
 			}
 			
 		} catch (SQLException e) {
@@ -213,7 +212,7 @@ public class MovieDao {
 			close(pstmt);
 		}
 		
-		return list;
+		return attach;
 	}
 
 	
