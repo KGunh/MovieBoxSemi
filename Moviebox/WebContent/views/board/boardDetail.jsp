@@ -7,6 +7,7 @@
     
 <%
 	Board board = (Board)request.getAttribute("board");
+	System.out.println(board);
 %>    
     
     
@@ -350,7 +351,7 @@
                     				resultStr += '<tr>'
                     						   + '<td>' + result[i].answerWriter + '</td>'
                     						   + '<td>' + result[i].answerContent + '</td>'
-
+                    						   + '<td>' + result[i].createDate + '</td>'
                     						   + '</tr>'
                     			};
                     			$('#detail-a tbody').html(resultStr);
@@ -362,14 +363,6 @@
                     		
                     	});
                     }
-                    
-            		$(function(){
-            			
-            			selectAnswerList();
-            			
-            			setInterval(selectAnswerList, 1000);
-            			
-            		});
                     
                     function insertReply(){
         				
@@ -383,7 +376,6 @@
         					success : function(result){
         						if(result == 'success'){
         							$('#answerContent').val('');
-        							selectAnswerList();
         						};
         					}
         					
@@ -393,6 +385,7 @@
                     
                     
                 </div>
+                
             </div> <!-- notice-content -->
 
                 <div class="notice-btn" align="center">
@@ -406,7 +399,6 @@
 
 
 
-            </div> <!-- notice-list -->
         </div> <!-- notice-detail -->
 	</div>
     

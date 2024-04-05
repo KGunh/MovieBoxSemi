@@ -254,7 +254,7 @@ public class BoardDao {
 				answer.add(new Answer(rset.getInt("ANSWER_NO"),
 						  rset.getString("ANSWER_CONTENT"),
 						  rset.getString("CREATE_DATE"),
-						  rset.getString("ANSWER_WRITER")));
+						  rset.getString("MEMBER_NAME")));
 			}
 			
 		} catch (SQLException e) {
@@ -276,7 +276,7 @@ public class BoardDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, answer.getAnswerContent());
-			pstmt.setInt(2, answer.getBoardNo());
+			pstmt.setInt(2, answer.getAnswerNo());
 			pstmt.setInt(3, Integer.parseInt(answer.getAnswerWriter()));
 			
 			result = pstmt.executeUpdate();

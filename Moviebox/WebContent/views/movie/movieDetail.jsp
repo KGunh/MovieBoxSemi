@@ -3,6 +3,9 @@
     
 <%@ page import="java.util.ArrayList, com.kh.movie.model.vo.*" %>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 <%
 	ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("movieList");
 	Movie movie = (Movie)request.getAttribute("movie");
@@ -195,12 +198,8 @@
     <div id="wrap">
         <div id="movie-detail">
             <div id="movie-detail-box">
-            
-           
-            
                 <div id="movie-detail-poster">
                     <img src="<%= movie.getFilePath() %>/<%= movie.getChangeName() %>" width="300" height="422">
-                    
                 </div>
 
                 <div id="movie-detail-content">
@@ -209,10 +208,20 @@
                         <a><%= movie.getGenreName() %></a> | <a><%= movie.getMovieRt() %>분</a> | <a><%= movie.getMovieRated() %>이상 관람가</a> | <a><%= movie.getMovieRelease() %> 개봉</a>
                     </div>
                     <div id="movie-detail-director">감독 | <%= movie.getDirectorName() %></div>
-                    <div id="movie-detail-actor">출연진 | <%= cast %></div>
+                    
+                    <c:choose>
+                    	<c:when test="${ empty cast }">
+                    		<div id="movie-detail-actor">출연진 | 없음</div>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<div id="movie-detail-actor">출연진 | ${ cast }</div>
+                    	</c:otherwise>
+                    </c:choose>
+                    
                     <div id="movie-detail-story"><textarea id="movie-story" readonly><%= movie.getMovieStory() %></textarea>
                     </div>
                     
+                   
                     <% if(loginUser == null) { %>
                     	<button id="movie-detail-btn" onclick="noMember();">예매하기</button>
                 	<%} else { %>
@@ -252,16 +261,16 @@
         
     <script>
 
-    	function noMember(){
+		function noMember(){
 			location.href = ('<%=contextPath%>/loginForm.me');
 			alert('로그인이 필요한 서비스 입니다.');
 		}
-    	
+	
     	// 예매하기 버튼 -> 예매 페이지
     	function reservationPage(){
     		location.href = '<%= contextPath %>/movie.reservation';
     	}
-    	
+
 
     </script>
     
