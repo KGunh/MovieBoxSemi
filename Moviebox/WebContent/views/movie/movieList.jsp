@@ -281,6 +281,12 @@
 	<%@ include file="/views/common/footer.jsp" %>
 	
     <script>
+    
+	function noMember(){
+		location.href = ('<%=contextPath%>/loginForm.me');
+		alert('로그인이 필요한 서비스 입니다.');
+	}
+	
 	$('#movie-content-btn2').on('click',function(){
 	    var movieNo = $(this).siblings('input[type="hidden"]').val();
 	    location.href = '<%=contextPath%>/detail.movie?movieNo=' + movieNo;
@@ -291,10 +297,7 @@
     		location.href = '<%= contextPath %>/movie.reservation';
     	}
     	
-		function noMember(){
-			location.href = ('<%=contextPath%>/loginForm.me');
-			alert('로그인이 필요한 서비스 입니다.');
-		}
+
 	</script>
     
 </body>

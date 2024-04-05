@@ -489,5 +489,17 @@
 
     	
 	</script>
+	
+	<script type="text/javascript">
+    	$(document).ready(function() {
+    		
+    		selectMovieList();
+    	});
+    	
+    	function selectMovieList() {
+    		// ajax통신 -> 영화제목을 DB에서 던져서 조회해서 받아야와서 
+    	}
+    	
+    </script>
 </body>
 </html>

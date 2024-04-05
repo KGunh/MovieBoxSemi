@@ -40,6 +40,7 @@ public class ReservationDao {
 		ArrayList<Movie> list = new ArrayList<Movie>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		
 		String sql = prop.getProperty("selectMovieList");
 		
 		try {
@@ -50,10 +51,10 @@ public class ReservationDao {
 			while(rset.next()) {
 				Movie m = new Movie();
 				
-				m.setMovieNo(rset.getInt("MOVIE_NO"));
 				m.setMovieTitle(rset.getString("MOVIE_TITLE"));
-			    m.setFilePath(rset.getString("FILE_PATH"));
-			    m.setFileName(rset.getString("CHANGE_NAME"));
+				m.setFileName(rset.getString("CHANGE_NAME"));
+				m.setFilePath(rset.getString("FILE_PATH"));
+				m.setMovieNo(rset.getInt("MOVIE_NO"));
 				
 				list.add(m);
 			}
@@ -70,6 +71,7 @@ public class ReservationDao {
 		ArrayList<Location> list = new ArrayList<Location>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		
 		String sql = prop.getProperty("selectLocationList");
 		
 		try {
@@ -78,11 +80,12 @@ public class ReservationDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
-				Location l = new Location();
-				l.setLocationCode(rset.getString("LOCATION_CODE"));
-				l.setLocationName(rset.getString("LOCATION_NAME"));
+				Location location = new Location();
 				
-				list.add(l);
+				location.setLocationCode(rset.getString("LOCATION_CODE"));
+				location.setLocationName(rset.getString("LOCATION_NAME"));
+				
+				list.add(location);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -109,16 +112,17 @@ public class ReservationDao {
 		    rset = pstmt.executeQuery();
 			
 			while (rset.next()) {
-				Screen s = new Screen();
-				s.setMovieNo(rset.getInt("MOVIE_NO"));
-				s.setScreenNo(rset.getInt("SCREEN_NO"));
-				s.setScreenName(rset.getString("SCREEN_NAME"));
-				s.setWatchDate(rset.getString("WATCH_DATE"));
-				s.setTheaterNo(rset.getInt("THEATER_NO"));
-				s.setTheaterName(rset.getString("THEATER_NAME"));
-				s.setMovieRt(rset.getInt("MOVIE_RT"));
+				Screen screen = new Screen();
 				
-				list.add(s);
+				screen.setTheaterName(rset.getString("THEATER_NAME"));
+				screen.setScreenName(rset.getString("SCREEN_NAME"));
+				screen.setWatchDate(rset.getString("WATCH_DATE"));
+				screen.setTheaterNo(rset.getInt("THEATER_NO"));
+				screen.setScreenNo(rset.getInt("SCREEN_NO"));
+				screen.setMovieNo(rset.getInt("MOVIE_NO"));
+				screen.setMovieRt(rset.getInt("MOVIE_RT"));
+				
+				list.add(screen);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -147,8 +151,8 @@ public class ReservationDao {
 				Seat seat = new Seat();
 				
 				seat.setScreenNo(rset.getInt("SCREEN_NO"));
-				seat.setSeatNo(rset.getString("SEAT_NO"));
 				seat.setTicketNo(rset.getInt("TICKET_NO"));
+				seat.setSeatNo(rset.getString("SEAT_NO"));
 				
 				seatList.add(seat);
 			}
@@ -171,32 +175,34 @@ public class ReservationDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, teenAge);
 			pstmt.setInt(2, adultAge);
-			pstmt.setInt(3, movieNo);
 			pstmt.setInt(4, screenNo);
+			pstmt.setInt(1, teenAge);
+			pstmt.setInt(3, movieNo);
 			
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				reservation.setMemberNo(rset.getInt("MOVIE_NO"));
-				reservation.setMovieTitle(rset.getString("MOVIE_TITLE"));
-				reservation.setWatchDate(rset.getString("WATCH_DATE"));
 				reservation.setTheaterName(rset.getString("THEATER_NAME"));
+				reservation.setMovieTitle(rset.getString("MOVIE_TITLE"));
 				reservation.setScreenName(rset.getNString("SCREEN_NAME"));
+				reservation.setWatchDate(rset.getString("WATCH_DATE"));
+				reservation.setMemberNo(rset.getInt("MOVIE_NO"));
 				
-				Movie m = new Movie();
-				m.setGenreName(rset.getString("GENRE_NAME"));
-				m.setFilePath(rset.getString("FILE_PATH"));
-				m.setFileName(rset.getString("CHANGE_NAME"));
-				m.setMovieRt(rset.getString("MOVIE_RT"));
-				m.setMovieRelease(rset.getNString("MOVIE_RELEASE"));
+				Movie movie = new Movie();
 				
-				Price p = new Price();
-				p.setTotalPrice(rset.getInt("TOTAL_PRICE"));
+				movie.setMovieRelease(rset.getNString("MOVIE_RELEASE"));
+				movie.setFileName(rset.getString("CHANGE_NAME"));
+				movie.setGenreName(rset.getString("GENRE_NAME"));
+				movie.setFilePath(rset.getString("FILE_PATH"));
+				movie.setMovieRt(rset.getString("MOVIE_RT"));
 				
-			    reservation.setMovie(m);
-			    reservation.setPrice(p);
+				Price price = new Price();
+				
+				price.setTotalPrice(rset.getInt("TOTAL_PRICE"));
+				
+			    reservation.setMovie(movie);
+			    reservation.setPrice(price);
 			}			
 			
 		} catch (SQLException e) {
@@ -210,10 +216,10 @@ public class ReservationDao {
 
 	public HashMap<String,Integer> insertReservation(Connection conn, Reservation reservation) {
 		HashMap<String, Integer> reservationKey = new HashMap<String, Integer>( );
-		int result = 0;
-		int key = 0;
 		PreparedStatement pstmt =null;
 		ResultSet rset = null;
+		int result = 0;
+		int key = 0;
 		
 		String sql = prop.getProperty("insertReservation");
 		
@@ -222,21 +228,20 @@ public class ReservationDao {
 			pstmt = conn.prepareStatement("SELECT SEQ_TKNO.NEXTVAL AS KEY FROM DUAL");
 			rset = pstmt.executeQuery();
 			
-			if(rset.next()) {
-				key = rset.getInt("KEY");
-			}
+			if(rset.next()) key = rset.getInt("KEY");
+				
 			// 반환받은 시컨스 값을 사용하여 insert -> 다음 테이블에 key값을 사용하여 insert하기 위해서
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setInt(1, key);
 			pstmt.setInt(2, reservation.getSeatList().size());			
 			pstmt.setInt(3, reservation.getMemberNo());
 			pstmt.setInt(4, reservation.getScreenNo());
+			pstmt.setInt(1, key);
 
 			result = pstmt.executeUpdate();
 			
-			reservationKey.put("ticketNo", key);
 			reservationKey.put("result", result);
+			reservationKey.put("ticketNo", key);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -249,8 +254,8 @@ public class ReservationDao {
 	}
 
 	public int insertPriceSheet(Connection conn, int ticketNo, int teenPersonNo, int adultPersonNo) {
-		int result = 0;
 		PreparedStatement pstmt = null;
+		int result = 0;
 		
 		String sql = prop.getProperty("insertPriceSheet");
 		// 청소년 성인 구분해서 반복문 돌리기
@@ -261,6 +266,7 @@ public class ReservationDao {
 				for(int i = 0; i < teenPersonNo; i++) {
 					pstmt.setInt(1, 1);
 					pstmt.setInt(2, ticketNo);
+					
 					result += pstmt.executeUpdate();
 				}
 			}
@@ -269,6 +275,7 @@ public class ReservationDao {
 				for(int i = 0; i < adultPersonNo; i++) {
 					pstmt.setInt(1, 2);
 					pstmt.setInt(2, ticketNo);
+					
 					result += pstmt.executeUpdate();
 				}
 			}
@@ -282,8 +289,8 @@ public class ReservationDao {
 	}
 
 	public int insertSeat(Connection conn, Reservation reservation, int ticketNo) {
-		int result = 0;
 		PreparedStatement pstmt = null;
+		int result = 0;
 		
 		String sql = prop.getProperty("insertSeat");
 		
@@ -297,7 +304,6 @@ public class ReservationDao {
 				
 				result += pstmt.executeUpdate();
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -323,28 +329,30 @@ public class ReservationDao {
 
 			if(rset.next()) {
 				Movie m = new Movie();
-				m.setMovieNo(rset.getInt("MOVIE_NO"));
-				m.setMovieTitle(rset.getString("MOVIE_TITLE"));
-				m.setMovieRt(rset.getString("MOVIE_RT"));
+				
 				m.setMovieRelease(rset.getString("MOVIE_RELEASE"));
-				m.setFilePath(rset.getString("FILE_PATH"));
+				m.setMovieTitle(rset.getString("MOVIE_TITLE"));
 				m.setFileName(rset.getString("CHANGE_NAME"));
 				m.setGenreName(rset.getString("GENRE_NAME"));
+				m.setFilePath(rset.getString("FILE_PATH"));
+				m.setMovieRt(rset.getString("MOVIE_RT"));
+				m.setMovieNo(rset.getInt("MOVIE_NO"));
 				
 				Price p = new Price();
+				
 				p.setStudentCount(rset.getInt("TEEN_PEOPLE"));
-				p.setStudentPrice(rset.getInt("TEEN_PRICE"));
 				p.setCommonCount(rset.getInt("ADULT_PEOPLE"));
+				p.setStudentPrice(rset.getInt("TEEN_PRICE"));
 				p.setCommonPrice(rset.getInt("ADULT_PRICE"));
 				p.setTotalPrice(rset.getInt("TOTAL_PRICE"));
 				
-				reservation.setMovie(m);
-				reservation.setPrice(p);
-				reservation.setTicketNo(rset.getInt("TICKET_NO"));
-				reservation.setScreenName(rset.getString("SCREEN_NAME"));
-				reservation.setTheaterName(rset.getString("THEATER_NAME"));
-				reservation.setWatchDate(rset.getString("WATCH_DATE"));
 				reservation.setReservationDate(rset.getString("RESERVATION_DATE"));
+				reservation.setTheaterName(rset.getString("THEATER_NAME"));
+				reservation.setScreenName(rset.getString("SCREEN_NAME"));
+				reservation.setWatchDate(rset.getString("WATCH_DATE"));
+				reservation.setTicketNo(rset.getInt("TICKET_NO"));
+				reservation.setPrice(p);
+				reservation.setMovie(m);
 				
 			}
 		} catch (SQLException e) {

@@ -41,7 +41,6 @@ public class ReservationService {
 	}
 
 	public List<Screen> selectScreen(String screenDate, String screenLocation,  int movieNo) {
-		// 영화조회쪽이랑 상의해서 메소드 통일해야함!
 		Connection conn = getConnection();
 		
 		List<Screen> screenList = new ReservationDao().selectScreen(conn, screenDate, screenLocation, movieNo);
@@ -73,17 +72,22 @@ public class ReservationService {
 
 	public HashMap<String,Integer> insertReservation(Reservation reservation, int teenPersonNo, int adultPersonNo) {
 		Connection conn = getConnection();
-	        
 		int priceSheetResult = 0;
 		int seatResult = 0;
+	    
 		// 예약테이블에 insert후 pk값 반환받기
 		HashMap<String, Integer> reservationKey = new ReservationDao().insertReservation(conn, reservation);
-		// 청소년/성인요금 테이블에 insert
 		
-        if (reservationKey.get("result") > 0) priceSheetResult = new ReservationDao().insertPriceSheet(conn, reservationKey.get("ticketNo"), teenPersonNo, adultPersonNo);
-        // 예약 좌석 테이블에 insert
-        if (priceSheetResult > 0) seatResult = new ReservationDao().insertSeat(conn, reservation, reservationKey.get("ticketNo"));
+		// 청소년or성인요금 테이블에 insert
+        if (reservationKey.get("result") > 0) {
+        	priceSheetResult = new ReservationDao().insertPriceSheet(conn, reservationKey.get("ticketNo"), teenPersonNo, adultPersonNo);
+        }
 
+        // 예약 좌석 테이블에 insert
+        if (priceSheetResult > 0) {
+        	seatResult = new ReservationDao().insertSeat(conn, reservation, reservationKey.get("ticketNo"));
+        }
+        // 트랜잭션 처리
         if (reservationKey.get("result") > 0 && priceSheetResult > 0 && seatResult > 0) {
             commit(conn);
         } else {

@@ -1,9 +1,18 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList, com.kh.common.model.vo.Genre, com.kh.common.model.vo.PageInfo" %>    
+<%@ page import="java.util.ArrayList, com.kh.common.model.vo.Genre, com.kh.common.model.vo.PageInfo, com.kh.movie.model.vo.Movie" %>    
 
 <%
+	Movie m =(Movie) request.getAttribute("movie");
+	String cast = (String) request.getAttribute("cast");
 	ArrayList<Genre> genrelist = (ArrayList<Genre>)request.getAttribute("genreList");
+	
+	String originalDateStr = m.getMovieRelease();
+	
+    String formattedDate = originalDateStr.substring(0, 4) + "-" 
+            + originalDateStr.substring(4, 6) + "-" 
+            + originalDateStr.substring(6, 8);
+
 %>
 
 
@@ -452,7 +461,9 @@
                 <p id="p">영화 관리 > 영화 등록</p>
 			<!-- /adminMovieInsert.admin 이름을 가진 서블릿으로 폼 데이터를 post방식으로 전달,
 					 파일업로드가 있기 때문에 enctype="multipart/form-data"로 전달 -->
-			<form action="<%= contextPath %>/adminMovieInsert.admin" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
+			<form action="<%= contextPath %>/adminMovieUpdate.admin" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
+			
+				<input type="hidden" name="movieNo" value="<%= m.getMovieNo()%>" />
 			    <div id="content_2_box"><!--컨텐트2 전체박스-->
 			        <div id="box_1">
 			            <div class="title-file">파일첨부</div>
@@ -471,66 +482,66 @@
 			                    <input type="file" id="file" name="upposter" style="padding-top: 35px;" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
                             </div>
 			                <div class="fileBox">
-			                    <input type="file" id="file" name="stillcut1" style="padding-top: 3px;" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
-			                    <input type="file" id="file" name="stillcut2" style="padding-top: 3px;"accept="image/*"> <!-- 이미지 파일 전부 받기 -->
-			                    <input type="file" id="file" name="stillcut3" style="padding-top: 3px;" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
+			                    <input type="file" id="file" name="upposter" style="padding-top: 3px;" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
+			                    <input type="file" id="file" name="upposter" style="padding-top: 3px;"accept="image/*"> <!-- 이미지 파일 전부 받기 -->
+			                    <input type="file" id="file" name="upposter" style="padding-top: 3px;" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
 
                             </div>
 			            </div>
 			
 			            
 			            <div id="sub_2">
-			                <input type="text" name="title" id="movieTitle" placeholder="영화 제목을 입력해 주세요."> <!-- 영화제목 = name="title" 로 전달!  -->
+			                <input type="text" name="title" id="movieTitle" placeholder="영화 제목을 입력해 주세요." value="<%=m.getMovieTitle()%>"> <!-- 영화제목 = name="title" 로 전달!  -->
 			            </div>
 									
-									<!--장르카테고리-->
+						<!--장르카테고리-->
 			            <div id="sub_3">
-			                <select name="genre" id="select_1" >
-								<% for(Genre g : genrelist) { %>
-									<option value="<%= g.getGenreCode()%>">
-										<%= g.getGenreName() %>
-									</option>
-								<% } %>
-			                </select>
+						    <select name="genre" id="select_1">
+						        <% for(Genre g : genrelist) { %>
+						            <option value="<%= g.getGenreCode()%>" <% if (m.getGenreNo().equals(g.getGenreCode())) { %> selected <% } %>>
+						                <%= g.getGenreName() %>
+						            </option>
+						        <% } %>
+						    </select>
 			            </div>
 			
 			            <div id="sub_4">
-			                <input type="text" name="running_time" id="runningTime" placeholder="러닝타임을 입력해 주세요.(ex - 120)">
+			                <input type="text" name="running_time" id="runningTime" placeholder="러닝타임을 입력해 주세요.(ex - 120)" value="<%=m.getMovieRt()%>">
 			            </div>
 			
 			            <div id="sub_5">
-			                <input type="text" name="rated" id="rating" placeholder="관람 등급을 입력해 주세요.(ex - 12세)">
+			                <input type="text" name="rated" id="rating" placeholder="관람 등급을 입력해 주세요.(ex - 12세)" value="<%=m.getMovieRated()%>">
 			            </div>
 			
 			            <div id="sub_6">
-			                <input type="date" name="release_date" id="date">
+			                <input type="date" name="release_date" id="date" value="<%=formattedDate%>">
 			            </div>
 			
 			            <div id="sub_7">
-			                <input type="text" name="director_name" id="director_name" placeholder="감독을 입력해 주세요.(ex - 호빵맨, 식빵맨 )">
+			                <input type="text" name="director_name" id="director_name" placeholder="감독을 입력해 주세요.(ex - 호빵맨, 식빵맨 )" value="<%=m.getDirectorName()%>">
 			            </div>
 			
 			            <div id="sub_8">
-			                <input type="text" name="actors" id="cast" placeholder="출연진을 입력해 주세요.(ex - 잉어빵, 붕어빵 )">
+			                <input type="text" name="actors" id="cast" placeholder="출연진을 입력해 주세요.(ex - 잉어빵, 붕어빵 )" value="<%=cast%>">
 			            </div>
 			
 			            <div id="sub_9">
-			                <textarea name="story" id="plot" cols="30" rows="10" placeholder="줄거리를 입력해 주세요."></textarea>
+			                <textarea name="story" id="plot" cols="30" rows="10" placeholder="줄거리를 입력해 주세요."><%=m.getMovieStory()%>></textarea>
 			            </div>
 			            
 			            <div id="sub_11">
-			                <input type="text" name="trailer" id="trailer" placeholder="예고편 영상 링크를 입력해 주세요.">
+			                <input type="text" name="trailer" id="trailer" placeholder="예고편 영상 링크를 입력해 주세요." value="<%=m.getTrailerVideo()%>">
 			            </div>
 			
-			            <div id="sub_10"><!--등록 버튼-->
+			            <div id="sub_10"><!--수정 버튼-->
 			                <input type="submit" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right;" value="등록">
 			            	<button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;" onclick="history.back();">목록</button>
-			            </div><!--등록 버튼-->
+			            </div><!--수정 버튼-->
+			            
+			           
 			        </div><!--box2-->
 			    </div><!--컨텐트2 전체박스 끝-->
 			</form>
-
-
 
             </div><!--content_2끝-->
         </div>

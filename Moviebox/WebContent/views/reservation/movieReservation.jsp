@@ -134,10 +134,14 @@
     }
 
     .screen{
+        width: 1070px;
         height: 175px;
         margin-top: 25px;
         border-radius: 25px;
         background-color: rgb(148, 145, 145);
+        overflow-x: auto;
+        overflow-y: none;
+        white-space: nowrap;
     }
 
     .theaterName{
@@ -152,9 +156,10 @@
     .selectScreen{
         width: 900px;
         height: 100px;
-        display: flex;
-        justify-content: space-around;
         margin-left: 80px;
+        white-space: nowrap;
+        align-items: center;
+        justify-content: center;
     }
 
     .screenName{
@@ -268,12 +273,9 @@
 	                            </div>
                             <% } %>
                         </div>
-                    	
                         <div class="swiper-pagination"></div>
-                    
                         <div class="swiper-button-prev"></div>
                         <div class="swiper-button-next"></div>
-                    
                         <div class="swiper-scrollbar"></div>
                     </div>
                 </div>
@@ -348,15 +350,15 @@
             document.getElementById('printToday').innerHTML = year + '-' + month + '-' + day;
         };
 
-        $(function(){
-            $('.poster').click(function(){
-                $('.poster').not(this).removeAttr('style');
-                $(this).css('transform', 'scale(1.1)');
-                $('#movieNo').val($(this).children().eq(1).val());
+        
+        $('.poster').click(function(){
+            $('.poster').not(this).removeAttr('style');
+            $(this).css('transform', 'scale(1.1)');
+            $('#movieNo').val($(this).children().eq(1).val());
 
-                movieTitle = $(this).children().eq(2).val();
-                $('#movieTitle').val(movieTitle);
-            });
+            movieTitle = $(this).children().eq(2).val();
+            
+            $('#movieTitle').val(movieTitle);
         });
 		
         function selectScreenNo(e){
@@ -364,6 +366,7 @@
                 $('.screenName').removeClass('clicked');
                 $('#screenNo').removeAttr('value');
                 $('#screenName').removeAttr('value');
+               
                 return '';
             } 
             else{
@@ -393,21 +396,22 @@
                     let resultStr = '';
                     for(let i = 0; i < result.length; i++){
                         resultStr += '<div class="screen">'
-                                    +     '<div class="theaterName">' + result[i].theaterName + '</div>';
-                                    +     '<div class="selectScreen">'
+                                   +     '<div class="theaterName">' + result[i].theaterName + '</div>';
+                                   +     '<div class="selectScreen">'
+                        
                         for(let j = 0; j < result[i].watchDateList.length; j++){
                             resultStr +=        '<div class="screenName" onclick="selectScreenNo(this);">'
-                                        +            '<span style="color: black;">' + result[i].watchDateList[j] + '</span>'
-                                        +            '<input type="hidden" value="' + result[i].screenNoList[j] + '">'
-                                        +            '<input type="hidden" value="' + result[i].screenNameList[j] + '">'
-                                        +        '</div>'
+                                       +            '<span style="color: black;">' + result[i].watchDateList[j] + '</span>'
+                                       +            '<input type="hidden" value="' + result[i].screenNoList[j] + '">'
+                                       +            '<input type="hidden" value="' + result[i].screenNameList[j] + '">'
+                                       +        '</div>'
                         };
+                        
                         resultStr +=    '</div>';
-                                    + '</div>';
+                                   + '</div>';
                     };
                 
                     $('#printScreen').html(resultStr);
-                    
             	},
             	error : function(){
 					$('#printScreen').html('조회된 영화관이 없습니다.');
@@ -426,7 +430,7 @@
         $('#locationOption').change(function(){
             selectScreen();
         });
-
+        // 상영관 선택 안했을때 좌석선택 페이지로 이동 못하게
         $('#submit-btn').click(function(){
             if(!$('#screenNo').val()){
                 alert('상영관을 선택해주세요!');

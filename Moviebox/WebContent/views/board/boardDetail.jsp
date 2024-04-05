@@ -210,7 +210,7 @@
         }
         
         /* 댓글 */
-        #replyContent{
+        #answerContent{
             width: 950px;
             height: 100px;
             padding: 10px;
@@ -222,8 +222,32 @@
             font-size: 15px;
             margin-top:20px;
         }
+        
+        #answerContent-else{
+        	width: 950px;
+            height: 100px;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #1A1A1A;
+            resize: none;
+            margin-left: 20px;
+            color: white;
+            font-size: 15px;
+            margin-top:20px;
+        }
 
-        #replySubmit{
+        #answerSubmit{
+            width: 80px;
+            height: 50px;
+            margin-left: 20px;
+            border-radius: 8px;
+            border: none;
+            font-weight: bold;
+            background-color: #FFC145;
+            font-size: 20px;
+        }
+        
+        #answerSubmit-else{
             width: 80px;
             height: 50px;
             margin-left: 20px;
@@ -286,19 +310,21 @@
                             <thead>
                                 <tr>
                                     <th>답변</th>
+                                    
+                                    <!-- loginUser가 비어있을 떄 -->
                                     <c:choose>
-                                    	<c:when test="${ !empty sessionScope.loginUser }">
+                                    	<c:when test="${!empty sessionScope.loginUser and sessionScope.loginUser.memberNo eq 1}">
 		                                        <td>
-		                                            <textarea id="replyContent"></textarea>
+		                                            <textarea id="answerContent"></textarea>
 		                                        </td>
-		                                        <td><button onclick="insertReply();" id="replySubmit">등록dd</button></td>
+		                                        <td><button onclick="insertReply();" id="answerSubmit">등록dd</button></td>
                                     	</c:when>
                                     	
                                     	<c:otherwise>
 	                                        <td>
-	                                            <textarea id="replyContent" placeholder="관리자만 작성 가능합니다." readonly></textarea>
+	                                            <textarea id="answerContent-else" placeholder="관리자만 작성 가능합니다." readonly></textarea>
 	                                        </td>
-	                                        <td><button onclick="insertReply();" id="replySubmit">등록</button></td>
+	                                        <td><button id="answerSubmit-else" disabled>등록</button></td>
                                     	</c:otherwise>
 									</c:choose>
                                 </tr>
@@ -324,18 +350,26 @@
                     				resultStr += '<tr>'
                     						   + '<td>' + result[i].answerWriter + '</td>'
                     						   + '<td>' + result[i].answerContent + '</td>'
-        									   + '<td>' + result[i].createDate + '</td>'
+
                     						   + '</tr>'
                     			};
-                    			$('detail-a').html(resultStr);
+                    			$('#detail-a tbody').html(resultStr);
                     			
                     		},
         					error : function(e){
-        						colsole.log(e);
+        						console.log(e);
         					}
                     		
                     	});
                     }
+                    
+            		$(function(){
+            			
+            			selectAnswerList();
+            			
+            			setInterval(selectAnswerList, 1000);
+            			
+            		});
                     
                     function insertReply(){
         				
@@ -343,13 +377,14 @@
         					url : 'answerInsert.board',
         					type : 'post',
         					data : {
-        						content : $('#replyContent').val(),
+        						content : $('#answerContent').val(),
         						boardNo : <%= board.getBoardNo() %>
         					},
         					success : function(result){
         						if(result == 'success'){
-        							$('#replyContent').val('');
-        						}
+        							$('#answerContent').val('');
+        							selectAnswerList();
+        						};
         					}
         					
         				});

@@ -4,6 +4,7 @@
 <%
 	Movie m =(Movie)request.getAttribute("movie");
 	String c =(String)request.getAttribute("cast");
+	String p =(String)request.getAttribute("poster");
 %>        
     
 <!DOCTYPE html>
@@ -388,15 +389,15 @@
 
                 <div id="content_2_box"><!--컨텐트2 전체박스-->
                     <div id="box_1">
-                        <div id="postimg"><img style="width: 250px; height: 350px; border: 1px solid rgb(177, 177, 177);"  src="/image/파묘.jpg"></div>
+                        <<div id="postimg"><img style="width: 250px; height: 350px; border: 1px solid rgb(177, 177, 177);" src="<%= p %>"></div>
                         <div id="plot">
                             
                             <div id="plotPage">
                                 <p id="plotStyle">줄거리</p>
                                 <textarea name="text" class="form-control" id="sub8plot" cols="30" rows="10" placeholder="줄거리를 입력해 주세요." readonly><%=m.getMovieStory() %></textarea>
                                 <div id="button"><!--등록 버튼-->
-                                    <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">삭제</button>
-                                    <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">수정</button>
+                                    <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;" onclick="deleteButton();">삭제</button>
+                                    <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;" onclick="updateButton()">수정</button>
                                     <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;"" onclick="history.back();">목록</button>
                                 </div><!--등록 버튼-->
                             </div>
@@ -491,6 +492,20 @@
     </div>
      	<%@ include file="/views/common/footer.jsp" %>
  		<!-- 푸터 -->
+ 		
+ 		<script>
+	 		function deleteButton(){
+    			const result = confirm('삭제하려면 확인을 눌러주세요.');
+    			
+                if(result){
+                	location.href =  '<%= contextPath %>/adminMovieDelete.admin?movieNo=<%=m.getMovieNo()%>';
+                }
+	 		}
+	 		
+	 		function updateButton() {
+	 			location.href = '<%=contextPath%>/adminMovieUpdateEnrollForm.admin?movieNo=<%=m.getMovieNo()%>';
+	 		}
+ 		</script>
 
 </body>
 </html>

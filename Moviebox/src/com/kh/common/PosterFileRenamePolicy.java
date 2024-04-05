@@ -21,7 +21,8 @@ public class PosterFileRenamePolicy implements FileRenamePolicy{
 		// lastIndexOf(찾고자하는문자열)
 		String ext = originName.substring(originName.lastIndexOf("."));
 		// 1 + 2 + 3 조합해서 수정파일명을 변수에 대입하기
-		String changeName = "poster_" +  originName + "_" + currentTime + "_" + randomNo + ext;
+//		String changeName = "poster_" +  originName + "_" + currentTime + "_" + randomNo + ext;
+		String changeName = "poster_" + currentTime + "_" + randomNo + ext;
 		//poster_사용자가 올리는 파일명 + 파일이 업로드된 시간 +  5자리 랜덤값
 		// 기존 파일명을 수정된 파일명으로 적용시켜서 반환
 		return new File(originFile.getParent(), changeName);

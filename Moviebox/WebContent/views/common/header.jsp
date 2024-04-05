@@ -179,11 +179,7 @@
 </head>
 <body>
 
-
-	
-
 	<script>
-		
 		const msg = '<%= alertMsg %>';
 		
 		if(msg != 'null'){
@@ -191,9 +187,8 @@
 		
 			<% session.removeAttribute("alertMsg"); %>
 		}
-		
-	
 	</script>
+	
 	<div class="header">
 		<div class="header-line">
 			<div class="top-header">

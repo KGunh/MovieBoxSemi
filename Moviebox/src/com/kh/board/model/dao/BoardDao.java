@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.kh.board.model.vo.Answer;
@@ -16,7 +17,6 @@ import com.kh.board.model.vo.Board;
 import com.kh.board.model.vo.Category;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.notice.model.dao.NoticeDao;
-import com.kh.notice.model.vo.Notice;
 
 public class BoardDao {
 	
@@ -235,9 +235,9 @@ public class BoardDao {
 		return result;
 	}
 
-	public ArrayList<Answer> selectAnswerList(Connection conn, int boardNo) {
+	public List<Answer> selectAnswerList(Connection conn, int boardNo) {
 		
-		ArrayList<Answer> answer = new ArrayList();
+		List<Answer> answer = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
@@ -254,9 +254,7 @@ public class BoardDao {
 				answer.add(new Answer(rset.getInt("ANSWER_NO"),
 						  rset.getString("ANSWER_CONTENT"),
 						  rset.getString("CREATE_DATE"),
-						  rset.getString("STATUS"),
-						  rset.getInt("BOARD_NO"),
-						  rset.getString("MEMBER_NO")));
+						  rset.getString("ANSWER_WRITER")));
 			}
 			
 		} catch (SQLException e) {
@@ -279,10 +277,9 @@ public class BoardDao {
 			
 			pstmt.setString(1, answer.getAnswerContent());
 			pstmt.setInt(2, answer.getBoardNo());
-			pstmt.setInt(3, Integer.parseInt(answer.getMemberNo()));
+			pstmt.setInt(3, Integer.parseInt(answer.getAnswerWriter()));
 			
 			result = pstmt.executeUpdate();
-			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

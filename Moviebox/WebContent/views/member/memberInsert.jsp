@@ -410,7 +410,7 @@
 
     </script>
     <script>
-        let birthdayReg =  /^\d{2}(0[1-9]|1[0-2])(0[1-9]$/;
+    	let birthdayReg = /^\d\d\d\d\d\d$/;///^(19[0-9][0-9]|20[0-2][0-9])(0[1-9]|1[0-2])(0[1-9]|1[0-9]|2[0-9]|3[0-1]$/;
         let phoneReg = /^\d{11}$/;
         let emailReg = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
         $('.inputdiv > input').blur(function(){
@@ -430,6 +430,7 @@
         $('.input-button > button').click(function(){
             const $input = $('.inputdiv > input');
             let flag = false;
+            conole.log($(input));
             $input.each(function(){
                 if ($(this).val() == ''){
                     $(this).css('border','2px solid red');

@@ -52,11 +52,18 @@ public class AdminPageServlet extends HttpServlet {
 			
 		case "adminMovieInsert" :
 			view = admin.adminMovieInsert(request, response); flag = false; break; //영화등록
+			
+		case "adminMovieUpdate" :
+			view = admin.adminMovieUpdate(request, response); flag = false; break; //영화등록
 
 		case "adminMovieDetail" :
 			view = admin.adminMovieDetail(request, response); flag = false; break; //영화상세보기페이지
 			
-		
+		case "adminMovieUpdateEnrollForm" :
+		view = admin.adminMovieUpdateEnrollForm(request, response); flag = false; break; //영화수정
+			
+		case "adminMovieDelete" :
+			view = admin.adminMovieDelete(request, response); flag = false; break; //영화삭제
 		
 			
 			

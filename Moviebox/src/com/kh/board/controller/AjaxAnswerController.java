@@ -1,7 +1,7 @@
 package com.kh.board.controller;
 
 import java.io.IOException;
-import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -35,7 +35,7 @@ public class AjaxAnswerController extends HttpServlet {
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		
 		
-		ArrayList<Answer> answer = new BoardService().selectAnswerList(boardNo);
+		List<Answer> answer = new BoardService().selectAnswerList(boardNo);
 		
 		response.setContentType("application/json; charset=UTF-8");
 		new Gson().toJson(answer, response.getWriter());

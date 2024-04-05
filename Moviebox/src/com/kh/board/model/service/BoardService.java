@@ -95,10 +95,10 @@ public class BoardService {
 		return result;
 	}
 
-	public ArrayList<Answer> selectAnswerList(int boardNo) {
+	public List<Answer> selectAnswerList(int boardNo) {
 		
 		Connection conn = getConnection();
-		ArrayList<Answer> answer = new BoardDao().selectAnswerList(conn, boardNo);
+		List<Answer> answer = new BoardDao().selectAnswerList(conn, boardNo);
 		
 		close(conn);
 		return answer;
