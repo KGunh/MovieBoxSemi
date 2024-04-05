@@ -159,7 +159,7 @@
         }
 
         #table > tr,td {
-            height: 50px;
+            height: 10px;
             width: 250px;
             font-size: 14px;
             text-align: left;
@@ -271,7 +271,7 @@
             <form action="<%=contextPath%>/modify.cm" method="post">
                 <h2> 영화관 상세 정보</h2>              
                  <div class="content_2_top">
-                    <table class="table table-hover"  style="height: 490px;">
+                    <table class="table table-hover"  style="height: 290px;">
                        
                         
                             <tbody>

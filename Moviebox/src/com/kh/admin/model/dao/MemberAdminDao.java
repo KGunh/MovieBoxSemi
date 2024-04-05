@@ -125,6 +125,8 @@ public class MemberAdminDao {
 	}
 	
 	
+	
+	
 	public int updateAdmin(Member member, Connection conn) {
 		
 		
@@ -154,6 +156,17 @@ public class MemberAdminDao {
 		
 		return result; 
 		
+	}
+	
+	public int deleteAdmin(Connection conn,int memberNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("deleteAdmin");
+		
+		
+		
+		return result;
 	}
 	
 	

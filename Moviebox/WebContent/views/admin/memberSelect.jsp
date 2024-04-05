@@ -378,7 +378,7 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
 
                 </div>
                 <div id="delete" >
-                    <button type="button" id="btn1" onclick="deleteadmin();">탈퇴</button>
+                <!--     <button type="button" id="btn1" onclick="deleteadmin();">탈퇴</button>  -->
                 </div>
 
                 <div id="cnt2_post"><!--게시판-->
@@ -389,11 +389,11 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                         <table class="table table-hover" style="text-align: center; font-size: small;">
                           <thead>
                             <tr style="background-color: #eaeaea; margin-top: 0; height: 40px; color: #212121; border: 0px solid #cfcfcf; opacity: 0.8; text-align: center;">
-                                <th ><input type="checkbox" name="check" value="check" id="check" checked></th>
+                          <!--       <th ><input type="checkbox" name="check" value="check" id="check" checked></th>  -->
                                 <th class="num">회원번호</th>
                                 <th>이름</th>
                                 <th>가입일</th>
-                                <th>탈퇴여부</th> 
+                                <th>활동여부</th> 
                                 <th>전화번호</th>
                             </tr>
                           </thead>
@@ -402,7 +402,7 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                            <% for(Member m : mb){ %>
                                 <tr class="member">
                                 
-                                <td class="ch"><input type="checkbox" name="check" value="check" id="check" ></td>
+                                <!-- <td class="ch"><input type="checkbox" name="check" value="check" id="check" ></td>  -->
                                 <td><%= m.getMemberNo() %></td>
                                 <td><%= m.getMemberName()%></td>
                                 <td><%= m.getEnrollDate() %></td>
@@ -424,7 +424,7 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                     		
                     		$('.member>td').click(function(){
                     			if(!$(this).is('.ch')) {
-	                    			const memberNo = $(this).parent().children().eq(1).text();
+	                    			const memberNo = $(this).parent().children().eq(0).text();
 	                    			location.href='<%=contextPath%>/modifyAdmin.mb?memberNo=' + memberNo;
                         		}
                     			
@@ -434,12 +434,7 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                     		
                     	})
                     	
-                    	function deleteadmin(){
-                    		const memberNo = $(this).parent().children().eq(1).text();
-                    		
-                    		location.href='<%=contextPath%>/deleteAdmin.mb?memberNo='+memberNo;
-                    	}
-                      
+                    	
                       
                       </script>
                       

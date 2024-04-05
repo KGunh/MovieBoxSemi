@@ -355,7 +355,7 @@
                             </tr>
                              <tr>
                               <th class="title">이메일</th>
-                              <td><input type="text" class="input1" name="Email" value="<%=m.getEmail()%>" ></td> 
+                              <td><input type="email" class="input1" name="Email" value="<%=m.getEmail()%>" ></td> 
                             </tr>
                             <tr>
                               <th class="title">주소</th>
@@ -363,15 +363,15 @@
                             </tr>
                             <tr>  
                               <th class="title">전화번호</th>
-                              <td><input type="text" class="input1" name="phone" value="<%=m.getPhone()%>" ></td>
+                              <td><input type="number" class="input1" name="phone" value="<%=m.getPhone()%>" maxlength="11" ></td>
                             </tr>
                             <tr>
                               <th class="title">가입일</th>
-                              <td><input type="text" class="input1" value="<%=m.getEnrollDate()%>"></td>
+                              <td><input type="text" class="input1" value="<%=m.getEnrollDate()%>" readonly></td>
                             </tr>  
                             <tr>
                               <th class="title">탈퇴여부</th>
-                              <td><input type="text" class="input1" name="status" value="<%=m.getStatus()%>"></td>
+                              <td><input type="text" class="input1" name="status" value="<%=m.getStatus()%>" maxlength="1"></td>
                             </tr>
                             
                            
@@ -384,15 +384,26 @@
                 <div id="buttoon">
                    <button type="submit" class="btn1" >수정</button>
                    <button type="button" class="btn1" onclick="close();">닫기</button>
+                    
+                    </form>
+                   
+                  
                 </div>
                 
-                </form>
+                
                 
                 <script>
                 
                 function close(){                	
                 	location.href='<%=contextPath%>/selectAdmin.mb';
                 }
+                
+                function deleteAdmin(){
+            		
+            		
+            		location.href='<%=contextPath%>/deleteAdmin.mb?memberNo='+<%=m.getMemberNo()%>;
+            	}
+              
                 
                 </script>
             </div>
