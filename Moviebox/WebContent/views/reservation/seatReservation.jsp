@@ -279,42 +279,42 @@
                 <div id="a-line" class="line">
                     <div id="a-line-wrap" class="line-wrap">
                         <% for(int i = 1; i <= 12; i++){ %>
-                        	<div draggable="true" class="a-seat seats">A<%= i %></div>
+                        	<div class="a-seat seats">A<%= i %></div>
                         <% } %>
                     </div>
                 </div>
                 <div id="b-line" class="line">
                     <div id="b-line-wrap" class="line-wrap">
                         <% for(int i = 1; i <= 12; i++){ %>
-                        	<div draggable="true" class="b-seat seats">B<%= i %></div>
+                        	<div class="b-seat seats">B<%= i %></div>
                         <% } %>
                     </div>
                 </div>
                 <div id="c-line" class="line">
                     <div id="c-line-wrap" class="line-wrap">
                          <% for(int i = 1; i <= 12; i++){ %>
-                        	<div draggable="true" class="c-seat seats">C<%= i %></div>
+                        	<div class="c-seat seats">C<%= i %></div>
                          <% } %>
                     </div>
                 </div>
                 <div id="d-line" class="line">
                     <div id="d-line-wrap" class="line-wrap">
                          <% for(int i = 1; i <= 12; i++){ %>
-                        	<div draggable="true" class="d-seat seats">D<%= i %></div>
+                        	<div class="d-seat seats">D<%= i %></div>
                          <% } %>
                     </div>
                 </div>
                 <div id="e-line" class="line">
                     <div id="e-line-wrap" class="line-wrap">
                         <% for(int i = 1; i <= 12; i++){ %>
-                        	<div draggable="true" class="e-seat seats">E<%= i %></div>
+                        	<div class="e-seat seats">E<%= i %></div>
                         <% } %>
                     </div>
                 </div>
                 <div id="f-line" class="line">
                     <div id="e-line-wrap" class="line-wrap">
                          <% for(int i = 1; i <= 12; i++){ %>
-                        	<div draggable="true" class="f-seat seats">F<%= i %></div>
+                        	<div class="f-seat seats">F<%= i %></div>
                          <% } %>
                     </div>
                 </div>
@@ -475,30 +475,13 @@
             });
         };
 ///////////////////////////////
-        $(document).ready(function() {
-    let isSelecting = false;
-    
-    $('.seats').mousedown(function(e) {
-        isSelecting = true;
-        $(this).addClass('selected');
-        e.preventDefault(); // 드래그 중 선택 영역이 확장되지 않도록 기본 이벤트를 막습니다.
-    });
-    
-    $(document).mousemove(function(e) {
-        if (isSelecting) {
-            $('.seats').each(function() {
-                if ($(this).hasClass('selected')) {
-                    $(this).removeClass('selected');
-                }
-            });
-            $(e.target).addClass('selected');
-        }
-    });
-    
-    $(document).mouseup(function() {
-        isSelecting = false;
-    });
-});
+        $('.seats').mousedown(function() {
+            $(this).addClass('aa');
+        });
+        
+        $('.seats').mouseenter(function() {
+            $(this).addClass('aa');
+        });
 /////////////////
         // 인원수 버튼에 대한 스타일동작 및 값처리
         $('.people-Count').click(e => {
