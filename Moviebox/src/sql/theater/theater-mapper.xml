@@ -76,7 +76,7 @@
 	</entry>
 	
 	
-	<!-- 선택한 영화관 보여주기 -->
+	<!-- 선택한 영화관 정보 보여주기 -->
 	<entry key="selectTheaterDetail">
 		SELECT
 		      SCREEN_NO,
