@@ -137,11 +137,9 @@
         width: 1070px;
         height: 175px;
         margin-top: 25px;
-        border-radius: 25px;
+        border-radius: 0px;
         background-color: rgb(148, 145, 145);
-        overflow-x: auto;
-        overflow-y: none;
-        white-space: nowrap;
+        border-radius: 25px;
     }
 
     .theaterName{
@@ -154,20 +152,19 @@
     }
     
     .selectScreen{
-        width: 900px;
-        height: 100px;
-        margin-left: 80px;
+        margin-left: 40px;
+        width: 990px;
+        display: flex;
         white-space: nowrap;
-        align-items: center;
-        justify-content: center;
+        overflow-x: scroll;
     }
 
     .screenName{
         float: left;
-        width: 155px;
-        height: 85px;
-        margin-top: 5px;
-        margin-left: 48px;
+        min-width: 155px;
+        min-height: 85px;
+        margin-right: 40px;
+        margin-bottom: 5px;
         border-radius: 25px;
         background-color: rgba(255, 255, 255, 0.6);
         text-align: center;
@@ -245,6 +242,13 @@
         border: none;
     }
   
+    .selectScreen::-webkit-scrollbar {
+        width: 10px; /* 스크롤바 너비 */
+    }
+
+    .selectScreen::-webkit-scrollbar-thumb {
+        background-color: rgb(255, 193, 69); /* 스크롤바 색상 */
+    }
 </style>
 
 </head>
@@ -350,7 +354,6 @@
             document.getElementById('printToday').innerHTML = year + '-' + month + '-' + day;
         };
 
-        
         $('.poster').click(function(){
             $('.poster').not(this).removeAttr('style');
             $(this).css('transform', 'scale(1.1)');
@@ -382,7 +385,7 @@
             $('#screenName').val(e.children[2].value);
             $('#theaterName').val($(e).parent().children().eq(0).html());
         };
-       
+        
         function selectScreen(){
             $.ajax({
             	url : 'screen.reservationAjax',
@@ -396,18 +399,19 @@
                     let resultStr = '';
                     for(let i = 0; i < result.length; i++){
                         resultStr += '<div class="screen">'
-                                   +     '<div class="theaterName">' + result[i].theaterName + '</div>';
-                                   +     '<div class="selectScreen">'
+                                   +     '<div class="theaterName">' + result[i].theaterName + '</div>'
+                                   +        '<div class="selectScreen">';
                         
                         for(let j = 0; j < result[i].watchDateList.length; j++){
                             resultStr +=        '<div class="screenName" onclick="selectScreenNo(this);">'
                                        +            '<span style="color: black;">' + result[i].watchDateList[j] + '</span>'
                                        +            '<input type="hidden" value="' + result[i].screenNoList[j] + '">'
                                        +            '<input type="hidden" value="' + result[i].screenNameList[j] + '">'
-                                       +        '</div>'
+                                       +        '</div>';
                         };
                         
-                        resultStr +=    '</div>';
+                        resultStr +=        '</div>'
+                                   +    '</div>'
                                    + '</div>';
                     };
                 

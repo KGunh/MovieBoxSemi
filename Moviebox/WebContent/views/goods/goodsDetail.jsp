@@ -211,14 +211,6 @@
             $('#txt-num').html(productNum);
         });
 
-
-
-
-
-
-
-
-
     </script>
 
 
