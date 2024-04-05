@@ -285,14 +285,14 @@
                 </script>
 				<div class="inputdiv">
 					<span class="input-span">이름</span><br> 
-                    <input type="text" class="input-text" name="memberName" placeholder="이름" maxlength="5">
+                    <input type="text" class="input-text" name="memberName" placeholder="이 름 | ex) 한글만 입력해주세요 " maxlength="5">
                     <span class="input-bottom"></span>
 				</div>
 
                 
 				<div class="inputdiv">
 					<span class="input-span">생년월일</span><br> 
-                    <input type="text" class="input-text" name="birthday" placeholder="생년월일ex)19901218(YYYYMMDD)" maxlength="8">
+                    <input type="text" class="input-text" name="birthday" placeholder="생년월일 | ex)19901218(YYYYMMDD)" maxlength="8">
                     <span class="input-bottom"></span>
 				</div>
 				<div class="inputdiv">
@@ -502,41 +502,11 @@
         	const $phoneInput = $('input[name=phone]');
         	const $birthdayInput = $('input[name=birthday]');
         	const $emailInput = $('input[name=email]');
-        	if(nameReg.test($memberNameInput.val())){
-        		removeAttr($memberNameInput)
-            }
-            else {
-            	$memberNameInput.css('border','2px solid red');
-            	$memberNameInput.siblings('.input-bottom').html('형식에 맞지않습니다(한글만 입력해주세요).').css('color','red');
-                msg += '이름 ';
-            }
-            if(phoneReg.test($phoneInput.val())){
-            	removeAttr($phoneInput)
-            }
-            else {
-            	$phoneInput.css('border','2px solid red');
-            	$phoneInput.siblings('.input-bottom').html('형식에 맞지않습니다(-를 제외한 11자리 숫자만 입력해주세요).').css('color','red');
-                msg += '전화번호 ';
-            }
-            if(birthdayReg.test($birthdayInput.val())){
-            	removeAttr($birthdayInput)
-            }
-            else{
-            	$birthdayInput.css('border','2px solid red');
-            	$birthdayInput.siblings('.input-bottom').html('형식에 맞지않습니다 | ex)19001124(YYYYMMDD).').css('color','red');
-                msg += '생년월일 ';
-            }
-            if(emailReg.test($emailInput.val())){
-            	removeAttr($emailInput)
-                
-            }
-            else{
-            	text = '형식에 맞지않습니다 | ex)aaa@movie.box(***@***.***).';
-            	failInput($emailInput,text);
-                msg += '이메일 ';
 
-            }
-            alert(msg+'입력되지 않았습니다.');
+            removeOrFail(nameReg,$memberNameInput);
+            removeOrFail(phoneReg,$phoneInput);
+            removeOrFail(birthdayReg,$birthdayInput);
+            removeOrFail(emailReg,$emailInput);
         };
     </script>
 
