@@ -156,14 +156,14 @@
         width: 990px;
         display: flex;
         white-space: nowrap;
-        overflow-x: scroll;
+        overflow-x: auto;
     }
 
     .screenName{
         float: left;
         min-width: 155px;
         min-height: 85px;
-        margin-right: 40px;
+        margin-right: 50px;
         margin-bottom: 5px;
         border-radius: 25px;
         background-color: rgba(255, 255, 255, 0.6);
@@ -215,11 +215,11 @@
         position: fixed; 
         bottom: 300px; 
         right: 150px;
-        border-radius: 12px;
+        border-radius: 5px;
     }
 
     #select-screen{
-        height: 150px;
+        height: 160px;
         width: 100%;
         text-align: center;
         color: rgb(148, 145, 145);
@@ -228,14 +228,14 @@
     }
 
     #select-screen > div{
-        margin-top: 30px;
+        margin-top: 15px;
     }
 
     #submit-btn{
         height: 60px;
         width: 140px;
-        border-bottom-right-radius: 12px;
-        border-bottom-left-radius: 12px;
+        border-bottom-right-radius: 5px;
+        border-bottom-left-radius: 5px;
         font-weight: 600;
         font-size: 24px;
         background-color: rgb(255, 193, 69);
@@ -243,11 +243,17 @@
     }
   
     .selectScreen::-webkit-scrollbar {
-        width: 10px; /* 스크롤바 너비 */
+        height: 10px;
     }
 
+    .selectScreen::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.267);
+        border-radius: 10px;
+}
+
     .selectScreen::-webkit-scrollbar-thumb {
-        background-color: rgb(255, 193, 69); /* 스크롤바 색상 */
+        background-color: rgb(255, 193, 69);
+        border-radius: 10px;
     }
 </style>
 
@@ -327,6 +333,17 @@
             background-color: rgb(255, 193, 69);
         }
 
+        .resultMsg{
+            height: 200px;
+            width: 1070px;
+            color: rgb(255, 193, 69);
+            background-color: rgba(255, 255, 255, 0.267);
+            border-radius: 25px;
+            line-height: 200px;
+            text-align: center;
+            font-size: 50px;
+            font-weight: 500;
+        }
     </style>
 
     <script>
@@ -377,13 +394,13 @@
                 $(e).addClass('clicked');
             }
 
-            $('#select-screen').children().eq(0).html($(e).parent().children().eq(0).html());
+            $('#select-screen').children().eq(0).html($(e).parent().prev().html());
             $('#select-screen').children().eq(1).html(movieTitle);
-            $('#select-screen').children().eq(2).html($(e).children().eq(2).html());
+            $('#select-screen').children().eq(2).html($(e).children().eq(2).val());
             $('#select-screen').children().eq(3).html($(e).children().eq(0).html());
             $('#screenNo').val(e.children[1].value);
             $('#screenName').val(e.children[2].value);
-            $('#theaterName').val($(e).parent().children().eq(0).html());
+            $('#theaterName').val($(e).children().eq(2).html());
         };
         
         function selectScreen(){
@@ -397,24 +414,34 @@
             	},
             	success : function(result){
                     let resultStr = '';
-                    for(let i = 0; i < result.length; i++){
-                        resultStr += '<div class="screen">'
-                                   +     '<div class="theaterName">' + result[i].theaterName + '</div>'
-                                   +        '<div class="selectScreen">';
-                        
-                        for(let j = 0; j < result[i].watchDateList.length; j++){
-                            resultStr +=        '<div class="screenName" onclick="selectScreenNo(this);">'
-                                       +            '<span style="color: black;">' + result[i].watchDateList[j] + '</span>'
-                                       +            '<input type="hidden" value="' + result[i].screenNoList[j] + '">'
-                                       +            '<input type="hidden" value="' + result[i].screenNameList[j] + '">'
-                                       +        '</div>';
+
+                    console.log(result);
+
+                    if(result.length != 0){
+
+                        for(let i = 0; i < result.length; i++){
+                            resultStr += '<div class="screen">'
+                                       +    '<div class="theaterName">' + result[i].theaterName + '</div>'
+                                       +        '<div class="selectScreen">';
+                            
+                            for(let j = 0; j < result[i].watchDateList.length; j++){
+                                resultStr +=        '<div class="screenName" onclick="selectScreenNo(this);">'
+                                           +            '<span style="color: black;">' + result[i].watchDateList[j] + '</span>'
+                                           +            '<input type="hidden" value="' + result[i].screenNoList[j] + '">'
+                                           +            '<input type="hidden" value="' + result[i].screenNameList[j] + '">'
+                                           +        '</div>';
+                            };
+                            
+                            resultStr +=        '</div>'
+                                       +    '</div>'
+                                       + '</div>';
                         };
                         
-                        resultStr +=        '</div>'
-                                   +    '</div>'
-                                   + '</div>';
-                    };
-                
+                    }
+                    else{
+                        resultStr = '<div class="resultMsg">조회된 상영관이 없습니다</div>';
+                    }
+
                     $('#printScreen').html(resultStr);
             	},
             	error : function(){

@@ -38,6 +38,21 @@
             margin: 0 auto;
             color: white;
         }
+        
+        /* 조회 결과 없을 때 */
+        #noMovieList{
+        	width:1200px;
+        	height: 500px;
+        	text-align: center;
+        	line-height: 490px;
+        }
+        
+        #noMovie{
+        	width: 1200px;
+        	font-size: 20px;
+        	text-align: center;
+        
+        }
 
 
         /* 영화 상세정보(줄거리 등) */
@@ -79,7 +94,7 @@
             height: 40px;
             line-height: 40px;
             padding-left: 10px;
-            margin-bottom: 15px;
+            margin-bottom: 10px;
         }
 
         #movie-detail-director{
@@ -93,8 +108,8 @@
             width: 830px;
             height: 40px;
             line-height: 40px;
-            margin-bottom: 15px;
             padding-left: 10px;
+            margin-bottom: 10px;
         }
 
         #movie-detail-story{
@@ -128,6 +143,8 @@
             border-radius: 8px;
             font-size: 19px;
             font-weight: bold;
+            margin-left: 10px;
+            margin-top: 10px;
             background-color: #FFC145;
         }
         
@@ -178,7 +195,14 @@
         	padding-bottom: 20px;
         }
         
-        #youtube{
+        #videoTitle{
+        	margin-top: 20px;
+        	font-size: 30px;
+        	color: white;
+        	font-weight: bold;
+        }
+        
+		#stilTitle{
         	margin-top: 20px;
         	font-size: 30px;
         	color: white;
@@ -194,20 +218,26 @@
 <body>
 
     <%@ include file="/views/common/header.jsp" %>
-
-    <div id="wrap">
-        <div id="movie-detail">
+	<div id="wrap">
+		<div id="movie-detail">
+	<c:choose>
+		<c:when test="${ movie.movieTitle eq null }">
+			<div id="noMovieList">
+				<a id="noMovie">조회 된 영화가 없습니다.</a>
+			</div>
+		</c:when>
+		<c:otherwise>
             <div id="movie-detail-box">
                 <div id="movie-detail-poster">
-                    <img src="<%= movie.getFilePath() %>/<%= movie.getChangeName() %>" width="300" height="422">
+                    <img src="${ movie.filePath }/${ movie.changeName }" width="300" height="422">
                 </div>
 
                 <div id="movie-detail-content">
-                    <div id="movie-detail-title"><%= movie.getMovieTitle() %></div>
+                    <div id="movie-detail-title">${ movie.movieTitle }</div>
                     <div id="movie-detail-etc">
-                        <a><%= movie.getGenreName() %></a> | <a><%= movie.getMovieRt() %>분</a> | <a><%= movie.getMovieRated() %>이상 관람가</a> | <a><%= movie.getMovieRelease() %> 개봉</a>
+                        <a>${ movie.genreName }</a> | <a>${ movie.movieRt }분</a> | <a>${ movie.movieRated }이상 관람가</a> | <a>${ movie.movieRelease } 개봉</a>
                     </div>
-                    <div id="movie-detail-director">감독 | <%= movie.getDirectorName() %></div>
+                    <div id="movie-detail-director">감독 | ${ movie.directorName }</div>
                     
                     <c:choose>
                     	<c:when test="${ empty cast }">
@@ -218,29 +248,31 @@
                     	</c:otherwise>
                     </c:choose>
                     
-                    <div id="movie-detail-story"><textarea id="movie-story" readonly><%= movie.getMovieStory() %></textarea>
+                    <div id="movie-detail-story"><textarea id="movie-story" readonly>${ movie.movieStory }</textarea>
                     </div>
                     
-                   
-                    <% if(loginUser == null) { %>
-                    	<button id="movie-detail-btn" onclick="noMember();">예매하기</button>
-                	<%} else { %>
-                		<button id="movie-detail-btn" onclick="reservationPage();">예매하기</button>
-                	<% } %>
+                   <c:choose>
+	                   <c:when test="${ empty loginUser }">
+	                    	<button id="movie-detail-btn" onclick="noMember();">예매하기</button>
+	                   </c:when>
+		               <c:otherwise>
+	                		<button id="movie-detail-btn" onclick="reservationPage();">예매하기</button>
+				      </c:otherwise>
+                	</c:choose>
                 
                 </div>
             </div>
 
             <div id="movie-detail-video">
-                <a id="youtube">예고편</a>
+                <a id="videoTitle">예고편</a>
                 
                 <div id="video-src">
-                    <%= movie.getTrailerVideo() %>
+                    ${ movie.trailerVideo }
                 </div>
             </div>
 
             <div id="movie-detail-still">
-                <h1>스틸컷</h1>
+                <a id="stilTitle">스틸컷</a>
                 <div id="detail-still-img">
                     <div class="still-img">
                         	스틸컷
@@ -253,17 +285,19 @@
                     </div>
                 </div>
             </div>
-
-        </div> <!-- movie-detail-->
+    	</c:otherwise>
+    </c:choose>
+    	</div> <!-- movie-detail-->
     </div> <!-- wrap -->
+    
     
         <%@ include file="/views/common/footer.jsp" %>
         
     <script>
 
 		function noMember(){
-			location.href = ('<%=contextPath%>/loginForm.me');
 			alert('로그인이 필요한 서비스 입니다.');
+			location.href = ('<%=contextPath%>/loginForm.me');
 		}
 	
     	// 예매하기 버튼 -> 예매 페이지

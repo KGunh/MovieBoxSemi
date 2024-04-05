@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -276,12 +288,14 @@
 
 	<!-- 헤더 -->
     <%@ include file="/views/common/header.jsp" %>
+   
     <div id="wrap">
 
         <div id="top_wrap">
             <div class="top_1">
                 <h1>관리자</h1>
             </div>
+       </div>
 
         <div id="content">
             <div class="content_1">
@@ -373,6 +387,7 @@
 
             </div><!--content_2끝-->
         </div>
+
 
     </div>
     <%@ include file="/views/common/footer.jsp" %>

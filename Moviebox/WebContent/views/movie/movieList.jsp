@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
     
 <%@ page import="com.kh.movie.model.vo.*, java.util.ArrayList" %>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <%
 	ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("movieList");
@@ -191,8 +193,6 @@
     <%@ include file="/views/common/header.jsp" %>
     
     <div id="wrap">
-    
- 
         <div id="movie-list">
 
             <div id="movie-list-header">
@@ -274,7 +274,7 @@
 	    	const selectGenre = e.target.innerHTML;
 	        document.getElementById('genreInput').value = selectGenre;
 	        document.getElementById('selectGenreForm').submit();
-	}
+		}
 	    	const genreType = document.getElementById('selectTypeGenre')
 		
 	    // 예매하기 버튼 클릭시 
@@ -282,11 +282,11 @@
 		    var movieNo = $(this).siblings('input[type="hidden"]').val();
 		    location.href = '<%=contextPath%>/detail.movie?movieNo=' + movieNo;
 		});
-			
-	    	// 예매하기 버튼 -> 예매 페이지
-	    	function reservationPage(){
-	    		location.href = '<%= contextPath %>/movie.reservation';
-	    	}
+		
+    	// 예매하기 버튼 -> 예매 페이지
+    	function reservationPage(){
+    		location.href = '<%= contextPath %>/movie.reservation';
+    	}
 	    	
 
 	</script>
