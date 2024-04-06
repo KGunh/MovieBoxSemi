@@ -148,15 +148,15 @@ public class MemberAdminController {
 		
 		
 		
-		String view = "view/admin/memberSelect.jsp";
+		String view = "views/admin/memberSearch.jsp";
 		
 		String search = request.getParameter("finding");
 		String category = request.getParameter("category");
 		
 		
 		switch(category) {
-		case "name" : category = "MEMBER_NAME";
-		
+		case "name" : category = "MEMBER_NAME"; break;
+		case "enrolldate"  : category = "ENROLL_DATE";
 		}
 		
 		

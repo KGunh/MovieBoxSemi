@@ -407,7 +407,14 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                             </tr>
                           </thead>
                           <tbody>
+                       <%if(mb.isEmpty()) {%>
+                       <tr>
+                       <td colspan="5" height="70px">조회 결과가 없습니다.</td>
                        
+                       
+                       </tr>
+                       
+                       <% } else {%>
                            <% for(Member m : mb){ %>
                                 <tr class="member">
 							     <!-- <td class="ch"><input type="checkbox" name="check" value="check" id="check" ></td>  -->
@@ -419,6 +426,7 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                                 <td><%= m.getPhone() %></td>
                                 
                             </tr>
+                            <% } %>
                             	<% } %>
                            
                             

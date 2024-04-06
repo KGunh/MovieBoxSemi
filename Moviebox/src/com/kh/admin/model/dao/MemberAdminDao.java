@@ -401,6 +401,8 @@ public class MemberAdminDao {
 				
 			}
 			
+			System.out.println(list);
+			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
