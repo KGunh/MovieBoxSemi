@@ -538,33 +538,19 @@ public class AdminPageController {
 		return view;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public String adminBoardDetail(HttpServletRequest request, HttpServletResponse response) {
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		
+		//System.out.println("boardNo :::::: " + boardNo);
+		Notice n = new AdminPageService().adminBoardDetail(boardNo);
+		
+		//System.out.println("notice :::: " + n.toString());
+		
+		request.setAttribute("notice2323", n);
+		String view = "views/admin/adminBoardDetail.jsp";
+		
+		return view;
+	}
 	
 	
 }

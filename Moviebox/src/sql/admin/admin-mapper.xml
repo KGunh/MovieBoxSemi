@@ -455,8 +455,21 @@
 	</entry>
 	
 	
-	
-	
+	<entry key="adminBoardDetail"> 
+		SELECT A.NOTICE_NO,
+		       A.NOTICE_TITLE,
+		       A.NOTICE_WRITER,
+		       A.NOTICE_CONTENT,
+		       A.CREATE_DATE,
+		       A.COUNT,
+		       A.STATUS,
+		       A.NOTICE_CATEGORY,
+		       B.CATEGORY_NAME
+		  FROM TB_NOTICE A
+		       LEFT OUTER JOIN TB_CATEGORY B
+		            ON A.NOTICE_CATEGORY = B.CATEGORY_NO
+		 WHERE A.NOTICE_NO = ?
+ 	</entry>
 	
 	
 	
