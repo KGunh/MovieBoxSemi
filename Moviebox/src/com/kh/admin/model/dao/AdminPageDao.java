@@ -982,7 +982,7 @@ public class AdminPageDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String sql = prop.getProperty("InsertFile");
+		String sql = prop.getProperty("InsertAttach");
 		
 		try {
 			
@@ -1133,7 +1133,33 @@ public class AdminPageDao {
 	}	
 	
 	
-	
+	//공지등록
+	public int adminBoardInsert(Connection conn, Notice notice) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("adminBoardInsert");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, notice.getNoticeTitle());
+			pstmt.setInt(2, notice.getUserNo());
+			pstmt.setString(3, notice.getNoticeContent());
+			pstmt.setInt(4, notice.getCategoryNo());
+			
+			result = pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
 	
 	
 	

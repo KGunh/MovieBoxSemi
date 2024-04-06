@@ -181,4 +181,8 @@ public class MemberAdminService {
 		
 	}
 	
+	public void search() {
+		
+	}
+	
 }
