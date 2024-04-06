@@ -338,7 +338,7 @@ System.out.println(board);
 				                                        <td>
 				                                            <textarea id="answerContent" name="answerContent"></textarea>
 				                                        </td>
-				                                        <td><button onclick="insertAnswer();" id="answerSubmit">등록dd</button></td>
+				                                        <td><button onclick="insertAnswer();" id="answerSubmit">등록</button></td>
 		                                    	</c:when>
 		                                    	
 		                                    	<c:otherwise>
