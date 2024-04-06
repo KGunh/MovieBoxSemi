@@ -96,7 +96,7 @@
         .menu > li {
             width: 198px;
             text-align: center;
-            line-height: 60px;
+            line-height: 40px;
             background-color: #323232;
             list-style: none;
            

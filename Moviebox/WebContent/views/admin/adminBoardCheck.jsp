@@ -378,7 +378,7 @@
                                     <th>조회수</th>
                                 </tr>
                               </thead>
-                              <tbody>
+                              <tbody id="tbody">
                               <% if(list == null || list.isEmpty()) { %>
                               	<tr>
                               		<td colspan="5">조회 된 공지 목록이 없습니다. </td>
@@ -451,8 +451,13 @@
  	
  	<script>
 		function insertButton(){
-			location.href = '<%= contextPath %>/adminBoardInsert.admin';
+			location.href = '<%= contextPath %>/adminBoardEnrollForm.admin';
 		}
+		
+ 		$('#tbody').on('click', 'tr', function(){
+			const noticeNo = $(this).children().eq(0).text();
+			location.href='<%= contextPath %>/adminBoardDetail.admin?noticeNo=' + noticeNo;
+ 		});
 	</script>
 </body>
 </html>

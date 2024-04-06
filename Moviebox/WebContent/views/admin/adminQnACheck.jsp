@@ -5,7 +5,7 @@
 <%
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("adminQnACheckList");
 	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
-	System.out.print(pi);
+	//System.out.print(pi);
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
@@ -354,11 +354,7 @@
 
 
 
-                    <div id="cnt2_btn"><!--등록 버튼-->
-                        <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right;" onclick="insertButton()";
-                        >등록</button>
 
-                    </div><!--등록 버튼-->
 
 
 
@@ -378,7 +374,7 @@
                                     <th style="width: 80px;">조회수</th>
                                 </tr>
                               </thead>
-                              <tbody>
+                              <<tbody id="tbody">
                               <% if(list == null || list.isEmpty()) { %>
                               	<tr>
                               		<td colspan="6">조회 된 문의 목록이 없습니다. </td>
@@ -449,6 +445,14 @@
  		function insertButton(){
  			location.href = '<%= contextPath %>/adminQnAInsert.admin';
  		}
+ 		
+ 		$('#tbody').on('click', 'tr', function(){
+			const boardNo = $(this).children().eq(0).text();
+			location.href='<%= contextPath %>/adminQnADetail.admin?boardNo=' + boardNo;
+ 		});
+ 		
+ 		
+ 		
 	</script>
 </body>
 </html>

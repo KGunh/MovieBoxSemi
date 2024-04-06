@@ -207,7 +207,7 @@ public class AdminPageDao {
 				Board board = new Board();
 				
 				board.setBoardNo(rset.getInt("BOARD_NO"));
-				board.setBoardCategory(rset.getString("CATEGORY_NO"));
+				board.setBoardCategory(rset.getString("CATEGORY_NAME"));
 				board.setBoardTitle(rset.getString("BOARD_TITLE"));
 				board.setBoardWriter(rset.getString("MEMBER_ID"));
 				board.setCreateDate(rset.getString("CREATE_DATE"));
@@ -1006,4 +1006,186 @@ public class AdminPageDao {
 		
 		return result == list.size() ? 1 : 0;
 	}
+	
+	//공지 상세
+	public Notice adminBoardDetail(Connection conn, int noticeNo){
+		Notice n = new Notice(); 
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminBoardDetail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, noticeNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) { 
+				n.setNoticeNo(rset.getInt("NOTICE_NO"));
+				n.setNoticeTitle(rset.getString("NOTICE_TITLE"));
+				n.setNoticeWriter(rset.getString("NOTICE_WRITER"));
+				n.setNoticeContent(rset.getString("NOTICE_CONTENT"));
+				n.setCreateDate(rset.getString("CREATE_DATE"));
+				n.setCount(rset.getInt("COUNT"));
+				n.setStatus(rset.getString("STATUS"));
+				n.setNoticeCategory(rset.getString("CATEGORY_NAME"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return n;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//문의 상세
+	public Board adminQnADetail(Connection conn, int boardNo){
+		Board b = new Board(); 
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminQnADetail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) { 
+				b.setBoardNo(rset.getInt("BOARD_NO"));
+				b.setBoardTitle(rset.getString("BOARD_TITLE"));
+				b.setBoardContent(rset.getString("BOARD_CONTENT"));
+				b.setCreateDate(rset.getString("CREATE_DATE"));
+				b.setCount(rset.getInt("COUNT"));
+				b.setStatus(rset.getString("STATUS"));
+				b.setBoardCategory(rset.getString("CATEGORY_NAME"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return b;
+	}
+	
+	//공지 삭제
+	public int adminBoardDelete(Connection conn, int noticeNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("adminBoardDelete");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, noticeNo);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}	
+	
+	
+	
+	
+	
+	//문의 삭제
+	public int adminQnADelete(Connection conn, int boardNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("adminQnADelete");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, boardNo);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}	
+	
+	
+	//공지등록
+	public int adminBoardInsert(Connection conn, Notice notice) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("adminBoardInsert");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, notice.getNoticeTitle());
+			pstmt.setInt(2, notice.getUserNo());
+			pstmt.setString(3, notice.getNoticeContent());
+			pstmt.setInt(4, notice.getCategoryNo());
+			
+			result = pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

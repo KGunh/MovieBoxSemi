@@ -93,7 +93,7 @@
             height : 800px;
             padding-left: 50px;
             padding-top: 20px;
-            color: white;
+          
         }
         .menu {
             width: 200px;
@@ -104,7 +104,7 @@
         .menu > li {
             width: 198px;
             text-align: center;
-            line-height: 57px;
+            line-height: 40px;
             background-color: #323232;
             list-style: none;
         }

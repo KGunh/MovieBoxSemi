@@ -160,7 +160,14 @@
 
 
 </entry>
+<entry key="search">
 
+SELECT * FROM TB_MEMBER 
+WHERE ? = ?
+
+
+
+</entry>
 
 
 
