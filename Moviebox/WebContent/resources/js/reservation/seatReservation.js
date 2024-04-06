@@ -49,6 +49,8 @@ $('.people-Count').on('click', function() {
             $(this).addClass('clicked');
             ageType.addClass('clicked');
         }
+
+        CountPeple(ageType);
     }
     else{
         adultCount = Number($(this).html());
@@ -65,6 +67,8 @@ $('.people-Count').on('click', function() {
             $(this).addClass('clicked');
             ageType.addClass('clicked');
         }
+
+        CountPeple(ageType);
     }
 
     peopleCount = teenCount + adultCount;
@@ -75,6 +79,19 @@ $('.people-Count').on('click', function() {
 
     printPeople();
 });
+
+function CountPeple(ageType) {
+    let ageBtns = (ageType.html() === '청소년') ? $('.adultBtn') : $('.teenBtn');
+    let maxCount = (ageType.html() === '청소년') ? (8 - teenCount) : (8 - adultCount);
+
+    for (let i = 0; i < ageBtns.length; i++) {
+        if(Number(ageBtns.eq(i).html()) > maxCount) {
+            ageBtns.eq(i).prop('disabled', true);
+        } else {
+            ageBtns.eq(i).prop('disabled', false);
+        }
+    }
+};
 
 function printPeople() {
     selectPeople = teenCount + adultCount;
