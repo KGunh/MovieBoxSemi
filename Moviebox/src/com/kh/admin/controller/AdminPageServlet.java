@@ -76,7 +76,8 @@ public class AdminPageServlet extends HttpServlet {
 		case "adminBoardDetail" :
 			view = admin.adminBoardDetail(request, response); flag = false; break; //공지상세보기
 
-			
+		case "adminBoardDelete" :
+			view = admin.adminBoardDelete(request, response); flag = false; break; //공지삭제
 			
 			
 		case "adminQnACheck" :

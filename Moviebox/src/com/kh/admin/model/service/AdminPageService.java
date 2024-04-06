@@ -427,4 +427,19 @@ public class AdminPageService {
 		return board;
 	}
 	
+	
+	public int adminBoardDelete(int noticeNo) {
+		Connection conn = getConnection();
+		int result = new AdminPageDao().adminBoardDelete(conn, noticeNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+	
 }
+

@@ -1084,7 +1084,26 @@ public class AdminPageDao {
 		return b;
 	}
 	
-	
+	public int adminBoardDelete(Connection conn, int noticeNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("adminBoardDelete");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, noticeNo);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}	
 	
 	
 	

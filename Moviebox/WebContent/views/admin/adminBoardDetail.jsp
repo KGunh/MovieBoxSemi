@@ -332,43 +332,43 @@
             <div class="content_2"><!--content_2 시작-->
                 <p id="p">게시글관리 > 공지 관리 > 공지 상세보기</p>
 
-            <form>
-                <div id="content_2_box"><!--컨텐트2 전체박스-->
-                    <div id="box_wrap">
+            
+            <div id="content_2_box"><!--컨텐트2 전체박스-->
+                <div id="box_wrap">
 
-                        <div id="box_category">
-                            <select name="#" id="category" >
-                                <option value=""><%=n.getNoticeCategory() %></option>
-                            </select>
-                        </div>
-
-                        <div id="box_1">
-                            <p class="title_p">공지 제목</p>
-                        </div>
-
-                        <div id="box_2">
-                            <input type="text" class="form-control" name="title" style="border-radius: 8px;" value="<%=n.getNoticeTitle() %>" readonly>
-                        </div>
-
-                        <div id="box_1">
-                            <p class="title_p">공지 내용</p>
-                        </div>
-
-                        <div id="box_3">
-                            <textarea class="form-control" rows="5" name="content" style="resize:none; height: 250px; border-radius: 8px;" readonly><%=n.getNoticeContent()%></textarea>
-                        </div>
-
-                        
-                        <div id="button"><!--등록 버튼-->
-                            <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">삭제</button>
-                            <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">수정</button>
-                            <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">목록</button>
-                        </div><!--등록 버튼-->
+                    <div id="box_category">
+                        <select name="#" id="category" >
+                            <option value=""><%=n.getNoticeCategory() %></option>
+                        </select>
                     </div>
- 
 
-                </div><!--컨텐트2 전체박스 끝-->
-            </form>
+                    <div id="box_1">
+                        <p class="title_p">공지 제목</p>
+                    </div>
+
+                    <div id="box_2">
+                        <input type="text" class="form-control" name="title" style="border-radius: 8px;" value="<%=n.getNoticeTitle() %>" readonly>
+                    </div>
+
+                    <div id="box_1">
+                        <p class="title_p">공지 내용</p>
+                    </div>
+
+                    <div id="box_3">
+                        <textarea class="form-control" rows="5" name="content" style="resize:none; height: 250px; border-radius: 8px;" readonly><%=n.getNoticeContent()%></textarea>
+                    </div>
+
+                    
+                    <div id="button"><!--등록 버튼-->
+                        <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;" onclick="noticeDelete()">삭제</button>
+                        <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">수정</button>
+                        <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">목록</button>
+                    </div><!--등록 버튼-->
+                </div>
+
+
+            </div><!--컨텐트2 전체박스 끝-->
+            
 
 
 
@@ -378,5 +378,16 @@
     </div>
  	<%@ include file="/views/common/footer.jsp" %>
  	<!-- 푸터 -->
+ 	
+ 	<script>
+ 		function noticeDelete() {
+ 			const result = confirm('삭제하려면 확인을 눌러주세요.');
+ 			
+ 			if(result) {
+ 				location.href = '<%=contextPath %>/adminBoardDelete.admin?noticeNo=<%=n.getNoticeNo()%>';	
+ 			}
+ 			
+ 		}
+ 	</script>
 </body>
 </html>

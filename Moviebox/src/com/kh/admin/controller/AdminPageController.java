@@ -569,20 +569,21 @@ public class AdminPageController {
 		return view;
 	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public String adminBoardDelete(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		
+		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+		
+		int result = new AdminPageService().adminBoardDelete(noticeNo);
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "성공적으로 삭제가 되었습니다");
+		} else {
+			session.setAttribute("alertMsg", "삭제를 실패하였습니다");
+		}
+		
+		return "/adminBoardCheck.admin?currentPage=1";
+	}
 	
 	
 	

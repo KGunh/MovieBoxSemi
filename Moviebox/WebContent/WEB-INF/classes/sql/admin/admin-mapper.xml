@@ -215,6 +215,7 @@
 				    TB_NOTICE    
 				JOIN
 				    TB_CATEGORY ON (NOTICE_CATEGORY = CATEGORY_NO)
+				WHERE STATUS = 'Y'
 				ORDER
 				   BY
 				    NOTICE_NO DESC) A)
@@ -455,6 +456,7 @@
 	</entry>
 	
 	
+	<!-- 공지상세보기 -->
 	<entry key="adminBoardDetail"> 
 		SELECT A.NOTICE_NO,
 		       A.NOTICE_TITLE,
@@ -472,16 +474,26 @@
  	</entry>
 	
 	
+	<!-- 문의 -->
+	<entry key="adminQnADetail">
+	    SELECT 
+	           A.BOARD_NO,
+	           A.BOARD_TITLE,
+	           A.BOARD_CONTENT,
+	           A.CREATE_DATE,
+	           A.COUNT,
+	           A.STATUS,
+	           B.CATEGORY_NAME
+	      FROM TB_BOARD A
+	           LEFT OUTER JOIN TB_CATEGORY B
+	                ON A.CATEGORY_NO = B.CATEGORY_NO
+	     WHERE A.BOARD_NO = ?
+	</entry>
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-
+	<entry key="adminBoardDelete">
+		UPDATE TB_NOTICE
+		   SET STATUS = 'N'
+		 WHERE NOTICE_NO = ?
+	</entry>
 
 </properties>
