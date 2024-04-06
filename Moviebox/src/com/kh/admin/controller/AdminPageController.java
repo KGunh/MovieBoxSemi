@@ -383,13 +383,18 @@ public class AdminPageController {
 			movie.setTrailerVideo(trailerVideo);
 			movieResult = new AdminPageService().updateMovie(movie);
 			for (int i = 0; i < resultActorNo.length; i++) {
-				castResult = new AdminPageService().InsertCast(movieNo, resultActorNo[i]);
+				// 0: 중복아님 / 0 아니면 중복임
+				int duplicate = new AdminPageService().selectDuplicateCast(movieNo, resultActorNo[i]);
+				
+				if(duplicate == 0) {
+					castResult = new AdminPageService().InsertCast(movieNo, resultActorNo[i]);
+				}
 			}
 			if (movieResult > 0) {
-				session.setAttribute("alertMsg", "영화가 등록되었습니다.");
+				session.setAttribute("alertMsg", "영화가 수정되었습니다.");
 				view = "/adminMovieCheck.admin?currentPage=1";
 			} else {
-				session.setAttribute("alertMsg", "영화 등록에 실패했습니다..");
+				session.setAttribute("alertMsg", "영화 수정에 실패했습니다..");
 				view = "views/admin/adminMovieInsert.jsp";
 			}
 			
@@ -644,8 +649,43 @@ public class AdminPageController {
 	}
 	
 	
+	public String adminBoardUpdateEnrollForm(HttpServletRequest request, HttpServletResponse response) {
+		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+		
+		Notice n = new AdminPageService().adminBoardDetail(noticeNo);
+		
+		request.setAttribute("notice", n);
+		
+		String view = "views/admin/adminBoardUpdate.jsp";
+		
+		return view;
+	}
 	
-	
+	public String adminBoardUpdate(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		
+		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+		int noticeCategory = Integer.parseInt(request.getParameter("category"));
+		
+		String noticeTitle = request.getParameter("title");
+		String noticeContent = request.getParameter("content");
+		
+		Notice notice = new Notice();
+		notice.setCategoryNo(noticeCategory);
+		notice.setNoticeTitle(noticeTitle);
+		notice.setNoticeContent(noticeContent);
+		notice.setNoticeNo(noticeNo);
+		
+		int result = new AdminPageService().adminBoardUpdate(notice);
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "공지글이 수정 되었습니다.");
+		} else {
+			session.setAttribute("alertMsg", "공지글이 수정 실패하였습니다.");
+		}
+		
+		return "/adminBoardCheck.admin?currentPage=1";
+	}
 	
 	
 	

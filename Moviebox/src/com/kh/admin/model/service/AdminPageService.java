@@ -15,6 +15,7 @@ import com.kh.common.model.vo.Attachment;
 import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.movie.model.vo.Movie;
+import com.kh.notice.model.dao.NoticeDao;
 import com.kh.notice.model.vo.Notice;
 import com.kh.theater.model.vo.Screen;
 import com.kh.theater.model.vo.Theater;
@@ -250,11 +251,10 @@ public class AdminPageService {
 	}
 	
 	
-	//Cast등록
-	public int InsertCast(int movieNo, int actorNo) {
+	public int selectDuplicateCast(int movieNo, int actorNo) {
 		Connection conn = getConnection();
 		
-		int result = new AdminPageDao().InsertCast(conn, movieNo, actorNo);
+		int result = new AdminPageDao().selectDuplicateCast(conn, movieNo, actorNo);
 		
 		if(result > 0) {
 			commit(conn);
@@ -265,6 +265,17 @@ public class AdminPageService {
 		close(conn);
 		
 		return result;
+	}
+	
+	//Cast등록
+	public int InsertCast(int movieNo, int actorNo) {
+		Connection conn = getConnection();
+		
+		int listCount = new AdminPageDao().InsertCast(conn, movieNo, actorNo);
+		
+		close(conn);
+		
+		return listCount;
 	}
 
 	//
@@ -472,7 +483,23 @@ public class AdminPageService {
 		return result;
 	}
 	
-	
+	public int adminBoardUpdate(Notice notice) {
+		
+		Connection conn = getConnection();
+		
+		int result = new AdminPageDao().adminBoardUpdate(conn, notice);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+		
+	}
 	
 	
 	

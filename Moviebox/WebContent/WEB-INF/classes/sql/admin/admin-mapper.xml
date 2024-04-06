@@ -183,6 +183,18 @@
 	</entry>
 
 	<!-- Cast 등록 -->
+	<entry key="selectDuplicateCast">
+	SELECT COUNT(*)
+	  FROM 
+	  	TB_CAST
+	 WHERE
+	 	MOVIE_NO = ?
+	   AND
+	    ACTOR_NO = ?
+		  	
+	</entry>
+
+	<!-- Cast 등록 -->
 	<entry key="InsertCast">
 		INSERT
 		  INTO
@@ -457,6 +469,7 @@
 		 	MOVIE_NO = ? 
 		 AND 
 		 	FILE_LEVEL = 1
+		 ORDER BY FILE_NO DESC
 	</entry>
 	
 	
@@ -470,6 +483,7 @@
 		       A.COUNT,
 		       A.STATUS,
 		       A.NOTICE_CATEGORY,
+		       B.CATEGORY_NO,
 		       B.CATEGORY_NAME
 		  FROM TB_NOTICE A
 		       LEFT OUTER JOIN TB_CATEGORY B
@@ -561,7 +575,17 @@
 			   )
 	</entry>
 	
-	
+	<!-- 공지수정 -->
+	<entry key="adminBoardUpdate">
+		UPDATE
+	      	  TB_NOTICE
+	       SET
+		      NOTICE_CATEGORY = ?,
+		      NOTICE_TITLE = ?,
+		      NOTICE_CONTENT = ?
+	 	 WHERE
+	      	  NOTICE_NO = ?
+	</entry>
 	
 	
 	

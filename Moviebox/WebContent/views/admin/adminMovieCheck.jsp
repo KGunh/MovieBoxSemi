@@ -384,9 +384,7 @@
                               
 			                    <tbody id="tbody">
 			                    <% if(list == null || list.isEmpty()) { %>
-			                        <tr>
-			                            <td colspan="6">조회 된 영화 목록이 없습니다. </td>
-			                        </tr>
+
 			                     <% } else { %>
 			                     	<% for(Movie m : list) { %>                                   
 											<tr>
@@ -458,7 +456,14 @@
  		}
  		
  		$('#tbody').on('click', 'tr', function(){
-			const movieNo = $(this).children().eq(0).text();
+ 		    const children = $(this).children();
+ 		    
+ 		    if (children.length === 0) {
+ 		        return;
+ 		    }
+ 		    
+ 		    const movieNo = children.eq(0).text();
+		    
 			location.href='<%= contextPath %>/adminMovieDetail.admin?movieNo=' + movieNo;
  		});
     	

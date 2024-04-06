@@ -2,6 +2,7 @@ package com.kh.admin.controller;
 
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.io.UnsupportedEncodingException;
 import java.util.ArrayList;
 
 import javax.servlet.http.HttpServletRequest;
@@ -137,17 +138,30 @@ public class MemberAdminController {
 	}
 	
 	public String search(HttpServletRequest request, HttpServletResponse response) {
+		try {
+			request.setCharacterEncoding("UTF-8");
+		} catch (UnsupportedEncodingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 		
-		String view = "view/admin/memberSelect.jsp";
 		
-		String searchkeyword = request.getParameter("find");
+		
+		
+		String view = "views/admin/memberSearch.jsp";
+		
+		String search = request.getParameter("finding");
 		String category = request.getParameter("category");
 		
+		
 		switch(category) {
-		case "전체" : category="전체";  break;
-		case "이름" : category = "이름"; break;
-		case "활동여부" : category = "활동여부"; break; 
+		case "name" : category = "MEMBER_NAME"; break;
+		case "enrolldate"  : category = "ENROLL_DATE";
 		}
+		
+		
+		ArrayList<Member> member = new MemberAdminService().search(category, search);
+		request.setAttribute("member", member);
 		
 		
 		return view; 

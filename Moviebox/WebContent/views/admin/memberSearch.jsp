@@ -1,12 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import = "java.util.ArrayList, com.kh.theater.model.vo.Theater"%>
-    
-    <%
-    
-    ArrayList<Theater> theater =(ArrayList<Theater>)request.getAttribute("theater");
-    
+    pageEncoding="UTF-8" import = " java.util.ArrayList, com.kh.member.model.vo.Member" 
     %>
-<!DOCTYPE html>
+    
+<%
+ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
+%>    
+
+    <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -14,23 +14,23 @@
     <title>Document</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
 
     <style>
         
- 		*{
+ *{
             box-sizing: border-box;
-        	}
-        	
-        body 
-        	{
+        }
+        body {
             background-color: #1A1A1A
-        	}
+        }
       
             div{
+           
+           
           
             box-sizing : border-box;
         }
@@ -80,7 +80,7 @@
             height : 800px;
             padding-left: 50px;
             padding-top: 20px;
-            color: #323232;
+            
         }
 
         .content_2_top{
@@ -91,7 +91,7 @@
             overflow: hidden;
             margin: 20px auto;
             padding: 0%;
-            height: 500px;
+            
         }
         .menu > li {
             width: 198px;
@@ -167,7 +167,7 @@
         #table{
             
             width: 800px;
-            border: 1px solid lightgray;
+            border: 1px solid lightpink;
         }
 
         #table > tr,td {
@@ -177,8 +177,8 @@
             text-align: center;
             margin-top: 10px;
             margin-right: 10px;
-            color : white;
-            border-bottom: 1px solid lightgray;
+            color: white;
+            border-bottom: 1px solid gray;
             
             
         }
@@ -195,7 +195,7 @@
       
 
        #select{
-        border: 1px solid gainsboro;
+        border: 1px solid white;
         border-radius: 5px;
         width: 150px;
         height: 35px;
@@ -223,7 +223,11 @@
 
        }
 
-
+       #table tr{
+        border-bottom: 2px solid lightgray;
+        
+       
+       }
 
        .check{
         height: 20px;
@@ -232,15 +236,14 @@
 
        }
 
-       .btn1{
+       #btn1{
         width: 70px;
         border: none;
         font-size: 12px;
         height: 25px;
         border-radius: 5px;
-        margin-top: 44px;
-        float: left;
-        background-color: #FFC145;
+        
+        background-color: rgb(189, 187, 187);
       }
 
 
@@ -254,9 +257,9 @@
 
        #delete{
         float: right;
-        height: 70px;
-        width: 100px;
+        width: 90px;
         
+       margin-top: 18px;
        }
 
        #cnt2_paging-area {
@@ -266,11 +269,13 @@
             margin: 0 auto;
             margin-top: 0px;
             display: inline-block;
-            padding: 17px  190px 0px;
+            padding-left: 195px;
         }
 
         .page-link{
-            color: #FFC145;
+            color: white;
+            background-color: #212121;
+            border: 1px solid white;
         }
 
         #inputBox-2 {
@@ -289,44 +294,44 @@
 
         .container{
             width: 825px;
-            margin-top: -15px;
 
         }
-        
-        .test123{
-        	width: 70px;
-        }
-        
-        .theatername{
-        width: 350px
-        }
-        
-        .code{
-        width: 120px
-        }
 
-
-     
+		
+		
+        #content2{
+        height: 800px;
+        width: 995.6px;
+        display: inline;
+        background-color: #1A1A1A;
+        
+       }
+		
+     	.page-item{
+     	background-color: black;
+     	}
 
 
     </style>
 </head>
+
+
+
 <body>
-   
-   	<!-- 헤더 -->
-    <%@ include file="/views/common/header.jsp" %>
-    
+
+ <%@ include file = "/views/common/header.jsp" %>
+<!-- 여기까지가 헤더 -->
+
     <div id="wrap">
-
-
+        <!-- jsp에서 header include하기 -->
+    
         <div id="top_wrap">
             <div class="top_1">
                 <h1>관리자</h1>
             </div>
 
         </div>
-
-        <div id="content">
+       <div id="content">
             <div class="content_1">
                 <ul class="menu">
                     <li>
@@ -362,47 +367,28 @@
                     </li>
                 </ul>    
             </div>
-
-            <!------------------------------------------------------------>
-
-            
-
-            
-                         <div class="content_2">
-                <h2 style="color : white;">영화관 관리</h2>
+             <div id="content2"></div>
+            <div class="content_2">
+                <h2>회원 관리</h2>
                 <div class="content_2_top">
-                 <form action="search.cm" method="get">
+                 <form action="search.mb" method="get">
                    <select name="category" id="select" >
-                    <option value="name">영화관 이름</option>
-                    <option value="code">지역코드</option>
-                    <option vlaue="city">지역</option>
+                    
+                    <option value="name">이름</option>
+                    <option value="enrollDate">가입일</option>
+                    <option value="status">활동여부</option>
                    </select>
-                    <input type="text" id="find" name="find">
+                    <input type="text" id="find" name="finding" placeholder="키워드를 입력해주세요">
                     <button type="submit" id="btn" style="background-color: #FFC145;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
                           </svg>
-
                     </button>
 					</form>
-                    <div id="delete" >
-                       <button type="button" class="btn1" onclick="enrollment();">등록</button>
-                       <!-- 수정/ 삭제 클릭해서 상세조회에서 함-->
-                    </div>
-                    
-                    <script>
-                    	function enrollment(){
-                    		console.log('<%=contextPath%>/insertAdmin.cm');
-                    		
-                    		location.href = '<%=contextPath%>/insertAdmin.cm';
-                    	}
-                    
-                    
-                    </script>
-                    
-                    
                 </div>
-               
+                <div id="delete" >
+                <!--     <button type="button" id="btn1" onclick="deleteadmin();">탈퇴</button>  -->
+                </div>
 
                 <div id="cnt2_post"><!--게시판-->
 
@@ -412,50 +398,58 @@
                         <table class="table table-hover" style="text-align: center; font-size: small;">
                           <thead>
                             <tr style="background-color: #eaeaea; margin-top: 0; height: 40px; color: #212121; border: 0px solid #cfcfcf; opacity: 0.8; text-align: center;">
-                               
-                                <th class="num">번호</th>
-                                <th>등록일</th>
-                                <th class="test123">지역</th>
-                                <th class="theatername">영화관 이름</th> 
-                                <th class="code">지역코드</th>
-              <!--                   <th>지도 링크</th>   -->
-                              
+                          <!--       <th ><input type="checkbox" name="check" value="check" id="check" checked></th>  -->
+                                <th>회원번호</th>
+                                <th>이름</th>
+                                <th>가입일</th>
+                                <th>활동여부</th> 
+                                <th>전화번호</th>
                             </tr>
                           </thead>
                           <tbody>
-                          
-                         <% for (Theater t : theater) { %>
-                            <tr class="theater">
-                               
-                                <td class="num"><%=t.getTheaterNo() %></td>
-                                <td><%=t.getUpdateDate() %></td>
-                                <td class="test123"><%=t.getLocationName() %></td>
-                                <td class="theatername"><%=t.getTheaterName() %></td>
-                                <td class="code"><%=t.getLocalCode() %></td>
-                             <!--    <td><%=t.getMapLink() %></td> --> 
+                       <%if(mb.isEmpty()) {%>
+                       <tr>
+                       <td colspan="5" >조회 결과가 없습니다.</td>
+                       
+                       
+                       </tr>
+                       
+                       <% } else {%>
+                           <% for(Member m : mb){ %>
+                                <tr class="member">
+							     <!-- <td class="ch"><input type="checkbox" name="check" value="check" id="check" ></td>  -->
+
+                                <td><%= m.getMemberNo() %></td>
+                                <td><%= m.getMemberName()%></td>
+                                <td><%= m.getEnrollDate() %></td>
+                                <td><%= m.getStatus() %></td>
+                                <td><%= m.getPhone() %></td>
                                 
                             </tr>
-                            
                             <% } %>
+                            	<% } %>
+                           
                             
                           </tbody>
                         </table>
-                        
                       </div>
                       </div>
-                      	<script>
-                      	
-                      	$(function(){
-                      		$('.theater').click(function(){
-                      			const theaterNo = $(this).children().eq(0).text();
-                      			location.href='<%=contextPath%>/editAdmin.cm?theaterNo='+theaterNo;
+                      
+                      <script> 
+                    
+                    	$(function(){
+                      		$('.member').click(function(){
+                      			const memberNo = $(this).children().eq(0).text();
+                      			location.href='<%=contextPath%>/modifyAdmin.mb?memberNo=' + memberNo;
                       		});
                       	})
-                      	
-                      	
-                      	
-                      	
-                      	</script>
+                    	
+                    	
+
+                      
+                      </script>
+                      
+                      
 
 
                       <div id="cnt2_paging-area"> 
@@ -478,29 +472,23 @@
                 </div>
                       
                 </div>
+				</div>
 
-
-                
-
-               
+                </div>
+	 	
+              
            
 
               
 
-               </div > 
-               
-                </div>
+              
+                
              
-  
 
- 	<%@ include file="/views/common/footer.jsp" %>
- 	<!-- 푸터 -->
-   
-   
-   
-   
-   
-   
-   
+
+
+<%@ include file="/views/common/footer.jsp" %>
+
+
 </body>
 </html>

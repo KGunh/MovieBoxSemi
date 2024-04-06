@@ -30,7 +30,6 @@ public class GoodsDao {
 	}
 
 	public List<Goods> selectGoodsList(Connection conn) {
-		
 		List<Goods> goodsList = new ArrayList<Goods>();
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(prop.getProperty("selectGoodsList"));

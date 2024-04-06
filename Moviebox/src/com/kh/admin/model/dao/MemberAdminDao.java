@@ -374,18 +374,86 @@ public class MemberAdminDao {
 	}
 	
 	
-	public ArrayList<Member> search(String search, String category){
+	public ArrayList<Member> search(Connection conn,String search, String category){
+		Member member = new Member();
+		ArrayList<Member> list = new ArrayList<Member>();
 		
-		ArrayList<Member> member = new ArrayList<Member>();
+		System.out.println(search+category);
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("search");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, category);
+			pstmt.setString(2, search);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				member.setMemberNo(rset.getInt("MEMBER_NO"));
+				member.setMemberName(rset.getString("MEMBER_NAME"));
+				member.setEnrollDate(rset.getDate("ENROLL_DATE"));
+				member.setStatus(rset.getString("STATUS"));
+				member.setPhone(rset.getString("PHONE"));
+				
+				list.add(member);
+				
+			}
+			
+			System.out.println(list);
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
 		
 		
-		
-		
+		return list; 
 		
 		
 	}
 	
-	
+	public ArrayList<Theater> searchCinema(Connection conn, String category, String search){
+		
+		Theater theater = new Theater();
+		ArrayList<Theater> list = new ArrayList<Theater>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchCinema");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, category);
+			pstmt.setString(2, search);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				theater.setTheaterNo(rset.getInt("THEATER_NO"));
+				theater.setUpdateDate(rset.getString("THEATER_UPDATE"));
+				theater.setLocationName(rset.getString("LOCATION_NAME"));
+				theater.setTheaterName(rset.getString("THEATER_NAME"));
+				theater.setLocalCode(rset.getString("LOCATION_CODE"));
+				
+				list.add(theater);
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list; 
+		
+	}
 	
 	
 }

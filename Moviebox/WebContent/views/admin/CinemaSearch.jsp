@@ -3,7 +3,7 @@
     
     <%
     
-    ArrayList<Theater> theater =(ArrayList<Theater>)request.getAttribute("theater");
+    ArrayList<Theater> theater =(ArrayList<Theater>)request.getAttribute("theaterlist");
     
     %>
 <!DOCTYPE html>
@@ -377,7 +377,7 @@
                     <option value="code">지역코드</option>
                     <option vlaue="city">지역</option>
                    </select>
-                    <input type="text" id="find" name="find">
+                    <input type="text" id="find" name="find" placeholder="키워드를 입력해주세요">
                     <button type="submit" id="btn" style="background-color: #FFC145;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
@@ -418,11 +418,17 @@
                                 <th class="test123">지역</th>
                                 <th class="theatername">영화관 이름</th> 
                                 <th class="code">지역코드</th>
-              <!--                   <th>지도 링크</th>   -->
+        
                               
                             </tr>
                           </thead>
                           <tbody>
+                          <%if(theater.isEmpty()){ %>
+                          <tr>
+                          <td colspan="5">조회된 결과가 없습니다</td>
+                          </tr>
+                          
+                          <%} else { %>
                           
                          <% for (Theater t : theater) { %>
                             <tr class="theater">
@@ -432,10 +438,11 @@
                                 <td class="test123"><%=t.getLocationName() %></td>
                                 <td class="theatername"><%=t.getTheaterName() %></td>
                                 <td class="code"><%=t.getLocalCode() %></td>
-                             <!--    <td><%=t.getMapLink() %></td> --> 
+                           
                                 
                             </tr>
                             
+                            <% } %>
                             <% } %>
                             
                           </tbody>
