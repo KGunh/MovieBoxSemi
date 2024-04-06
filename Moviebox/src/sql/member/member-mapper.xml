@@ -160,7 +160,6 @@
 	   			CAST(SUBSTR(SEAT_NO, 2) AS NUMBER),
        			SEAT_NO
 	
-	
 	</entry>
 	
 	

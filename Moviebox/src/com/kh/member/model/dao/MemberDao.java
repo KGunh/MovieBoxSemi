@@ -242,9 +242,7 @@ public class MemberDao {
 		List<Seat> seatList = new ArrayList<>();    
 		 PreparedStatement pstmt = null;
 		 ResultSet rset = null;
-		 
 		 String sql = prop.getProperty("seatList");
-		 
 		 
 		 try {
 			pstmt = conn.prepareStatement(sql);
@@ -255,6 +253,7 @@ public class MemberDao {
 			
 			while(rset.next()) {
 				Seat seat = new Seat();
+				
 				seat.setSeatNo(rset.getString("SEAT_NO"));
 				
 				seatList.add(seat);
@@ -267,9 +266,7 @@ public class MemberDao {
 			close(pstmt);
 		}
 		 
-		 
-		 
-		 return seatList;
+		return seatList;
 	}
 	
 	public Movie myPageMoviePoster(Connection conn,Reservation res){

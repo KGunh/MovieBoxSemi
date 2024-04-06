@@ -33,18 +33,7 @@ public class AjaxSelectSeatServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		List<Seat> seatList = new ArrayList<Seat>();
-		
-		if(new ReservationController().selectSeatList(request).size() != 0) {
-			seatList = new ReservationController().selectSeatList(request);
-		} else {
-			HttpSession session = request.getSession();
-			
-			session.setAttribute("alertMsg", "잘못된 요청입니다.");
-			
-			request.getRequestDispatcher("views/common/errorPage.jsp").forward(request, response);
-		}
+		List<Seat> seatList = new ReservationController().selectSeatList(request);
 		
 		response.setContentType("application/json; charset=UTF-8");
 				
