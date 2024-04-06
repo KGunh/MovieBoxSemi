@@ -409,7 +409,7 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                           <tbody>
                        <%if(mb.isEmpty()) {%>
                        <tr>
-                       <td colspan="5" height="70px">조회 결과가 없습니다.</td>
+                       <td colspan="5" >조회 결과가 없습니다.</td>
                        
                        
                        </tr>

@@ -192,4 +192,15 @@ public class MemberAdminService {
 		
 	}
 	
+	public ArrayList<Theater> searchCinema(String category, String search) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<Theater> theater = new MemberAdminDao().searchCinema(conn, search, category);
+		
+		JDBCTemplate.close(conn);
+		
+		return theater;
+	}
+	
 }

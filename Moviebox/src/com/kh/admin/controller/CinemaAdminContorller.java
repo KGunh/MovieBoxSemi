@@ -163,6 +163,26 @@ public class CinemaAdminContorller {
 		
 	}
 	
-	
+	public String searchCinema(HttpServletRequest request, HttpServletResponse response) {
+		
+		String category = request.getParameter("category");
+		String search = request.getParameter("find");
+		
+		switch(category) {
+		case "name" : category = "C.THEATER_NAME";
+		case "code" : category = "C.LOCATION_CODE";
+		case "city" : category ="L.LOCATION_NAME";
+		}
+		
+		ArrayList<Theater> theater = new MemberAdminService().searchCinema(category,search);
+		
+		request.setAttribute("theaterlist", theater);
+		
+		String view = "views/admin/CinemaSearch.jsp";
+		
+		return view;
+		
+		
+	}
 	
 }

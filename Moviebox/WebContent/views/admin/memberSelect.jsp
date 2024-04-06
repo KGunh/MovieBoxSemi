@@ -80,6 +80,7 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
             height : 800px;
             padding-left: 50px;
             padding-top: 20px;
+            color : white;
             
         }
 

@@ -163,7 +163,23 @@ SELECT * FROM TB_MEMBER WHERE ? LIKE '%'||?||'%'
 
 </entry>
 
+<entry key="searchCinema">
 
+SELECT
+    C.THEATER_NO,
+    C.THEATER_UPDATE,
+    L.LOCATION_NAME,
+    C.THEATER_NAME,
+    C.LOCATION_CODE
+FROM
+    TB_THEATER C
+INNER JOIN
+    TB_LOCATION L ON C.LOCATION_CODE = L.LOCATION_CODE
+WHERE
+    L.LOCATION_NAME LIKE '%'||?||'%';
+
+
+</entry>
 
 
 
