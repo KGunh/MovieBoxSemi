@@ -154,22 +154,15 @@
 
 <entry key="deleteAdmin">
 
-
-
-
-
-
 </entry>
+
+
 <entry key="search">
 
-SELECT * FROM TB_MEMBER 
-WHERE ? = ?
-
-
 
 </entry>
 
-
+SELECT * FROM TB_MEMBER WHERE ? LIKE '%?%'
 
 
 

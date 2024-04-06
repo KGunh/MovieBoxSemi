@@ -373,11 +373,11 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                 <div class="content_2_top">
                  <form action="search.mb" method="get">
                    <select name="category" id="select" >
-                    <option value="entire" >전체</option>
+                    <option value="entire">전체</option>
                     <option value="name">이름</option>
                     <option value="status">활동여부</option>
                    </select>
-                    <input type="search" id="find">
+                    <input type="text" id="find" name="finding" placeholder="키워드를 입력해주세요">
                     <button type="submit" id="btn" style="background-color: #FFC145;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
