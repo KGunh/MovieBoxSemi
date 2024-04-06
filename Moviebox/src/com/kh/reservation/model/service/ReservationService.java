@@ -19,17 +19,6 @@ import oracle.jdbc.OracleConnection.CommitOption;
 
 public class ReservationService {
 	
-	public List<Movie> selectMovieList() {
-		// 영화조회쪽이랑 상의해서 메소드 통일해야함!
-		Connection conn = getConnection();
-		
-		List<Movie> movieList = new ReservationDao().selectMovieList(conn);
-		
-		close(conn);
-		
-		return movieList;
-	}
-
 	public List<Location> selectLocationList() {
 		Connection conn = getConnection();
 	

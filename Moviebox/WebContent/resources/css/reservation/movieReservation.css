@@ -7,7 +7,7 @@ div{
     height: auto;
 }
 
- .swiper {
+.swiper {
     width: 1200px;
     height: 400px;
 }
@@ -193,8 +193,7 @@ div[class^=swiper-button] {
     border: 3px solid rgb(255, 193, 69);
     position: fixed; 
     bottom: 300px; 
-    right: 150px;
-    border-radius: 5px;
+    right: 50px;
 }
 
 #select-screen{
@@ -213,8 +212,6 @@ div[class^=swiper-button] {
 #submit-btn{
     height: 60px;
     width: 140px;
-    border-bottom-right-radius: 5px;
-    border-bottom-left-radius: 5px;
     font-weight: 600;
     font-size: 24px;
     background-color: rgb(255, 193, 69);

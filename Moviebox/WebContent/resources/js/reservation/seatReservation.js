@@ -178,7 +178,7 @@ $('#print-resv-info').click(function(){
                 
                 resultStr += '<div id="check-reservation">'
                            +     '<div id="check-movie">'
-                           +         '<div id="poster-select"><img style="width: 100%; height: 100%;" src="'+ path + '/'+ result.movie.filePath + '/' + result.movie.fileName + '" alt="영화포스터"></div>'
+                           +         '<div id="poster-select"><img style="width: 100%; height: 100%;" src="'+ path + '/'+ result.movie.filePath + '/' + result.movie.changeName + '" alt="영화포스터"></div>'
                            +         '<div id="movie-select">'
                            +             '<div style="text-align: center; font-size:20px; font-weight: 700; margin-top: 5px; margin-bottom: 5px;">' + result.movieTitle + '</div>'
                            +             '<div style="text-align: center;">개봉일 ' + result.movie.movieRelease + '</div>'

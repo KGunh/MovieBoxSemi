@@ -136,6 +136,23 @@ public class MemberAdminController {
 		
 	}
 	
-	
+	public String search(HttpServletRequest request, HttpServletResponse response) {
+		
+		String view = "view/admin/memberSelect.jsp";
+		
+		String searchkeyword = request.getParameter("find");
+		String category = request.getParameter("category");
+		
+		switch(category) {
+		case "전체" : category="전체";  break;
+		case "이름" : category = "이름"; break;
+		case "활동여부" : category = "활동여부"; break; 
+		}
+		
+		
+		return view; 
+		
+		
+	}
 
 }

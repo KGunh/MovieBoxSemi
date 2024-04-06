@@ -89,7 +89,7 @@
         .menu > li {
             width: 198px;
             text-align: center;
-            line-height: 57px;
+            line-height: 40px;
             background-color: #323232;
             list-style: none;
         }
