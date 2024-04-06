@@ -12,8 +12,7 @@ window.onload = function(){
             $('#movie-poster').html('<img src="' + imgFilePath + '" alt="영화포스터">');
             $('#movie-info').children().eq(0).html(result.movie.movieTitle);
             $('#movie-info').children().eq(1).html('개봉일 : ' + result.movie.movieRelease);
-            $('#movie-info').children().eq(2).html('장르 : ' + result.movie.genreName);
-            $('#movie-info').children().eq(3).html('러닝타임 : ' + result.movie.movieRt + '분');
+            $('#movie-info').children().eq(2).html(result.movie.genreName+ ' | ' + result.movie.movieRt + '분');
         
             $('#print-reservation-info').children().eq(0).html(result.ticketNo);
             $('#print-reservation-info').children().eq(1).html(result.watchDate);
