@@ -401,15 +401,30 @@ public class AdminPageService {
 		return result;
 	}
 	
-	public Notice adminBoardDetail(int boardNo) {
+	
+	// 공지 게시글 상세보기
+	public Notice adminBoardDetail(int noticeNo) {
 		
 		Connection conn = getConnection();
 		
-		Notice notice = new AdminPageDao().adminBoardDetail(conn, boardNo);
+		Notice notice = new AdminPageDao().adminBoardDetail(conn, noticeNo);
 		
 		close(conn);
 		
 		return notice;
+	}
+	
+	
+	// 문의 게시글 상세보기
+	public Board adminQnADetail(int boardNo) {
+		
+		Connection conn = getConnection();
+		
+		Board board = new AdminPageDao().adminQnADetail(conn, boardNo);
+		
+		close(conn);
+		
+		return board;
 	}
 	
 }

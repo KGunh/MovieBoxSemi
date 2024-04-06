@@ -1008,7 +1008,7 @@ public class AdminPageDao {
 	}
 	
 	//공지 상세
-	public Notice adminBoardDetail(Connection conn, int boardNo){
+	public Notice adminBoardDetail(Connection conn, int noticeNo){
 		Notice n = new Notice(); 
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -1016,7 +1016,7 @@ public class AdminPageDao {
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
-			pstmt.setInt(1, boardNo);
+			pstmt.setInt(1, noticeNo);
 			
 			rset = pstmt.executeQuery();
 			
@@ -1040,4 +1040,60 @@ public class AdminPageDao {
 		
 		return n;
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	//문의 상세
+	public Board adminQnADetail(Connection conn, int boardNo){
+		Board b = new Board(); 
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminQnADetail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) { 
+				b.setBoardNo(rset.getInt("BOARD_NO"));
+				b.setBoardTitle(rset.getString("BOARD_TITLE"));
+				b.setBoardContent(rset.getString("BOARD_CONTENT"));
+				b.setCreateDate(rset.getString("CREATE_DATE"));
+				b.setCount(rset.getInt("COUNT"));
+				b.setStatus(rset.getString("STATUS"));
+				b.setBoardCategory(rset.getString("CATEGORY_NAME"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return b;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }

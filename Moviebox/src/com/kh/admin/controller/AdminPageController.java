@@ -539,11 +539,11 @@ public class AdminPageController {
 	}
 	
 	public String adminBoardDetail(HttpServletRequest request, HttpServletResponse response) {
-		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
 		
-		//System.out.println("boardNo :::::: " + boardNo);
-		Notice n = new AdminPageService().adminBoardDetail(boardNo);
+		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+		//System.out.println("noticeNo :::::: " + noticeNo);
 		
+		Notice n = new AdminPageService().adminBoardDetail(noticeNo);
 		//System.out.println("notice :::: " + n.toString());
 		
 		request.setAttribute("notice2323", n);
@@ -551,6 +551,41 @@ public class AdminPageController {
 		
 		return view;
 	}
+	
+	
+	
+	
+	
+	public String adminQnADetail(HttpServletRequest request, HttpServletResponse response) {
+		
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		//System.out.println("boardNo :::::: " + boardNo);
+		
+		Board b = new AdminPageService().adminQnADetail(boardNo);
+
+		request.setAttribute("qna", b);
+		String view = "views/admin/adminQnADetail.jsp";
+		
+		return view;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

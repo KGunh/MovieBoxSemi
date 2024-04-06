@@ -455,8 +455,8 @@
 		}
 		
  		$('#tbody').on('click', 'tr', function(){
-			const boardNo = $(this).children().eq(0).text();
-			location.href='<%= contextPath %>/adminBoardDetail.admin?boardNo=' + boardNo;
+			const noticeNo = $(this).children().eq(0).text();
+			location.href='<%= contextPath %>/adminBoardDetail.admin?noticeNo=' + noticeNo;
  		});
 	</script>
 </body>
