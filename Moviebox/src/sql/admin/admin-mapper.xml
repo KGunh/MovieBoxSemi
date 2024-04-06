@@ -537,6 +537,30 @@
 				)
 	</entry>
 	
+	<!-- Attachment에 포스터 저장 -->
+	<entry key="InsertAttach">
+		INSERT
+		  INTO
+			    TB_ATTACHMENT
+			    (
+			    FILE_NO,
+			    MOVIE_NO,
+			    ORIGIN_NAME,
+			    CHANGE_NAME,
+			    FILE_PATH,
+			    FILE_LEVEL
+			    )
+		  VALUES
+			   (
+			   SEQ_FNO.NEXTVAL,
+			   ?,
+			   ?,
+			   ?,
+			   ?,
+			   ?
+			   )
+	</entry>
+	
 	
 	
 	

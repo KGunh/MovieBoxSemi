@@ -982,7 +982,7 @@ public class AdminPageDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String sql = prop.getProperty("InsertFile");
+		String sql = prop.getProperty("InsertAttach");
 		
 		try {
 			
