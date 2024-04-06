@@ -74,6 +74,7 @@ function selectScreen(){
                     
                     for(let j = 0; j < result[i].watchDateList.length; j++){
                         resultStr +=        '<div class="screenName" onclick="selectScreenNo(this);">'
+                                   +            '<div style="color: black; height: 35px">' + result[i].screenNameList[j] + '</div>'
                                    +            '<span style="color: black;">' + result[i].watchDateList[j] + '</span>'
                                    +            '<input type="hidden" value="' + result[i].screenNoList[j] + '">'
                                    +            '<input type="hidden" value="' + result[i].screenNameList[j] + '">'
