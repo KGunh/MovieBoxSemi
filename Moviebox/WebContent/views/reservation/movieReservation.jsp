@@ -15,7 +15,9 @@
 <link rel="stylesheet" href="resources/css/reservation/movieReservation.css">
 
 </head>
+
 <body>
+	
 	<jsp:include page="/views/common/header.jsp"></jsp:include>
 	
 	<c:set var="path" value="${ pageContext.request.contextPath }"/>
@@ -41,7 +43,7 @@
 		                            <c:forEach var="movie" items="${ movieList }">
 			                           	<div class="swiper-slide">
 			                                <div class="poster">
-			                                    <img src="${ path }/${ movie.filePath }/${ movie.fileName }" alt="영화포스터">
+			                                    <img src="${ path }/${ movie.filePath }/${ movie.changeName }" alt="영화포스터">
 		                                        <input type="hidden" value="${ movie.movieNo }">
 		                                        <input type="hidden" value="${ movie.movieTitle }">
 			                                </div>

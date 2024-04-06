@@ -1,13 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import = "com.kh.board.model.vo.Board"
+    pageEncoding="UTF-8" import = "com.kh.notice.model.vo.Notice"   
 %>
+    
 <%
-	Board b =(Board)request.getAttribute("qna");
-%>
+	Notice n =(Notice)request.getAttribute("notice");
+%>       
+
+         
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>문의글 상세보기</title>
+    <title>게시글 공지상세수정페이지</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -213,18 +217,7 @@
             height: 250px;
             float: left;
             padding-left: 17px;
-            margin-bottom: 2px;
         }
-
-        #box_4{ /*form-control 테두리*/
-            /* border: 1px solid rgb(255, 0, 149); */
-            width: 470px;
-            height: 100px;
-            float: left;
-            padding-left: 17px;
-            margin-bottom: 7px;
-        }
-
 
         .fileBox{ /*form-control 테두리*/
             /* border: 1px solid rgb(0, 47, 255); */
@@ -266,12 +259,13 @@
             /* border: 1px solid rgb(255, 0, 149); */
             width: 470px;
             float: left;
+            margin-top: 5px;
         }
 
         #category{ /*카테고리*/
             border: 1px solid rgb(212, 212, 212);
             border-radius: 8px;
-            width: 150px;
+            width: 100px;
             height: 37px;
             font-size: 15px;
             color: #727272;
@@ -286,6 +280,7 @@
 <body>
 	<!-- 헤더 -->
     <%@ include file="/views/common/header.jsp" %>
+    
     <div id="wrap">
 
         <div id="top_wrap">
@@ -333,49 +328,50 @@
             </div>
 
             <!------------------------------------------------------------>
-
+			
             <div class="content_2"><!--content_2 시작-->
-                <p id="p">게시글관리 > 문의 관리 > 문의내용</p>
+                <p id="p">게시글관리 > 공지 관리 > 공지 상세수정</p>
 
-            <form>
-                <div id="content_2_box"><!--컨텐트2 전체박스-->
-                    <div id="box_wrap">
-
-                        <div id="box_category">
-                            <select name="#" id="category" >
- 								<option value=""><%=b.getBoardCategory() %></option>
-                            </select>
-                        </div>
-
-                        <div id="box_1">
-                            <p class="title_p">문의 제목</p>
-                        </div>
-
-                        <div id="box_2">
-                            <input type="text" class="form-control" name="title" style="border-radius: 8px;" value="<%=b.getBoardTitle() %>" readonly >
-                        </div>
-
-                        <div id="box_1">
-                            <p class="title_p">문의 내용</p>
-                        </div>
-
-                        <div id="box_3">
-                            <textarea class="form-control" rows="5" name="content" style="resize:none; height: 250px; border-radius: 8px;" readonly ><%=b.getBoardContent()%></textarea>
-                        </div>
-
-                        
-                        <div id="button"><!--등록 버튼-->
-                            <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;" onclick="qnaDelete()">삭제</button>
-                            <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">목록</button>
-                        </div><!--등록 버튼-->
-                    </div>
- 
-
-                </div><!--컨텐트2 전체박스 끝-->
-            </form>
-
-
-
+            		<form action="<%=contextPath %>/adminBoardUpdate.admin" method="post" id="insert-box">
+            			<input type="hidden" name="noticeNo" value="<%= n.getNoticeNo()%>" />
+            			
+		            	<div id="content_2_box"><!--컨텐트2 전체박스-->
+			                <div id="box_wrap">
+			
+			                    <div id="box_category">
+			                            <select name="category" id="category" >
+			                                <option value="1">예매</option>
+			                                <option value="2">영화관</option>
+			                                <option value="3">굿즈</option>
+			                                <option value="4">기타</option>
+			                            </select>
+			                    </div>
+			
+			                    <div id="box_1">
+			                        <p class="title_p">공지 제목</p>
+			                    </div>
+			
+			                    <div id="box_2">
+			                        <input type="text" class="form-control" name="title" style="border-radius: 8px;" value="<%=n.getNoticeTitle() %>" >
+			                    </div>
+			
+			                    <div id="box_1">
+			                        <p class="title_p">공지 내용</p>
+			                    </div>
+			
+			                    <div id="box_3">
+			                        <textarea class="form-control" rows="5" name="content" style="resize:none; height: 250px; border-radius: 8px;"><%=n.getNoticeContent()%></textarea>
+			                    </div>
+			
+			                    <div id="button"><!--수정 버튼-->
+			                        <button type="submit" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">수정</button>
+			                        <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">목록</button>
+			                    </div><!--수정 버튼-->
+			                </div>
+		                
+		               </div><!--컨텐트2 전체박스 끝--> 
+		        	</form>
+	
             </div><!--content_2끝-->
         </div>
 
@@ -383,29 +379,23 @@
  	<%@ include file="/views/common/footer.jsp" %>
  	<!-- 푸터 -->
  	
+ 	<script>
+
+ 		window.onload = function() {
+ 		    var categoryValue = <%=n.getCategoryNo()%> // JSP로부터 category 값을 받아옴
+
+ 		    // 받아온 category 값에 해당하는 option을 선택
+ 		    $('#category').val(categoryValue);
+ 		};
  	
- 	
- 	
-	 <script>
-		function qnaDelete() {
-			const result = confirm('삭제하려면 확인을 눌러주세요.');
-			
-			if(result) {
-				location.href = '<%=contextPath %>/adminQnADelete.admin?boardNo=<%=b.getBoardNo()%>';	
-			}
-			
-		}
+ 		function noticeDelete() {
+ 			const result = confirm('삭제하려면 확인을 눌러주세요.');
+ 			
+ 			if(result) {
+ 				location.href = '<%=contextPath %>/adminBoardDelete.admin?noticeNo=<%=n.getNoticeNo()%>';	
+ 			}
+ 			
+ 		}
  	</script>
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
- 	
 </body>
 </html>

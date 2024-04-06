@@ -15,6 +15,7 @@
 <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
 </head>
 
 <body>
@@ -35,12 +36,11 @@
 		
 			<div id="wrap">
 		        <div id="title">영화 예매</div>
-		
 		        <div id="selectPersonArea">
 		            <div id="selectText">
-		                                   인원 선택
+						인원 선택
 		                <div style="color:rgb(148, 145, 145); font-size: 16px;">
-		                                           최대 8명까지 선택 가능
+							최대 8명까지 선택 가능
 		                </div>
 		            </div>
 		            <div id="movie-info">${ movieTitle } ${ theaterName } ${ screenName } ${ screenDate }</div>
@@ -74,7 +74,6 @@
 		            </div>
 		            <div id="select-people"></div>
 		        </div>
-		        
 		        <div id="seat-wrap">
 		            <div id="seat-title"> 좌석 선택 </div>
 		            <div id="seat-arrange">
@@ -129,7 +128,6 @@
 		            <button id="print-resv-info" >좌석 선택</button>
 		        </div>
 		        <div id="check-area" hidden>
-		            
 		        </div>
 			</div>
 

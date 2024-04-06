@@ -15,6 +15,7 @@ import com.kh.common.model.vo.Attachment;
 import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.movie.model.vo.Movie;
+import com.kh.notice.model.dao.NoticeDao;
 import com.kh.notice.model.vo.Notice;
 import com.kh.theater.model.vo.Screen;
 import com.kh.theater.model.vo.Theater;
@@ -427,7 +428,7 @@ public class AdminPageService {
 		return board;
 	}
 	
-	
+	//공지 삭제
 	public int adminBoardDelete(int noticeNo) {
 		Connection conn = getConnection();
 		int result = new AdminPageDao().adminBoardDelete(conn, noticeNo);
@@ -440,6 +441,89 @@ public class AdminPageService {
 		
 		return result;
 	}
+	
+	
+	
+	//문의 삭제
+	public int adminQnADelete(int boardNo) {
+		Connection conn = getConnection();
+		int result = new AdminPageDao().adminQnADelete(conn, boardNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+	
+	
+	//공지등록
+	public int adminBoardInsert(Notice notice) {
+		Connection conn = getConnection();
+		int result = new AdminPageDao().adminBoardInsert(conn, notice);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+	
+	public int adminBoardUpdate(Notice notice) {
+		
+		Connection conn = getConnection();
+		
+		int result = new AdminPageDao().adminBoardUpdate(conn, notice);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
 

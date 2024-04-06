@@ -201,7 +201,7 @@
 	
 	
 	
-	<!-- 공지 -->
+	<!-- 공지전체보기 -->
 	<entry key="adminSelectNoticeList">
 		SELECT *
 		FROM (SELECT A.*, ROWNUM RNUM
@@ -233,13 +233,13 @@
 	</entry>
 
 
-	<!-- 문의 -->
+	<!-- 문의전체보기 -->
 	<entry key="adminSelectQnAList">
 		SELECT *
 		FROM (SELECT A.*, ROWNUM RNUM
 		      FROM (SELECT
 		    BOARD_NO,
-		    CATEGORY_NO,
+		    TB_CATEGORY.CATEGORY_NAME,
 		    BOARD_TITLE,
 		    MEMBER_ID,
 		    TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE,
@@ -248,6 +248,10 @@
 		   TB_BOARD
 		JOIN 
 		    TB_MEMBER USING (MEMBER_NO)
+        JOIN 
+            TB_CATEGORY USING (CATEGORY_NO)
+		WHERE 
+            TB_BOARD.STATUS = 'Y'
 		ORDER
 		   BY
 		    BOARD_NO DESC) A)
@@ -466,6 +470,7 @@
 		       A.COUNT,
 		       A.STATUS,
 		       A.NOTICE_CATEGORY,
+		       B.CATEGORY_NO,
 		       B.CATEGORY_NAME
 		  FROM TB_NOTICE A
 		       LEFT OUTER JOIN TB_CATEGORY B
@@ -474,7 +479,7 @@
  	</entry>
 	
 	
-	<!-- 문의 -->
+	<!-- 문의상세보기 -->
 	<entry key="adminQnADetail">
 	    SELECT 
 	           A.BOARD_NO,
@@ -490,10 +495,86 @@
 	     WHERE A.BOARD_NO = ?
 	</entry>
 	
+	<!-- 공지삭제 -->
 	<entry key="adminBoardDelete">
 		UPDATE TB_NOTICE
 		   SET STATUS = 'N'
 		 WHERE NOTICE_NO = ?
 	</entry>
+	
+	
+		<!-- 문의삭제 -->
+	<entry key="adminQnADelete">
+		UPDATE TB_BOARD
+		   SET STATUS = 'N'
+		 WHERE BOARD_NO = ?
+	</entry>
+	
+	<!-- 공지등록 -->
+	<entry key="adminBoardInsert">
+		INSERT 
+		INTO 
+			TB_NOTICE
+				( 
+				  NOTICE_NO,
+				  NOTICE_TITLE,
+				  NOTICE_WRITER,
+				  NOTICE_CONTENT,
+				  CREATE_DATE,
+				  COUNT,
+				  STATUS,
+				  NOTICE_CATEGORY
+				)
+		VALUES
+				( 
+				  SEQ_NOTICENO.NEXTVAL,
+				  ?,
+				  ?,
+				  ?,
+				  SYSDATE,
+				  0,
+				  'Y',
+				  ?
+				)
+	</entry>
+	
+	<!-- Attachment에 포스터 저장 -->
+	<entry key="InsertAttach">
+		INSERT
+		  INTO
+			    TB_ATTACHMENT
+			    (
+			    FILE_NO,
+			    MOVIE_NO,
+			    ORIGIN_NAME,
+			    CHANGE_NAME,
+			    FILE_PATH,
+			    FILE_LEVEL
+			    )
+		  VALUES
+			   (
+			   SEQ_FNO.NEXTVAL,
+			   ?,
+			   ?,
+			   ?,
+			   ?,
+			   ?
+			   )
+	</entry>
+	
+	<!-- 공지수정 -->
+	<entry key="adminBoardUpdate">
+		UPDATE
+	      	  TB_NOTICE
+	       SET
+		      NOTICE_CATEGORY = ?,
+		      NOTICE_TITLE = ?,
+		      NOTICE_CONTENT = ?
+	 	 WHERE
+	      	  NOTICE_NO = ?
+	</entry>
+	
+	
+	
 
 </properties>

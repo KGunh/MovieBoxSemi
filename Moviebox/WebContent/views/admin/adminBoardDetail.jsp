@@ -361,7 +361,7 @@
                     
                     <div id="button"><!--등록 버튼-->
                         <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;" onclick="noticeDelete()">삭제</button>
-                        <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">수정</button>
+                        <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;" onclick="noticeUpdate()">수정</button>
                         <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">목록</button>
                     </div><!--등록 버튼-->
                 </div>
@@ -380,6 +380,10 @@
  	<!-- 푸터 -->
  	
  	<script>
+ 		function noticeUpdate() {
+ 			location.href = '<%=contextPath %>/adminBoardUpdateEnrollForm.admin?noticeNo=<%=n.getNoticeNo()%>';
+ 		}
+ 	
  		function noticeDelete() {
  			const result = confirm('삭제하려면 확인을 눌러주세요.');
  			

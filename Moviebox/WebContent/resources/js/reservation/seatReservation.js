@@ -49,6 +49,8 @@ $('.people-Count').on('click', function() {
             $(this).addClass('clicked');
             ageType.addClass('clicked');
         }
+
+        CountPeple(ageType);
     }
     else{
         adultCount = Number($(this).html());
@@ -65,6 +67,8 @@ $('.people-Count').on('click', function() {
             $(this).addClass('clicked');
             ageType.addClass('clicked');
         }
+
+        CountPeple(ageType);
     }
 
     peopleCount = teenCount + adultCount;
@@ -75,6 +79,19 @@ $('.people-Count').on('click', function() {
 
     printPeople();
 });
+
+function CountPeple(ageType) {
+    let ageBtns = (ageType.html() === '청소년') ? $('.adultBtn') : $('.teenBtn');
+    let maxCount = (ageType.html() === '청소년') ? (8 - teenCount) : (8 - adultCount);
+
+    for (let i = 0; i < ageBtns.length; i++) {
+        if(Number(ageBtns.eq(i).html()) > maxCount) {
+            ageBtns.eq(i).prop('disabled', true);
+        } else {
+            ageBtns.eq(i).prop('disabled', false);
+        }
+    }
+};
 
 function printPeople() {
     selectPeople = teenCount + adultCount;
@@ -178,7 +195,7 @@ $('#print-resv-info').click(function(){
                 
                 resultStr += '<div id="check-reservation">'
                            +     '<div id="check-movie">'
-                           +         '<div id="poster-select"><img style="width: 100%; height: 100%;" src="'+ path + '/'+ result.movie.filePath + '/' + result.movie.fileName + '" alt="영화포스터"></div>'
+                           +         '<div id="poster-select"><img style="width: 100%; height: 100%;" src="'+ path + '/'+ result.movie.filePath + '/' + result.movie.changeName + '" alt="영화포스터"></div>'
                            +         '<div id="movie-select">'
                            +             '<div style="text-align: center; font-size:20px; font-weight: 700; margin-top: 5px; margin-bottom: 5px;">' + result.movieTitle + '</div>'
                            +             '<div style="text-align: center;">개봉일 ' + result.movie.movieRelease + '</div>'
