@@ -274,7 +274,7 @@
                     <div class="phone-number">1588-8888</div>
                 </div>
                 <div class="phone-img">
-                    <img src="" alt="">
+                    <img src="<%=contextPath%>/resources/img/telephone.png" alt="">
                 </div>
             </div>
             <div class="board-content">
