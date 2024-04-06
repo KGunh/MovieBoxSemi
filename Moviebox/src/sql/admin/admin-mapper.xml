@@ -470,6 +470,7 @@
 		       A.COUNT,
 		       A.STATUS,
 		       A.NOTICE_CATEGORY,
+		       B.CATEGORY_NO,
 		       B.CATEGORY_NAME
 		  FROM TB_NOTICE A
 		       LEFT OUTER JOIN TB_CATEGORY B
@@ -561,7 +562,17 @@
 			   )
 	</entry>
 	
-	
+	<!-- 공지수정 -->
+	<entry key="adminBoardUpdate">
+		UPDATE
+	      	  TB_NOTICE
+	       SET
+		      NOTICE_CATEGORY = ?,
+		      NOTICE_TITLE = ?,
+		      NOTICE_CONTENT = ?
+	 	 WHERE
+	      	  NOTICE_NO = ?
+	</entry>
 	
 	
 	

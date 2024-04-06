@@ -9,44 +9,47 @@
 	
 	<entry key="selectMovieList">
         SELECT
-			   MOVIE_NO,
-			   MOVIE_TITLE,
-			   MOVIE_RT,
-			   MOVIE_RATED,
-			   MOVIE_RELEASE,
-			   MOVIE_STORY,
-			   STATUS,
-			   GENRE_CODE,
-			   DIRECTOR_NO,
-			   MOVIE_UPDATE,
-			   FILE_PATH,
-			   CHANGE_NAME,
-			   TRAILER_VIDEO
+		       MOVIE_NO,
+		       MOVIE_TITLE,
+		       MOVIE_RT,
+		       MOVIE_RATED,
+		       MOVIE_RELEASE,
+		       MOVIE_STORY,
+		       STATUS,
+		       GENRE_CODE,
+		       DIRECTOR_NO,
+		       MOVIE_UPDATE,
+		       FILE_PATH,
+		       CHANGE_NAME,
+		       TRAILER_VIDEO
 		  FROM
-			   TB_MOVIE
+		       TB_MOVIE
 		  JOIN
-			   TB_GENRE ON (GENRE_CODE = GENRE_NO)
+		       TB_GENRE ON (GENRE_CODE = GENRE_NO)
 		  JOIN
-		  	   TB_ATTACHMENT USING (MOVIE_NO)
-          JOIN
-               (
-                SELECT
-                       COUNT(SEAT_NO) MOVIERATE,
-                       MOVIE_NO
-                  FROM
-                       TB_SEAT
-                 RIGHT
-                  JOIN
-                       TB_SCREEN USING(SCREEN_NO)
-                 GROUP
-                    BY
-                       MOVIE_NO
-               ) USING(MOVIE_NO)
+		       TB_ATTACHMENT USING (MOVIE_NO)
+		  JOIN
+		       (
+		        SELECT
+		               COUNT(SEAT_NO) MOVIERATE,
+		               MOVIE_NO
+		          FROM
+		               TB_SEAT
+		          JOIN
+		               TB_SCREEN USING(SCREEN_NO)
+		         RIGHT
+		          JOIN
+		               TB_MOVIE USING(MOVIE_NO)
+		         GROUP
+		            BY
+		               MOVIE_NO
+		       ) USING(MOVIE_NO)
 		 WHERE
-		 	   FILE_LEVEL = 1
+		       FILE_LEVEL = 1
 		 ORDER
 		    BY
-			   MOVIERATE DESC
+		       MOVIERATE DESC,
+		       MOVIE_RELEASE DESC
 	</entry>
 	
 	<entry key="movieCategory">

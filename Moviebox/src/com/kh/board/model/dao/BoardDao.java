@@ -251,10 +251,11 @@ public class BoardDao {
 			rset = pstmt.executeQuery();
 			
 			while(rset.next()) {
+				
 				answer.add(new Answer(rset.getInt("ANSWER_NO"),
-						  rset.getString("ANSWER_CONTENT"),
-						  rset.getString("CREATE_DATE"),
-						  rset.getString("MEMBER_NAME")));
+									  rset.getString("ANSWER_CONTENT"),
+									  rset.getString("CREATE_DATE"),
+									  rset.getString("MEMBER_NAME")));
 			}
 			
 		} catch (SQLException e) {
@@ -266,6 +267,7 @@ public class BoardDao {
 		
 		return answer;
 	}
+	
 
 	public int insertAnswer(Connection conn, Answer answer) {
 		int result = 0;
@@ -276,7 +278,7 @@ public class BoardDao {
 			pstmt = conn.prepareStatement(sql);
 			
 			pstmt.setString(1, answer.getAnswerContent());
-			pstmt.setInt(2, answer.getAnswerNo());
+			pstmt.setInt(2, answer.getBoardNo());
 			pstmt.setInt(3, Integer.parseInt(answer.getAnswerWriter()));
 			
 			result = pstmt.executeUpdate();

@@ -6,8 +6,10 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import com.kh.member.controller.MemberController;
+import com.kh.member.model.vo.Member;
 
 /**
  * Servlet implementation class AdminPageController
@@ -36,6 +38,24 @@ public class AdminPageServlet extends HttpServlet {
 		String uri = request.getRequestURI();
 		String mapping = uri.substring(uri.lastIndexOf("/") + 1, uri.lastIndexOf("."));
 		
+		// 관리자 체크
+		HttpSession session = request.getSession();
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		
+		if(loginUser == null) {
+			session.setAttribute("alertMsg", "올바른 접근이 아닙니다.");
+			mapping = "";
+		} else {
+			int memberNo = loginUser.getMemberNo();
+			
+			if(memberNo != 1) {
+				session.setAttribute("alertMsg", "올바른 접근이 아닙니다.");
+				mapping = "";
+			}
+		}
+		
+		//
+			
 		// 변수선언
 		AdminPageController admin = new AdminPageController();
 		
@@ -76,6 +96,12 @@ public class AdminPageServlet extends HttpServlet {
 		case "adminBoardInsert" :
 			view = admin.adminBoardInsert(request, response); flag = false; break;
 		
+		case "adminBoardUpdateEnrollForm" :
+			view = admin.adminBoardUpdateEnrollForm(request, response); flag = false; break;
+		
+		case "adminBoardUpdate"	:
+		view = admin.adminBoardUpdate(request, response); flag = false; break;
+			
 		case "adminBoardDetail" :
 			view = admin.adminBoardDetail(request, response); flag = false; break; //공지상세보기
 
@@ -109,7 +135,8 @@ public class AdminPageServlet extends HttpServlet {
 			view = "/views/admin/adminScreenList.jsp"; flag = false; break;
 		case "adminDetailTheater":
 			view =  admin.adminDetailTheater(request, response); flag = false; break;
-			
+		case ""	:
+			view = "/index.jsp";
 			
 		
 			

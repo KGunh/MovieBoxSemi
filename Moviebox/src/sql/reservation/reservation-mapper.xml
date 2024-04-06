@@ -38,6 +38,8 @@
 		       LOCATION_NAME LIKE '%'||?||'%'
 		   AND 
 		       TO_CHAR(WATCH_DATE, 'YY/MM/DD') = ?
+		   AND
+       	       WATCH_DATE > SYSDATE
 		 ORDER
 		    BY
 		       THEATER_NO,
