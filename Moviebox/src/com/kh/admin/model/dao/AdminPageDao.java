@@ -696,7 +696,7 @@ public class AdminPageDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("adminDetailScreenName");
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
@@ -708,10 +708,9 @@ public class AdminPageDao {
 				Screen s = new Screen();
 				
 				s.setScreenName(rset.getString("SCREEN_NAME"));
-				
+				System.out.println(rset.getString("SCREEN_NAME"));
 				list.add(s);
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

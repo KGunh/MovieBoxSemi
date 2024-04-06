@@ -488,7 +488,6 @@ public class AdminPageController {
 		sc.setWatchDate(watchDate);
 
 		List<Screen> list = new AdminPageService().adminDetailTheater(sc);
-		System.out.println(list);
 		Theater th = new TheaterService().detailTheater(theaterNo);
 		
 		List<Movie> movieList = new MovieService().selectMovieList();
