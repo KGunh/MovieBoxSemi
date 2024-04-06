@@ -157,12 +157,14 @@
 </entry>
 
 
-<entry key="search">
 
+<entry key="search">
+SELECT * FROM TB_MEMBER WHERE ? LIKE '%?%'
 
 </entry>
 
-SELECT * FROM TB_MEMBER WHERE ? LIKE '%?%'
+
+
 
 
 

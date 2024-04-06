@@ -19,7 +19,9 @@ import com.kh.common.model.vo.Attachment;
 import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.Location;
 import com.kh.common.model.vo.PageInfo;
+import com.kh.movie.model.service.MovieService;
 import com.kh.movie.model.vo.Movie;
+import com.kh.notice.model.service.NoticeService;
 import com.kh.notice.model.vo.Notice;
 import com.kh.reservation.model.service.ReservationService;
 import com.kh.theater.model.service.TheaterService;
@@ -480,16 +482,16 @@ public class AdminPageController {
 		
 		int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));
 		String watchDate = request.getParameter("watchDate");
-		
+		System.out.println(theaterNo);
 		Screen sc = new Screen();
 		sc.setTheaterNo(theaterNo);
 		sc.setWatchDate(watchDate);
 
 		List<Screen> list = new AdminPageService().adminDetailTheater(sc);
-		
 		Theater th = new TheaterService().detailTheater(theaterNo);
 		
-		List<Movie> movieList = new ReservationService().selectMovieList();
+		List<Movie> movieList = new MovieService().selectMovieList();
+
 		if(th != null) {
 			request.setAttribute("theater", th);
 		}
@@ -608,6 +610,38 @@ public class AdminPageController {
 		return "/adminQnACheck.admin?currentPage=1";
 	}
 	
+	
+	//공지등록 버튼 누르면 보여지는 공지등록양식
+	public String adminBoardEnrollForm(HttpServletRequest request, HttpServletResponse response) {
+		return "views/admin/adminBoardInsert.jsp";
+	}
+	
+	
+	//공지등록
+	public String adminBoardInsert(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		
+		int userNo = Integer.parseInt(request.getParameter("userNo"));
+		int categoryNo = Integer.parseInt(request.getParameter("category"));
+		String title = (String) request.getParameter("title");
+		String content = (String) request.getParameter("content");
+		
+		Notice notice = new Notice();
+		notice.setUserNo(userNo);
+		notice.setCategoryNo(categoryNo);
+		notice.setNoticeTitle(title);
+		notice.setNoticeContent(content);
+				
+		int result = new AdminPageService().adminBoardInsert(notice);
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "성공적으로 등록 되었습니다.");
+		} else {
+			session.setAttribute("alertMsg", "등록에 실패하였습니다.");
+		}
+		
+		return "/adminBoardCheck.admin?currentPage=1";
+	}
 	
 	
 	

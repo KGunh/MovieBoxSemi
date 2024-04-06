@@ -696,7 +696,7 @@ public class AdminPageDao {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("adminDetailScreenName");
-		
+
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
@@ -708,10 +708,9 @@ public class AdminPageDao {
 				Screen s = new Screen();
 				
 				s.setScreenName(rset.getString("SCREEN_NAME"));
-				
+				System.out.println(rset.getString("SCREEN_NAME"));
 				list.add(s);
 			}
-			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -982,7 +981,7 @@ public class AdminPageDao {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		
-		String sql = prop.getProperty("InsertFile");
+		String sql = prop.getProperty("InsertAttach");
 		
 		try {
 			
@@ -1133,7 +1132,33 @@ public class AdminPageDao {
 	}	
 	
 	
-	
+	//공지등록
+	public int adminBoardInsert(Connection conn, Notice notice) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("adminBoardInsert");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, notice.getNoticeTitle());
+			pstmt.setInt(2, notice.getUserNo());
+			pstmt.setString(3, notice.getNoticeContent());
+			pstmt.setInt(4, notice.getCategoryNo());
+			
+			result = pstmt.executeUpdate();
+		
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+		
+	}
 	
 	
 	

@@ -235,7 +235,7 @@
            
                 <div class="res-img">
 
-                    <div><img id="poster" src="<%=contextPath %>/<%= movieList.get(i).getFilePath()%>/<%=movieList.get(i).getFileName() %>" alt=""></div>
+                    <div><img id="poster" src="<%=contextPath %>/<%= movieList.get(i).getFilePath()%>/<%=movieList.get(i).getChangeName() %>" alt=""></div>
                 </div>
                 <div class="res-content">
                     <div>
