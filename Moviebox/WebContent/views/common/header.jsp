@@ -17,14 +17,19 @@
 
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap" rel="stylesheet">
-
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@100..900&display=swap">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
-<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
-                                                                                                                                
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css">   
+
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.min.js"></script>
+    <script rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.bundle.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    
+
+    
     <style>
     
         * {
@@ -50,6 +55,7 @@
             height: 200px;
             margin: auto;
             border-bottom: 1px solid lightgray;
+
         }
         .header-line{
         	width: 100%;
@@ -175,11 +181,7 @@
 </head>
 <body>
 
-
-	
-
 	<script>
-		
 		const msg = '<%= alertMsg %>';
 		
 		if(msg != 'null'){
@@ -187,9 +189,8 @@
 		
 			<% session.removeAttribute("alertMsg"); %>
 		}
-		
-	
 	</script>
+	
 	<div class="header">
 		<div class="header-line">
 			<div class="top-header">
@@ -211,6 +212,7 @@
             <div id="logo-div">
                 <div id="logo"><a href="<%=contextPath %>"><img class="img-concert" src="<%=contextPath%>/resources/img/4.png"/></a></div>
             </div>
+            
             <div id="navigator">
                 <!-- A grey horizontal navbar that becomes vertical on small screens -->
                 <ul class="nav">
@@ -220,6 +222,9 @@
                         <%} else { %>
                         <a class="nav-link" href="<%=contextPath %>/movie.reservation"><span>예매</span></a>
                         <%} %>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="<%=contextPath %>/list.goods"><span>스토어</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="<%=contextPath %>/list.movie"><span>영화</span></a>

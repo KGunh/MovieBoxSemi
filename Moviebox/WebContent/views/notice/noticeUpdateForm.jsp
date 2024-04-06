@@ -3,6 +3,8 @@
     
 <%@ page import="com.kh.board.model.vo.Category, java.util.ArrayList,
 				 com.kh.notice.model.vo.Notice"%>
+				 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <%
 	Notice notice = (Notice)request.getAttribute("notice");
@@ -237,85 +239,89 @@
 
     <%@ include file="../common/header.jsp" %>
     
-    <% if(loginUser == null) { %>
-    	<script>
-    		alert('관리자만 작성 가능합니다.');
-    	</script>
-
-	<% } else { %>
-    <div id="wrap">
-        <div id="notice-detail">
-            <!-- 전체 감싸는 부분 -->
-            <div id="notice-list">
-
-                <div id="title">고객센터</div>
-        
-                <!-- 고객센터 큰 분류 카테고리 
-                <div id="board-category">
-                    <div class="notice-tap">공지사항</div>
-                    <div class="qna-tap">QnA</div>
-                </div>-->
-                <div class="notice-content">
-                    <div class="detail-box1">
-                        <div class="detail-title-box1">
-                            <div class="detail-category"><span>공지사항 작성</span></div>
-                        </div>
-                    </div>
-                    
-                    <div class="detail-content-box">
-                        <form action="<%= contextPath %>/update.notice" method="post" id="insert-box">
-                        
-                        <input type="hidden" name="noticeNo" value="<%= notice.getNoticeNo()%>" />
-                            
-                            <div id="category-box">
-                                <div id="box-name">분류</div>
-                                
-                                
-                                <select name="category" id="select-category">
-                               
-                                <% for(Category c : list) { %>
-									<option class="<%= c.getCategoryName()%>" value="<%= c.getCategoryNo() %>">
-										<%= c.getCategoryName() %>
-									</option>
-								<% } %>
-								
-                                </select>
-                                
-                                    <script>
-								    	$(function(){
-								    		$('option[class="<%=notice.getNoticeCategory()%>"]').attr('selected', 'true');
-								    	})
-    
-								    </script>
-								    
-                            </div> <!-- category box -->
-
-                            <div id="title-box">
-                                <div id="box-name">제목</div>
-                                <input type="text" id="select-title" name="title" value="<%= notice.getNoticeTitle() %>">
-                            </div>
-
-                            <div id="content-box">
-                                <div id="box-name">내용</div>
-                                <textarea id="select-content" cols="30" rows="10" name="content"><%= notice.getNoticeContent() %></textarea>
-                            </div>
+   	<c:choose>
+	<c:when test="${ loginUser.memberNo eq 1 }">
+	    <div id="wrap">
+	        <div id="notice-detail">
+	            <!-- 전체 감싸는 부분 -->
+	            <div id="notice-list">
 	
-	                        <div id="insert-btn" align="center">
-	                        
-	                            <button type="submit" class="notice-detail-btn">등록</button>
-                				<button type="button" class="notice-detail-btn1" onclick="history.back()">취소</button>
-                
+	                <div id="title">고객센터</div>
+	        
+	                <!-- 고객센터 큰 분류 카테고리 
+	                <div id="board-category">
+	                    <div class="notice-tap">공지사항</div>
+	                    <div class="qna-tap">QnA</div>
+	                </div>-->
+	                <div class="notice-content">
+	                    <div class="detail-box1">
+	                        <div class="detail-title-box1">
+	                            <div class="detail-category"><span>공지사항 작성</span></div>
 	                        </div>
-                    	</form> <!-- insert box -->
-                    </div> <!-- detail-content-box -->
-
-                </div> <!-- notice-content -->
-
-            </div> <!-- notice-list -->
-        </div> <!-- notice-detail -->
-    </div> <!-- wrap -->
+	                    </div>
+	                    
+	                    <div class="detail-content-box">
+	                        <form action="<%= contextPath %>/update.notice" method="post" id="insert-box">
+	                        
+	                        <input type="hidden" name="noticeNo" value="<%= notice.getNoticeNo()%>" />
+	                            
+	                            <div id="category-box">
+	                                <div id="box-name">분류</div>
+	                                
+	                                
+	                                <select name="category" id="select-category">
+	                               
+	                                <% for(Category c : list) { %>
+										<option class="<%= c.getCategoryName()%>" value="<%= c.getCategoryNo() %>">
+											<%= c.getCategoryName() %>
+										</option>
+									<% } %>
+									
+	                                </select>
+	                                
+	                                    <script>
+									    	$(function(){
+									    		$('option[class="<%=notice.getNoticeCategory()%>"]').attr('selected', 'true');
+									    	})
+	    
+									    </script>
+									    
+	                            </div> <!-- category box -->
 	
-	<% } %>
+	                            <div id="title-box">
+	                                <div id="box-name">제목</div>
+	                                <input type="text" id="select-title" name="title" value="<%= notice.getNoticeTitle() %>">
+	                            </div>
+	
+	                            <div id="content-box">
+	                                <div id="box-name">내용</div>
+	                                <textarea id="select-content" cols="30" rows="10" name="content"><%= notice.getNoticeContent() %></textarea>
+	                            </div>
+		
+		                        <div id="insert-btn" align="center">
+		                        
+		                            <button type="submit" class="notice-detail-btn">등록</button>
+	                				<button type="button" class="notice-detail-btn1" onclick="history.back()">취소</button>
+	                
+		                        </div>
+	                    	</form> <!-- insert box -->
+	                    </div> <!-- detail-content-box -->
+	
+	                </div> <!-- notice-content -->
+	
+	            </div> <!-- notice-list -->
+	        </div> <!-- notice-detail -->
+	    </div> <!-- wrap -->
+	    </c:when>
+	    
+		<c:otherwise>
+			<script>
+				alert('관리자만 수정 가능합니다.');
+				location.href = '<%= contextPath %>/list.notice?currentPage=1';
+			</script>
+    	</c:otherwise>
+    	
+	</c:choose>
     
     <%@ include file="../common/footer.jsp" %>
     

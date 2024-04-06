@@ -53,6 +53,19 @@ public class AdminPageServlet extends HttpServlet {
 		case "adminMovieInsert" :
 			view = admin.adminMovieInsert(request, response); flag = false; break; //영화등록
 			
+		case "adminMovieUpdate" :
+			view = admin.adminMovieUpdate(request, response); flag = false; break; //영화등록
+
+		case "adminMovieDetail" :
+			view = admin.adminMovieDetail(request, response); flag = false; break; //영화상세보기페이지
+			
+		case "adminMovieUpdateEnrollForm" :
+		view = admin.adminMovieUpdateEnrollForm(request, response); flag = false; break; //영화수정
+			
+		case "adminMovieDelete" :
+			view = admin.adminMovieDelete(request, response); flag = false; break; //영화삭제
+		
+			
 			
 		case "adminBoardCheck" :
 			view = admin.adminBoardCheckList(request, response); flag = false; break; //공지목록전체
@@ -67,6 +80,10 @@ public class AdminPageServlet extends HttpServlet {
 			
 		case "adminQnAInsert" :
 			view = "/views/admin/adminQnAInsert.jsp"; break; //문의관리
+		case "adminScreenList":
+			view = "/views/admin/adminScreenList.jsp"; flag = false; break;
+		case "adminDetailTheater":
+			view =  admin.adminDetailTheater(request, response); flag = false; break;
 			
 			
 		

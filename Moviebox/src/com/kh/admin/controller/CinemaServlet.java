@@ -29,9 +29,7 @@ public class CinemaServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		String uri =request.getRequestURI();
-		
 		String mapping = uri.substring(uri.lastIndexOf("/")+1,uri.lastIndexOf("."));
-		System.out.println(mapping);
 		String view = "";
 		
 		CinemaAdminContorller CAC = new CinemaAdminContorller();
@@ -40,32 +38,25 @@ public class CinemaServlet extends HttpServlet {
 		
 		switch(mapping) {
 		
-		case "insertAdmin" :  view = CAC.cinemaCheck(request,response);;
-		case "editAdmin"   :  view= "/views/admin/CinemaEdit.jsp";
-		case "checkAdmin"  :  view = "views/admin/CinemaCheck.jsp";
+		case "insertAdmin" :  view = CAC.category(request, response); break;
+		case "editAdmin"   :  view= CAC.cinemaEdit(request,response); break;
+		case "checkAdmin"  :  view = CAC.cinemaCheck(request,response); break;
+		case "enroll" 	   :  view = CAC.cinemaInsert(request, response); break;
+		case "modify"	   :  view = CAC.modify(request,response); flag=true; break;
+		case "dele"		   :  view = CAC.dele(request, response); break;
+		
+		
 		
 		}
 		
 		if(false != flag) {
-		response.sendRedirect(view);
+			response.sendRedirect(view);
 			
 		}else {
 			System.out.println(view);
 			request.getRequestDispatcher(view).forward(request, response);	
 		}
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+
 	}
 
 	/**

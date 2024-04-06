@@ -1,18 +1,26 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.ArrayList, com.kh.movie.model.vo.*, com.kh.common.model.vo.*" %>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 
 <%
-	
-	
-	
+
+	ArrayList<Attachment> list = (ArrayList<Attachment>)request.getAttribute("attach");
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>영화 상세정보</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <style>
         body{
@@ -35,6 +43,20 @@
             margin: 0 auto;
             color: white;
         }
+        
+        /* 조회 결과 없을 때 */
+        #noMovieList{
+        	width:1200px;
+        	height: 500px;
+        	text-align: center;
+        	line-height: 490px;
+        }
+        
+        #noMovie{
+        	width: 1200px;
+        	font-size: 20px;
+        	text-align: center;
+        }
 
 
         /* 영화 상세정보(줄거리 등) */
@@ -43,7 +65,6 @@
             height: 470px;
             margin-top: 20px;
             color: white;
-            border: 1px solid #FFC145;
             position: relative;
         }
 
@@ -51,9 +72,7 @@
             position: absolute;
             width: 300px;
             height: 422px;
-            border: 1px solid red;            
             left: 0;
-            padding: 10px;
             margin: 20px;
         }
 
@@ -63,7 +82,6 @@
             right: 0;
             padding: 10px;
             margin: 20px;
-            border: 1px solid blue;
         }
 
         #movie-detail-title{
@@ -73,7 +91,6 @@
             font-size: 25px;
             font-weight: bold;
             padding-left: 10px;
-            border: 1px solid lightgreen;
         }
 
         #movie-detail-etc{
@@ -81,8 +98,7 @@
             height: 40px;
             line-height: 40px;
             padding-left: 10px;
-            margin-bottom: 15px;
-            border: 1px solid sienna;
+            margin-bottom: 10px;
         }
 
         #movie-detail-director{
@@ -90,16 +106,14 @@
             height: 40px;
             line-height: 40px;
             padding-left: 10px;
-            border: 1px solid salmon;
         }
 
         #movie-detail-actor{
             width: 830px;
             height: 40px;
             line-height: 40px;
-            margin-bottom: 15px;
             padding-left: 10px;
-            border: 1px solid darkcyan;
+            margin-bottom: 10px;
         }
 
         #movie-detail-story{
@@ -107,8 +121,24 @@
             height: 130px;
             padding: 10px;
             margin-bottom: 15px;
-            border: 1px solid chartreuse;
         }
+        
+        #movie-story{
+        	width: 830px;
+        	height: 120px;
+        	border-radius: 8px;
+        	background-color: #1a1a1a;
+        	color: white;
+        	padding: 10px;
+        	border: 1px solid #383838;
+        	resize:none;
+        }
+        
+        /* 스크롤바? */
+        textarea {
+		  scrollbar-width: thin;
+		  scrollbar-color: #383838 transparent;
+		}
 
         #movie-detail-btn{
             width: 300px;
@@ -117,16 +147,16 @@
             border-radius: 8px;
             font-size: 19px;
             font-weight: bold;
+            margin-left: 10px;
+            margin-top: 10px;
             background-color: #FFC145;
         }
-
+        
 
         /* 영화 예고편 */
         #movie-detail-video{
             width: 1200px;
-            padding-bottom: 30px;
-            color:white;
-            border: 1px solid aqua;
+            margin-top: 20px;
         }
 
         h1{
@@ -162,6 +192,31 @@
             float: left;
             margin-right: 20px;
         }
+        
+        #video-src{
+        	margin-bottom: 30px;
+        	padding-top: 20px;
+        	padding-bottom: 20px;
+        }
+        
+        #videoTitle{
+        	margin-top: 20px;
+        	font-size: 30px;
+        	color: white;
+        	font-weight: bold;
+        }
+        
+		#stilTitle{
+        	margin-top: 20px;
+        	font-size: 30px;
+        	color: white;
+        	font-weight: bold;
+        }
+        
+          .carousel-inner img {
+		    width: 100%;
+		    height: 100%;
+		  }
 
 
     </style>
@@ -172,56 +227,130 @@
 <body>
 
     <%@ include file="/views/common/header.jsp" %>
-
-    <div id="wrap">
-        <div id="movie-detail">
+	<div id="wrap">
+		<div id="movie-detail">
+	<c:choose>
+		<c:when test="${ movie.movieTitle eq null }">
+			<div id="noMovieList">
+				<a id="noMovie">조회 된 영화가 없습니다.</a>
+			</div>
+		</c:when>
+		<c:otherwise>
             <div id="movie-detail-box">
                 <div id="movie-detail-poster">
-                    포스터
+                    <img src="${ movie.filePath }/${ movie.changeName }" width="300" height="422">
                 </div>
 
                 <div id="movie-detail-content">
-                    <div id="movie-detail-title">파묘 </div>
+                    <div id="movie-detail-title">${ movie.movieTitle }</div>
                     <div id="movie-detail-etc">
-                        <a>미스터리</a> | <a>134분</a> | <a>15세 이상 관람가</a> | <a>2024.02.22</a>
+                        <a>${ movie.genreName }</a> | <a>${ movie.movieRt }분</a> | <a>${ movie.movieRated }이상 관람가</a> | <a>${ movie.movieRelease } 개봉</a>
                     </div>
-                    <div id="movie-detail-director">장재현</div>
-                    <div id="movie-detail-actor">최민식, 김고은, 유해진, 이도현</div>
-                    <div id="movie-detail-story">미국 LA, 거액의 의뢰를 받은 무당 ‘화림’(김고은)과 ‘봉길’(이도현)은<br>
-                        기이한 병이 대물림되는 집안의 장손을 만난다.<br>
-                        조상의 묫자리가 화근임을 알아챈 ‘화림’은 이장을 권하고,<br>
-                        돈 냄새를 맡은 최고의 풍수사 ‘상덕’(최민식)과 장의사 ‘영근’(유해진)이 합류한다.
+                    <div id="movie-detail-director">감독 | ${ movie.directorName }</div>
+                    
+                    <c:choose>
+                    	<c:when test="${ empty cast }">
+                    		<div id="movie-detail-actor">출연진 | 없음</div>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<div id="movie-detail-actor">출연진 | ${ cast }</div>
+                    	</c:otherwise>
+                    </c:choose>
+                    
+                    <div id="movie-detail-story"><textarea id="movie-story" readonly>${ movie.movieStory }</textarea>
                     </div>
-                    <button id="movie-detail-btn">예매하기</button>
+                    
+                   <c:choose>
+	                   <c:when test="${ empty loginUser }">
+	                    	<button id="movie-detail-btn" onclick="noMember();">예매하기</button>
+	                   </c:when>
+		               <c:otherwise>
+	                		<button id="movie-detail-btn" onclick="reservationPage();">예매하기</button>
+				      </c:otherwise>
+                	</c:choose>
+                
                 </div>
             </div>
 
             <div id="movie-detail-video">
-                <h1>예고편</h1>
+                <a id="videoTitle">예고편</a>
+                
                 <div id="video-src">
-                    <iframe id="detail-video" width="1090" height="600" src="https://www.youtube.com/embed/rjW9E1BR_30?si=v4wZ9R1k-4jWv8RI" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+                    <iframe width="1200" height="600" src="${ movie.trailerVideo }"></iframe>
                 </div>
             </div>
-
+            
+            
+        <!-- 
             <div id="movie-detail-still">
-                <h1>스틸컷</h1>
+				<div id="demo" class="carousel slide" data-ride="carousel">
+				
+				  <ul class="carousel-indicators">
+				    <li data-target="#demo" data-slide-to="0" class="active"></li>
+				    <li data-target="#demo" data-slide-to="1"></li>
+				    <li data-target="#demo" data-slide-to="2"></li>
+				  </ul>
+				  
+				  <div class="carousel-inner">
+				    <div class="carousel-item active">
+				  <c:forEach var="stil" items="${ requestScope.attachment }">
+				      <img src="${ stil.filePath }/${ stil.changeName }" width="1100" height="500">
+				  </c:forEach>
+				    </div>
+				    <div class="carousel-item">
+				      <img src="${ stil.filePath }/${ stil.changeName }" alt="Chicago" width="1100" height="500">
+				    </div>
+				    <div class="carousel-item">
+				      <img src="${ stil.filePath }/${ stil.changeName }" alt="New York" width="1100" height="500">
+				    </div>
+				  </div>
+				  
+				  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+				    <span class="carousel-control-prev-icon"></span>
+				  </a>
+				  <a class="carousel-control-next" href="#demo" data-slide="next">
+				    <span class="carousel-control-next-icon"></span>
+				  </a>
+				</div>
+            </div>
+        -->
+            
+             <div id="movie-detail-still">
+                <a id="stilTitle">스틸컷</a>
                 <div id="detail-still-img">
                     <div class="still-img">
-                        스틸컷
+                        	${ requestScope.filePath }/${ requestScope.changeName }
                     </div>
                     <div class="still-img">
-                        스틸컷
+                        	스틸컷
                     </div>
                     <div class="still-img">
-                        스틸컷
+                        	스틸컷
                     </div>
                 </div>
             </div>
-
-        </div> <!-- movie-detail-->
+    	</c:otherwise>
+    </c:choose>
+    	</div> <!-- movie-detail-->
     </div> <!-- wrap -->
     
+    
         <%@ include file="/views/common/footer.jsp" %>
+        
+    <script>
+
+		function noMember(){
+			alert('로그인이 필요한 서비스 입니다.');
+			location.href = ('<%=contextPath%>/loginForm.me');
+		}
+	
+    	// 예매하기 버튼 -> 예매 페이지
+    	function reservationPage(){
+    		location.href = '<%= contextPath %>/movie.reservation';
+    	}
+
+
+    </script>
     
 </body>
 

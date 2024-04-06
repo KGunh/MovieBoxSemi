@@ -228,6 +228,7 @@ public class MemberService {
 		
 		int result = new MemberDao().reservationCancel(conn, ticketNo);
 		
+		
 		if(result > 0) commit(conn);
 		
 		close(conn);

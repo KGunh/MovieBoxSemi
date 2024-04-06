@@ -1,5 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -276,21 +288,27 @@
 
 	<!-- 헤더 -->
     <%@ include file="/views/common/header.jsp" %>
+   
     <div id="wrap">
 
         <div id="top_wrap">
             <div class="top_1">
                 <h1>관리자</h1>
             </div>
-
-        </div>
+       </div>
 
         <div id="content">
             <div class="content_1">
                 <ul class="menu">
                     <li>
-                       	<a href="<%=contextPath %>/selectAdmin.mb">회원 관리</a>
+                        <a href="<%=contextPath %>/selectAdmin.mb">회원 관리</a>
                         <ul class="submenu">
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="<%=contextPath %>/adminScreenList.admin">예매 관리</a>
+                        <ul class="submenu" >
 
                         </ul>
                     </li>
@@ -350,10 +368,7 @@
                         <div id="box_3">
                             <textarea class="form-control" rows="5" name="content" style="resize:none; height: 250px; border-radius: 8px;">내용!!</textarea>
                         </div>
-
-                        <div class="fileBox">
-                            <input type="file" name="file" id="file">
-                        </div>
+>
                         
                         <div id="button"><!--등록 버튼-->
                             <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">등록</button>
@@ -369,6 +384,7 @@
 
             </div><!--content_2끝-->
         </div>
+
 
     </div>
     <%@ include file="/views/common/footer.jsp" %>

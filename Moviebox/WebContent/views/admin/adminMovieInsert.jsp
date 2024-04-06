@@ -7,6 +7,11 @@
 %>
 
 
+
+
+
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,6 +32,7 @@
         div{
            /* border : 1px solid red;  */
             box-sizing : border-box;
+            background-color: #1a1a1a;
         }
 
         /* 전체를 감싸는 #wrap div */
@@ -177,11 +183,22 @@
 
         /* -------------------------------------------*/
 
-        
+        .title-file{
+            /* border: 1px solid rgb(172, 0, 0); */
+            width: 170px;
+            height: 100px;
+            font-size: 15px;
+            font-weight: bold;
+            line-height: 100px;
+            color:#ffffff;
+            text-align: right;
+            padding-right: 30px;
+            
+        }
         .title{
             /* border: 1px solid rgb(172, 0, 0); */
             width: 170px;
-            height: 60px;
+            height: 50px;
             font-size: 15px;
             font-weight: bold;
             line-height: 60px;
@@ -190,6 +207,30 @@
             padding-right: 30px;
         }
 
+
+        .title-story{
+            /* border: 1px solid rgb(172, 0, 0); */
+            width: 170px;
+            height: 80px;
+            font-size: 15px;
+            font-weight: bold;
+            line-height: 80px;
+            color:#ffffff;
+            text-align: right;
+            padding-right: 30px;
+        }
+
+        .title-trailer{
+            /* border: 1px solid rgb(172, 0, 0); */
+            width: 170px;
+            height: 50px;
+            font-size: 15px;
+            font-weight: bold;
+            line-height: 50px;
+            color:#ffffff;
+            text-align: right;
+            padding-right: 30px;
+        }
 
         #box_1     
         {
@@ -209,71 +250,79 @@
         #sub_1 {
             /* border: 1px solid rgb(0, 236, 39); */
             width: 580px;
-            height: 60px;
+            height: 100px;
             float: left;
         }
 
         #sub_2 {
             /* border: 1px solid rgb(0, 155, 216); */
             width: 580px;
-            height: 60px;
+            height: 50px;
             float: left;
         }
 
         #sub_3 {
             /* border: 1px solid rgb(223, 145, 0); */
             width: 580px;
-            height: 60px;
+            height: 50px;
             float: left;
         }
 
         #sub_4 {
             /* border: 1px solid rgb(223, 0, 93); */
             width: 580px;
-            height: 60px;
+            height: 50px;
             float: left;
         }
 
         #sub_5 {
             /* border: 1px solid rgb(255, 57, 255); */
             width: 580px;
-            height: 60px;
+            height: 50px;
             float: left;
         }
         #sub_6 {
             /* border: 1px solid rgb(34, 156, 255); */
             width: 580px;
-            height: 60px;
+            height: 50px;
             float: left;
         }
         #sub_7 {
             /* border: 1px solid rgb(63, 243, 78); */
             width: 580px;
-            height: 60px;
+            height: 50px;
             float: left;
         }
 
         #sub_8 {
             /* border: 1px solid rgb(63, 111, 243); */
             width: 580px;
-            height: 60px;
+            height: 50px;
             float: left;
         }
 
         #sub_9 {
             /* border: 1px solid rgb(236, 193, 0); */
             width: 580px;
-            height: 160px;
+            height: 80px;
             float: left;
         }
 
         #sub_10{
             /* border: 1px solid rgb(63, 111, 243); */
             width: 530px;
-            height: 60px;
+            height: 30px;
             float: left;
+            margin-top: 5px;
         }
 
+        #sub_11 {
+            /* border: 1px solid rgb(236, 193, 0); */
+            width: 580px;
+            height: 50px;
+            float: left;
+            margin-top: 3px;
+        }
 
         /*-------------------------------------------------------*/
         #file { 
@@ -287,7 +336,8 @@
             width: 135px;
             height: 40px;
             float: left;
-            line-height: 40px;
+            font-size: small;
+            padding-top: 2px;
 
         }
         
@@ -300,14 +350,14 @@
             border-radius: 8px;
         }
         input[type=file]::file-selector-button {
-            width: 130px;
-            height: 40px;
+            width: 80px;
+            height: 27px;
             background-color: #FFC145;
             border: 1px solid lightgray;;
-            border-radius: 8px;
+            border-radius: 5px;
             cursor: pointer;
-            margin-top: 10px;
-            text-align: center;
+            margin-top: 2px;
+
             
             
         }
@@ -319,24 +369,25 @@
         #runningTime, /*러닝타임입력창*/
         #rating, /*관람등급입력창*/
         #director_name,/*감독입력창*/
-        #cast /*출연진입력창*/
+        #cast, /*출연진입력창*/
+        #trailer/*예고편링크입력창*/
         { 
             width: 533px;
             height: 40px;
             border-radius: 8px;
             border: 1px solid lightgray;
             font-size: 15px;
-            margin-top: 9px;
+            margin-top: 4px;
             color: #727272;
         }
 
         #plot{ /*줄거리 입력창*/
             width: 533px;
-            height: 140px;
+            height: 75px;
             border-radius: 8px;
             border: 1px solid lightgray;
             font-size: 15px;
-            margin-top: 9px;
+            margin-top: 3px;
             color: #727272;
             padding-left: 7px;
             padding-top: 7px;
@@ -350,7 +401,7 @@
             width: 533px;
             height: 40px;
             font-size: 15px;
-            margin-top: 9px;
+            margin-top: 4px;
             margin-right: 14px;
             color: #727272;
             padding-left: 7px;
@@ -365,7 +416,7 @@
             border-radius: 8px;
             border: 1px solid lightgray;
             font-size: 15px;
-            margin-top: 9px;
+            margin-top: 4px;
             color: #727272;
             padding-left: 7px;
         }
@@ -409,6 +460,12 @@
                         </ul>
                     </li>
                     <li>
+                        <a href="<%=contextPath %>/adminScreenList.admin">예매 관리</a>
+                        <ul class="submenu" >
+
+                        </ul>
+                    </li>
+                    <li>
                         <a href="<%=contextPath %>/adminMovieCheck.admin?currentPage=1">영화 관리</a>
                         <ul class="submenu" >
 
@@ -439,7 +496,7 @@
 			<form action="<%= contextPath %>/adminMovieInsert.admin" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
 			    <div id="content_2_box"><!--컨텐트2 전체박스-->
 			        <div id="box_1">
-			            <div class="title">포스터</div>
+			            <div class="title-file">파일첨부</div>
 			            <div class="title">제목</div>
 			            <div class="title">장르</div>
 			            <div class="title">러닝타임</div>
@@ -447,14 +504,20 @@
 			            <div class="title">개봉일</div>
 			            <div class="title">감독</div>
 			            <div class="title">출연진</div>
-			            <div class="title">줄거리</div>
+			            <div class="title-story">줄거리</div>
+                        <div class="title-trailer">예고편</div>
 			        </div>
 			        <div id="box_2">
 			            <div id="sub_1">
+			                <div class="fileBox" style="padding-right: 250px;">
+			                    <input type="file" id="file" name="upposter" style="padding-top: 35px;" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
+                            </div>
 			                <div class="fileBox">
-			                    <input type="file" id="file" name="upposter" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
-			                </div>
-			                <div class="fileBox_2"></div>
+			                    <input type="file" id="file" name="stillcut1" style="padding-top: 3px;" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
+			                    <input type="file" id="file" name="stillcut2" style="padding-top: 3px;"accept="image/*"> <!-- 이미지 파일 전부 받기 -->
+			                    <input type="file" id="file" name="stillcut3" style="padding-top: 3px;" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
+
+                            </div>
 			            </div>
 			
 			            
@@ -474,11 +537,11 @@
 			            </div>
 			
 			            <div id="sub_4">
-			                <input type="text" name="running_time" id="runningTime" placeholder="러닝타임을 입력해 주세요.">
+			                <input type="text" name="running_time" id="runningTime" placeholder="러닝타임을 입력해 주세요.(ex - 120)">
 			            </div>
 			
 			            <div id="sub_5">
-			                <input type="text" name="rated" id="rating" placeholder="관람 등급을 입력해 주세요.">
+			                <input type="text" name="rated" id="rating" placeholder="관람 등급을 입력해 주세요.(ex - 12세)">
 			            </div>
 			
 			            <div id="sub_6">
@@ -486,19 +549,23 @@
 			            </div>
 			
 			            <div id="sub_7">
-			                <input type="text" name="director_name" id="director_name" placeholder="감독을 입력해 주세요.">
+			                <input type="text" name="director_name" id="director_name" placeholder="감독을 입력해 주세요.(ex - 호빵맨, 식빵맨 )">
 			            </div>
 			
 			            <div id="sub_8">
-			                <input type="text" name="actors" id="cast" placeholder="출연진을 입력해 주세요.">
+			                <input type="text" name="actors" id="cast" placeholder="출연진을 입력해 주세요.(ex - 잉어빵, 붕어빵 )">
 			            </div>
 			
 			            <div id="sub_9">
 			                <textarea name="story" id="plot" cols="30" rows="10" placeholder="줄거리를 입력해 주세요."></textarea>
 			            </div>
+			            
+			            <div id="sub_11">
+			                <input type="text" name="trailer" id="trailer" placeholder="예고편 영상 링크를 입력해 주세요.">
+			            </div>
 			
 			            <div id="sub_10"><!--등록 버튼-->
-			                <input type="submit" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right;" value="등록" onclick="insertButton();">
+			                <input type="submit" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right;" value="등록">
 			            	<button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;" onclick="history.back();">목록</button>
 			            </div><!--등록 버튼-->
 			        </div><!--box2-->
@@ -519,12 +586,13 @@
  	 
  	<script>
 	 	function validateForm() { 
-	 	    var fileInput = document.getElementById('file');
-	 	    var fileName = fileInput.value; 
-	 	    if (fileName === "" || fileInput.files.length === 0) {
-	 	        alert('포스터 파일을 첨부해 주세요.');
-	 	        return false;
-	 	    }
+//
+//	 		var fileInput = document.getElementById('file');
+//	 	    var fileName = fileInput.value; 
+//	 	    if (fileName === "" || fileInput.files.length === 0) {
+//	 	        alert('포스터 파일을 첨부해 주세요.');
+//	 	        return false;
+//	 	    }
 	 	    var movieTitle = document.getElementById('movieTitle').value;
 	 	    if (movieTitle === "" || movieTitle.length === 0) {
 	 	        alert('영화 제목을 입력해 주세요.');

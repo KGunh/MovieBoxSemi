@@ -2,11 +2,8 @@
     pageEncoding="UTF-8" import = " java.util.ArrayList, com.kh.member.model.vo.Member" 
     %>
     
-    
 <%
-
 ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
-//String contextPath = request.getContextPath(); 
 %>    
 
     <!DOCTYPE html>
@@ -30,96 +27,7 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
         body {
             background-color: #1A1A1A
         }
-        #header{
-           margin: auto;
-            height : 200px;
-            width: 1200px;
-        }
-
-        #top-header{
-            height: 75px;
-            position: relative;
-            border-bottom: 1px solid lightgray;
-        }
-        #login-area{
-            position: absolute;
-            right: 30px;
-            top: 20px;
-
-        }
-        #login-area > a{
-            display: block;
-            float: right;
-            text-decoration-line: none;
-            color: white;
-            font-size: 16px;
-            margin-left: 30px;
-            font-weight: bold;
-        }
-        
-
-        #header-navigator{
-            height : 125px;
-            
-            border-bottom: 1px solid lightgray;
-        }
-
-        #logo-div{
-            position: relative;
-            float: left;
-            height: 100%;
-            width: 30%;
-
-        }
-
-        #content{height : 1500px;}
-
-        #logo{
-            position: absolute; 
-            top: 50%;
-            margin-top: -25px;
-            width: 100%;
-            height: 50px;
-            font-size: 50px;
-            font-weight: bold;
-            color: #FFC145;
-            line-height: 45px;
-            
-            text-align: center;
-        }
-        a {
-            text-decoration-line: none;
-        }
-        #logo > a{
-            text-decoration-line: none;
-            color: #FFC145;
-        }
-        #navigator{
-            float: right;
-            width: 50%;
-            height: 100%;
-            margin-right: 15%;
-        }
-        .navi{
-            float:left;
-            width: 20%;
-            height: 100%;
-            text-align:center;
-            margin: 0 auto;
-        }
-        .navi > a{
-            display: block;
-            text-align: center;
-            width: 100%;
-            height: 100%;
-            color: white;
-            text-decoration-line: none;
-            line-height: 125px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-          
+      
             div{
            
            
@@ -259,7 +167,7 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
         #table{
             
             width: 800px;
-            border: 1px solid lightgray;
+            border: 1px solid lightpink;
         }
 
         #table > tr,td {
@@ -270,7 +178,7 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
             margin-top: 10px;
             margin-right: 10px;
             color: white;
-            border-bottom: 1px solid lightgray;
+            border-bottom: 1px solid gray;
             
             
         }
@@ -470,7 +378,7 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
 
                 </div>
                 <div id="delete" >
-                    <button id="btn1">탈퇴</button>
+                <!--     <button type="button" id="btn1" onclick="deleteadmin();">탈퇴</button>  -->
                 </div>
 
                 <div id="cnt2_post"><!--게시판-->
@@ -481,11 +389,11 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                         <table class="table table-hover" style="text-align: center; font-size: small;">
                           <thead>
                             <tr style="background-color: #eaeaea; margin-top: 0; height: 40px; color: #212121; border: 0px solid #cfcfcf; opacity: 0.8; text-align: center;">
-                                <th><input type="checkbox" name="check" value="check" id="check" checked></th>
+                          <!--       <th ><input type="checkbox" name="check" value="check" id="check" checked></th>  -->
                                 <th class="num">회원번호</th>
                                 <th>이름</th>
                                 <th>가입일</th>
-                                <th>탈퇴여부</th> 
+                                <th>활동여부</th> 
                                 <th>전화번호</th>
                             </tr>
                           </thead>
@@ -493,8 +401,13 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                        
                            <% for(Member m : mb){ %>
                                 <tr class="member">
+
                                 <td><input type="checkbox" name="check" value="check" id="check" 
                                 ></td>
+
+                                
+                                <!-- <td class="ch"><input type="checkbox" name="check" value="check" id="check" ></td>  -->
+
                                 <td><%= m.getMemberNo() %></td>
                                 <td><%= m.getMemberName()%></td>
                                 <td><%= m.getEnrollDate() %></td>
@@ -514,14 +427,16 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                       
                     	$(function(){
                     		
-                    		$('.member').click(function(){
-                    			
-                    			const memberNo = $(this).children().eq(1).text();
-                    			location.href='<%=contextPath%>/modifyAdmin.mb?memberNo=' + memberNo;
+                    		$('.member>td').click(function(){
+                    			if(!$(this).is('.ch')) {
+	                    			const memberNo = $(this).parent().children().eq(0).text();
+	                    			location.href='<%=contextPath%>/modifyAdmin.mb?memberNo=' + memberNo;
+                        		}
                     			
                     		});
                     		
                     		
+
                     	})
                     	
                     	
@@ -533,8 +448,15 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                     		
                     	})
                       
+
+                    		
+                    	})
+                    	
+
                       
                       </script>
+                      
+                      
 
 
                       <div id="cnt2_paging-area"> 
@@ -572,7 +494,7 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
 
 
 
-
+<%@ include file="/views/common/footer.jsp" %>
 
 
 </body>

@@ -7,13 +7,17 @@ import static com.kh.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kh.admin.model.dao.AdminPageDao;
 import com.kh.board.model.vo.Board;
+import com.kh.common.model.vo.Attachment;
 import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.movie.model.vo.Movie;
 import com.kh.notice.model.vo.Notice;
+import com.kh.theater.model.vo.Screen;
+import com.kh.theater.model.vo.Theater;
 
 public class AdminPageService {
 	
@@ -228,6 +232,23 @@ public class AdminPageService {
 		return result;
 	}
 	
+	//영화 수정
+	public int updateMovie(Movie movie) {
+		Connection conn = getConnection();
+		
+		int result = new AdminPageDao().updateMovie(conn, movie);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
 	
 	//Cast등록
 	public int InsertCast(int movieNo, int actorNo) {
@@ -246,4 +267,138 @@ public class AdminPageService {
 		return result;
 	}
 
+	//
+	public Movie adminMovieDetail(int movieNo) {
+		
+		Connection conn = getConnection();
+		
+		Movie movie = new AdminPageDao().adminMovieDetail(conn,movieNo);
+		
+		close(conn);
+		
+		return movie;
+	}
+	
+	
+	public String adminMovieCast(int movieNo) {
+		Connection conn = getConnection();
+		
+		String casts = new AdminPageDao().adminMovieCast(conn, movieNo);
+		
+		close(conn);
+		
+		return casts;
+	}
+	
+	public List<Theater> selectTheaterList(String locationCode){
+		Connection conn = getConnection();
+		List<Theater> list = new AdminPageDao().selectTheaterList(conn, locationCode);
+		close(conn);
+		
+		return list;
+	}
+	
+	
+	public List<Screen> adminDetailTheater(Screen sc){
+		Connection conn = getConnection();
+		
+		List<Screen> screenList = new AdminPageDao().adminDetailScreenName(conn, sc);
+		
+		if(!screenList.isEmpty()) {
+			for(int i=0;i<screenList.size();i++) {
+				String screenName = screenList.get(i).getScreenName();
+				
+				List<Movie> movieList = new AdminPageDao().adminMovieList(conn,screenName, sc);
+				screenList.get(i).setMovieList(movieList);
+				
+			}
+		}
+		
+		
+		
+		
+		close(conn);
+		
+		return screenList;
+		
+	}
+	
+										  //=서블릿에서 getParameter()써주기
+	public List<Movie> searchTitle(String keyword, PageInfo pi){
+		Connection conn = getConnection();
+//		System.out.println(keyword);
+		List<Movie> movieList = new AdminPageDao().searchTitle(conn, keyword, pi);
+		close(conn);
+		return movieList;
+	}
+	
+	public int insertScreen(Screen sc) {
+		Connection conn = getConnection();
+		
+		int count = new AdminPageDao().selectScreen(conn,sc);
+		int result = 0;
+		if(count == 0) {
+			result = new AdminPageDao().insertScreen(conn, sc);
+			
+			if(result>0) commit(conn);
+		}
+		
+		
+		
+		close(conn);
+		
+		return result;
+	}
+	
+	public int adminMovieDelete(int movieNo) {
+		Connection conn = getConnection();
+		int result = new AdminPageDao().adminMovieDelete(conn, movieNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	public String adminMoviePoster(int movieNo) {
+		Connection conn = getConnection();
+		String poster = new AdminPageDao().adminMoviePoster(conn, movieNo);
+		close(conn);
+		return poster;
+	}
+	
+	// 포스터 등록전 fileNo
+	public int SelectFileNo() {
+		Connection conn = getConnection();
+		
+		int fileNo = new AdminPageDao().SelectFileNo(conn);
+		
+		close(conn);
+		
+		return fileNo; 
+	}
+	
+	public int InsertAttach(int movieNo, ArrayList<Attachment> list) {
+		Connection conn = getConnection();
+		
+		int result = new AdminPageDao().InsertAttach(conn, movieNo, list);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+	}
+	
 }

@@ -12,8 +12,10 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import com.kh.common.model.vo.Location;
 import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.vo.Member;
+import com.kh.theater.model.vo.Theater;
 
 public class MemberAdminDao {
 	
@@ -123,6 +125,8 @@ public class MemberAdminDao {
 	}
 	
 	
+	
+	
 	public int updateAdmin(Member member, Connection conn) {
 		
 		
@@ -148,6 +152,221 @@ public class MemberAdminDao {
 		} finally {
 			close(pstmt);
 		}
+		
+		
+		return result; 
+		
+	}
+	
+	public int deleteAdmin(Connection conn,int memberNo) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("deleteAdmin");
+		
+		
+		
+		return result;
+	}
+	
+	
+	
+	public ArrayList<Theater> cinemaCheck(Connection conn){
+		
+		ArrayList<Theater> theater = new ArrayList<Theater>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("cinemaCheck");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Theater Cinema = new Theater(); 
+						Cinema.setTheaterNo(rset.getInt("THEATER_NO"));
+						Cinema.setUpdateDate(rset.getString("THEATER_UPDATE"));
+						Cinema.setLocationName(rset.getString("LOCATION_NAME"));
+						Cinema.setTheaterName(rset.getString("THEATER_NAME"));
+						Cinema.setLocalCode(rset.getString("LOCATION_CODE"));
+						Cinema.setMapLink(rset.getString("MAP_LINK"));
+						
+					theater.add(Cinema);	
+						
+						
+			}	
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return theater;
+		
+		
+	}
+	
+	public int cinemaInsert(Connection conn,Theater theater) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("cinemaInsert");
+		
+		try {
+			pstmt=conn.prepareStatement(sql);
+			
+			
+			pstmt.setString(1, theater.getTheaterName());
+			pstmt.setString(2, theater.getTheaterAddr());
+			pstmt.setString(3, theater.getMapLink());
+			pstmt.setString(4, theater.getLocalCode());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			
+			close(pstmt);
+			
+		}
+		
+		
+		
+		return result; 
+		
+		
+	}
+	
+	
+	public ArrayList<Location> category(Connection conn) {
+		
+		ArrayList<Location> location = new ArrayList<Location>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("category");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				
+				Location loca = new Location();
+								loca.setLocationCode(rset.getString("LOCATION_CODE"));
+								loca.setLocationName(rset.getString("LOCATION_NAME"));	
+			
+								location.add(loca);
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		
+		return location;
+		
+		
+		
+		
+		
+	}
+	
+	
+	public Theater cinemaEdit(Connection conn, int theaterNo) {
+		
+		Theater theater = new Theater();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("cinemaEdit");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, theaterNo);
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+						theater.setTheaterNo(rset.getInt("THEATER_NO"));
+						theater.setTheaterName(rset.getString("THEATER_NAME"));
+						theater.setTheaterAddr(rset.getString("THEATER_ADDR"));
+						theater.setLocationName(rset.getString("LOCATION_NAME"));
+						theater.setMapLink(rset.getString("MAP_LINK"));
+						theater.setLocalCode(rset.getString("LOCATION_CODE"));
+						theater.setUpdateDate(rset.getString("THEATER_UPDATE"));
+						
+					
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return theater;
+		
+		
+		
+	}
+	
+	public int modify(Connection conn, Theater theater) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("modify");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, theater.getTheaterName());
+			pstmt.setString(2, theater.getTheaterAddr());
+			pstmt.setString(3, theater.getMapLink());
+			pstmt.setString(4, theater.getLocalCode());
+			pstmt.setInt(5, theater.getTheaterNo());
+			
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result; 
+	}
+	
+	public int dele(Connection conn,int theaterNo) {
+		System.out.println(theaterNo);
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String sql = prop.getProperty("dele");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, theaterNo);
+			pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+	
 		
 		
 		return result; 

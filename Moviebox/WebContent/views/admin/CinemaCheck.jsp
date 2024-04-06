@@ -1,5 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import = "java.util.ArrayList, com.kh.theater.model.vo.Theater"%>
+    
+    <%
+    
+    ArrayList<Theater> theater =(ArrayList<Theater>)request.getAttribute("theater");
+    
+    %>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,105 +21,16 @@
 
     <style>
         
- *{
+ 		*{
             box-sizing: border-box;
-        }
-        body {
+        	}
+        	
+        body 
+        	{
             background-color: #1A1A1A
-        }
-        #header{
-           margin: auto;
-            height : 200px;
-            width: 1200px;
-        }
-
-        #top-header{
-            height: 75px;
-            position: relative;
-            border-bottom: 1px solid lightgray;
-        }
-        #login-area{
-            position: absolute;
-            right: 30px;
-            top: 20px;
-
-        }
-        #login-area > a{
-            display: block;
-            float: right;
-            text-decoration-line: none;
-            color: white;
-            font-size: 16px;
-            margin-left: 30px;
-            font-weight: bold;
-        }
-        
-
-        #header-navigator{
-            height : 125px;
-            
-            border-bottom: 1px solid lightgray;
-        }
-
-        #logo-div{
-            position: relative;
-            float: left;
-            height: 100%;
-            width: 30%;
-
-        }
-
-        #content{height : 1500px;}
-
-        #logo{
-            position: absolute; 
-            top: 50%;
-            margin-top: -25px;
-            width: 100%;
-            height: 50px;
-            font-size: 50px;
-            font-weight: bold;
-            color: #FFC145;
-            line-height: 45px;
-            
-            text-align: center;
-        }
-        a {
-            text-decoration-line: none;
-        }
-        #logo > a{
-            text-decoration-line: none;
-            color: #FFC145;
-        }
-        #navigator{
-            float: right;
-            width: 50%;
-            height: 100%;
-            margin-right: 15%;
-        }
-        .navi{
-            float:left;
-            width: 20%;
-            height: 100%;
-            text-align:center;
-            margin: 0 auto;
-        }
-        .navi > a{
-            display: block;
-            text-align: center;
-            width: 100%;
-            height: 100%;
-            color: white;
-            text-decoration-line: none;
-            line-height: 125px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-          
+        	}
+      
             div{
-           
-           
           
             box-sizing : border-box;
         }
@@ -306,10 +223,7 @@
 
        }
 
-     
-        
-       
-       }
+
 
        .check{
         height: 20px;
@@ -379,7 +293,17 @@
 
         }
         
+        .test123{
+        	width: 70px;
+        }
         
+        .theatername{
+        width: 350px
+        }
+        
+        .code{
+        width: 120px
+        }
 
 
      
@@ -445,7 +369,8 @@
                    <select name="#" id="select" >
                     <option value="">전체</option>
                     <option value="">가입일</option>
-                    <option value="">취향</option>
+                    <option value="">지역코드</option>
+                    <option vlaue="">지역</option>
                    </select>
                     <input type="search" id="find">
                     <button type="submit" id="btn" style="background-color: #FFC145;">
@@ -456,15 +381,15 @@
                     </button>
 
                     <div id="delete" >
-                        <button class="btn1" onclick="enrollment();">등록</button>
+                       <button type="button" class="btn1" onclick="enrollment();">등록</button>
                        <!-- 수정/ 삭제 클릭해서 상세조회에서 함-->
                     </div>
                     
                     <script>
                     	function enrollment(){
+                    		console.log('<%=contextPath%>/insertAdmin.cm');
                     		
-                    		location.href = '<%=contextPath%>/views/admin/CinemaInsert.jsp'; 
-                    		
+                    		location.href = '<%=contextPath%>/insertAdmin.cm';
                     	}
                     
                     
@@ -485,30 +410,47 @@
                                
                                 <th class="num">번호</th>
                                 <th>등록일</th>
-                                <th>지역</th>
-                                <th>영화관 이름</th> 
-                                <th>상영관수</th>
-                                <th>지도 링크</th>
+                                <th class="test123">지역</th>
+                                <th class="theatername">영화관 이름</th> 
+                                <th class="code">지역코드</th>
+              <!--                   <th>지도 링크</th>   -->
                               
                             </tr>
                           </thead>
                           <tbody>
-                            <tr>
+                          
+                         <% for (Theater t : theater) { %>
+                            <tr class="theater">
                                
-                                <td class="num">1</td>
-                                <td>01/01/01</td>
-                                <td>서울시 마포구</td>
-                                <td>롯데시네마 홍대점</td>
-                                <td>9</td>
-                                <td>지도 링크 </td>
+                                <td class="num"><%=t.getTheaterNo() %></td>
+                                <td><%=t.getUpdateDate() %></td>
+                                <td class="test123"><%=t.getLocationName() %></td>
+                                <td class="theatername"><%=t.getTheaterName() %></td>
+                                <td class="code"><%=t.getLocalCode() %></td>
+                             <!--    <td><%=t.getMapLink() %></td> --> 
                                 
                             </tr>
+                            
+                            <% } %>
                             
                           </tbody>
                         </table>
                         
                       </div>
                       </div>
+                      	<script>
+                      	
+                      	$(function(){
+                      		$('.theater').click(function(){
+                      			const theaterNo = $(this).children().eq(0).text();
+                      			location.href='<%=contextPath%>/editAdmin.cm?theaterNo='+theaterNo;
+                      		});
+                      	})
+                      	
+                      	
+                      	
+                      	
+                      	</script>
 
 
                       <div id="cnt2_paging-area"> 

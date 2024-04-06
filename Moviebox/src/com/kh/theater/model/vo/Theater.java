@@ -1,24 +1,90 @@
 package com.kh.theater.model.vo;
 
+import java.util.ArrayList;
+
+import com.kh.movie.model.vo.Movie;
+
 public class Theater {
 	private int theaterNo;
 	private String theaterName;
 	private String theaterAddr;
 	private String mapLink;
 	private String localCode;
+	private String updateDate;
+	private String locationName;
+	
+	private int screenNo;
+	private int movieNo;
+	private String movieTitle;
+	
+	private String filePath;
+	private String changeName;
+	
+	private ArrayList<Movie> movies;
+	
+	
+	public String getLocationName() {
+		return locationName;
+	}
+	public void setLocationName(String locationName) {
+		this.locationName = locationName;
+	}
 	public Theater() {
 		super();
 	}
-	public Theater(int theaterNo, String theaterName, String theaterAddr, String mapLink, String localCode) {
+	
+	public Theater(int theaterNo, String theaterName, String theaterAddr, String mapLink, String locationName) {
+		super();
+		this.theaterNo = theaterNo;
+		this.theaterName = theaterName;
+		this.theaterAddr = theaterAddr;
+		this.mapLink = mapLink;
+		this.locationName = locationName;
+	}
+	public Theater(int theaterNo, String theaterName, String theaterAddr, String mapLink, String localCode,String updateDate) {
 		super();
 		this.theaterNo = theaterNo;
 		this.theaterName = theaterName;
 		this.theaterAddr = theaterAddr;
 		this.mapLink = mapLink;
 		this.localCode = localCode;
+		this.updateDate= updateDate;
+	}
+	
+	
+	public Theater(int screenNo, int movieNo, String movieTitle) {
+		super();
+		this.screenNo = screenNo;
+		this.movieNo = movieNo;
+		this.movieTitle = movieTitle;
+	}
+	
+	public int getScreenNo() {
+		return screenNo;
+	}
+	public void setScreenNo(int screenNo) {
+		this.screenNo = screenNo;
+	}
+	public int getMovieNo() {
+		return movieNo;
+	}
+	public void setMovieNo(int movieNo) {
+		this.movieNo = movieNo;
+	}
+	public String getMovieTitle() {
+		return movieTitle;
+	}
+	public void setMovieTitle(String movieTitle) {
+		this.movieTitle = movieTitle;
 	}
 	public int getTheaterNo() {
 		return theaterNo;
+	}
+	public String getUpdateDate() {
+		return updateDate;
+	}
+	public void setUpdateDate(String updateDate) {
+		this.updateDate = updateDate;
 	}
 	public void setTheaterNo(int theaterNo) {
 		this.theaterNo = theaterNo;
@@ -47,10 +113,35 @@ public class Theater {
 	public void setLocalCode(String localCode) {
 		this.localCode = localCode;
 	}
+	
+	public ArrayList<Movie> getMovies() {
+		return movies;
+	}
+	public void setMovies(ArrayList<Movie> movies) {
+		this.movies = movies;
+	}
+	
+	public String getFilePath() {
+		return filePath;
+	}
+	public void setFilePath(String filePath) {
+		this.filePath = filePath;
+	}
+	public String getChangeName() {
+		return changeName;
+	}
+	public void setChangeName(String changeName) {
+		this.changeName = changeName;
+	}
+	
+	
+	
 	@Override
 	public String toString() {
 		return "Theater [theaterNo=" + theaterNo + ", theaterName=" + theaterName + ", theaterAddr=" + theaterAddr
-				+ ", mapLink=" + mapLink + ", localCode=" + localCode + "]";
+				+ ", mapLink=" + mapLink + ", localCode=" + localCode + ", updateDate=" + updateDate + ", locationName="
+				+ locationName + ", screenNo=" + screenNo + ", movieNo=" + movieNo + ", movieTitle=" + movieTitle
+				+ ", filePath=" + filePath + ", changeName=" + changeName + ", movies=" + movies + "]";
 	}
 	@Override
 	public int hashCode() {

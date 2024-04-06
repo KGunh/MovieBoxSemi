@@ -85,6 +85,7 @@
        				PERSONNEL,
        				MEMBER_NO,
                     SCREEN_NO,
+                    SCREEN_NAME,
        				MOVIE_TITLE,
                     TO_CHAR(WATCH_DATE,'HH24:MI') || '~' || TO_CHAR(WATCH_DATE + NUMTODSINTERVAL(TO_NUMBER(MOVIE_RT), 'MINUTE'), 'HH24:MI') AS RT,
        				THEATER_NAME,
@@ -138,6 +139,8 @@
   											) USING(TICKET_NO)  											 											
  				WHERE
        						MEMBER_NO = ?
+       				AND
+                      		FILE_LEVEL = 1 
  				ORDER
  	  			     BY
  	  	    				TICKET_NO DESC
@@ -358,4 +361,5 @@
       		   TICKET_NO = ?
 	
 	</entry>
+
 </properties>

@@ -9,13 +9,17 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
 import com.kh.board.model.vo.Board;
+import com.kh.common.model.vo.Attachment;
 import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.movie.model.vo.Movie;
 import com.kh.notice.model.vo.Notice;
+import com.kh.theater.model.vo.Screen;
+import com.kh.theater.model.vo.Theater;
 
 public class AdminPageDao {
 
@@ -514,6 +518,7 @@ public class AdminPageDao {
 			pstmt.setString(6, movie.getMovieStory());
 			pstmt.setString(7, movie.getGenreNo());
 			pstmt.setInt(8, movie.getDirectorNo());
+			pstmt.setString(9, movie.getTrailerVideo());
 			
 			result = pstmt.executeUpdate();
 
@@ -527,6 +532,36 @@ public class AdminPageDao {
 		return result;
 	}
 	
+	//영화 등록
+	public int updateMovie(Connection conn, Movie movie) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("updateMovie");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, movie.getMovieTitle());
+			pstmt.setString(2, movie.getMovieRt());
+			pstmt.setString(3, movie.getMovieRated());
+			pstmt.setString(4, movie.getMovieRelease());
+			pstmt.setString(5, movie.getMovieStory());
+			pstmt.setString(6, movie.getGenreNo());
+			pstmt.setInt(7, movie.getDirectorNo());
+			pstmt.setString(8, movie.getTrailerVideo());
+			pstmt.setInt(9, movie.getMovieNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
 	
 	
 	//Cast 등록
@@ -555,5 +590,420 @@ public class AdminPageDao {
 	}
 	
 	
+	//영화 상세
+	public Movie adminMovieDetail(Connection conn, int movieNo){
+		Movie m = new Movie(); 
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminMovieDetail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, movieNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) { 
+				m.setMovieNo(rset.getInt("MOVIE_NO"));
+				m.setMovieTitle(rset.getString("MOVIE_TITLE"));
+				m.setMovieRt(rset.getString("MOVIE_RT"));
+				m.setMovieRated(rset.getString("MOVIE_RATED"));
+				m.setMovieRelease(rset.getString("MOVIE_RELEASE"));
+				m.setMovieStory(rset.getString("MOVIE_STORY"));
+				m.setStatus(rset.getString("STATUS"));
+				m.setGenreNo(rset.getString("GENRE_NO"));
+				m.setGenreName(rset.getString("GENRE_NAME"));
+				m.setDirectorNo(rset.getInt("DIRECTOR_NO"));
+				m.setDirectorName(rset.getString("DIRECTOR_NAME"));
+				m.setMovieUpdate(rset.getString("MOVIE_UPDATE"));
+				m.setTrailerVideo(rset.getString("TRAILER_VIDEO"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return m;
+	}
+	
+	public String adminMovieCast(Connection conn, int movieNo) {
+		String cast = "";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("SelectCastInfo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			
+			pstmt.setInt(1, movieNo);
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			cast = rset.getString("ACTOR_NAMES");
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return cast;
+	}
+	
+	public List<Theater> selectTheaterList(Connection conn,String locationCode){
+		List<Theater> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectTheaterList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, locationCode);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Theater t = new Theater();
+				
+				t.setTheaterNo(rset.getInt("THEATER_NO"));
+				t.setTheaterName(rset.getString("THEATER_NAME"));
+				list.add(t);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list;
+		
+		
+		
+	}
+	public List<Screen> adminDetailScreenName(Connection conn, Screen sc){
+		List<Screen> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminDetailScreenName");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, sc.getTheaterNo());
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				Screen s = new Screen();
+				
+				s.setScreenName(rset.getString("SCREEN_NAME"));
+				
+				list.add(s);
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
+	}
+	public List<Movie> adminMovieList(Connection conn,String screenName, Screen sc){
+		List<Movie> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminMovieList");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, sc.getTheaterNo());
+			pstmt.setString(2, screenName);
+			pstmt.setString(3, sc.getWatchDate());
+			rset = pstmt.executeQuery();
+			
+			while (rset.next()) {
+				Movie m = new Movie();
+				m.setScreenNo(rset.getInt("SCREEN_NO"));
+				m.setMovieNo(rset.getInt("MOVIE_NO"));
+				m.setMovieTitle(rset.getString("MOVIE_TITLE"));
+				m.setWatchDate(rset.getString("WATCH_DATE"));
+				list.add(m);
+				
+			}
+			
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return list;
 
+		
+		
+	}
+	
+	public List<Screen> adminDetailTheater(Connection conn, Screen sc) {
+		List<Screen> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminDetailTheater");
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+
+			pstmt.setInt(1, sc.getTheaterNo());
+			pstmt.setString(2, sc.getWatchDate());
+
+			rset = pstmt.executeQuery();
+
+			while (rset.next()) {
+				Screen s = new Screen();
+
+				s.setScreenName(rset.getString("SCREEN_NAME"));
+				s.setWatchDate(rset.getString("WATCH_DATE"));
+				s.setTheaterName(rset.getString("THEATER_NAME"));
+				s.setMovieTitle(rset.getString("MOVIE_TITLE"));
+				
+				
+				list.add(s);
+			}
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+
+		return list;
+
+	}
+	
+	
+	
+	
+	
+	public List<Movie> searchTitle(Connection conn, String keyword, PageInfo pi) {
+		
+		List<Movie> list = new ArrayList();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchTitle");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			int startRow = (pi.getCurrentPage() - 1) * pi.getBoardLimit() + 1;
+			int endRow = startRow + pi.getBoardLimit() - 1;
+
+			pstmt.setString(1, keyword);
+			pstmt.setInt(2, startRow);
+			pstmt.setInt(3, endRow);
+			
+			rset = pstmt.executeQuery();
+			while (rset.next()) {
+			Movie movie = new Movie();
+			
+				movie.setMovieNo(rset.getInt("MOVIE_NO"));
+				movie.setMovieRelease(rset.getString("MOVIE_RELEASE"));
+				movie.setMovieTitle(rset.getString("MOVIE_TITLE"));
+				movie.setMovieRated(rset.getString("MOVIE_RATED"));
+				movie.setGenreNo(rset.getString("GENRE_NAME"));
+				movie.setMovieUpdate(rset.getString("MOVIE_UPDATE"));
+				
+				list.add(movie);
+			}	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+//		System.out.println(list);
+		return list;
+		
+	}
+	
+	
+	public int insertScreen(Connection conn, Screen sc) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("insertScreen");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, sc.getTheaterNo());
+			pstmt.setInt(2, sc.getMovieNo());
+			pstmt.setString(3, sc.getWatchDate());
+			pstmt.setString(4, sc.getScreenName());
+			
+			result = pstmt.executeUpdate();
+
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	public int selectScreen(Connection conn, Screen sc){
+		int count = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String sql = prop.getProperty("selectScreen");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, sc.getWatchDate());
+			pstmt.setInt(2, sc.getTheaterNo());
+			pstmt.setString(3, sc.getScreenName());
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			count = rset.getInt("COUNT(*)");
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return count;
+		
+	}
+	
+	public int adminMovieDelete(Connection conn, int movieNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("adminMovieDelete");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, movieNo);
+			result = pstmt.executeUpdate();
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	
+	
+	public String adminMoviePoster(Connection conn, int movieNo) {
+		String poster = "";
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("SelectPoster");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			
+			pstmt.setInt(1, movieNo);
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			poster = rset.getString("FILE_PATH") + "/" + rset.getString("CHANGE_NAME");
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return poster;
+	}
+	
+	//영화 등록전 시퀀스 조회
+	public int SelectFileNo(Connection conn) {
+		int fileNo = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("SelectFileNo");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			fileNo = rset.getInt("FILE_NO");
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return fileNo;
+	}
+	
+	public int InsertAttach(Connection conn, int movieNo, ArrayList<Attachment> list) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("InsertFile");
+		
+		try {
+			
+			for(Attachment at : list) {
+				pstmt = conn.prepareStatement(sql);
+				
+				pstmt.setInt(1, movieNo);
+				pstmt.setString(2, at.getOrginName());
+				pstmt.setString(3, at.getChangeName());
+				pstmt.setString(4, at.getFilePath());
+				pstmt.setInt(5, at.getFileLevel());
+				
+				result += pstmt.executeUpdate();
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result == list.size() ? 1 : 0;
+	}
 }

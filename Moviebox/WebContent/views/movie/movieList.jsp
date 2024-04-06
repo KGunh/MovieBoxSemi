@@ -2,24 +2,27 @@
     pageEncoding="UTF-8"%>
     
 <%@ page import="com.kh.movie.model.vo.*, java.util.ArrayList" %>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <%
-	ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("movie");
-	System.out.println(list); // 리스트 출력 확인 
+	ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("movieList");
+	String type = (String)request.getAttribute("type");
+	String genre = (String)request.getAttribute("genre");
+	
 %>
     
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>영화 목록</title>
     <style>
         body{
             background-color: #1A1A1A;
         }
 
         div{
-            /* border: 1px solid red; */
             box-sizing: border-box;
         }
 
@@ -29,28 +32,32 @@
         }
 
         /* 영화 리스트 전체 감싸는 div */
-        .movie-list{
+        #movie-list{
             width: 1200px;
             height: auto;
             margin: 0 auto;
             position: relative;
         }
 
-        .movie-list-header{
-            width: 100%;
+        #movie-list-header{
+            width: 1200px;
             height: 100px;
-            margin-top: 20px;
+            margin-top: 10px;
+            margin-bottom: 10px;
         }
 
         #movie-list-category{
-            width: 80%;
+            width: 940px;
             height: 100px;
-            left: 0;
-            position: absolute;
             padding-top: 13px;
+            float: left;
+        }
+        
+        #movieCategory{
+        	width:600px;
         }
 
-        .movie-list-genre{
+        #movie-list-genre{
             width: 70px;
             height: 70px;
             color: white;
@@ -59,39 +66,23 @@
             font-weight: bold;
             float: left;
             padding-top: 20px;
+            cursor: pointer;
         }
 
-        .movie-list-genre1{
-            width: 120px;
-            height: 70px;
-            color: white;
-            text-align: center;
-            font-size: 20px;
-            font-weight: bold;
-            float: left;
-            padding-top: 20px;
-        }
 
-        .movie-list-genre:hover{
+        #movie-list-genre:hover{
             background-color: #FFC145;
             border-radius: 25px;
             color: #1A1A1A;
             font-weight: bold;
         }
 
-        .movie-list-genre1:hover{
-            background-color: #FFC145;
-            border-radius: 25px;
-            color: #1A1A1A;
-            font-weight: bold;        
-        }
 
         /* 정렬 / 검색창 */
         #searchalign{
             width: 250px;
             height: 100px;
-            position: absolute;
-            right: 0;
+            float: left;
             padding-top: 13px;
             color: #808080;
         }
@@ -100,12 +91,10 @@
             color: white;
             cursor: pointer;
             font-size: 15px;
-            text-decoration: none;
         }
 
         .align-a:hover{
             color: #FFC145;
-            text-decoration: none;
         }
 
         #movie-list-search{
@@ -135,18 +124,24 @@
         }
 
         /* 영화 목록 부분 */
-        .movie-content-body{
-            width: 100%;
+        #movie-content-body{
+            width: 1200px;
             height: auto;
+            margin-bottom: 30px;
         }
 
         .movie-content{
-            width: 230px;
-            height: 400px;
-            float: left;
-            margin-left: 7px;
+            width: 235px;
+            height: auto;
             color: white;
-            border: 1px solid pink;
+            display: inline-block;
+            margin-bottom: 20px;
+            border: 1px solid #383838;
+            padding-bottom: 10px;
+        }
+        
+        .movie-conten1{
+            width: 1200px;
         }
 
         .movie-list-img{
@@ -154,23 +149,32 @@
         }
 
         .movie-list-title{
-            height: 50px;
-            border: 1px solid seagreen;
+            height: 70px;
             text-align: center;
-            font-size: 23px;
+            font-size: 20px;
             font-weight: bold;
             padding-top: 6px;
             color: white;
         }
 
         #movie-content-btn1{
-            width: 100px;
-            height: 35px;
+        	width: 100px;
+        	height: 35px;
+        	float:left;
             margin-right: 10px;
-            margin-left: 5px;
+            margin-left: 10px;
             border-radius: 8px;
-            font-weight: bold;
-            font-size: 15px;
+            background-color: white;
+            text-align: center;
+            line-height: 32px;
+        }
+        
+        #detailbtn{
+        	text-decoration: none;
+        	color: black;
+        	font-size: 15px;
+        	font-weight: bold;
+        	display: block;
         }
 
         #movie-content-btn2{
@@ -180,11 +184,7 @@
             background-color: #FFC145;
             font-weight: bold;
             font-size: 15px;
-        }
-
-        .movie-conten1{
-            height: 400px;
-            margin-top: 20px;
+            border: none;
         }
 
     </style>
@@ -193,19 +193,27 @@
     <%@ include file="/views/common/header.jsp" %>
     
     <div id="wrap">
- 
-        <div class="movie-list">
+        <div id="movie-list">
 
-            <div class="movie-list-header">
+            <div id="movie-list-header">
             <!-- 카테고리 시작 -->
                 <div id="movie-list-category">
-                    <div class="movie-list-genre">전체</div>
-                    <div class="movie-list-genre">액션</div>
-                    <div class="movie-list-genre">로맨스</div>
-                    <div class="movie-list-genre1">공포/스릴러</div>
-                    <div class="movie-list-genre">코미디</div>
-                    <div class="movie-list-genre1">애니메이션</div>
+                	<div id="movieCategory">
+	                    <div id="movie-list-genre">전체</div>
+	                    <div id="movie-list-genre">액션</div>
+	                    <div id="movie-list-genre">로맨스</div>
+	                    <div id="movie-list-genre" style="width:130px;">공포/스릴러</div>
+	                    <div id="movie-list-genre">코미디</div>
+	                    <div id="movie-list-genre">애니</div>
+	                    <div id="movie-list-genre">판타지</div>
+                    </div>
                 </div>
+                
+                <!-- 장르 버튼 -->
+                <form id="selectGenreForm" action="<%=contextPath%>/selectGenre.movie" method="get">
+                	<input id="selectTypeGenre" type="hidden" name="type" value="genre">
+                	<input id="genreInput" type="hidden" name="genre">
+                </form>
 
                 <!-- 정렬 / 검색창 -->
                 <div id="searchalign">
@@ -222,174 +230,62 @@
                 </div>
             </div> <!-- movie-list-header -->
 
-            <div class="movie-content-body">
-				
+            <div id="movie-content-body">
 			<% if(list.isEmpty()) { %>
-				등록된 영화가 존재하지 않습니다. <br>
+				<a style="color: white;">등록된 영화가 존재하지 않습니다.</a> <br>
 			<% } else { %>
-                <div class="movie-conten1">
+
+                <% for(Movie m : list) { %>
                     <div class="movie-content">
-                        <div class="movie-list-img"> 포스터 </div>
-                        <div class="movie-list-title"> 영화 타이틀 </div>
-                        <button id="movie-content-btn1" onclick="detailPage();">상세정보</button>
-                        <button id="movie-content-btn2">예매정보</button>
+                    	<input type="hidden" id="inputId" name="movieNo" value="<%= m.getMovieNo()%>" />
+                    	
+                        <div class="movie-list-img"> <!-- 포스터 -->
+                        	<a href="<%=contextPath%>/detail.movie?movieNo=<%= m.getMovieNo()%>"><img src="<%= m.getFilePath() %>/<%= m.getChangeName() %>" width="232" height="300"></a>
+                        </div>
+                        
+                        <div class="movie-list-title"><%= m.getMovieTitle() %></div>
+                        <div id="movie-content-btn1"><a href="<%=contextPath%>/detail.movie?movieNo=<%= m.getMovieNo()%>" id="detailbtn">상세정보</a></div>
+	                    <% if(loginUser == null) { %>
+	                    	<button id="movie-content-btn2" onclick="noMember();">예매하기</button>
+	                	<%} else { %>
+	                		<button id="movie-content-btn2" onclick="reservationPage();">예매하기</button>
+	                	<% } %>
                     </div>
-                    <div class="movie-content">
-                        <div class="movie-list-img"> 포스터 </div>
-                        <div class="movie-list-title"> 영화 타이틀 </div>
-                        <button id="movie-content-btn1">상세정보</button>
-                        <button id="movie-content-btn2">예매정보</button>
-                    </div>
+                 <% } %>
              <% } %>
 
-                     <!--<div class="movie-content">
-                        <div class="movie-list-img"> 포스터 </div>
-                        <div class="movie-list-title"> 영화 타이틀 </div>
-                        <button id="movie-content-btn1">상세정보</button>
-                        <button id="movie-content-btn2">예매정보</button>
-                    </div>
-
-                    <div class="movie-content">
-                        <div class="movie-list-img"> 포스터 </div>
-                        <div class="movie-list-title"> 영화 타이틀 </div>
-                        <button id="movie-content-btn1">상세정보</button>
-                        <button id="movie-content-btn2">예매정보</button>
-                    </div>
-
-                    <div class="movie-content">
-                        <div class="movie-list-img"> 포스터 </div>
-                        <div class="movie-list-title"> 영화 타이틀 </div>
-                        <button id="movie-content-btn1">상세정보</button>
-                        <button id="movie-content-btn2">예매정보</button>
-                    </div>
-                </div>
-
-                <div class="movie-conten1">
-                    <div class="movie-content">
-                        <div class="movie-list-img"> 포스터 </div>
-                        <div class="movie-list-title"> 영화 타이틀 </div>
-                        <button id="movie-content-btn1">상세정보</button>
-                        <button id="movie-content-btn2">예매정보</button>
-                    </div>
-
-                    <div class="movie-content">
-                        <div class="movie-list-img"> 포스터 </div>
-                        <div class="movie-list-title"> 영화 타이틀 </div>
-                        <button id="movie-content-btn1">상세정보</button>
-                        <button id="movie-content-btn2">예매정보</button>
-                    </div>
-
-                    <div class="movie-content">
-                        <div class="movie-list-img"> 포스터 </div>
-                        <div class="movie-list-title"> 영화 타이틀 </div>
-                        <button id="movie-content-btn1">상세정보</button>
-                        <button id="movie-content-btn2">예매정보</button>
-                    </div>
-
-                    <div class="movie-content">
-                        <div class="movie-list-img"> 포스터 </div>
-                        <div class="movie-list-title"> 영화 타이틀 </div>
-                        <button id="movie-content-btn1">상세정보</button>
-                        <button id="movie-content-btn2">예매정보</button>
-                    </div>
-
-                    <div class="movie-content">
-                        <div class="movie-list-img"> 포스터 </div>
-                        <div class="movie-list-title"> 영화 타이틀 </div>
-                        <button id="movie-content-btn1">상세정보</button>
-                        <button id="movie-content-btn2">예매정보</button>
-                    </div>
-                </div>
-
-                <div class="movie-conten1">
-                    <div class="movie-content">
-                        <div class="movie-list-img"> 포스터 </div>
-                        <div class="movie-list-title"> 영화 타이틀 </div>
-                        <button id="movie-content-btn1">상세정보</button>
-                        <button id="movie-content-btn2">예매정보</button>
-                    </div>
-
-                    <div class="movie-content">
-                        <div class="movie-list-img"> 포스터 </div>
-                        <div class="movie-list-title"> 영화 타이틀 </div>
-                        <button id="movie-content-btn1">상세정보</button>
-                        <button id="movie-content-btn2">예매정보</button>
-                    </div>
-
-                    <div class="movie-content">
-                        <div class="movie-list-img"> 포스터 </div>
-                        <div class="movie-list-title"> 영화 타이틀 </div>
-                        <button id="movie-content-btn1">상세정보</button>
-                        <button id="movie-content-btn2">예매정보</button>
-                    </div>
-
-                    <div class="movie-content">
-                        <div class="movie-list-img"> 포스터 </div>
-                        <div class="movie-list-title"> 영화 타이틀 </div>
-                        <button id="movie-content-btn1">상세정보</button>
-                        <button id="movie-content-btn2">예매정보</button>
-                    </div>
-
-                    <div class="movie-content">
-                        <div class="movie-list-img"> 포스터 </div>
-                        <div class="movie-list-title"> 영화 타이틀 </div>
-                        <button id="movie-content-btn1">상세정보</button>
-                        <button id="movie-content-btn2">예매정보</button>
-                    </div>
-                </div>
-
-                <div class="movie-conten1">
-                    <div class="movie-content">
-                        <div class="movie-list-img"> 포스터 </div>
-                        <div class="movie-list-title"> 영화 타이틀 </div>
-                        <button id="movie-content-btn1">상세정보</button>
-                        <button id="movie-content-btn2">예매정보</button>
-                    </div>
-
-                    <div class="movie-content">
-                        <div class="movie-list-img"> 포스터 </div>
-                        <div class="movie-list-title"> 영화 타이틀 </div>
-                        <button id="movie-content-btn1">상세정보</button>
-                        <button id="movie-content-btn2">예매정보</button>
-                    </div>
-
-                    <div class="movie-content">
-                        <div class="movie-list-img"> 포스터 </div>
-                        <div class="movie-list-title"> 영화 타이틀 </div>
-                        <button id="movie-content-btn1">상세정보</button>
-                        <button id="movie-content-btn2">예매정보</button>
-                    </div>
-
-                    <div class="movie-content">
-                        <div class="movie-list-img"> 포스터 </div>
-                        <div class="movie-list-title"> 영화 타이틀 </div>
-                        <button id="movie-content-btn1">상세정보</button>
-                        <button id="movie-content-btn2">예매정보</button>
-                    </div>
-
-                    <div class="movie-content">
-                        <div class="movie-list-img"> 포스터 </div>
-                        <div class="movie-list-title"> 영화 타이틀 </div>
-                        <button id="movie-content-btn1">상세정보</button>
-                        <button id="movie-content-btn2">예매정보</button>
-                    </div>-->
-                </div> 
             </div>
-            
-            <script>
-            function detailPage(){
-            	location.href = '<%= contextPath %>/views/movie/movieDetail.jsp';
-            }
-            
-            </script>
-            
-
 
         </div> <!-- movie-list -->
     </div> <!-- wrap -->
     
     
 	<%@ include file="/views/common/footer.jsp" %>
+	
+    <script>
+
+    	// 비회원 상태에서 예매하기 버튼 클릭 시
+		function noMember(){
+			alert('로그인이 필요한 서비스 입니다.');
+			location.href = ('<%=contextPath%>/loginForm.me');
+		}
+		
+    	// 카테고리 네비 바
+	    document.getElementById('movieCategory').onclick = function(e){
+	    	const selectGenre = e.target.innerHTML;
+	        document.getElementById('genreInput').value = selectGenre;
+	        document.getElementById('selectGenreForm').submit();
+		}
+	    	const genreType = document.getElementById('selectTypeGenre')
+		
+
+    	// 예매하기 버튼 -> 예매 페이지
+    	function reservationPage(){
+    		location.href = '<%= contextPath %>/movie.reservation';
+    	}
+	    	
+
+	</script>
     
 </body>
 </html>

@@ -18,11 +18,40 @@ public class Movie {
 	private String movieUpdate;
 	private String genreName;
     
-    
+	private String directorName;
 
+	private String watchDate;
+	
+	private int screenNo;
+	
+	private String changeName;
+	
+	private String trailerVideo;
+	
+	
 	public Movie() {
 		super();
 	}
+
+	
+	
+	public Movie(int movieNo, String movieTitle, String movieRt, String movieRated, String movieRelease,
+			String movieStory, String status, int directorNo, String filePath, String genreName, String changeName) {
+		super();
+		this.movieNo = movieNo;
+		this.movieTitle = movieTitle;
+		this.movieRt = movieRt;
+		this.movieRated = movieRated;
+		this.movieRelease = movieRelease;
+		this.movieStory = movieStory;
+		this.status = status;
+		this.directorNo = directorNo;
+		this.filePath = filePath;
+		this.genreName = genreName;
+		this.changeName = changeName;
+	}
+
+
 	public Movie(int movieNo, String movieTitle, String movieRt, String movieRated, String movieRelease,
 			String movieStory, String status, String genreNo, int directorNo) {
 		super();
@@ -36,6 +65,49 @@ public class Movie {
 		this.genreNo = genreNo;
 		this.directorNo = directorNo;
 	}
+	
+	
+	
+	public String getTrailerVideo() {
+		return trailerVideo;
+	}
+
+
+	public void setTrailerVideo(String trailerVideo) {
+		this.trailerVideo = trailerVideo;
+	}
+
+
+	public String getChangeName() {
+		return changeName;
+	}
+
+
+	public void setChangeName(String changeName) {
+		this.changeName = changeName;
+	}
+
+
+	public int getScreenNo() {
+		return screenNo;
+	}
+
+
+	public void setScreenNo(int screenNo) {
+		this.screenNo = screenNo;
+	}
+
+
+	public String getWatchDate() {
+		return watchDate;
+	}
+
+
+	public void setWatchDate(String watchDate) {
+		this.watchDate = watchDate;
+	}
+
+
 	public int getMovieNo() {
 		return movieNo;
 	}
@@ -121,6 +193,19 @@ public class Movie {
 	public void setGenreName(String genreName) {
 		this.genreName = genreName;
 	}
+	
+	
+	
+	public String getDirectorName() {
+		return directorName;
+	}
+	public void setDirectorName(String directorName) {
+		this.directorName = directorName;
+	}
+	
+	
+	
+	
 	@Override
 	public String toString() {
 		return "Movie [movieNo=" + movieNo + ", movieTitle=" + movieTitle + ", movieRt=" + movieRt + ", movieRated="

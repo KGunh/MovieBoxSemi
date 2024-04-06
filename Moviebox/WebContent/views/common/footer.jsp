@@ -72,6 +72,10 @@
     </style>
 </head>
 <body>
+<script>
+
+</script>
+
 	<div id="footer">
 		<div class="corp_area">
 			<div id="corp_logo">

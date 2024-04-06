@@ -6,16 +6,44 @@ public class Answer {
 	private String createDate;
 	private String status;
 	private int boardNo;
+	private String answerWriter;
+	
+	
 	public Answer() {
 		super();
 	}
-	public Answer(int answerNo, String answerContent, String createDate, String status, int boardNo) {
+	
+
+
+
+	public Answer(int answerNo, String answerContent, String createDate, String answerWriter) {
+		super();
+		this.answerNo = answerNo;
+		this.answerContent = answerContent;
+		this.createDate = createDate;
+		this.answerWriter = answerWriter;
+	}
+
+
+	public Answer(int answerNo, String answerContent, String createDate, String status, int boardNo, String answerWriter) {
 		super();
 		this.answerNo = answerNo;
 		this.answerContent = answerContent;
 		this.createDate = createDate;
 		this.status = status;
 		this.boardNo = boardNo;
+		this.answerWriter = answerWriter;
+	}
+	
+	
+	
+	
+	
+	public String getAnswerWriter() {
+		return answerWriter;
+	}
+	public void setAnswerWriter(String answerWriter) {
+		this.answerWriter = answerWriter;
 	}
 	public int getAnswerNo() {
 		return answerNo;

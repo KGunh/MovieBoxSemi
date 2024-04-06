@@ -57,7 +57,7 @@
 			ADDRESS =?,
 			PHONE =?,
 			STATUS =?,
-			UPDATE_DATE = SYSDATE
+			UPDATE_DATE 
 		WHERE 
 			MEMBER_ID = ?
 		AND
@@ -65,10 +65,101 @@
 						
 </entry>
 
+<entry key="cinemaCheck">
+
+	SELECT
+		THEATER_NO,
+		THEATER_UPDATE,
+		LOCATION_NAME,
+		THEATER_NAME,
+		C.LOCATION_CODE,
+		MAP_LINK
+	FROM
+		TB_THEATER C, TB_LOCATION L
+     WHERE 
+           C.LOCATION_CODE = L.LOCATION_CODE 
+</entry>
+
+<entry key="cinemaInsert">
+
+		INSERT 
+			INTO TB_THEATER(
+						THEATER_NO,
+						THEATER_NAME,
+						THEATER_ADDR,
+						MAP_LINK,
+						LOCATION_CODE
+						)
+						
+					VALUES(
+						SEQ_THERNO.NEXTVAL,
+						?,
+						?,
+						?,
+						?
+		)	 
+				
+
+
+
+</entry>
+<entry key="category">
+
+	SELECT * FROM TB_LOCATION
+
+
+</entry>
+<entry key="cinemaEdit">
+
+	SELECT 
+			THEATER_NO,
+			THEATER_NAME,
+			THEATER_ADDR,
+			MAP_LINK,
+			LOCATION_NAME,
+			C.LOCATION_CODE,
+			THEATER_UPDATE
+	  FROM
+		TB_THEATER C, TB_LOCATION L
+	  WHERE 
+           C.LOCATION_CODE = L.LOCATION_CODE 
+           		AND
+			THEATER_NO = ? 		
+			
+</entry>
+
+<entry key="modify">
+
+	UPDATE 
+		TB_THEATER 
+	SET
+		THEATER_NAME = ?,
+		THEATER_ADDR = ?,
+		MAP_LINK = ? ,
+		LOCATION_CODE = ?,
+		THEATER_UPDATE = SYSDATE
+	WHERE
+		THEATER_NO = ?	
+</entry>
+
+<entry key="dele">
+
+	DELETE
+		FROM TB_THEATER
+	WHERE 
+		THEATER_NO = ?	
+
+
+</entry>
+
+<entry key="deleteAdmin">
 
 
 
 
+
+
+</entry>
 
 
 

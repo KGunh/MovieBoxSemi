@@ -36,34 +36,10 @@
         a {
             text-decoration-line: none;
         }
-        #logo > a{
-            text-decoration-line: none;
-            color: #FFC145;
-        }
-        #navigator{
-            float: right;
-            width: 50%;
-            height: 100%;
-            margin-right: 15%;
-        }
-        .navi{
-            float:left;
-            width: 20%;
-            height: 100%;
-            text-align:center;
-            margin: 0 auto;
-        }
-        .navi > a{
-            display: block;
-            text-align: center;
-            width: 100%;
-            height: 100%;
-            color: white;
-            text-decoration-line: none;
-            line-height: 125px;
-            font-size: 18px;
-            font-weight: bold;
-        }
+       
+        
+       
+        
 
           
             div{
@@ -182,7 +158,7 @@
         .table table-hover{
             
             
-            border: 1px solid white;             
+            background-color:  white;             
         }
 
         .title{
@@ -192,6 +168,7 @@
             color: rgb(255, 255, 255);
             font-size: 14px;
             font-weight: bolder;
+            border-bottom : 1px solid gray;
            
            
         }
@@ -204,7 +181,7 @@
             margin-top: 10px;
             margin-right: 10px;
             color:white;
-            border-bottom: 1px solid white;
+            border-bottom: 1px solid gray;
             
             
         }
@@ -332,12 +309,11 @@
                     </li>
                 </ul>    
             </div>
-
             <!------------------------------------------------------------>
 			 <div id="content2">
             <div class="content_2">
             
-            	<form action="<%=contextPath%>/revisedAdmin.mb">
+            	<form action="<%=contextPath%>/revisedAdmin.mb" method="post">
                 <h2> 회원 기본 정보</h2>
                 <div class="content_2_top">
                  
@@ -379,7 +355,7 @@
                             </tr>
                              <tr>
                               <th class="title">이메일</th>
-                              <td><input type="text" class="input1" name="Email" value="<%=m.getEmail()%>" ></td> 
+                              <td><input type="email" class="input1" name="Email" value="<%=m.getEmail()%>" ></td> 
                             </tr>
                             <tr>
                               <th class="title">주소</th>
@@ -387,15 +363,15 @@
                             </tr>
                             <tr>  
                               <th class="title">전화번호</th>
-                              <td><input type="text" class="input1" name="phone" value="<%=m.getPhone()%>" ></td>
+                              <td><input type="number" class="input1" name="phone" value="<%=m.getPhone()%>" maxlength="11" ></td>
                             </tr>
                             <tr>
                               <th class="title">가입일</th>
-                              <td><input type="text" class="input1" value="<%=m.getEnrollDate()%>"></td>
+                              <td><input type="text" class="input1" value="<%=m.getEnrollDate()%>" readonly></td>
                             </tr>  
                             <tr>
                               <th class="title">탈퇴여부</th>
-                              <td><input type="text" class="input1" name="status" value="<%=m.getStatus()%>"></td>
+                              <td><input type="text" class="input1" name="status" value="<%=m.getStatus()%>" maxlength="1"></td>
                             </tr>
                             
                            
@@ -407,16 +383,27 @@
                 </div>
                 <div id="buttoon">
                    <button type="submit" class="btn1" >수정</button>
-                   <button type="button" class="btn1" onclick="enrollment();">닫기</button>
+                   <button type="button" class="btn1" onclick="close();">닫기</button>
+                    
+                    </form>
+                   
+                  
                 </div>
                 
-                </form>
+                
                 
                 <script>
                 
-                function enrollment(){                	
+                function close(){                	
                 	location.href='<%=contextPath%>/selectAdmin.mb';
                 }
+                
+                function deleteAdmin(){
+            		
+            		
+            		location.href='<%=contextPath%>/deleteAdmin.mb?memberNo='+<%=m.getMemberNo()%>;
+            	}
+              
                 
                 </script>
             </div>

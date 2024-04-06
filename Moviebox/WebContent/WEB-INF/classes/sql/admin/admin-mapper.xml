@@ -23,6 +23,7 @@
 				LEFT
 				JOIN
 				    TB_GENRE ON(GENRE_NO = GENRE_CODE)
+			   WHERE STATUS = 'Y'
 				ORDER
 				   BY
 				     MOVIE_NO DESC) A)
@@ -30,7 +31,7 @@
 	</entry>
 	
 	
-	<!-- 영화 글 전체 개수 (그 개수로 페이징바 생성하게 하기위함)-->
+
 		<entry key="selectListCount">
 		SELECT
 		    COUNT(*)
@@ -42,72 +43,7 @@
 	
 	
 	
-	<!-- 공지 -->
-	<entry key="adminSelectNoticeList">
-		SELECT *
-		FROM (SELECT A.*, ROWNUM RNUM
-		      FROM (SELECT
-				    NOTICE_NO,
-				    CATEGORY_NAME,
-				    NOTICE_TITLE,                  
-				    TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE,                   
-				    COUNT      
-				FROM
-				    TB_NOTICE    
-				JOIN
-				    TB_CATEGORY ON (NOTICE_CATEGORY = CATEGORY_NO)
-				ORDER
-				   BY
-				    NOTICE_NO DESC) A)
-		WHERE RNUM BETWEEN ? AND ?
-	</entry>
-
-<!-- 공지 글 전체 개수 (그 개수로 페이징바 생성하게 하기위함)-->
-	<entry key="selectListCountNotice">
-		SELECT
-		    COUNT(*)
-		  FROM
-		    TB_NOTICE
-		 WHERE
-		    STATUS = 'Y'
-	</entry>
-
-
-	<!-- 문의 -->
-	<entry key="adminSelectQnAList">
-		SELECT *
-		FROM (SELECT A.*, ROWNUM RNUM
-		      FROM (SELECT
-		    BOARD_NO,
-		    CATEGORY_NO,
-		    BOARD_TITLE,
-		    MEMBER_ID,
-		    TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE,
-		    COUNT
-		FROM
-		   TB_BOARD
-		JOIN 
-		    TB_MEMBER USING (MEMBER_NO)
-		ORDER
-		   BY
-		    BOARD_NO DESC) A)
-		WHERE RNUM BETWEEN ? AND ?
-	</entry>
-
-<!-- 문의 글 전체 개수 (그 개수로 페이징바 생성하게 하기위함)-->
-	<entry key="selectListCountQnA">
-		SELECT
-		    COUNT(*)
-		  FROM
-		    TB_BOARD
-		 WHERE
-		    STATUS = 'Y'
-	</entry>
-
-
-
-
-<!--장르카테고리(adminMovieEnrollForm화면에서 보여주기 + adminMovieInsert에서도) -->
+<!--장르카테고리-->
 	<entry key="SelectGenreList">
 		SELECT
 		    GENRE_CODE,
@@ -130,7 +66,7 @@
 	<!-- 감독 등록전 시퀀스 조회 -->
 	<entry key="SelectDirectorNo">
 		SELECT 
-			SEQ_DIRECTOR_NO.NEXTVAL AS DIRECTOR_NO
+			SEQ_DIRECNO.NEXTVAL AS DIRECTOR_NO
 		FROM
 			  DUAL
 	</entry>
@@ -166,7 +102,7 @@
 	<!-- 출연진 등록전 시퀀스 조회 -->
 	<entry key="SelectActorNo">
 		SELECT 
-			SEQ_ACTOR_NO.NEXTVAL AS ACTOR_NO
+			SEQ_ACTNO.NEXTVAL AS ACTOR_NO
 		FROM
 		  DUAL
 	</entry>
@@ -191,7 +127,7 @@
 	<!-- 영화 등록전 시퀀스 조회 -->
 	<entry key="SelectMovieNo">
 		SELECT
-			 SEQ_MOVIE_NO.NEXTVAL AS MOVIE_NO
+			 SEQ_MVNO.NEXTVAL AS MOVIE_NO
 		FROM
 			 DUAL
 	</entry>
@@ -211,11 +147,12 @@
 		  	STATUS,
 		  	GENRE_NO,
 		  	DIRECTOR_NO,
-		  	MOVIE_UPDATE
+		  	MOVIE_UPDATE,
+		  	TRAILER_VIDEO
 		  	)
 		  VALUES
 			  (
-			  ?, 
+			  ?,
 			  ?,
 			  ?, 
 			  ?, 
@@ -224,8 +161,25 @@
 			  'Y', 
 			  ?, 
 			  ?, 
-			  SYSDATE
+			  SYSDATE,
+			  ?
 			  )
+	</entry>
+	
+	<!-- 영화 수정 -->
+	<entry key="updateMovie">
+	UPDATE TB_MOVIE
+	   SET MOVIE_TITLE = ?,
+	       MOVIE_RT = ?,
+	       MOVIE_RATED = ?,
+	       MOVIE_RELEASE = ?,
+	       MOVIE_STORY = ?,
+	       STATUS = 'Y',
+	       GENRE_NO = ?,
+	       DIRECTOR_NO = ?,
+	       MOVIE_UPDATE = SYSDATE,
+	       TRAILER_VIDEO = ?
+	 WHERE MOVIE_NO = ?
 	</entry>
 
 	<!-- Cast 등록 -->
@@ -243,5 +197,278 @@
 			  ?
 			  )
 	</entry>
+	
+	
+	
+	
+	<!-- 공지 -->
+	<entry key="adminSelectNoticeList">
+		SELECT *
+		FROM (SELECT A.*, ROWNUM RNUM
+		      FROM (SELECT
+				    NOTICE_NO,
+				    CATEGORY_NAME,
+				    NOTICE_TITLE,                  
+				    TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE,                   
+				    COUNT      
+				FROM
+				    TB_NOTICE    
+				JOIN
+				    TB_CATEGORY ON (NOTICE_CATEGORY = CATEGORY_NO)
+				ORDER
+				   BY
+				    NOTICE_NO DESC) A)
+		WHERE RNUM BETWEEN ? AND ?
+	</entry>
+
+
+	<entry key="selectListCountNotice">
+		SELECT
+		    COUNT(*)
+		  FROM
+		    TB_NOTICE
+		 WHERE
+		    STATUS = 'Y'
+	</entry>
+
+
+	<!-- 문의 -->
+	<entry key="adminSelectQnAList">
+		SELECT *
+		FROM (SELECT A.*, ROWNUM RNUM
+		      FROM (SELECT
+		    BOARD_NO,
+		    CATEGORY_NO,
+		    BOARD_TITLE,
+		    MEMBER_ID,
+		    TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE,
+		    COUNT
+		FROM
+		   TB_BOARD
+		JOIN 
+		    TB_MEMBER USING (MEMBER_NO)
+		ORDER
+		   BY
+		    BOARD_NO DESC) A)
+		WHERE RNUM BETWEEN ? AND ?
+	</entry>
+
+
+	<entry key="selectListCountQnA">
+		SELECT
+		    COUNT(*)
+		  FROM
+		    TB_BOARD
+		 WHERE
+		    STATUS = 'Y'
+	</entry>
+
+
+
+
+	<!-- 영화상세 -->
+	<entry key="adminMovieDetail">
+		SELECT
+	       A.MOVIE_NO AS MOVIE_NO,
+	       A.MOVIE_TITLE AS MOVIE_TITLE,
+	       A.MOVIE_RT AS MOVIE_RT,
+	       A.MOVIE_RATED AS MOVIE_RATED,
+	       A.MOVIE_RELEASE AS MOVIE_RELEASE,
+	       A.MOVIE_STORY AS MOVIE_STORY,
+	       A.STATUS AS STATUS,
+	       A.GENRE_NO AS GENRE_NO,
+	       B.GENRE_NAME AS GENRE_NAME,
+	       A.DIRECTOR_NO AS DIRECTOR_NO,
+	       C.DIRECTOR_NAME AS DIRECTOR_NAME,
+	       A.MOVIE_UPDATE AS MOVIE_UPDATE,
+	       A.TRAILER_VIDEO AS TRAILER_VIDEO
+		FROM
+		   TB_MOVIE A
+		LEFT
+		OUTER
+		JOIN
+			TB_GENRE B ON A.GENRE_NO = B.GENRE_CODE
+		LEFT
+		OUTER
+		JOIN
+			TB_DIRECTOR C ON A.DIRECTOR_NO = C.DIRECTOR_NO
+		WHERE
+		   A.MOVIE_NO = ?
+	</entry>
+	
+	<entry key="SelectCastInfo">
+		SELECT 
+		    LISTAGG(A.ACTOR_NAME, ', ') 
+		    WITHIN GROUP 
+		           (ORDER BY A.ACTOR_NO) AS ACTOR_NAMES
+		FROM 
+		    TB_ACTOR A
+		JOIN 
+		    TB_CAST C ON A.ACTOR_NO = C.ACTOR_NO
+		WHERE
+		    C.MOVIE_NO = ?
+	</entry>
+	<!-- -->
+
+
+
+
+
+	<entry key="selectTheaterList">
+		SELECT
+		       THEATER_NO,
+		       THEATER_NAME
+		  FROM
+		       TB_THEATER
+         WHERE
+         	   LOCATION_CODE = ?
+		 ORDER
+		    BY
+		       THEATER_NO ASC
+	
+	
+	</entry>
+	<entry key="adminDetailScreenName">
+		SELECT
+       		   SCREEN_NAME
+          FROM
+               TB_SCREEN
+         WHERE
+               THEATER_NO = ?
+         GROUP
+            BY  
+               SCREEN_NAME
+         ORDER
+   			BY
+       		   SCREEN_NAME
+	
+	</entry>
+	
+	<entry key="adminMovieList">
+	SELECT
+		   SCREEN_NO,
+       	   MOVIE_NO,
+           MOVIE_TITLE,
+           TO_CHAR(WATCH_DATE,'HH24:MI:SS') AS WATCH_DATE
+      FROM
+           TB_SCREEN
+      JOIN
+           TB_MOVIE USING(MOVIE_NO)
+     WHERE
+           THEATER_NO = ? AND SCREEN_NAME = ? AND TO_CHAR(WATCH_DATE,'YYYY-MM-DD') = TO_CHAR(TO_DATE(?,'YYYY-MM-DD'),'YYYY-MM-DD')
+       AND STATUS = 'Y'    
+	 ORDER
+   	    BY WATCH_DATE
+	
+	</entry>
+	
+	
+	
+	<entry key="adminDetailTheater">
+		SELECT
+       			   SCREEN_NAME,
+       			   WATCH_DATE,
+       			   THEATER_NAME,
+       			   MOVIE_TITLE
+  		   FROM
+       			   TB_SCREEN
+  			JOIN
+       			   TB_MOVIE USING(MOVIE_NO)
+  			JOIN
+       			   TB_THEATER USING(THEATER_NO)
+ 	     WHERE
+       			   THEATER_NO = ?
+   			 AND
+       			   TRUNC(WATCH_DATE) = TO_DATE(?,'YYYYMMDD')
+ 		 ORDER
+    		  BY 
+       			    SCREEN_NAME, WATCH_DATE
+			      
+	
+	</entry>
+	
+	
+	
+	<!--  -->
+	<entry key="searchTitle">
+		SELECT *
+		FROM (SELECT A.*, ROWNUM RNUM
+		      FROM (SELECT
+				    MOVIE_NO,
+				    TO_CHAR(MOVIE_RELEASE, 'YY/MM/DD') MOVIE_RELEASE,
+				    MOVIE_TITLE,
+				    MOVIE_RATED,
+				    GENRE_NAME,
+				    TO_CHAR(MOVIE_UPDATE, 'YY/MM/DD') MOVIE_UPDATE
+				FROM
+				    TB_MOVIE
+				LEFT
+				JOIN
+				    TB_GENRE ON(GENRE_NO = GENRE_CODE)
+               WHERE
+                   MOVIE_TITLE LIKE '%'||?||'%'
+                 AND STATUS = 'Y' 
+               ORDER
+			      BY
+	  		       MOVIE_NO DESC) A)
+		WHERE RNUM BETWEEN ? AND ?
+	</entry>
+	<entry key="selectScreen">
+	SELECT
+       	   COUNT(*)
+  	  FROM
+           TB_SCREEN
+     WHERE
+           TO_CHAR(WATCH_DATE,'YYYY-MM-DD/HH24:MI') = ?
+       AND
+           THEATER_NO = ? AND SCREEN_NAME = ?
+	
+	</entry>
+	<entry key="insertScreen">
+		INSERT
+	      INTO
+	      	   TB_SCREEN
+	    VALUES(SEQ_SCRNO.NEXTVAL,?,?,TO_DATE(?,'YYYY-MM-DD/HH24:MI'),?)
+	</entry>
+	
+	<entry key="adminMovieDelete">
+		UPDATE
+			  TB_MOVIE
+		   SET
+		   	  STATUS = 'N'
+		 WHERE
+		 	  MOVIE_NO = ?
+	</entry>
+	
+	
+	
+	<entry key="SelectPoster"> 
+		SELECT
+			 FILE_PATH AS FILE_PATH,
+			 CHANGE_NAME AS CHANGE_NAME
+		 FROM
+		 	TB_ATTACHMENT 
+		 WHERE 
+		 	MOVIE_NO = ? 
+		 AND 
+		 	FILE_LEVEL = 1
+	</entry>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+
 
 </properties>

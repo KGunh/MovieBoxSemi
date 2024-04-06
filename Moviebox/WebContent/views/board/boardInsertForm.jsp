@@ -2,7 +2,9 @@
     pageEncoding="UTF-8"%>
 
 <%@ page import="com.kh.board.model.vo.Category, java.util.ArrayList" %>
-    
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%
 	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("category");
 
@@ -273,7 +275,7 @@
                                 <select name="category" id="select-category">
                                 <% for(Category c : list) { %>
 									<option value="<%= c.getCategoryNo() %>">
-										<%= c.getCategoryName() %>
+										<%= c.getCategoryName() + " 문의" %>
 									</option>
 								<% } %>
                                 </select>

@@ -147,6 +147,15 @@ public class NoticeService {
 		return result;
 	}
 
+	public ArrayList<Notice> searchNotice(String searchNoticeForm, PageInfo pi) {
+		
+		Connection conn = getConnection();
+		ArrayList<Notice> list = new NoticeDao().searchNotice(conn, searchNoticeForm, pi);
+		close(conn);
+		
+		return list;
+	}
+
 
 	
 

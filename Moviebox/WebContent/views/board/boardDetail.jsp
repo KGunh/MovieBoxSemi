@@ -2,9 +2,12 @@
     pageEncoding="UTF-8"%>
     
 <%@ page import="com.kh.board.model.vo.*" %>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <%
 	Board board = (Board)request.getAttribute("board");
+	System.out.println(board);
 %>    
     
     
@@ -206,6 +209,56 @@
             color: #1A1A1A;
             margin-right: 10px;
         }
+        
+        /* 댓글 */
+        #answerContent{
+            width: 950px;
+            height: 100px;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #1A1A1A;
+            resize: none;
+            margin-left: 20px;
+            color: white;
+            font-size: 15px;
+            margin-top:20px;
+        }
+        
+        #answerContent-else{
+        	width: 950px;
+            height: 100px;
+            padding: 10px;
+            border-radius: 8px;
+            background-color: #1A1A1A;
+            resize: none;
+            margin-left: 20px;
+            color: white;
+            font-size: 15px;
+            margin-top:20px;
+        }
+
+        #answerSubmit{
+            width: 80px;
+            height: 50px;
+            margin-left: 20px;
+            border-radius: 8px;
+            border: none;
+            font-weight: bold;
+            background-color: #FFC145;
+            font-size: 20px;
+        }
+        
+        #answerSubmit-else{
+            width: 80px;
+            height: 50px;
+            margin-left: 20px;
+            border-radius: 8px;
+            border: none;
+            font-weight: bold;
+            background-color: #FFC145;
+            font-size: 20px;
+        }
+        
     </style>
 
 </head>
@@ -254,8 +307,89 @@
 
                 <div class="detail-content-a-box">
                     <div class="detail-a">
-			        	댓글로 해야하나
+	                    <c:choose>
+	                    	<c:when test="${ sessionScope.loginUser.memberNo eq 1}">
+		                        <table>
+		                            <thead>
+		                                <tr>
+		                                	<th>답변</th>
+		                                    <c:choose>
+		                                    	<c:when test="${!empty sessionScope.loginUser and sessionScope.loginUser.memberNo eq 1}">
+				                                        <td>
+				                                            <textarea id="answerContent"></textarea>
+				                                        </td>
+				                                        <td><button onclick="insertReply();" id="answerSubmit">등록dd</button></td>
+		                                    	</c:when>
+		                                    	
+		                                    	<c:otherwise>
+			                                        <td>
+			                                            <textarea id="answerContent-else" placeholder="관리자만 작성 가능합니다." readonly></textarea>
+			                                        </td>
+			                                        <td><button id="answerSubmit-else" disabled>등록</button></td>
+		                                    	</c:otherwise>
+											</c:choose>
+		                                </tr>
+		                            </thead>
+		                            <tbody>
+		                            <a>댓글 등록되는 부분</a>
+		                            </tbody>
+		                        </table>
+	                        </c:when>
+	                        <c:otherwise>
+								<a></a>	                        
+	                        </c:otherwise>
+	                    </c:choose>
+                    </div>
+                    
+                    <script>
+                    
+                    function selectAnswerList(){
+                    	$.ajax({
+                    		url : 'answerList.board',
+                    		data : {boardNo : <%= board.getBoardNo() %>},
+                    		success : function(result){
+                    			
+                    			let resultStr = '';
+                    			for(let i in result){
+                    				
+                    				resultStr += '<tr>'
+                    						   + '<td>' + result[i].answerWriter + '</td>'
+                    						   + '<td>' + result[i].answerContent + '</td>'
+                    						   + '<td>' + result[i].createDate + '</td>'
+                    						   + '</tr>'
+                    			};
+                    			$('#detail-a tbody').html(resultStr);
+                    			
+                    		},
+        					error : function(e){
+        						console.log(e);
+        					}
+                    		
+                    	});
+                    }
+                    
+                    function insertReply(){
+        				
+        				$.ajax({
+        					url : 'answerInsert.board',
+        					type : 'post',
+        					data : {
+        						content : $('#answerContent').val(),
+        						boardNo : <%= board.getBoardNo() %>
+        					},
+        					success : function(result){
+        						if(result == 'success'){
+        							$('#answerContent').val('');
+        						};
+        					}
+        					
+        				});
+        			}
+                    </script>
+                    
+                    
                 </div>
+                
             </div> <!-- notice-content -->
 
                 <div class="notice-btn" align="center">
@@ -269,7 +403,6 @@
 
 
 
-            </div> <!-- notice-list -->
         </div> <!-- notice-detail -->
 	</div>
     

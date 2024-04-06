@@ -21,7 +21,7 @@
 		                  JOIN
 		                      TB_CATEGORY USING (CATEGORY_NO)
 		                  JOIN
-		                      TB_MEMBER ON (MEMBER_NO = BOARD_WRITER)
+		                      TB_MEMBER USING (MEMBER_NO)
 		                 WHERE
 		                      TB_BOARD.STATUS = 'Y'
 		                 ORDER
@@ -53,7 +53,7 @@
 	          TB_BOARD
 		  LEFT		
 		  JOIN
-	          TB_MEMBER ON (MEMBER_NO = BOARD_WRITER)
+	          TB_MEMBER USING (MEMBER_NO)
 		  JOIN
 	          TB_CATEGORY USING(CATEGORY_NO)
 		 WHERE
@@ -83,7 +83,7 @@
 	          BOARD_CONTENT,
 	          CREATE_DATE,
 	          CATEGORY_NO,
-	          BOARD_WRITER
+	          MEMBER_NO
 	          )
 	    VALUES
 		      (
@@ -92,14 +92,7 @@
 		      ?,
 		      SYSDATE,
 	          ?,
-	          (
-	          SELECT
-		            MEMBER_NO
-		        FROM
-		            TB_MEMBER
-		       WHERE
-		            MEMBER_NO = ?
-		      )
+	          ?
 		      )
 	</entry>
 	
@@ -127,5 +120,48 @@
 		 WHERE
 			  BOARD_NO = ?
 	</entry>
+	
+	
+	<!-- 문의게시판 답변(댓글) -->
+	<entry key="selectAnswerList">
+		SELECT
+			  ANSWER_NO,
+			  ANSWER_CONTENT,
+			  TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE,
+			  MEMBER_NAME
+		  FROM
+		  	  TB_ANSWER A
+		  JOIN
+		  	  TB_MEMBER ON (MEMBER_NO = ANSWER_WRITER)
+		 WHERE
+		 	  BOARD_NO = ?
+		   AND
+		   	  A.STATUS = 'Y'
+		 ORDER
+		 	BY
+		 	  CREATE_DATE DESC
+	</entry>
+	
+	
+	<entry key="insertAnswer">
+		INSERT
+  	 	  INTO
+  	 	  	  TB_ANSWER
+  	 	  	  (
+  	 	  	  ANSWER_NO,
+  	 	  	  ANSWER_CONTENT,
+  	 	  	  BOARD_NO,
+  	 	  	  ANSWER_WRITER
+  	 	  	  )
+		VALUES
+			  (
+			  SEQ_ANSNO.NEXTVAL,
+			  ?,
+			  ?,
+			  ?
+			  )
+	</entry>
+	
+	
 	
 </properties>

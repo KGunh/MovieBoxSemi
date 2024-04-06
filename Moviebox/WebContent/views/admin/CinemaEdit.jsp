@@ -1,5 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import = "com.kh.theater.model.vo.Theater"%>
+    
+    <%
+    Theater theater = (Theater)request.getAttribute("theater");
+    %>
+    
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -21,96 +26,7 @@
         body {
             background-color: #1A1A1A
         }
-        #header{
-           margin: auto;
-            height : 200px;
-            width: 1200px;
-        }
-
-        #top-header{
-            height: 75px;
-            position: relative;
-            border-bottom: 1px solid lightgray;
-        }
-        #login-area{
-            position: absolute;
-            right: 30px;
-            top: 20px;
-
-        }
-        #login-area > a{
-            display: block;
-            float: right;
-            text-decoration-line: none;
-            color: white;
-            font-size: 16px;
-            margin-left: 30px;
-            font-weight: bold;
-        }
-        
-
-        #header-navigator{
-            height : 125px;
-            
-            border-bottom: 1px solid lightgray;
-        }
-
-        #logo-div{
-            position: relative;
-            float: left;
-            height: 100%;
-            width: 30%;
-
-        }
-
-        #content{height : 1500px;}
-
-        #logo{
-            position: absolute; 
-            top: 50%;
-            margin-top: -25px;
-            width: 100%;
-            height: 50px;
-            font-size: 50px;
-            font-weight: bold;
-            color: #FFC145;
-            line-height: 45px;
-            
-            text-align: center;
-        }
-        a {
-            text-decoration-line: none;
-        }
-        #logo > a{
-            text-decoration-line: none;
-            color: #FFC145;
-        }
-        #navigator{
-            float: right;
-            width: 50%;
-            height: 100%;
-            margin-right: 15%;
-        }
-        .navi{
-            float:left;
-            width: 20%;
-            height: 100%;
-            text-align:center;
-            margin: 0 auto;
-        }
-        .navi > a{
-            display: block;
-            text-align: center;
-            width: 100%;
-            height: 100%;
-            color: white;
-            text-decoration-line: none;
-            line-height: 125px;
-            font-size: 18px;
-            font-weight: bold;
-        }
-
-          
+      
             div{
                 
            /* border : 1px solid red; */
@@ -145,7 +61,7 @@
             width: 1200px;
             height : 800px;
             margin: 0 auto;
-            background-color:white
+           
         }
         .content_1{
             display: inline-block;
@@ -162,7 +78,7 @@
             height : 800px;
             padding-left: 50px;
             padding-top: 20px;
-            color: #323232;
+            color: white;
         }
         .menu {
             width: 200px;
@@ -232,26 +148,43 @@
 
         .title{
             background-color: rgba(211, 211, 211, 0.171);
-            width: 60px;
+            width: 120px;
             text-align: center;
-            color: rgb(77, 77, 77);
+            color: white;
             font-size: 14px;
             font-weight: bolder;
             line-height: 80px;
+            border-bottom : 1px solid gray;
            
         }
 
         #table > tr,td {
-            height: 50px;
+            height: 10px;
             width: 250px;
             font-size: 14px;
             text-align: left;
             margin-top: 10px;
             margin-right: 10px;
             line-height: 80px;
-            border-bottom: 1px solid lightgray;
+            border-bottom: 1px solid gray;
+            color : white;
             
             
+        }
+        
+        .input1{
+        	height: 50px;
+            width: 550px;
+            font-size: 14px;
+            text-align: left;
+            margin-top: 10px;
+            marin-right : -90px;
+            margin-left : 10px;
+            line-height: 80px;
+           	border : none;
+            color : white;
+            background-color : #1A1A1A;
+        
         }
 
        
@@ -265,20 +198,25 @@
         margin-right: 30px;
        }
             
-       .btn{
+       .btn1{
         height: 30px;
         width: 60px;
-        background-color:   #FFC145;
+        background-color: #FFC145;
         color: rgb(77, 77, 77);
         border: gainsboro;
         border-radius: 5px;
         font-size: 12px;
-        font-weight: bold;
+        font-weight: bolder;
+        
        } 
 
        .content_2_top {
         margin-top: 70px;
         height: 550px;
+       }
+       
+       #toptitle{
+       margin-bottom : 40px
        }
 
    
@@ -288,39 +226,7 @@
     </style>
 </head>
 <body>
-   <div id="header">
-      <div id="top-header">
-         <div id="login-area">
-            <a href="#" class="member">회원가입</a> <a href="#" class="member">로그인</a>
-         </div>
-      </div>
-      <div id="header-navigator">
-         <div id="logo-div">
-            <div id="logo">
-               <a href="#">MOVIE MOX</a>
-            </div>
-         </div>
-         <div id="navigator">
-            <div class="navi">
-               <a href="#" id="reservation">예매</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="movie">영화</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="theater">영화관</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="notice">고객센터</a>
-            </div>
-            <div class="navi">
-               <a href="#" id="myPage">마이페이지</a>
-            </div>
-         </div>
-
-      </div>
-
-   </div>
+   <%@ include file = "../common/header.jsp" %>
 <!-- 여기까지가 헤더 -->
 
 <body>
@@ -339,75 +245,115 @@
             <div class="content_1">
                 <ul class="menu">
                     <li>
-                        <a href="#">회원 관리</a>
+                        <a href="<%=contextPath %>/selectAdmin.mb">회원 관리</a>
                         <ul class="submenu">
+
                         </ul>
                     </li>
                     <li>
-                        <a href="#">영화 관리</a>
-                        <ul class="submenu">
+                        <a href="<%=contextPath %>/adminMovieCheck.admin?currentPage=1">영화 관리</a>
+                        <ul class="submenu" >
+
                         </ul>
                     </li>
                     <li>
-                        <a href="#">영화관 관리</a>
+                        <a href="<%=contextPath%>/checkAdmin.cm">영화관 관리</a>
                         <ul class="submenu">
+
                         </ul>
-                    </li>
+                    </li> 
                     <li class="post">
                         <a href="#">게시글 관리</a>
                         <ul class="submenu">
-                        <li><a href="#">공지 관리</a></li>
-                        <li><a href="#">문의 게시글 관리</a></li>
+                        <li><a href="<%=contextPath %>/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
+                        <li><a href="<%=contextPath %>/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
                         </ul>
                     </li>
-                </ul>
+                </ul>    
             </div>
             <div class="content_2">
-                <h2> 영화관 상세 정보</h2>
-                <div class="content_2_top">
-                 
-                    <table class="table table-hover"  style="height: 490px;">
+            <form action="<%=contextPath%>/modify.cm" method="post">
+                <div id=toptitle>
+                <h2> 영화관 상세 정보</h2>              
+                </div>
+                    <table class="table table-hover"  style="height: 290px;">
                        
-                          <tr>
+                        
                             <tbody>
+                            
+                            <tr>
+                            <th class="title">영화관 번호</th>
+                            <td><input type="text" class="input1" name="theaterNo" value="<%=theater.getTheaterNo() %>"></td>
+                        </tr>
+                            
+                              <tr>
                             <th class="title">영화관 이름</th>
-                            <td>롯데시네마</td>
+                            <td><input type="text" class="input1" name="name" value="<%=theater.getTheaterName() %>"></td>
                         </tr>
                            
                             <tr>  
-                              <th class="title">상영관 수</th>
-                              <td>4</td>
+                              <th class="title">주소</th>
+                              <td><input type="text" class="input1" name="address" value="<%=theater.getTheaterAddr() %>"></td>
+                              
                             </tr>
                             <tr>  
-                              <th class="title">좌석 수</th>
-                              <td>200</td>
+                              <th class="title">지도</th>
+                              <td>
+                              	<a href="<%= theater.getMapLink() %>">지도보기</a>
+                                 <input type="text" id="map" class="input1" name="link" value="<%= theater.getMapLink() %>"></td>
+                               
                             </tr>  
                             <tr>
-                              <th class="title">주소</th>
-                              <td>서울시 마포구 양화로 176(동교동, 와이즈파크8층)</td>
+                              <th class="title">지역</th>
+                              <td><input type="text" id="map" class="input1" name="code" value="<%=theater.getLocationName()%>"></td>
                             </tr>
                             <tr>  
-                              <th class="title">특이사항</th>
-                              <td>없음</td>
+                              <th class="title">등록일</th>
+                              <td><input type="text" class="input1" name="updateDate" value="<%=theater.getUpdateDate() %>"></td>
                             </tr>
                            
                               </tbody>
                               </table>
+                              
+                              <div id="buttoon">
+                   <button type="submit" class="btn1">수정</button>
+                    </form>
+                   <button type="button" class="btn1" onclick="dele();">삭제</button>
+                   <button  type="button" class="btn1" onclick="check();">닫기</button>
+                </div>
+                </div>
+                </div>
 
-                </div>
-                <div id="buttoon">
-                   <button class="btn">수정</button>
-                   <button class="btn">삭제</button>
-                   <button class="btn">닫기</button>
-                </div>
+               
                 
-            </div>
+                
+                 
+                
+               
+                <script>
+                
+               
+                
+              
+                function dele(){
+                	console.log('asas');
+                	location.href = '<%=contextPath%>/dele.cm?theaterNo=<%=theater.getTheaterNo() %>';
+                }
+                
+                function check(){
+                	location.href = '<%=contextPath%>/checkAdmin.cm';
+                }
+                
+                
+                </script>
+                
+          
         </div>
 
 
 
 
-
+<%@ include file = "../common/footer.jsp" %>
 
 
 </body>

@@ -7,6 +7,7 @@ import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 /**
  * Servlet implementation class ReservationviewServlet
@@ -39,14 +40,24 @@ public class ReservationServlet extends HttpServlet {
 		boolean flag = false;
 		
 		switch(mapping) {
-		case "movie" : view = rc.selectReservationInfo(request); break; 
-		case "seat" : view = rc.connectSeatList(request); break;
-		case "payment" : view = rc.insertReservation(request); flag = true; break;
+			case "movie" : view = rc.selectReservationInfo(request); break; 
+			case "payment" : view = rc.insertReservation(request); break;
+			case "seat" : view = rc.connectSeatList(request); break;
 		}
 		
-		if(flag) {
-			response.sendRedirect(view);
-		} else {
+		if(request != null && response != null) {
+			if(flag) {
+				response.sendRedirect(view);
+			} else {
+				request.getRequestDispatcher(view).forward(request, response);
+			}
+		} else if(view.contains("errorPage")) {
+			HttpSession session = request.getSession();
+			
+			session.setAttribute("alertMsg", "잘못된 요청입니다.");
+			
+			view = "views/common/errorPage.jsp";
+			
 			request.getRequestDispatcher(view).forward(request, response);
 		}
 	}

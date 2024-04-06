@@ -1,54 +1,168 @@
 package com.kh.admin.controller;
 
+import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
+import java.util.Date;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
+import javax.servlet.http.HttpSession;
+
+import com.kh.admin.model.service.MemberAdminService;
+import com.kh.common.JDBCTemplate;
+import com.kh.common.model.vo.Location;
+import com.kh.theater.model.vo.Theater;
+
 
 public class CinemaAdminContorller {
 
 	public String cinemaCheck (HttpServletRequest request, HttpServletResponse response) {
 				
-		String view = "/views/admin/CinemaInsert.jsp";
+		
+		
+		String view = "views/admin/CinemaCheck.jsp";
+		
+		ArrayList<Theater> theater = new MemberAdminService().cinemaCheck();
+		
+		
+		
+		request.setAttribute("theater", theater);
+		return view; 
+		
+	}
+	
+	public String cinemaEdit(HttpServletRequest request, HttpServletResponse response) {
+		
+		int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));
+		
+		Theater theater = new MemberAdminService().cinemaEdit(theaterNo);
+		request.setAttribute("theater", theater);
+		System.out.println(theater);
+		String view = "/views/admin/CinemaEdit.jsp";
 		
 		return view;
 		
+	}
+	
+	
+	public String category(HttpServletRequest request, HttpServletResponse response) {
+		
+		String view ="/views/admin/CinemaInsert.jsp"; 
+		
+		ArrayList<Location> location =  new MemberAdminService().category();
+
+		
+		HttpSession session = request.getSession();
+		session.setAttribute("location", location);
+		
+		return view;
 		
 	}
 	
-	public void cinemaEdit() {
-		
-	}
 	
-	public void cinemaInsert(HttpServletRequest request) {
+	public String cinemaInsert(HttpServletRequest request, HttpServletResponse response) {
 		
-		String name = request.getParameter("name");
-		String address = request.getParameter("address");
+		
+			try {
+				request.setCharacterEncoding("UTF-8");
+			} catch (UnsupportedEncodingException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		
+		
+		Theater theater = new Theater();
+		String view = "/views/admin/CinemaInsert.jsp";
+		String name = request.getParameter("cinemaname");
+		System.out.println(name);
+		String code = request.getParameter("address");
 		String region = request.getParameter("region");
-		String city = request.getParameter("city");
+		String link = request.getParameter("link");
 		
 		
-		switch(region) {
+	
 		
-		case "서울" : String 서울;
-		case "경기" : String 경기;
-		case "인천" : String 인천;
-		case "강원" : String 강원;
-		case "충남" : String 충남;
-		case "충북" : String 충북;
-		case "대구" : String 대구;
-		case "경북" : String 경북;  
-		case "울산" : String 울산;
-		case "부산" : String 부산;
-		case "경남" : String 경남;
-		case "제주" : String 제주;
+		theater.setTheaterName(name);
+		theater.setTheaterAddr(code);
+		theater.setLocalCode(region);
+		theater.setMapLink(link);
+
+		int result = new MemberAdminService().cinemaInsert(theater);
+	
+		if(result>0) {
 		
-		
-		
+			HttpSession session = request.getSession();
+			session.setAttribute("alertMsg", "영화관 정보가 등록되었습니다.");
+			
+			return view;
+			
+		}else {
+			request.setAttribute("errorMsg", "영화관 정보 등록 실패하였습니다.");
 		}
 		
 		
 		
 		
+		return view;
+		
 	}
+	
+	public String modify(HttpServletRequest request, HttpServletResponse response) {
+		
+		int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));
+		String name = request.getParameter("name");
+		String address = request.getParameter("address");
+		String link = request.getParameter("link");
+		String code = request.getParameter("code");
+		String enrollDate = request.getParameter("updateDate");
+		
+		Theater theater = new Theater();
+		
+		theater.setTheaterName(name);
+		theater.setTheaterAddr(address);
+		theater.setMapLink(link);
+		theater.setLocalCode(code);
+		theater.setUpdateDate(enrollDate);
+		theater.setTheaterNo(theaterNo);
+		
+		int result = new MemberAdminService().modify(theater);
+		
+		if(result > 0) {
+			HttpSession session = request.getSession();
+			session.setAttribute("alertMsg", "정보수정이 완료되었습니다");
+			
+		}else {
+			request.setAttribute("errorMsg", "영화관 정보 등록 실패하였습니다.");
+		}
+		
+		
+		String view = request.getContextPath()+"/editAdmin.cm?theaterNo=" + theaterNo;
+		
+		
+		
+		return view;
+	}
+	
+	public String dele(HttpServletRequest request, HttpServletResponse response) {
+		
+		int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));
+		int result = new MemberAdminService().dele(theaterNo);
+		
+		
+		if(result>0) {
+			HttpSession session = request.getSession();
+			session.setAttribute("alertMsg", "삭제되었습니다");
+		} else {
+			request.setAttribute("errorMsg", "삭제되지 않았습니다");
+		}
+		
+		String view ="views/admin/CinemaCheck.jsp";
+		
+		return view; 
+		
+	}
+	
 	
 	
 }

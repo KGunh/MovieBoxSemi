@@ -2,10 +2,12 @@
     pageEncoding="UTF-8"%>
 
 <%@ page import="com.kh.board.model.vo.*, java.util.ArrayList" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <%
 	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("category");
 	Board board = (Board)request.getAttribute("board");
+	System.out.println(board);
 %>
 
 <!DOCTYPE html>
@@ -238,92 +240,91 @@
 <body>
 
 	<%@ include file="../common/header.jsp" %>
+
+	<c:choose>
+		<c:when test="${ loginUser.memberNo eq board.userNo }">
+		    <div id="wrap">
+		        <div id="notice-detail">
+		            <!-- 전체 감싸는 부분 -->
+		            <div id="notice-list">
+		
+		                <div id="title">고객센터</div>
+		        
+		                <!-- 카테고리 -->
+		                <div id="board-category">
+			                <div class="notice-tap" onclick="openNoticePage();">공지사항</div>
+			                <div class="qna-tap" onclick="openQnaPage();">QnA</div>
+		                </div> <!-- board-category -->
+		
+		                <div id="insert-title">고객 문의사항</div>
+		
+		                <div class="notice-content">
+		                    <div class="detail-box1">
+		                        <div class="detail-title-box1">
+		                            <div class="detail-category"><span>문의사항 작성</span></div>
+		                        </div>
+		                    </div>
+		
+		
+		                    <div class="detail-content-box">
+			                    <form action="<%= contextPath %>/update.board" method="post" id="insert-box">
+			                    
+			                    <input type="hidden" name="boardNo" value="<%= board.getBoardNo()%>" />
+			                    
+		                            <div id="category-box">
+		                                <div id="box-name">분류</div>
+		                                
+		                                <select name="category" id="select-category">
+		                                <% for(Category c : list) { %>
+											<option value="<%= c.getCategoryNo() %>" class="<%= c.getCategoryName() %>">
+												<%= c.getCategoryName() %>
+											</option>
+										<% } %>
+		                                </select>
+		                                
+		                                <script>
+		                                	$(function(){
+		                                		$('option[class="<%=board.getBoardCategory()%>"]').attr('selected', 'true');
+		                                	})
+		                                </script>
+		                                
+		                           	</div> 
+		
+		                            <div id="title-box">
+		                                <div id="box-name">제목</div>
+		                                <input type="text" id="select-title" name="title" value="<%= board.getBoardTitle() %>">
+		                            </div>
+		
+		                            <div id="content-box">
+		                                <div id="box-name">내용</div>
+		                                <textarea id="select-content" cols="30" rows="10" name="content"><%= board.getBoardContent() %></textarea>
+		                            </div>
+			
+			
+			                        <div id="insert-btn" align="center">
+			                            <button type="submit" class="notice-detail-btn">등록</button>
+		                				<button type="button" class="notice-detail-btn1" onclick="history.back()">취소</button>
+			                        </div>
+								</form>
+		                    </div> <!-- detail-content-box -->
+		                </div> <!-- notice-content -->
+		            </div> <!-- notice-list -->
+		        </div> <!-- notice-detail -->
+		    </div> <!-- wrap -->
+		</c:when>
+		
+		<c:otherwise>
+			<script>
+				alert('작성자만 수정 가능합니다.');
+				location.href = '<%= contextPath %>/list.board?currentPage=1';
+			</script>
+    	</c:otherwise>
+    	
+	</c:choose>
 	
-	<% if(loginUser == null) { %>
-		<script>
-			alert('작성자만 수정 가능합니다.');
-		</script>
-	
-	<% } else { %>
-    <div id="wrap">
-        <div id="notice-detail">
-            <!-- 전체 감싸는 부분 -->
-            <div id="notice-list">
-
-                <div id="title">고객센터</div>
-        
-                <!-- 카테고리 -->
-                <div id="board-category">
-	                <div class="notice-tap" onclick="openNoticePage();">공지사항</div>
-	                <div class="qna-tap" onclick="openQnaPage();">QnA</div>
-                </div> <!-- board-category -->
-
-                <div id="insert-title">고객 문의사항</div>
-
-                <div class="notice-content">
-                    <div class="detail-box1">
-                        <div class="detail-title-box1">
-                            <div class="detail-category"><span>문의사항 작성</span></div>
-                        </div>
-                    </div>
-
-
-                    <div class="detail-content-box">
-	                    <form action="<%= contextPath %>/update.board" method="post" id="insert-box">
-	                    
-	                    <input type="hidden" name="boardNo" value="<%= board.getBoardNo()%>" />
-	                    
-                            <div id="category-box">
-                                <div id="box-name">분류</div>
-                                
-                                <select name="category" id="select-category">
-                                <% for(Category c : list) { %>
-									<option value="<%= c.getCategoryNo() %>" class="<%= c.getCategoryName() %>">
-										<%= c.getCategoryName() %>
-									</option>
-								<% } %>
-                                </select>
-                                
-                                <script>
-                                	$(function(){
-                                		$('option[class="<%=board.getBoardCategory()%>"]').attr('selected', 'true');
-                                	})
-                                </script>
-                                
-                           	</div> 
-
-                            <div id="title-box">
-                                <div id="box-name">제목</div>
-                                <input type="text" id="select-title" name="title" value="<%= board.getBoardTitle() %>">
-                            </div>
-
-                            <div id="content-box">
-                                <div id="box-name">내용</div>
-                                <textarea id="select-content" cols="30" rows="10" name="content"><%= board.getBoardContent() %></textarea>
-                            </div>
-	
-	
-	                        <div id="insert-btn" align="center">
-	                            <button type="submit" class="notice-detail-btn">등록</button>
-                				<button type="button" class="notice-detail-btn1" onclick="history.back()">취소</button>
-	                        </div>
-						</form>
-                    </div> <!-- detail-content-box -->
-
-
-                </div> <!-- notice-content -->
-
-
-
-
-            </div> <!-- notice-list -->
-        </div> <!-- notice-detail -->
-    </div> <!-- wrap -->
-	
-	<% } %> <!-- 상단 if문 끝 -->
 	<%@ include file="../common/footer.jsp" %>
 	
-	    	<script>
+	    <script>
 			function openNoticePage(){
 				location.href = '<%=contextPath %>/list.notice?currentPage=1';
 			}
@@ -335,10 +336,7 @@
     		function backPage(){
     			location.href = '<%=contextPath%>/list.board?currentPage=1';
     		}
-
-    	
     	</script>
-	
-	
+    	
 </body>
 </html>

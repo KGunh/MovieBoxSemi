@@ -90,6 +90,8 @@
             width: 100%;
             border: 1px solid rgb(158, 158, 158);
             border-radius: 8px;
+            display: flex;
+            justify-content: space-evenly;
         }
         .input-button{
             
@@ -246,36 +248,8 @@
                     <span class="input-bottom"></span>
 				</div>
 				<script>
-					function idCheck() {
-						const $memberId = $('.inputdiv input[name=memberId]');
-
-						//AJAX 요청
-						$.ajax({
-							url : 'idCheck.me',
-							data : {
-								checkId : $memberId.val()
-							},
-							success : function(result) {
-								if (result == 'N') {
-									$memberId.css('border','2px solid red');
-									$('#memberId').siblings('.input-bottom').html('이미 존재하거나 탈퇴한 회원의 아이디입니다.').css('color','red');
-									$memberId.val('').focus();
-								} else {
-									if (confirm('사용 가능한 아이디입니다. 사용하시겠습니까?')) {
-										$memberId.attr('readonly', true);
-										$memberId.removeAttr('style');
-										$('#memberId').siblings('.input-bottom').html('');
-                                        $('.input-button > button').removeAttr('disabled');
-									} else {
-										$memberId.focus();
-									}
-								}
-							},
-							error : function() {
-								console.log('AJAX통신 실패');
-							}
-						});
-					}
+					
+					
 				</script>
 				
 				
@@ -291,7 +265,6 @@
 				</div>
                 <script>
                      $(function(){
-
                                 $('#checkPwd').blur(function(){
                                     const $memberPwd = $('#memberPwd').val();
                                     const $checkPwd = $(this).val();
@@ -312,14 +285,14 @@
                 </script>
 				<div class="inputdiv">
 					<span class="input-span">이름</span><br> 
-                    <input type="text" class="input-text" name="memberName" placeholder="이름">
+                    <input type="text" class="input-text" name="memberName" placeholder="이 름 | ex) 한글만 입력해주세요 " maxlength="5">
                     <span class="input-bottom"></span>
 				</div>
 
                 
 				<div class="inputdiv">
 					<span class="input-span">생년월일</span><br> 
-                    <input type="text" class="input-text" name="birthday" placeholder="생년월일ex)19901218(YYYYMMDD)" maxlength="8">
+                    <input type="text" class="input-text" name="birthday" placeholder="생년월일 | ex)19901218(YYYYMMDD)" maxlength="8">
                     <span class="input-bottom"></span>
 				</div>
 				<div class="inputdiv">
@@ -340,7 +313,7 @@
 				</div>
 				<div class="inputdiv">
 					<span class="input-span">전화번호</span><br> 
-                    <input type="text" class="input-text" name="phone" maxlength="11">
+                    <input type="text" class="input-text" name="phone" maxlength="11" placeholder="전화번호입력 | ex)01066665555">
                     <span class="input-bottom"></span>
 				</div>
 
@@ -385,8 +358,12 @@
                             <input class="checkbox" type="checkbox" name="genre" value="코미디" id="comedy">
 						</div>
 						<div class="checkbox-div-label">
-							<label class="genre" for="anime">애니메이션</label>
-                            <input class="checkbox" type="checkbox" name="genre" value="애니메이션" id="anime">
+							<label class="genre" for="anime">애니</label>
+                            <input class="checkbox" type="checkbox" name="genre" value="애니" id="anime">
+						</div>
+						<div class="checkbox-div-label">
+							<label class="genre" for="anime">판타지</label>
+                            <input class="checkbox" type="checkbox" name="genre" value="판타지" id="fantasy">
 						</div>
 					</div>
 				</div>
@@ -396,19 +373,96 @@
 			</form>
 		</div>
 	</div>
-    <script>
-       
 
-    </script>
     <script>
-
-    </script>
-    <script>
-        let birthdayReg =  /^\d{8}$/;
+    	let idReg = /^[a-zA-Z0-9]+$/;
+    	let nameReg = /^[가-힣]+$/;
         let phoneReg = /^\d{11}$/;
         let emailReg = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+        let birthdayReg = '';
+        let year = $('input[name=birthday]').val().substr(0,4);
+    	let month = $('input[name=birthday]').val().substr(4,2);
+    	if((year%4) == 0 && month == 02){
+    	     //윤년
+    	     console.log('윤년');
+    		birthdayReg = /^(19|20)\d{2}(02)(0[1-9]|1[0-9]|2[0-9])$/;
+    		
+        } 
+        else{
+        	if(month == 02){
+        		console.log('윤년x');
+        		birthdayReg = /^(19|20)d{2}02(0[1-9]|1[0-9]|2[0-8])$/;
+        	}
+        	else if(month == 04 || month == 06 || month == 09 || month == 11){
+        		console.log('윤년x46911');
+        		birthdayReg = /^(19|20)d{2}(0[469]|11)(0[1-9]|1[0-9]|2[0-9]|30)$/;
+    		}
+    		else{
+    			console.log('윤년x13578');
+    			birthdayReg = /^(19|20)d{2}(0[13578]|1[02])(0[1-9]|1[0-9]|2[0-9]|31)$/;
+    		}
+        }
+        function idCheck() {
+			const $memberId = $('.inputdiv input[name=memberId]');
+			
+			if($memberId.val() == ''){
+				$memberId.css('border','2px solid red');
+				$memberId.siblings('.input-bottom').html('필수 정보입니다.').css('color','red');
+	        } 
+	        else if(idReg.test($memberId.val())){
+	        	$memberId.removeAttr('style');
+	        	$memberId.siblings('.input-bottom').html('');
+	          //AJAX 요청
+				$.ajax({
+					url : 'idCheck.me',
+					data : {
+						checkId : $memberId.val()
+					},
+					success : function(result) {
+						if (result == 'N') {
+							$memberId.css('border','2px solid red');
+							$('#memberId').siblings('.input-bottom').html('이미 존재하거나 탈퇴한 회원의 아이디입니다.').css('color','red');
+							$memberId.val('').focus();
+						} else {
+							if (confirm('사용 가능한 아이디입니다. 사용하시겠습니까?')) {
+								$memberId.removeAttr('style');
+								$('#memberId').siblings('.input-bottom').html('');
+	                            $('.input-button > button').removeAttr('disabled');
+	                            $('.idCheck').css('background','#FFC145');
+							} else {
+								$memberId.focus();
+							}
+						}
+					},
+					error : function() {
+						console.log('AJAX통신 실패');
+					}
+				});
+	            
+	            
+	        }     
+	        else {
+	        	$memberId.css('border','2px solid red');
+	        	$memberId.siblings('.input-bottom').html('형식에 맞지않습니다(영어,숫자만 입력해주세요).').css('color','red');
+	        }
+
+			
+		}
+        
+        
         $('.inputdiv > input').blur(function(){
             checkInput($(this));
+        });
+        $('input[name=memberId]').blur(function(){
+        	checkInputId($(this));
+        });
+        $('input[name=memberId]').keyup(function(){
+        	$('.input-button > button').attr('disabled',true);
+        	$('.idCheck').css('background','rgb(218, 218, 218)');
+        	
+        });
+        $('input[name=memberName]').blur(function(){
+        	checkInputName($(this));
         });
         
         $('input[name=phone]').blur(function(){
@@ -418,7 +472,10 @@
             checkInputEmail($(this));  
         });
         $('input[name=birthday]').blur(function(){
-            checkInputBirthday($(this));  
+        	
+        	checkInputBirthday($(this));
+        	
+            
         });
     
         $('.input-button > button').click(function(){
@@ -440,37 +497,32 @@
 
         });
         function checkInputAll(){
-            if(phoneReg.test($('input[name=phone]').val())){
-                $('input[name=phone]').removeAttr('style');
-                $('input[name=phone]').siblings('.input-bottom').html('');
-            }
-            else {
-                $('input[name=phone]').css('border','2px solid red');
-                $('input[name=phone]').siblings('.input-bottom').html('형식에 맞지않습니다(-를 제외한 11자리 숫자만 입력해주세요).').css('color','red');
-            }
-            if(birthdayReg.test($('input[name=birthday]').val())){
-                $('input[name=birthday]').removeAttr('style');
-                $('input[name=birthday]').siblings('.input-bottom').html('');
-            }
-            else{
-                $('input[name=birthday]').css('border','2px solid red');
-                $('input[name=birthday]').siblings('.input-bottom').html('형식에 맞지않습니다 | ex)19001124(YYYYMMDD).').css('color','red');
+        	let msg = '';
+        	const $memberNameInput = $('input[name=memberName]');
+        	const $phoneInput = $('input[name=phone]');
+        	const $birthdayInput = $('input[name=birthday]');
+        	const $emailInput = $('input[name=email]');
 
-            }
-            if(emailReg.test($('input[name=email]').val())){
-                $('input[name=email]').removeAttr('style');
-                $('input[name=email]').siblings('.input-bottom').html('');
-            }
-            else{
-                $('input[name=email]').css('border','2px solid red');
-                $('input[name=email]').siblings('.input-bottom').html('형식에 맞지않습니다 | ex)aaa@movie.box(***@***.***).').css('color','red');
-
-            }
-            
+            removeOrFail(nameReg,$memberNameInput);
+            removeOrFail(phoneReg,$phoneInput);
+            removeOrFail(birthdayReg,$birthdayInput);
+            removeOrFail(emailReg,$emailInput);
         };
     </script>
 
     <script>
+    	function removeOrFail(reg,$input){
+    		if(reg.test($input.val())){
+    			$input.removeAttr('style');
+        		$input.siblings('.input-bottom').html('');
+                
+            }
+            else{
+            	$input.css('border','2px solid red');
+        		$input.siblings('.input-bottom').html('형식에 맞지않습니다 | '+ $input.attr('placeholder').substring(10)).css('color','red');
+            }
+    	}
+    	
         function checkInput($input){
             if($input.val() == ''){
                     $input.css('border','2px solid red');
@@ -480,6 +532,34 @@
                 $input.removeAttr('style');
                 $input.siblings('.input-bottom').html('');
             }     
+        }
+        function checkInputId($input){				
+			if($input.val() == ''){
+                $input.css('border','2px solid red');
+                $input.siblings('.input-bottom').html('필수 정보입니다.').css('color','red');
+	        } 
+	        else if(idReg.test($input.val())){
+	            $input.removeAttr('style');
+	            $input.siblings('.input-bottom').html('');
+	        }     
+	        else {
+	            $input.css('border','2px solid red');
+	            $input.siblings('.input-bottom').html('형식에 맞지않습니다(영어,숫자만 입력해주세요).').css('color','red');
+	        }
+		}
+        function checkInputName($input){
+        	if($input.val() == ''){
+                $input.css('border','2px solid red');
+                $input.siblings('.input-bottom').html('필수 정보입니다.').css('color','red');
+	        } 
+	        else if(nameReg.test($input.val())){
+	            $input.removeAttr('style');
+	            $input.siblings('.input-bottom').html('');
+	        }     
+	        else {
+	            $input.css('border','2px solid red');
+	            $input.siblings('.input-bottom').html('형식에 맞지않습니다(한글만 입력해주세요).').css('color','red');
+	        }
         }
         function checkInputPhone($input){
             if($input.val() == ''){
@@ -511,6 +591,8 @@
         }
 
         function checkInputBirthday($input){
+        
+        	
             if($input.val() == ''){
                     $input.css('border','2px solid red');
                     $input.siblings('.input-bottom').html('필수 정보입니다.').css('color','red');
@@ -524,6 +606,8 @@
                 $input.siblings('.input-bottom').html('형식에 맞지않습니다 | ex)19001124(YYYYMMDD).').css('color','red');
             }
         }
+        
+        
     </script>
 
 

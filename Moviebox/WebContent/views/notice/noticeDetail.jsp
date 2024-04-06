@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
     
 <%@ page import="com.kh.notice.model.vo.*" %>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 
 <%

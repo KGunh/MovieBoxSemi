@@ -3,7 +3,7 @@
 <properties>
 
 	<comment>
-		Moviebox Mapper
+		Theater Mapper
 	</comment>
 	
 	<entry key="searchTheaterAll">
@@ -57,9 +57,85 @@
 	
 	
 	</entry>
+
+	<entry key="detailTheater">
+		SELECT
+              THEATER_NO,
+              THEATER_NAME,
+              THEATER_ADDR,
+              MAP_LINK,
+              LOCATION_NAME,
+              THEATER_UPDATE
+         FROM
+              TB_THEATER
+         JOIN
+              TB_LOCATION USING(LOCATION_CODE)
+        WHERE
+              THEATER_NO = ?
+	
+	</entry>
 	
 	
+	<!-- 선택한 영화관 정보 보여주기 -->
+	<entry key="selectTheaterDetail">
+		SELECT
+		      MOVIE_NO,
+		      THEATER_NO,
+		      THEATER_NAME,
+		      FILE_PATH,
+		      CHANGE_NAME,
+		      THEATER_ADDR,
+		      MOVIE_TITLE,
+		      MAP_LINK
+		  FROM
+		      TB_SCREEN
+		  JOIN
+		      TB_MOVIE M USING(MOVIE_NO)
+		  JOIN
+		      TB_THEATER USING(THEATER_NO)
+		  JOIN
+		      TB_ATTACHMENT USING(MOVIE_NO)
+		 WHERE
+		      THEATER_NO = ? AND M.STATUS = 'Y'
+		  AND
+			  FILE_LEVEL = 1
+		 GROUP
+		    BY
+		      MOVIE_TITLE, FILE_PATH, CHANGE_NAME, MOVIE_NO, THEATER_NAME, THEATER_ADDR, MAP_LINK, THEATER_NO
+		 ORDER
+		    BY
+		      THEATER_ADDR, MOVIE_NO
+	</entry>
 	
 	
+	<entry key="selectTheaterList">
+		SELECT
+		      THEATER_NO,
+		      THEATER_NAME,
+		      THEATER_ADDR,
+		      MAP_LINK,
+		      LOCATION_CODE,
+		      THEATER_UPDATE
+		  FROM
+		      TB_THEATER
+		 ORDER
+		    BY
+		      THEATER_NO DESC
+	</entry>
 	
+	
+	<entry key="theaterImg">
+		SELECT
+		      MOVIE_NO,
+		      CHANGE_NAME
+		  FROM
+		      TB_ATTACHMENT
+		  JOIN
+		      TB_MOVIE USING(MOVIE_NO)
+		 WHERE
+		      MOVIE_NO = ?
+	</entry>
+
+
+
 </properties>
