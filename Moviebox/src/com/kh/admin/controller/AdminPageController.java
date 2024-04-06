@@ -538,30 +538,52 @@ public class AdminPageController {
 		return view;
 	}
 	
+	public String adminBoardDetail(HttpServletRequest request, HttpServletResponse response) {
+		
+		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+		//System.out.println("noticeNo :::::: " + noticeNo);
+		
+		Notice n = new AdminPageService().adminBoardDetail(noticeNo);
+		//System.out.println("notice :::: " + n.toString());
+		
+		request.setAttribute("notice2323", n);
+		String view = "views/admin/adminBoardDetail.jsp";
+		
+		return view;
+	}
 	
 	
 	
 	
 	
+	public String adminQnADetail(HttpServletRequest request, HttpServletResponse response) {
+		
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		//System.out.println("boardNo :::::: " + boardNo);
+		
+		Board b = new AdminPageService().adminQnADetail(boardNo);
+
+		request.setAttribute("qna", b);
+		String view = "views/admin/adminQnADetail.jsp";
+		
+		return view;
+	}
 	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
+	public String adminBoardDelete(HttpServletRequest request, HttpServletResponse response) {
+		HttpSession session = request.getSession();
+		
+		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
+		
+		int result = new AdminPageService().adminBoardDelete(noticeNo);
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "성공적으로 삭제가 되었습니다");
+		} else {
+			session.setAttribute("alertMsg", "삭제를 실패하였습니다");
+		}
+		
+		return "/adminBoardCheck.admin?currentPage=1";
+	}
 	
 	
 	

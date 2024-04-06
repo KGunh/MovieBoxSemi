@@ -401,4 +401,45 @@ public class AdminPageService {
 		return result;
 	}
 	
+	
+	// 공지 게시글 상세보기
+	public Notice adminBoardDetail(int noticeNo) {
+		
+		Connection conn = getConnection();
+		
+		Notice notice = new AdminPageDao().adminBoardDetail(conn, noticeNo);
+		
+		close(conn);
+		
+		return notice;
+	}
+	
+	
+	// 문의 게시글 상세보기
+	public Board adminQnADetail(int boardNo) {
+		
+		Connection conn = getConnection();
+		
+		Board board = new AdminPageDao().adminQnADetail(conn, boardNo);
+		
+		close(conn);
+		
+		return board;
+	}
+	
+	
+	public int adminBoardDelete(int noticeNo) {
+		Connection conn = getConnection();
+		int result = new AdminPageDao().adminBoardDelete(conn, noticeNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+	
 }
+

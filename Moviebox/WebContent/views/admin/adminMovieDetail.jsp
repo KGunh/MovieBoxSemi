@@ -351,7 +351,7 @@
         </div>
 
         <div id="content">
-            <div class="content_1">
+           	<div class="content_1">
                 <ul class="menu">
                     <li>
                         <a href="<%=contextPath %>/selectAdmin.mb">회원 관리</a>

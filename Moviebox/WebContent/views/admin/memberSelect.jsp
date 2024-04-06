@@ -339,6 +339,12 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                         </ul>
                     </li>
                     <li>
+                        <a href="<%=contextPath %>/adminScreenList.admin">예매 관리</a>
+                        <ul class="submenu" >
+
+                        </ul>
+                    </li>
+                    <li>
                         <a href="<%=contextPath %>/adminMovieCheck.admin?currentPage=1">영화 관리</a>
                         <ul class="submenu" >
 
@@ -401,8 +407,13 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                        
                            <% for(Member m : mb){ %>
                                 <tr class="member">
+
+                                <td><input type="checkbox" name="check" value="check" id="check" 
+                                ></td>
+
                                 
                                 <!-- <td class="ch"><input type="checkbox" name="check" value="check" id="check" ></td>  -->
+
                                 <td><%= m.getMemberNo() %></td>
                                 <td><%= m.getMemberName()%></td>
                                 <td><%= m.getEnrollDate() %></td>
@@ -431,10 +442,23 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                     		});
                     		
                     		
-                    		
+
                     	})
                     	
                     	
+                    	$(function)()
+                    		$('#checkbox').click(function(){
+                    			location.href='<%=contextPath%>/selectAdmin.mb';
+                    			
+                    		})
+                    		
+                    	})
+                      
+
+                    		
+                    	})
+                    	
+
                       
                       </script>
                       

@@ -1,22 +1,17 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+    pageEncoding="UTF-8" import = "com.kh.notice.model.vo.Notice"   
+%>
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+<%
+	Notice n =(Notice)request.getAttribute("notice2323");
+%>       
+
+         
     
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>게시글 공지등록</title>
+    <title>게시글 공지상세페이지</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -38,7 +33,7 @@
         #wrap{
             /*width: 1200px;*/
             margin: 0 auto;
-           /* border : 1px solid red;  */
+            /*border : 1px solid red;*/
         }
 
         #top_wrap{
@@ -177,8 +172,8 @@
             margin-bottom: 30px;
             font-size: x-large;
             font-weight: bold;
-            color: #ffffff;
-        }   
+            
+        }  
 
         /* -------------------------------------------*/
 
@@ -236,7 +231,6 @@
             display: none;
             display: inline;
             float: left;
-            color:#ffffff;/*첨부파일색상*/
         }
 
         input[type=file]::file-selector-button {
@@ -258,7 +252,7 @@
             font-size: 18px;
             font-weight: bold;
             line-height: 50px;
-            color: #ffffff;
+            color: #5a5a5a;
         }
 
         #button{
@@ -282,20 +276,19 @@
 
 
     </style>
-    
 </head>
 <body>
-
 	<!-- 헤더 -->
     <%@ include file="/views/common/header.jsp" %>
-   
+    
     <div id="wrap">
 
         <div id="top_wrap">
             <div class="top_1">
                 <h1>관리자</h1>
             </div>
-       </div>
+
+        </div>
 
         <div id="content">
             <div class="content_1">
@@ -337,58 +330,64 @@
             <!------------------------------------------------------------>
 
             <div class="content_2"><!--content_2 시작-->
-                <p id="p">게시글관리 > 공지 관리 > 공지 등록</p>
+                <p id="p">게시글관리 > 공지 관리 > 공지 상세보기</p>
 
-            <form>
-                <div id="content_2_box"><!--컨텐트2 전체박스-->
-                    <div id="box_wrap">
+            
+            <div id="content_2_box"><!--컨텐트2 전체박스-->
+                <div id="box_wrap">
 
-                        <div id="box_category">
-                            <select name="#" id="category" >
-                                <option value="">공통</option>
-                                <option value="">예매</option>
-                                <option value="">영화관</option>
-                                <option value="">굿즈</option>
-                                <option value="">기타</option>
-                            </select>
-                        </div>
-
-                        <div id="box_1">
-                            <p class="title_p">공지 제목</p>
-                        </div>
-
-                        <div id="box_2">
-                            <input type="text" class="form-control" name="title" style="border-radius: 8px;" value="">
-                        </div>
-
-                        <div id="box_1">
-                            <p class="title_p">공지 내용</p>
-                        </div>
-
-                        <div id="box_3">
-                            <textarea class="form-control" rows="5" name="content" style="resize:none; height: 250px; border-radius: 8px;">내용!!</textarea>
-                        </div>
->
-                        
-                        <div id="button"><!--등록 버튼-->
-                            <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">등록</button>
-                            <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">목록</button>
-                        </div><!--등록 버튼-->
+                    <div id="box_category">
+                        <select name="#" id="category" >
+                            <option value=""><%=n.getNoticeCategory() %></option>
+                        </select>
                     </div>
- 
 
-                </div><!--컨텐트2 전체박스 끝-->
-            </form>
+                    <div id="box_1">
+                        <p class="title_p">공지 제목</p>
+                    </div>
+
+                    <div id="box_2">
+                        <input type="text" class="form-control" name="title" style="border-radius: 8px;" value="<%=n.getNoticeTitle() %>" readonly>
+                    </div>
+
+                    <div id="box_1">
+                        <p class="title_p">공지 내용</p>
+                    </div>
+
+                    <div id="box_3">
+                        <textarea class="form-control" rows="5" name="content" style="resize:none; height: 250px; border-radius: 8px;" readonly><%=n.getNoticeContent()%></textarea>
+                    </div>
+
+                    
+                    <div id="button"><!--등록 버튼-->
+                        <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;" onclick="noticeDelete()">삭제</button>
+                        <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">수정</button>
+                        <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">목록</button>
+                    </div><!--등록 버튼-->
+                </div>
+
+
+            </div><!--컨텐트2 전체박스 끝-->
+            
 
 
 
             </div><!--content_2끝-->
         </div>
 
-
     </div>
-    <%@ include file="/views/common/footer.jsp" %>
+ 	<%@ include file="/views/common/footer.jsp" %>
  	<!-- 푸터 -->
-
+ 	
+ 	<script>
+ 		function noticeDelete() {
+ 			const result = confirm('삭제하려면 확인을 눌러주세요.');
+ 			
+ 			if(result) {
+ 				location.href = '<%=contextPath %>/adminBoardDelete.admin?noticeNo=<%=n.getNoticeNo()%>';	
+ 			}
+ 			
+ 		}
+ 	</script>
 </body>
 </html>

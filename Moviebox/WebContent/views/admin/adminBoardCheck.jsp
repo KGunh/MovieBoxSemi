@@ -171,12 +171,14 @@
             font-size: 15px;
         }
 
-        #find { /*검색창*/
+        #searchTitle { /*검색창*/
             width: 300px;
             height: 35px;
             border-radius: 5px;
             border: 1px solid lightgray;
             font-size: 15px;
+			margin-left: 100px;/*셀렉창 지워서 검색창 중앙으로 배치*/
+			padding-left: 7px;
         }
 
 
@@ -343,15 +345,8 @@
                 <div id="content_2_box"><!--컨텐트2 전체박스-->
 
                     <div id="cnt2_box_wrap"> <!-- 셀렉, 인풋, 버튼 전체 -->
-                        <select name="#" id="select" >
-                            <option value="">공통</option>
-                            <option value="">예매</option>
-                            <option value="">영화관</option>
-                            <option value="">굿즈</option>
-                            <option value="">기타</option>
-                        </select>
-                            <input type="search" id="find">
-                            <button type="submit" id="btn" style="background-color: #FFC145; height: 35px;">
+                            <input type="text" id="searchTitle" placeholder="공지 제목을 입력해 주세요.">
+                            <button type="button" id="btn" style="background-color: #FFC145; height: 35px;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                     <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
                                 </svg>
@@ -383,7 +378,7 @@
                                     <th>조회수</th>
                                 </tr>
                               </thead>
-                              <tbody>
+                              <tbody id="tbody">
                               <% if(list == null || list.isEmpty()) { %>
                               	<tr>
                               		<td colspan="5">조회 된 공지 목록이 없습니다. </td>
@@ -458,6 +453,11 @@
 		function insertButton(){
 			location.href = '<%= contextPath %>/adminBoardInsert.admin';
 		}
+		
+ 		$('#tbody').on('click', 'tr', function(){
+			const noticeNo = $(this).children().eq(0).text();
+			location.href='<%= contextPath %>/adminBoardDetail.admin?noticeNo=' + noticeNo;
+ 		});
 	</script>
 </body>
 </html>
