@@ -451,7 +451,7 @@
  	
  	<script>
 		function insertButton(){
-			location.href = '<%= contextPath %>/adminBoardInsert.admin';
+			location.href = '<%= contextPath %>/adminBoardEnrollForm.admin';
 		}
 		
  		$('#tbody').on('click', 'tr', function(){

@@ -70,8 +70,11 @@ public class AdminPageServlet extends HttpServlet {
 		case "adminBoardCheck" :
 			view = admin.adminBoardCheckList(request, response); flag = false; break; //공지목록전체
 			
+		case "adminBoardEnrollForm" :
+			view = admin.adminBoardEnrollForm(request, response); flag = false; break; //공지등록양식페이지
+			
 		case "adminBoardInsert" :
-			view = "/views/admin/adminBoardInsert.jsp"; break; //공지등록
+			view = admin.adminBoardInsert(request, response); flag = false; break;
 		
 		case "adminBoardDetail" :
 			view = admin.adminBoardDetail(request, response); flag = false; break; //공지상세보기

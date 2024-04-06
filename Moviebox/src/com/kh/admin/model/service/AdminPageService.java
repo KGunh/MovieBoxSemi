@@ -443,7 +443,7 @@ public class AdminPageService {
 	
 	
 	
-	//공지 삭제
+	//문의 삭제
 	public int adminQnADelete(int boardNo) {
 		Connection conn = getConnection();
 		int result = new AdminPageDao().adminQnADelete(conn, boardNo);
@@ -457,6 +457,20 @@ public class AdminPageService {
 		return result;
 	}
 	
+	
+	//공지등록
+	public int adminBoardInsert(Notice notice) {
+		Connection conn = getConnection();
+		int result = new AdminPageDao().adminBoardInsert(conn, notice);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
 	
 	
 	
