@@ -201,7 +201,7 @@
 	
 	
 	
-	<!-- 공지 -->
+	<!-- 공지전체보기 -->
 	<entry key="adminSelectNoticeList">
 		SELECT *
 		FROM (SELECT A.*, ROWNUM RNUM
@@ -215,6 +215,7 @@
 				    TB_NOTICE    
 				JOIN
 				    TB_CATEGORY ON (NOTICE_CATEGORY = CATEGORY_NO)
+				WHERE STATUS = 'Y'
 				ORDER
 				   BY
 				    NOTICE_NO DESC) A)
@@ -232,13 +233,13 @@
 	</entry>
 
 
-	<!-- 문의 -->
+	<!-- 문의전체보기 -->
 	<entry key="adminSelectQnAList">
 		SELECT *
 		FROM (SELECT A.*, ROWNUM RNUM
 		      FROM (SELECT
 		    BOARD_NO,
-		    CATEGORY_NO,
+		    TB_CATEGORY.CATEGORY_NAME,
 		    BOARD_TITLE,
 		    MEMBER_ID,
 		    TO_CHAR(CREATE_DATE, 'YY/MM/DD') CREATE_DATE,
@@ -247,6 +248,10 @@
 		   TB_BOARD
 		JOIN 
 		    TB_MEMBER USING (MEMBER_NO)
+        JOIN 
+            TB_CATEGORY USING (CATEGORY_NO)
+		WHERE 
+            TB_BOARD.STATUS = 'Y'
 		ORDER
 		   BY
 		    BOARD_NO DESC) A)
@@ -455,6 +460,54 @@
 	</entry>
 	
 	
+	<!-- 공지상세보기 -->
+	<entry key="adminBoardDetail"> 
+		SELECT A.NOTICE_NO,
+		       A.NOTICE_TITLE,
+		       A.NOTICE_WRITER,
+		       A.NOTICE_CONTENT,
+		       A.CREATE_DATE,
+		       A.COUNT,
+		       A.STATUS,
+		       A.NOTICE_CATEGORY,
+		       B.CATEGORY_NAME
+		  FROM TB_NOTICE A
+		       LEFT OUTER JOIN TB_CATEGORY B
+		            ON A.NOTICE_CATEGORY = B.CATEGORY_NO
+		 WHERE A.NOTICE_NO = ?
+ 	</entry>
+	
+	
+	<!-- 문의상세보기 -->
+	<entry key="adminQnADetail">
+	    SELECT 
+	           A.BOARD_NO,
+	           A.BOARD_TITLE,
+	           A.BOARD_CONTENT,
+	           A.CREATE_DATE,
+	           A.COUNT,
+	           A.STATUS,
+	           B.CATEGORY_NAME
+	      FROM TB_BOARD A
+	           LEFT OUTER JOIN TB_CATEGORY B
+	                ON A.CATEGORY_NO = B.CATEGORY_NO
+	     WHERE A.BOARD_NO = ?
+	</entry>
+	
+	<!-- 공지삭제 -->
+	<entry key="adminBoardDelete">
+		UPDATE TB_NOTICE
+		   SET STATUS = 'N'
+		 WHERE NOTICE_NO = ?
+	</entry>
+	
+	
+		<!-- 문의삭제 -->
+	<entry key="adminQnADelete">
+		UPDATE TB_BOARD
+		   SET STATUS = 'N'
+		 WHERE BOARD_NO = ?
+	</entry>
 	
 	
 	
@@ -462,13 +515,5 @@
 	
 	
 	
-	
-	
-	
-	
-	
-	
-	
-
 
 </properties>

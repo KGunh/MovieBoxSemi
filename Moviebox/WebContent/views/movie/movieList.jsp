@@ -218,7 +218,7 @@
                 <!-- 정렬 / 검색창 -->
                 <div id="searchalign">
                     <div id="movie-list-align">
-                        <a class="align-a">예매순</a> | <a class="align-a">가나다순</a>
+                        <a class="align-a">개봉일순</a> | <a class="align-a">가나다순</a>
                     </div>
 
                      <div id="search-img">
