@@ -373,6 +373,21 @@ public class MemberAdminDao {
 		
 	}
 	
+	
+	public ArrayList<Member> search(String search, String category){
+		
+		ArrayList<Member> member = new ArrayList<Member>();
+		
+		
+		
+		
+		
+		
+	}
+	
+	
+	
+	
 }
 	
 	
