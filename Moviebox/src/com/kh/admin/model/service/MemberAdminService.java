@@ -181,7 +181,14 @@ public class MemberAdminService {
 		
 	}
 	
-	public void search() {
+	public ArrayList<Member> search(String search, String category) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<Member> list = new MemberAdminDao().search(conn, search, category);
+		JDBCTemplate.close(conn);
+		
+		return list; 
 		
 	}
 	

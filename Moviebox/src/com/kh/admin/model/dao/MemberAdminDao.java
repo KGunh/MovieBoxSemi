@@ -374,13 +374,43 @@ public class MemberAdminDao {
 	}
 	
 	
-	public ArrayList<Member> search(String search, String category){
+	public ArrayList<Member> search(Connection conn,String search, String category){
+		Member member = new Member();
+		ArrayList<Member> list = new ArrayList<Member>();
 		
-		ArrayList<Member> member = new ArrayList<Member>();
+		System.out.println(search+category);
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("search");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, category);
+			pstmt.setString(2, search);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				member.setMemberNo(rset.getInt("MEMBER_NO"));
+				member.setMemberName(rset.getString("MEMBER_NAME"));
+				member.setEnrollDate(rset.getDate("ENROLL_DATE"));
+				member.setStatus(rset.getString("STATUS"));
+				member.setPhone(rset.getString("PHONE"));
+				
+				list.add(member);
+				
+			}
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
 		
 		
-		
-		
+		return list; 
 		
 		
 	}

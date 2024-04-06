@@ -15,6 +15,7 @@ import com.kh.common.model.vo.Attachment;
 import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.movie.model.vo.Movie;
+import com.kh.notice.model.dao.NoticeDao;
 import com.kh.notice.model.vo.Notice;
 import com.kh.theater.model.vo.Screen;
 import com.kh.theater.model.vo.Theater;
@@ -472,7 +473,23 @@ public class AdminPageService {
 		return result;
 	}
 	
-	
+	public int adminBoardUpdate(Notice notice) {
+		
+		Connection conn = getConnection();
+		
+		int result = new AdminPageDao().adminBoardUpdate(conn, notice);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+		
+	}
 	
 	
 	
