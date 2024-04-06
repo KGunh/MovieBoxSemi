@@ -401,4 +401,15 @@ public class AdminPageService {
 		return result;
 	}
 	
+	public Notice adminBoardDetail(int boardNo) {
+		
+		Connection conn = getConnection();
+		
+		Notice notice = new AdminPageDao().adminBoardDetail(conn, boardNo);
+		
+		close(conn);
+		
+		return notice;
+	}
+	
 }

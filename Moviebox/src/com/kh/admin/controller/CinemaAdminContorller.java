@@ -6,12 +6,14 @@ import java.util.Date;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+
 import javax.servlet.http.HttpSession;
 
 import com.kh.admin.model.service.MemberAdminService;
 import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.Location;
 import com.kh.theater.model.vo.Theater;
+
 
 public class CinemaAdminContorller {
 

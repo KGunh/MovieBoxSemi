@@ -1006,4 +1006,38 @@ public class AdminPageDao {
 		
 		return result == list.size() ? 1 : 0;
 	}
+	
+	//공지 상세
+	public Notice adminBoardDetail(Connection conn, int boardNo){
+		Notice n = new Notice(); 
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("adminBoardDetail");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, boardNo);
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) { 
+				n.setNoticeNo(rset.getInt("NOTICE_NO"));
+				n.setNoticeTitle(rset.getString("NOTICE_TITLE"));
+				n.setNoticeWriter(rset.getString("NOTICE_WRITER"));
+				n.setNoticeContent(rset.getString("NOTICE_CONTENT"));
+				n.setCreateDate(rset.getString("CREATE_DATE"));
+				n.setCount(rset.getInt("COUNT"));
+				n.setStatus(rset.getString("STATUS"));
+				n.setNoticeCategory(rset.getString("CATEGORY_NAME"));
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return n;
+	}
 }
