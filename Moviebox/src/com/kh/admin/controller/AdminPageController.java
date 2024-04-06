@@ -383,13 +383,18 @@ public class AdminPageController {
 			movie.setTrailerVideo(trailerVideo);
 			movieResult = new AdminPageService().updateMovie(movie);
 			for (int i = 0; i < resultActorNo.length; i++) {
-				castResult = new AdminPageService().InsertCast(movieNo, resultActorNo[i]);
+				// 0: 중복아님 / 0 아니면 중복임
+				int duplicate = new AdminPageService().selectDuplicateCast(movieNo, resultActorNo[i]);
+				
+				if(duplicate == 0) {
+					castResult = new AdminPageService().InsertCast(movieNo, resultActorNo[i]);
+				}
 			}
 			if (movieResult > 0) {
-				session.setAttribute("alertMsg", "영화가 등록되었습니다.");
+				session.setAttribute("alertMsg", "영화가 수정되었습니다.");
 				view = "/adminMovieCheck.admin?currentPage=1";
 			} else {
-				session.setAttribute("alertMsg", "영화 등록에 실패했습니다..");
+				session.setAttribute("alertMsg", "영화 수정에 실패했습니다..");
 				view = "views/admin/adminMovieInsert.jsp";
 			}
 			

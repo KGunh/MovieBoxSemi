@@ -183,6 +183,18 @@
 	</entry>
 
 	<!-- Cast 등록 -->
+	<entry key="selectDuplicateCast">
+	SELECT COUNT(*)
+	  FROM 
+	  	TB_CAST
+	 WHERE
+	 	MOVIE_NO = ?
+	   AND
+	    ACTOR_NO = ?
+		  	
+	</entry>
+
+	<!-- Cast 등록 -->
 	<entry key="InsertCast">
 		INSERT
 		  INTO
@@ -457,6 +469,7 @@
 		 	MOVIE_NO = ? 
 		 AND 
 		 	FILE_LEVEL = 1
+		 ORDER BY FILE_NO DESC
 	</entry>
 	
 	

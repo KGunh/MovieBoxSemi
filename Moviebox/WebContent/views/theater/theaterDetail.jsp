@@ -221,7 +221,8 @@
                     <input type="hidden" id="inputId" name="movieNo" value="${ t.movieNo }" />
                     	
                         <div class="movie-list-img">
-                        <img src="${ t.filePath }/${ t.changeName }" width="232" height="300"> </div>
+                        	<a href="<%=contextPath%>/detail.movie?movieNo=${ t.movieNo }"><img src="${ t.filePath }/${ t.changeName }" width="232" height="300"></a>
+                        </div>
                     
                         <div class="movie-list-title">${ t.movieTitle }</div>
                         
