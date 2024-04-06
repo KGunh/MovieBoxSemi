@@ -368,10 +368,7 @@
                         <div id="box_3">
                             <textarea class="form-control" rows="5" name="content" style="resize:none; height: 250px; border-radius: 8px;">내용!!</textarea>
                         </div>
-
-                        <div class="fileBox">
-                            <input type="file" name="file" id="file">
-                        </div>
+>
                         
                         <div id="button"><!--등록 버튼-->
                             <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">등록</button>
