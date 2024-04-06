@@ -145,7 +145,7 @@ public class ReservationController {
 		
 		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		String seatNo = request.getParameter("seatNo");
-		String[] seatArray = seatNo.split(",");
+		String[] seatArray = seatNo.split(", ");
 		
 		for(int i = 0; i < seatArray.length; i++) {
 			Seat seat = new Seat();

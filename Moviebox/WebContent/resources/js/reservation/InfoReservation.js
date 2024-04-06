@@ -6,7 +6,6 @@ window.onload = function(){
             ticketNo : selectTicketNo
         },
         success : function(result) {
-            console.log(result);
             var imgFilePath = path + '/' + result.movie.filePath + '/' + result.movie.fileName;
             var selectSeatList = '';
 

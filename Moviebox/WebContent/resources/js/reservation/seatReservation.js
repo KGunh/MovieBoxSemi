@@ -170,7 +170,7 @@ $('#print-resv-info').click(function(){
         },
         success : function(result){
             if(!(selectSeat.length == 0) && selectPeople == 0){
-                let selectSeats = selectSeat.join(',');
+                let selectSeats = selectSeat.join(', ');
                 let resultStr = '';
                 
                 $("#check-area").removeAttr("hidden");
