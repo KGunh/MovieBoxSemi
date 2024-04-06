@@ -327,16 +327,10 @@
                     },
                     success : function(result){
                         var resultStr = '';
-                        for(let i = 0; i < result.length; i++){
+						for(let i = 0; i < result.length; i++){
                             
-                            if(i != 0 && i % 3 == 0){
-                                resultStr += '<div class="printTheaterName"><a href="#">'+ result[i].theaterName +'</a></div><br>';
-                            }
-                            else{
-                                resultStr += '<div class="printTheaterName"><a href="#">'+ result[i].theaterName +'</a></div>';
-                            }
+                            resultStr += '<div class="printTheaterName"><a href="<%=contextPath%>/adminDetailTheater.admin?theaterNo=' +result[i].theaterNo +'&watchDate='+ year + '-' + month + '-' + day +'">'+ result[i].theaterName +'</a></div>';
                         }
-                        console.log(resultStr);
                         $('.theater-content').html(resultStr);
                     }
                     
