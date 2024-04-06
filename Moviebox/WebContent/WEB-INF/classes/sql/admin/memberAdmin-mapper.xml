@@ -159,7 +159,7 @@
 
 
 <entry key="search">
-SELECT * FROM TB_MEMBER WHERE ? LIKE '%?%'
+SELECT * FROM TB_MEMBER WHERE ? LIKE '%'||?||'%'
 
 </entry>
 
