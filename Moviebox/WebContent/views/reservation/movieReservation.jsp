@@ -15,7 +15,9 @@
 <link rel="stylesheet" href="resources/css/reservation/movieReservation.css">
 
 </head>
+
 <body>
+	
 	<jsp:include page="/views/common/header.jsp"></jsp:include>
 	
 	<c:set var="path" value="${ pageContext.request.contextPath }"/>
