@@ -243,7 +243,7 @@
 			<form action="<%=contextPath%>/insert.me" method="post" id="insertForm">
 				<div class="inputdiv">
 					<span class="input-span id" >아이디</span><br> 
-                    <input type="text" class="input-text id" id="memberId" name="memberId" placeholder="아이디입력 | (영문/숫자만 가능 12글자 제한)" maxlength="12">
+                    <input type="text" class="input-text id" id="memberId" name="memberId" placeholder="아이디입력 | (영문/숫자만 가능 6~12글자 제한)" maxlength="12">
 					<button type="button" class="idCheck" onclick="idCheck();">중복확인</button>
                     <span class="input-bottom"></span>
 				</div>
@@ -255,7 +255,7 @@
 				
 				<div class="inputdiv">
 					<span class="input-span">비밀번호</span><br> 
-                    <input type="password" id="memberPwd" class="input-text" name="memberPwd" placeholder="비밀번호 | (영문/숫자만 가능 16글자 제한)" maxlength="16">
+                    <input type="password" id="memberPwd" class="input-text" name="memberPwd" placeholder="비밀번호 | (영문/숫자만 가능 8~16글자 제한)" maxlength="16">
                     <span class="input-bottom"></span>
 				</div>
 				<div class="inputdiv">
@@ -263,26 +263,7 @@
                     <input type="password" id="checkPwd" class="input-text" placeholder="비밀번호확인 (위와 동일한 비밀번호를 입력해주세요)" maxlength="16">
                     <span class="input-bottom"></span>
 				</div>
-                <script>
-                     $(function(){
-                                $('#checkPwd').blur(function(){
-                                    const $memberPwd = $('#memberPwd').val();
-                                    const $checkPwd = $(this).val();
-                                    if($memberPwd != $checkPwd){
-                                        $('#checkPwd').css('border','2px solid red');
-                                        $(this).siblings('.input-bottom').html('잘못된 입력입니다. 다시입력해주세요').css('color','red');
-                                    } 
-                                    else{
-                                        $('#checkPwd').removeAttr('style');
-                                        $(this).siblings('.input-bottom').html('');
-                                    }
-
-                                });
-                                
-                            });
-                            
-
-                </script>
+              
 				<div class="inputdiv">
 					<span class="input-span">이름</span><br> 
                     <input type="text" class="input-text" name="memberName" placeholder="이 름 | ex) 한글만 입력해주세요 " maxlength="5">
@@ -335,7 +316,7 @@
 						<option value="L13">제주</option>
 						<option value="L14">광주</option>
 
-					</select> <input type="text" name="address"class="input-text address">
+					</select> <input type="text" name="address"class="input-text address" placeholder=" | 아무거나작성">
                     <span class="input-bottom"></span>
 				</div>
 				<div class="checkbox-div">
@@ -375,13 +356,23 @@
 	</div>
 
     <script>
-    	let idReg = /^[a-zA-Z0-9]+$/;
-    	let nameReg = /^[가-힣]+$/;
+    	let idReg = /^[a-zA-Z0-9]{6,12}$/;
+    	let pwdReg = /^[a-zA-Z0-9]{8,16}$/;
+    	let nameReg = /^[가-힣]{2,5}$/;
         let phoneReg = /^\d{11}$/;
         let emailReg = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
         let birthdayReg = '';
-        let year = $('input[name=birthday]').val().substr(0,4);
-    	let month = $('input[name=birthday]').val().substr(4,2);
+        const $memberIdInput = $('input[name=memberId]');
+        const $memberPwdInput = $('input[name=memberPwd]');
+        const $memberNameInput = $('input[name=memberName]');
+        const $birthdayInput = $('input[name=birthday]');
+        const $emailInput = $('input[name=email]');
+    	const $phoneInput = $('input[name=phone]');
+    	
+    	
+    	
+        let year =$birthdayInput.val().substr(0,4);
+    	let month = $birthdayInput.val().substr(4,2);
     	if((year%4) == 0 && month == 02){
     	     //윤년
     	     console.log('윤년');
@@ -448,34 +439,51 @@
 
 			
 		}
-        
-        
-        $('.inputdiv > input').blur(function(){
-            checkInput($(this));
-        });
-        $('input[name=memberId]').blur(function(){
-        	checkInputId($(this));
-        });
-        $('input[name=memberId]').keyup(function(){
+        $memberIdInput.keyup(function(){
         	$('.input-button > button').attr('disabled',true);
         	$('.idCheck').css('background','rgb(218, 218, 218)');
         	
         });
-        $('input[name=memberName]').blur(function(){
-        	checkInputName($(this));
+        $('#checkPwd').blur(function(){
+            const $memberPwd = $('#memberPwd').val();
+            const $checkPwd = $(this).val();
+            if($memberPwd != $checkPwd){
+                $('#checkPwd').css('border','2px solid red');
+                $(this).siblings('.input-bottom').html('잘못된 입력입니다. 다시입력해주세요').css('color','red');
+            } 
+            else{
+                $('#checkPwd').removeAttr('style');
+                $(this).siblings('.input-bottom').html('');
+            }
+
         });
         
-        $('input[name=phone]').blur(function(){
-            checkInputPhone($(this));  
+        $('.inputdiv > input').blur(function(){
+            checkInput($(this));
         });
-        $('input[name=email]').blur(function(){
-            checkInputEmail($(this));  
+        $memberPwdInput.blur(function(){
+        	checkInput($(this));
         });
-        $('input[name=birthday]').blur(function(){
-        	
-        	checkInputBirthday($(this));
-        	
-            
+        
+        
+        
+        $memberIdInput.blur(function(){
+        	checkInputId($(this));
+        });
+        
+        $memberNameInput.blur(function(){
+        	removeOrFail(nameReg,this);
+        });
+        
+        $$phoneInput.blur(function(){
+        	removeOrFail(phoneReg,this);
+        });
+        $emailInput.blur(function(){
+        	removeOrFail(emailReg,this);
+        });
+        $birthdayInput.blur(function(){
+        	removeOrFail(birthdayReg,this);
+ 
         });
     
         $('.input-button > button').click(function(){
@@ -488,7 +496,12 @@
                 }
                 else {
                     checkInputAll();
-                    if(phoneReg.test($('input[name=phone]').val()) && birthdayReg.test($('input[name=birthday]').val()) && emailReg.test($('input[name=email]').val())){
+                    if(pwdReg.test($.val())
+                    phoneReg.test($phoneInput.val()) && 
+                    birthdayReg.test($birthdayInput.val()) && 
+                    emailReg.test($emailInput.val()) &&
+                    nameReg.test($memberIdInput.val())
+                    ){
                         $('#insertForm').submit();
                     }
                 }
@@ -498,11 +511,6 @@
         });
         function checkInputAll(){
         	let msg = '';
-        	const $memberNameInput = $('input[name=memberName]');
-        	const $phoneInput = $('input[name=phone]');
-        	const $birthdayInput = $('input[name=birthday]');
-        	const $emailInput = $('input[name=email]');
-
             removeOrFail(nameReg,$memberNameInput);
             removeOrFail(phoneReg,$phoneInput);
             removeOrFail(birthdayReg,$birthdayInput);
@@ -511,6 +519,7 @@
     </script>
 
     <script>
+	    
     	function removeOrFail(reg,$input){
     		if(reg.test($input.val())){
     			$input.removeAttr('style');
