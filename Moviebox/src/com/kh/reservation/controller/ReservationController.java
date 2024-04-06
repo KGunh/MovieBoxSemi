@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import com.kh.common.model.vo.Reservation;
+import com.kh.movie.model.service.MovieService;
 import com.kh.reservation.model.service.ReservationService;
 import com.kh.reservation.model.vo.Seat;
 import com.kh.theater.model.vo.Screen;
@@ -18,7 +19,7 @@ public class ReservationController {
 	
 	public String selectReservationInfo(HttpServletRequest request) {
 		request.setAttribute("locationList", new ReservationService().selectLocationList()); 
-		request.setAttribute("movieList", new ReservationService().selectMovieList()); 
+		request.setAttribute("movieList", new MovieService().selectMovieList()); 
 		
 		return "views/reservation/movieReservation.jsp";
 	}
@@ -116,7 +117,6 @@ public class ReservationController {
 	}
 
 	public Reservation printReservationInfo(HttpServletRequest request) {
-		// 오류 넘버
 		int screenNo = Integer.parseInt(request.getParameter("screenNo"));
 		int adultAge = Integer.parseInt(request.getParameter("adultAge"));
 		

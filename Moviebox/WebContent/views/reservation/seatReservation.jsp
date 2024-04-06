@@ -38,9 +38,9 @@
 		
 		        <div id="selectPersonArea">
 		            <div id="selectText">
-		                                   인원 선택
+						인원 선택
 		                <div style="color:rgb(148, 145, 145); font-size: 16px;">
-		                                           최대 8명까지 선택 가능
+							최대 8명까지 선택 가능
 		                </div>
 		            </div>
 		            <div id="movie-info">${ movieTitle } ${ theaterName } ${ screenName } ${ screenDate }</div>

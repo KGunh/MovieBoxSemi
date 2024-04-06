@@ -6,7 +6,7 @@ window.onload = function(){
             ticketNo : selectTicketNo
         },
         success : function(result) {
-            var imgFilePath = path + '/' + result.movie.filePath + '/' + result.movie.fileName;
+            var imgFilePath = path + '/' + result.movie.filePath + '/' + result.movie.changeName;
             var selectSeatList = '';
 
             $('#movie-poster').html('<img src="' + imgFilePath + '" alt="영화포스터">');

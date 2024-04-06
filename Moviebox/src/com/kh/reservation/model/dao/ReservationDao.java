@@ -36,39 +36,8 @@ public class ReservationDao {
 		}
 	}
 
-	public ArrayList<Movie> selectMovieList(Connection conn) {
-		ArrayList<Movie> list = new ArrayList<Movie>();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("selectMovieList");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
-				Movie m = new Movie();
-				
-				m.setMovieTitle(rset.getString("MOVIE_TITLE"));
-				m.setFileName(rset.getString("CHANGE_NAME"));
-				m.setFilePath(rset.getString("FILE_PATH"));
-				m.setMovieNo(rset.getInt("MOVIE_NO"));
-				
-				list.add(m);
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return list;
-	}
-
-	public ArrayList<Location> selectLocationList(Connection conn) {
-		ArrayList<Location> list = new ArrayList<Location>();
+	public List<Location> selectLocationList(Connection conn) {
+		List<Location> list = new ArrayList<Location>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
@@ -93,6 +62,7 @@ public class ReservationDao {
 			close(rset);
 			close(pstmt);
 		}
+		
 		return list;
 	}
 
@@ -131,6 +101,7 @@ public class ReservationDao {
 			close(rset);
 			close(pstmt);
 		}
+		
 		return list;
 	}
 
@@ -138,6 +109,7 @@ public class ReservationDao {
 		List<Seat> seatList = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		
 		String sql = prop.getProperty("selectSeatList");
 		
 		try {
@@ -156,6 +128,7 @@ public class ReservationDao {
 				
 				seatList.add(seat);
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -193,7 +166,7 @@ public class ReservationDao {
 				Movie movie = new Movie();
 				
 				movie.setMovieRelease(rset.getNString("MOVIE_RELEASE"));
-				movie.setFileName(rset.getString("CHANGE_NAME"));
+				movie.setChangeName(rset.getString("CHANGE_NAME"));
 				movie.setGenreName(rset.getString("GENRE_NAME"));
 				movie.setFilePath(rset.getString("FILE_PATH"));
 				movie.setMovieRt(rset.getString("MOVIE_RT"));
@@ -279,6 +252,7 @@ public class ReservationDao {
 					result += pstmt.executeUpdate();
 				}
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -304,6 +278,7 @@ public class ReservationDao {
 				
 				result += pstmt.executeUpdate();
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -332,7 +307,7 @@ public class ReservationDao {
 				
 				m.setMovieRelease(rset.getString("MOVIE_RELEASE"));
 				m.setMovieTitle(rset.getString("MOVIE_TITLE"));
-				m.setFileName(rset.getString("CHANGE_NAME"));
+				m.setChangeName(rset.getString("CHANGE_NAME"));
 				m.setGenreName(rset.getString("GENRE_NAME"));
 				m.setFilePath(rset.getString("FILE_PATH"));
 				m.setMovieRt(rset.getString("MOVIE_RT"));
@@ -353,8 +328,8 @@ public class ReservationDao {
 				reservation.setTicketNo(rset.getInt("TICKET_NO"));
 				reservation.setPrice(p);
 				reservation.setMovie(m);
-				
 			}
+			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
