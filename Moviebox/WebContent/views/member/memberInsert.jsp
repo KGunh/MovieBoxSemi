@@ -243,7 +243,7 @@
 			<form action="<%=contextPath%>/insert.me" method="post" id="insertForm">
 				<div class="inputdiv">
 					<span class="input-span id" >아이디</span><br> 
-                    <input type="text" class="input-text id" id="memberId" name="memberId" placeholder="아이디입력(영문/숫자만 가능 12글자 제한)" maxlength="12">
+                    <input type="text" class="input-text id" id="memberId" name="memberId" placeholder="아이디입력 | (영문/숫자만 가능 12글자 제한)" maxlength="12">
 					<button type="button" class="idCheck" onclick="idCheck();">중복확인</button>
                     <span class="input-bottom"></span>
 				</div>
@@ -255,7 +255,7 @@
 				
 				<div class="inputdiv">
 					<span class="input-span">비밀번호</span><br> 
-                    <input type="password" id="memberPwd" class="input-text" name="memberPwd" placeholder="비밀번호(영문/숫자만 가능 16글자 제한)" maxlength="16">
+                    <input type="password" id="memberPwd" class="input-text" name="memberPwd" placeholder="비밀번호 | (영문/숫자만 가능 16글자 제한)" maxlength="16">
                     <span class="input-bottom"></span>
 				</div>
 				<div class="inputdiv">
@@ -519,7 +519,8 @@
             }
             else{
             	$input.css('border','2px solid red');
-        		$input.siblings('.input-bottom').html('형식에 맞지않습니다 | '+ $input.attr('placeholder').substring(10)).css('color','red');
+            	let count = $input.attr('placeholder').indexOf('|');
+        		$input.siblings('.input-bottom').html('형식에 맞지않습니다 '+ $input.attr('placeholder').substring(count)).css('color','red');
             }
     	}
     	
