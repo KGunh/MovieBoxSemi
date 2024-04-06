@@ -538,6 +538,7 @@ public class AdminPageController {
 		return view;
 	}
 	
+	//공지 상세보기
 	public String adminBoardDetail(HttpServletRequest request, HttpServletResponse response) {
 		
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
@@ -555,7 +556,7 @@ public class AdminPageController {
 	
 	
 	
-	
+	//문의 상세보기
 	public String adminQnADetail(HttpServletRequest request, HttpServletResponse response) {
 		
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
@@ -569,7 +570,10 @@ public class AdminPageController {
 		return view;
 	}
 	
+	
+	//공지 삭제
 	public String adminBoardDelete(HttpServletRequest request, HttpServletResponse response) {
+		
 		HttpSession session = request.getSession();
 		
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
@@ -577,13 +581,62 @@ public class AdminPageController {
 		int result = new AdminPageService().adminBoardDelete(noticeNo);
 		
 		if(result > 0) {
-			session.setAttribute("alertMsg", "성공적으로 삭제가 되었습니다");
+			session.setAttribute("alertMsg", "성공적으로 삭제가 되었습니다.");
 		} else {
-			session.setAttribute("alertMsg", "삭제를 실패하였습니다");
+			session.setAttribute("alertMsg", "삭제에 실패하였습니다.");
 		}
 		
 		return "/adminBoardCheck.admin?currentPage=1";
 	}
+	
+	
+	//문의 삭제
+	public String adminQnADelete(HttpServletRequest request, HttpServletResponse response) {
+		
+		HttpSession session = request.getSession();
+		
+		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
+		
+		int result = new AdminPageService().adminQnADelete(boardNo);
+		
+		if(result > 0) {
+			session.setAttribute("alertMsg", "성공적으로 삭제가 되었습니다.");
+		} else {
+			session.setAttribute("alertMsg", "삭제에 실패하였습니다.");
+		}
+		
+		return "/adminQnACheck.admin?currentPage=1";
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

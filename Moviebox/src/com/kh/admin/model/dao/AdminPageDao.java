@@ -207,7 +207,7 @@ public class AdminPageDao {
 				Board board = new Board();
 				
 				board.setBoardNo(rset.getInt("BOARD_NO"));
-				board.setBoardCategory(rset.getString("CATEGORY_NO"));
+				board.setBoardCategory(rset.getString("CATEGORY_NAME"));
 				board.setBoardTitle(rset.getString("BOARD_TITLE"));
 				board.setBoardWriter(rset.getString("MEMBER_ID"));
 				board.setCreateDate(rset.getString("CREATE_DATE"));
@@ -1084,6 +1084,7 @@ public class AdminPageDao {
 		return b;
 	}
 	
+	//공지 삭제
 	public int adminBoardDelete(Connection conn, int noticeNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -1104,6 +1105,52 @@ public class AdminPageDao {
 		
 		return result;
 	}	
+	
+	
+	
+	
+	
+	//문의 삭제
+	public int adminQnADelete(Connection conn, int boardNo) {
+		int result = 0;
+		PreparedStatement pstmt = null;
+		
+		String sql = prop.getProperty("adminQnADelete");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, boardNo);
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	

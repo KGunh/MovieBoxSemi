@@ -88,6 +88,9 @@ public class AdminPageServlet extends HttpServlet {
 		
 		case "adminQnADetail" :
 			view = admin.adminQnADetail(request, response); flag = false; break; //공지상세보기
+			
+		case "adminQnADelete" :
+			view = admin.adminQnADelete(request, response); flag = false; break; //공지상세보기
 
 			
 			

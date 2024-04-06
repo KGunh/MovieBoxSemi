@@ -427,7 +427,7 @@ public class AdminPageService {
 		return board;
 	}
 	
-	
+	//공지 삭제
 	public int adminBoardDelete(int noticeNo) {
 		Connection conn = getConnection();
 		int result = new AdminPageDao().adminBoardDelete(conn, noticeNo);
@@ -440,6 +440,59 @@ public class AdminPageService {
 		
 		return result;
 	}
+	
+	
+	
+	//공지 삭제
+	public int adminQnADelete(int boardNo) {
+		Connection conn = getConnection();
+		int result = new AdminPageDao().adminQnADelete(conn, boardNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 }
 

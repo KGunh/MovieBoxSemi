@@ -365,7 +365,7 @@
 
                         
                         <div id="button"><!--등록 버튼-->
-                            <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">삭제</button>
+                            <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;" onclick="qnaDelete()">삭제</button>
                             <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">목록</button>
                         </div><!--등록 버튼-->
                     </div>
@@ -382,5 +382,30 @@
     </div>
  	<%@ include file="/views/common/footer.jsp" %>
  	<!-- 푸터 -->
+ 	
+ 	
+ 	
+ 	
+	 <script>
+		function qnaDelete() {
+			const result = confirm('삭제하려면 확인을 눌러주세요.');
+			
+			if(result) {
+				location.href = '<%=contextPath %>/adminQnADelete.admin?boardNo=<%=b.getBoardNo()%>';	
+			}
+			
+		}
+ 	</script>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
 </body>
 </html>

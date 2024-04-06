@@ -354,11 +354,7 @@
 
 
 
-                    <div id="cnt2_btn"><!--등록 버튼-->
-                        <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right;" onclick="insertButton()";
-                        >등록</button>
 
-                    </div><!--등록 버튼-->
 
 
 
