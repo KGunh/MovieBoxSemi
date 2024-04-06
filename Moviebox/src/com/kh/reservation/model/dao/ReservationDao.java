@@ -138,7 +138,6 @@ public class ReservationDao {
 		List<Seat> seatList = new ArrayList<>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
 		String sql = prop.getProperty("selectSeatList");
 		
 		try {
@@ -163,6 +162,7 @@ public class ReservationDao {
 			close(rset);
 			close(pstmt);
 		}
+		
 		return seatList;
 	}
 
@@ -212,6 +212,7 @@ public class ReservationDao {
 			close(rset);
 			close(pstmt);
 		}
+		
 		return reservation;
 	}
 

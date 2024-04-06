@@ -12,7 +12,7 @@ window.onload = function() {
         url : 'seat.reservationAjax',
         type : 'get',
         data : {
-            screenNo : <%= screenNo %>
+            screenNo : selectScreenNo
         },
         success : function(result){
             result.forEach(function(seat) {
@@ -163,14 +163,14 @@ $('#print-resv-info').click(function(){
         url : 'printInfo.reservationAjax',
         type : 'post',
         data : {
-            screenNo : <%= screenNo %>,
-            movieNo : <%= movieNo %>,
+            screenNo : selectScreenNo,
+            movieNo : selectMovieNo,
             teenAge : teenCount,
             adultAge : adultCount 
         },
         success : function(result){
             if(!(selectSeat.length == 0) && selectPeople == 0){
-                let selectSeats = selectSeat.join(', ');
+                let selectSeats = selectSeat.join(',');
                 let resultStr = '';
                 
                 $("#check-area").removeAttr("hidden");
@@ -178,7 +178,7 @@ $('#print-resv-info').click(function(){
                 
                 resultStr += '<div id="check-reservation">'
                            +     '<div id="check-movie">'
-                           +         '<div id="poster-select"><img style="width: 100%; height: 100%;" src="<%= contextPath %>/'+ result.movie.filePath + '/' + result.movie.fileName + '" alt="영화포스터"></div>'
+                           +         '<div id="poster-select"><img style="width: 100%; height: 100%;" src="'+ path + '/'+ result.movie.filePath + '/' + result.movie.fileName + '" alt="영화포스터"></div>'
                            +         '<div id="movie-select">'
                            +             '<div style="text-align: center; font-size:20px; font-weight: 700; margin-top: 5px; margin-bottom: 5px;">' + result.movieTitle + '</div>'
                            +             '<div style="text-align: center;">개봉일 ' + result.movie.movieRelease + '</div>'
@@ -206,9 +206,9 @@ $('#print-resv-info').click(function(){
                            +         '</div>'
                            +     '</div>'
                            +     '<form id="payment-form" action="/moviebox/payment.reservation" method="post">'
-                           +         '<input type="hidden" name="movieNo" value="' + <%= movieNo %> + '">'
-                           +         '<input type="hidden" name="screenNo" value="' + <%= screenNo %> + '">'
-                           +         '<input type="hidden" name="memberNo" value="' + <%= loginUser.getMemberNo() %> + '">'
+                           +         '<input type="hidden" name="movieNo" value="' + selectMovieNo + '">'
+                           +         '<input type="hidden" name="screenNo" value="' + selectScreenNo + '">'
+                           +         '<input type="hidden" name="memberNo" value="' + memberNo + '">'
                            +         '<input type="hidden" name="teen" value="' + teenCount + '">'
                            +         '<input type="hidden" name="adult" value="' + adultCount + '">'
                            +         '<input type="hidden" name="seatNo" value="' + selectSeats + '">'
