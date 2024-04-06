@@ -3,7 +3,7 @@
 %>
     
 <%
-	Notice n =(Notice)request.getAttribute("notice2323");
+	Notice n =(Notice)request.getAttribute("notice");
 %>       
 
          
@@ -11,7 +11,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>게시글 공지상세페이지</title>
+    <title>게시글 공지상세수정페이지</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -328,50 +328,50 @@
             </div>
 
             <!------------------------------------------------------------>
-
+			
             <div class="content_2"><!--content_2 시작-->
-                <p id="p">게시글관리 > 공지 관리 > 공지 상세보기</p>
+                <p id="p">게시글관리 > 공지 관리 > 공지 상세수정</p>
 
-            
-            <div id="content_2_box"><!--컨텐트2 전체박스-->
-                <div id="box_wrap">
-
-                    <div id="box_category">
-                        <select name="#" id="category" >
-                            <option value=""><%=n.getNoticeCategory() %></option>
-                        </select>
-                    </div>
-
-                    <div id="box_1">
-                        <p class="title_p">공지 제목</p>
-                    </div>
-
-                    <div id="box_2">
-                        <input type="text" class="form-control" name="title" style="border-radius: 8px;" value="<%=n.getNoticeTitle() %>" readonly>
-                    </div>
-
-                    <div id="box_1">
-                        <p class="title_p">공지 내용</p>
-                    </div>
-
-                    <div id="box_3">
-                        <textarea class="form-control" rows="5" name="content" style="resize:none; height: 250px; border-radius: 8px;" readonly><%=n.getNoticeContent()%></textarea>
-                    </div>
-
-                    
-                    <div id="button"><!--등록 버튼-->
-                        <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;" onclick="noticeDelete()">삭제</button>
-                        <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;" onclick="noticeUpdate()">수정</button>
-                        <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">목록</button>
-                    </div><!--등록 버튼-->
-                </div>
-
-
-            </div><!--컨텐트2 전체박스 끝-->
-            
-
-
-
+            		<form action="<%=contextPath %>/adminBoardUpdate.admin" method="post" id="insert-box">
+            			<input type="hidden" name="noticeNo" value="<%= n.getNoticeNo()%>" />
+            			
+		            	<div id="content_2_box"><!--컨텐트2 전체박스-->
+			                <div id="box_wrap">
+			
+			                    <div id="box_category">
+			                            <select name="category" id="category" >
+			                                <option value="1">예매</option>
+			                                <option value="2">영화관</option>
+			                                <option value="3">굿즈</option>
+			                                <option value="4">기타</option>
+			                            </select>
+			                    </div>
+			
+			                    <div id="box_1">
+			                        <p class="title_p">공지 제목</p>
+			                    </div>
+			
+			                    <div id="box_2">
+			                        <input type="text" class="form-control" name="title" style="border-radius: 8px;" value="<%=n.getNoticeTitle() %>" >
+			                    </div>
+			
+			                    <div id="box_1">
+			                        <p class="title_p">공지 내용</p>
+			                    </div>
+			
+			                    <div id="box_3">
+			                        <textarea class="form-control" rows="5" name="content" style="resize:none; height: 250px; border-radius: 8px;"><%=n.getNoticeContent()%></textarea>
+			                    </div>
+			
+			                    <div id="button"><!--수정 버튼-->
+			                        <button type="submit" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">수정</button>
+			                        <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">목록</button>
+			                    </div><!--수정 버튼-->
+			                </div>
+		                
+		               </div><!--컨텐트2 전체박스 끝--> 
+		        	</form>
+	
             </div><!--content_2끝-->
         </div>
 
@@ -380,9 +380,13 @@
  	<!-- 푸터 -->
  	
  	<script>
- 		function noticeUpdate() {
- 			location.href = '<%=contextPath %>/adminBoardUpdateEnrollForm.admin?noticeNo=<%=n.getNoticeNo()%>';
- 		}
+
+ 		window.onload = function() {
+ 		    var categoryValue = <%=n.getCategoryNo()%> // JSP로부터 category 값을 받아옴
+
+ 		    // 받아온 category 값에 해당하는 option을 선택
+ 		    $('#category').val(categoryValue);
+ 		};
  	
  		function noticeDelete() {
  			const result = confirm('삭제하려면 확인을 눌러주세요.');

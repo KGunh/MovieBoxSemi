@@ -1028,6 +1028,7 @@ public class AdminPageDao {
 				n.setCreateDate(rset.getString("CREATE_DATE"));
 				n.setCount(rset.getInt("COUNT"));
 				n.setStatus(rset.getString("STATUS"));
+				n.setCategoryNo(rset.getInt("CATEGORY_NO"));
 				n.setNoticeCategory(rset.getString("CATEGORY_NAME"));
 			}
 			
@@ -1160,6 +1161,33 @@ public class AdminPageDao {
 		return result;
 		
 	}
+	
+	public int adminBoardUpdate(Connection conn, Notice notice) {
+		
+		int result = 0;
+		PreparedStatement pstmt = null;
+		String sql = prop.getProperty("adminBoardUpdate");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, notice.getCategoryNo());
+			pstmt.setString(2, notice.getNoticeTitle());
+			pstmt.setString(3, notice.getNoticeContent());
+			pstmt.setInt(4, notice.getNoticeNo());
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+	
+	
 	
 	
 	

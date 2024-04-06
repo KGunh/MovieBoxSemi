@@ -470,6 +470,7 @@
 		       A.COUNT,
 		       A.STATUS,
 		       A.NOTICE_CATEGORY,
+		       B.CATEGORY_NO,
 		       B.CATEGORY_NAME
 		  FROM TB_NOTICE A
 		       LEFT OUTER JOIN TB_CATEGORY B
@@ -537,7 +538,41 @@
 				)
 	</entry>
 	
+	<!-- Attachment에 포스터 저장 -->
+	<entry key="InsertAttach">
+		INSERT
+		  INTO
+			    TB_ATTACHMENT
+			    (
+			    FILE_NO,
+			    MOVIE_NO,
+			    ORIGIN_NAME,
+			    CHANGE_NAME,
+			    FILE_PATH,
+			    FILE_LEVEL
+			    )
+		  VALUES
+			   (
+			   SEQ_FNO.NEXTVAL,
+			   ?,
+			   ?,
+			   ?,
+			   ?,
+			   ?
+			   )
+	</entry>
 	
+	<!-- 공지수정 -->
+	<entry key="adminBoardUpdate">
+		UPDATE
+	      	  TB_NOTICE
+	       SET
+		      NOTICE_CATEGORY = ?,
+		      NOTICE_TITLE = ?,
+		      NOTICE_CONTENT = ?
+	 	 WHERE
+	      	  NOTICE_NO = ?
+	</entry>
 	
 	
 	
