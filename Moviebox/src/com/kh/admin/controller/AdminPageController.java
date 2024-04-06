@@ -19,6 +19,7 @@ import com.kh.common.model.vo.Attachment;
 import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.Location;
 import com.kh.common.model.vo.PageInfo;
+import com.kh.movie.model.service.MovieService;
 import com.kh.movie.model.vo.Movie;
 import com.kh.notice.model.service.NoticeService;
 import com.kh.notice.model.vo.Notice;
@@ -490,7 +491,7 @@ public class AdminPageController {
 		
 		Theater th = new TheaterService().detailTheater(theaterNo);
 		
-		List<Movie> movieList = new ReservationService().selectMovieList();
+		List<Movie> movieList = new MovieService().selectMovieList();
 		if(th != null) {
 			request.setAttribute("theater", th);
 		}

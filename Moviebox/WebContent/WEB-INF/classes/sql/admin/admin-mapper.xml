@@ -509,7 +509,33 @@
 		 WHERE BOARD_NO = ?
 	</entry>
 	
-	
+	<!-- 공지등록 -->
+	<entry key="adminBoardInsert">
+		INSERT 
+		INTO 
+			TB_NOTICE
+				( 
+				  NOTICE_NO,
+				  NOTICE_TITLE,
+				  NOTICE_WRITER,
+				  NOTICE_CONTENT,
+				  CREATE_DATE,
+				  COUNT,
+				  STATUS,
+				  NOTICE_CATEGORY
+				)
+		VALUES
+				( 
+				  SEQ_NOTICENO.NEXTVAL,
+				  ?,
+				  ?,
+				  ?,
+				  SYSDATE,
+				  0,
+				  'Y',
+				  ?
+				)
+	</entry>
 	
 	
 	
