@@ -563,6 +563,32 @@ public class AdminPageDao {
 		return result;
 	}
 	
+	public int selectDuplicateCast(Connection conn, int movieNo, int actorNo) {
+		int listCount = 0;
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("selectDuplicateCast");
+		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setInt(1, movieNo);
+			pstmt.setInt(2, actorNo);
+			
+			rset = pstmt.executeQuery();
+			
+			rset.next();
+			
+			listCount = rset.getInt("COUNT(*)");		
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return listCount;
+	}
 	
 	//Cast 등록
 	public int InsertCast(Connection conn, int movieNo, int actorNo) {

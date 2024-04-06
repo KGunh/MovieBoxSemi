@@ -537,7 +537,7 @@
 			            </div>
 			
 			            <div id="sub_4">
-			                <input type="text" name="running_time" id="runningTime" placeholder="러닝타임을 입력해 주세요.(ex - 120)">
+			                <input type="text" name="running_time" id="runningTime" placeholder="러닝타임을 입력해 주세요.(ex - 120)" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
 			            </div>
 			
 			            <div id="sub_5">
