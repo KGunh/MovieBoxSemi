@@ -441,13 +441,14 @@
     </style>
 
     <script>
-        let teenCount = 0;
-        let adultCount = 0;
-        let peopleCount = 0;
-        let selectPeople = 0;
-        let resvTeen = ['', 0]; 
         let resvAdult = ['', 0];
+        let resvTeen = ['', 0]; 
         let selectSeat = [];
+        let mousedrag = false;
+        let selectPeople = 0;
+        let peopleCount = 0;
+        let adultCount = 0;
+        let teenCount = 0;
 
         window.onload = function() {
             $.ajax({
@@ -541,106 +542,28 @@
             peopleCount = 0;
         };
 
-        let mouseClick = false;
-
-        $('.seat').mousedown(function(){
-            mouseClick = true;
-
-            if($(this).hasClass('clicked')) {
-                $(this).removeClass('clicked');
-                $("#check-area").hide();
-
-                selectSeat.splice(index, 1);
-                selectPeople += 1;
-            } 
-            else {
-                if(selectPeople < 1 ) {
-                    if(!$('.people-Count').hasClass('clicked')) alert('인원을 먼저 선택해주세요.');
-                    else alert('좌석을 모두 선택하셨습니다.');
-                }
-                else {
-                    $(this).addClass('clicked');
-                    selectSeat.push(seat);
-                    selectPeople -= 1;
-                };
-            };
-
-            selectSeat.sort(function(a, b) {
-                let strA = a.match(/[A-F]/);
-                let strB = b.match(/[A-F]/);
-                
-                if (strA < strB) {
-                    return -1;
-                } 
-                else if (strA > strB) {
-                    return 1;
-                };
-                
-                let numA = parseInt(a.match(/\d+/));
-                let numB = parseInt(b.match(/\d+/));
-
-                return numA - numB;
-            });
-        });
-
-        $('.seat').mouseenter(function(){
-            if(mouseClick == true){
-                if($(this).hasClass('clicked')) {
-                    $(this).removeClass('clicked');
-                    $("#check-area").hide();
-
-                    selectSeat.splice(index, 1);
-                    selectPeople += 1;
-                } 
-                else {
-                    if(selectPeople < 1 ) {
-                        if(!$('.people-Count').hasClass('clicked')) alert('인원을 먼저 선택해주세요.');
-                        else alert('좌석을 모두 선택하셨습니다.');
-                    }
-                    else {
-                        $(this).addClass('clicked');
-                        selectSeat.push(seat);
-                        selectPeople -= 1;
-                    };
-                };
-
-                selectSeat.sort(function(a, b) {
-                    let strA = a.match(/[A-F]/);
-                    let strB = b.match(/[A-F]/);
-                    
-                    if (strA < strB) {
-                        return -1;
-                    } 
-                    else if (strA > strB) {
-                        return 1;
-                    };
-                    
-                    let numA = parseInt(a.match(/\d+/));
-                    let numB = parseInt(b.match(/\d+/));
-
-                    return numA - numB;
-                });
-            }
-        });
-
-        $('.seat').mouseup(function(){
-            mouseClick = false;
-        })
-
-        $('.seats').on('click', function() {
-            let seat = $(this).html();
-            let index = selectSeat.indexOf(seat);
-
-            selectseat(this, seat, index);
-
+        $('.seats').on('mousedown', function(){
+            mousedrag = true;
+            selectSeats(this);
             arrangeSeat();
         });
 
+        $('.seats').on('mouseenter', function(){
+            if(mousedrag){
+                selectSeats(this);
+                arrangeSeat();
+            }
+        });
 
-        // 중복코드 하나의 함수로 묶기
-        function selectseat(this, seat, index) {
-            if($(this).hasClass('clicked')) {
-                $(this).removeClass('clicked');
+        $(document).on('mouseup', function() {
+            mousedrag = false;
+        });
+
+        function selectSeats(e) {
+            let index = selectSeat.indexOf($(e).html());
+
+            if($(e).hasClass('clicked')) {
+                $(e).removeClass('clicked');
                 $("#check-area").hide();
 
                 selectSeat.splice(index, 1);
@@ -649,15 +572,15 @@
             else {
                 if(selectPeople < 1 ) {
                     if(!$('.people-Count').hasClass('clicked')) alert('인원을 먼저 선택해주세요.');
-                    else alert('좌석을 모두 선택하셨습니다.');
+                    else alert('좌석을 모두 선택하셨습니다.'); mousedrag = false;
                 }
                 else {
-                    $(this).addClass('clicked');
-                    selectSeat.push(seat);
+                    $(e).addClass('clicked');
+                    selectSeat.push($(e).html());
                     selectPeople -= 1;
                 };
             };
-        }
+        };
  
         function arrangeSeat(){
             selectSeat.sort(function(a, b) {
@@ -676,10 +599,7 @@
 
                 return numA - numB;
             });
-        }
-
-
-
+        };
 
         $('#print-resv-info').click(function(){
             $.ajax({

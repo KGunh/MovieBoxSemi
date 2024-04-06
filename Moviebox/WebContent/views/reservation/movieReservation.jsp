@@ -415,8 +415,6 @@
             	success : function(result){
                     let resultStr = '';
 
-                    console.log(result);
-
                     if(result.length != 0){
 
                         for(let i = 0; i < result.length; i++){
