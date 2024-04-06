@@ -327,7 +327,9 @@
             
         </div>
 	</div>
+
     <% } %>
+
 	<%@ include file="/views/common/footer.jsp" %>
 
     <style>
@@ -439,15 +441,14 @@
     </style>
 
     <script>
-        let teenCount = 0; // 연령별 선택한 인원
+        let teenCount = 0;
         let adultCount = 0;
         let peopleCount = 0;
-        let selectPeople = 0; // 총 인원
+        let selectPeople = 0;
         let resvTeen = ['', 0]; 
         let resvAdult = ['', 0];
-        let selectSeat = []; // 선택 좌석
+        let selectSeat = [];
 
-        // 상영관 예약정보 가져와서 예약좌석 비활성화
         window.onload = function() {
             $.ajax({
                 url : 'seat.reservationAjax',
@@ -456,13 +457,9 @@
                     screenNo : <%= screenNo %>
             	},
                 success : function(result){
-
                     result.forEach(function(seat) {
-                        
-                        // .line div요소 html과 배열요소 비교
                         $('.seats').each(function() {
                             if ($(this).html() === seat.seatNo) {
-                                // 값이 같으면 disabled 속성 부여
                                 $(this).addClass('disabled');
                                 $(this).html('X');
                             };
@@ -470,34 +467,13 @@
                     });
                 },
                 error : function(){
-                    // 경고창 보여주고 영화 선택화면으로 이동시키기
+                    alert('잘못된 상영관 정보입니다. 상영관을 다시 선택해주세요!');
+                    location.href = '/moviebox/movie.reservation';
                 }
             });
         };
-        /*
-        $('.seats').mousedown(function() {
-            if($(this).hasClass('clicked')){
-                $(this).removeClass('clicked');
-            }
-            else{
-                $(this).addClass('clicked');
-            }
 
-            $('.seats').mouseenter(function() {
-                if($(this).hasClass('clicked')){
-                    $(this).removeClass('clicked');
-                }
-                else{
-                    $(this).addClass('clicked');
-                }
-            });
-        });
-        */
-
-
-        // 인원수 버튼에 대한 스타일동작 및 값처리
         $('.people-Count').on('click', function() {
-            // 인원선택 상위 연령요소
             let ageType = $(this).parent().prev().children().eq(0);
 
             if(ageType.html() == '청소년'){
@@ -532,17 +508,16 @@
                     ageType.addClass('clicked');
                 }
             }
-            // 총 인원수
+
             peopleCount = teenCount + adultCount;
-            // 인원선택 초기화 -> 선택한 좌석 배열 초기화
             selectSeat = [];
-             // 청소년,성인 선택 -> 좌석선택 초기화
+
             $('.seats').removeClass('clicked');
+            $("#check-area").hide();
 
             printPeople();
         });
 
-        // 선택한 인원 보여주기
         function printPeople() {
             selectPeople = teenCount + adultCount;
 
@@ -566,10 +541,10 @@
             peopleCount = 0;
         };
 
-        // 인원수대로 좌석선택
-        $('.seats').on('click', function() {
-            let seat = $(this).html();
-            let index = selectSeat.indexOf(seat);
+        let mouseClick = false;
+
+        $('.seat').mousedown(function(){
+            mouseClick = true;
 
             if($(this).hasClass('clicked')) {
                 $(this).removeClass('clicked');
@@ -589,13 +564,11 @@
                     selectPeople -= 1;
                 };
             };
-            // 좌석 배열 오름차순 정렬 -> 정규표현식 활용
+
             selectSeat.sort(function(a, b) {
-                // 배열요소의 문자 추출
-                let strA = a.match(/[A-Z]+/)[0];
-                let strB = b.match(/[A-Z]+/)[0];
+                let strA = a.match(/[A-F]/);
+                let strB = b.match(/[A-F]/);
                 
-                // 문자 비교
                 if (strA < strB) {
                     return -1;
                 } 
@@ -603,16 +576,111 @@
                     return 1;
                 };
                 
-                // 문자가 같을때 숫자 추출
-                let numA = parseInt(a.match(/\d+/)[0], 10);
-                let numB = parseInt(b.match(/\d+/)[0], 10);
+                let numA = parseInt(a.match(/\d+/));
+                let numB = parseInt(b.match(/\d+/));
 
-                // 숫자를 비교
                 return numA - numB;
             });
         });
 
-        // 좌석 선택 후 예매정보 하단에 표시
+        $('.seat').mouseenter(function(){
+            if(mouseClick == true){
+                if($(this).hasClass('clicked')) {
+                    $(this).removeClass('clicked');
+                    $("#check-area").hide();
+
+                    selectSeat.splice(index, 1);
+                    selectPeople += 1;
+                } 
+                else {
+                    if(selectPeople < 1 ) {
+                        if(!$('.people-Count').hasClass('clicked')) alert('인원을 먼저 선택해주세요.');
+                        else alert('좌석을 모두 선택하셨습니다.');
+                    }
+                    else {
+                        $(this).addClass('clicked');
+                        selectSeat.push(seat);
+                        selectPeople -= 1;
+                    };
+                };
+
+                selectSeat.sort(function(a, b) {
+                    let strA = a.match(/[A-F]/);
+                    let strB = b.match(/[A-F]/);
+                    
+                    if (strA < strB) {
+                        return -1;
+                    } 
+                    else if (strA > strB) {
+                        return 1;
+                    };
+                    
+                    let numA = parseInt(a.match(/\d+/));
+                    let numB = parseInt(b.match(/\d+/));
+
+                    return numA - numB;
+                });
+            }
+        });
+
+        $('.seat').mouseup(function(){
+            mouseClick = false;
+        })
+
+        $('.seats').on('click', function() {
+            let seat = $(this).html();
+            let index = selectSeat.indexOf(seat);
+
+            selectseat(this, seat, index);
+
+            arrangeSeat();
+        });
+
+
+        // 중복코드 하나의 함수로 묶기
+        function selectseat(this, seat, index) {
+            if($(this).hasClass('clicked')) {
+                $(this).removeClass('clicked');
+                $("#check-area").hide();
+
+                selectSeat.splice(index, 1);
+                selectPeople += 1;
+            } 
+            else {
+                if(selectPeople < 1 ) {
+                    if(!$('.people-Count').hasClass('clicked')) alert('인원을 먼저 선택해주세요.');
+                    else alert('좌석을 모두 선택하셨습니다.');
+                }
+                else {
+                    $(this).addClass('clicked');
+                    selectSeat.push(seat);
+                    selectPeople -= 1;
+                };
+            };
+        }
+ 
+        function arrangeSeat(){
+            selectSeat.sort(function(a, b) {
+                let strA = a.match(/[A-F]/);
+                let strB = b.match(/[A-F]/);
+                
+                if (strA < strB) {
+                    return -1;
+                } 
+                else if (strA > strB) {
+                    return 1;
+                };
+                
+                let numA = parseInt(a.match(/\d+/));
+                let numB = parseInt(b.match(/\d+/));
+
+                return numA - numB;
+            });
+        }
+
+
+
+
         $('#print-resv-info').click(function(){
             $.ajax({
                 url : 'printInfo.reservationAjax',
@@ -624,11 +692,12 @@
                     adultAge : adultCount 
                 },
                 success : function(result){
-                    if(!(selectSeat.length === 0) && selectPeople === 0){
+                    if(!(selectSeat.length == 0) && selectPeople == 0){
+                        let selectSeats = selectSeat.join(', ');
+                        let resultStr = '';
+                        
                         $("#check-area").removeAttr("hidden");
                         $("#check-area").show();
-
-                        let resultStr = '';
                         
                         resultStr += '<div id="check-reservation">'
                                    +     '<div id="check-movie">'
@@ -655,7 +724,7 @@
                                    +             '<div class="print-info">' + result.theaterName + '</div>'
                                    +             '<div class="print-info">' + result.screenName + '</div>'
                                    +             '<div class="print-info">' + Number(teenCount + adultCount) + '인</div>'
-                                   +             '<div class="print-info">' + selectSeat.join(', ') + '</div>'
+                                   +             '<div class="print-info">' + selectSeats + '</div>'
                                    +             '<div class="print-info" style="margin-top: 50px;">' + result.price.totalPrice + '원</div>'
                                    +         '</div>'
                                    +     '</div>'
@@ -665,7 +734,7 @@
                                    +         '<input type="hidden" name="memberNo" value="' + <%= loginUser.getMemberNo() %> + '">'
                                    +         '<input type="hidden" name="teen" value="' + teenCount + '">'
                                    +         '<input type="hidden" name="adult" value="' + adultCount + '">'
-                                   +         '<input type="hidden" name="seatNo" value="' + selectSeat.join(',') + '">'
+                                   +         '<input type="hidden" name="seatNo" value="' + selectSeats + '">'
                                    +         '<button type="submit" id="payment-btn" onclick="return payment()">결제 하기</button>'
                                    +     '</form>'
                                    + '</div>';
@@ -679,11 +748,11 @@
                 },
                 error : function(e){
                     alert('예매정보 오류!');
+                    location.href = '\moviebox';
                 }
             });
         });
         
-        // 결제하기
         function payment(){
             if(confirm('현재 예매 정보로 결제하시겠습니까?')) {
                 return true;
