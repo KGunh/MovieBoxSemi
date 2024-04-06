@@ -1,12 +1,15 @@
 package com.kh.admin.controller;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 public class CinemaAdminContorller {
 
-	public void cinemaCheck () {
+	public String cinemaCheck (HttpServletRequest request, HttpServletResponse response) {
 				
+		String view = "/views/admin/CinemaInsert.jsp";
 		
+		return view;
 		
 		
 	}

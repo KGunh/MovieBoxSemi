@@ -40,7 +40,7 @@ public class CinemaServlet extends HttpServlet {
 		
 		switch(mapping) {
 		
-		case "insertAdmin" :  view = "/views/admin/CinemaInsert.jsp";
+		case "insertAdmin" :  view = CAC.cinemaCheck(request,response);;
 		case "editAdmin"   :  view= "/views/admin/CinemaEdit.jsp";
 		case "checkAdmin"  :  view = "views/admin/CinemaCheck.jsp";
 		
@@ -54,13 +54,6 @@ public class CinemaServlet extends HttpServlet {
 			request.getRequestDispatcher(view).forward(request, response);	
 		}
 		
-		switch(mapping) {
-		
-		case "insertAdmin" :  CAC.cinemaInsert(request);
-		case "editAdmin"   :  CAC.cinemaEdit();
-		case "checkAdmin"  :  CAC.cinemaCheck();
-		
-		}
 		
 		
 		

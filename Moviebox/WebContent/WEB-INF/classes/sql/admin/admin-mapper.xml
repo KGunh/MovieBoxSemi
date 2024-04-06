@@ -30,6 +30,7 @@
 	</entry>
 	
 	
+	<!-- 영화 글 전체 개수 (그 개수로 페이징바 생성하게 하기위함)-->
 		<entry key="selectListCount">
 		SELECT
 		    COUNT(*)
@@ -61,7 +62,7 @@
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
 
-
+<!-- 공지 글 전체 개수 (그 개수로 페이징바 생성하게 하기위함)-->
 	<entry key="selectListCountNotice">
 		SELECT
 		    COUNT(*)
@@ -93,7 +94,7 @@
 		WHERE RNUM BETWEEN ? AND ?
 	</entry>
 
-
+<!-- 문의 글 전체 개수 (그 개수로 페이징바 생성하게 하기위함)-->
 	<entry key="selectListCountQnA">
 		SELECT
 		    COUNT(*)
@@ -106,7 +107,7 @@
 
 
 
-
+<!--장르카테고리(adminMovieEnrollForm화면에서 보여주기 + adminMovieInsert에서도) -->
 	<entry key="SelectGenreList">
 		SELECT
 		    GENRE_CODE,
@@ -116,22 +117,131 @@
 	</entry>
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+	<!-- 감독이름으로 감독NO조회 -->
+	<entry key="SelectDirectorName">
+		SELECT 
+			DIRECTOR_NO 
+		FROM
+			TB_DIRECTOR 
+		WHERE 
+			DIRECTOR_NAME LIKE ?
+	</entry>
 	
+	<!-- 감독 등록전 시퀀스 조회 -->
+	<entry key="SelectDirectorNo">
+		SELECT 
+			SEQ_DIRECTOR_NO.NEXTVAL AS DIRECTOR_NO
+		FROM
+			  DUAL
+	</entry>
+	
+	
+	<!-- 감독 등록 -->
+	<entry key="InsertDirector">
+		INSERT
+		  INTO
+		  	TB_DIRECTOR
+		  	(
+		  	DIRECTOR_NO,
+		  	DIRECTOR_NAME
+		  	)
+		  VALUES
+			  (
+			  ?,
+			  ?
+			  )
+	</entry>
+	
+	
+	<!-- 출연진 이름으로 출연진NO조회 -->
+	<entry key="SelectActorName">
+		SELECT 
+			ACTOR_NO 
+		FROM
+			TB_ACTOR 
+		WHERE 
+			ACTOR_NAME LIKE ?
+	</entry>
+	
+	<!-- 출연진 등록전 시퀀스 조회 -->
+	<entry key="SelectActorNo">
+		SELECT 
+			SEQ_ACTOR_NO.NEXTVAL AS ACTOR_NO
+		FROM
+		  DUAL
+	</entry>
+	
+	<!-- 출연진 등록 -->
+	<entry key="InsertActor">
+		INSERT
+		  INTO
+		  	TB_ACTOR
+		  	(
+		  	ACTOR_NO,
+		  	ACTOR_NAME
+		  	)
+		  VALUES
+			  (
+			  ?,
+			  ?
+			  )
+	</entry>
+
+
+	<!-- 영화 등록전 시퀀스 조회 -->
+	<entry key="SelectMovieNo">
+		SELECT
+			 SEQ_MOVIE_NO.NEXTVAL AS MOVIE_NO
+		FROM
+			 DUAL
+	</entry>
+
+	<!-- 영화 등록 -->
+	<entry key="InsertMovie">
+		INSERT
+		  INTO
+		  	TB_MOVIE
+		  	(
+		  	MOVIE_NO,
+		  	MOVIE_TITLE,
+		  	MOVIE_RT,
+		  	MOVIE_RATED,
+		  	MOVIE_RELEASE,
+		  	MOVIE_STORY,
+		  	STATUS,
+		  	GENRE_NO,
+		  	DIRECTOR_NO,
+		  	MOVIE_UPDATE
+		  	)
+		  VALUES
+			  (
+			  ?, 
+			  ?,
+			  ?, 
+			  ?, 
+			  ?,
+			  ?, 
+			  'Y', 
+			  ?, 
+			  ?, 
+			  SYSDATE
+			  )
+	</entry>
+
+	<!-- Cast 등록 -->
+	<entry key="InsertCast">
+		INSERT
+		  INTO
+		  	TB_CAST
+		  	(
+		  	MOVIE_NO,
+		  	ACTOR_NO
+		  	)
+		  VALUES
+			  (
+			  ?,
+			  ?
+			  )
+	</entry>
+
 </properties>

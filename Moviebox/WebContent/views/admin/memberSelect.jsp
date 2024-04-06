@@ -493,7 +493,8 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                        
                            <% for(Member m : mb){ %>
                                 <tr class="member">
-                                <td><input type="checkbox" name="check" value="check" id="check"></td>
+                                <td><input type="checkbox" name="check" value="check" id="check" 
+                                ></td>
                                 <td><%= m.getMemberNo() %></td>
                                 <td><%= m.getMemberName()%></td>
                                 <td><%= m.getEnrollDate() %></td>
@@ -521,7 +522,16 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                     		});
                     		
                     		
-                    	})  
+                    	})
+                    	
+                    	
+                    	$(function)()
+                    		$('#checkbox').click(function(){
+                    			location.href='<%=contextPath%>/selectAdmin.mb';
+                    			
+                    		})
+                    		
+                    	})
                       
                       
                       </script>
