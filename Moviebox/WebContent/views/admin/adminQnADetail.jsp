@@ -1,17 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import = "com.kh.notice.model.vo.Notice"   
+    pageEncoding="UTF-8" import = "com.kh.board.model.vo.Board"
 %>
-    
 <%
-	Notice n =(Notice)request.getAttribute("notice2323");
-%>       
-
-         
-    
+	Board b =(Board)request.getAttribute("qna");
+%>
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <title>게시글 공지상세페이지</title>
+    <title>문의글 상세보기</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
@@ -217,7 +213,18 @@
             height: 250px;
             float: left;
             padding-left: 17px;
+            margin-bottom: 2px;
         }
+
+        #box_4{ /*form-control 테두리*/
+            /* border: 1px solid rgb(255, 0, 149); */
+            width: 470px;
+            height: 100px;
+            float: left;
+            padding-left: 17px;
+            margin-bottom: 7px;
+        }
+
 
         .fileBox{ /*form-control 테두리*/
             /* border: 1px solid rgb(0, 47, 255); */
@@ -259,13 +266,12 @@
             /* border: 1px solid rgb(255, 0, 149); */
             width: 470px;
             float: left;
-            margin-top: 5px;
         }
 
         #category{ /*카테고리*/
             border: 1px solid rgb(212, 212, 212);
             border-radius: 8px;
-            width: 100px;
+            width: 150px;
             height: 37px;
             font-size: 15px;
             color: #727272;
@@ -280,7 +286,6 @@
 <body>
 	<!-- 헤더 -->
     <%@ include file="/views/common/header.jsp" %>
-    
     <div id="wrap">
 
         <div id="top_wrap">
@@ -330,45 +335,44 @@
             <!------------------------------------------------------------>
 
             <div class="content_2"><!--content_2 시작-->
-                <p id="p">게시글관리 > 공지 관리 > 공지 상세보기</p>
+                <p id="p">게시글관리 > 문의 관리 > 문의내용</p>
 
-            
-            <div id="content_2_box"><!--컨텐트2 전체박스-->
-                <div id="box_wrap">
+            <form>
+                <div id="content_2_box"><!--컨텐트2 전체박스-->
+                    <div id="box_wrap">
 
-                    <div id="box_category">
-                        <select name="#" id="category" >
-                            <option value=""><%=n.getNoticeCategory() %></option>
-                        </select>
+                        <div id="box_category">
+                            <select name="#" id="category" >
+ 								<option value=""><%=b.getBoardCategory() %></option>
+                            </select>
+                        </div>
+
+                        <div id="box_1">
+                            <p class="title_p">문의 제목</p>
+                        </div>
+
+                        <div id="box_2">
+                            <input type="text" class="form-control" name="title" style="border-radius: 8px;" value="<%=b.getBoardTitle() %>" readonly >
+                        </div>
+
+                        <div id="box_1">
+                            <p class="title_p">문의 내용</p>
+                        </div>
+
+                        <div id="box_3">
+                            <textarea class="form-control" rows="5" name="content" style="resize:none; height: 250px; border-radius: 8px;" readonly ><%=b.getBoardContent()%></textarea>
+                        </div>
+
+                        
+                        <div id="button"><!--등록 버튼-->
+                            <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;" onclick="qnaDelete()">삭제</button>
+                            <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">목록</button>
+                        </div><!--등록 버튼-->
                     </div>
+ 
 
-                    <div id="box_1">
-                        <p class="title_p">공지 제목</p>
-                    </div>
-
-                    <div id="box_2">
-                        <input type="text" class="form-control" name="title" style="border-radius: 8px;" value="<%=n.getNoticeTitle() %>" readonly>
-                    </div>
-
-                    <div id="box_1">
-                        <p class="title_p">공지 내용</p>
-                    </div>
-
-                    <div id="box_3">
-                        <textarea class="form-control" rows="5" name="content" style="resize:none; height: 250px; border-radius: 8px;" readonly><%=n.getNoticeContent()%></textarea>
-                    </div>
-
-                    
-                    <div id="button"><!--등록 버튼-->
-                        <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;" onclick="noticeDelete()">삭제</button>
-                        <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">수정</button>
-                        <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">목록</button>
-                    </div><!--등록 버튼-->
-                </div>
-
-
-            </div><!--컨텐트2 전체박스 끝-->
-            
+                </div><!--컨텐트2 전체박스 끝-->
+            </form>
 
 
 
@@ -379,15 +383,29 @@
  	<%@ include file="/views/common/footer.jsp" %>
  	<!-- 푸터 -->
  	
- 	<script>
- 		function noticeDelete() {
- 			const result = confirm('삭제하려면 확인을 눌러주세요.');
- 			
- 			if(result) {
- 				location.href = '<%=contextPath %>/adminBoardDelete.admin?noticeNo=<%=n.getNoticeNo()%>';	
- 			}
- 			
- 		}
+ 	
+ 	
+ 	
+	 <script>
+		function qnaDelete() {
+			const result = confirm('삭제하려면 확인을 눌러주세요.');
+			
+			if(result) {
+				location.href = '<%=contextPath %>/adminQnADelete.admin?boardNo=<%=b.getBoardNo()%>';	
+			}
+			
+		}
  	</script>
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
+ 	
 </body>
 </html>
