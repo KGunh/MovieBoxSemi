@@ -482,16 +482,16 @@ public class AdminPageController {
 		
 		int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));
 		String watchDate = request.getParameter("watchDate");
-		
+		System.out.println(theaterNo);
 		Screen sc = new Screen();
 		sc.setTheaterNo(theaterNo);
 		sc.setWatchDate(watchDate);
 
 		List<Screen> list = new AdminPageService().adminDetailTheater(sc);
-		
 		Theater th = new TheaterService().detailTheater(theaterNo);
 		
 		List<Movie> movieList = new MovieService().selectMovieList();
+
 		if(th != null) {
 			request.setAttribute("theater", th);
 		}

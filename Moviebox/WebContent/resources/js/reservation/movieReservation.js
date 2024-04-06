@@ -46,10 +46,10 @@ function selectScreenNo(e){
 
     $('#select-screen').children().eq(0).html($(e).parent().prev().html());
     $('#select-screen').children().eq(1).html(movieTitle);
-    $('#select-screen').children().eq(2).html($(e).children().eq(2).val());
-    $('#select-screen').children().eq(3).html($(e).children().eq(0).html());
-    $('#screenNo').val(e.children[1].value);
-    $('#screenName').val(e.children[2].value);
+    $('#select-screen').children().eq(2).html($(e).children().eq(3).val());
+    $('#select-screen').children().eq(3).html($(e).children().eq(1).html());
+    $('#screenNo').val(e.children[2].value);
+    $('#screenName').val(e.children[3].value);
     $('#theaterName').val($(e).children().eq(2).html());
 };
 
@@ -74,6 +74,7 @@ function selectScreen(){
                     
                     for(let j = 0; j < result[i].watchDateList.length; j++){
                         resultStr +=        '<div class="screenName" onclick="selectScreenNo(this);">'
+                                   +            '<div style="color: black; height: 35px">' + result[i].screenNameList[j] + '</div>'
                                    +            '<span style="color: black;">' + result[i].watchDateList[j] + '</span>'
                                    +            '<input type="hidden" value="' + result[i].screenNoList[j] + '">'
                                    +            '<input type="hidden" value="' + result[i].screenNameList[j] + '">'

@@ -92,7 +92,7 @@ public class ReservationDao {
 
 	public List<Seat> selectSeatList(Connection conn, int screenNo) {
 		List<Seat> seatList = new ArrayList<>();
-		
+		System.out.println(screenNo);
 		try(PreparedStatement pstmt = conn.prepareStatement(prop.getProperty("selectSeatList"))) {
 
 			pstmt.setInt(1, screenNo);
