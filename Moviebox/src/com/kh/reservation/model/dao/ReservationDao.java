@@ -38,7 +38,7 @@ public class ReservationDao {
 		List<Location> list = new ArrayList<Location>();
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(prop.getProperty("selectLocationList"));
-			ResultSet rset = pstmt.executeQuery();) {
+			ResultSet rset = pstmt.executeQuery()) {
 			
 			while(rset.next()) {
 				Location location = new Location();
@@ -57,7 +57,7 @@ public class ReservationDao {
 
 	public List<Screen> selectScreen(Connection conn, String screenDate, String screenLocation, int movieNo, String theaterName) {
 		List<Screen> list = new ArrayList<Screen>();
-		
+
 		try(PreparedStatement pstmt = conn.prepareStatement(prop.getProperty("selectScreen"))) {
 		    
 			pstmt.setString(2, screenLocation);
@@ -85,7 +85,7 @@ public class ReservationDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return list;
 	}
 
@@ -126,7 +126,7 @@ public class ReservationDao {
 			pstmt.setInt(1, teenAge);
 			pstmt.setInt(3, movieNo);
 
-			try(ResultSet rset = pstmt.executeQuery();){
+			try(ResultSet rset = pstmt.executeQuery()){
 				
 				if(rset.next()) {
 					reservation.setTheaterName(rset.getString("THEATER_NAME"));
