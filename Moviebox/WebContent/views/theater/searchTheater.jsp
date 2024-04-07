@@ -18,31 +18,38 @@
         body {
             background-color: #1A1A1A
         }
+
         div{
             box-sizing: border-box;
         }
+
         #wrap{
             width: 1200px;
             margin: auto;
         }
+
         #content_searchTheater{
-            height: 850px;
+            height: auto;
         }
-        #searcTextArea{
+
+        #searchTextArea{
             height: 60px;
         }
+
         #searchBar{
             height: 60px;
-            position: relative;
         }
+
         #searchNavi{
             margin-left: 60px;
             margin-right: 60px;
             height: 60px;
         }
+
         #printTheaterArea{
-            height: 670px;
+            margin: auto;
         }
+        
         #searchText > p{
             color: rgb(238, 238, 238);
             font-size: 32px;
@@ -52,9 +59,10 @@
             padding-left: 60px;
             line-height: 55px;
         }
+
         .searchLocation{
             float: left;
-            height: 100%;
+            height: 60px;
             width: 72px;
             text-align: center;
             line-height: 60px;
@@ -63,11 +71,13 @@
             font-weight: bold;
             border-radius: 15px;
         }
+
         .searchLocation:hover{
             cursor: pointer;
             background-color: rgb(255, 193, 69);
             color: #1A1A1A;
         }
+
         #theaterNameInput{
             height: 45px;
             width: 275px;
@@ -76,21 +86,23 @@
             border-radius: 5px;
             font-size: 18px;
         }
+
         #theaterNameInput:focus{
             outline: 3px solid rgb(255, 193, 69);
         }
+
         #theaterInputArea{
-            height: 100%;
             padding-top: 5px;
             padding-left: 60px;
             padding-right: 8px;
             float: left;
         }
+
         #theaterInputBtnArea{
             padding-top: 6px;
-            height: 100%;
             float: left;
         }
+
         #theaterInputBtn{
             height: 45px;
             width: 50px;
@@ -104,20 +116,20 @@
         #theaterInputBtn:hover{
             cursor: pointer;
         }
+
         #printTheater{
             margin: 30px 160px 30px 160px;
-            height: 600px;
-            position: relative;
         }
+
         .printTheaterName{
-            float: left;
+            display: inline-block;
             height: 60px;
             width: 290px;
             padding: 15px 15px 15px 15px;
             font-size: 20px;
             text-align: center;
-            
         }
+
         .printTheaterName > a{
         	color: rgb(238, 238, 238);
         	text-decoration: none;
@@ -130,29 +142,15 @@
         
         
     </style>
-    <script>
-        window.onload = function(){
-            var typeLocation = document.getElementById('searchTypeLocation');
-            var search = document.getElementsByClassName('searchLocation');
-            
-            if('location' == '<%= type %>'){
-	            for(let i = 0; i < search.length; i++){
-                    if(search[i].innerHTML == '<%= location %>'){
-                        search[i].style.color = '#1A1A1A';
-                        search[i].style.background = 'rgb(255, 193, 69)';
-            		}
-                }
-            }
-        }
-    </script>
+    
 </head>
 <body>
-	 <div id="wrap">
-        <!-- jsp에서 header include하기 --> 
-        <div id="header" style="height: 250px; color: white;"><%@ include file="/views/common/header.jsp" %></div>
+    
+    <%@ include file="/views/common/header.jsp" %>
 
+    <div id="wrap">
         <div id="content_searchTheater">
-            <div id="searcTextArea">
+            <div id="searchTextArea">
                 <div id="searchText">
                     <p>영화관 검색</p>
                 </div>
@@ -192,35 +190,49 @@
             <div id="printTheaterArea">
                 <div id="printTheater">
                     
-                    	<% for(int i = 0; i < list.size(); i++){ %>
+                    <% for(int i = 0; i < list.size(); i++){ %>
                         <div class="printTheaterName">
 	                        <a href="#" onclick="goToTheaterDetail('<%= list.get(i).getTheaterNo() %>');">
 	                        <%= list.get(i).getTheaterName() %></a>
                         </div>
-                    	<% } %>
+                    <% } %>
                     
                 </div>
             </div>
         </div>
-        <!-- jsp에서 footer include하기 -->
-        <div id="footer" style="height: 250px;"><%@ include file="/views/common/footer.jsp" %></div>
     </div>
-    
+
+    <%@ include file="../common/footer.jsp" %>
+
     <script>
+
+        window.onload = function(){
+            var typeLocation = document.getElementById('searchTypeLocation');
+            var search = document.getElementsByClassName('searchLocation');
+            
+            if('location' == '<%= type %>'){
+	            for(let i = 0; i < search.length; i++){
+                    if(search[i].innerHTML == '<%= location %>'){
+                        search[i].style.color = '#1A1A1A';
+                        search[i].style.background = 'rgb(255, 193, 69)';
+            		}
+                }
+            }
+        };
+
         document.getElementById('searchNavi').onclick = function(e){
                 var locationName = e.target.innerHTML;
                 document.getElementById('locationInput').value = locationName;
                 document.getElementById('locationForm').submit();
-        }
+        };
 
         function selectName(){
             document.getElementById('nameForm').submit();
-        }
+        };
         
         function goToTheaterDetail(theaterNo) {
             location.href = '<%=contextPath%>/detail.theater?theaterNo=' + theaterNo;
-        }
-        
+        };
         
     </script>
 

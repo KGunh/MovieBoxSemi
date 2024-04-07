@@ -62,10 +62,10 @@ public class ReservationDao {
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(prop.getProperty("selectScreen"))) {
 		    
+			pstmt.setString(2, screenLocation);
+			pstmt.setString(3, theaterName);
+			pstmt.setString(4, screenDate);
 		    pstmt.setInt(1, movieNo);
-		    pstmt.setString(2, screenLocation);
-		    pstmt.setString(3, theaterName);
-		    pstmt.setString(4, screenDate);
 		    
 		    try(ResultSet rset = pstmt.executeQuery()) {
 			
