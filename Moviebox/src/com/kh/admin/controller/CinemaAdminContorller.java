@@ -167,22 +167,25 @@ public class CinemaAdminContorller {
 		
 		String category = request.getParameter("category");
 		String search = request.getParameter("find");
+		String view = "views/admin/CinemaSearch.jsp";
 		
 		switch(category) {
-		case "name" : category = "C.THEATER_NAME";
-		case "code" : category = "C.LOCATION_CODE";
-		case "city" : category ="L.LOCATION_NAME";
+		case "name" : category = "THEATER_NAME"; break;
+		case "code" : category = "LOCATION_CODE"; break;
+		case "city" : category = "LOCATION_NAME"; break;
+	
+	
 		}
 		
 		ArrayList<Theater> theater = new MemberAdminService().searchCinema(category,search);
-		
 		request.setAttribute("theaterlist", theater);
 		
-		String view = "views/admin/CinemaSearch.jsp";
 		
+		
+		
+		
+	
 		return view;
-		
-		
-	}
+}
 	
 }

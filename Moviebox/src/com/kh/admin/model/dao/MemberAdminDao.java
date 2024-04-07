@@ -193,6 +193,8 @@ public class MemberAdminDao {
 						
 					theater.add(Cinema);	
 						
+					
+					
 						
 			}	
 			
@@ -378,13 +380,15 @@ public class MemberAdminDao {
 		Member member = new Member();
 		ArrayList<Member> list = new ArrayList<Member>();
 		
-		System.out.println(search+category);
+		
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		String sql = prop.getProperty("search");
 		try {
 			pstmt = conn.prepareStatement(sql);
+			
+	
 			pstmt.setString(1, category);
 			pstmt.setString(2, search);
 			
@@ -439,7 +443,11 @@ public class MemberAdminDao {
 				theater.setLocalCode(rset.getString("LOCATION_CODE"));
 				
 				list.add(theater);
+			
 			}
+			
+			
+			
 			
 			
 			
