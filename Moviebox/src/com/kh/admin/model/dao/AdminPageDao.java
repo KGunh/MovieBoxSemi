@@ -260,7 +260,7 @@ public class AdminPageDao {
 	
 	
 	
-	//장르카테고리
+	//장르카테고리(영화등록 시 필요)
 	public ArrayList<Genre> SelectGenreList(Connection conn){
 		
 		ArrayList<Genre> genrelist = new ArrayList();
@@ -295,7 +295,7 @@ public class AdminPageDao {
 	
 	
 	
-	//감독이름으로 감독NO조회
+	//감독이름으로 감독NO조회(영화등록 시 필요)
 	public int SelectDirectorName(Connection conn, String directorName) {
 		
 		int directorNo = 0;
@@ -333,7 +333,7 @@ public class AdminPageDao {
 	}
 	
 	
-	//감독 등록전 시퀀스 조회
+	//감독 등록전 시퀀스 조회(영화등록 시 필요)
 	public int SelectDirectorNo(Connection conn) {
 		int directorNo = 0;
 		PreparedStatement pstmt = null;
@@ -360,7 +360,7 @@ public class AdminPageDao {
 	}
 	
 	
-	//감독 등록
+	//감독 등록(영화등록 시 필요)
 	public int InsertDirector(Connection conn, int directorNo, String directorName) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -386,7 +386,7 @@ public class AdminPageDao {
 	}
 
 	
-	//출연진 이름으로 출연진NO조회
+	//출연진 이름으로 출연진NO조회(영화등록 시 필요)
 	public int SelectActorName(Connection conn, String actorName) {
 		
 		int actorNo = 0;
@@ -423,7 +423,7 @@ public class AdminPageDao {
 		return actorNo;
 	}
 	
-	//출연진 등록전 시퀀스 조회
+	//출연진 등록전 시퀀스 조회(영화등록 시 필요)
 	public int SelectActorNo(Connection conn) {
 		int actorNo = 0;
 		PreparedStatement pstmt = null;
@@ -449,7 +449,7 @@ public class AdminPageDao {
 		return actorNo;
 	}
 	
-	//출연진 등록
+	//출연진 등록(영화등록 시 필요)
 	public int InsertActor(Connection conn, int actorNo, String actorName) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -474,7 +474,7 @@ public class AdminPageDao {
 		return result;
 	}
 	
-	//영화 등록전 시퀀스 조회
+	//영화 등록전 시퀀스 조회(영화등록 시 필요)
 	public int SelectMovieNo(Connection conn) {
 		int movieNo = 0;
 		PreparedStatement pstmt = null;
@@ -500,7 +500,7 @@ public class AdminPageDao {
 		return movieNo;
 	}
 	
-	//영화 등록
+	//영화 등록(영화등록 시 필요)
 	public int InsertMovie(Connection conn, Movie movie) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -590,7 +590,7 @@ public class AdminPageDao {
 		return listCount;
 	}
 	
-	//Cast 등록
+	//Cast 등록(영화등록 시 필요)
 	public int InsertCast(Connection conn, int movieNo, int actorNo) {
 		int result = 0;
 		PreparedStatement pstmt = null;
@@ -1003,6 +1003,7 @@ public class AdminPageDao {
 		return fileNo;
 	}
 	
+	//attachment등록ㄷ(영화등록 시 필요)
 	public int InsertAttach(Connection conn, int movieNo, ArrayList<Attachment> list) {
 		int result = 0;
 		PreparedStatement pstmt = null;
