@@ -72,13 +72,17 @@
 		                        
 		                    </select>
 		                    <input id="screenDate" type="date" name="screenDate">
+							<div id="theaterInputBtnArea">
+								<button id="search-theaterName" type="button"><img src="resources/img/search.PNG" alt="검색"></button>
+								<input id="input-theaterName" type="text" name="theaterName" placeholder="영화관 이름 검색">
+							</div>
 		                </div>
 		            </div>
 		            <div id="selectScreenArea">
 		                <div id="printScreen"></div>
 		                <input id="movieTitle" type="hidden" name="movieTitle">
 		                <input id="movieNo" type="hidden" name="movieNo">
-		                <input id="theaterName" type="hidden" name="theaterName">
+						<input id="theaterName" type="hidden" name="theaterName">
 		                <input id="screenName" type="hidden" name="screenName">
 		                <input id="screenNo" type="hidden" name="screenNo">
 		                <div id="select-screen-area">
