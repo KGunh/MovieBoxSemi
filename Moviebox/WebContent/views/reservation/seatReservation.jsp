@@ -128,6 +128,48 @@
 		            <button id="print-resv-info" >좌석 선택</button>
 		        </div>
 		        <div id="check-area" hidden>
+					
+					<div id="check-reservation">
+						<div id="check-movie">
+							<div id="poster-select">
+								<img style="width: 100%; height: 100%;" src="" alt="영화포스터">
+							</div>
+							<div id="movie-select">
+								<div style="text-align: center; font-size:20px; font-weight: 700; margin-top: 5px; margin-bottom: 5px;"></div>
+								<div style="text-align: center;"></div>
+								<div style="text-align: center;"></div>
+							</div>
+						</div>
+					</div>
+					<div id="check-info">
+						<div id="reservation-info">
+							<div>
+								<div class="select-info">상영일시</div>
+								<div class="select-info">관람극장</div>
+								<div class="select-info">상영관</div>
+								<div class="select-info">관람인원</div>
+								<div class="select-info">선택좌석</div>
+								<div class="select-info" style="margin-top: 50px;">결제금액</div>
+							</div>
+							<div id="print-reservation-info">
+								<div class="print-info"></div>
+								<div class="print-info"></div>
+								<div class="print-info"></div>
+								<div class="print-info"></div>
+								<div class="print-info"></div>
+								<div class="print-info" style="margin-top: 50px;"></div>
+							</div>
+						</div>
+						<form id="payment-form" action="/moviebox/payment.reservation" method="post">
+							<input type="hidden" name="movieNo" value="">
+							<input type="hidden" name="screenNo" value="">
+							<input type="hidden" name="memberNo" value="">
+							<input type="hidden" name="teen" value="">
+							<input type="hidden" name="adult" value="">
+							<input type="hidden" name="seatNo" value="">
+							<button type="submit" id="payment-btn" onclick="return payment()">결제 하기</button>
+						</form>
+					</div>
 		        </div>
 			</div>
 
