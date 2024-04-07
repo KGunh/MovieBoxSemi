@@ -84,13 +84,13 @@ function CountPeple(ageType) {
     let ageBtns = (ageType.html() === '청소년') ? $('.adultBtn') : $('.teenBtn');
     let maxCount = (ageType.html() === '청소년') ? (8 - teenCount) : (8 - adultCount);
 
-    for (let i = 0; i < ageBtns.length; i++) {
-        if(Number(ageBtns.eq(i).html()) > maxCount) {
-            ageBtns.eq(i).prop('disabled', true);
+    ageBtns.each(function() {
+        if (Number($(this).html()) > maxCount) {
+            $(this).prop('disabled', true);
         } else {
-            ageBtns.eq(i).prop('disabled', false);
+            $(this).prop('disabled', false);
         }
-    }
+    });
 };
 
 function printPeople() {
@@ -118,6 +118,7 @@ function printPeople() {
 
 $('.seats').on('mousedown', function(){
     mousedrag = true;
+    
     selectSeats(this);
     arrangeSeat();
 });
@@ -187,60 +188,55 @@ $('#print-resv-info').click(function(){
         },
         success : function(result){
             if(!(selectSeat.length == 0) && selectPeople == 0){
+                
                 let selectSeats = selectSeat.join(', ');
-                let resultStr = '';
+                let MovieItems = [
+                    result.movieTitle,
+                    result.movie.movieRelease,
+                    result.movie.genreName + ' / ' + result.movie.movieRt + '분'
+                ];
+                
+                let resvItems = [
+                    result.watchDate,
+                    result.theaterName,
+                    result.screenName,
+                    Number(teenCount + adultCount) + '인',
+                    selectSeats,
+                    result.price.totalPrice + '원'
+                ];
+
+                let inputval = [
+                    selectMovieNo, 
+                    selectScreenNo, 
+                    memberNo,
+                    teenCount, 
+                    adultCount, 
+                    selectSeats
+                ];
+
+                $('#poster-select > img').attr('src', path + '/'+ result.movie.filePath + '/' + result.movie.changeName);
+                
+                $('#movie-select').children().each(function(i) {
+                    $(this).html(MovieItems[i]);
+                });
+                
+                $('#print-reservation-info').children().each(function(i) {
+                    $(this).html(resvItems[i]);
+                });
+
+                $('#payment-form').children().each(function(i) {
+                    $(this).val(inputval[i]);
+                });
                 
                 $("#check-area").removeAttr("hidden");
                 $("#check-area").show();
-                
-                resultStr += '<div id="check-reservation">'
-                           +     '<div id="check-movie">'
-                           +         '<div id="poster-select"><img style="width: 100%; height: 100%;" src="'+ path + '/'+ result.movie.filePath + '/' + result.movie.changeName + '" alt="영화포스터"></div>'
-                           +         '<div id="movie-select">'
-                           +             '<div style="text-align: center; font-size:20px; font-weight: 700; margin-top: 5px; margin-bottom: 5px;">' + result.movieTitle + '</div>'
-                           +             '<div style="text-align: center;">개봉일 ' + result.movie.movieRelease + '</div>'
-                           +             '<div style="text-align: center;">' + result.movie.genreName + ' / ' + result.movie.movieRt + '분</div>'
-                           +         '</div>'
-                           +     '</div>'
-                           + '</div>'
-                           + '<div id="check-info">'
-                           +     '<div id="reservation-info">'
-                           +         '<div>'
-                           +             '<div class="select-info">상영일시</div>'
-                           +             '<div class="select-info">관람극장</div>'
-                           +             '<div class="select-info">상영관</div>'
-                           +             '<div class="select-info">관람인원</div>'
-                           +             '<div class="select-info">선택좌석</div>'
-                           +             '<div class="select-info" style="margin-top: 50px;">결제금액</div>'
-                           +         '</div>'
-                           +         '<div>'
-                           +             '<div class="print-info">'+ result.watchDate +'</div>'
-                           +             '<div class="print-info">' + result.theaterName + '</div>'
-                           +             '<div class="print-info">' + result.screenName + '</div>'
-                           +             '<div class="print-info">' + Number(teenCount + adultCount) + '인</div>'
-                           +             '<div class="print-info">' + selectSeats + '</div>'
-                           +             '<div class="print-info" style="margin-top: 50px;">' + result.price.totalPrice + '원</div>'
-                           +         '</div>'
-                           +     '</div>'
-                           +     '<form id="payment-form" action="/moviebox/payment.reservation" method="post">'
-                           +         '<input type="hidden" name="movieNo" value="' + selectMovieNo + '">'
-                           +         '<input type="hidden" name="screenNo" value="' + selectScreenNo + '">'
-                           +         '<input type="hidden" name="memberNo" value="' + memberNo + '">'
-                           +         '<input type="hidden" name="teen" value="' + teenCount + '">'
-                           +         '<input type="hidden" name="adult" value="' + adultCount + '">'
-                           +         '<input type="hidden" name="seatNo" value="' + selectSeats + '">'
-                           +         '<button type="submit" id="payment-btn" onclick="return payment()">결제 하기</button>'
-                           +     '</form>'
-                           + '</div>';
-
-                $('#check-area').html(resultStr);
             }
             else {
                 alert('좌석을 모두 선택해주세요!');
                 $("#check-area").hide();
             };
         },
-        error : function(e){
+        error : function(){
             alert('예매정보 오류!');
             location.href = '\moviebox';
         }

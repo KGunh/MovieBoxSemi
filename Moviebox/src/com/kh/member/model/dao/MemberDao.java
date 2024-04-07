@@ -287,7 +287,7 @@ public class MemberDao {
 			if(rset.next()) {
 				m = new Movie();
 				m.setFilePath(rset.getString("FILE_PATH"));
-				m.setFileName(rset.getString("CHANGE_NAME"));
+				m.setChangeName(rset.getString("CHANGE_NAME"));
 			}
 			
 			

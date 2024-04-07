@@ -16,14 +16,17 @@
             margin: auto;
         }
 
-        /* footer영역*/
         #footer{
-        width: 1200px;
-        height : 250px;
-        margin: auto;
-        border-top: 1px solid lightgray;
+            width: 1200px;
+            height : 250px;
+            margin: auto;
+            border-top: 1px solid lightgray;
         }
-        .corp_area{height : 100%;}
+
+        .corp_area{
+            height : 100%;
+        }
+
         #logoText{
             height : 30%;
             color: rgb(255, 193, 69);
@@ -32,21 +35,31 @@
             padding-left: 15px;
             text-decoration: none;
         }
+
         #logoText :hover{
             cursor : pointer;
         }
+
         #corp_item{
             height : 20%;
             padding-top: 12px;
         }
-        #corp_info{height : 40%;}
-        #copyright{height : 10%;}
+
+        #corp_info{
+            height : 40%
+        }
+        
+        #copyright{
+            height : 10%;
+        }
+        
         #corp_item a{
             color: rgb(200, 200, 200);
             padding-left: 15px;
             text-decoration: none;
             font-size: 20px;
         }
+
         #corp_info > ul{
             margin: auto;
             list-style: none;
@@ -55,7 +68,11 @@
             vertical-align: middle;
             color: rgb(95, 95, 95);
         }
-        #corp_info li{padding-top: 5px;}
+
+        #corp_info li{
+            padding-top: 5px;
+        }
+
         #copyright > h4{
             margin: 0px;
             padding-left: 15px;
@@ -63,6 +80,7 @@
             font-weight: 600;
             color: rgb(95, 95, 95);
         }
+
         #corp_logo > hr{
             margin: 0px;
         }

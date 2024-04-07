@@ -120,8 +120,8 @@
 
     <div class="content">
         <div class="title-area">
-            <div class="title-content" ><a href="<%=contextPath%>/idSearchForm.me" class="tit" style="border-bottom: none;">아이디 찾기</a></div>
-            <div class="title-content" ><a  class="tit">비밀번호 찾기</a></div>
+            <div class="title-content" ><a href="<%=contextPath%>/idSearchForm.me" class="tit" style="color: white;border-bottom: none;">아이디 찾기</a></div>
+            <div class="title-content" ><a  class="tit" style="color: white;">비밀번호 찾기</a></div>
         </div>
         <div id="input-list">
             <form action="<%=contextPath%>/pwdSearch.me" method="post">
