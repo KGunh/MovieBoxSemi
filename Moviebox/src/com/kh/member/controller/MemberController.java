@@ -98,6 +98,7 @@ public class MemberController {
 		m.setPhone(phone);
 		m.setLocalCode(localCode);
 		m.setAddress(address);
+
 		
 		
 		

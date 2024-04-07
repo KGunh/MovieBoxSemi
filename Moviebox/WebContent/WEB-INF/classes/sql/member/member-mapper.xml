@@ -312,7 +312,7 @@
 		 WHERE
 		  	   MEMBER_NAME = ?
 		   AND
-		   	   BIRTHDAY = TO_CHAR(?,'YYYYMMDD')
+		   	   BIRTHDAY = TO_DATE(?,'YYYYMMDD')
 		   AND
 		   	   PHONE = ?
 		   AND
@@ -339,7 +339,7 @@
 		   AND
 		  	   MEMBER_NAME = ?
 		   AND
-		   	   BIRTHDAY = TO_CHAR(?,'YYYYMMDD')
+		   	   BIRTHDAY = TO_DATE(?,'YYYYMMDD')
 		   AND
 		   	   PHONE = ?
 		   AND
