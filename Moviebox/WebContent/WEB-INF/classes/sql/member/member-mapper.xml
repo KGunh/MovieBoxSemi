@@ -78,7 +78,7 @@
        					 GENRE_NAME = ?))
 	
 	</entry>
-	
+	<!-- 마이페이지 예매내역 가져오기 -->
 	<entry key="myPagePrint">
 		SELECT
        			    TICKET_NO,
