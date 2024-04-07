@@ -108,7 +108,7 @@ public class CinemaAdminContorller {
 		
 	}
 	
-	public String modify(HttpServletRequest request, HttpServletResponse response) {
+	public String modifyCinema(HttpServletRequest request, HttpServletResponse response) {
 		
 		int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));
 		String name = request.getParameter("name");
@@ -172,10 +172,13 @@ public class CinemaAdminContorller {
 		switch(category) {
 		case "name" : category = "THEATER_NAME"; break;
 		case "code" : category = "LOCATION_CODE"; break;
-		case "city" : category = "LOCATION_NAME"; break;
+		case "city" : category = "LOCATION_NAME"; 
 	
+		
 	
 		}
+		System.out.println(category);
+		System.out.println(search);
 		
 		ArrayList<Theater> theater = new MemberAdminService().searchCinema(category,search);
 		request.setAttribute("theaterlist", theater);

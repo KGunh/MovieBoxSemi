@@ -142,7 +142,7 @@
 		THEATER_NO = ?	
 </entry>
 
-<entry key="dele">
+<entry key="deleleteCinema">
 
 	DELETE
 		FROM TB_THEATER
@@ -155,7 +155,10 @@
 <entry key="deleteAdmin">
 
 
-
+DELETE 
+	FROM TB_MEMBER
+WHERE
+	MEMBER_NO = ?	
 
 
 

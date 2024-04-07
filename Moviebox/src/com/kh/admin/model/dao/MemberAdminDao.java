@@ -163,7 +163,17 @@ public class MemberAdminDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = prop.getProperty("deleteAdmin");
-		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		
 		
 		return result;
@@ -356,7 +366,7 @@ public class MemberAdminDao {
 		System.out.println(theaterNo);
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String sql = prop.getProperty("dele");
+		String sql = prop.getProperty("deleleteCinema");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -380,11 +390,12 @@ public class MemberAdminDao {
 		Member member = new Member();
 		ArrayList<Member> list = new ArrayList<Member>();
 		
-		
+		System.out.println(category);
+		System.out.println(search);
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("search");
+		String sql = prop.getProperty("deleleteCinema");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
@@ -405,7 +416,7 @@ public class MemberAdminDao {
 				
 			}
 			
-			System.out.println(list);
+			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -448,7 +459,8 @@ public class MemberAdminDao {
 			
 			
 			
-			
+			System.out.println(search);
+			System.out.println(category);
 			
 			
 		} catch (SQLException e) {
