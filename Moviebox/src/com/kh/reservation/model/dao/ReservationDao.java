@@ -1,7 +1,5 @@
 package com.kh.reservation.model.dao;
 
-import static com.kh.common.JDBCTemplate.close;
-
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -121,7 +119,6 @@ public class ReservationDao {
 	public Reservation printReservationInfo(Connection conn, int screenNo, int movieNo, int teenAge, int adultAge) {
 		Reservation reservation = new Reservation();
 		
-		
 		try(PreparedStatement pstmt = conn.prepareStatement(prop.getProperty("printReservationInfo"))) {
 
 			pstmt.setInt(2, adultAge);
@@ -167,9 +164,9 @@ public class ReservationDao {
 	    int result = 0;
 	    int key = 0;
 
-	    try (PreparedStatement seqPstmt = conn.prepareStatement("SELECT SEQ_TKNO.NEXTVAL AS KEY FROM DUAL");
-	         ResultSet rset = seqPstmt.executeQuery();
-	         PreparedStatement pstmt = conn.prepareStatement(prop.getProperty("insertReservation"))) {
+	    try(PreparedStatement seqPstmt = conn.prepareStatement("SELECT SEQ_TKNO.NEXTVAL AS KEY FROM DUAL");
+	        ResultSet rset = seqPstmt.executeQuery();
+	        PreparedStatement pstmt = conn.prepareStatement(prop.getProperty("insertReservation"))) {
 
 	        if (rset.next()) {
 	            key = rset.getInt("KEY");
