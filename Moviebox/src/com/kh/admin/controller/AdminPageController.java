@@ -446,15 +446,15 @@ public class AdminPageController {
 		String poster = new AdminPageService().adminMoviePoster(movieNo);
 		Movie m = new AdminPageService().adminMovieDetail(movieNo);
 		String cast = new AdminPageService().adminMovieCast(movieNo);
-		
-		
-		
-		if(m != null) {
+	
+		if(m != null && m.getMovieTitle() != null) {
+			// Movie객체가 생성이 안되었고 + 제목이 null이 아닐경우 -> 정상작동
 			request.setAttribute("movie", m);
 			request.setAttribute("cast", cast);
 			request.setAttribute("poster", poster);
 			view = "views/admin/adminMovieDetail.jsp";
 		} else {
+			// 정상적이지 않을 경우 메인페이지로 튕겨내기
 			view = "index.jsp";
 		}
 
