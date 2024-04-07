@@ -38,7 +38,7 @@ public class AdminPageDao {
 	
 	
 	
-	//영화 목록 전체 출력
+	//영화 목록 전체 리스트 보여주기
 	public ArrayList<Movie> adminSelectMovieList(Connection conn, PageInfo pi){
 		
 		
@@ -111,7 +111,7 @@ public class AdminPageDao {
 	
 	
 	
-	//공지 목록 전체 출력
+	//공지 목록 전체 리스트 보여주기
 	public ArrayList<Notice> adminSelectNoticeList(Connection conn,  PageInfo pi){
 		
 		ArrayList<Notice> list = new ArrayList();

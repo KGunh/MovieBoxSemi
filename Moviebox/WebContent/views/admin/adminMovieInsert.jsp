@@ -586,13 +586,13 @@
  	 
  	<script>
 	 	function validateForm() { 
-//
-//	 		var fileInput = document.getElementById('file');
-//	 	    var fileName = fileInput.value; 
-//	 	    if (fileName === "" || fileInput.files.length === 0) {
-//	 	        alert('포스터 파일을 첨부해 주세요.');
-//	 	        return false;
-//	 	    }
+
+	 		var fileInput = document.getElementById('file');
+	 	    var fileName = fileInput.value; 
+	 	    if (fileName === "" || fileInput.files.length === 0) {
+	 	        alert('포스터 파일을 첨부해 주세요.');
+	 	        return false;
+	 	    }
 	 	    var movieTitle = document.getElementById('movieTitle').value;
 	 	    if (movieTitle === "" || movieTitle.length === 0) {
 	 	        alert('영화 제목을 입력해 주세요.');
