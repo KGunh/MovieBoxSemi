@@ -78,7 +78,6 @@
 		TB_THEATER C, TB_LOCATION L
      WHERE 
            C.LOCATION_CODE = L.LOCATION_CODE 
-           AND THEATER_NO BETWEEN 1 AND 9
 </entry>
 
 <entry key="cinemaInsert">
@@ -155,7 +154,6 @@
 
 <entry key="deleteAdmin">
 
- HEAD
 
 
 
@@ -185,9 +183,7 @@ INNER JOIN
 WHERE
     ?  LIKE '%'||?||'%'
 
-
 </entry>
-
 
 
 </properties>

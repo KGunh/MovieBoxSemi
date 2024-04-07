@@ -199,7 +199,7 @@
         <c:choose>
         	<c:when test="${ empty theater }">
 				<div id="noMovieList">
-					<a id="noMovie">해당 영화관에 조회 된 영화가 없습니다.</a>
+					<a id="noMovie">영화관이 존재하지 않습니다.</a>
 				</div>
        	 	</c:when>
        	 	<c:otherwise>
