@@ -220,11 +220,11 @@
             }
         };
 
-        document.getElementById('searchNavi').onclick = function(e){
-                var locationName = e.target.innerHTML;
+        $('.searchLocation').on('click', function(){
+                var locationName = this.innerHTML;
                 document.getElementById('locationInput').value = locationName;
                 document.getElementById('locationForm').submit();
-        };
+        });
 
         function selectName(){
             document.getElementById('nameForm').submit();
