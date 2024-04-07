@@ -43,7 +43,6 @@ public class MovieServlet extends HttpServlet {
 		case "list" : view = mc.selectMovieList(request); flag = false; break;
 		case "selectGenre" : view = mc.movieCategory(request, response); flag= false; break;
 		case "detail" : view = mc.detailMovie(request, response); flag= false; break;
-		
 		}
 		
 		if(flag) {
