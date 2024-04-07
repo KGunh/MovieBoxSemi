@@ -126,7 +126,7 @@ public class CinemaAdminContorller {
 		theater.setUpdateDate(enrollDate);
 		theater.setTheaterNo(theaterNo);
 		
-		int result = new MemberAdminService().modify(theater);
+		int result = new MemberAdminService().modifyCinema(theater);
 		
 		if(result > 0) {
 			HttpSession session = request.getSession();
@@ -144,10 +144,10 @@ public class CinemaAdminContorller {
 		return view;
 	}
 	
-	public String dele(HttpServletRequest request, HttpServletResponse response) {
+	public String deleleteCinema(HttpServletRequest request, HttpServletResponse response) {
 		
 		int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));
-		int result = new MemberAdminService().dele(theaterNo);
+		int result = new MemberAdminService().deleleteCinema(theaterNo);
 		
 		
 		if(result>0) {

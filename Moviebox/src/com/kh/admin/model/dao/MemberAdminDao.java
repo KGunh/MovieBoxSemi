@@ -326,7 +326,7 @@ public class MemberAdminDao {
 		
 	}
 	
-	public int modify(Connection conn, Theater theater) {
+	public int modifyCinema(Connection conn, Theater theater) {
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -352,7 +352,7 @@ public class MemberAdminDao {
 		return result; 
 	}
 	
-	public int dele(Connection conn,int theaterNo) {
+	public int deleleteCinema(Connection conn,int theaterNo) {
 		System.out.println(theaterNo);
 		PreparedStatement pstmt = null;
 		int result = 0;
