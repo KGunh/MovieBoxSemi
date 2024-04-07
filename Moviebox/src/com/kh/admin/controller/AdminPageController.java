@@ -575,10 +575,15 @@ public class AdminPageController {
 		
 		Notice n = new AdminPageService().adminBoardDetail(noticeNo);
 		//System.out.println("notice :::: " + n.toString());
+		String view = "";
 		
-		request.setAttribute("notice2323", n);
-		String view = "views/admin/adminBoardDetail.jsp";
-		
+		if(n != null && n.getNoticeTitle() != null) {
+			request.setAttribute("notice2323", n);
+			view = "views/admin/adminBoardDetail.jsp";
+		} else {
+			// 정상적이지 않을 경우 메인페이지로 튕겨내기
+			view = "index.jsp";
+		}
 		return view;
 	}
 	
@@ -592,10 +597,14 @@ public class AdminPageController {
 		//System.out.println("boardNo :::::: " + boardNo);
 		
 		Board b = new AdminPageService().adminQnADetail(boardNo);
-
-		request.setAttribute("qna", b);
-		String view = "views/admin/adminQnADetail.jsp";
-		
+		String view = "";
+		if(b != null && b.getBoardTitle() != null) {
+			request.setAttribute("qna", b);
+			view = "views/admin/adminQnADetail.jsp";
+		} else {
+			// 정상적이지 않을 경우 메인페이지로 튕겨내기
+			view = "index.jsp";
+		}
 		return view;
 	}
 	
