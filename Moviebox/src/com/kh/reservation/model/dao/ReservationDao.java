@@ -57,14 +57,15 @@ public class ReservationDao {
 		return list;
 	}
 
-	public List<Screen> selectScreen(Connection conn, String screenDate, String screenLocation, int movieNo) {
+	public List<Screen> selectScreen(Connection conn, String screenDate, String screenLocation, int movieNo, String theaterName) {
 		List<Screen> list = new ArrayList<Screen>();
 		
 		try(PreparedStatement pstmt = conn.prepareStatement(prop.getProperty("selectScreen"))) {
 		    
 		    pstmt.setInt(1, movieNo);
 		    pstmt.setString(2, screenLocation);
-		    pstmt.setString(3, screenDate);
+		    pstmt.setString(3, theaterName);
+		    pstmt.setString(4, screenDate);
 		    
 		    try(ResultSet rset = pstmt.executeQuery()) {
 			

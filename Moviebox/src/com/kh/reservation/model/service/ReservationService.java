@@ -29,10 +29,10 @@ public class ReservationService {
 		return locationList;
 	}
 
-	public List<Screen> selectScreen(String screenDate, String screenLocation,  int movieNo) {
+	public List<Screen> selectScreen(String screenDate, String screenLocation,  int movieNo, String theaterName) {
 		Connection conn = getConnection();
 		
-		List<Screen> screenList = new ReservationDao().selectScreen(conn, screenDate, screenLocation, movieNo);
+		List<Screen> screenList = new ReservationDao().selectScreen(conn, screenDate, screenLocation, movieNo, theaterName);
 
 		close(conn);
 		
