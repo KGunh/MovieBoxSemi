@@ -78,6 +78,10 @@
 		TB_THEATER C, TB_LOCATION L
      WHERE 
            C.LOCATION_CODE = L.LOCATION_CODE 
+           		AND
+           THEATER_NO BETWEEN 1 AND 9
+           
+           		
 </entry>
 
 <entry key="cinemaInsert">
@@ -142,7 +146,7 @@
 		THEATER_NO = ?	
 </entry>
 
-<entry key="dele">
+<entry key="deleleteCinema">
 
 	DELETE
 		FROM TB_THEATER
@@ -155,14 +159,22 @@
 <entry key="deleteAdmin">
 
 
-
+DELETE 
+	FROM TB_MEMBER
+WHERE
+	MEMBER_NO = ?	
 
 
 
 </entry>
 
 <entry key="search">
-SELECT * FROM TB_MEMBER WHERE ? LIKE '%'||?||'%'
+SELECT 
+	* 
+FROM 
+	TB_MEMBER 
+WHERE 
+	? LIKE '%'||?||'%'
 
 </entry>
 

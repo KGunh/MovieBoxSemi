@@ -19,24 +19,11 @@ public class MemberAdminController {
 		
 		ArrayList<Member> member =new MemberAdminService().selectMemberAdmin();
 		
-		System.out.println(member);
+		
 
-		/*
+	
 		
-		for(int i = 0; i<member.size(); i++) {
-			
-			request.setAttribute("memberNo", member.get(i).getMemberNo());
-			request.setAttribute("memberName", member.get(i).getMemberName());
-			request.setAttribute("enrollDate", member.get(i).getEnrollDate());
-			request.setAttribute("status", member.get(i).getStatus());
-			request.setAttribute("phone", member.get(i).getPhone());
-			
-			//request.getRequestDispatcher("views/admin/memberSelect.jsp").forward(request, response);		
-		
-		
-		}
-		
-		*/	
+	
 		request.setAttribute("member", member);
 		
 		String view = "views/admin/memberSelect.jsp";
@@ -144,9 +131,7 @@ public class MemberAdminController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
+	
 		
 		String view = "views/admin/memberSearch.jsp";
 		
@@ -156,8 +141,10 @@ public class MemberAdminController {
 		
 		switch(category) {
 		case "name" : category = "MEMBER_NAME"; break;
-		case "enrolldate"  : category = "ENROLL_DATE";
+		case "enrolldate"  : category = "ENROLL_DATE"; break;
+		case "status" : category = "STATUS" ; break; 
 		}
+		
 		
 		
 		ArrayList<Member> member = new MemberAdminService().search(category, search);

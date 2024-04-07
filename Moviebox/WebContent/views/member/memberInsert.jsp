@@ -366,28 +366,11 @@
         const $emailInput = $('input[name=email]');
     	const $phoneInput = $('input[name=phone]');
 		const $memberId = $('input[name=memberId]');
-
+		const $checkPwdInput = $('#checkPwd');
     	
     	
-        let year =$birthdayInput.val().substr(0,4);
-    	let month = $birthdayInput.val().substr(4,2);
-    	// 날짜 계산
-    	if((year%4) == 0 && month == 02){
-			// 윤년 계산
-    		birthdayReg = /^(19|20)\d{2}(02)(0[1-9]|1[0-9]|2[0-9])$/;
-    		
-        } 
-        else{
-        	if(month == 02){
-        		birthdayReg = /^(19|20)d{2}02(0[1-9]|1[0-9]|2[0-8])$/;
-        	}
-        	else if(month == 04 || month == 06 || month == 09 || month == 11){
-        		birthdayReg = /^(19|20)d{2}(0[469]|11)(0[1-9]|1[0-9]|2[0-9]|30)$/;
-    		}
-    		else{
-    			birthdayReg = /^(19|20)d{2}(0[13578]|1[02])(0[1-9]|1[0-9]|2[0-9]|31)$/;
-    		}
-        }
+		
+	    	
     	
     	
     	// 아이디 중복체크
@@ -443,28 +426,38 @@
         	$('.idCheck').css('background','rgb(218, 218, 218)');
         	
         });
-    	
+    	$memberPwdInput.blur(function() {
+    		console.log($memberPwdInput.val());
+    		console.log($checkPwdInput.val());
+    		 if( $checkPwdInput.val() != ''){
+    			 if($memberPwdInput.val() != $checkPwdInput.val()){
+    				 	$checkPwdInput.css('border','2px solid red');
+    				 	$checkPwdInput.siblings('.input-bottom').html('잘못된 입력입니다. 다시입력해주세요').css('color','red');
+    	            } 
+    	            else{
+    	            	$checkPwdInput.removeAttr('style');
+    	                $checkPwdInput.siblings('.input-bottom').html('');
+    	            }
+    		 }
+		})
     	// 비밀번호 확인
-        $('#checkPwd').blur(function(){
-            const $memberPwd = $('#memberPwd').val();
-            const $checkPwd = $(this).val();
-            if($memberPwd != $checkPwd){
-                $('#checkPwd').css('border','2px solid red');
-                $(this).siblings('.input-bottom').html('잘못된 입력입니다. 다시입력해주세요').css('color','red');
+        $checkPwdInput.blur(function(){
+            
+        	if($memberPwdInput.val() != $checkPwdInput.val()){
+            	$checkPwdInput.css('border','2px solid red');
+            	$checkPwdInput.siblings('.input-bottom').html('잘못된 입력입니다. 다시입력해주세요').css('color','red');
             } 
             else{
-                $('#checkPwd').removeAttr('style');
-                $(this).siblings('.input-bottom').html('');
+            	$checkPwdInput.removeAttr('style');
+            	$checkPwdInput.siblings('.input-bottom').html('');
             }
 
         });
         
-    	// 모든 input 빈값 처리
-        $('.inputdiv > input').blur(function(){
-            checkInput($(this));
-        });
-        
+
     	// pwd 정규표현식
+
+    	
         $memberPwdInput.blur(function(){
         	removeOrFail(pwdReg,$(this));
         });
@@ -486,6 +479,26 @@
         });
      	// birthday 정규표현식
         $birthdayInput.blur(function(){
+        	
+        	 let year =$birthdayInput.val().substr(0,4);
+    	     let month = $birthdayInput.val().substr(4,2);
+    	     
+        	if((year%4) == 0 && month == '02'){
+	    		birthdayReg = /^(19|20)\d{2}(02)(0[1-9]|1[0-9]|2[0-9])$/;
+	        } 
+	        else{
+	        	if(month == '02'){
+	        		birthdayReg = /^(19|20)\d{2}02(0[1-9]|1[0-9]|2[0-8])$/;
+	        	}
+	        	else if(month == '04' || month == '06' || month == '09' || month == '11'){
+	        		console.log(month);
+	        		birthdayReg = /^(19|20)\d{2}(0[469]|11)(0[1-9]|1[0-9]|2[0-9]|30)$/;
+	    		}
+	    		else{
+	    			console.log($birthdayInput.val());
+	    			birthdayReg = /^(19|20)\d{2}(0[13578]|1[02])(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/;
+	    		}
+	        }
         	removeOrFail(birthdayReg,$(this));
  
         });
@@ -493,7 +506,13 @@
     	// 회원가입 버튼 
         $('.input-button > button').click(function(){
             const $input = $('.inputdiv > input');
-            let flag = false;
+
+            console.log(pwdReg.test($memberPwdInput.val()));
+            console.log(phoneReg.test($phoneInput.val()));
+            console.log(birthdayReg.test($birthdayInput.val()));
+            console.log(emailReg.test($emailInput.val()));
+            console.log(nameReg.test($memberNameInput.val()));
+            
         	 // 모든 input 빈값 체크
             $input.each(function(){
                 if ($(this).val() == ''){
@@ -503,12 +522,13 @@
                 else {
                 	//모든 input 정규표현식 체크 이후 경고메시지
                     checkInputAll();
-                  //모든 input 정규표현식 체크 
+                  //모든 input 정규표현식 체크후 submit
                     if(pwdReg.test($memberPwdInput.val()) &&
                     	phoneReg.test($phoneInput.val()) && 
                     	birthdayReg.test($birthdayInput.val()) && 
                     	emailReg.test($emailInput.val()) &&
-                    	nameReg.test($memberIdInput.val())){
+                    	nameReg.test($memberNameInput.val())){
+                    	console.log('성공');
                         $('#insertForm').submit();
                     }
 

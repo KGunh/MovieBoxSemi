@@ -181,11 +181,11 @@ public class MemberAdminService {
 		
 	}
 	
-	public ArrayList<Member> search(String search, String category) {
+	public ArrayList<Member> search(String category, String search) {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		ArrayList<Member> list = new MemberAdminDao().search(conn, search, category);
+		ArrayList<Member> list = new MemberAdminDao().search(conn, category, search);
 		JDBCTemplate.close(conn);
 		
 		return list; 
@@ -196,7 +196,7 @@ public class MemberAdminService {
 		
 		Connection conn = JDBCTemplate.getConnection();
 		
-		ArrayList<Theater> theater = new MemberAdminDao().searchCinema(conn, search, category);
+		ArrayList<Theater> theater = new MemberAdminDao().searchCinema(conn, category, search);
 		
 		JDBCTemplate.close(conn);
 		

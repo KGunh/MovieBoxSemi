@@ -43,27 +43,20 @@ public class MemberDao {
 	}
 	//로그인기능
 	public Member login(Connection conn, Member member) {
-
 		
 		Member m = null;
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		
 		String sql = prop.getProperty("login");
-		
-
 		try {
 			pstmt = conn.prepareStatement(sql);
 
 			pstmt.setString(1, member.getMemberId());
 			pstmt.setString(2, member.getMemberPwd());
 			
-		
-			
 			rset = pstmt.executeQuery();
 			
-
 			if(rset.next()) {
 				
 				
@@ -126,15 +119,12 @@ public class MemberDao {
 		return list; 
 	}
 
-	// 회원가입
 	public int memberInsert(Connection conn, Member m) {
 		int result = 0;
 		PreparedStatement pstmt = null;
 		String sql = prop.getProperty("memberInsert");
-
 		try {
-			pstmt = conn.prepareStatement(sql);
-			
+			pstmt = conn.prepareStatement(sql);		
 			pstmt.setString(1, m.getMemberId());
 			pstmt.setString(2, m.getMemberPwd());
 			pstmt.setString(3, m.getMemberName());
@@ -143,23 +133,16 @@ public class MemberDao {
 			pstmt.setString(6, m.getEmail());
 			pstmt.setString(7, m.getPhone());
 			pstmt.setString(8, m.getAddress());
-			pstmt.setString(9, m.getLocalCode());
-			
-			result = pstmt.executeUpdate();
-			
-			
+			pstmt.setString(9, m.getLocalCode());	
+			result = pstmt.executeUpdate();	
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally {
 			close(pstmt);
 		}
-		
-		
-		
-		
 		return result;
 	}
-	// 회원가입 장르 추가
+
 	public int genreInsert(Connection conn, Genre g) {
 		
 		int result = 0;
@@ -178,9 +161,6 @@ public class MemberDao {
 		} finally {
 			close(pstmt);
 		}
-		
-		
-		
 		return result;
 	}
 	

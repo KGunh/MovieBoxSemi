@@ -35,7 +35,6 @@ public class MemberAdminServlet extends HttpServlet {
 		String uri =request.getRequestURI();
 		
 		String mapping = uri.substring(uri.lastIndexOf("/")+1,uri.lastIndexOf("."));
-		System.out.println(mapping);
 		String view = "";
 		boolean flag = false;
 		

@@ -422,7 +422,7 @@
                 <div class="info-content1">
                     <div class="info-name"><%=memberName %> 님 <div class="info-id"><%=memberId %></div></div>
                     <div class="info-address"><%=localCode%> <%=address %></div>
-                    <div class="info-email"><%=memberName%></div>
+                    <div class="info-email"><%=email%></div>
                     <div class="info-genre">
                     <%if(list == null) {%>
                     <%} else { %>
@@ -471,7 +471,17 @@
             		<%for(int i=0;i < boardList.size(); i ++) {%>
             		<% if(i==2) { break;}%>
                 <div class="QNA-area-list" style="border-bottom: 1px solid rgb(158, 157, 157);">
-                    <div id="QNA-title"><%=boardList.get(i).getBoardTitle() %></div>
+                    <div id="QNA-title">
+                    	<%
+                    		String boardTitle = "";
+                    		if((boardList.get(i).getBoardTitle()).length() > 20){
+                    			boardTitle = boardList.get(i).getBoardTitle().substring(0,20) + "...";
+                    		} else{
+                    			boardTitle = boardList.get(i).getBoardTitle();
+                    		}
+                    	%>
+                    	<%=boardTitle %>
+                    </div>
                     <div id="QNA-createDate"><%=boardList.get(i).getCreateDate() %></div>
                     
                     <%if(answerList == null) {%>
