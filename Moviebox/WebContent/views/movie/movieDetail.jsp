@@ -7,7 +7,6 @@
 
 
 <%
-
 	ArrayList<Attachment> list = (ArrayList<Attachment>)request.getAttribute("attach");
 %>
 
@@ -295,17 +294,24 @@
 				  <!-- The slideshow -->
 				  <div class="carousel-inner">
 				    <div class="carousel-item active">
-				      <img src="la.jpg" alt="Los Angeles" width="1100" height="500">
+						<c:forEach var="a" items="${stilCutList}">
+						<c:out value="${a.filePath}" />
+						    <img src="${a.filePath}/${a.stilCut}" alt="스틸컷 이미지" width="1100" height="500">
+						</c:forEach>
+
+				    
+				    <!--
+				      <img src="${ attach.filePath }/${ attach.stilCut }" alt="Los Angeles" width="1100" height="500">
 				    </div>
 				    <div class="carousel-item">
 				      <img src="chicago.jpg" alt="Chicago" width="1100" height="500">
 				    </div>
 				    <div class="carousel-item">
 				      <img src="ny.jpg" alt="New York" width="1100" height="500">
-				    </div>
+				    </div>-->
 				  </div>
 				  
-				  <!-- Left and right controls -->
+				   
 				  <a class="carousel-control-prev" href="#demo" data-slide="prev">
 				    <span class="carousel-control-prev-icon"></span>
 				  </a>
