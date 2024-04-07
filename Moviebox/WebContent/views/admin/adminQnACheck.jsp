@@ -339,7 +339,7 @@
                 </ul>    
             </div>
             <div class="content_2">
-                <p id="p">게시글관리 > 문의 게시글 관리</p>
+                <p id="p"> 문의 게시글 </p>
                
                 <div id="content_2_box"><!--컨텐트2 전체박스-->
 
@@ -366,19 +366,16 @@
                             <table class="table table-hover" style="text-align: center; font-size: small;">
                               <thead>
                                 <tr style="background-color: #eaeaea; margin-top: 0; height: 40px; color: #212121; border: 0px solid #cfcfcf; opacity: 0.8; text-align: center;">
-                                    <th style="width: 60px;">번호</th>
-                                    <th style="width: 100px;">카테고리</th>
-                                    <th style="width: 300px;">제목</th>
-                                    <th style="width: 100px;">작성자</th>
-                                    <th style="width: 100px;">등록일</th>
-                                    <th style="width: 80px;">조회수</th>
+                                    <th>번호</th>
+                                    <th>카테고리</th>
+                                    <th>제목</th>
+                                    <th>작성자</th>
+                                    <th>등록일</th>
                                 </tr>
                               </thead>
-                              <<tbody id="tbody">
+                              <tbody id="tbody">
                               <% if(list == null || list.isEmpty()) { %>
-                              	<tr>
-                              		<td colspan="6">조회 된 문의 목록이 없습니다. </td>
-                              	</tr>
+
                               <% }else{ %>
                               	<% for(Board b : list) {%>	
 	                                <tr>
@@ -387,7 +384,6 @@
 	                                    <td><%= b.getBoardTitle() %></td>
 	                                    <td><%= b.getBoardWriter() %></td>
 	                                    <td><%= b.getCreateDate() %></td>
-	                                    <td><%= b.getCount() %></td>
 	                                </tr>
 	                            <% } %>    
                               <% } %> 
