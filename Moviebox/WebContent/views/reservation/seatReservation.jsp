@@ -43,7 +43,7 @@
 							최대 8명까지 선택 가능
 		                </div>
 		            </div>
-		            <div id="movie-info">${ movieTitle } ${ theaterName } ${ screenName } ${ screenDate }</div>
+		            <div id="movie-info">${ requestScope.movieTitle } ${ requestScope.theaterName } ${ requestScope.screenName } ${ requestScope.screenDate }</div>
 		            <div id="select-wrap">
 		                <div class="selectAge">
 		                    <button class="people-teen ageBtn" style="cursor: auto;">청소년</button>
