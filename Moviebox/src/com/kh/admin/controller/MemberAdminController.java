@@ -131,9 +131,7 @@ public class MemberAdminController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		
-		
-		
+	
 		
 		String view = "views/admin/memberSearch.jsp";
 		
@@ -143,8 +141,10 @@ public class MemberAdminController {
 		
 		switch(category) {
 		case "name" : category = "MEMBER_NAME"; break;
-		case "enrolldate"  : category = "ENROLL_DATE";
+		case "enrolldate"  : category = "ENROLL_DATE"; break;
+		case "status" : category = "STATUS" ; break; 
 		}
+		
 		
 		
 		ArrayList<Member> member = new MemberAdminService().search(category, search);

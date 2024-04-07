@@ -386,22 +386,20 @@ public class MemberAdminDao {
 	}
 	
 	
-	public ArrayList<Member> search(Connection conn,String search, String category){
+	public ArrayList<Member> search(Connection conn,String category, String search){
 		Member member = new Member();
 		ArrayList<Member> list = new ArrayList<Member>();
 		
-		System.out.println(category);
-		System.out.println(search);
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		String sql = prop.getProperty("deleleteCinema");
+		String sql = prop.getProperty("search");
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-	
 			pstmt.setString(1, category);
 			pstmt.setString(2, search);
+			
 			
 			rset = pstmt.executeQuery();
 			
@@ -415,6 +413,7 @@ public class MemberAdminDao {
 				list.add(member);
 				
 			}
+			
 			
 			
 			
@@ -456,7 +455,7 @@ public class MemberAdminDao {
 				list.add(theater);
 			
 			}
-			
+			System.out.println(list);
 			
 			
 			System.out.println(search);
