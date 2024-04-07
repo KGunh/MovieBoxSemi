@@ -199,7 +199,7 @@
         <c:choose>
         	<c:when test="${ empty theater }">
 				<div id="noMovieList">
-					<a id="noMovie">조회 된 영화관이 없습니다.</a>
+					<a id="noMovie">해당 영화관에 조회 된 영화가 없습니다.</a>
 				</div>
        	 	</c:when>
        	 	<c:otherwise>
@@ -237,7 +237,7 @@
 	                	</c:choose>
                         <%--<button id="movie-content-btn2">예매하기</button> --%>
                     </div>
-        				</c:forEach>
+        		 </c:forEach>
             </div>
         </div>
 
@@ -250,15 +250,10 @@
             </div>
             <div id="theater-mapLink">${ theater[0].mapLink }</div>
         </div>
-
-
 			</c:otherwise>
-	</c:choose>
+		</c:choose>
 	
     </div> <!-- wrap -->
-
-
-
 
 <%@ include file="../common/footer.jsp" %>
 
@@ -272,10 +267,6 @@
     	function reservationPage(){
     		location.href = '<%= contextPath %>/movie.reservation';
     	}
-
-   // var movieNo = $(this).siblings('input[type="hidden"]').val();
-   // location.href = '< %=contextPath%>/detail.movie?movieNo=' + movieNo;
-  //	  });
 
 	</script>
     

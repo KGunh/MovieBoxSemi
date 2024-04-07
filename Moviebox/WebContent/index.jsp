@@ -121,7 +121,6 @@
         vertical-align: top;
     }
     .board-content td{
-        width: 50%;
         height: 30px;
     }
     .board-area td:first-child {
@@ -360,7 +359,7 @@
 
         			if(i==4) break;
 
-        			resultStr += '<tr class="board-area"> <td> ' + result[i].noticeTitle + '</td><td> ' + result[i].createDate + '</td> </tr>';
+        			resultStr += '<tr class="board-area"> <td "> ' + result[i].noticeTitle + '</td><td> ' + result[i].createDate + '</td> </tr>';
         		}
         		
         		$('.board-content tbody').html(resultStr);

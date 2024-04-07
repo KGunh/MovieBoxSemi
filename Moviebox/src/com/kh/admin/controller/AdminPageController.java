@@ -201,11 +201,11 @@ public class AdminPageController {
 			// 넣어준다.
 			// 4. TB_CAST 테이블에 캐스팅 정보가 들어가야함 - 들고있던 영화번호, 배우번호 넣기 (LOOP로)
 			// 5. TB_ATTACHMENT 테이블에 포스터, 스틸컷1,2,3 들어가야함.
-			int directorResult;
-			int actorResult;
-			int castResult;
-			int movieResult;
-			int attachResult;
+			int directorResult = 0;
+			int actorResult = 0;
+			int castResult = 0;
+			int movieResult = 0;
+			int attachResult = 0;
 
 			// 1.)을 하기위해 감독이름이 한글로 들어오기 때문에, 한글로 DB에 감독 이름 검색
 			// 기존에 있다면 감독 번호가 나오고, 없다면 0
@@ -497,34 +497,37 @@ public class AdminPageController {
 
 	public String adminDetailTheater(HttpServletRequest request, HttpServletResponse response){
 		String view = "";
-		
-		int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));
-		String watchDate = request.getParameter("watchDate");
-		System.out.println(theaterNo);
-		Screen sc = new Screen();
-		sc.setTheaterNo(theaterNo);
-		sc.setWatchDate(watchDate);
-
-		List<Screen> list = new AdminPageService().adminDetailTheater(sc);
-		Theater th = new TheaterService().detailTheater(theaterNo);
-		
-		List<Movie> movieList = new MovieService().selectMovieList();
-
-		if(th != null) {
-			request.setAttribute("theater", th);
-		}
-		
-		
-		if(!list.isEmpty()) {
-			request.setAttribute("movieList", movieList);
-			request.setAttribute("screenList", list);
-			
-			view = "views/admin/adminDetailTheater.jsp";
-		} else {
-			view = "views/admin/adminDetailTheater.jsp";
-		}
-		
-		return view;
+	    
+	    try {
+	        int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));
+	        String watchDate = request.getParameter("watchDate");
+	        Screen sc = new Screen();
+	        sc.setTheaterNo(theaterNo);
+	        sc.setWatchDate(watchDate);
+	        
+	        List<Screen> list = new AdminPageService().adminDetailTheater(sc);
+	        
+	        Theater th = new TheaterService().detailTheater(theaterNo);
+	        
+	        List<Movie> movieList = new MovieService().selectMovieList();
+	        
+	        if(th != null) {
+	            request.setAttribute("theater", th);
+	        }
+	        
+	        if(!list.isEmpty()) {
+	            request.setAttribute("movieList", movieList);
+	            request.setAttribute("screenList", list);
+	            
+	            view = "views/admin/adminDetailTheater.jsp";
+	        } else {
+	            view = "views/common/errorPage.jsp";
+	        }
+	    } catch (NumberFormatException e) {
+	        view = "views/common/errorPage.jsp";
+	    }
+	    
+	    return view;
 	}
 	
 	

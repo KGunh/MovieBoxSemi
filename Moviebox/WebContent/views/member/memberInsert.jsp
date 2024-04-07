@@ -247,10 +247,7 @@
 					<button type="button" class="idCheck" onclick="idCheck();">중복확인</button>
                     <span class="input-bottom"></span>
 				</div>
-				<script>
-					
-					
-				</script>
+
 				
 				
 				<div class="inputdiv">
@@ -368,29 +365,26 @@
         const $birthdayInput = $('input[name=birthday]');
         const $emailInput = $('input[name=email]');
     	const $phoneInput = $('input[name=phone]');
-    	
+		const $memberId = $('input[name=memberId]');
+
     	
     	
         let year =$birthdayInput.val().substr(0,4);
     	let month = $birthdayInput.val().substr(4,2);
     	// 날짜 계산
     	if((year%4) == 0 && month == 02){
-    	     //윤년
-    	     console.log('윤년');
+			// 윤년 계산
     		birthdayReg = /^(19|20)\d{2}(02)(0[1-9]|1[0-9]|2[0-9])$/;
     		
         } 
         else{
         	if(month == 02){
-        		console.log('윤년x');
         		birthdayReg = /^(19|20)d{2}02(0[1-9]|1[0-9]|2[0-8])$/;
         	}
         	else if(month == 04 || month == 06 || month == 09 || month == 11){
-        		console.log('윤년x46911');
         		birthdayReg = /^(19|20)d{2}(0[469]|11)(0[1-9]|1[0-9]|2[0-9]|30)$/;
     		}
     		else{
-    			console.log('윤년x13578');
     			birthdayReg = /^(19|20)d{2}(0[13578]|1[02])(0[1-9]|1[0-9]|2[0-9]|31)$/;
     		}
         }
@@ -398,7 +392,6 @@
     	
     	// 아이디 중복체크
         function idCheck() {
-			const $memberId = $('.inputdiv input[name=memberId]');
 			
 			if($memberId.val() == ''){
 				$memberId.css('border','2px solid red');
@@ -511,12 +504,11 @@
                 	//모든 input 정규표현식 체크 이후 경고메시지
                     checkInputAll();
                   //모든 input 정규표현식 체크 
-                    if(pwdReg.test($memberPwdInput .val()) &&
-                    phoneReg.test($phoneInput.val()) && 
-                    birthdayReg.test($birthdayInput.val()) && 
-                    emailReg.test($emailInput.val()) &&
-                    nameReg.test($memberIdInput.val())
-                    ){
+                    if(pwdReg.test($memberPwdInput.val()) &&
+                    	phoneReg.test($phoneInput.val()) && 
+                    	birthdayReg.test($birthdayInput.val()) && 
+                    	emailReg.test($emailInput.val()) &&
+                    	nameReg.test($memberIdInput.val())){
                         $('#insertForm').submit();
                     }
 

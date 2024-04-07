@@ -1,5 +1,6 @@
 package com.kh.movie.controller;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -36,6 +37,7 @@ public class MovieController {
 				list = new MovieService().movieCategory(genre);
 			}
 		}
+		
 		request.setAttribute("genre", genre);
 		request.setAttribute("type", type);
 		request.setAttribute("movieList", list);
@@ -44,7 +46,6 @@ public class MovieController {
 		
 		return view;
 	}
-	
 	
 	
 	// 영화 상세정보
@@ -56,56 +57,17 @@ public class MovieController {
 		Movie movie = new MovieService().detailMovie(movieNo);
 		String cast = new MovieService().detailMovieCast(movieNo);
 		
+		ArrayList<Attachment> stilCut = new MovieService().stilCut(movieNo);
+		
 		if(movie != null) {
 			request.setAttribute("movie", movie);
 			request.setAttribute("cast", cast);
+			request.setAttribute("stilCut", stilCut);
 
 			view = "views/movie/movieDetail.jsp";
 		} else {
 			view = "index.jsp";
-		
 		}
-		
 		return view;
 	}
-	
-	public String detailMovieList(HttpServletRequest request, HttpServletResponse response) {
-		
-		List<Movie> movieList = new MovieService().selectMovieList();
-		request.setAttribute("movieList", movieList);
-		
-		String view = "views/movie/movieDetail.jsp";
-		
-		return view;
-	}
-	
-	
-	// 스틸컷
-	public String stilCut(HttpServletRequest request, HttpServletResponse response) {
-		
-		int movieNo = Integer.parseInt(request.getParameter("movieNo"));
-
-		List<Attachment> stilCutList = new MovieService().stilCut(movieNo);
-		System.out.println(stilCutList);
-		request.setAttribute("stilCutList", stilCutList);
-		
-		
-		String view = "views/movie/movieDetail.jsp";
-		
-		return view;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }
