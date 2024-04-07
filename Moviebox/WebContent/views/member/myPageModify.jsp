@@ -322,6 +322,13 @@
 <body>
 	<%@ include file="../common/header.jsp" %>
 	
+	<% if(loginUser == null) {%>
+			
+		<script>
+			location.href = ('<%=contextPath%>/loginForm.me');
+		</script>
+	<%} else {%>
+	
 	<div id="info-header">
         <div id="info-title">
             <span class="title">마이페이지</span>
@@ -607,6 +614,6 @@
 			</div>
 		</div>
 	</div>
-
+	<%} %>
 </body>
 </html>

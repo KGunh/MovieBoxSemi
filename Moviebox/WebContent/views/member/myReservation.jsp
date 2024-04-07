@@ -193,6 +193,7 @@
 </head>
 <body>
 	<%@ include file="../common/header.jsp" %>
+
 	
 	<%
 	
@@ -204,6 +205,7 @@
 	%>
 	
 	<% if(loginUser == null) {%>
+			
 		<script>
 			location.href = ('<%=contextPath%>/loginForm.me');
 		</script>
