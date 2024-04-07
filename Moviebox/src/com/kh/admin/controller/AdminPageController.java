@@ -497,34 +497,37 @@ public class AdminPageController {
 
 	public String adminDetailTheater(HttpServletRequest request, HttpServletResponse response){
 		String view = "";
-		
-		int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));
-		String watchDate = request.getParameter("watchDate");
-		System.out.println(theaterNo);
-		Screen sc = new Screen();
-		sc.setTheaterNo(theaterNo);
-		sc.setWatchDate(watchDate);
-
-		List<Screen> list = new AdminPageService().adminDetailTheater(sc);
-		Theater th = new TheaterService().detailTheater(theaterNo);
-		
-		List<Movie> movieList = new MovieService().selectMovieList();
-
-		if(th != null) {
-			request.setAttribute("theater", th);
-		}
-		
-		
-		if(!list.isEmpty()) {
-			request.setAttribute("movieList", movieList);
-			request.setAttribute("screenList", list);
-			
-			view = "views/admin/adminDetailTheater.jsp";
-		} else {
-			view = "views/admin/adminDetailTheater.jsp";
-		}
-		
-		return view;
+	    
+	    try {
+	        int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));
+	        String watchDate = request.getParameter("watchDate");
+	        Screen sc = new Screen();
+	        sc.setTheaterNo(theaterNo);
+	        sc.setWatchDate(watchDate);
+	        
+	        List<Screen> list = new AdminPageService().adminDetailTheater(sc);
+	        
+	        Theater th = new TheaterService().detailTheater(theaterNo);
+	        
+	        List<Movie> movieList = new MovieService().selectMovieList();
+	        
+	        if(th != null) {
+	            request.setAttribute("theater", th);
+	        }
+	        
+	        if(!list.isEmpty()) {
+	            request.setAttribute("movieList", movieList);
+	            request.setAttribute("screenList", list);
+	            
+	            view = "views/admin/adminDetailTheater.jsp";
+	        } else {
+	            view = "views/common/errorPage.jsp";
+	        }
+	    } catch (NumberFormatException e) {
+	        view = "views/common/errorPage.jsp";
+	    }
+	    
+	    return view;
 	}
 	
 	
