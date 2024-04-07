@@ -108,7 +108,7 @@ public class CinemaAdminContorller {
 		
 	}
 	
-	public String modify(HttpServletRequest request, HttpServletResponse response) {
+	public String modifyCinema(HttpServletRequest request, HttpServletResponse response) {
 		
 		int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));
 		String name = request.getParameter("name");
@@ -126,7 +126,7 @@ public class CinemaAdminContorller {
 		theater.setUpdateDate(enrollDate);
 		theater.setTheaterNo(theaterNo);
 		
-		int result = new MemberAdminService().modify(theater);
+		int result = new MemberAdminService().modifyCinema(theater);
 		
 		if(result > 0) {
 			HttpSession session = request.getSession();
@@ -144,10 +144,10 @@ public class CinemaAdminContorller {
 		return view;
 	}
 	
-	public String dele(HttpServletRequest request, HttpServletResponse response) {
+	public String deleleteCinema(HttpServletRequest request, HttpServletResponse response) {
 		
 		int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));
-		int result = new MemberAdminService().dele(theaterNo);
+		int result = new MemberAdminService().deleleteCinema(theaterNo);
 		
 		
 		if(result>0) {
@@ -167,22 +167,28 @@ public class CinemaAdminContorller {
 		
 		String category = request.getParameter("category");
 		String search = request.getParameter("find");
-		
-		switch(category) {
-		case "name" : category = "C.THEATER_NAME";
-		case "code" : category = "C.LOCATION_CODE";
-		case "city" : category ="L.LOCATION_NAME";
-		}
-		
-		ArrayList<Theater> theater = new MemberAdminService().searchCinema(category,search);
-		
-		request.setAttribute("theaterlist", theater);
-		
 		String view = "views/admin/CinemaSearch.jsp";
 		
+		switch(category) {
+		case "name" : category = "THEATER_NAME"; break;
+		case "code" : category = "LOCATION_CODE"; break;
+		case "city" : category = "LOCATION_NAME"; 
+	
+		
+	
+		}
+		System.out.println(category);
+		System.out.println(search);
+		
+		ArrayList<Theater> theater = new MemberAdminService().searchCinema(category,search);
+		request.setAttribute("theaterlist", theater);
+		
+		
+		
+		
+		
+	
 		return view;
-		
-		
-	}
+}
 	
 }

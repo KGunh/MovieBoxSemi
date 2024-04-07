@@ -375,7 +375,7 @@
                    <select name="category" id="select" >
                     <option value="name">영화관 이름</option>
                     <option value="code">지역코드</option>
-                    <option vlaue="city">지역</option>
+                    <option value="city">지역</option>
                    </select>
                     <input type="text" id="find" name="find">
                     <button type="submit" id="btn" style="background-color: #FFC145;">
