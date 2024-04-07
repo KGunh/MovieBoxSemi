@@ -245,11 +245,15 @@
                     	<input type="hidden" id="inputId" name="movieNo" value="<%= m.getMovieNo()%>" />
                     	
                         <div class="movie-list-img"> <!-- 포스터 -->
-                        	<a href="<%=contextPath%>/detail.movie?movieNo=<%= m.getMovieNo()%>"><img src="<%= m.getFilePath() %>/<%= m.getChangeName() %>" width="232" height="300"></a>
+                        	<a href="<%=contextPath%>/detail.movie?movieNo=<%= m.getMovieNo()%>">
+                        		<img src="<%= m.getFilePath() %>/<%= m.getChangeName() %>" width="232" height="300">
+                        	</a>
                         </div>
                         
                         <div class="movie-list-title"><%= m.getMovieTitle() %></div>
-                        <div id="movie-content-btn1"><a href="<%=contextPath%>/detail.movie?movieNo=<%= m.getMovieNo()%>" id="detailbtn">상세정보</a></div>
+                        <div id="movie-content-btn1">
+	                        <a href="<%=contextPath%>/detail.movie?movieNo=<%= m.getMovieNo()%>" id="detailbtn">상세정보</a>
+                        </div>
 	                    <% if(loginUser == null) { %>
 	                    	<button id="movie-content-btn2" onclick="noMember();">예매하기</button>
 	                	<%} else { %>
@@ -279,6 +283,11 @@
 			location.href = ('<%=contextPath%>/loginForm.me');
 		}
 		
+    	// 예매하기 버튼 -> 예매 페이지
+    	function reservationPage(){
+    		location.href = '<%= contextPath %>/movie.reservation';
+    	}
+    	
     	// 카테고리 네비 바
 		document.getElementById('movieCategory').addEventListener('click', function(e) {
 		    document.getElementById('genreInput').value = e.target.textContent;
@@ -286,10 +295,6 @@
 		});
 		
 
-    	// 예매하기 버튼 -> 예매 페이지
-    	function reservationPage(){
-    		location.href = '<%= contextPath %>/movie.reservation';
-    	}
 
     	
 	</script>
