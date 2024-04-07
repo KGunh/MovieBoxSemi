@@ -42,7 +42,6 @@
 		                        <div class="movie-detail-info" style="font-size: 24px; margin-top: 10px;">제목</div>
 		                        <div class="movie-detail-info">개봉일</div>
 		                        <div class="movie-detail-info">장르</div>
-		                        <div class="movie-detail-info">분</div>
 		                    </div>
 		                </div>
 		                <div id="reservation-info-area">

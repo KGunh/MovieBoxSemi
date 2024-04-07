@@ -44,9 +44,6 @@ public class AjaxAnswerInsertController extends HttpServlet {
 		answer.setAnswerContent(answerContent);
 		answer.setAnswerWriter(String.valueOf(answerWriter));
 		
-		System.out.println(boardNo);
-		System.out.println(answerContent);
-		
 		
 		int result = new BoardService().insertAnswer(answer);
 		

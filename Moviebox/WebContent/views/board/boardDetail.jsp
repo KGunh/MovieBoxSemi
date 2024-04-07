@@ -7,7 +7,6 @@
     
 <%
 	Board board = (Board)request.getAttribute("board");
-System.out.println(board);
 %>    
     
     
@@ -304,20 +303,16 @@ System.out.println(board);
                 <div class="notice-content">
                     <div class="detail-box1">
                         <div class="detail-title-box1">
-                        
-                        
                             <div class="detail-category"><span>No.<%=board.getBoardNo() %> [<%= board.getBoardCategory() %>]</span></div>
                             <div class="detail-title"><span><%= board.getBoardTitle() %></span></div>
                         </div>
                     </div>
-
                     <div class="detail-box2">
                         <div class="detail-title-box2">
                             <div class="detail-date"><a><%= board.getCreateDate() %></a></div>
                             <div class="detail-count"><a>작성자 : <%= board.getBoardWriter() %></a></div>
                         </div>
                     </div>
-
                     <div class="detail-content-box">
                         <div class="detail-content">
                         <%= board.getBoardContent() %>
@@ -326,7 +321,6 @@ System.out.println(board);
                 </div> <!-- notice-content -->
 
                 <div id="a-title">답변</div>
-
                 <div class="detail-content-a-box">
                     <div class="detail-a">
 		                        <table>
@@ -336,11 +330,10 @@ System.out.println(board);
 		                                    	<c:when test="${!empty sessionScope.loginUser and sessionScope.loginUser.memberNo eq 1}">
 		                                	<th style="text-align:center;">답변</th>
 				                                        <td>
-				                                            <textarea id="answerContent" name="answerContent"></textarea>
+				                                            <textarea id="answerContent"></textarea>
 				                                        </td>
 				                                        <td><button onclick="insertAnswer();" id="answerSubmit">등록</button></td>
 		                                    	</c:when>
-		                                    	
 		                                    	<c:otherwise>
 			                                        <td>
 			                                        </td>
@@ -349,11 +342,9 @@ System.out.println(board);
 											</c:choose>
 		                                </tr>
 		                            </thead>
-		                            <tbody id="testName">
-										
+		                            <tbody id="answer">
 		                            </tbody>
 		                        </table>
-								<a></a>
                     </div>
                     
                     <script>
@@ -362,39 +353,29 @@ System.out.println(board);
                     	$.ajax({
                     		url : 'answerList.board',
                     		data : {boardNo : <%= board.getBoardNo() %>},
-                    		
                     		success : function(result){
-                    			
                     			let resultStr = '';
                     			for(let i in result){
-                    				
                     				resultStr += '<tr>'
                     						   + '<td id="answerWriter">' + result[i].answerWriter + '</td>'
                     						   + '<td id="answerContent2">' + result[i].answerContent + '</td>'
                     						   + '<td id="answercreateDate">' + result[i].createDate + '</td>'
                     						   + '</tr>'
                     			};
-                    			$('#testName').html(resultStr);
-                    			
+                    			$('#answer').html(resultStr);
                     		},
         					error : function(e){
         						console.log(e);
         					}
-                    		
                     	});
                     }
                     
             		$(function(){
-            			
             			selectAnswerList();
-            			
             			setInterval(selectAnswerList, 1000);
-            			
             		});
             	
-                    
                     function insertAnswer(){
-        				
         				$.ajax({
         					url : 'answerInsert.board',
         					type : 'post',
@@ -408,27 +389,18 @@ System.out.println(board);
         							selectAnswerList();
         						};
         					}
-        					
         				});
         			}
                     </script>
-                    
-                    
                 </div>
-                
             </div> <!-- notice-content -->
-
                 <div class="notice-btn" align="center">
-                
                     <button class="board-detail-btn" onclick="backPage();">목록</button>
                     <% if(loginUser != null && loginUser.getMemberNo() == board.getUserNo()) { %>
 	                    <button class="board-detail-btn" onclick="boardUpdatePage();">수정</button> 
 	                    <button class="board-detail-btn" onclick="boardDelete();">삭제</button>
 	                <% } %>
                 </div>
-
-
-
         </div> <!-- notice-detail -->
 	</div>
     

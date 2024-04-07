@@ -27,6 +27,7 @@ public class ReservationController {
 	public List<Screen> selectScreen(HttpServletRequest request) {
 		String[] dateStr = request.getParameter("date").split("-");
 		String screenLocation = request.getParameter("location");
+		String theaterName = request.getParameter("theaterName");
 		String screenDate = "";
 		int movieNo = 0;
 		
@@ -37,10 +38,11 @@ public class ReservationController {
 		if(!request.getParameter("movieNo").equals("")) {
 			movieNo = Integer.parseInt(request.getParameter("movieNo"));
 		}
+		
 
 		if(screenLocation.equals("전체")) screenLocation = "";
 		
-		List<Screen> list = new ReservationService().selectScreen(screenDate, screenLocation, movieNo); 
+		List<Screen> list = new ReservationService().selectScreen(screenDate, screenLocation, movieNo, theaterName); 
 
 		Set<Screen> set = new LinkedHashSet<>();
 

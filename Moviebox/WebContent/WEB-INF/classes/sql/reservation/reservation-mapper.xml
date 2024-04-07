@@ -36,6 +36,8 @@
 		       MOVIE_NO = ?
 		   AND
 		       LOCATION_NAME LIKE '%'||?||'%'
+		   AND
+		   	   THEATER_NAME LIKE '%'||?||'%'
 		   AND 
 		       TO_CHAR(WATCH_DATE, 'YY/MM/DD') = ?
 		   AND

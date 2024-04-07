@@ -193,7 +193,7 @@ div[class^=swiper-button] {
     border: 3px solid rgb(255, 193, 69);
     position: fixed; 
     bottom: 300px; 
-    right: 50px;
+    right: 20px;
 }
 
 #select-screen{
@@ -247,4 +247,41 @@ div[class^=swiper-button] {
     text-align: center;
     font-size: 50px;
     font-weight: 500;
+}
+
+#input-theaterName{
+    height: 40px;
+    border-radius: 9px;
+    padding-left: 15px;
+    background-color: white;
+    width: 200px;
+    font-size: 20px;
+    font-weight: 500;
+    margin-left: 5px;
+    border: none;
+}
+
+#search-theaterName{
+    position: absolute;
+    height: 40px;
+    width: 43px;
+    border: 1px solid rgb(255, 193, 69);
+    color: rgb(255, 193, 69);
+    background-color: #1A1A1A;
+    border-radius: 9px;
+    line-height: 0px;
+    right: 205px;
+    top: 9px;
+}
+
+#search-theaterName img{
+    height: 90%;
+    width: 100%;
+}
+
+#theaterInputBtnArea{
+    position: relative;
+    line-height: 60px;
+    height: 60px;
+    float: right;
 }

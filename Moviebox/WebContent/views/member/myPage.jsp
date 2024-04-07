@@ -445,7 +445,7 @@
             	<h5 align="center">고객님의 최근 예매 내역이 존재하지 않습니다.</h5>
             <%} else { %>
             
-                <div class="history-area-image"><img id="poster" src="<%=contextPath %>/<%= movieList.get(0).getFilePath()%>/<%=movieList.get(0).getFileName() %>"></div>
+                <div class="history-area-image"><img id="poster" src="<%=contextPath %>/<%= movieList.get(0).getFilePath()%>/<%=movieList.get(0).getChangeName() %>"></div>
                 <div class="history-area-list">
                 	<%Price price = resList.get(0).getPrice(); %>
                     <div>영화&emsp;<%=resList.get(0).getMovieTitle() %></div>
@@ -537,8 +537,9 @@
                             </tbody>
                         </table>
                         <%} %>
+					<%} else { %>
+							<h5 align="center">고객님의 최근 구매 내역이 존재하지 않습니다.</h5>
 					<%} %>
-
                     </div>
             </div>
             

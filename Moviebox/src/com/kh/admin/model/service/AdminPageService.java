@@ -102,7 +102,7 @@ public class AdminPageService {
 	
 	
 	
-	//장르카테고리
+	//장르카테고리(영화등록 시 필요)
 	public ArrayList<Genre> SelectGenreList() {
 		
 		Connection conn = getConnection();
@@ -116,7 +116,7 @@ public class AdminPageService {
 	
 	
 	
-	//감독체크
+	//감독체크(영화등록 시 필요)
 	public int SelectDirectorName(String directorName) {
 		
 		Connection conn = getConnection();
@@ -129,7 +129,7 @@ public class AdminPageService {
 		
 	}
 	
-	//감독 등록전 시퀀스 조회
+	//감독 등록전 시퀀스 조회(영화등록 시 필요)
 	public int SelectDirectorNo() {
 		Connection conn = getConnection();
 		
@@ -141,7 +141,7 @@ public class AdminPageService {
 	}
 	
 	
-	//감독 등록
+	//감독 등록(영화등록 시 필요)
 	public int InsertDirector(int directorNo, String directorName) {
 		Connection conn = getConnection();
 		
@@ -160,7 +160,7 @@ public class AdminPageService {
 	
 	
 	
-	//출연진 이름으로 출연진NO조회
+	//출연진 이름으로 출연진NO조회(영화등록 시 필요)
 	public int SelectActorName(String actorName) {
 		
 		Connection conn = getConnection();
@@ -175,7 +175,7 @@ public class AdminPageService {
 	
 	
 	
-	//출연진 등록전 시퀀스 조회
+	//출연진 등록전 시퀀스 조회(영화등록 시 필요)
 	public int SelectActorNo() {
 		Connection conn = getConnection();
 		
@@ -187,7 +187,7 @@ public class AdminPageService {
 	}
 	
 	
-	//출연진 등록
+	//출연진 등록(영화등록 시 필요)
 	public int InsertActor(int actorNo, String actorName) {
 		Connection conn = getConnection();
 		
@@ -205,7 +205,7 @@ public class AdminPageService {
 	}
 	
 	
-	//영화 등록전 시퀀스 조회
+	//영화 등록전 시퀀스 조회(영화등록 시 필요)
 	public int SelectMovieNo() {
 		Connection conn = getConnection();
 		
@@ -216,7 +216,7 @@ public class AdminPageService {
 		return movieNo; 
 	}
 	
-	//영화 등록
+	//영화 등록(영화등록 시 필요)
 	public int InsertMovie(Movie movie) {
 		Connection conn = getConnection();
 		
@@ -267,7 +267,7 @@ public class AdminPageService {
 		return result;
 	}
 	
-	//Cast등록
+	//Cast등록(영화등록 시 필요)
 	public int InsertCast(int movieNo, int actorNo) {
 		Connection conn = getConnection();
 		
@@ -396,6 +396,7 @@ public class AdminPageService {
 		return fileNo; 
 	}
 	
+	//Attachment에 등록(영화등록 시 필요)
 	public int InsertAttach(int movieNo, ArrayList<Attachment> list) {
 		Connection conn = getConnection();
 		

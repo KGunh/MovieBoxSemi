@@ -340,7 +340,7 @@
                 </ul>    
             </div>
             <div class="content_2">
-                <p id="p">게시글관리 > 공지 관리</p>
+                <p id="p"> 공지 관리 </p>
                
                 <div id="content_2_box"><!--컨텐트2 전체박스-->
 
@@ -375,14 +375,11 @@
                                     <th>카테고리</th>
                                     <th>제목</th>
                                     <th>등록일</th>
-                                    <th>조회수</th>
                                 </tr>
                               </thead>
                               <tbody id="tbody">
                               <% if(list == null || list.isEmpty()) { %>
-                              	<tr>
-                              		<td colspan="5">조회 된 공지 목록이 없습니다. </td>
-                              	</tr>
+
                               <% }else{ %>
                               	<% for(Notice n : list) {%>	
 	                                <tr>
@@ -393,7 +390,6 @@
 	                                      -->
 	                                    <td><%= n.getNoticeTitle() %></td>
 	                                    <td><%= n.getCreateDate() %></td>
-	                                    <td><%= n.getCount() %></td>
 	                                </tr>
 	                            <% } %>    
                               <% } %>    

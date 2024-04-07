@@ -31,15 +31,19 @@ import com.oreilly.servlet.MultipartRequest;
 
 public class AdminPageController {
 	
+	
+	//영화 목록 전체 리스트 보여주기
 	public String adminSelectMovieList(HttpServletRequest request, HttpServletResponse response) {
 
-		int listCount;
-		int currentPage;
-		int pageLimit;
-		int boardLimit;
-		int maxPage;
-		int startPage;
-		int endPage;
+		//페이징 처리
+		//필요한 변수들
+		int listCount;  // 게시글 총 개수 
+		int currentPage;// 현재 페이지
+		int pageLimit;	// 페이징바의 최대 개수
+		int boardLimit; // 게시글의 최대 개수
+		int maxPage; 	// 마지막 페이지
+		int startPage;  // 페이징바 시작 수
+		int endPage;    // 페이징바 끝 수
 
 		listCount = new AdminPageService().selectListCount();
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
@@ -69,7 +73,9 @@ public class AdminPageController {
 		return view;
 	}
 
-	// 공지 목록 전체 출력
+	
+	
+	// 공지 목록 전체 리스트 보여주기
 	public String adminBoardCheckList(HttpServletRequest request, HttpServletResponse response) {
 
 		int listCount;
@@ -105,7 +111,7 @@ public class AdminPageController {
 		return view;
 	}
 
-	// 문의 목록 전체 출력
+	// 문의 목록 전체 리스트 보여주기
 	public String adminSelectQnAList(HttpServletRequest request, HttpServletResponse response) {
 
 		int listCount;
@@ -143,6 +149,9 @@ public class AdminPageController {
 		return view;
 	}
 
+	
+	
+	// 영화 등록 양식페이지
 	public String adminMovieEnrollForm(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		// 입력 양식에서 장르선택은 보여지게
 		// 장르선택
@@ -153,6 +162,10 @@ public class AdminPageController {
 		return view;
 	}
 
+	
+	
+	
+	// 영화 등록
 	public String adminMovieInsert(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession();
 		String view = "views/admin/adminMovieInsert.jsp";
@@ -161,7 +174,6 @@ public class AdminPageController {
 			int maxSize = 1024 * 1024 * 10;
 
 			ServletContext application = session.getServletContext();
-//			String savePath = application.getRealPath("/resources/img/upposter/");
 			String savePath = application.getRealPath("/resources/img/poster/");
 			// 2) 서버에 업로드
 
@@ -169,11 +181,6 @@ public class AdminPageController {
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8",
 					new PosterFileRenamePolicy());
 			// ------------------ 파일업로드 ------------------
-
-			// enctype="multipart/form-data" 는 아래처럼 request를 한번 더 가공 해줬기 때문에
-			// String title = request.getParameter("title");
-			// 이렇게 request로 쓰면 null이 나옴...
-			// 그래서 multiRequest로 뽑아줘야함!!!
 
 			String title = multiRequest.getParameter("title");
 			String genreCode = multiRequest.getParameter("genre");
@@ -214,7 +221,6 @@ public class AdminPageController {
 			String[] actorArray = actors.split(",");
 			// 최종 TB_CAST테이블에 넣을때 사용할 것
 			int[] resultActorNo = new int[actorArray.length];
-//	        System.out.println("actorArray length: " + actorArray.length);
 
 			// 배우가 등록되어 있는지 여부를 판단하고, 없으면 넣어줘야함.
 			for (int i = 0; i < actorArray.length; i++) {
@@ -289,6 +295,13 @@ public class AdminPageController {
 		return view;
 	}
 	
+	
+	
+	
+	
+	
+	
+	//영화 업데이트
 	public String adminMovieUpdate(HttpServletRequest request, HttpServletResponse response) throws IOException {
 		HttpSession session = request.getSession();
 		String view = "";
@@ -305,12 +318,7 @@ public class AdminPageController {
 			MultipartRequest multiRequest = new MultipartRequest(request, savePath, maxSize, "UTF-8",
 					new PosterFileRenamePolicy());
 			// ------------------ 파일업로드 ------------------
-
-			// enctype="multipart/form-data" 는 아래처럼 request를 한번 더 가공 해줬기 때문에
-			// String title = request.getParameter("title");
-			// 이렇게 request로 쓰면 null이 나옴...
-			// 그래서 multiRequest로 뽑아줘야함!!!
-			
+		
 			int movieNo = Integer.parseInt(multiRequest.getParameter("movieNo"));
 			String title = multiRequest.getParameter("title");
 			String genreCode = multiRequest.getParameter("genre");
@@ -322,15 +330,7 @@ public class AdminPageController {
 			String story = multiRequest.getParameter("story");
 			String genre = multiRequest.getParameter("genre");
 			String trailerVideo = multiRequest.getParameter("trailer");
-			// 위쪽까지 form 데이터 받기완료
 
-			// 등록정리
-			// 1. TB_DIRECTOR 테이블에 감독정보가 들어가야함 - 존재할 경우 감독번호(DIRECTOR_NO)만 들고있기
-			// 2. TB_ACTOR 테이블에 배우 정보가 들어가야함 - 존재할 경우 배우번호(ACTOR_NO)만 들고있기
-			// 3. TB_MOVIE 테이블에 영화에 대한 정보가 전부 들어가야함 -영화번호(MOVIE_NO)만 들고있기 -> 들고있던 감독번호도
-			// 넣어준다.
-			// 4. TB_CAST 테이블에 캐스팅 정보가 들어가야함 - 들고있던 영화번호, 배우번호 넣기 (LOOP로)
-			// 5. TB_ATTACHMENT 테이블에 포스터, 스틸컷1,2,3 들어가야함.
 			int directorResult;
 			int actorResult;
 			int castResult;
@@ -351,7 +351,6 @@ public class AdminPageController {
 			String[] actorArray = actors.split(",");
 			// 최종 TB_CAST테이블에 넣을때 사용할 것
 			int[] resultActorNo = new int[actorArray.length];
-//	        System.out.println("actorArray length: " + actorArray.length);
 
 			// 배우가 등록되어 있는지 여부를 판단하고, 없으면 넣어줘야함.
 			for (int i = 0; i < actorArray.length; i++) {
@@ -430,6 +429,14 @@ public class AdminPageController {
 		return view;
 	}
 
+	
+	
+	
+	
+	
+	
+	
+	
 	// 영화 상세보기
 	public String adminMovieDetail(HttpServletRequest request, HttpServletResponse response) {
 
@@ -439,21 +446,25 @@ public class AdminPageController {
 		String poster = new AdminPageService().adminMoviePoster(movieNo);
 		Movie m = new AdminPageService().adminMovieDetail(movieNo);
 		String cast = new AdminPageService().adminMovieCast(movieNo);
-		
-		
-		
-		if(m != null) {
+	
+		if(m != null && m.getMovieTitle() != null) {
+			// Movie객체가 생성이 안되었고 + 제목이 null이 아닐경우 -> 정상작동
 			request.setAttribute("movie", m);
 			request.setAttribute("cast", cast);
 			request.setAttribute("poster", poster);
 			view = "views/admin/adminMovieDetail.jsp";
 		} else {
+			// 정상적이지 않을 경우 메인페이지로 튕겨내기
 			view = "index.jsp";
 		}
 
 		return view;
 
 	}
+	
+	
+	
+	
 	
 	public String adminScreenList(HttpServletRequest request, HttpServletResponse response) {
 		
@@ -481,6 +492,8 @@ public class AdminPageController {
 				
 		return list;
 	}
+	
+	
 
 	public String adminDetailTheater(HttpServletRequest request, HttpServletResponse response){
 		String view = "";
@@ -514,6 +527,11 @@ public class AdminPageController {
 		return view;
 	}
 	
+	
+	
+	
+	
+	//영화 삭제
 	public String adminMovieDelete(HttpServletRequest request, HttpServletResponse response) {
 		String view = "/adminMovieCheck.admin?currentPage=1";
 		HttpSession session = request.getSession();
@@ -530,6 +548,8 @@ public class AdminPageController {
 		return view;
 	}
 	
+	
+	//영화 수정 양식
 	public String adminMovieUpdateEnrollForm(HttpServletRequest request, HttpServletResponse response) {
 		int movieNo = Integer.parseInt(request.getParameter("movieNo"));
 		Movie m = new AdminPageService().adminMovieDetail(movieNo);
@@ -545,6 +565,8 @@ public class AdminPageController {
 		return view;
 	}
 	
+	
+	
 	//공지 상세보기
 	public String adminBoardDetail(HttpServletRequest request, HttpServletResponse response) {
 		
@@ -553,10 +575,15 @@ public class AdminPageController {
 		
 		Notice n = new AdminPageService().adminBoardDetail(noticeNo);
 		//System.out.println("notice :::: " + n.toString());
+		String view = "";
 		
-		request.setAttribute("notice2323", n);
-		String view = "views/admin/adminBoardDetail.jsp";
-		
+		if(n != null && n.getNoticeTitle() != null) {
+			request.setAttribute("notice2323", n);
+			view = "views/admin/adminBoardDetail.jsp";
+		} else {
+			// 정상적이지 않을 경우 메인페이지로 튕겨내기
+			view = "index.jsp";
+		}
 		return view;
 	}
 	
@@ -570,10 +597,14 @@ public class AdminPageController {
 		//System.out.println("boardNo :::::: " + boardNo);
 		
 		Board b = new AdminPageService().adminQnADetail(boardNo);
-
-		request.setAttribute("qna", b);
-		String view = "views/admin/adminQnADetail.jsp";
-		
+		String view = "";
+		if(b != null && b.getBoardTitle() != null) {
+			request.setAttribute("qna", b);
+			view = "views/admin/adminQnADetail.jsp";
+		} else {
+			// 정상적이지 않을 경우 메인페이지로 튕겨내기
+			view = "index.jsp";
+		}
 		return view;
 	}
 	
@@ -649,6 +680,7 @@ public class AdminPageController {
 	}
 	
 	
+	// 공지 수정 양식
 	public String adminBoardUpdateEnrollForm(HttpServletRequest request, HttpServletResponse response) {
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
 		
@@ -661,6 +693,8 @@ public class AdminPageController {
 		return view;
 	}
 	
+	
+	// 공지 수정
 	public String adminBoardUpdate(HttpServletRequest request, HttpServletResponse response) {
 		HttpSession session = request.getSession();
 		

@@ -9,6 +9,7 @@ public class Attachment {
 	private String filePath;
 	private int fileLevel;
 	private String uploadDate;
+	private String stilCut;
 	
 	public Attachment() {
 		super();
@@ -26,6 +27,17 @@ public class Attachment {
 		this.fileLevel = fileLevel;
 		this.uploadDate = uploadDate;
 	}
+	
+	
+	
+	public String getStilCut() {
+		return stilCut;
+	}
+
+	public void setStilCut(String stilCut) {
+		this.stilCut = stilCut;
+	}
+
 	public int getFileNo() {
 		return fileNo;
 	}

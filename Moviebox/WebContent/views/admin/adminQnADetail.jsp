@@ -168,7 +168,7 @@
             margin-bottom: 30px;
             font-size: x-large;
             font-weight: bold;
-            
+            color: #ffffff;            
         }  
 
         /* -------------------------------------------*/
@@ -259,7 +259,7 @@
             font-size: 18px;
             font-weight: bold;
             line-height: 50px;
-            color: #5a5a5a;
+            color: #ffffff;
         }
 
         #button{
@@ -335,7 +335,7 @@
             <!------------------------------------------------------------>
 
             <div class="content_2"><!--content_2 시작-->
-                <p id="p">게시글관리 > 문의 관리 > 문의내용</p>
+                <p id="p"> 상세 보기 </p>
 
             <form>
                 <div id="content_2_box"><!--컨텐트2 전체박스-->

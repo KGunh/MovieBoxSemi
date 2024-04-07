@@ -7,7 +7,6 @@
 
 
 <%
-
 	ArrayList<Attachment> list = (ArrayList<Attachment>)request.getAttribute("attach");
 %>
 
@@ -213,10 +212,10 @@
         	font-weight: bold;
         }
         
-          .carousel-inner img {
-		    width: 100%;
+		.carousel-inner img {
+		    width: 1200px;
 		    height: 100%;
-		  }
+	    }
 
 
     </style>
@@ -280,31 +279,39 @@
                 </div>
             </div>
             
-            
-        <!-- 
-            <div id="movie-detail-still">
+             <div id="movie-detail-still">
+             
+             <!-- 테스트중 -->
 				<div id="demo" class="carousel slide" data-ride="carousel">
 				
+				  <!-- Indicators -->
 				  <ul class="carousel-indicators">
 				    <li data-target="#demo" data-slide-to="0" class="active"></li>
 				    <li data-target="#demo" data-slide-to="1"></li>
 				    <li data-target="#demo" data-slide-to="2"></li>
 				  </ul>
 				  
+				  <!-- The slideshow -->
 				  <div class="carousel-inner">
 				    <div class="carousel-item active">
-				  <c:forEach var="stil" items="${ requestScope.attachment }">
-				      <img src="${ stil.filePath }/${ stil.changeName }" width="1100" height="500">
-				  </c:forEach>
+						<c:forEach var="a" items="${stilCutList}">
+						<c:out value="${a.filePath}" />
+						    <img src="${a.filePath}/${a.stilCut}" alt="스틸컷 이미지" width="1100" height="500">
+						</c:forEach>
+
+				    
+				    <!--
+				      <img src="${ attach.filePath }/${ attach.stilCut }" alt="Los Angeles" width="1100" height="500">
 				    </div>
 				    <div class="carousel-item">
-				      <img src="${ stil.filePath }/${ stil.changeName }" alt="Chicago" width="1100" height="500">
+				      <img src="chicago.jpg" alt="Chicago" width="1100" height="500">
 				    </div>
 				    <div class="carousel-item">
-				      <img src="${ stil.filePath }/${ stil.changeName }" alt="New York" width="1100" height="500">
-				    </div>
+				      <img src="ny.jpg" alt="New York" width="1100" height="500">
+				    </div>-->
 				  </div>
 				  
+				   
 				  <a class="carousel-control-prev" href="#demo" data-slide="prev">
 				    <span class="carousel-control-prev-icon"></span>
 				  </a>
@@ -312,10 +319,11 @@
 				    <span class="carousel-control-next-icon"></span>
 				  </a>
 				</div>
-            </div>
-        -->
-            
-             <div id="movie-detail-still">
+				             
+             
+             
+             
+             <!-- 
                 <a id="stilTitle">스틸컷</a>
                 <div id="detail-still-img">
                     <div class="still-img">
@@ -326,8 +334,11 @@
                     </div>
                     <div class="still-img">
                         	스틸컷
-                    </div>
+                    </div>                    
                 </div>
+             -->
+             
+             
             </div>
     	</c:otherwise>
     </c:choose>

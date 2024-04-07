@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-
+    
 <%@ page import="com.kh.movie.model.vo.*, java.util.ArrayList" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -17,10 +17,6 @@
 <head>
 <meta charset="UTF-8">
 <title>영화 목록</title>
-
-<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-
     <style>
         body{
             background-color: #1A1A1A;
@@ -190,7 +186,6 @@
             font-size: 15px;
             border: none;
         }
-        
 
     </style>
 </head>
@@ -266,10 +261,6 @@
     
     
 	<%@ include file="/views/common/footer.jsp" %>
-
-    
-</body>
-
 	
     <script>
 
@@ -280,17 +271,21 @@
 		}
 		
     	// 카테고리 네비 바
-		document.getElementById('movieCategory').addEventListener('click', function(e) {
-		    document.getElementById('genreInput').value = e.target.textContent;
-		    document.getElementById('selectGenreForm').submit();
-		});
+	    document.getElementById('movieCategory').onclick = function(e){
+	    	const selectGenre = e.target.innerHTML;
+	        document.getElementById('genreInput').value = selectGenre;
+	        document.getElementById('selectGenreForm').submit();
+		}
+	    	const genreType = document.getElementById('selectTypeGenre')
 		
 
     	// 예매하기 버튼 -> 예매 페이지
     	function reservationPage(){
     		location.href = '<%= contextPath %>/movie.reservation';
     	}
+	    	
 
-    	
 	</script>
+    
+</body>
 </html>

@@ -60,7 +60,8 @@ function selectScreen(){
         data : {
             date : $('#screenDate').val(),
             location : $('#locationOption').val(),
-            movieNo : $('#movieNo').val()
+            movieNo : $('#movieNo').val(),
+            theaterName : $('#input-theaterName').val()
         },
         success : function(result){
             let resultStr = '';
@@ -98,18 +99,30 @@ function selectScreen(){
         }
     });
 };
-    
-$('.poster').click(function(e){
-    selectScreen();
-});
 
-$('#screenDate').change(function(e){
-    selectScreen();
-});
+    
+$("#input-theaterName").keypress(function(e) {
+    if (e.keyCode === 13) {
+        e.preventDefault();
+        selectScreen();
+    }
+})
 
 $('#locationOption').change(function(){
     selectScreen();
 });
+
+$('#search-theaterName').click(function(){
+    selectScreen();
+});
+
+$('#screenDate').change(function(){
+    selectScreen();
+});    
+
+$('.poster').click(function(){
+    selectScreen();
+});    
 
 $('#submit-btn').click(function(){
     if(!$('#screenNo').val()){

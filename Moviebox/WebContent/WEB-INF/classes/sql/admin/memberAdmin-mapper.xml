@@ -154,6 +154,7 @@
 
 <entry key="deleteAdmin">
 
+ HEAD
 
 
 
@@ -183,7 +184,9 @@ INNER JOIN
 WHERE
     ?  LIKE '%'||?||'%'
 
+
 </entry>
+
 
 
 </properties>

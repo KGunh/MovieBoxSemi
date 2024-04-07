@@ -109,18 +109,23 @@
        				TB_ATTACHMENT USING(MOVIE_NO)
   			 JOIN
        				(SELECT
-      				 			a.TICKET_NO,
-       							a.GRADE_1_COUNT,
-       							a.GRADE_2_COUNT,
-       							a.GRADE_1_COUNT * p1.PRICE AS STUDENT_PRICE,
-       							a.GRADE_2_COUNT * p2.PRICE AS COMMON_PRICE,
-       							(a.GRADE_1_COUNT * p1.PRICE) + (a.GRADE_2_COUNT * p2.PRICE) AS TOTAL_PRICE
+      				 			A.TICKET_NO,
+       							A.GRADE_1_COUNT,
+       							A.GRADE_2_COUNT,
+       							A.GRADE_1_COUNT * P1.PRICE AS STUDENT_PRICE,
+       							A.GRADE_2_COUNT * P2.PRICE AS COMMON_PRICE,
+       							(A.GRADE_1_COUNT * P1.PRICE) + (A.GRADE_2_COUNT * P2.PRICE) AS TOTAL_PRICE
   						FROM
         						(SELECT
                 							TICKET_NO,
-                							
-                							COUNT(CASE WHEN GRADE = 1 THEN 1 ELSE NULL END) AS GRADE_1_COUNT,
-                							COUNT(CASE WHEN GRADE = 2 THEN 1 ELSE NULL END) AS GRADE_2_COUNT
+                						    COUNT(CASE 
+                  											   	WHEN GRADE = 1 THEN 1 
+                												ELSE NULL 
+                												END) AS GRADE_1_COUNT,
+       										COUNT(CASE 
+                												WHEN GRADE = 2 THEN 1 
+                												ELSE NULL 
+                												END) AS GRADE_2_COUNT
            							FROM
                 							TB_RESERVATION
            							 JOIN
@@ -133,9 +138,9 @@
              						   BY 
                 							TICKET_NO) A
   									JOIN 
-  											TB_PRICE p1 ON p1.GRADE = 1
+  											TB_PRICE P1 ON P1.GRADE = 1
   									JOIN 
-  											TB_PRICE p2 ON p2.GRADE = 2
+  											TB_PRICE P2 ON P2.GRADE = 2
   											) USING(TICKET_NO)  											 											
  				WHERE
        						MEMBER_NO = ?
@@ -307,7 +312,7 @@
 		 WHERE
 		  	   MEMBER_NAME = ?
 		   AND
-		   	   BIRTHDAY = ?
+		   	   BIRTHDAY = TO_CHAR(?,'YYYYMMDD')
 		   AND
 		   	   PHONE = ?
 		   AND
@@ -334,7 +339,7 @@
 		   AND
 		  	   MEMBER_NAME = ?
 		   AND
-		   	   BIRTHDAY = ?
+		   	   BIRTHDAY = TO_CHAR(?,'YYYYMMDD')
 		   AND
 		   	   PHONE = ?
 		   AND

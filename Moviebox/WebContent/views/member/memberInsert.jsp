@@ -243,7 +243,7 @@
 			<form action="<%=contextPath%>/insert.me" method="post" id="insertForm">
 				<div class="inputdiv">
 					<span class="input-span id" >아이디</span><br> 
-                    <input type="text" class="input-text id" id="memberId" name="memberId" placeholder="아이디입력 | (영문/숫자만 가능 12글자 제한)" maxlength="12">
+                    <input type="text" class="input-text id" id="memberId" name="memberId" placeholder="아이디입력 | (영문/숫자만 가능 6~12글자 제한)" maxlength="12">
 					<button type="button" class="idCheck" onclick="idCheck();">중복확인</button>
                     <span class="input-bottom"></span>
 				</div>
@@ -255,7 +255,7 @@
 				
 				<div class="inputdiv">
 					<span class="input-span">비밀번호</span><br> 
-                    <input type="password" id="memberPwd" class="input-text" name="memberPwd" placeholder="비밀번호 | (영문/숫자만 가능 16글자 제한)" maxlength="16">
+                    <input type="password" id="memberPwd" class="input-text" name="memberPwd" placeholder="비밀번호 | (영문/숫자만 가능 8~16글자 제한)" maxlength="16">
                     <span class="input-bottom"></span>
 				</div>
 				<div class="inputdiv">
@@ -263,26 +263,7 @@
                     <input type="password" id="checkPwd" class="input-text" placeholder="비밀번호확인 (위와 동일한 비밀번호를 입력해주세요)" maxlength="16">
                     <span class="input-bottom"></span>
 				</div>
-                <script>
-                     $(function(){
-                                $('#checkPwd').blur(function(){
-                                    const $memberPwd = $('#memberPwd').val();
-                                    const $checkPwd = $(this).val();
-                                    if($memberPwd != $checkPwd){
-                                        $('#checkPwd').css('border','2px solid red');
-                                        $(this).siblings('.input-bottom').html('잘못된 입력입니다. 다시입력해주세요').css('color','red');
-                                    } 
-                                    else{
-                                        $('#checkPwd').removeAttr('style');
-                                        $(this).siblings('.input-bottom').html('');
-                                    }
-
-                                });
-                                
-                            });
-                            
-
-                </script>
+              
 				<div class="inputdiv">
 					<span class="input-span">이름</span><br> 
                     <input type="text" class="input-text" name="memberName" placeholder="이 름 | ex) 한글만 입력해주세요 " maxlength="5">
@@ -335,7 +316,7 @@
 						<option value="L13">제주</option>
 						<option value="L14">광주</option>
 
-					</select> <input type="text" name="address"class="input-text address">
+					</select> <input type="text" name="address"class="input-text address" placeholder=" | 아무거나작성">
                     <span class="input-bottom"></span>
 				</div>
 				<div class="checkbox-div">
@@ -375,13 +356,24 @@
 	</div>
 
     <script>
-    	let idReg = /^[a-zA-Z0-9]+$/;
-    	let nameReg = /^[가-힣]+$/;
+    	let idReg = /^[a-zA-Z0-9]{6,12}$/;
+    	let pwdReg = /^[a-zA-Z0-9]{8,16}$/;
+    	let nameReg = /^[가-힣]{2,5}$/;
         let phoneReg = /^\d{11}$/;
         let emailReg = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
         let birthdayReg = '';
-        let year = $('input[name=birthday]').val().substr(0,4);
-    	let month = $('input[name=birthday]').val().substr(4,2);
+        const $memberIdInput = $('input[name=memberId]');
+        const $memberPwdInput = $('input[name=memberPwd]');
+        const $memberNameInput = $('input[name=memberName]');
+        const $birthdayInput = $('input[name=birthday]');
+        const $emailInput = $('input[name=email]');
+    	const $phoneInput = $('input[name=phone]');
+    	
+    	
+    	
+        let year =$birthdayInput.val().substr(0,4);
+    	let month = $birthdayInput.val().substr(4,2);
+    	// 날짜 계산
     	if((year%4) == 0 && month == 02){
     	     //윤년
     	     console.log('윤년');
@@ -402,6 +394,9 @@
     			birthdayReg = /^(19|20)d{2}(0[13578]|1[02])(0[1-9]|1[0-9]|2[0-9]|31)$/;
     		}
         }
+    	
+    	
+    	// 아이디 중복체크
         function idCheck() {
 			const $memberId = $('.inputdiv input[name=memberId]');
 			
@@ -412,7 +407,7 @@
 	        else if(idReg.test($memberId.val())){
 	        	$memberId.removeAttr('style');
 	        	$memberId.siblings('.input-bottom').html('');
-	          //AJAX 요청
+	        	
 				$.ajax({
 					url : 'idCheck.me',
 					data : {
@@ -448,71 +443,103 @@
 
 			
 		}
-        
-        
-        $('.inputdiv > input').blur(function(){
-            checkInput($(this));
-        });
-        $('input[name=memberId]').blur(function(){
-        	checkInputId($(this));
-        });
-        $('input[name=memberId]').keyup(function(){
+    	
+    	// memberId input에 입력시 중복체크 해제 
+    	$memberIdInput.keyup(function(){
         	$('.input-button > button').attr('disabled',true);
         	$('.idCheck').css('background','rgb(218, 218, 218)');
         	
         });
-        $('input[name=memberName]').blur(function(){
-        	checkInputName($(this));
+    	
+    	// 비밀번호 확인
+        $('#checkPwd').blur(function(){
+            const $memberPwd = $('#memberPwd').val();
+            const $checkPwd = $(this).val();
+            if($memberPwd != $checkPwd){
+                $('#checkPwd').css('border','2px solid red');
+                $(this).siblings('.input-bottom').html('잘못된 입력입니다. 다시입력해주세요').css('color','red');
+            } 
+            else{
+                $('#checkPwd').removeAttr('style');
+                $(this).siblings('.input-bottom').html('');
+            }
+
         });
         
-        $('input[name=phone]').blur(function(){
-            checkInputPhone($(this));  
+    	// 모든 input 빈값 처리
+        $('.inputdiv > input').blur(function(){
+            checkInput($(this));
         });
-        $('input[name=email]').blur(function(){
-            checkInputEmail($(this));  
+        
+    	// pwd 정규표현식
+        $memberPwdInput.blur(function(){
+        	removeOrFail(pwdReg,$(this));
         });
-        $('input[name=birthday]').blur(function(){
-        	
-        	checkInputBirthday($(this));
-        	
-            
+     	// id 정규표현식
+        $memberIdInput.blur(function(){
+        	removeOrFail(idReg,$(this));
         });
-    
+     	// name 정규표현식
+        $memberNameInput.blur(function(){
+        	removeOrFail(nameReg,$(this));
+        });
+     	// phone 정규표현식
+        $phoneInput.blur(function(){
+        	removeOrFail(phoneReg,$(this));
+        });
+     	// email 정규표현식
+        $emailInput.blur(function(){
+        	removeOrFail(emailReg,$(this));
+        });
+     	// birthday 정규표현식
+        $birthdayInput.blur(function(){
+        	removeOrFail(birthdayReg,$(this));
+ 
+        });
+     	
+    	// 회원가입 버튼 
         $('.input-button > button').click(function(){
             const $input = $('.inputdiv > input');
             let flag = false;
+        	 // 모든 input 빈값 체크
             $input.each(function(){
                 if ($(this).val() == ''){
                     $(this).css('border','2px solid red');
                     $(this).siblings('.input-bottom').html('필수 정보입니다.').css('color','red');
                 }
                 else {
+                	//모든 input 정규표현식 체크 이후 경고메시지
                     checkInputAll();
-                    if(phoneReg.test($('input[name=phone]').val()) && birthdayReg.test($('input[name=birthday]').val()) && emailReg.test($('input[name=email]').val())){
+                  //모든 input 정규표현식 체크 
+                    if(pwdReg.test($memberPwdInput .val()) &&
+                    phoneReg.test($phoneInput.val()) && 
+                    birthdayReg.test($birthdayInput.val()) && 
+                    emailReg.test($emailInput.val()) &&
+                    nameReg.test($memberIdInput.val())
+                    ){
                         $('#insertForm').submit();
                     }
+
                 }
                 
             });
 
         });
+     // 모든 input 빈값 체크
         function checkInputAll(){
-        	let msg = '';
-        	const $memberNameInput = $('input[name=memberName]');
-        	const $phoneInput = $('input[name=phone]');
-        	const $birthdayInput = $('input[name=birthday]');
-        	const $emailInput = $('input[name=email]');
-
+        	
             removeOrFail(nameReg,$memberNameInput);
             removeOrFail(phoneReg,$phoneInput);
             removeOrFail(birthdayReg,$birthdayInput);
             removeOrFail(emailReg,$emailInput);
         };
-    </script>
-
-    <script>
-    	function removeOrFail(reg,$input){
-    		if(reg.test($input.val())){
+      //모든 input 정규표현식 체크
+        function removeOrFail(reg,$input){
+    		if($input.val() == ''){
+                $input.css('border','2px solid red');
+                $input.siblings('.input-bottom').html('필수 정보입니다.').css('color','red');
+        	} 
+    		else if(reg.test($input.val())){
     			$input.removeAttr('style');
         		$input.siblings('.input-bottom').html('');
                 
@@ -534,82 +561,8 @@
                 $input.siblings('.input-bottom').html('');
             }     
         }
-        function checkInputId($input){				
-			if($input.val() == ''){
-                $input.css('border','2px solid red');
-                $input.siblings('.input-bottom').html('필수 정보입니다.').css('color','red');
-	        } 
-	        else if(idReg.test($input.val())){
-	            $input.removeAttr('style');
-	            $input.siblings('.input-bottom').html('');
-	        }     
-	        else {
-	            $input.css('border','2px solid red');
-	            $input.siblings('.input-bottom').html('형식에 맞지않습니다(영어,숫자만 입력해주세요).').css('color','red');
-	        }
-		}
-        function checkInputName($input){
-        	if($input.val() == ''){
-                $input.css('border','2px solid red');
-                $input.siblings('.input-bottom').html('필수 정보입니다.').css('color','red');
-	        } 
-	        else if(nameReg.test($input.val())){
-	            $input.removeAttr('style');
-	            $input.siblings('.input-bottom').html('');
-	        }     
-	        else {
-	            $input.css('border','2px solid red');
-	            $input.siblings('.input-bottom').html('형식에 맞지않습니다(한글만 입력해주세요).').css('color','red');
-	        }
-        }
-        function checkInputPhone($input){
-            if($input.val() == ''){
-                    $input.css('border','2px solid red');
-                    $input.siblings('.input-bottom').html('필수 정보입니다.').css('color','red');
-            } 
-            else if(phoneReg.test($input.val())){
-                $input.removeAttr('style');
-                $input.siblings('.input-bottom').html('');
-            }     
-            else {
-                $input.css('border','2px solid red');
-                $input.siblings('.input-bottom').html('형식에 맞지않습니다(-를 제외한 11자리 숫자만 입력해주세요).').css('color','red');
-            }
-        }
-        function checkInputEmail($input){
-            if($input.val() == ''){
-                    $input.css('border','2px solid red');
-                    $input.siblings('.input-bottom').html('필수 정보입니다.').css('color','red');
-            } 
-            else if(emailReg.test($input.val())){
-                $input.removeAttr('style');
-                $input.siblings('.input-bottom').html('');
-            }     
-            else {
-                $input.css('border','2px solid red');
-                $input.siblings('.input-bottom').html('형식에 맞지않습니다 | ex)aaa@movie.box(***@***.***).').css('color','red');
-            }
-        }
-
-        function checkInputBirthday($input){
-        
-        	
-            if($input.val() == ''){
-                    $input.css('border','2px solid red');
-                    $input.siblings('.input-bottom').html('필수 정보입니다.').css('color','red');
-            } 
-            else if(birthdayReg.test($input.val())){
-                $input.removeAttr('style');
-                $input.siblings('.input-bottom').html('');
-            }     
-            else {
-                $input.css('border','2px solid red');
-                $input.siblings('.input-bottom').html('형식에 맞지않습니다 | ex)19001124(YYYYMMDD).').css('color','red');
-            }
-        }
-        
-        
     </script>
+
 
 
 
