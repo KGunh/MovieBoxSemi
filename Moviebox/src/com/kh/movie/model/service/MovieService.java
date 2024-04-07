@@ -42,7 +42,6 @@ public class MovieService {
 
 	public String detailMovieCast(int movieNo) {
 		Connection conn = getConnection();
-		
 		String cast = new MovieDao().detailMovieCast(conn, movieNo);
 		
 		close(conn);
@@ -53,11 +52,11 @@ public class MovieService {
 	public ArrayList<Attachment> stilCut(int movieNo) {
 
 		Connection conn = getConnection();
-		ArrayList<Attachment> stilCutList = new MovieDao().stilCut(conn, movieNo);
+		ArrayList<Attachment> stilCut = new MovieDao().stilCut(conn, movieNo);
 
 		close(conn);
 		
-		return stilCutList;
+		return stilCut;
 	}
 
 

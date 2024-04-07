@@ -184,28 +184,25 @@ public class MovieDao {
 
 	public ArrayList<Attachment> stilCut(Connection conn, int movieNo) {
 
-		ArrayList<Attachment> attach = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		
 		String sql = prop.getProperty("stilCut");
 		
+		ArrayList<Attachment> stilCutList = new ArrayList();
+
 		try {
 			pstmt = conn.prepareStatement(sql);
-			
 			pstmt.setInt(1, movieNo);
 			rset = pstmt.executeQuery();
 			
-			while(rset.next()) {
-				Attachment attachment = new Attachment();
-				
-				attachment.setFilePath(rset.getString("FILE_PATH"));
-				attachment.setStilCut(rset.getString("CHANGE_NAME"));
-				
-				attach.add(attachment);
-			}
-			
-			System.out.println("Received movieNo: " + attach);
+	        while (rset.next()) {
+	        	Attachment attach = new Attachment();
+	        	attach.setMovieNo(rset.getInt("MOVIE_NO"));
+	        	attach.setFilePath(rset.getString("FILE_PATH"));
+	        	attach.setChangeName(rset.getString("CHANGE_NAME"));
+	        	
+	        	stilCutList.add(attach);
+	        }
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -214,7 +211,7 @@ public class MovieDao {
 			close(pstmt);
 		}
 		
-		return attach;
+		return stilCutList;
 	}
 
 	

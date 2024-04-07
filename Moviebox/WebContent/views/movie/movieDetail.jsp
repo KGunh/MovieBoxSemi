@@ -133,7 +133,7 @@
         	resize:none;
         }
         
-        /* 스크롤바? */
+        /* 스크롤바 */
         textarea {
 		  scrollbar-width: thin;
 		  scrollbar-color: #383838 transparent;
@@ -170,26 +170,16 @@
         /* 영화 스틸컷*/
         #movie-detail-still{
             width: 1200px;
-            height: 630px;
+            height: auto;
             color: pink;
-            border: 1px solid pink;
+            margin-bottom: 50px;
         }
-
-        #detail-still-img{
-            width: 1100px;
-            height: 500px;
-            margin: 0 auto;
-            padding: 25px;
-            border: 1px solid darkorange;
-            padding-left: 45px;
-        }
-
-        .still-img{
-            width: 321px;
-            height: 450px;
-            border: 1px solid salmon;
-            float: left;
-            margin-right: 20px;
+        
+        #stilTitle{
+        	margin-top: 20px;
+        	font-size: 30px;
+        	color: white;
+        	font-weight: bold;
         }
         
         #video-src{
@@ -205,16 +195,13 @@
         	font-weight: bold;
         }
         
-		#stilTitle{
-        	margin-top: 20px;
-        	font-size: 30px;
-        	color: white;
-        	font-weight: bold;
+        .carousel-inner{
+        	margin-top: 30px;
         }
         
 		.carousel-inner img {
 		    width: 1200px;
-		    height: 100%;
+		    height: auto;
 	    }
 
 
@@ -280,38 +267,28 @@
             </div>
             
              <div id="movie-detail-still">
-             
-             <!-- 테스트중 -->
+                <a id="stilTitle">스틸컷</a>
+
 				<div id="demo" class="carousel slide" data-ride="carousel">
 				
 				  <!-- Indicators -->
 				  <ul class="carousel-indicators">
-				    <li data-target="#demo" data-slide-to="0" class="active"></li>
+				    <li data-target="#demo" data-slide-to="0"></li>
 				    <li data-target="#demo" data-slide-to="1"></li>
 				    <li data-target="#demo" data-slide-to="2"></li>
+				    <li data-target="#demo" data-slide-to="3"></li>
 				  </ul>
 				  
 				  <!-- The slideshow -->
-				  <div class="carousel-inner">
-				    <div class="carousel-item active">
-						<c:forEach var="a" items="${stilCutList}">
-						<c:out value="${a.filePath}" />
-						    <img src="${a.filePath}/${a.stilCut}" alt="스틸컷 이미지" width="1100" height="500">
-						</c:forEach>
-
-				    
-				    <!--
-				      <img src="${ attach.filePath }/${ attach.stilCut }" alt="Los Angeles" width="1100" height="500">
-				    </div>
-				    <div class="carousel-item">
-				      <img src="chicago.jpg" alt="Chicago" width="1100" height="500">
-				    </div>
-				    <div class="carousel-item">
-				      <img src="ny.jpg" alt="New York" width="1100" height="500">
-				    </div>-->
+		   	      <div class="carousel-inner">
+				      <c:forEach var="attachment" items="${stilCut}" varStatus="loop">
+			              <div class="carousel-item <c:if test="${loop.index == 0}">active</c:if>">
+						  	<img src="${attachment.filePath}/${attachment.changeName}" alt="Image">
+						  </div>
+					  </c:forEach>
 				  </div>
 				  
-				   
+				  <!-- Left and right controls -->
 				  <a class="carousel-control-prev" href="#demo" data-slide="prev">
 				    <span class="carousel-control-prev-icon"></span>
 				  </a>
@@ -319,26 +296,7 @@
 				    <span class="carousel-control-next-icon"></span>
 				  </a>
 				</div>
-				             
-             
-             
-             
-             <!-- 
-                <a id="stilTitle">스틸컷</a>
-                <div id="detail-still-img">
-                    <div class="still-img">
-                        	${ requestScope.filePath }/${ requestScope.changeName }
-                    </div>
-                    <div class="still-img">
-                        	스틸컷
-                    </div>
-                    <div class="still-img">
-                        	스틸컷
-                    </div>                    
-                </div>
-             -->
-             
-             
+ 
             </div>
     	</c:otherwise>
     </c:choose>
