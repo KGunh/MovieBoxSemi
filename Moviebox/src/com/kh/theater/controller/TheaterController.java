@@ -36,6 +36,7 @@ public class TheaterController {
 		int movieNo = Integer.parseInt(request.getParameter("movieNo"));
 		ArrayList<Attachment> attachment = new TheaterService().theaterImg(movieNo);
 		request.setAttribute("attachment", attachment);
+		
 		String view = "views/theater/theaterDetail.jsp";
 		
 		return view;

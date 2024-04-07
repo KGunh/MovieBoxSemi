@@ -223,6 +223,12 @@
 	<!-- 헤더 -->
     <%@ include file="/views/common/header.jsp" %>
 
+	<% if(loginUser == null && loginUser.getPrivilege().equals("N")) {%>
+		<script>
+			location.href = ('<%=contextPath%>');
+		</script>
+	<%} else {%>
+	
     <script>
         window.onload = function() {
             today = new Date();
@@ -252,7 +258,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminScreenList.admin">예매 관리</a>
+                        <a href="<%=contextPath %>/adminScreenList.admin">상영관 관리</a>
                         <ul class="submenu" >
 
                         </ul>
@@ -450,5 +456,6 @@
 
  	<%@ include file="/views/common/footer.jsp" %>
  	<!-- 푸터 -->
+ 	<%} %>
 </body>
 </html>
