@@ -84,13 +84,13 @@ function CountPeple(ageType) {
     let ageBtns = (ageType.html() === '청소년') ? $('.adultBtn') : $('.teenBtn');
     let maxCount = (ageType.html() === '청소년') ? (8 - teenCount) : (8 - adultCount);
 
-    for (let i = 0; i < ageBtns.length; i++) {
-        if(Number(ageBtns.eq(i).html()) > maxCount) {
-            ageBtns.eq(i).prop('disabled', true);
+    ageBtns.each(function() {
+        if (Number($(this).html()) > maxCount) {
+            $(this).prop('disabled', true);
         } else {
-            ageBtns.eq(i).prop('disabled', false);
+            $(this).prop('disabled', false);
         }
-    }
+    });
 };
 
 function printPeople() {
@@ -118,6 +118,7 @@ function printPeople() {
 
 $('.seats').on('mousedown', function(){
     mousedrag = true;
+    
     selectSeats(this);
     arrangeSeat();
 });
@@ -215,17 +216,17 @@ $('#print-resv-info').click(function(){
 
                 $('#poster-select > img').attr('src', path + '/'+ result.movie.filePath + '/' + result.movie.changeName);
                 
-                for(let i = 0; i < $('#movie-select').children().length; i++){
-                    $('#movie-select').children().eq(i).html(MovieItems[i]);
-                };
+                $('#movie-select').children().each(function(i) {
+                    $(this).html(MovieItems[i]);
+                });
                 
-                for(let i = 0; i < $('#print-reservation-info').children().length; i++){
-                    $('#print-reservation-info').children().eq(i).html(resvItems[i]);
-                };
+                $('#print-reservation-info').children().each(function(i) {
+                    $(this).html(resvItems[i]);
+                });
 
-                for(let i = 0; i < $('#payment-form').children().length; i++){
-                    $('#payment-form').children().eq(i).val(inputval[i]);
-                };
+                $('#payment-form').children().each(function(i) {
+                    $(this).val(inputval[i]);
+                });
                 
                 $("#check-area").removeAttr("hidden");
                 $("#check-area").show();
