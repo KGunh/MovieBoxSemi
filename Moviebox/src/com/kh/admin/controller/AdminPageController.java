@@ -201,11 +201,11 @@ public class AdminPageController {
 			// 넣어준다.
 			// 4. TB_CAST 테이블에 캐스팅 정보가 들어가야함 - 들고있던 영화번호, 배우번호 넣기 (LOOP로)
 			// 5. TB_ATTACHMENT 테이블에 포스터, 스틸컷1,2,3 들어가야함.
-			int directorResult;
-			int actorResult;
-			int castResult;
-			int movieResult;
-			int attachResult;
+			int directorResult = 0;
+			int actorResult = 0;
+			int castResult = 0;
+			int movieResult = 0;
+			int attachResult = 0;
 
 			// 1.)을 하기위해 감독이름이 한글로 들어오기 때문에, 한글로 DB에 감독 이름 검색
 			// 기존에 있다면 감독 번호가 나오고, 없다면 0
