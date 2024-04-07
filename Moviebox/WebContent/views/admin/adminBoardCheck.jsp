@@ -375,7 +375,6 @@
                                     <th>카테고리</th>
                                     <th>제목</th>
                                     <th>등록일</th>
-                                    <th>조회수</th>
                                 </tr>
                               </thead>
                               <tbody id="tbody">
@@ -391,7 +390,6 @@
 	                                      -->
 	                                    <td><%= n.getNoticeTitle() %></td>
 	                                    <td><%= n.getCreateDate() %></td>
-	                                    <td><%= n.getCount() %></td>
 	                                </tr>
 	                            <% } %>    
                               <% } %>    

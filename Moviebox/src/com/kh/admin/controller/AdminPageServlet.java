@@ -41,7 +41,6 @@ public class AdminPageServlet extends HttpServlet {
 		// 관리자 체크
 		HttpSession session = request.getSession();
 		Member loginUser = (Member)session.getAttribute("loginUser");
-		
 		if(loginUser == null) {
 			session.setAttribute("alertMsg", "올바른 접근이 아닙니다.");
 			mapping = "";
@@ -54,7 +53,6 @@ public class AdminPageServlet extends HttpServlet {
 			}
 		}
 		
-		//
 			
 		// 변수선언
 		AdminPageController admin = new AdminPageController();
@@ -74,13 +72,13 @@ public class AdminPageServlet extends HttpServlet {
 			view = admin.adminMovieInsert(request, response); flag = false; break; //영화등록
 			
 		case "adminMovieUpdate" :
-			view = admin.adminMovieUpdate(request, response); flag = false; break; //영화등록
+			view = admin.adminMovieUpdate(request, response); flag = false; break; //영화수정
 
 		case "adminMovieDetail" :
 			view = admin.adminMovieDetail(request, response); flag = false; break; //영화상세보기페이지
 			
 		case "adminMovieUpdateEnrollForm" :
-		view = admin.adminMovieUpdateEnrollForm(request, response); flag = false; break; //영화수정
+		view = admin.adminMovieUpdateEnrollForm(request, response); flag = false; break; //영화수정양식페이지
 			
 		case "adminMovieDelete" :
 			view = admin.adminMovieDelete(request, response); flag = false; break; //영화삭제
@@ -94,13 +92,13 @@ public class AdminPageServlet extends HttpServlet {
 			view = admin.adminBoardEnrollForm(request, response); flag = false; break; //공지등록양식페이지
 			
 		case "adminBoardInsert" :
-			view = admin.adminBoardInsert(request, response); flag = false; break;
+			view = admin.adminBoardInsert(request, response); flag = false; break; //공지등록
 		
 		case "adminBoardUpdateEnrollForm" :
-			view = admin.adminBoardUpdateEnrollForm(request, response); flag = false; break;
+			view = admin.adminBoardUpdateEnrollForm(request, response); flag = false; break; //공지수정양식페이지
 		
 		case "adminBoardUpdate"	:
-		view = admin.adminBoardUpdate(request, response); flag = false; break;
+		view = admin.adminBoardUpdate(request, response); flag = false; break; //공지수정
 			
 		case "adminBoardDetail" :
 			view = admin.adminBoardDetail(request, response); flag = false; break; //공지상세보기
@@ -109,25 +107,18 @@ public class AdminPageServlet extends HttpServlet {
 			view = admin.adminBoardDelete(request, response); flag = false; break; //공지삭제
 			
 			
+			
 		case "adminQnACheck" :
 			view = admin.adminSelectQnAList(request, response); flag = false; break; //문의목록전체
 			
-		case "adminQnAInsert" :
-			view = "/views/admin/adminQnAInsert.jsp"; break; //문의관리
-		
 		case "adminQnADetail" :
-			view = admin.adminQnADetail(request, response); flag = false; break; //공지상세보기
+			view = admin.adminQnADetail(request, response); flag = false; break; //문의상세보기
 			
 		case "adminQnADelete" :
-			view = admin.adminQnADelete(request, response); flag = false; break; //공지상세보기
+			view = admin.adminQnADelete(request, response); flag = false; break; //문의삭제
 
-			
-			
-			
-			
-			
-			
-			
+		case ""	:
+			view = "/index.jsp";
 			
 			
 			
@@ -135,12 +126,6 @@ public class AdminPageServlet extends HttpServlet {
 			view = "/views/admin/adminScreenList.jsp"; flag = false; break;
 		case "adminDetailTheater":
 			view =  admin.adminDetailTheater(request, response); flag = false; break;
-		case ""	:
-			view = "/index.jsp";
-			
-		
-			
-			
 			
 			
 		}
