@@ -52,6 +52,7 @@
             margin: 0;
             position: absolute;
             bottom: 0;
+            padding: 5px;
             
         }
         .inputdiv button{
@@ -70,6 +71,11 @@
             color: rgb(158, 158, 158);
             font-size: 12px;
             
+        }
+        .input-bottom{
+            position: absolute;
+            bottom: -17px;
+            font-size: 12px;
         }
         .input-text{
             width: 100%;
@@ -410,10 +416,12 @@
 
                     </select>
                     <input type="text" class="input-text address" name="address" value="<%=address%>">
+                    <span class="input-bottom"></span>
                 </div>
                 <div class="inputdiv">
                     <span class="input-span">이메일</span><br>
-                    <input type="text" class="input-text" value="<%=email %>" name="email">
+                    <input type="text" class="input-text" value="<%=email %>" name="email" placeholder="이메일입력 | ex)aaa@movie.box (***@***.***)" >
+                    <span class="input-bottom"></span>
                 </div>
                 <div class="checkbox-div">
                     <span class="input-span">취향</span><br>
@@ -446,7 +454,7 @@
                 </div>
                 <div class="input-button">
                     <a id="secession" href="<%=contextPath%>/deleteForm.me">회원 탈퇴</a>
-                    <input id="edit" type="submit" value="정보수정">
+                    <input id="edit" type="submit" value="정보수정" disabled>
                 </div>
             </form>
             <script>
@@ -463,9 +471,31 @@
     				});
                     
                 });
-
-                
-                
+                const $emailInput = $('input[name=email]');
+                let emailReg = /^[a-zA-Z0-9+-\_.]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
+                let pwdReg = /^[a-zA-Z0-9]{8,16}$/;
+                $emailInput.blur(function(){
+                	removeOrFail(emailReg,$(this));
+                });
+                function removeOrFail(reg,$input){
+            		if($input.val() == ''){
+                        $input.css('border','2px solid red');
+                        $input.siblings('.input-bottom').html('필수 정보입니다.').css('color','red');
+                        $('#edit').attr("disabled",true);
+                	} 
+            		else if(reg.test($input.val())){
+            			$input.removeAttr('style');
+                		$input.siblings('.input-bottom').html('');
+                		$('#edit').attr("disabled",false);
+                        
+                    }
+                    else{
+                    	$input.css('border','2px solid red');
+                    	let count = $input.attr('placeholder').indexOf('|');
+                		$input.siblings('.input-bottom').html('형식에 맞지않습니다 '+ $input.attr('placeholder').substring(count)).css('color','red');
+                		$('#edit').attr("disabled",true);
+                    }
+            	}
             </script>
 	
         </div>
@@ -488,19 +518,19 @@
 					<form action="<%=contextPath%>/updatePwd.me" method="post" id="pwdUpdateForm">
 						<div class="form-group">
 							<label for="userPwd">현재 비밀번호</label> 
-							<input type="password" class="form-control" name="userPwd" placeholder="비밀번호를 입력해주세요" id="userPwd">
+							<input type="password" class="form-control" name="userPwd" placeholder="비밀번호를 입력해주세요" id="userPwd"  maxlength="16">
                             <span id="errorText1"></span>
 						</div>
 						<div class="form-group">
 							<label for="changePwd">변경할 비밀번호</label> 
-							<input type="password" class="form-control"  name="changePwd" placeholder="변경할 비밀번호를 입력해주세요" id="changePwd">
-                            <span id="errorText2"></span>
+							<input type="password" class="form-control"  name="changePwd" placeholder="변경할 비밀번호를 입력해주세요" id="changePwd"  maxlength="16">
+                            <span class="input-bottom" id="errorText2"></span>
 						</div>
 						
 						<div class="form-group">
 							<label for="checkPwd">변경할 비밀번호 확인</label> 
-							<input type="password" class="form-control"  placeholder="다시 한번 입력해주세요" id="checkPwd">
-                            <span id="errorText3"></span>
+							<input type="password" class="form-control"  placeholder="다시 한번 입력해주세요" id="checkPwd"  maxlength="16">
+                            <span class="input-bottom" id="errorText3"></span>
 						</div>
 						<button type="button" class="btn btn-warning" id="modal-btn">비밀번호 변경</button>
 						<input type="hidden" value="<%=loginUser.getMemberNo() %>" name="userNo">
@@ -517,7 +547,6 @@
                                         success : function(result){
                                             if(result == 'N') {
                                                 $userPwd.css('border','1px solid red');
-                                                $userPwd.val('').focus();
                                                 $('#errorText1').html('잘못된 입력입니다. 다시입력해주세요').css('color','red');
                                             } else{
                                             	$userPwd.removeAttr('style');
@@ -534,56 +563,33 @@
 
                         </script>
                         <script>
+                        const $userPwd = $('#userPwd');
+                        const $changePwd = $('#changePwd');
+                        const $checkPwd = $('#checkPwd');
                         $(function(){
                         	$('#modal-btn').click(function(){
-                                const $userPwd = $('#userPwd');
-                                const $changePwd = $('#changePwd');
-                                const $checkPwd = $('#checkPwd');
+                               
 
                                 if($userPwd.val() == ''){
                                     $('#errorText1').html('값이 비어있습니다').css('color','red');
                                 } 
-                                if($changePwd.val() == ''){
-                                    $('#errorText2').html('값이 비어있습니다').css('color','red');
-                                }
-                                if($checkPwd.val() == ''){
-                                    $('#errorText3').html('값이 비어있습니다').css('color','red');
-                                }
-								
+                                removeOrFail(pwdReg,$changePwd)
+                                removeOrFail(pwdReg,$checkPwd)
+                                
                                 if($userPwd.val() != '' && $changePwd.val() != '' && $checkPwd.val() != ''){
                                 	$('#pwdUpdateForm').submit();
                                 }
 
                             });
                         	
+                        	$changePwd.blur(function() {
+                        		removeOrFail(pwdReg,$changePwd)
+							})
+                        	
+                        	
                         });
                         </script>
-                        <script>
-					
-                            $(function(){
-
-                                $('#changePwd').blur(function(){
-                                    const $changePwd = $(this).val();
-                                    const $checkPwd = $('#checkPwd').val();
-                                    if($changePwd != ''){
-                                        $('#changePwd').removeAttr('style');
-                                        $('#errorText2').html('');
-                                    }
-                                    if($changePwd != $checkPwd){
-                                        $('#checkPwd').css('border','1px solid red');
-                                        $('#errorText3').html('잘못된 입력입니다. 다시입력해주세요').css('color','red');
-                                    } 
-                                    else{
-                                        $('#checkPwd').removeAttr('style');
-                                        $('#errorText3').html('');
-                                    }
-
-                                });
-                                
-                            });
-                            
-                            
-                        </script>
+                        
 						<script>
 					
                             $(function(){
