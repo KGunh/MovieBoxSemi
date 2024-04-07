@@ -35,8 +35,6 @@ public class MemberService {
 			ArrayList<MemberGenre> list = new MemberDao().loginGenre(conn, member);
 			m.setGenreList(list);
 		}
-		
-
 		close(conn);
 		
 		return m;
