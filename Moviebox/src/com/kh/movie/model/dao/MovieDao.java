@@ -184,7 +184,7 @@ public class MovieDao {
 
 	public ArrayList<Attachment> stilCut(Connection conn, int movieNo) {
 
-		ArrayList<Attachment> attach = new ArrayList<>();
+		ArrayList<Attachment> attach = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
@@ -200,10 +200,12 @@ public class MovieDao {
 				Attachment attachment = new Attachment();
 				
 				attachment.setFilePath(rset.getString("FILE_PATH"));
-				attachment.setChangeName(rset.getString("CHANGE_NAME"));
+				attachment.setStilCut(rset.getString("CHANGE_NAME"));
 				
 				attach.add(attachment);
 			}
+			
+			System.out.println("Received movieNo: " + attach);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();

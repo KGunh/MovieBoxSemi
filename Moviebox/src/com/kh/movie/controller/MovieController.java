@@ -85,9 +85,11 @@ public class MovieController {
 		
 		int movieNo = Integer.parseInt(request.getParameter("movieNo"));
 
-		List<Attachment> attach = new MovieService().stilCut(movieNo);
-
-		request.setAttribute("attach", attach);
+		List<Attachment> stilCutList = new MovieService().stilCut(movieNo);
+		System.out.println(stilCutList);
+		request.setAttribute("stilCutList", stilCutList);
+		
+		
 		String view = "views/movie/movieDetail.jsp";
 		
 		return view;

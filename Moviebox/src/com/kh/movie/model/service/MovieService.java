@@ -51,16 +51,13 @@ public class MovieService {
 	}
 
 	public ArrayList<Attachment> stilCut(int movieNo) {
-		
-	
-		System.out.println("Received movieNo: " + movieNo);
-		
-		
+
 		Connection conn = getConnection();
-		ArrayList<Attachment> attach = new MovieDao().stilCut(conn, movieNo);
+		ArrayList<Attachment> stilCutList = new MovieDao().stilCut(conn, movieNo);
+
 		close(conn);
 		
-		return attach;
+		return stilCutList;
 	}
 
 
