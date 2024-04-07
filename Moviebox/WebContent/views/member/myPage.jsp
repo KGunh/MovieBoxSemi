@@ -499,7 +499,7 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th>주문번호 <%=orderList.get(i).getOrderNo() %></th>
+                                    <th colspan="3">주문번호 <%=orderList.get(i).getOrderNo() %></th>
                                 </tr>
                             </thead>
                             <tbody>
