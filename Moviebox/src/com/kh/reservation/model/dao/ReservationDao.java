@@ -57,7 +57,7 @@ public class ReservationDao {
 
 	public List<Screen> selectScreen(Connection conn, String screenDate, String screenLocation, int movieNo, String theaterName) {
 		List<Screen> list = new ArrayList<Screen>();
-		
+
 		try(PreparedStatement pstmt = conn.prepareStatement(prop.getProperty("selectScreen"))) {
 		    
 			pstmt.setString(2, screenLocation);
@@ -85,7 +85,7 @@ public class ReservationDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+
 		return list;
 	}
 

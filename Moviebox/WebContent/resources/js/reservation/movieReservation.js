@@ -16,8 +16,8 @@ let movieTitle = '';
 window.onload = function() {
     let today = new Date();
     let year = today.getFullYear();
-    let month = (String)(today.getMonth() + 1).padStart(2, '0');
-    let day = (String)(today.getDate()).padStart(2, '0');
+    let month = String(today.getMonth() + 1).padStart(2, '0');
+    let day = String(today.getDate()).padStart(2, '0');
     document.getElementById('printToday').innerHTML = year + '-' + month + '-' + day;
 };
 
@@ -50,7 +50,7 @@ function selectScreenNo(e){
     $('#select-screen').children().eq(3).html($(e).children().eq(1).html());
     $('#screenNo').val(e.children[2].value);
     $('#screenName').val(e.children[3].value);
-    $('#theaterName').val($(e).children().eq(2).html());
+    $('#theaterName').val($(e).parent().prev().html());
 };
 
 function selectScreen(){
