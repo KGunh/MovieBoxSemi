@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.goods.model.vo.Goods,com.kh.goods.model.vo.Order,com.kh.common.model.vo.Price,com.kh.board.model.vo.Answer,com.kh.board.model.vo.Board,java.util.ArrayList,com.kh.member.model.vo.MemberGenre,java.util.List,com.kh.common.model.vo.Reservation,com.kh.movie.model.vo.Movie"%>
+    pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 
 <!DOCTYPE html>
@@ -392,20 +392,7 @@
 			
 		</c:when>
 		<c:otherwise>
-	
-	<% 
 
-		List<Reservation> resList = (ArrayList)request.getAttribute("list");
-		List<Movie> movieList = (ArrayList)request.getAttribute("movieList");
-		List<Board> boardList = (ArrayList)request.getAttribute("boardList");
-		List<Answer> answerList = (ArrayList)request.getAttribute("answerList");
-		List<Order> orderList = (ArrayList)request.getAttribute("orderList");
-		
-
-		
-
-
-	%>
 	
 
     <div class="content">
@@ -474,12 +461,12 @@
             		<h5 align="center">고객님의 최근 문의 내역이 존재하지 않습니다.</h5>
             	</c:when>
             	<c:otherwise>
-            		<c:forEach var="i" begin="0" end="2" >
+            		<c:forEach var="i" begin="0" end="1" >
             			<div class="QNA-area-list" style="border-bottom: 1px solid rgb(158, 157, 157);">
                     		<div id="QNA-title">
                     		<c:choose>
                     		<c:when test="${ requestScope.boardList[i].boardTitle.length() gt 20 }">
-                    			<c:set var="boardTitle" value="${ requestScope.boardList[i].boardTitle.substring(0,20) + '...' }"/>
+                    			<c:set var="boardTitle" value='${ requestScope.boardList[i].boardTitle.substring(0,20).concat("...") }'/>
                     		</c:when>
                     		<c:otherwise>
                     			<c:set var="boardTitle" value="${ requestScope.boardList[i].boardTitle }"/>
@@ -490,13 +477,16 @@
                     		
 
                     </div>
-                    <div id="QNA-createDate">${ requestScope.boardList[i].createDate() }</div>
+                    <div id="QNA-createDate">${ requestScope.boardList[i].createDate }</div>
                     
-                    <%if(answerList == null) {%>
-                    <div id="QNA-yn">N</div>
-                    <%} else { %>
-                    <div id="QNA-yn">Y</div>
-                    <%} %>
+                    <c:choose>
+                    	<c:when test="${empty requestScope.answerList }">
+                    		<div id="QNA-yn">N</div>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<div id="QNA-yn">Y</div>	
+                    	</c:otherwise>
+                    </c:choose>
                 </div>
             		
             		</c:forEach>
@@ -512,53 +502,54 @@
             <div class="store-area-list">
                 	<div class="store-img"></div>
                 	<div class="store-content">
-                	<% if(orderList != null) {%>
-                		<%for(int i = 0; i<orderList.size();i++) { %>
-                			<%if(i==1) break; %>
-                        <table>
+                	<c:choose>
+                		<c:when test="${ empty requestScope.orderList }">
+                			<h5 align="center">고객님의 최근 구매 내역이 존재하지 않습니다.</h5>
+                		</c:when>
+                		<c:otherwise>
+                			<table>
                             <thead>
                                 <tr>
-                                    <th colspan="3">주문번호 <%=orderList.get(i).getOrderNo() %></th>
+                                    <th colspan="3">주문번호 ${ requestScope.orderList[0].orderNo }</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td class="menu">메뉴</td>
-                                    <%List<Goods> goodsList = orderList.get(i).getGoodsList();%>
-                                    <%if(!goodsList.isEmpty()) { %>
-                                    	<%for(Goods g : goodsList) {%>
-                                    <td class="menu"><%= g.getGoodsName() %></td>
-                                    	
-                                    	<%} %>
-
-                                    <%} %>
+                                    <c:choose>
+                                    	<c:when test="${ !empty requestScope.orderList[0].goodsList }">
+                                    		<c:forEach var='g' items="${ requestScope.orderList[0].goodsList }">
+                                    			<td class="menu">${ g.goodsName }</td>
+                                    		</c:forEach>
+                                    	</c:when>
+                                    </c:choose>
+                                    
                                 </tr>
                                 <tr>
                                     <td class="menu">개수</td>
-                                    <%if(!goodsList.isEmpty()) { %>
-                                    	<%for(Goods g : goodsList) {%>
-                                    <td class="menu"><%= g.getQty()%>개</td>
-                                    	
-                                    	<%} %>
-
-                                    <%} %>
+                                   <c:choose>
+                                    	<c:when test="${ !empty requestScope.orderList[0].goodsList }">
+                                    		<c:forEach var='g' items="${ requestScope.orderList[0].goodsList }">
+                                    			<td class="menu">${ g.qty }</td>
+                                    		</c:forEach>
+                                    	</c:when>
+                                    </c:choose>
                                 </tr>
                                 <tr>
                                     <td class="menu">비용</td>
-                                    <%if(!goodsList.isEmpty()) { %>
-                                    	<%for(Goods g : goodsList) {%>
-                                    <td class="menu"><%= g.getGoodsPrice() %></td>
-                                    	
-                                    	<%} %>
-
-                                    <%} %>
+                                    <c:choose>
+                                    	<c:when test="${ !empty requestScope.orderList[0].goodsList }">
+                                    		<c:forEach var='g' items="${ requestScope.orderList[0].goodsList }">
+                                    			<td class="menu">${ g.goodsPrice }</td>
+                                    		</c:forEach>
+                                    	</c:when>
+                                    </c:choose>
                                 </tr>
                             </tbody>
                         </table>
-                        <%} %>
-					<%} else { %>
-							<h5 align="center">고객님의 최근 구매 내역이 존재하지 않습니다.</h5>
-					<%} %>
+                		</c:otherwise>
+                	</c:choose>
+                	
                     </div>
             </div>
             

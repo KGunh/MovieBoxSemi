@@ -177,8 +177,7 @@ public class CinemaAdminContorller {
 		
 	
 		}
-		System.out.println(category);
-		System.out.println(search);
+		
 		
 		ArrayList<Theater> theater = new MemberAdminService().searchCinema(category,search);
 		request.setAttribute("theaterlist", theater);
