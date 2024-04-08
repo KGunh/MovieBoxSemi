@@ -210,15 +210,7 @@
 </head>
 <body>
 
-	
-
-    <c:set var="path" value=" pageContext.request.contextPath"/>
-    <%@ include file="views/common/header.jsp" %> 
-    
-
-
     <jsp:include page="views/common/header.jsp" />
-
     
     <div id="main-cotent">
         <div id="content_1">
@@ -257,41 +249,22 @@
         <div class="long-div">
             <div class="movie-genre-content">
                 <div class="genre-content">
-
-                    <div class="genre-content-img"><img src="${path }/resources/img/action.png" alt="">액션</div>
+                    <div class="genre-content-img"><img src="${ sessionScope.path }/resources/img/action.png" alt="">액션</div>
                 </div>
                 <div class="genre-content">
-                    <div class="genre-content-img"><img src="${path }/resources/img/couple.png" alt="">로맨스</div>
+                    <div class="genre-content-img"><img src="${ sessionScope.path }/resources/img/couple.png" alt="">로맨스</div>
                 </div>
                 <div class="genre-content">
-                    <div class="genre-content-img"><img src="${path }/resources/img/fear.png" alt="">공포/스릴러</div>
+                    <div class="genre-content-img"><img src="${ sessionScope.path }/resources/img/fear.png" alt="">공포/스릴러</div>
                 </div>
                 <div class="genre-content">
-                    <div class="genre-content-img"><img src="${path }/resources/img/comedy.png" alt="">코미디</div>
+                    <div class="genre-content-img"><img src="${ sessionScope.path }/resources/img/comedy.png" alt="">코미디</div>
                 </div>
                 <div class="genre-content">
-                    <div class="genre-content-img"><img src="${path }/resources/img/cartoon.png" alt="">애니</div>
+                    <div class="genre-content-img"><img src="${ sessionScope.path }/resources/img/cartoon.png" alt="">애니</div>
                 </div>
                 <div class="genre-content">
-                    <div class="genre-content-img"><img src="${path }/resources/img/fantasy-movie.png" alt="">판타지</div>
-
-                    <div class="genre-content-img"><img src="${ path }/resources/img/action.png" alt="">액션</div>
-                </div>
-                <div class="genre-content">
-                    <div class="genre-content-img"><img src="${ path }/resources/img/couple.png" alt="">로맨스</div>
-                </div>
-                <div class="genre-content">
-                    <div class="genre-content-img"><img src="${ path }/resources/img/fear.png" alt="">공포/스릴러</div>
-                </div>
-                <div class="genre-content">
-                    <div class="genre-content-img"><img src="${ path }/resources/img/comedy.png" alt="">코미디</div>
-                </div>
-                <div class="genre-content">
-                    <div class="genre-content-img"><img src="${ path }/resources/img/cartoon.png" alt="">애니</div>
-                </div>
-                <div class="genre-content">
-                    <div class="genre-content-img"><img src="${ path }/resources/img/fantasy-movie.png" alt="">판타지</div>
-
+                    <div class="genre-content-img"><img src="${ sessionScope.path }/resources/img/fantasy-movie.png" alt="">판타지</div>
                 </div>
             </div>
         </div>
@@ -304,9 +277,7 @@
                 </div>
                 <div class="phone-img">
 
-                    <img src="${path }/resources/img/telephone.png" alt="">
-
-                    <img src="${ path }/resources/img/telephone.png" alt="">
+                    <img src="${ sessionScope.path }/resources/img/telephone.png" alt="">
 
                 </div>
             </div>
@@ -329,9 +300,7 @@
     <script>
     $('.genre-content-img').on('click',function(){
 
-    	location.href = '${path }/selectGenre.movie?type=genre&genre=' + $(this).text();
-
-    	location.href = '${ path }/selectGenre.movie?type=genre&genre=' + $(this).text();
+    	location.href = '${ sessionScope.path }/selectGenre.movie?type=genre&genre=' + $(this).text();
 
     });
     	
@@ -343,23 +312,12 @@
             type : 'get',
             success : function(result) {
 
-				
 				let resultStr = '';
 				for(let i = 0; i < result.length; i++){
-
-					resultStr += '<div class="swiper-slide" ><img class="'+  result[i].movieNo  +'" src="${path }/' + result[i].filePath +'/'+ result[i].changeName+'"' +'/></div>'; 
-
-					resultStr += '<div class="swiper-slide" ><img class="'+  result[i].movieNo  +'" src="${ path }/' + result[i].filePath +'/'+ result[i].changeName+'"' +'/></div>'; 
-
-
-					
+					resultStr += '<div class="swiper-slide" ><img class="'+  result[i].movieNo  +'" src="${ sessionScope.path }/' + result[i].filePath +'/'+ result[i].changeName+'"' +'/></div>'; 
 				}
-				
-
 
 				$('.swiper-wrapper').html(resultStr);
-				
-				
 				
             },
             async : false
@@ -369,15 +327,12 @@
         	url : 'chart.main',
         	type : 'get',
         	success : function(result) {
-				
-				
-				let resultStr = '';
+
+                let resultStr = '';
 				for(let i = 0; i < result.length; i++){
 					if(i==5) break;
 
-					resultStr += '<div><img class="'+   result[i].movieNo  +'" src="${path }/' + result[i].filePath +'/'+ result[i].changeName+'"' +'/></div>'; 
-
-					resultStr += '<div><img class="'+   result[i].movieNo  +'" src="${ path }/' + result[i].filePath +'/'+ result[i].changeName+'"' +'/></div>'; 
+					resultStr += '<div><img class="'+   result[i].movieNo  +'" src="${ sessionScope.path }/' + result[i].filePath +'/'+ result[i].changeName+'"' +'/></div>'; 
 
 				}
 				
@@ -385,15 +340,10 @@
 				for(let i = 0; i < result.length; i++){
 					$('.' + result[i].movieNo).on('click',function(){
 
-						location.href = '${path }/detail.movie?movieNo=' + result[i].movieNo;
-
-						location.href = '${ path }/detail.movie?movieNo=' + result[i].movieNo;
+						location.href = '${ sessionScope.path }/detail.movie?movieNo=' + result[i].movieNo;
 
 					});
-
-					
 				}
-				
             },
             async : false
         });
@@ -403,8 +353,7 @@
         	type : 'get',
         	success : function(result) {
 
-				
-        		let resultStr = '';
+                let resultStr = '';
         		for(let i = 0;i< result.length; i++){
 
         			if(i==4) break;
@@ -435,10 +384,8 @@
         }); 
     }
     
-    	
     </script>
     
-
     <jsp:include page="views/common/footer.jsp" />
 </body>
 </html>

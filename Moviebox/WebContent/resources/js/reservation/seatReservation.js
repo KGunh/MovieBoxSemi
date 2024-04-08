@@ -7,7 +7,8 @@ let peopleCount = 0;
 let adultCount = 0;
 let teenCount = 0;
 
-window.onload = function() {
+function init(){
+
     $.ajax({
         url : 'seat.reservationAjax',
         type : 'get',
@@ -29,7 +30,11 @@ window.onload = function() {
             location.href = '/moviebox/movie.reservation';
         }
     });
-};
+    
+    $('#movie-select>div').css('text-align', 'center');
+    $('#reservation-info>div>div').last().css('margin-top', '50px');
+}
+
 
 $('.people-Count').on('click', function() {
     let ageType = $(this).parent().prev().children().eq(0);
@@ -250,3 +255,5 @@ function payment(){
 
     return false;
 };
+
+init();

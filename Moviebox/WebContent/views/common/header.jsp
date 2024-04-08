@@ -195,7 +195,7 @@
                 	</c:when>
                 	<c:otherwise>
                         <c:if test="${ loginUser.privilege == 'Y'}">
-                            <a href="${ sessionScope.path }/adminMain.me" class="member">관리자 기능</a><!-- 관리자로 로그인시 관리자 기능 활성화 -->
+                            <a href="${ sessionScope.path }/adminMain.me" class="member">관리자 기능</a>
                         </c:if>
                             <a href="${ sessionScope.path }/logout.me" class="member">로그아웃</a>
                     </c:otherwise>
@@ -211,7 +211,6 @@
             </div>
             
             <div id="navigator">
-                <!-- A grey horizontal navbar that becomes vertical on small screens -->
                 <ul class="nav">
                     <li class="nav-item">
                     	
