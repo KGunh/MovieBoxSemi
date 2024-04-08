@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>문의사항 수정</title>
     <style>
         body{
             background-color: #1A1A1A;
@@ -239,7 +239,8 @@
 </head>
 <body>
 
-	<%@ include file="../common/header.jsp" %>
+    <jsp:include page="../common/header.jsp"></jsp:include>
+    <c:set var="path" value="${ pageContext.request.contextPath }" />
 
 	<c:choose>
 		<c:when test="${ loginUser.memberNo eq board.userNo }">
@@ -267,19 +268,21 @@
 		
 		
 		                    <div class="detail-content-box">
-			                    <form action="<%= contextPath %>/update.board" method="post" id="insert-box">
+			                    <form action="${ path }/update.board" method="post" id="insert-box">
 			                    
-			                    <input type="hidden" name="boardNo" value="<%= board.getBoardNo()%>" />
+			                    <input type="hidden" name="boardNo" value="${ board.boardNo }" />
 			                    
 		                            <div id="category-box">
 		                                <div id="box-name">분류</div>
 		                                
 		                                <select name="category" id="select-category">
+		                                <c:forEach var="c" items="${ requestScope.category }">
+		                                
 		                                <% for(Category c : list) { %>
 											<option value="<%= c.getCategoryNo() %>" class="<%= c.getCategoryName() %>">
 												<%= c.getCategoryName() %>
 											</option>
-										<% } %>
+										</c:forEach>
 		                                </select>
 		                                
 		                                <script>

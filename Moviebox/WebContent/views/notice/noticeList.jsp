@@ -7,20 +7,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-<%
-	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("noticeList");
-	Notice notice = (Notice)request.getAttribute("notice");
-	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
-	String type = (String)request.getAttribute("type");
-	
-	int currentPage = pi.getCurrentPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
-	int maxPage = pi.getMaxPage();
-
-%>    
-    
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -250,14 +236,14 @@
             background-color: #FFC145;
         }
 
-
     </style>
     
 </head>
 <body>
 
-	<%@ include file="../common/header.jsp" %>
-	
+	<jsp:include page="../common/header.jsp"></jsp:include>
+	<c:set var="path" value="${ pageContext.request.contextPath }" />
+		
     <div id="wrap">
 
         <!-- 전체 감싸는 부분 -->
@@ -268,31 +254,35 @@
             <!-- 카테고리 -->
             <div id="board-category">
                 <div class="notice-tap" onclick="openNoticePage();">공지사항</div>
-                <div class="qna-tap" onclick="openQnaPage();">Q&A</div>
+                <div class="qna-tap" onclick="openQnaPage();">문의사항</div>
             </div> <!-- board-category -->
 
             <!-- 검색 -->
             <div id="search-notice">
 
                 <div id="search-notice-input">
-                	<form id="noticeSearch" action="<%=contextPath%>/search.notice" method="get">
+                	<form id="noticeSearch" action="${ path }/search.notice" method="get">
                 		<input id="searchType" type="hidden" name="type" value="notice">
                     	<input name="searchNoticeForm" id="input-notice" type="text" placeholder="검색어를 입력해 주세요.">
                     </form>
                 </div>
 
                 <div id="search-img" onclick="searchNotice();">
-                    <img src="<%= contextPath %>/resources/img/search.PNG" width="45" height="45">
+                    <img src="${ path }/resources/img/search.PNG" width="45" height="45">
                 </div>
 
             </div> <!-- search-notice -->
             
             
-	            <!-- 관리자로 로그인 했을 때만 보이게 해야함! -->
+	            <!-- 관리자로 로그인 시 -->
 	        <div id="qna-insert">
-	            <% if(loginUser != null && loginUser.getMemberId().equals("admin")) { %>
-	                <button id="qna-insert-btn" onclick="noticeInsert();">글쓰기</button>
-	            <% } %>
+	        
+	        <c:choose>
+	        	<c:when test="${ loginUser ne null and loginUser.memberId eq 'admin'}">
+		            <!-- < % if(loginUser != null && loginUser.getMemberId().equals("admin")) { %> -->
+		                <button id="qna-insert-btn" onclick="noticeInsert();">글쓰기</button>
+	            </c:when>
+	        </c:choose>
 	        </div>
 
             <!-- 게시판 -->
@@ -308,80 +298,78 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <% if(list.isEmpty()) { %>
-                        <tr>
-                            <td colspan="5" style="color: white;">조회 된 공지사항이 없습니다. </td>
-                        </tr>
-                     <% } else { %>
-                     
-                     	<% for(Notice n : list) { %>
-                        <tr class="list">
-                            <td id="list-no"><%= n.getNoticeNo() %></td>
-                            <td id="list-ca"><%= n.getNoticeCategory() %></td>
-                            <td id="list-title"><%= n.getNoticeTitle() %></td>
-                            <td id="list-count"><%= n.getCount() %></td>
-                            <td id="list-date"><%= n.getCreateDate() %></td>
-                        </tr>
-                        
-                        <% } %>
-                    <% } %>
-
+                    <c:choose>
+                    	<c:when test="${ empty noticeList }">
+	                    <!-- < % if(list.isEmpty()) { %> -->
+	                        <tr>
+	                            <td colspan="5" style="color: white;">조회 된 공지사항이 없습니다. </td>
+	                        </tr>
+                        </c:when>
+	                    <c:otherwise>
+							<c:forEach var="n" items="${requestScope.noticeList}">
+							    <tr class="list">
+							        <td id="list-no">${n.noticeNo}</td>
+							        <td id="list-ca">${n.noticeCategory}</td>
+							        <td id="list-title">${n.noticeTitle}</td>
+							        <td id="list-count">${n.count}</td>
+							        <td id="list-date">${n.createDate}</td>
+							    </tr>
+							</c:forEach>
+	                    </c:otherwise>
+					</c:choose>
                      
                     </tbody>
                 </table>
             </div>
 			
-	        
-           <!--  -->
             <div id="page">
                 <div class="paging-area" align="center" style="margin-top:12px;">
-          			
-          			<% if(currentPage > 1) { %>
-	          			<button class="btn btn-outline-secondary" style="color:white; background: none; border: 1px solid white;"
-	          			onclick="location.href='<%=contextPath%>/list.notice?currentPage=<%= currentPage - 1 %>'"> < </button>
-	               	<% } %>
+          			<c:if test="${ pageInfo.currentPage > 1}">
+		          			<button class="btn btn-outline-secondary" style="color:white; background: none; border: 1px solid white;"
+		          			onclick="location.href='${ path }/list.notice?currentPage=${ pageInfo.currentPage - 1 }'"> < </button>
+		          	</c:if>
 	                    
-	                <% for(int i = startPage; i <= endPage; i++) { %>
-	                	<% if(currentPage != i) { %>
-					        <button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
-					        onclick="location.href='<%=contextPath%>/list.notice?currentPage=<%=i%>'"><%= i %></button>
-					    <% } else { %>
-					    	<button disabled class="btn btn-outline-secondary" style="color:white; background-color:#6c757d; border: 1px solid white;"><%=i%></button>
-					    <% } %>
-	                <% } %>
+	                <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="i" >
+	                	<c:choose>
+		                	<c:when test="${ pageInfo.currentPage ne i }">
+						        <button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
+						        onclick="location.href='${ path }/list.notice?currentPage=${ i }'">${ i }</button>
+						    </c:when>
+						    <c:otherwise>
+						    	<button disabled class="btn btn-outline-secondary" style="color:white; background-color:#6c757d; border: 1px solid white;">${ i }</button>
+						    </c:otherwise>
+					    </c:choose>
+	                </c:forEach>
 	                
-	                <% if(currentPage != maxPage) { %>
-		                <button class="btn btn-outline-secondary" style="color:white; background: none; border: 1px solid white;"
-		                onclick="location.href='<%=contextPath%>/list.notice?currentPage=<%= currentPage + 1 %>'"> > </button>
-		            <% } %>
+	                	<c:if test="${ pageInfo.currentPage ne pageInfo.maxPage }">
+			                <button class="btn btn-outline-secondary" style="color:white; background: none; border: 1px solid white;"
+			                onclick="location.href='${ path }/list.notice?currentPage=${ pageInfo.currentPage + 1 }'"> > </button>
+		            	</c:if>
                 </div>
             </div>
 
         </div>
     </div>
     
-    	<%@ include file="../common/footer.jsp" %>
+    	<jsp:include page="../common/footer.jsp"></jsp:include>
 
-    	
     	<script>
     		function openNoticePage(){
-    			location.href = '<%=contextPath %>/list.notice?currentPage=1';
+    			location.href = '${ path }/list.notice?currentPage=1';
     		}
     		
     		function openQnaPage(){
-    			location.href = '<%= contextPath %>/list.board?currentPage=1';
+    			location.href = '${ path }/list.board?currentPage=1';
     		}
     		
     		function noticeInsert(){
-    			location.href = '<%=contextPath%>/enrollForm.notice';
+    			location.href = '${ path }/enrollForm.notice';
     		}
 
     		$('tbody > tr.list').click(function(){
     			const noticeNo = $(this).children().eq(0).text();
-    			location.href = '<%=contextPath%>/detail.notice?noticeNo=' + noticeNo;
+    			location.href = '${ path }/detail.notice?noticeNo=' + noticeNo;
             });
-    		
-    	
     	</script>
 
 
