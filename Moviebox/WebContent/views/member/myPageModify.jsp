@@ -1,5 +1,8 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.List,com.kh.member.model.vo.MemberGenre"%>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -326,16 +329,20 @@
     
 </head>
 <body>
-	<%@ include file="../common/header.jsp" %>
+	<jsp:include page="/views/common/header.jsp"></jsp:include>
 	
-	<% if(loginUser == null) {%>
+
+	
+	<c:choose>
+		<c:when test="${ loginUser eq null }">
 			
-		<script>
-			location.href = ('<%=contextPath%>/loginForm.me');
-		</script>
-	<%} else {%>
-	
-	<div id="info-header">
+			<script>
+				location.href = ('${ path }/loginForm.me');
+			</script>
+			
+		</c:when>
+		<c:otherwise>
+			<div id="info-header">
         <div id="info-title">
             <span class="title">마이페이지</span>
         </div>
@@ -343,45 +350,28 @@
             
             <ul class="info-navi">
                 <li id="info-navi-first">
-                    <a href="<%=contextPath %>/mypage.me" class="info-my">회원정보</a>
+                    <a href="${ path }/mypage.me" class="info-my">회원정보</a>
                 </li>
                 <li id="info-navi-second">
-                    <a href="<%=contextPath %>/resList.me" class="info-list">예매내역</a>
+                    <a href="${ path }/resList.me" class="info-list">예매내역</a>
                 </li>
             </ul>
         </div>
 
     </div>
-    <%
-	    String memberId = loginUser.getMemberId();
-		String memberName = loginUser.getMemberName();
-		String phone = loginUser.getPhone();
-		String birthday = loginUser.getBirthday();
-		String email = loginUser.getEmail();
-		String memberPwd = loginUser.getMemberPwd();
-		
-		String address = loginUser.getAddress();
-		String localCode = loginUser.getLocalCode();
-		List<MemberGenre> list = loginUser.getGenreList();
-		String genreList = "";
-		
-		for(int i = 0; i < list.size(); i++) {
-        	 genreList += list.get(i).getGenreCode() + (i < (list.size()-1) ? "," : "");
-		}
-	%>
-    %>
+
 
     <div class="content">
         <div class="input-title"><span class="tit">내정보 수정</span></div>
         <div id="input-list">
-            <form action="<%=contextPath%>/update.me" method="post">
+            <form action="${ path }/update.me" method="post">
                 <div class="inputdiv">
                     <span class="input-span">생년월일</span><br>
-                    <input type="text" class="input-text N" value="<%=birthday %>" disabled>
+                    <input type="text" class="input-text N" value="${ birthday }" disabled>
                 </div>
                 <div class="inputdiv">
                     <span class="input-span">이름</span><br>
-                    <input type="text" class="input-text N" value="<%=memberName %>" disabled>
+                    <input type="text" class="input-text N" value="${ memberName }" disabled>
                 </div>
                 <div class="inputdiv">
                     <span class="input-span">전화번호</span><br>
@@ -620,6 +610,11 @@
 			</div>
 		</div>
 	</div>
-	<%} %>
+		
+		
+		</c:otherwise>
+	</c:choose>
+	
+
 </body>
 </html>
