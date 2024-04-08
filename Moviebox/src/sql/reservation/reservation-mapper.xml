@@ -6,25 +6,6 @@
 		Reservation Mapper
 	</comment>
 	
-	<entry key="selectMovieList">
-		SELECT
-		       MOVIE_NO,
-		       MOVIE_TITLE,
-		       FILE_PATH,
-		       CHANGE_NAME
-		  FROM
-		       TB_MOVIE
-		  JOIN
-		       TB_ATTACHMENT USING(MOVIE_NO)
-		 WHERE
-		       STATUS = 'Y'
-		   AND
-			   FILE_LEVEL = 1  
-		 ORDER
-		    BY
-		       MOVIE_NO
-	</entry>
-	
 	<entry key="selectLocationList">
 		SELECT
 		       LOCATION_CODE,
@@ -55,8 +36,12 @@
 		       MOVIE_NO = ?
 		   AND
 		       LOCATION_NAME LIKE '%'||?||'%'
+		   AND
+		   	   THEATER_NAME LIKE '%'||?||'%'
 		   AND 
 		       TO_CHAR(WATCH_DATE, 'YY/MM/DD') = ?
+		   AND
+       	       WATCH_DATE > SYSDATE
 		 ORDER
 		    BY
 		       THEATER_NO,
@@ -147,12 +132,12 @@
 		       ) 
 		VALUES 
 		       (
-		       ?,
-		       ?,
-		       ?,
-		       ?,
-		       DEFAULT,
-		       SYSDATE
+		        ?,
+		        ?,
+		        ?,
+		        ?,
+		        DEFAULT,
+		        SYSDATE
 		       )
 	</entry>
 	
@@ -166,8 +151,8 @@
 		  	   )
 	  	VALUES
 		  	   (
-		  	   ?,
-		  	   ?
+		  	    ?,
+		  	    ?
 		  	   )
 	</entry>
 	

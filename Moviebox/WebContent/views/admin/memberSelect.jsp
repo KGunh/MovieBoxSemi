@@ -14,7 +14,7 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
     <title>Document</title>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+    
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -80,7 +80,8 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
             height : 800px;
             padding-left: 50px;
             padding-top: 20px;
-            color: white;
+            color : white;
+            
         }
 
         .content_2_top{
@@ -91,12 +92,12 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
             overflow: hidden;
             margin: 20px auto;
             padding: 0%;
-            height: 500px;
+            
         }
         .menu > li {
             width: 198px;
             text-align: center;
-            line-height: 60px;
+            line-height: 40px;
             background-color: #323232;
             list-style: none;
            
@@ -273,9 +274,9 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
         }
 
         .page-link{
-            color: #212121;
-            background-color: #FFC145;
-            border: 1px solid rgba(0, 0, 0, 0.123)
+            color: white;
+            background-color: #212121;
+            border: 1px solid white;
         }
 
         #inputBox-2 {
@@ -307,7 +308,9 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
         
        }
 		
-     
+     	.page-item{
+     	background-color: black;
+     	}
 
 
     </style>
@@ -339,6 +342,12 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                         </ul>
                     </li>
                     <li>
+                        <a href="<%=contextPath %>/adminScreenList.admin">예매 관리</a>
+                        <ul class="submenu" >
+
+                        </ul>
+                    </li>
+                    <li>
                         <a href="<%=contextPath %>/adminMovieCheck.admin?currentPage=1">영화 관리</a>
                         <ul class="submenu" >
 
@@ -363,6 +372,7 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
             <div class="content_2">
                 <h2>회원 관리</h2>
                 <div class="content_2_top">
+
                  <form>
                    <select name="#" id="select" >
                     <option value="" >전체</option>
@@ -371,11 +381,24 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                    </select>
                     <input type="search" id="find" name="search">
                     <button type="submit" id="btn" style="background-color: #FFC145;" onclick="keyword();">
+
+                 <form action="search.mb" method="get">
+                   <select name="category" id="select" >
+                    
+                    <option value="name">이름</option>
+                    <option value="enrollDate">가입일</option>
+                    <option value="status">활동여부</option>
+                   </select>
+                    <input type="text" id="find" name="finding" placeholder="키워드를 입력해주세요">
+                    <button type="submit" id="btn" style="background-color: #FFC145;">
+
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
                           </svg>
                     </button>
+
 				</form>
+
                 </div>
                 <div id="delete" >
                 <!--     <button type="button" id="btn1" onclick="deleteadmin();">탈퇴</button>  -->
@@ -390,7 +413,7 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                           <thead>
                             <tr style="background-color: #eaeaea; margin-top: 0; height: 40px; color: #212121; border: 0px solid #cfcfcf; opacity: 0.8; text-align: center;">
                           <!--       <th ><input type="checkbox" name="check" value="check" id="check" checked></th>  -->
-                                <th class="num">회원번호</th>
+                                <th>회원번호</th>
                                 <th>이름</th>
                                 <th>가입일</th>
                                 <th>활동여부</th> 
@@ -401,8 +424,8 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                        
                            <% for(Member m : mb){ %>
                                 <tr class="member">
-                                
-                                <!-- <td class="ch"><input type="checkbox" name="check" value="check" id="check" ></td>  -->
+							     <!-- <td class="ch"><input type="checkbox" name="check" value="check" id="check" ></td>  -->
+
                                 <td><%= m.getMemberNo() %></td>
                                 <td><%= m.getMemberName()%></td>
                                 <td><%= m.getEnrollDate() %></td>
@@ -419,19 +442,7 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                       </div>
                       
                       <script> 
-                      
-                    	$(function(){
-                    		
-                    		$('.member>td').click(function(){
-                    			if(!$(this).is('.ch')) {
-	                    			const memberNo = $(this).parent().children().eq(0).text();
-	                    			location.href='<%=contextPath%>/modifyAdmin.mb?memberNo=' + memberNo;
-                        		}
-                    			
-                    		});
-	
-                    		
-                    	})
+                   
                     	
                     	function keyword(){
                     		
@@ -439,6 +450,16 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                     		
                     		
                     	}
+
+                      		$('.member').click(function(){
+                      			const memberNo = $(this).children().eq(0).text();
+                      			location.href='<%=contextPath%>/modifyAdmin.mb?memberNo=' + memberNo;
+                      		});
+                
+                    	
+                    	
+
+
                       
                       </script>
                       
@@ -468,7 +489,7 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
 				</div>
 
                 </div>
-	 	</div>
+	 	
               
            
 

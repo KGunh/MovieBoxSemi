@@ -96,7 +96,7 @@
         .menu > li {
             width: 198px;
             text-align: center;
-            line-height: 60px;
+            line-height: 40px;
             background-color: #323232;
             list-style: none;
            
@@ -336,8 +336,14 @@
                         </ul>
                     </li>
                     <li>
+                        <a href="<%=contextPath %>/adminScreenList.admin">예매 관리</a>
+                        <ul class="submenu" >
+
+                        </ul>
+                    </li>
+                    <li>
                         <a href="<%=contextPath %>/adminMovieCheck.admin?currentPage=1">영화 관리</a>
-                        <ul class="submenu">
+                        <ul class="submenu" >
 
                         </ul>
                     </li>
@@ -365,21 +371,20 @@
                          <div class="content_2">
                 <h2 style="color : white;">영화관 관리</h2>
                 <div class="content_2_top">
-                 
-                   <select name="#" id="select" >
-                    <option value="">전체</option>
-                    <option value="">가입일</option>
-                    <option value="">지역코드</option>
-                    <option vlaue="">지역</option>
+                 <form action="search.cm" method="get">
+                   <select name="category" id="select" >
+                    <option value="name">영화관 이름</option>
+                    <option value="code">지역코드</option>
+                    <option value="city">지역</option>
                    </select>
-                    <input type="search" id="find">
+                    <input type="text" id="find" name="find">
                     <button type="submit" id="btn" style="background-color: #FFC145;">
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
                           </svg>
 
                     </button>
-
+					</form>
                     <div id="delete" >
                        <button type="button" class="btn1" onclick="enrollment();">등록</button>
                        <!-- 수정/ 삭제 클릭해서 상세조회에서 함-->

@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>MOVIE BOX</title>
 <link rel="stylesheet" href="https://unpkg.com/swiper@8/swiper-bundle.min.css" />
 <script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
 <style>
@@ -121,7 +121,6 @@
         vertical-align: top;
     }
     .board-content td{
-        width: 50%;
         height: 30px;
     }
     .board-area td:first-child {
@@ -274,7 +273,7 @@
                     <div class="phone-number">1588-8888</div>
                 </div>
                 <div class="phone-img">
-                    <img src="" alt="">
+                    <img src="<%=contextPath%>/resources/img/telephone.png" alt="">
                 </div>
             </div>
             <div class="board-content">
@@ -360,7 +359,7 @@
 
         			if(i==4) break;
 
-        			resultStr += '<tr class="board-area"> <td> ' + result[i].noticeTitle + '</td><td> ' + result[i].createDate + '</td> </tr>';
+        			resultStr += '<tr class="board-area"> <td "> ' + result[i].noticeTitle + '</td><td> ' + result[i].createDate + '</td> </tr>';
         		}
         		
         		$('.board-content tbody').html(resultStr);

@@ -537,7 +537,7 @@
 			            </div>
 			
 			            <div id="sub_4">
-			                <input type="text" name="running_time" id="runningTime" placeholder="러닝타임을 입력해 주세요.(ex - 120)">
+			                <input type="text" name="running_time" id="runningTime" placeholder="러닝타임을 입력해 주세요.(ex - 120)" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
 			            </div>
 			
 			            <div id="sub_5">
@@ -586,13 +586,13 @@
  	 
  	<script>
 	 	function validateForm() { 
-//
-//	 		var fileInput = document.getElementById('file');
-//	 	    var fileName = fileInput.value; 
-//	 	    if (fileName === "" || fileInput.files.length === 0) {
-//	 	        alert('포스터 파일을 첨부해 주세요.');
-//	 	        return false;
-//	 	    }
+
+	 		var fileInput = document.getElementById('file');
+	 	    var fileName = fileInput.value; 
+	 	    if (fileName === "" || fileInput.files.length === 0) {
+	 	        alert('포스터 파일을 첨부해 주세요.');
+	 	        return false;
+	 	    }
 	 	    var movieTitle = document.getElementById('movieTitle').value;
 	 	    if (movieTitle === "" || movieTitle.length === 0) {
 	 	        alert('영화 제목을 입력해 주세요.');

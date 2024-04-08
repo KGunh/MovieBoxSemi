@@ -208,6 +208,11 @@
 <body>
 	<!-- 헤더 -->
     <%@ include file="/views/common/header.jsp" %>
+    <% if(loginUser == null || loginUser.getPrivilege().equals("N")) {%>
+		<script>
+			location.href = ('<%=contextPath%>');
+		</script>
+	<%} else {%>
     
     <div id="wrap">
 
@@ -229,7 +234,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminScreenList.admin">예매 관리</a>
+                        <a href="<%=contextPath %>/adminScreenList.admin">상영관 관리</a>
                         <ul class="submenu" >
 
                         </ul>
@@ -278,14 +283,15 @@
     </div>
 
     <script>
+    var date = new Date();
+    
+    var year=date.getFullYear();
+
+    var month= ('0' + (date.getMonth() + 1)).slice(-2);
+
+    var day= ('0' + date.getDate()).slice(-2);
         $(function(){
-            var date = new Date();
             
-            var year=date.getFullYear();
-
-            var month= ('0' + (date.getMonth() + 1)).slice(-2);
-
-            var day= ('0' + date.getDate()).slice(-2);
 
             $.ajax({
                 url : 'locationList.admin',   
@@ -327,16 +333,10 @@
                     },
                     success : function(result){
                         var resultStr = '';
-                        for(let i = 0; i < result.length; i++){
-                            
-                            if(i != 0 && i % 3 == 0){
-                                resultStr += '<div class="printTheaterName"><a href="#">'+ result[i].theaterName +'</a></div><br>';
-                            }
-                            else{
-                                resultStr += '<div class="printTheaterName"><a href="#">'+ result[i].theaterName +'</a></div>';
-                            }
+						for(let i = 0; i < result.length; i++){
+                            console.log(result);
+                            resultStr += '<div class="printTheaterName"><a href="<%=contextPath%>/adminDetailTheater.admin?theaterNo=' +result[i].theaterNo +'&watchDate='+ year + '-' + month + '-' + day +'">'+ result[i].theaterName +'</a></div>';
                         }
-                        console.log(resultStr);
                         $('.theater-content').html(resultStr);
                     }
                     
@@ -348,5 +348,6 @@
 
  	<%@ include file="/views/common/footer.jsp" %>
  	<!-- 푸터 -->
+ 	<%} %>
 </body>
 </html>

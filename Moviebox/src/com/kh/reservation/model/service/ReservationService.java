@@ -19,17 +19,6 @@ import oracle.jdbc.OracleConnection.CommitOption;
 
 public class ReservationService {
 	
-	public List<Movie> selectMovieList() {
-		// 영화조회쪽이랑 상의해서 메소드 통일해야함!
-		Connection conn = getConnection();
-		
-		List<Movie> movieList = new ReservationDao().selectMovieList(conn);
-		
-		close(conn);
-		
-		return movieList;
-	}
-
 	public List<Location> selectLocationList() {
 		Connection conn = getConnection();
 	
@@ -40,10 +29,10 @@ public class ReservationService {
 		return locationList;
 	}
 
-	public List<Screen> selectScreen(String screenDate, String screenLocation,  int movieNo) {
+	public List<Screen> selectScreen(String screenDate, String screenLocation,  int movieNo, String theaterName) {
 		Connection conn = getConnection();
 		
-		List<Screen> screenList = new ReservationDao().selectScreen(conn, screenDate, screenLocation, movieNo);
+		List<Screen> screenList = new ReservationDao().selectScreen(conn, screenDate, screenLocation, movieNo, theaterName);
 
 		close(conn);
 		
@@ -75,19 +64,16 @@ public class ReservationService {
 		int priceSheetResult = 0;
 		int seatResult = 0;
 	    
-		// 예약테이블에 insert후 pk값 반환받기
 		HashMap<String, Integer> reservationKey = new ReservationDao().insertReservation(conn, reservation);
-		
-		// 청소년or성인요금 테이블에 insert
-        if (reservationKey.get("result") > 0) {
+
+		if (reservationKey.get("result") > 0) {
         	priceSheetResult = new ReservationDao().insertPriceSheet(conn, reservationKey.get("ticketNo"), teenPersonNo, adultPersonNo);
         }
 
-        // 예약 좌석 테이블에 insert
         if (priceSheetResult > 0) {
         	seatResult = new ReservationDao().insertSeat(conn, reservation, reservationKey.get("ticketNo"));
         }
-        // 트랜잭션 처리
+
         if (reservationKey.get("result") > 0 && priceSheetResult > 0 && seatResult > 0) {
             commit(conn);
         } else {

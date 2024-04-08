@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-    
+
 <%@ page import="com.kh.movie.model.vo.*, java.util.ArrayList" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
@@ -17,6 +17,10 @@
 <head>
 <meta charset="UTF-8">
 <title>영화 목록</title>
+
+<script src="https://unpkg.com/swiper@8/swiper-bundle.min.js"></script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+
     <style>
         body{
             background-color: #1A1A1A;
@@ -186,6 +190,7 @@
             font-size: 15px;
             border: none;
         }
+        
 
     </style>
 </head>
@@ -218,7 +223,7 @@
                 <!-- 정렬 / 검색창 -->
                 <div id="searchalign">
                     <div id="movie-list-align">
-                        <a class="align-a">예매순</a> | <a class="align-a">가나다순</a>
+                        <a class="align-a">개봉일순</a> | <a class="align-a">가나다순</a>
                     </div>
 
                      <div id="search-img">
@@ -240,11 +245,15 @@
                     	<input type="hidden" id="inputId" name="movieNo" value="<%= m.getMovieNo()%>" />
                     	
                         <div class="movie-list-img"> <!-- 포스터 -->
-                        	<a href="<%=contextPath%>/detail.movie?movieNo=<%= m.getMovieNo()%>"><img src="<%= m.getFilePath() %>/<%= m.getChangeName() %>" width="232" height="300"></a>
+                        	<a href="<%=contextPath%>/detail.movie?movieNo=<%= m.getMovieNo()%>">
+                        		<img src="<%= m.getFilePath() %>/<%= m.getChangeName() %>" width="232" height="300">
+                        	</a>
                         </div>
                         
                         <div class="movie-list-title"><%= m.getMovieTitle() %></div>
-                        <div id="movie-content-btn1"><a href="<%=contextPath%>/detail.movie?movieNo=<%= m.getMovieNo()%>" id="detailbtn">상세정보</a></div>
+                        <div id="movie-content-btn1">
+	                        <a href="<%=contextPath%>/detail.movie?movieNo=<%= m.getMovieNo()%>" id="detailbtn">상세정보</a>
+                        </div>
 	                    <% if(loginUser == null) { %>
 	                    	<button id="movie-content-btn2" onclick="noMember();">예매하기</button>
 	                	<%} else { %>
@@ -261,35 +270,32 @@
     
     
 	<%@ include file="/views/common/footer.jsp" %>
+
+    
+</body>
+
 	
     <script>
+
     	// 비회원 상태에서 예매하기 버튼 클릭 시
 		function noMember(){
-			location.href = ('<%=contextPath%>/loginForm.me');
 			alert('로그인이 필요한 서비스 입니다.');
+			location.href = ('<%=contextPath%>/loginForm.me');
 		}
-		
-    	// 카테고리 네비 바
-	    document.getElementById('movieCategory').onclick = function(e){
-	    	const selectGenre = e.target.innerHTML;
-	        document.getElementById('genreInput').value = selectGenre;
-	        document.getElementById('selectGenreForm').submit();
-		}
-	    	const genreType = document.getElementById('selectTypeGenre')
-		
-	    // 예매하기 버튼 클릭시 
-		$('#movie-content-btn2').on('click',function(){
-		    var movieNo = $(this).siblings('input[type="hidden"]').val();
-		    location.href = '<%=contextPath%>/detail.movie?movieNo=' + movieNo;
-		});
 		
     	// 예매하기 버튼 -> 예매 페이지
     	function reservationPage(){
     		location.href = '<%= contextPath %>/movie.reservation';
     	}
-	    	
+    	
+    	// 카테고리 네비 바
+		document.getElementById('movieCategory').addEventListener('click', function(e) {
+		    document.getElementById('genreInput').value = e.target.textContent;
+		    document.getElementById('selectGenreForm').submit();
+		});
+		
 
+
+    	
 	</script>
-    
-</body>
 </html>

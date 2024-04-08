@@ -7,7 +7,6 @@
     
 <%
 	Board board = (Board)request.getAttribute("board");
-	System.out.println(board);
 %>    
     
     
@@ -179,6 +178,7 @@
         .detail-a{
             padding: 10px;
             padding: 20px;
+            padding-bottom: 50px;
             border: 1px solid #3f3f3f;
         }
 
@@ -259,6 +259,27 @@
             font-size: 20px;
         }
         
+        #answerWriter{
+        	width: 130px;
+        	font-size: 18px;
+        	color: #FFC145;
+        	font-weight: bold;
+        	text-align: center;
+        }
+        
+        #answerContent2{
+        	width: 950px;
+        	padding: 25px;
+        }
+        
+        tbody > tr{
+         	border-bottom: 1px solid #3f3f3f;
+        }
+        
+        #answercreateDate{
+        	width: 100px;
+        }
+        
     </style>
 
 </head>
@@ -282,20 +303,16 @@
                 <div class="notice-content">
                     <div class="detail-box1">
                         <div class="detail-title-box1">
-                        
-                        
                             <div class="detail-category"><span>No.<%=board.getBoardNo() %> [<%= board.getBoardCategory() %>]</span></div>
                             <div class="detail-title"><span><%= board.getBoardTitle() %></span></div>
                         </div>
                     </div>
-
                     <div class="detail-box2">
                         <div class="detail-title-box2">
                             <div class="detail-date"><a><%= board.getCreateDate() %></a></div>
                             <div class="detail-count"><a>작성자 : <%= board.getBoardWriter() %></a></div>
                         </div>
                     </div>
-
                     <div class="detail-content-box">
                         <div class="detail-content">
                         <%= board.getBoardContent() %>
@@ -304,41 +321,30 @@
                 </div> <!-- notice-content -->
 
                 <div id="a-title">답변</div>
-
                 <div class="detail-content-a-box">
                     <div class="detail-a">
-	                    <c:choose>
-	                    	<c:when test="${ sessionScope.loginUser.memberNo eq 1}">
 		                        <table>
 		                            <thead>
 		                                <tr>
-		                                	<th>답변</th>
 		                                    <c:choose>
 		                                    	<c:when test="${!empty sessionScope.loginUser and sessionScope.loginUser.memberNo eq 1}">
+		                                	<th style="text-align:center;">답변</th>
 				                                        <td>
 				                                            <textarea id="answerContent"></textarea>
 				                                        </td>
-				                                        <td><button onclick="insertReply();" id="answerSubmit">등록dd</button></td>
+				                                        <td><button onclick="insertAnswer();" id="answerSubmit">등록</button></td>
 		                                    	</c:when>
-		                                    	
 		                                    	<c:otherwise>
 			                                        <td>
-			                                            <textarea id="answerContent-else" placeholder="관리자만 작성 가능합니다." readonly></textarea>
 			                                        </td>
-			                                        <td><button id="answerSubmit-else" disabled>등록</button></td>
+			                                        <td></td>
 		                                    	</c:otherwise>
 											</c:choose>
 		                                </tr>
 		                            </thead>
-		                            <tbody>
-		                            <a>댓글 등록되는 부분</a>
+		                            <tbody id="answer">
 		                            </tbody>
 		                        </table>
-	                        </c:when>
-	                        <c:otherwise>
-								<a></a>	                        
-	                        </c:otherwise>
-	                    </c:choose>
                     </div>
                     
                     <script>
@@ -348,61 +354,53 @@
                     		url : 'answerList.board',
                     		data : {boardNo : <%= board.getBoardNo() %>},
                     		success : function(result){
-                    			
                     			let resultStr = '';
                     			for(let i in result){
-                    				
                     				resultStr += '<tr>'
-                    						   + '<td>' + result[i].answerWriter + '</td>'
-                    						   + '<td>' + result[i].answerContent + '</td>'
-                    						   + '<td>' + result[i].createDate + '</td>'
+                    						   + '<td id="answerWriter">' + result[i].answerWriter + '</td>'
+                    						   + '<td id="answerContent2">' + result[i].answerContent + '</td>'
+                    						   + '<td id="answercreateDate">' + result[i].createDate + '</td>'
                     						   + '</tr>'
                     			};
-                    			$('#detail-a tbody').html(resultStr);
-                    			
+                    			$('#answer').html(resultStr);
                     		},
         					error : function(e){
         						console.log(e);
         					}
-                    		
                     	});
                     }
                     
-                    function insertReply(){
-        				
+            		$(function(){
+            			selectAnswerList();
+            			setInterval(selectAnswerList, 1000);
+            		});
+            	
+                    function insertAnswer(){
         				$.ajax({
         					url : 'answerInsert.board',
         					type : 'post',
         					data : {
-        						content : $('#answerContent').val(),
+        						answerContent : $('#answerContent').val(),
         						boardNo : <%= board.getBoardNo() %>
         					},
         					success : function(result){
         						if(result == 'success'){
         							$('#answerContent').val('');
+        							selectAnswerList();
         						};
         					}
-        					
         				});
         			}
                     </script>
-                    
-                    
                 </div>
-                
             </div> <!-- notice-content -->
-
                 <div class="notice-btn" align="center">
-                
                     <button class="board-detail-btn" onclick="backPage();">목록</button>
                     <% if(loginUser != null && loginUser.getMemberNo() == board.getUserNo()) { %>
 	                    <button class="board-detail-btn" onclick="boardUpdatePage();">수정</button> 
 	                    <button class="board-detail-btn" onclick="boardDelete();">삭제</button>
 	                <% } %>
                 </div>
-
-
-
         </div> <!-- notice-detail -->
 	</div>
     

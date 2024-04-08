@@ -518,9 +518,9 @@
 			                    <input type="file" id="file" name="upposter" style="padding-top: 35px;" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
                             </div>
 			                <div class="fileBox">
-			                    <input type="file" id="file" name="upposter" style="padding-top: 3px;" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
-			                    <input type="file" id="file" name="upposter" style="padding-top: 3px;"accept="image/*"> <!-- 이미지 파일 전부 받기 -->
-			                    <input type="file" id="file" name="upposter" style="padding-top: 3px;" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
+			                    <input type="file" id="file" name="stillcut1" style="padding-top: 3px;" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
+			                    <input type="file" id="file" name="stillcut2" style="padding-top: 3px;"accept="image/*"> <!-- 이미지 파일 전부 받기 -->
+			                    <input type="file" id="file" name="stillcut3" style="padding-top: 3px;" accept="image/*"> <!-- 이미지 파일 전부 받기 -->
 
                             </div>
 			            </div>
@@ -571,7 +571,7 @@
 			
 			            <div id="sub_10"><!--수정 버튼-->
 			                <input type="submit" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right;" value="등록">
-			            	<button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;" onclick="history.back();">목록</button>
+			            	<button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;" onclick="location.href='<%=contextPath%>/adminMovieCheck.admin?currentPage=1'">목록</button>
 			            </div><!--수정 버튼-->
 			            
 			           

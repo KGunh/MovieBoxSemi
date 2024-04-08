@@ -35,7 +35,6 @@ public class MemberAdminServlet extends HttpServlet {
 		String uri =request.getRequestURI();
 		
 		String mapping = uri.substring(uri.lastIndexOf("/")+1,uri.lastIndexOf("."));
-		System.out.println(mapping);
 		String view = "";
 		boolean flag = false;
 		
@@ -49,7 +48,12 @@ public class MemberAdminServlet extends HttpServlet {
 		case "modifyAdmin"   :  view = MAC.detailAdmin(request,response); break;
 		case "revisedAdmin"  :  view = MAC.updateAdmin(request,response); flag=true; break;
 		case "deleteAdmin"	 :  view = MAC.deleteAdmin(request,response); break;
+
 		case "keyword" 		 :  view = MAC.keyword(request,response); break;
+
+		case "search"		 :  view = MAC.search(request,response); break;  
+		
+
 		}
 		
 	

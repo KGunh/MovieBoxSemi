@@ -89,7 +89,7 @@
         .menu > li {
             width: 198px;
             text-align: center;
-            line-height: 57px;
+            line-height: 40px;
             background-color: #323232;
             list-style: none;
         }
@@ -242,11 +242,17 @@
             </div>
         </div>
         <div id="content">
-            <div class="content_1">
+           <div class="content_1">
                 <ul class="menu">
                     <li>
                         <a href="<%=contextPath %>/selectAdmin.mb">회원 관리</a>
                         <ul class="submenu">
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="<%=contextPath %>/adminScreenList.admin">예매 관리</a>
+                        <ul class="submenu" >
 
                         </ul>
                     </li>
@@ -318,7 +324,7 @@
                               <div id="buttoon">
                    <button type="submit" class="btn1">수정</button>
                     </form>
-                   <button type="button" class="btn1" onclick="dele();">삭제</button>
+                   <button type="button" class="btn1" onclick="deleleteCinema();">삭제</button>
                    <button  type="button" class="btn1" onclick="check();">닫기</button>
                 </div>
                 </div>

@@ -1,21 +1,25 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-<%@ page import="java.util.ArrayList, com.kh.movie.model.vo.*" %>
+<%@ page import="java.util.ArrayList, com.kh.movie.model.vo.*, com.kh.common.model.vo.*" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
 
 <%
-	ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("movieList");
-	Movie movie = (Movie)request.getAttribute("movie");
-	String cast = (String)request.getAttribute("cast");
+	ArrayList<Attachment> list = (ArrayList<Attachment>)request.getAttribute("attach");
 %>
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
 <title>영화 상세정보</title>
+
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <style>
         body{
@@ -51,7 +55,6 @@
         	width: 1200px;
         	font-size: 20px;
         	text-align: center;
-        
         }
 
 
@@ -130,7 +133,7 @@
         	resize:none;
         }
         
-        /* 스크롤바? */
+        /* 스크롤바 */
         textarea {
 		  scrollbar-width: thin;
 		  scrollbar-color: #383838 transparent;
@@ -167,26 +170,16 @@
         /* 영화 스틸컷*/
         #movie-detail-still{
             width: 1200px;
-            height: 630px;
+            height: auto;
             color: pink;
-            border: 1px solid pink;
+            margin-bottom: 50px;
         }
-
-        #detail-still-img{
-            width: 1100px;
-            height: 500px;
-            margin: 0 auto;
-            padding: 25px;
-            border: 1px solid darkorange;
-            padding-left: 45px;
-        }
-
-        .still-img{
-            width: 321px;
-            height: 450px;
-            border: 1px solid salmon;
-            float: left;
-            margin-right: 20px;
+        
+        #stilTitle{
+        	margin-top: 20px;
+        	font-size: 30px;
+        	color: white;
+        	font-weight: bold;
         }
         
         #video-src{
@@ -202,12 +195,14 @@
         	font-weight: bold;
         }
         
-		#stilTitle{
-        	margin-top: 20px;
-        	font-size: 30px;
-        	color: white;
-        	font-weight: bold;
+        .carousel-inner{
+        	margin-top: 30px;
         }
+        
+		.carousel-inner img {
+		    width: 1200px;
+		    height: auto;
+	    }
 
 
     </style>
@@ -267,23 +262,41 @@
                 <a id="videoTitle">예고편</a>
                 
                 <div id="video-src">
-                    ${ movie.trailerVideo }
+                    <iframe width="1200" height="600" src="${ movie.trailerVideo }"></iframe>
                 </div>
             </div>
-
-            <div id="movie-detail-still">
+            
+             <div id="movie-detail-still">
                 <a id="stilTitle">스틸컷</a>
-                <div id="detail-still-img">
-                    <div class="still-img">
-                        	스틸컷
-                    </div>
-                    <div class="still-img">
-                        	스틸컷
-                    </div>
-                    <div class="still-img">
-                        	스틸컷
-                    </div>
-                </div>
+
+				<div id="demo" class="carousel slide" data-ride="carousel">
+				
+				  <!-- Indicators -->
+				  <ul class="carousel-indicators">
+				    <li data-target="#demo" data-slide-to="0"></li>
+				    <li data-target="#demo" data-slide-to="1"></li>
+				    <li data-target="#demo" data-slide-to="2"></li>
+				    <li data-target="#demo" data-slide-to="3"></li>
+				  </ul>
+				  
+				  <!-- The slideshow -->
+		   	      <div class="carousel-inner">
+				      <c:forEach var="attachment" items="${stilCut}" varStatus="loop">
+			              <div class="carousel-item <c:if test="${loop.index == 0}">active</c:if>">
+						  	<img src="${attachment.filePath}/${attachment.changeName}" alt="Image">
+						  </div>
+					  </c:forEach>
+				  </div>
+				  
+				  <!-- Left and right controls -->
+				  <a class="carousel-control-prev" href="#demo" data-slide="prev">
+				    <span class="carousel-control-prev-icon"></span>
+				  </a>
+				  <a class="carousel-control-next" href="#demo" data-slide="next">
+				    <span class="carousel-control-next-icon"></span>
+				  </a>
+				</div>
+ 
             </div>
     	</c:otherwise>
     </c:choose>

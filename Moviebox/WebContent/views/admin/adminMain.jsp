@@ -193,7 +193,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminScreenList.admin">예매 관리</a>
+                        <a href="<%=contextPath %>/adminScreenList.admin">상영관 관리</a>
                         <ul class="submenu" >
 
                         </ul>

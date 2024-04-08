@@ -151,13 +151,15 @@ public class TheaterDao {
 		}
 		
 		return th;
-		
 	}
 
-	public Theater selectTheaterDetail(Connection conn, int theaterNo) {
-		Theater th = new Theater();
+	// 테스트
+	public ArrayList<Theater> selectTheaterDetail(Connection conn, int theaterNo) {
+		
+		ArrayList<Theater> theaterList = new ArrayList();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
+		
 		String sql = prop.getProperty("selectTheaterDetail");
 		
 		try {
@@ -166,17 +168,20 @@ public class TheaterDao {
 			pstmt.setInt(1, theaterNo);
 			rset = pstmt.executeQuery();
 			
-			if(rset.next()) {
-				th.setScreenNo(rset.getInt("SCREEN_NO"));
-				th.setTheaterNo(rset.getInt("THEATER_NO"));
-				th.setMovieNo(rset.getInt("MOVIE_NO"));
-				th.setMovieTitle(rset.getString("MOVIE_TITLE"));
-				th.setTheaterName(rset.getString("THEATER_NAME"));
-				th.setTheaterAddr(rset.getString("THEATER_ADDR"));
-				th.setMapLink(rset.getString("MAP_LINK"));
-				th.setFilePath(rset.getString("FILE_PATH"));
-				th.setChangeName(rset.getString("CHANGE_NAME"));
+			while(rset.next()) {
+				Theater theater = new Theater();
+				theater.setTheaterNo(rset.getInt("THEATER_NO"));
+				theater.setMovieNo(rset.getInt("MOVIE_NO"));
+				theater.setTheaterName(rset.getString("THEATER_NAME"));
+				theater.setFilePath(rset.getString("FILE_PATH"));
+				theater.setChangeName(rset.getString("CHANGE_NAME"));
+				theater.setTheaterAddr(rset.getString("THEATER_ADDR"));
+				theater.setMovieTitle(rset.getString("MOVIE_TITLE"));
+				theater.setMapLink(rset.getString("MAP_LINK"));
+				
+				theaterList.add(theater);
 			}
+			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -184,8 +189,43 @@ public class TheaterDao {
 			close(rset);
 			close(pstmt);
 		}
-		return th;
+		
+		return theaterList;
 	}
+		
+	
+	
+//	public Theater selectTheaterDetail(Connection conn, int theaterNo) {
+//		Theater th = new Theater();
+//		PreparedStatement pstmt = null;
+//		ResultSet rset = null;
+//		String sql = prop.getProperty("selectTheaterDetail");
+//		
+//		try {
+//			pstmt = conn.prepareStatement(sql);
+//			
+//			pstmt.setInt(1, theaterNo);
+//			rset = pstmt.executeQuery();
+//			
+//			if(rset.next()) {
+//				th.setTheaterNo(rset.getInt("THEATER_NO"));
+//				th.setMovieNo(rset.getInt("MOVIE_NO"));
+//				th.setMovieTitle(rset.getString("MOVIE_TITLE"));
+//				th.setTheaterName(rset.getString("THEATER_NAME"));
+//				th.setTheaterAddr(rset.getString("THEATER_ADDR"));
+//				th.setMapLink(rset.getString("MAP_LINK"));
+//				th.setFilePath(rset.getString("FILE_PATH"));
+//				th.setChangeName(rset.getString("CHANGE_NAME"));
+//			}
+//			
+//		} catch (SQLException e) {
+//			e.printStackTrace();
+//		} finally {
+//			close(rset);
+//			close(pstmt);
+//		}
+//		return th;
+//	}
 
 	public ArrayList<Theater> theaterAll(Connection conn) {
 		
@@ -253,7 +293,8 @@ public class TheaterDao {
 		
 		return list;
 	}
-		
+
+
 	
 	
 	

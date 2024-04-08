@@ -44,6 +44,7 @@ public class AjaxAnswerInsertController extends HttpServlet {
 		answer.setAnswerContent(answerContent);
 		answer.setAnswerWriter(String.valueOf(answerWriter));
 		
+		
 		int result = new BoardService().insertAnswer(answer);
 		
 		response.setContentType("text/html; charset=UTF-8");

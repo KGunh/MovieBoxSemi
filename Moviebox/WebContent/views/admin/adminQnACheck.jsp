@@ -5,7 +5,7 @@
 <%
 	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("adminQnACheckList");
 	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
-	System.out.print(pi);
+	//System.out.print(pi);
 	int currentPage = pi.getCurrentPage();
 	int startPage = pi.getStartPage();
 	int endPage = pi.getEndPage();
@@ -173,12 +173,14 @@
             font-size: 15px;
         }
 
-        #find { /*검색창*/
+        #searchTitle { /*검색창*/
             width: 300px;
             height: 35px;
             border-radius: 5px;
             border: 1px solid lightgray;
             font-size: 15px;
+			margin-left: 100px;/*셀렉창 지워서 검색창 중앙으로 배치*/
+			padding-left: 7px;
         }
 
 
@@ -337,20 +339,13 @@
                 </ul>    
             </div>
             <div class="content_2">
-                <p id="p">게시글관리 > 문의 게시글 관리</p>
+                <p id="p"> 문의 게시글 </p>
                
                 <div id="content_2_box"><!--컨텐트2 전체박스-->
 
                     <div id="cnt2_box_wrap"> <!-- 셀렉, 인풋, 버튼 전체 -->
-                        <select name="#" id="select" >
-                            <option value="">문의 종류</option>
-                            <option value="">예매 문의</option>
-                            <option value="">영화관 문의</option>
-                            <option value="">굿즈 문의</option>
-                            <option value="">기타 문의</option>
-                        </select>
-                            <input type="search" id="find">
-                            <button type="submit" id="btn" style="background-color: #FFC145; height: 35px;">
+                            <input type="text" id="searchTitle"  placeholder="문의 제목을 입력해 주세요.">
+                            <button type="button" id="btn" style="background-color: #FFC145; height: 35px;">
                                 <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                                     <path style="color:#212121;" d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
                                 </svg>
@@ -359,11 +354,7 @@
 
 
 
-                    <div id="cnt2_btn"><!--등록 버튼-->
-                        <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right;" onclick="insertButton()";
-                        >등록</button>
 
-                    </div><!--등록 버튼-->
 
 
 
@@ -375,19 +366,16 @@
                             <table class="table table-hover" style="text-align: center; font-size: small;">
                               <thead>
                                 <tr style="background-color: #eaeaea; margin-top: 0; height: 40px; color: #212121; border: 0px solid #cfcfcf; opacity: 0.8; text-align: center;">
-                                    <th style="width: 60px;">번호</th>
-                                    <th style="width: 100px;">카테고리</th>
-                                    <th style="width: 300px;">제목</th>
-                                    <th style="width: 100px;">작성자</th>
-                                    <th style="width: 100px;">등록일</th>
-                                    <th style="width: 80px;">조회수</th>
+                                    <th>번호</th>
+                                    <th>카테고리</th>
+                                    <th>제목</th>
+                                    <th>작성자</th>
+                                    <th>등록일</th>
                                 </tr>
                               </thead>
-                              <tbody>
+                              <tbody id="tbody">
                               <% if(list == null || list.isEmpty()) { %>
-                              	<tr>
-                              		<td colspan="6">조회 된 문의 목록이 없습니다. </td>
-                              	</tr>
+
                               <% }else{ %>
                               	<% for(Board b : list) {%>	
 	                                <tr>
@@ -396,7 +384,6 @@
 	                                    <td><%= b.getBoardTitle() %></td>
 	                                    <td><%= b.getBoardWriter() %></td>
 	                                    <td><%= b.getCreateDate() %></td>
-	                                    <td><%= b.getCount() %></td>
 	                                </tr>
 	                            <% } %>    
                               <% } %> 
@@ -454,6 +441,14 @@
  		function insertButton(){
  			location.href = '<%= contextPath %>/adminQnAInsert.admin';
  		}
+ 		
+ 		$('#tbody').on('click', 'tr', function(){
+			const boardNo = $(this).children().eq(0).text();
+			location.href='<%= contextPath %>/adminQnADetail.admin?boardNo=' + boardNo;
+ 		});
+ 		
+ 		
+ 		
 	</script>
 </body>
 </html>

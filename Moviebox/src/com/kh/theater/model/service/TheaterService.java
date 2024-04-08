@@ -47,14 +47,25 @@ public class TheaterService {
 		return th;
 	}
 
-	// 영화관 선택 시 해당 영화관 상세정보 출력
-	public Theater selectTheaterDetail(int theaterNo) {
+	// 테스트중
+	public ArrayList<Theater> selectTheaterDetail(int theaterNo) {
+		
 		Connection conn = getConnection();
-		Theater theater = new TheaterDao().selectTheaterDetail(conn, theaterNo);
+		ArrayList<Theater> theater = new TheaterDao().selectTheaterDetail(conn, theaterNo);
 		close(conn);
 		
 		return theater;
 	}
+
+
+	// 영화관 선택 시 해당 영화관 상세정보 출력
+//	public Theater selectTheaterDetail(int theaterNo) {
+//		Connection conn = getConnection();
+//		Theater theater = new TheaterDao().selectTheaterDetail(conn, theaterNo);
+//		close(conn);
+//		
+//		return theater;
+//	}
 
 	// 영화관 리스트
 	public ArrayList<Theater> theaterAll() {
@@ -81,6 +92,7 @@ public class TheaterService {
 		
 		return attachment;
 	}
+
 
 
 	

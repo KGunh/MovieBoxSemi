@@ -1,21 +1,25 @@
 package com.kh.movie.model.service;
 
-import static com.kh.common.JDBCTemplate.*;
+import static com.kh.common.JDBCTemplate.close;
+import static com.kh.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 
-import com.kh.common.model.vo.Genre;
+import com.kh.common.model.vo.Attachment;
 import com.kh.movie.model.dao.MovieDao;
 import com.kh.movie.model.vo.Movie;
 
 public class MovieService {
 
-	public ArrayList<Movie> selectMovieList() {
+	public List<Movie> selectMovieList() {
 		Connection conn = getConnection();
-		ArrayList<Movie> movieList = new MovieDao().selectMovieList(conn);
+		
+		List<Movie> movieList = new MovieDao().selectMovieList(conn);
 		
 		close(conn);
+		
 		return movieList;
 	}
 
@@ -38,12 +42,21 @@ public class MovieService {
 
 	public String detailMovieCast(int movieNo) {
 		Connection conn = getConnection();
-		
 		String cast = new MovieDao().detailMovieCast(conn, movieNo);
 		
 		close(conn);
 		
 		return cast;
+	}
+
+	public ArrayList<Attachment> stilCut(int movieNo) {
+
+		Connection conn = getConnection();
+		ArrayList<Attachment> stilCut = new MovieDao().stilCut(conn, movieNo);
+
+		close(conn);
+		
+		return stilCut;
 	}
 
 

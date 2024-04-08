@@ -1,11 +1,12 @@
 package com.kh.movie.controller;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.kh.common.model.vo.Genre;
+import com.kh.common.model.vo.Attachment;
 import com.kh.movie.model.service.MovieService;
 import com.kh.movie.model.vo.Movie;
 
@@ -14,7 +15,7 @@ public class MovieController {
 	// 전체 목록 출력
 	public String selectMovieList(HttpServletRequest request) {
 		
-		ArrayList<Movie> movieList = new MovieService().selectMovieList();
+		List<Movie> movieList = new MovieService().selectMovieList();
 		request.setAttribute("movieList", movieList);
 		
 		String view = "views/movie/movieList.jsp";
@@ -26,7 +27,7 @@ public class MovieController {
 	// 영화 카테고리 네비바
 	public String movieCategory(HttpServletRequest request, HttpServletResponse response) {
 		
-		ArrayList<Movie> list = new MovieService().selectMovieList();
+		List<Movie> list = new MovieService().selectMovieList();
 		
 		String genre = request.getParameter("genre");
 		String type = request.getParameter("type");
@@ -36,6 +37,7 @@ public class MovieController {
 				list = new MovieService().movieCategory(genre);
 			}
 		}
+		
 		request.setAttribute("genre", genre);
 		request.setAttribute("type", type);
 		request.setAttribute("movieList", list);
@@ -44,7 +46,6 @@ public class MovieController {
 		
 		return view;
 	}
-	
 	
 	
 	// 영화 상세정보
@@ -56,43 +57,17 @@ public class MovieController {
 		Movie movie = new MovieService().detailMovie(movieNo);
 		String cast = new MovieService().detailMovieCast(movieNo);
 		
+		ArrayList<Attachment> stilCut = new MovieService().stilCut(movieNo);
+		
 		if(movie != null) {
 			request.setAttribute("movie", movie);
 			request.setAttribute("cast", cast);
+			request.setAttribute("stilCut", stilCut);
 
 			view = "views/movie/movieDetail.jsp";
 		} else {
 			view = "index.jsp";
-		
 		}
-		
 		return view;
 	}
-	
-	public String detailMovieList(HttpServletRequest request, HttpServletResponse response) {
-		
-		ArrayList<Movie> movieList = new MovieService().selectMovieList();
-		request.setAttribute("movieList", movieList);
-		
-		String view = "views/movie/movieDetail.jsp";
-		
-		return view;
-	}
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 }

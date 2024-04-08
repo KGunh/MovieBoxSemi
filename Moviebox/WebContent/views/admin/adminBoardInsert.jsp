@@ -1,17 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -23,12 +12,7 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
 
-
-
-
     <style>
-
-        
         div{
            /* border : 1px solid red;  */
             box-sizing : border-box;
@@ -54,8 +38,6 @@
             height: 150px;
             background-color: #212121;
         }
-
-
 
         #content{
             width: 1200px;
@@ -86,8 +68,6 @@
 
         }
 
-
-
         .menu {
             width: 200px;
             overflow: hidden;
@@ -105,7 +85,6 @@
 
         }
 
-
         .menu a {
             color: #fff;
             text-decoration: none;
@@ -118,7 +97,6 @@
             text-decoration: none;
             
         }
-
 
         .submenu > li { /*게시글관리 - 공지관리/문의 게시글 관리*/
             line-height: 50px;
@@ -143,17 +121,12 @@
             height: 100px; /*서브메뉴 li한개의 높이 50*5*/
             transition-duration: 1s;
         }
-
-
-
-
+        
         .top_1 > h1{
             color: #FFC145;
             text-align: center;
             line-height: 150px;
         }
-
-
 
         .menu .submenu{
             padding-left: 0;
@@ -170,7 +143,6 @@
             height: 690px;
             /* border : 1px solid rgb(255, 150, 79); */
         }
-
 
         #p{
             margin-top: 24px;
@@ -339,17 +311,18 @@
             <div class="content_2"><!--content_2 시작-->
                 <p id="p">게시글관리 > 공지 관리 > 공지 등록</p>
 
-            <form>
+           <form action="<%=contextPath %>/adminBoardInsert.admin" method="post" id="insert-box">
+            	<input type="hidden" name="userNo" value="<%= loginUser.getMemberNo()%>" />
+            
                 <div id="content_2_box"><!--컨텐트2 전체박스-->
                     <div id="box_wrap">
 
                         <div id="box_category">
-                            <select name="#" id="category" >
-                                <option value="">공통</option>
-                                <option value="">예매</option>
-                                <option value="">영화관</option>
-                                <option value="">굿즈</option>
-                                <option value="">기타</option>
+                            <select name="category" id="category" >
+                                <option value="1">예매</option>
+                                <option value="2">영화관</option>
+                                <option value="3">굿즈</option>
+                                <option value="4">기타</option>
                             </select>
                         </div>
 
@@ -366,15 +339,12 @@
                         </div>
 
                         <div id="box_3">
-                            <textarea class="form-control" rows="5" name="content" style="resize:none; height: 250px; border-radius: 8px;">내용!!</textarea>
+                            <textarea class="form-control" rows="5" name="content" style="resize:none; height: 250px; border-radius: 8px;"></textarea>
                         </div>
-
-                        <div class="fileBox">
-                            <input type="file" name="file" id="file">
-                        </div>
+>
                         
                         <div id="button"><!--등록 버튼-->
-                            <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">등록</button>
+                            <button type="submit" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">등록</button>
                             <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">목록</button>
                         </div><!--등록 버튼-->
                     </div>

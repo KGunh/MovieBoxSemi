@@ -163,7 +163,17 @@ public class MemberAdminDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = prop.getProperty("deleteAdmin");
-		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		
 		
 		return result;
@@ -193,6 +203,8 @@ public class MemberAdminDao {
 						
 					theater.add(Cinema);	
 						
+					
+					
 						
 			}	
 			
@@ -324,7 +336,7 @@ public class MemberAdminDao {
 		
 	}
 	
-	public int modify(Connection conn, Theater theater) {
+	public int modifyCinema(Connection conn, Theater theater) {
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -350,11 +362,11 @@ public class MemberAdminDao {
 		return result; 
 	}
 	
-	public int dele(Connection conn,int theaterNo) {
+	public int deleleteCinema(Connection conn,int theaterNo) {
 		System.out.println(theaterNo);
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String sql = prop.getProperty("dele");
+		String sql = prop.getProperty("deleleteCinema");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -372,6 +384,96 @@ public class MemberAdminDao {
 		return result; 
 		
 	}
+	
+	
+	public ArrayList<Member> search(Connection conn,String category, String search){
+		Member member = new Member();
+		ArrayList<Member> list = new ArrayList<Member>();
+		
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("search");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			
+			pstmt.setString(1, category);
+			pstmt.setString(2, search);
+			
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				member.setMemberNo(rset.getInt("MEMBER_NO"));
+				member.setMemberName(rset.getString("MEMBER_NAME"));
+				member.setEnrollDate(rset.getDate("ENROLL_DATE"));
+				member.setStatus(rset.getString("STATUS"));
+				member.setPhone(rset.getString("PHONE"));
+				
+				list.add(member);
+				
+			}
+			
+			
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		
+		return list; 
+		
+		
+	}
+	
+	public ArrayList<Theater> searchCinema(Connection conn, String category, String search){
+		
+		Theater theater = new Theater();
+		ArrayList<Theater> list = new ArrayList<Theater>();
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("searchCinema");
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, category);
+			pstmt.setString(2, search);
+			
+			rset = pstmt.executeQuery();
+			
+			while(rset.next()) {
+				theater.setTheaterNo(rset.getInt("THEATER_NO"));
+				theater.setUpdateDate(rset.getString("THEATER_UPDATE"));
+				theater.setLocationName(rset.getString("LOCATION_NAME"));
+				theater.setTheaterName(rset.getString("THEATER_NAME"));
+				theater.setLocalCode(rset.getString("LOCATION_CODE"));
+				
+				list.add(theater);
+			
+			}
+			System.out.println(list);
+			
+			
+			System.out.println(search);
+			System.out.println(category);
+			
+			
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return list; 
+		
+	}
+	
 	
 }
 	

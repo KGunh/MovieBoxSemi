@@ -384,12 +384,10 @@
                               
 			                    <tbody id="tbody">
 			                    <% if(list == null || list.isEmpty()) { %>
-			                        <tr>
-			                            <td colspan="6">조회 된 영화 목록이 없습니다. </td>
-			                        </tr>
+
 			                     <% } else { %>
 			                     	<% for(Movie m : list) { %>                                   
-											<tr class="mvDetail">
+											<tr>
 			                                    <td><%= m.getMovieNo() %></td>
 			                                    <td><%= m.getMovieRelease() %></td>
 			                                    <td><%= m.getMovieTitle() %></td>
@@ -458,7 +456,14 @@
  		}
  		
  		$('#tbody').on('click', 'tr', function(){
-			const movieNo = $(this).children().eq(0).text();
+ 		    const children = $(this).children();
+ 		    
+ 		    if (children.length === 0) {
+ 		        return;
+ 		    }
+ 		    
+ 		    const movieNo = children.eq(0).text();
+		    
 			location.href='<%= contextPath %>/adminMovieDetail.admin?movieNo=' + movieNo;
  		});
     	
@@ -491,21 +496,6 @@
 				}
     		});
     	})
-    	
-
-    	
 	</script>
-	
-	<script type="text/javascript">
-    	$(document).ready(function() {
-    		
-    		selectMovieList();
-    	});
-    	
-    	function selectMovieList() {
-    		// ajax통신 -> 영화제목을 DB에서 던져서 조회해서 받아야와서 
-    	}
-    	
-    </script>
 </body>
 </html>

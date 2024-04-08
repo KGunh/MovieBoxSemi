@@ -102,7 +102,7 @@
         .menu > li {
             width: 198px;
             text-align: center;
-            line-height: 60px;
+            line-height: 40px;
             background-color: #323232;
             list-style: none;
            
@@ -320,32 +320,41 @@
             </div>
 
         </div>
-        <div id="content" >
+       <div id="content">
             <div class="content_1">
                 <ul class="menu">
                     <li>
                         <a href="<%=contextPath %>/selectAdmin.mb">회원 관리</a>
                         <ul class="submenu">
+
+                        </ul>
+                    </li>
+                    <li>
+                        <a href="<%=contextPath %>/adminScreenList.admin">예매 관리</a>
+                        <ul class="submenu" >
+
                         </ul>
                     </li>
                     <li>
                         <a href="<%=contextPath %>/adminMovieCheck.admin?currentPage=1">영화 관리</a>
-                        <ul class="submenu">
+                        <ul class="submenu" >
+
                         </ul>
                     </li>
                     <li>
                         <a href="<%=contextPath%>/checkAdmin.cm">영화관 관리</a>
                         <ul class="submenu">
+
                         </ul>
-                    </li>
+                    </li> 
                     <li class="post">
                         <a href="#">게시글 관리</a>
                         <ul class="submenu">
-                         <li><a href="<%=contextPath %>/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
+                        <li><a href="<%=contextPath %>/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
                         <li><a href="<%=contextPath %>/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
                         </ul>
                     </li>
-                </ul>
+                </ul>    
             </div>
             <div class="content_2">
                 <h2>영화관 관리 〉영화관 등록</h2>

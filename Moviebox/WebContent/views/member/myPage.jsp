@@ -422,7 +422,7 @@
                 <div class="info-content1">
                     <div class="info-name"><%=memberName %> 님 <div class="info-id"><%=memberId %></div></div>
                     <div class="info-address"><%=localCode%> <%=address %></div>
-                    <div class="info-email"><%=memberName%></div>
+                    <div class="info-email"><%=email%></div>
                     <div class="info-genre">
                     <%if(list == null) {%>
                     <%} else { %>
@@ -445,7 +445,7 @@
             	<h5 align="center">고객님의 최근 예매 내역이 존재하지 않습니다.</h5>
             <%} else { %>
             
-                <div class="history-area-image"><img id="poster" src="<%=contextPath %>/<%= movieList.get(0).getFilePath()%>/<%=movieList.get(0).getFileName() %>"></div>
+                <div class="history-area-image"><img id="poster" src="<%=contextPath %>/<%= movieList.get(0).getFilePath()%>/<%=movieList.get(0).getChangeName() %>"></div>
                 <div class="history-area-list">
                 	<%Price price = resList.get(0).getPrice(); %>
                     <div>영화&emsp;<%=resList.get(0).getMovieTitle() %></div>
@@ -471,7 +471,17 @@
             		<%for(int i=0;i < boardList.size(); i ++) {%>
             		<% if(i==2) { break;}%>
                 <div class="QNA-area-list" style="border-bottom: 1px solid rgb(158, 157, 157);">
-                    <div id="QNA-title"><%=boardList.get(i).getBoardTitle() %></div>
+                    <div id="QNA-title">
+                    	<%
+                    		String boardTitle = "";
+                    		if((boardList.get(i).getBoardTitle()).length() > 20){
+                    			boardTitle = boardList.get(i).getBoardTitle().substring(0,20) + "...";
+                    		} else{
+                    			boardTitle = boardList.get(i).getBoardTitle();
+                    		}
+                    	%>
+                    	<%=boardTitle %>
+                    </div>
                     <div id="QNA-createDate"><%=boardList.get(i).getCreateDate() %></div>
                     
                     <%if(answerList == null) {%>
@@ -499,7 +509,7 @@
                         <table>
                             <thead>
                                 <tr>
-                                    <th>주문번호 <%=orderList.get(i).getOrderNo() %></th>
+                                    <th colspan="3">주문번호 <%=orderList.get(i).getOrderNo() %></th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -537,8 +547,9 @@
                             </tbody>
                         </table>
                         <%} %>
+					<%} else { %>
+							<h5 align="center">고객님의 최근 구매 내역이 존재하지 않습니다.</h5>
 					<%} %>
-
                     </div>
             </div>
             

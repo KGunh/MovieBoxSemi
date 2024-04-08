@@ -351,7 +351,7 @@
         </div>
 
         <div id="content">
-            <div class="content_1">
+           	<div class="content_1">
                 <ul class="menu">
                     <li>
                         <a href="<%=contextPath %>/selectAdmin.mb">회원 관리</a>
@@ -390,12 +390,12 @@
             <!------------------------------------------------------------>
 
             <div class="content_2"><!--content_2 시작-->
-                <p id="p">영화 관리 > 상세보기</p>
+                <p id="p"> 상세 보기 </p>
 
 
                 <div id="content_2_box"><!--컨텐트2 전체박스-->
                     <div id="box_1">
-                        <<div id="postimg"><img style="width: 250px; height: 350px; border: 1px solid rgb(177, 177, 177);" src="<%= p %>"></div>
+                        <div id="postimg"><img style="width: 250px; height: 350px; border: 1px solid rgb(177, 177, 177);" src="<%= p %>"></div>
                         <div id="plot">
                             
                             <div id="plotPage">
@@ -448,31 +448,31 @@
 
                             <div id="right">
                                 <div id="right_1">
-                                    <input type="text" class="form-control" name='title' value="<%= m.getMovieTitle() %>" readonly>
+                                    <input type="text" class="form-control" name='movieTitle' value="<%= m.getMovieTitle() %>" readonly>
                                 </div>    
 
                                 <div id="right_2">
-                                    <input type="text" class="form-control" name='title' value="<%= m.getGenreName() %>" readonly>
+                                    <input type="text" class="form-control" name='movieName' value="<%= m.getGenreName() %>" readonly>
                                 </div>    
 
                                 <div id="right_3">
-                                    <input type="text" class="form-control" name='title' value="<%= m.getMovieRt() %>" readonly>
+                                    <input type="text" class="form-control" name='running_time' value="<%= m.getMovieRt() %>" readonly>
                                 </div>    
 
                                 <div id="right_4">
-                                    <input type="text" class="form-control" name='title' value="<%= m.getMovieRated() %>" readonly>
+                                    <input type="text" class="form-control" name='rated' value="<%= m.getMovieRated() %>" readonly>
                                 </div>    
 
                                 <div id="right_5">
-                                    <input type="text" class="form-control" name='title' value="<%= m.getMovieRelease()%>" readonly>
+                                    <input type="text" class="form-control" name='release_date' value="<%= m.getMovieRelease()%>" readonly>
                                 </div>    
 
                                 <div id="right_6">
-                                    <input type="text" class="form-control" name='title' value="<%= m.getDirectorName()%>" readonly>
+                                    <input type="text" class="form-control" name='director_name' value="<%= m.getDirectorName()%>" readonly>
                                 </div>    
 
                                 <div id="right_7">
-                                    <input type="text" class="form-control" name='title' value="<%= c %>" readonly>
+                                    <input type="text" class="form-control" name='actors' value="<%= c %>" readonly>
                                 </div>    
                             
                             </div>

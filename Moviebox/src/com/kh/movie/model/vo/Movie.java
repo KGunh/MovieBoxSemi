@@ -13,21 +13,13 @@ public class Movie {
 	private String genreNo;
 	private int directorNo;
 	private String filePath;
-    private String fileName;
-    
 	private String movieUpdate;
 	private String genreName;
-    
 	private String directorName;
-
 	private String watchDate;
-	
 	private int screenNo;
-	
 	private String changeName;
-	
 	private String trailerVideo;
-	
 	
 	public Movie() {
 		super();
@@ -169,13 +161,6 @@ public class Movie {
 	public void setFilePath(String filePath) {
 		this.filePath = filePath;
 	}
-	public String getFileName() {
-		return fileName;
-	}
-	public void setFileName(String fileName) {
-		this.fileName = fileName;
-	}
-	
 	
 	
 	public String getMovieUpdate() {

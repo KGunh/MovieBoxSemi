@@ -193,6 +193,7 @@
 </head>
 <body>
 	<%@ include file="../common/header.jsp" %>
+
 	
 	<%
 	
@@ -204,6 +205,7 @@
 	%>
 	
 	<% if(loginUser == null) {%>
+			
 		<script>
 			location.href = ('<%=contextPath%>/loginForm.me');
 		</script>
@@ -235,7 +237,7 @@
            
                 <div class="res-img">
 
-                    <div><img id="poster" src="<%=contextPath %>/<%= movieList.get(i).getFilePath()%>/<%=movieList.get(i).getFileName() %>" alt=""></div>
+                    <div><img id="poster" src="<%=contextPath %>/<%= movieList.get(i).getFilePath()%>/<%=movieList.get(i).getChangeName() %>" alt=""></div>
                 </div>
                 <div class="res-content">
                     <div>
@@ -262,7 +264,7 @@
                                     <td>날짜</td>
                                     <td><%=resList.get(i).getWatchDate() %></td>
                                     <td>좌석</td>
-                                    <td style="font-size: 12px;">
+                                    <td style="font-size: 10px;">
                                     <%
                                     	List<Seat> seatList = resList.get(i).getSeatList(); 
 										for(Seat s : seatList){   

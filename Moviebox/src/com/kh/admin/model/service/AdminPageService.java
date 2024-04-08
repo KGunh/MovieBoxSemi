@@ -15,6 +15,7 @@ import com.kh.common.model.vo.Attachment;
 import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.PageInfo;
 import com.kh.movie.model.vo.Movie;
+import com.kh.notice.model.dao.NoticeDao;
 import com.kh.notice.model.vo.Notice;
 import com.kh.theater.model.vo.Screen;
 import com.kh.theater.model.vo.Theater;
@@ -101,7 +102,7 @@ public class AdminPageService {
 	
 	
 	
-	//장르카테고리
+	//장르카테고리(영화등록 시 필요)
 	public ArrayList<Genre> SelectGenreList() {
 		
 		Connection conn = getConnection();
@@ -115,7 +116,7 @@ public class AdminPageService {
 	
 	
 	
-	//감독체크
+	//감독체크(영화등록 시 필요)
 	public int SelectDirectorName(String directorName) {
 		
 		Connection conn = getConnection();
@@ -128,7 +129,7 @@ public class AdminPageService {
 		
 	}
 	
-	//감독 등록전 시퀀스 조회
+	//감독 등록전 시퀀스 조회(영화등록 시 필요)
 	public int SelectDirectorNo() {
 		Connection conn = getConnection();
 		
@@ -140,7 +141,7 @@ public class AdminPageService {
 	}
 	
 	
-	//감독 등록
+	//감독 등록(영화등록 시 필요)
 	public int InsertDirector(int directorNo, String directorName) {
 		Connection conn = getConnection();
 		
@@ -159,7 +160,7 @@ public class AdminPageService {
 	
 	
 	
-	//출연진 이름으로 출연진NO조회
+	//출연진 이름으로 출연진NO조회(영화등록 시 필요)
 	public int SelectActorName(String actorName) {
 		
 		Connection conn = getConnection();
@@ -174,7 +175,7 @@ public class AdminPageService {
 	
 	
 	
-	//출연진 등록전 시퀀스 조회
+	//출연진 등록전 시퀀스 조회(영화등록 시 필요)
 	public int SelectActorNo() {
 		Connection conn = getConnection();
 		
@@ -186,7 +187,7 @@ public class AdminPageService {
 	}
 	
 	
-	//출연진 등록
+	//출연진 등록(영화등록 시 필요)
 	public int InsertActor(int actorNo, String actorName) {
 		Connection conn = getConnection();
 		
@@ -204,7 +205,7 @@ public class AdminPageService {
 	}
 	
 	
-	//영화 등록전 시퀀스 조회
+	//영화 등록전 시퀀스 조회(영화등록 시 필요)
 	public int SelectMovieNo() {
 		Connection conn = getConnection();
 		
@@ -215,7 +216,7 @@ public class AdminPageService {
 		return movieNo; 
 	}
 	
-	//영화 등록
+	//영화 등록(영화등록 시 필요)
 	public int InsertMovie(Movie movie) {
 		Connection conn = getConnection();
 		
@@ -250,11 +251,10 @@ public class AdminPageService {
 	}
 	
 	
-	//Cast등록
-	public int InsertCast(int movieNo, int actorNo) {
+	public int selectDuplicateCast(int movieNo, int actorNo) {
 		Connection conn = getConnection();
 		
-		int result = new AdminPageDao().InsertCast(conn, movieNo, actorNo);
+		int result = new AdminPageDao().selectDuplicateCast(conn, movieNo, actorNo);
 		
 		if(result > 0) {
 			commit(conn);
@@ -265,6 +265,17 @@ public class AdminPageService {
 		close(conn);
 		
 		return result;
+	}
+	
+	//Cast등록(영화등록 시 필요)
+	public int InsertCast(int movieNo, int actorNo) {
+		Connection conn = getConnection();
+		
+		int listCount = new AdminPageDao().InsertCast(conn, movieNo, actorNo);
+		
+		close(conn);
+		
+		return listCount;
 	}
 
 	//
@@ -385,6 +396,7 @@ public class AdminPageService {
 		return fileNo; 
 	}
 	
+	//Attachment에 등록(영화등록 시 필요)
 	public int InsertAttach(int movieNo, ArrayList<Attachment> list) {
 		Connection conn = getConnection();
 		
@@ -401,4 +413,128 @@ public class AdminPageService {
 		return result;
 	}
 	
+	
+	// 공지 게시글 상세보기
+	public Notice adminBoardDetail(int noticeNo) {
+		
+		Connection conn = getConnection();
+		
+		Notice notice = new AdminPageDao().adminBoardDetail(conn, noticeNo);
+		
+		close(conn);
+		
+		return notice;
+	}
+	
+	
+	// 문의 게시글 상세보기
+	public Board adminQnADetail(int boardNo) {
+		
+		Connection conn = getConnection();
+		
+		Board board = new AdminPageDao().adminQnADetail(conn, boardNo);
+		
+		close(conn);
+		
+		return board;
+	}
+	
+	//공지 삭제
+	public int adminBoardDelete(int noticeNo) {
+		Connection conn = getConnection();
+		int result = new AdminPageDao().adminBoardDelete(conn, noticeNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+	
+	
+	
+	//문의 삭제
+	public int adminQnADelete(int boardNo) {
+		Connection conn = getConnection();
+		int result = new AdminPageDao().adminQnADelete(conn, boardNo);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+	
+	
+	//공지등록
+	public int adminBoardInsert(Notice notice) {
+		Connection conn = getConnection();
+		int result = new AdminPageDao().adminBoardInsert(conn, notice);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		return result;
+	}
+	
+	public int adminBoardUpdate(Notice notice) {
+		
+		Connection conn = getConnection();
+		
+		int result = new AdminPageDao().adminBoardUpdate(conn, notice);
+		
+		if(result > 0) {
+			commit(conn);
+		} else {
+			rollback(conn);
+		}
+		
+		close(conn);
+		
+		return result;
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 }
+

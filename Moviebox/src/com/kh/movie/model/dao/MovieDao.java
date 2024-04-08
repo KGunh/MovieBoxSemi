@@ -9,8 +9,10 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Properties;
 
+import com.kh.common.model.vo.Attachment;
 import com.kh.movie.model.vo.Movie;
 
 public class MovieDao {
@@ -27,9 +29,8 @@ public class MovieDao {
 		}
 	}
 
-	public ArrayList<Movie> selectMovieList(Connection conn) {
-		
-		ArrayList<Movie> movieList = new ArrayList();
+	public List<Movie> selectMovieList(Connection conn) {
+		List<Movie> movieList = new ArrayList<Movie>();
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
@@ -41,19 +42,20 @@ public class MovieDao {
 			
 			while(rset.next()) {
 				Movie movie = new Movie();
-				movie.setMovieNo(rset.getInt("MOVIE_NO"));
-				movie.setMovieTitle(rset.getString("MOVIE_TITLE"));
-				movie.setMovieRt(rset.getString("MOVIE_RT"));
-				movie.setMovieRated(rset.getString("MOVIE_RATED"));
+				
 				movie.setMovieRelease(rset.getString("MOVIE_RELEASE"));
-				movie.setMovieStory(rset.getString("MOVIE_STORY"));
-				movie.setStatus(rset.getString("STATUS"));
-				movie.setGenreName(rset.getString("GENRE_CODE"));
-				movie.setDirectorName(rset.getString("DIRECTOR_NO"));
-				movie.setMovieUpdate(rset.getString("MOVIE_UPDATE"));
-				movie.setFilePath(rset.getString("FILE_PATH"));
-				movie.setChangeName(rset.getString("CHANGE_NAME"));
 				movie.setTrailerVideo(rset.getString("TRAILER_VIDEO"));
+				movie.setMovieUpdate(rset.getString("MOVIE_UPDATE"));
+				movie.setDirectorName(rset.getString("DIRECTOR_NO"));
+				movie.setMovieTitle(rset.getString("MOVIE_TITLE"));
+				movie.setMovieRated(rset.getString("MOVIE_RATED"));
+				movie.setMovieStory(rset.getString("MOVIE_STORY"));
+				movie.setChangeName(rset.getString("CHANGE_NAME"));
+				movie.setGenreName(rset.getString("GENRE_CODE"));
+				movie.setFilePath(rset.getString("FILE_PATH"));
+				movie.setMovieRt(rset.getString("MOVIE_RT"));
+				movie.setMovieNo(rset.getInt("MOVIE_NO"));
+				movie.setStatus(rset.getString("STATUS"));
 				
 				movieList.add(movie);
 			}
@@ -64,7 +66,6 @@ public class MovieDao {
 			close(rset);
 			close(pstmt);
 		}
-		
 		
 		return movieList;
 	}
@@ -179,6 +180,38 @@ public class MovieDao {
 		}
 
 		return cast;
+	}
+
+	public ArrayList<Attachment> stilCut(Connection conn, int movieNo) {
+
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		String sql = prop.getProperty("stilCut");
+		
+		ArrayList<Attachment> stilCutList = new ArrayList();
+
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, movieNo);
+			rset = pstmt.executeQuery();
+			
+	        while (rset.next()) {
+	        	Attachment attach = new Attachment();
+	        	attach.setMovieNo(rset.getInt("MOVIE_NO"));
+	        	attach.setFilePath(rset.getString("FILE_PATH"));
+	        	attach.setChangeName(rset.getString("CHANGE_NAME"));
+	        	
+	        	stilCutList.add(attach);
+	        }
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return stilCutList;
 	}
 
 	

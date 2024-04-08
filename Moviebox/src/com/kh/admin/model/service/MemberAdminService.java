@@ -141,10 +141,10 @@ public class MemberAdminService {
 		
 	}
 	
-	public int modify(Theater theater) {
+	public int modifyCinema(Theater theater) {
 		
 		Connection conn = JDBCTemplate.getConnection();
-		int result = new MemberAdminDao().modify(conn, theater);
+		int result = new MemberAdminDao().modifyCinema(conn, theater);
 		JDBCTemplate.close(conn);
 		
 		
@@ -163,11 +163,11 @@ public class MemberAdminService {
 		
 	}
 	
-	public int dele(int theaterNo){
+	public int deleleteCinema(int theaterNo){
 		
 		
 		Connection conn = JDBCTemplate.getConnection();
-		int result = new MemberAdminDao().dele(conn,theaterNo);
+		int result = new MemberAdminDao().deleleteCinema(conn,theaterNo);
 		JDBCTemplate.close(conn);
 		
 		
@@ -179,6 +179,28 @@ public class MemberAdminService {
 		
 		return result; 
 		
+	}
+	
+	public ArrayList<Member> search(String category, String search) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<Member> list = new MemberAdminDao().search(conn, category, search);
+		JDBCTemplate.close(conn);
+		
+		return list; 
+		
+	}
+	
+	public ArrayList<Theater> searchCinema(String category, String search) {
+		
+		Connection conn = JDBCTemplate.getConnection();
+		
+		ArrayList<Theater> theater = new MemberAdminDao().searchCinema(conn, category, search);
+		
+		JDBCTemplate.close(conn);
+		
+		return theater;
 	}
 	
 }
