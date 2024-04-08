@@ -6,19 +6,22 @@ window.onload = function(){
             ticketNo : selectTicketNo
         },
         success : function(result) {
-            var imgFilePath = path + '/' + result.movie.filePath + '/' + result.movie.changeName;
-            var selectSeatList = '';
+            let imgFilePath = path + '/' + result.movie.filePath + '/' + result.movie.changeName;
+            let selectSeatList = '';
 
-            $('#movie-poster').html('<img src="' + imgFilePath + '" alt="영화포스터">');
-            $('#movie-info').children().eq(0).html(result.movie.movieTitle);
-            $('#movie-info').children().eq(1).html('개봉일 : ' + result.movie.movieRelease);
-            $('#movie-info').children().eq(2).html(result.movie.genreName+ ' | ' + result.movie.movieRt + '분');
-        
-            $('#print-reservation-info').children().eq(0).html(result.ticketNo);
-            $('#print-reservation-info').children().eq(1).html(result.watchDate);
-            $('#print-reservation-info').children().eq(2).html(result.theaterName);
-            $('#print-reservation-info').children().eq(3).html(result.screenName);
-            $('#print-reservation-info').children().eq(4).html(Number(result.price.studentCount + result.price.commonCount) + '인');
+            let resvItems = [
+                result.ticketNo,
+                result.watchDate,
+                result.theaterName,
+                result.screenName,
+                Number(result.price.studentCount + result.price.commonCount) + '인'
+            ];
+
+            let InfoItems = [
+                result.movie.movieTitle,
+                '개봉일 : ' + result.movie.movieRelease,
+                result.movie.genreName + ' | ' + result.movie.movieRt + '분'
+            ];
 
             for(let i = 0; i < result.seatList.length; i++){
                 selectSeatList += result.seatList[i].seatNo;
@@ -27,6 +30,16 @@ window.onload = function(){
                     selectSeatList += ', ';
                 };
             };
+
+            $('#movie-poster').html('<img src="' + imgFilePath + '" alt="영화포스터">');
+            
+            $('#movie-info').children().each(function(i) {
+                $(this).html(InfoItems[i]);
+            });
+
+            $('#print-reservation-info').children().each(function(i) {
+                $(this).html(resvItems[i]);
+            });
 
             $('#print-reservation-info').children().eq(5).html(selectSeatList);
             $('#print-reservation-info').children().eq(6).html(result.price.totalPrice + '원');
