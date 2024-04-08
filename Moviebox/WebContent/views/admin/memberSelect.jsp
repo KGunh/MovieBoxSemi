@@ -372,6 +372,16 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
             <div class="content_2">
                 <h2>회원 관리</h2>
                 <div class="content_2_top">
+
+                 <form>
+                   <select name="#" id="select" >
+                    <option value="" >전체</option>
+                    <option value="">가입일</option>
+                    <option value="">탈퇴여부</option>
+                   </select>
+                    <input type="search" id="find" name="search">
+                    <button type="submit" id="btn" style="background-color: #FFC145;" onclick="keyword();">
+
                  <form action="search.mb" method="get">
                    <select name="category" id="select" >
                     
@@ -381,11 +391,14 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                    </select>
                     <input type="text" id="find" name="finding" placeholder="키워드를 입력해주세요">
                     <button type="submit" id="btn" style="background-color: #FFC145;">
+
                         <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-search" viewBox="0 0 16 16">
                             <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001q.044.06.098.115l3.85 3.85a1 1 0 0 0 1.415-1.414l-3.85-3.85a1 1 0 0 0-.115-.1zM12 6.5a5.5 5.5 0 1 1-11 0 5.5 5.5 0 0 1 11 0"/>
                           </svg>
                     </button>
-					</form>
+
+				</form>
+
                 </div>
                 <div id="delete" >
                 <!--     <button type="button" id="btn1" onclick="deleteadmin();">탈퇴</button>  -->
@@ -429,15 +442,23 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                       </div>
                       
                       <script> 
-                    
-                    	$(function(){
+                   
+                    	
+                    	function keyword(){
+                    		
+                    			location.href='<%=contextPath%>/keywordSearch.mb';
+                    		
+                    		
+                    	}
+
                       		$('.member').click(function(){
                       			const memberNo = $(this).children().eq(0).text();
                       			location.href='<%=contextPath%>/modifyAdmin.mb?memberNo=' + memberNo;
                       		});
-                      	})
+                
                     	
                     	
+
 
                       
                       </script>
