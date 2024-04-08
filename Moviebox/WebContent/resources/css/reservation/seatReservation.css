@@ -24,6 +24,7 @@ a{
     font-weight: 700;
     line-height: 80px;
     padding-left: 30px;
+    user-select: none;
 }
 
 #selectPersonArea{
@@ -86,12 +87,14 @@ a{
     padding-left: 30px;
     font-size: 28px;
     font-weight: 700;
+    user-select: none;
 }
 
 #select-wrap{
     height: 100px;
     width: 500px;
     margin: auto;
+    user-select: none;
 }
 
 #movie-info{
@@ -169,6 +172,7 @@ a{
     font-size: 24px;
     font-weight: 700;
     margin-left: 850px;
+    user-select: none;
 }
 
 #select-btn{
