@@ -292,7 +292,7 @@
     var day= ('0' + date.getDate()).slice(-2);
         $(function(){
             
-
+			// 지역 추가
             $.ajax({
                 url : 'locationList.admin',   
                 success : result => {
@@ -306,6 +306,7 @@
                 },
                 async : false
             });
+			// 처음 화면설정
             $.ajax({
                     url : 'selectLocation.admin',
                     type : 'get',
@@ -324,6 +325,7 @@
                 });
 
         });
+        // 이후 선택 화면
         $('#location-area').change(function(){
             $.ajax({
                     url : 'selectLocation.admin',

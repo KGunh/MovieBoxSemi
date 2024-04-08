@@ -124,6 +124,18 @@ public class MemberAdminController {
 		
 	}
 	
+
+	public String keyword(HttpServletRequest request, HttpServletResponse response) {
+		
+		String view ="";
+		
+		
+		
+		
+		return view; 
+	}
+	
+
 	public String search(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			request.setCharacterEncoding("UTF-8");
@@ -131,6 +143,7 @@ public class MemberAdminController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
+
 	
 		
 		String view = "views/admin/memberSearch.jsp";

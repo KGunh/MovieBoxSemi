@@ -363,7 +363,6 @@ public class MemberAdminDao {
 	}
 	
 	public int deleleteCinema(Connection conn,int theaterNo) {
-		System.out.println(theaterNo);
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = prop.getProperty("deleleteCinema");
@@ -455,11 +454,8 @@ public class MemberAdminDao {
 				list.add(theater);
 			
 			}
-			System.out.println(list);
 			
 			
-			System.out.println(search);
-			System.out.println(category);
 			
 			
 		} catch (SQLException e) {

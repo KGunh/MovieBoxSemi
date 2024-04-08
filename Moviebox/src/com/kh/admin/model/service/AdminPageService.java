@@ -337,7 +337,6 @@ public class AdminPageService {
 										  //=서블릿에서 getParameter()써주기
 	public List<Movie> searchTitle(String keyword, PageInfo pi){
 		Connection conn = getConnection();
-//		System.out.println(keyword);
 		List<Movie> movieList = new AdminPageDao().searchTitle(conn, keyword, pi);
 		close(conn);
 		return movieList;

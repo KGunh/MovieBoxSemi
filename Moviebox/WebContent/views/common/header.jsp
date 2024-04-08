@@ -1,14 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.member.model.vo.Member"  %>
-<%
-	
-	Member loginUser = (Member)session.getAttribute("loginUser");
+    pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-	String contextPath = request.getContextPath();
-	
-	String alertMsg = (String)session.getAttribute("alertMsg");
-	
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -27,8 +20,6 @@
     <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
-    
-
     
     <style>
     
@@ -181,80 +172,96 @@
 </head>
 <body>
 
+	<c:set var="path" value="${ pageContext.request.contextPath }" scope="session"/>
+	
 	<script>
-		const msg = '<%= alertMsg %>';
+		const msg = '${ alertMsg }';
 		
-		if(msg != 'null'){
+		if(msg != 'null' && msg != ''){
 			alert(msg);
-		
-			<% session.removeAttribute("alertMsg"); %>
+            <c:remove var="alertMsg"/>
 		}
 	</script>
-	
+
 	<div class="header">
 		<div class="header-line">
 			<div class="top-header">
 				<div class="login-area">
-				<% if(loginUser == null) { %>
-					<a href="<%=contextPath%>/insertForm.me" class="member">회원가입</a>
-					
-                	<a href="<%=contextPath%>/loginForm.me" class="member">로그인</a>
-                	
-				<%}else {  if(loginUser.getPrivilege().equals("Y")) {%>
-					<a href="<%= contextPath %>/adminMain.me" class="member">관리자 기능</a><!-- 관리자로 로그인시 관리자 기능 활성화 -->
-				<%} %>
-					<a href="<%=contextPath%>/logout.me" class="member">로그아웃</a>
-				<%} %>
+				
+				<c:choose>
+					<c:when test="${ loginUser eq null }">
+						<a href="${ sessionScope.path }/insertForm.me" class="member">회원가입</a>
+	                	<a href="${ sessionScope.path }/loginForm.me" class="member">로그인</a>
+                	</c:when>
+                	<c:otherwise>
+                        <c:if test="${ loginUser.privilege == 'Y'}">
+                            <a href="${ sessionScope.path }/adminMain.me" class="member">관리자 기능</a>
+                        </c:if>
+                            <a href="${ sessionScope.path }/logout.me" class="member">로그아웃</a>
+                    </c:otherwise>
+
+				</c:choose>
+				
 				</div>
 			</div>
 		</div>
 		<div id="header-navigator">
             <div id="logo-div">
-                <div id="logo"><a href="<%=contextPath %>"><img class="img-concert" src="<%=contextPath%>/resources/img/4.png"/></a></div>
+                <div id="logo"><a href="${ sessionScope.path }"><img class="img-concert" src="${ path }/resources/img/4.png"/></a></div>
             </div>
             
             <div id="navigator">
-                <!-- A grey horizontal navbar that becomes vertical on small screens -->
                 <ul class="nav">
                     <li class="nav-item">
-                    	<% if(loginUser == null) { %>
-                        <a class="nav-link" onclick="nologin();" href="<%=contextPath %>/loginForm.me"><span>예매</span></a>
-                        <%} else { %>
-                        <a class="nav-link" href="<%=contextPath %>/movie.reservation"><span>예매</span></a>
-                        <%} %>
+                    	
+                    	<c:choose>
+	                    	<c:when test="${ loginUser eq null }">
+	                        
+	                        	<a class="nav-link" onclick="nologin();" href="${ sessionScope.path }/loginForm.me"><span>예매</span></a>
+	                        
+	                        </c:when>
+							<c:otherwise>                        
+	                        
+	                        	<a class="nav-link" href="${ sessionScope.path }/movie.reservation"><span>예매</span></a>
+	   						
+	   						</c:otherwise>
+                        </c:choose>
+                        
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<%=contextPath %>/list.goods"><span>스토어</span></a>
+                        <a class="nav-link" href="${ sessionScope.path }/list.goods"><span>스토어</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<%=contextPath %>/list.movie"><span>영화</span></a>
+                        <a class="nav-link" href="${ path }/list.movie"><span>영화</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<%=contextPath %>/search.theater"><span>영화관</span></a>
+                        <a class="nav-link" href="${ path }/search.theater"><span>영화관</span></a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="<%=contextPath %>/list.notice?currentPage=1"><span>고객센터</span></a>
+                        <a class="nav-link" href="${ path }/list.notice?currentPage=1"><span>고객센터</span></a>
                     </li>
                     <li class="nav-item">
-       					<% if(loginUser == null) { %>
        					
-                        <a class="nav-link" onclick="nologin();" href="<%=contextPath %>/loginForm.me"><span>마이페이지</span></a>
-                        <%} else { %>
-                        <a class="nav-link" href="<%=contextPath %>/mypage.me"><span>마이페이지</span></a>
-                        <%} %>
+       					<c:choose>
+							<c:when test="${ loginUser eq null }">       					
+	                        	<a class="nav-link" onclick="nologin();" href="${ path }/loginForm.me"><span>마이페이지</span></a>
+							</c:when>
+							<c:otherwise>
+	                        	<a class="nav-link" href="${ path }/mypage.me"><span>마이페이지</span></a>
+	                        </c:otherwise>
+                        </c:choose>
+                        
                     </li>
                 </ul>
-
             </div>
             <script>
             	function nologin() {
 					alert('로그인이 필요한 서비스입니다');
 				}
             </script>
-
         </div>
-
 	</div>
+
 
 </body>
 

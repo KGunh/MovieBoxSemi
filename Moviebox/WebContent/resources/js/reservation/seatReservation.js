@@ -7,7 +7,8 @@ let peopleCount = 0;
 let adultCount = 0;
 let teenCount = 0;
 
-window.onload = function() {
+function init(){
+
     $.ajax({
         url : 'seat.reservationAjax',
         type : 'get',
@@ -29,7 +30,11 @@ window.onload = function() {
             location.href = '/moviebox/movie.reservation';
         }
     });
-};
+    
+    $('#movie-select>div').css('text-align', 'center');
+    $('#reservation-info>div>div').last().css('margin-top', '50px');
+}
+
 
 $('.people-Count').on('click', function() {
     let ageType = $(this).parent().prev().children().eq(0);
@@ -50,7 +55,7 @@ $('.people-Count').on('click', function() {
             ageType.addClass('clicked');
         }
 
-        CountPeple(ageType);
+        countPeople(ageType);
     }
     else{
         adultCount = Number($(this).html());
@@ -68,7 +73,7 @@ $('.people-Count').on('click', function() {
             ageType.addClass('clicked');
         }
 
-        CountPeple(ageType);
+        countPeople(ageType);
     }
 
     peopleCount = teenCount + adultCount;
@@ -80,7 +85,7 @@ $('.people-Count').on('click', function() {
     printPeople();
 });
 
-function CountPeple(ageType) {
+function countPeople(ageType) {
     let ageBtns = (ageType.html() === '청소년') ? $('.adultBtn') : $('.teenBtn');
     let maxCount = (ageType.html() === '청소년') ? (8 - teenCount) : (8 - adultCount);
 
@@ -250,3 +255,5 @@ function payment(){
 
     return false;
 };
+
+init();

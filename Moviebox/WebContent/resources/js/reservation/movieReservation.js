@@ -99,7 +99,6 @@ function selectScreen(){
         }
     });
 };
-
     
 $("#input-theaterName").keypress(function(e) {
     if (e.keyCode === 13) {
