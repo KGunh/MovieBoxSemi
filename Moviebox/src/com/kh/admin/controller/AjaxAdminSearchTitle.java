@@ -62,7 +62,6 @@ public class AjaxAdminSearchTitle extends HttpServlet {
 
 		
 		String keyword = request.getParameter("keyword");
-//		System.out.println(keyword);
 	
 		List<Movie> movieList = new AdminPageService().searchTitle(keyword,pi);
 		

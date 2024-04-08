@@ -734,7 +734,6 @@ public class AdminPageDao {
 				Screen s = new Screen();
 				
 				s.setScreenName(rset.getString("SCREEN_NAME"));
-				System.out.println(rset.getString("SCREEN_NAME"));
 				list.add(s);
 			}
 		} catch (SQLException e) {
@@ -860,7 +859,6 @@ public class AdminPageDao {
 			close(rset);
 			close(pstmt);
 		}
-//		System.out.println(list);
 		return list;
 		
 	}

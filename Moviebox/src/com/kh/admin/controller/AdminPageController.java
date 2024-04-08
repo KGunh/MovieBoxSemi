@@ -574,10 +574,8 @@ public class AdminPageController {
 	public String adminBoardDetail(HttpServletRequest request, HttpServletResponse response) {
 		
 		int noticeNo = Integer.parseInt(request.getParameter("noticeNo"));
-		//System.out.println("noticeNo :::::: " + noticeNo);
 		
 		Notice n = new AdminPageService().adminBoardDetail(noticeNo);
-		//System.out.println("notice :::: " + n.toString());
 		String view = "";
 		
 		if(n != null && n.getNoticeTitle() != null) {
@@ -597,7 +595,6 @@ public class AdminPageController {
 	public String adminQnADetail(HttpServletRequest request, HttpServletResponse response) {
 		
 		int boardNo = Integer.parseInt(request.getParameter("boardNo"));
-		//System.out.println("boardNo :::::: " + boardNo);
 		
 		Board b = new AdminPageService().adminQnADetail(boardNo);
 		String view = "";

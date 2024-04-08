@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>     
+ 
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -232,7 +234,9 @@
 </head>
 <body>
 	
-	<%@ include file="../common/header.jsp" %>
+	<jsp:include page="/views/common/header.jsp"></jsp:include>
+	
+	<c:set var="path" value="${ pageContext.request.contextPath }"/>
 
 	<div class="content">
 	<div class="title-area">
@@ -240,7 +244,7 @@
 		</div>
 
 		<div id="input-list">
-			<form action="<%=contextPath%>/insert.me" method="post" id="insertForm">
+			<form action="${ path }/insert.me" method="post" id="insertForm">
 				<div class="inputdiv">
 					<span class="input-span id" >아이디</span><br> 
                     <input type="text" class="input-text id" id="memberId" name="memberId" placeholder="아이디입력 | (영문/숫자만 가능 6~12글자 제한)" maxlength="12">
@@ -275,12 +279,9 @@
 				</div>
 				<div class="inputdiv">
 					<span class="input-span">성별</span><br> 
-                    <div class="gender f">
-                        여자 
-                        <input type="radio" name=gender value="F" checked> 
+                    <div class="gender f">여자 <input type="radio" name=gender value="F" checked> 
                     </div>
-                    <div class="gender m">
-                        남자 <input type="radio" name="gender" value="M">
+                    <div class="gender m">남자 <input type="radio" name="gender" value="M">
                     </div>
                    
 				</div>
@@ -351,7 +352,7 @@
 			</form>
 		</div>
 	</div>
-
+	<jsp:include page="/views/common/footer.jsp" />
     <script>
     	let idReg = /^[a-zA-Z0-9]{6,12}$/;
     	let pwdReg = /^[a-zA-Z0-9]{8,16}$/;
@@ -414,7 +415,7 @@
 	        }     
 	        else {
 	        	$memberId.css('border','2px solid red');
-	        	$memberId.siblings('.input-bottom').html('형식에 맞지않습니다(영어,숫자만 입력해주세요).').css('color','red');
+	        	$memberId.siblings('.input-bottom').html('형식에 맞지않습니다 '+ $input.attr('placeholder').substring(count)).css('color','red');
 	        }
 
 			
@@ -427,8 +428,7 @@
         	
         });
     	$memberPwdInput.blur(function() {
-    		console.log($memberPwdInput.val());
-    		console.log($checkPwdInput.val());
+
     		 if( $checkPwdInput.val() != ''){
     			 if($memberPwdInput.val() != $checkPwdInput.val()){
     				 	$checkPwdInput.css('border','2px solid red');
@@ -506,13 +506,6 @@
     	// 회원가입 버튼 
         $('.input-button > button').click(function(){
             const $input = $('.inputdiv > input');
-
-            console.log(pwdReg.test($memberPwdInput.val()));
-            console.log(phoneReg.test($phoneInput.val()));
-            console.log(birthdayReg.test($birthdayInput.val()));
-            console.log(emailReg.test($emailInput.val()));
-            console.log(nameReg.test($memberNameInput.val()));
-            
         	 // 모든 input 빈값 체크
             $input.each(function(){
                 if ($(this).val() == ''){
@@ -562,22 +555,9 @@
         		$input.siblings('.input-bottom').html('형식에 맞지않습니다 '+ $input.attr('placeholder').substring(count)).css('color','red');
             }
     	}
-    	
-        function checkInput($input){
-            if($input.val() == ''){
-                    $input.css('border','2px solid red');
-                    $input.siblings('.input-bottom').html('필수 정보입니다.').css('color','red');
-            } 
-            else {
-                $input.removeAttr('style');
-                $input.siblings('.input-bottom').html('');
-            }     
-        }
+
     </script>
 
 
-
-
-<%@ include file="../common/footer.jsp" %>
 </body>
 </html>
