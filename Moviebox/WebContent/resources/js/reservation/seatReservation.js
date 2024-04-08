@@ -50,7 +50,7 @@ $('.people-Count').on('click', function() {
             ageType.addClass('clicked');
         }
 
-        CountPeple(ageType);
+        countPeople(ageType);
     }
     else{
         adultCount = Number($(this).html());
@@ -68,7 +68,7 @@ $('.people-Count').on('click', function() {
             ageType.addClass('clicked');
         }
 
-        CountPeple(ageType);
+        countPeople(ageType);
     }
 
     peopleCount = teenCount + adultCount;
@@ -80,7 +80,7 @@ $('.people-Count').on('click', function() {
     printPeople();
 });
 
-function CountPeple(ageType) {
+function countPeople(ageType) {
     let ageBtns = (ageType.html() === '청소년') ? $('.adultBtn') : $('.teenBtn');
     let maxCount = (ageType.html() === '청소년') ? (8 - teenCount) : (8 - adultCount);
 
