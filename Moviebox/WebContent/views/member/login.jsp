@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -147,15 +148,15 @@
 </head>
 
 <body>
-
-	<%@ include file="../common/header.jsp" %>
+	<jsp:include page="/views/common/header.jsp"></jsp:include>
+	<c:set var="path" value="${ pageContext.request.contextPath }"/>
 	
     <div class="content">
         <div class="title-area">
             <div class="title-content"><span class="tit">로그인</span></div>
         </div>
         <div id="input-list">
-            <form action="<%=contextPath%>/login.me" method="post">
+            <form action="${ path }/login.me" method="post">
                 <div class="inputdiv">
                     <span class="input-span">아이디</span><br>
                     <input type="text" class="input-text" name="memberId" placeholder="아이디" required>
@@ -171,18 +172,18 @@
 				</div>
 				<div class="inputdiv colorWhite" style="height: 50px;">
                     <div class="search">
-                        <a href="<%=contextPath%>/idSearchForm.me" class="find_text">아이디 찾기</a>
+                        <a href="${ path }/idSearchForm.me" class="find_text">아이디 찾기</a>
                     </div>
                     <div style="width: 2%; height: 100%; float: left;text-align: center;
                     line-height: 50px;">|</div>
                     <div class="search">
-                        <a href="<%=contextPath%>/pwdSearchForm.me" class="find_text">비밀번호 찾기</a>
+                        <a href="${ path }/pwdSearchForm.me" class="find_text">비밀번호 찾기</a>
                     </div>
                 </div>
         		
         		<div class="inputdiv colorWhite" style="height: 50px;">
             		<div class="regis">MOVIE BOX 회원이 아니신가요?</div>
-            		<div class="register" ><a href="<%=contextPath%>/insertForm.me" class="find_text">회원가입하기</a></div>
+            		<div class="register" ><a href="${ path }/insertForm.me" class="find_text">회원가입하기</a></div>
         		</div>
 
             </form>
@@ -190,7 +191,7 @@
         </div>
     </div>
 
-
+<jsp:include page="/views/common/footer.jsp" />
 
 
 </body>

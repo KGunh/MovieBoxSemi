@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -115,16 +116,16 @@
 </head>
 
 <body>
-
-<%@ include file="../common/header.jsp" %>
+	<jsp:include page="/views/common/header.jsp"></jsp:include>
+<c:set var="path" value="${ pageContext.request.contextPath }"/>
 
     <div class="content">
         <div class="title-area">
             <div class="title-content"><a class="tit" style="color: white;">아이디 찾기</a></div>
-            <div class="title-content" ><a href="<%=contextPath%>/pwdSearchForm.me" class="tit" style="border-bottom: none;">비밀번호 찾기</a></div>
+            <div class="title-content" ><a href="${ path }/pwdSearchForm.me" class="tit" style="border-bottom: none;">비밀번호 찾기</a></div>
         </div>
         <div id="input-list">
-            <form action="<%=contextPath%>/idSearch.me" method="post">
+            <form action="${ path }/idSearch.me" method="post">
                 <div class="inputdiv">
                     <span class="input-span">이름</span><br>
                     <input type="text" class="input-text" name="memberName" placeholder="이름" required>
@@ -148,6 +149,8 @@
 
         </div>
     </div>
+    
+    <jsp:include page="/views/common/footer.jsp" />
 
 
 
