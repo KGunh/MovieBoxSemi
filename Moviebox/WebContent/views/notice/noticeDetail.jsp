@@ -14,7 +14,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>공지사항 상세보기</title>
 
     <style>
         body{
@@ -23,7 +23,6 @@
         }
 
         div{
-            /* border: 1px solid red; */
             box-sizing: border-box;
         }
 
@@ -32,14 +31,11 @@
             margin: 0 auto;
         }
 
-        /* 전체 감싸는 부분 */
         #notice-list{
             width: 1200px;
             margin: 0 auto;
-            /*border: 1px solid pink;*/
         }
 
-        /* 타이틀 */
         #title{
             text-align: center;
             color: white;
@@ -96,19 +92,16 @@
         .notice-content{
             width: 1200px;
             height: auto;
-            /* border: 1px solid pink; */
             color: white;
             margin-top: 30px;
         }
 
         .detail-box1{
             width: 1200px;
-            /* border: 1px solid #FFC145; */
         }
 
         .detail-box2{
             width: 1200px;
-            /* border: 1px solid red; */
         }
 
         .detail-title-box1{
@@ -200,7 +193,9 @@
 </head>
 <body>
 
-<%@ include file="../common/header.jsp" %>
+	<c:set var="path" value="${ pageContext.request.contextPath }" />
+	<jsp:include page="../common/header.jsp"></jsp:include>
+
     <div id="wrap">
         <div id="notice-detail">
             <!-- 전체 감싸는 부분 -->
@@ -217,21 +212,21 @@
                 <div class="notice-content">
                     <div class="detail-box1">
                         <div class="detail-title-box1">
-                            <div class="detail-category"><span>No.<%=notice.getNoticeNo() %> [<%= notice.getNoticeCategory() %>]</span></div>
-                            <div class="detail-title"><span><%= notice.getNoticeTitle() %> </span></div>
+                            <div class="detail-category"><span>No.${ notice.noticeNo } [${ notice.noticeCategory }]</span></div>
+                            <div class="detail-title"><span>${ notice.noticeTitle }</span></div>
                         </div>
                     </div>
 
                     <div class="detail-box2">
                         <div class="detail-title-box2">
-                            <div class="detail-date"><a>작성일 : <%= notice.getCreateDate() %></a></div>
-                            <div class="detail-count"><a> 조회수 : <%= notice.getCount() %></a></div>
+                            <div class="detail-date"><a>작성일 : ${ notice.createDate }</a></div>
+                            <div class="detail-count"><a> 조회수 : ${ notice.count }</a></div>
                         </div>
                     </div>
 
                     <div class="detail-content-box">
                         <div class="detail-content">
-                        <%= notice.getNoticeContent() %>
+                        	${ notice.noticeContent }
                         </div>
                     </div>
                 </div> <!-- notice-content -->
@@ -239,46 +234,44 @@
                 <div class="notice-btn" align="center">
                     <button class="notice-detail-btn" onclick="backPage();">목록</button>
                     <!-- 관리자로 로그인 했을 때만 보이기 -->
-                    <% if(loginUser != null && loginUser.getMemberId().equals("admin")) { %>
-                    <button class="notice-detail-btn" onclick="noticeUpdatePage();">수정</button> 
-                    <button class="notice-detail-btn" onclick="noticeDelete();">삭제</button>
-                    <% } %>
+                    <c:if test="${ loginUser ne null and loginUser.memberId eq 'admin'}">
+	                    <button class="notice-detail-btn" onclick="noticeUpdatePage();">수정</button> 
+	                    <button class="notice-detail-btn" onclick="noticeDelete();">삭제</button>
+	                </c:if>
                 </div>
-
-
 
             </div> <!-- notice-list -->
         </div> <!-- notice-detail -->
     </div> <!-- wrap -->
     
-    <%@ include file="../common/footer.jsp" %>
+    <jsp:include page="../common/footer.jsp"></jsp:include>
     
       	<script>
     		function openNoticePage(){
-    			location.href = '<%=contextPath %>/list.notice?currentPage=1';
+    			location.href = '${ path }/list.notice?currentPage=1';
     		}
     		
     		function openQnaPage(){
-    			location.href = '<%=contextPath %>/list.board?currentPage=1'; 			
+    			location.href = '${ path }/list.board?currentPage=1'; 			
     		}
     		
     		function backPage(){
-    			location.href = '<%=contextPath%>/list.notice?currentPage=1';
+    			location.href = '${ path }/list.notice?currentPage=1';
     		}
     		
     		function noticeUpdatePage(){
-    			location.href = '<%=contextPath%>/updateForm.notice?noticeNo=<%=notice.getNoticeNo()%>';
+    			location.href = '${ path }/updateForm.notice?noticeNo=${notice.noticeNo}';
     		}
     		
     		function noticeDelete(){
     			const result = confirm('삭제하려면 확인을 눌러주세요.');
                 if(result){
-                	location.href = '<%=contextPath%>/delete.notice?noticeNo=<%=notice.getNoticeNo()%>';
+                	location.href = '${ path }/delete.notice?noticeNo=${notice.noticeNo}';
                 } 
                 else{
             		$('tbody > tr.list').click(function(){
             			const noticeNo = $(this).children().eq(0).text();
-            			location.href = '<%=contextPath%>/detail.notice?noticeNo=' + noticeNo;
+            			location.href = '${ path }/detail.notice?noticeNo=' + noticeNo;
                     });
                 }
     			

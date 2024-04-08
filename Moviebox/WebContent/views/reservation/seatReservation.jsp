@@ -22,13 +22,11 @@
 
 	<jsp:include page="/views/common/header.jsp"></jsp:include>
 	
-	<c:set var="path" value="${ pageContext.request.contextPath }"/>
-
 	<c:choose>
 		<c:when test="${ loginUser eq null }">
 			
 			<script>
-				location.href = ('${ path }/loginForm.me');
+				location.href = ('${ sessionScope.path }/loginForm.me');
 			</script>
 			
 		</c:when>
@@ -135,9 +133,9 @@
 								<img style="width: 100%; height: 100%;" src="" alt="영화포스터">
 							</div>
 							<div id="movie-select">
-								<div style="text-align: center; font-size:20px; font-weight: 700; margin-top: 5px; margin-bottom: 5px;"></div>
-								<div style="text-align: center;"></div>
-								<div style="text-align: center;"></div>
+								<div style="font-size:20px; font-weight: 700; margin-top: 5px; margin-bottom: 5px;"></div>
+								<div></div>
+								<div></div>
 							</div>
 						</div>
 					</div>
@@ -152,15 +150,14 @@
 								<div class="select-info" style="margin-top: 50px;">결제금액</div>
 							</div>
 							<div id="print-reservation-info">
-								<div class="print-info"></div>
-								<div class="print-info"></div>
-								<div class="print-info"></div>
-								<div class="print-info"></div>
-								<div class="print-info"></div>
-								<div class="print-info" style="margin-top: 50px;"></div>
+								
+								<c:forEach var="i" begin="1" end="6">
+									<div class="print-info"></div>							
+								</c:forEach>
+								
 							</div>
 						</div>
-						<form id="payment-form" action="/moviebox/payment.reservation" method="post">
+						<form id="payment-form" action="${ sessionScope.path }/payment.reservation" method="post">
 							<input type="hidden" name="movieNo" value="">
 							<input type="hidden" name="screenNo" value="">
 							<input type="hidden" name="memberNo" value="">
@@ -179,7 +176,7 @@
     <jsp:include page="/views/common/footer.jsp" />
 
     <script>
-        let path = '${ path }';
+        let path = '${ sessionScope.path }';
     	let memberNo = ${ sessionScope.loginUser.memberNo };
 		let selectScreenNo = ${ requestScope.screenNo };
 		let selectMovieNo = ${ requestScope.movieNo };

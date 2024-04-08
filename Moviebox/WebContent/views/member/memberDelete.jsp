@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -199,13 +200,17 @@
     </style>
 </head>
 <body>
-	<%@ include file="../common/header.jsp" %>
+<jsp:include page="/views/common/header.jsp"></jsp:include>
+	<c:set var="path" value="${ pageContext.request.contextPath }"/>
 	
-	<% if(loginUser == null) {%>
-		<script>
-			location.href = ('<%=contextPath%>/loginForm.me');
-		</script>
-	<%} else {%>
+		<c:when test="${ loginUser eq null }">
+			
+			<script>
+				location.href = ('${ path }/loginForm.me');
+			</script>
+			
+		</c:when>
+	<c:otherwise>
 	
 	<div id="info-header">
         <div id="info-title">
@@ -215,10 +220,10 @@
             
             <ul class="info-navi">
                 <li id="info-navi-first">
-                    <a href="<%=contextPath%>/mypage.me" class="info-my">회원정보</a>
+                    <a href="${ path }/mypage.me" class="info-my">회원정보</a>
                 </li>
                 <li id="info-navi-second">
-                    <a href="<%=contextPath %>/resList.me" class="info-list">예매내역</a>
+                    <a href="${ path }/resList.me" class="info-list">예매내역</a>
                 </li>
             </ul>
         </div>
@@ -233,19 +238,21 @@
             한번 삭제된 정보는 복구가 불가능합니다
 
         </div>
-        <form action="<%=contextPath%>/delete.me" >
+        <form action="${ path }/delete.me" >
             <div class="inputdiv">
                 <span class="input-span">비밀번호</span><br>
                 <input type="password" class="input-text" name="memberPwd" placeholder="비밀번호" required>
             </div>
             <div class="input-button">
-                <a id="secession" href="<%=contextPath%>/Updateform.me">취소</a>
+                <a id="secession" href="${ path }/Updateform.me">취소</a>
                 <input id="edit" type="submit" value="회원 탈퇴">
             </div>
         </form>
     </div>
     
-    <%} %>
+    </c:otherwise>
+
+    <jsp:include page="/views/common/footer.jsp" />
 
 
 

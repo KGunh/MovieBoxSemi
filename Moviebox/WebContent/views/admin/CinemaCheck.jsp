@@ -1,11 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import = "java.util.ArrayList, com.kh.theater.model.vo.Theater"%>
     
-    <%
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-    ArrayList<Theater> theater =(ArrayList<Theater>)request.getAttribute("theater");
-    
-    %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -330,25 +328,25 @@
             <div class="content_1">
                 <ul class="menu">
                     <li>
-                        <a href="<%=contextPath %>/selectAdmin.mb">회원 관리</a>
+                        <a href="${path }/selectAdmin.mb">회원 관리</a>
                         <ul class="submenu">
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminScreenList.admin">예매 관리</a>
+                        <a href="${path }/adminScreenList.admin">예매 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminMovieCheck.admin?currentPage=1">영화 관리</a>
+                        <a href="${path }/adminMovieCheck.admin?currentPage=1">영화 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath%>/checkAdmin.cm">영화관 관리</a>
+                        <a href="${path }/checkAdmin.cm">영화관 관리</a>
                         <ul class="submenu">
 
                         </ul>
@@ -356,8 +354,8 @@
                     <li class="post">
                         <a href="#">게시글 관리</a>
                         <ul class="submenu">
-                        <li><a href="<%=contextPath %>/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
-                        <li><a href="<%=contextPath %>/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
+                        <li><a href="${path }adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
+                        <li><a href="${path }/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
                         </ul>
                     </li>
                 </ul>    
@@ -392,9 +390,9 @@
                     
                     <script>
                     	function enrollment(){
-                    		console.log('<%=contextPath%>/insertAdmin.cm');
+                    		console.log('${ path}/insertAdmin.cm');
                     		
-                    		location.href = '<%=contextPath%>/insertAdmin.cm';
+                    		location.href = '${ path}/insertAdmin.cm';
                     	}
                     
                     
@@ -424,19 +422,19 @@
                           </thead>
                           <tbody>
                           
-                         <% for (Theater t : theater) { %>
+                          <c:forEach var="t" items="${ theater}">
                             <tr class="theater">
                                
-                                <td class="num"><%=t.getTheaterNo() %></td>
-                                <td><%=t.getUpdateDate() %></td>
-                                <td class="test123"><%=t.getLocationName() %></td>
-                                <td class="theatername"><%=t.getTheaterName() %></td>
-                                <td class="code"><%=t.getLocalCode() %></td>
-                             <!--    <td><%=t.getMapLink() %></td> --> 
+                                <td class="num">${t.theaterNo }</td>
+                                <td>${t.updateDate }</td>
+                                <td class="test123">${t.locationName }</td>
+                                <td class="theatername">${t.theaterName }</td>
+                                <td class="code">${t.localCode }</td>
+                              
                                 
                             </tr>
                             
-                            <% } %>
+                         </c:forEach>
                             
                           </tbody>
                         </table>
@@ -448,7 +446,7 @@
                       	$(function(){
                       		$('.theater').click(function(){
                       			const theaterNo = $(this).children().eq(0).text();
-                      			location.href='<%=contextPath%>/editAdmin.cm?theaterNo='+theaterNo;
+                      			location.href='${ path}/editAdmin.cm?theaterNo='+theaterNo;
                       		});
                       	})
                       	
