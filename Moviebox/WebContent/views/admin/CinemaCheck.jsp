@@ -3,11 +3,7 @@
     
     <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-    <%
-    
-    ArrayList<Theater> theater =(ArrayList<Theater>)request.getAttribute("theater");
-    
-    %>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -394,9 +390,9 @@
                     
                     <script>
                     	function enrollment(){
-                    		console.log('<%=contextPath%>/insertAdmin.cm');
+                    		console.log('${ path}/insertAdmin.cm');
                     		
-                    		location.href = '<%=contextPath%>/insertAdmin.cm';
+                    		location.href = '${ path}/insertAdmin.cm';
                     	}
                     
                     
@@ -426,19 +422,19 @@
                           </thead>
                           <tbody>
                           
-                         <% for (Theater t : theater) { %>
+                          <c:forEach var="t" items="theater">
                             <tr class="theater">
                                
-                                <td class="num"><%=t.getTheaterNo() %></td>
-                                <td><%=t.getUpdateDate() %></td>
-                                <td class="test123"><%=t.getLocationName() %></td>
-                                <td class="theatername"><%=t.getTheaterName() %></td>
+                                <td class="num">${t.theaterNo }td>
+                                <td>${t.updateDate }</td>
+                                <td class="test123">${t.locationName }</td>
+                                <td class="theatername">${theaterName }</td>
                                 <td class="code"><%=t.getLocalCode() %></td>
                              <!--    <td><%=t.getMapLink() %></td> --> 
                                 
                             </tr>
                             
-                            <% } %>
+                         </c:forEach>
                             
                           </tbody>
                         </table>
@@ -450,7 +446,7 @@
                       	$(function(){
                       		$('.theater').click(function(){
                       			const theaterNo = $(this).children().eq(0).text();
-                      			location.href='<%=contextPath%>/editAdmin.cm?theaterNo='+theaterNo;
+                      			location.href='${ path}/editAdmin.cm?theaterNo='+theaterNo;
                       		});
                       	})
                       	

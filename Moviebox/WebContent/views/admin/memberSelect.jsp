@@ -4,9 +4,6 @@
 
  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
   
-<%
-ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
-%>    
 
     <!DOCTYPE html>
 <html lang="en">
@@ -416,19 +413,19 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                           </thead>
                           <tbody>
                        
-                           <% for(Member m : mb){ %>
+                       		<c:forEach var="m" items="${ member}">
                                 <tr class="member">
 							     <!-- <td class="ch"><input type="checkbox" name="check" value="check" id="check" ></td>  -->
 
-                                <td><%= m.getMemberNo() %></td>
-                                <td><%= m.getMemberName()%></td>
-                                <td><%= m.getEnrollDate() %></td>
-                                <td><%= m.getStatus() %></td>
-                                <td><%= m.getPhone() %></td>
+                                <td>${m.memberNo }</td>
+                                
+                                <td>${m.memberName }</td>
+                                <td>${m.enrollDate }</td>
+                                <td>${m.status }</td>
+                                <td>${m.phone }</td>
                                 
                             </tr>
-                            	<% } %>
-                           
+                           </c:forEach>
                             
                           </tbody>
                         </table>
@@ -442,7 +439,7 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
 
                       		$('.member').click(function(){
                       			const memberNo = $(this).children().eq(0).text();
-                      			location.href='<%=contextPath%>/modifyAdmin.mb?memberNo=' + memberNo;
+                      			location.href='${path }/modifyAdmin.mb?memberNo=' + memberNo;
                       		});
                 
                     	
