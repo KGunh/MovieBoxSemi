@@ -6,9 +6,9 @@ window.onload = function(){
             ticketNo : selectTicketNo
         },
         success : function(result) {
-            var imgFilePath = path + '/' + result.movie.filePath + '/' + result.movie.changeName;
-            var selectSeatList = '';
-
+            let imgFilePath = path + '/' + result.movie.filePath + '/' + result.movie.changeName;
+            let selectSeatList = '';
+            
             $('#movie-poster').html('<img src="' + imgFilePath + '" alt="영화포스터">');
             $('#movie-info').children().eq(0).html(result.movie.movieTitle);
             $('#movie-info').children().eq(1).html('개봉일 : ' + result.movie.movieRelease);
