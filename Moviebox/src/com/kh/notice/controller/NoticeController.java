@@ -226,20 +226,6 @@ public class NoticeController {
 		
 		return view;
 	}
-
-//	public String searchNotice(HttpServletRequest request, HttpServletResponse response) {
-//		
-//		String searchNoticeForm = request.getParameter("searchNoticeForm");
-//		String type = request.getParameter("type");
-//		ArrayList<Notice> list = new NoticeService().searchNotice(searchNoticeForm, type);
-//		
-//		request.setAttribute("type", type);
-//		request.setAttribute("noticeList", list);
-//		
-//		String view = "views/notice/noticeList.jsp";
-//		
-//		return view;
-//	}
 	
 	public String searchNotice(HttpServletRequest request, HttpServletResponse response) {
 		

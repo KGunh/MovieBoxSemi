@@ -193,39 +193,6 @@ public class TheaterDao {
 		return theaterList;
 	}
 		
-	
-	
-//	public Theater selectTheaterDetail(Connection conn, int theaterNo) {
-//		Theater th = new Theater();
-//		PreparedStatement pstmt = null;
-//		ResultSet rset = null;
-//		String sql = prop.getProperty("selectTheaterDetail");
-//		
-//		try {
-//			pstmt = conn.prepareStatement(sql);
-//			
-//			pstmt.setInt(1, theaterNo);
-//			rset = pstmt.executeQuery();
-//			
-//			if(rset.next()) {
-//				th.setTheaterNo(rset.getInt("THEATER_NO"));
-//				th.setMovieNo(rset.getInt("MOVIE_NO"));
-//				th.setMovieTitle(rset.getString("MOVIE_TITLE"));
-//				th.setTheaterName(rset.getString("THEATER_NAME"));
-//				th.setTheaterAddr(rset.getString("THEATER_ADDR"));
-//				th.setMapLink(rset.getString("MAP_LINK"));
-//				th.setFilePath(rset.getString("FILE_PATH"));
-//				th.setChangeName(rset.getString("CHANGE_NAME"));
-//			}
-//			
-//		} catch (SQLException e) {
-//			e.printStackTrace();
-//		} finally {
-//			close(rset);
-//			close(pstmt);
-//		}
-//		return th;
-//	}
 
 	public ArrayList<Theater> theaterAll(Connection conn) {
 		
@@ -295,18 +262,5 @@ public class TheaterDao {
 	}
 
 
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
-	
 
 }

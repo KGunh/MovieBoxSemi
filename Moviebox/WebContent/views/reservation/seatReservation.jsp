@@ -133,9 +133,9 @@
 								<img style="width: 100%; height: 100%;" src="" alt="영화포스터">
 							</div>
 							<div id="movie-select">
-								<div style="text-align: center; font-size:20px; font-weight: 700; margin-top: 5px; margin-bottom: 5px;"></div>
-								<div style="text-align: center;"></div>
-								<div style="text-align: center;"></div>
+								<div style="font-size:20px; font-weight: 700; margin-top: 5px; margin-bottom: 5px;"></div>
+								<div></div>
+								<div></div>
 							</div>
 						</div>
 					</div>
@@ -150,25 +150,11 @@
 								<div class="select-info" style="margin-top: 50px;">결제금액</div>
 							</div>
 							<div id="print-reservation-info">
-
-								<!--
-									이걸 이렇게 하는게 맞지않나 시프요...
-								<script>
-									$('#reservation-info>div>div').last().css('margin-top', '50px');
-									$('#movie-select>div').css('text-align', 'center');
-								</script>
+								
 								<c:forEach var="i" begin="1" end="6">
 									<div class="print-info"></div>							
 								</c:forEach>
-								-->
-
-
-								<div class="print-info"></div>
-								<div class="print-info"></div>
-								<div class="print-info"></div>
-								<div class="print-info"></div>
-								<div class="print-info"></div>
-								<div class="print-info" style="margin-top: 50px;"></div>
+								
 							</div>
 						</div>
 						<form id="payment-form" action="${ sessionScope.path }/payment.reservation" method="post">
