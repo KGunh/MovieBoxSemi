@@ -2,14 +2,9 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.kh.notice.model.vo.Notice, java.util.ArrayList, com.kh.common.model.vo.PageInfo"%>
     
-<%
-	ArrayList<Notice> list = (ArrayList<Notice>)request.getAttribute("adminBoardCheckList");
-	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
-	int currentPage = pi.getCurrentPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
-	int maxPage = pi.getMaxPage();
-%> 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
+
 
 
 <!DOCTYPE html>
@@ -291,7 +286,8 @@
 </head>
 <body>
 	<!-- 헤더 -->
-    <%@ include file="/views/common/header.jsp" %>
+ 	<jsp:include page="/views/common/header.jsp"></jsp:include>
+ 	<c:set var="path" value="${ pageContext.request.contextPath }" /> <!-- ${path} 쓰기 위해서 선언해줘야함 -->
 	
 	
     <div id="wrap">
@@ -307,25 +303,25 @@
             <div class="content_1">
                 <ul class="menu">
                     <li>
-                        <a href="<%=contextPath %>/selectAdmin.mb">회원 관리</a>
+                        <a href="${path}/selectAdmin.mb">회원 관리</a>
                         <ul class="submenu">
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminScreenList.admin">예매 관리</a>
+                        <a href="${path}/adminScreenList.admin">예매 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminMovieCheck.admin?currentPage=1">영화 관리</a>
+                        <a href="${path}/adminMovieCheck.admin?currentPage=1">영화 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath%>/checkAdmin.cm">영화관 관리</a>
+                        <a href="${path}/checkAdmin.cm">영화관 관리</a>
                         <ul class="submenu">
 
                         </ul>
@@ -333,8 +329,8 @@
                     <li class="post">
                         <a href="#">게시글 관리</a>
                         <ul class="submenu">
-                        <li><a href="<%=contextPath %>/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
-                        <li><a href="<%=contextPath %>/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
+                        <li><a href="${path}/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
+                        <li><a href="${path}/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
                         </ul>
                     </li>
                 </ul>    
@@ -378,21 +374,21 @@
                                 </tr>
                               </thead>
                               <tbody id="tbody">
-                              <% if(list == null || list.isEmpty()) { %>
-
-                              <% }else{ %>
-                              	<% for(Notice n : list) {%>	
-	                                <tr>
-	                                    <td><%= n.getNoticeNo() %></td>
-	                                    <td><%= n.getNoticeCategory() %></td>
-	                                    <!-- NOTICE_CATEGORY = CATEGORY_NO로 조인해서 getNoticeNo에는 값이 없음 그래서 0으로 출력됨 dao에서
-	                                    	notice.setNoticeCategory(rset.getString("CATEGORY_NAME")); 이렇게 값을 담은 NoticeCategory출력해야함
-	                                      -->
-	                                    <td><%= n.getNoticeTitle() %></td>
-	                                    <td><%= n.getCreateDate() %></td>
-	                                </tr>
-	                            <% } %>    
-                              <% } %>    
+                              <c:choose>
+								<c:when test="${ empty adminBoardCheckList}">
+								
+								</c:when>
+								<c:otherwise>	
+									<c:forEach var="n" items="${ requestScope.adminBoardCheckList }">
+		                                <tr>
+		                                    <td>${ n.noticeNo }</td>
+		                                    <td>${ n.noticeCategory }</td>
+		                                    <td>${ n.noticeTitle }</td>
+		                                    <td>${ n.createDate }</td>
+		                                </tr>
+		                            </c:forEach>   
+								</c:otherwise>                              
+                              </c:choose>
                               </tbody>
                             </table>
                           </div>
@@ -404,26 +400,30 @@
 
                     
                     <div class="paging-area" align="center" style="margin-top:12px;">
-                    
-                    	<% if(currentPage > 1) { %>
-                    	<button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
-					        onclick="location.href='<%=contextPath%>/adminBoardCheck.admin?currentPage=<%= currentPage - 1 %>'"> < </button>
-                    	<% } %>
-                    	<% for(int i = startPage; i <= endPage; i++) { %>
                     	
-                    		<% if(currentPage != i) { %>
-							<button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
-					        onclick="location.href='<%=contextPath%>/adminBoardCheck.admin?currentPage=<%=i%>'"><%= i %></button>
-	                        <%} else {%>
-								 <button disabled class="btn btn-outline-secondary" style="color:#ffffff">
-								 <%= i %></button>                       
-	                        <%} %>
-                        <% } %>
+                    	<c:if test="${ pageInfo.currentPage > 1 }">
+	                    	<button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
+						        onclick="location.href='${path}/adminBoardCheck.admin?currentPage=${pageInfo.currentPage - 1}'"> < </button>
+                    	</c:if>
+                    	
+                    	<c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}" >
+                    	
+                    		<c:choose>
+                    			<c:when test="${ pageInfo.currentPage ne i }">
+									<button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
+							        onclick="location.href='${path}/adminBoardCheck.admin?currentPage=${i}'">${i}</button>
+		                        </c:when>
+		                        <c:otherwise>
+									 <button disabled class="btn btn-outline-secondary" style="color:#ffffff">
+									 ${i}</button>                       
+		                        </c:otherwise>
+	                        </c:choose>
+                        </c:forEach>
                         
-                        <% if(currentPage != maxPage) { %>
-                        <button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
-					        onclick="location.href='<%=contextPath%>/adminBoardCheck.admin?currentPage=<%= currentPage + 1 %>'"> > </button>
-					    <% } %>    
+                        <c:if test="${ pageInfo.currentPage ne pageInfo.maxPage }">
+	                        <button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
+						        onclick="location.href='${path}/adminBoardCheck.admin?currentPage=${pageInfo.currentPage + 1}'"> > </button>
+						</c:if>
                     </div>
                     <!--페이지 숫자-->
 
@@ -442,18 +442,22 @@
     </div>
 
 
- 	<%@ include file="/views/common/footer.jsp" %>
+ 	<jsp:include page="/views/common/footer.jsp"></jsp:include>
  	<!-- 푸터 -->
+ 	
  	
  	<script>
 		function insertButton(){
-			location.href = '<%= contextPath %>/adminBoardEnrollForm.admin';
+			location.href = '${ path }/adminBoardEnrollForm.admin';
 		}
 		
  		$('#tbody').on('click', 'tr', function(){
 			const noticeNo = $(this).children().eq(0).text();
-			location.href='<%= contextPath %>/adminBoardDetail.admin?noticeNo=' + noticeNo;
+			location.href='${ path }/adminBoardDetail.admin?noticeNo=' + noticeNo;
  		});
 	</script>
+
+
+
 </body>
 </html>
