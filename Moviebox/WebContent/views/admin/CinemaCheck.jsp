@@ -422,15 +422,15 @@
                           </thead>
                           <tbody>
                           
-                          <c:forEach var="t" items="theater">
+                          <c:forEach var="t" items="${ theater}">
                             <tr class="theater">
                                
-                                <td class="num">${t.theaterNo }td>
+                                <td class="num">${t.theaterNo }</td>
                                 <td>${t.updateDate }</td>
                                 <td class="test123">${t.locationName }</td>
-                                <td class="theatername">${theaterName }</td>
-                                <td class="code"><%=t.getLocalCode() %></td>
-                             <!--    <td><%=t.getMapLink() %></td> --> 
+                                <td class="theatername">${t.theaterName }</td>
+                                <td class="code">${t.localCode }</td>
+                              
                                 
                             </tr>
                             
