@@ -4,17 +4,12 @@
 <%@ page import="com.kh.board.model.vo.*" %>
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
-<%
-	Board board = (Board)request.getAttribute("board");
-%>    
-    
-    
+
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>문의사항 상세보기</title>
 
     <style>
         body{
@@ -285,7 +280,8 @@
 </head>
 <body>
 
-	<%@ include file="../common/header.jsp" %>
+    <c:set var="path" value="${ pageContext.request.contextPath }" />
+    <jsp:include page="../common/header.jsp"></jsp:include>
 	
     <div id="wrap">
         <div id="notice-detail">
@@ -303,19 +299,19 @@
                 <div class="notice-content">
                     <div class="detail-box1">
                         <div class="detail-title-box1">
-                            <div class="detail-category"><span>No.<%=board.getBoardNo() %> [<%= board.getBoardCategory() %>]</span></div>
-                            <div class="detail-title"><span><%= board.getBoardTitle() %></span></div>
+                            <div class="detail-category"><span>No.${ board.boardNo } [${ board.boardCategory }]</span></div>
+                            <div class="detail-title"><span>${ board.boardTitle }</span></div>
                         </div>
                     </div>
                     <div class="detail-box2">
                         <div class="detail-title-box2">
-                            <div class="detail-date"><a><%= board.getCreateDate() %></a></div>
-                            <div class="detail-count"><a>작성자 : <%= board.getBoardWriter() %></a></div>
+                            <div class="detail-date"><a>${ board.createDate }</a></div>
+                            <div class="detail-count"><a>작성자 : ${ board.boardWriter }</a></div>
                         </div>
                     </div>
                     <div class="detail-content-box">
                         <div class="detail-content">
-                        <%= board.getBoardContent() %>
+                        	${ board.boardContent }
                         </div>
                     </div>
                 </div> <!-- notice-content -->
@@ -352,7 +348,7 @@
                     function selectAnswerList(){
                     	$.ajax({
                     		url : 'answerList.board',
-                    		data : {boardNo : <%= board.getBoardNo() %>},
+                    		data : {boardNo : ${ board.boardNo }},
                     		success : function(result){
                     			let resultStr = '';
                     			for(let i in result){
@@ -381,7 +377,7 @@
         					type : 'post',
         					data : {
         						answerContent : $('#answerContent').val(),
-        						boardNo : <%= board.getBoardNo() %>
+        						boardNo : ${ board.boardNo }
         					},
         					success : function(result){
         						if(result == 'success'){
@@ -396,10 +392,13 @@
             </div> <!-- notice-content -->
                 <div class="notice-btn" align="center">
                     <button class="board-detail-btn" onclick="backPage();">목록</button>
-                    <% if(loginUser != null && loginUser.getMemberNo() == board.getUserNo()) { %>
+                    
+                    
+                    <c:if test="${ loginUser ne null and loginUser.memberNo eq board.userNo}">
+                    <!-- < % if(loginUser != null && loginUser.getMemberNo() == board.getUserNo()) { %> -->
 	                    <button class="board-detail-btn" onclick="boardUpdatePage();">수정</button> 
 	                    <button class="board-detail-btn" onclick="boardDelete();">삭제</button>
-	                <% } %>
+	                </c:if>
                 </div>
         </div> <!-- notice-detail -->
 	</div>
@@ -408,30 +407,30 @@
     	
     	<script>
 			function openNoticePage(){
-				location.href = '<%=contextPath %>/list.notice?currentPage=1';
+				location.href = '${ path }/list.notice?currentPage=1';
 			}
 			
 			function openQnaPage(){
-				location.href = '<%= contextPath %>/list.board?currentPage=1';
+				location.href = '${ path }/list.board?currentPage=1';
 			}
 			
     		function backPage(){
-    			location.href = '<%=contextPath%>/list.board?currentPage=1';
+    			location.href = '${ path }/list.board?currentPage=1';
     		}
 
     		function boardUpdatePage(){
-    			location.href = '<%=contextPath%>/updateForm.board?boardNo=<%=board.getBoardNo()%>';
+    			location.href = '${ path }/updateForm.board?boardNo=${ board.boardNo }';
     		}
     		
     		function boardDelete(){
     			const result = confirm('문의글을 삭제하시겠습니까?');
                 if(result){
-                	location.href = '<%=contextPath%>/delete.board?boardNo=<%=board.getBoardNo()%>';
+                	location.href = '${ path }/delete.board?boardNo=${ board.boardNo }';
                 } 
                 else{
             		$('tbody > tr.list').click(function(){
             			const boardNo = $(this).children().eq(0).text();
-            			location.href = '<%=contextPath%>/detail.board?boardNo=' + boardNo;
+            			location.href = '${ path }/detail.board?boardNo=' + boardNo;
                     });
                 }
     		}

@@ -5,16 +5,11 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-<%
-	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("category");
-
-%>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>문의글 등록</title>
     <style>
         body{
             background-color: #1A1A1A;
@@ -239,7 +234,8 @@
 </head>
 <body>
 
-	<%@ include file="../common/header.jsp" %>
+	<c:set var="path" value="${ pageContext.request.contextPath }" />
+	<jsp:include page="../common/header.jsp"></jsp:include>
 	
     <div id="wrap">
         <div id="notice-detail">
@@ -265,19 +261,21 @@
 
 
                     <div class="detail-content-box">
-	                    <form action="<%= contextPath %>/insert.board" method="post" id="insert-box">
+	                    <form action="${ path }/insert.board" method="post" id="insert-box">
 	                    
-	                    <input type="hidden" name="userNo" value="<%= loginUser.getMemberNo()%>" />
+	                    <input type="hidden" name="userNo" value="${ loginUser.memberNo }" />
 	                    
                             <div id="category-box">
                                 <div id="box-name">분류</div>
                                 
                                 <select name="category" id="select-category">
-                                <% for(Category c : list) { %>
-									<option value="<%= c.getCategoryNo() %>">
-										<%= c.getCategoryName() + " 문의" %>
+                                
+                                <c:forEach var="c" items="${ requestScope.category}">
+									<option value="${ c.categoryNo }">
+										${ c.categoryName } 문의
 									</option>
-								<% } %>
+								</c:forEach>
+								
                                 </select>
                            	</div> 
 
@@ -302,9 +300,6 @@
 
                 </div> <!-- notice-content -->
 
-
-
-
             </div> <!-- notice-list -->
         </div> <!-- notice-detail -->
     </div> <!-- wrap -->
@@ -313,15 +308,15 @@
 	
 	    	<script>
 			function openNoticePage(){
-				location.href = '<%=contextPath %>/list.notice?currentPage=1';
+				location.href = '${ path }/list.notice?currentPage=1';
 			}
 			
 			function openQnaPage(){
-				location.href = '<%= contextPath %>/list.board?currentPage=1';
+				location.href = '${ path }/list.board?currentPage=1';
 			}
 			
     		function backPage(){
-    			location.href = '<%=contextPath%>/list.board?currentPage=1';
+    			location.href = '${ path }/list.board?currentPage=1';
     		}
 
     	

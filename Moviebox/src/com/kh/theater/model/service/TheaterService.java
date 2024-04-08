@@ -5,6 +5,7 @@ import static com.kh.common.JDBCTemplate.getConnection;
 
 import java.sql.Connection;
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kh.common.JDBCTemplate;
 import com.kh.common.model.vo.Attachment;
@@ -57,16 +58,6 @@ public class TheaterService {
 		return theater;
 	}
 
-
-	// 영화관 선택 시 해당 영화관 상세정보 출력
-//	public Theater selectTheaterDetail(int theaterNo) {
-//		Connection conn = getConnection();
-//		Theater theater = new TheaterDao().selectTheaterDetail(conn, theaterNo);
-//		close(conn);
-//		
-//		return theater;
-//	}
-
 	// 영화관 리스트
 	public ArrayList<Theater> theaterAll() {
 		Connection conn = getConnection();
@@ -76,9 +67,9 @@ public class TheaterService {
 	}
 
 	// 영화 정보
-	public ArrayList<Movie> getMoviesByTheater(int theaterNo) {
+	public List<Movie> getMoviesByTheater(int theaterNo) {
 		Connection conn = getConnection();
-		ArrayList<Movie> movies = new MovieDao().selectMovieList(conn);
+		List<Movie> movies = new MovieDao().selectMovieList(conn);
 		close(conn);
 		return movies;
 	}
