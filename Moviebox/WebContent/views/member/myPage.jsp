@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="com.kh.goods.model.vo.Goods,com.kh.goods.model.vo.Order,com.kh.common.model.vo.Price,com.kh.board.model.vo.Answer,com.kh.board.model.vo.Board,java.util.ArrayList,com.kh.member.model.vo.MemberGenre,java.util.List,com.kh.common.model.vo.Reservation,com.kh.movie.model.vo.Movie"%>
-
+    pageEncoding="UTF-8" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>   
 
 <!DOCTYPE html>
 <html lang="en">
@@ -362,8 +362,9 @@
 	
 
 
-	<%@ include file="../common/header.jsp" %>
+	<jsp:include page="/views/common/header.jsp"></jsp:include>
 	
+	<c:set var="path" value="${ pageContext.request.contextPath }"/>
 	<div id="info-header">
         <div id="info-title">
             <span class="title">마이페이지</span>
@@ -375,41 +376,23 @@
                     <a href="#" class="info-my">회원정보</a>
                 </li>
                 <li id="info-navi-second">
-                    <a href="<%=contextPath %>/resList.me" class="info-list">예매내역</a>
+                    <a href="${ path }/resList.me" class="info-list">예매내역</a>
                 </li>
             </ul>
         </div>
 
     </div>
 	
-	<% if(loginUser == null) {%>
-		<script>
-			location.href = ('<%=contextPath%>/loginForm.me');
-		</script>
-	<%} else {%>
-	
-	<% 
-		String memberId = loginUser.getMemberId();
-		String memberName = loginUser.getMemberName();
-		String phone = loginUser.getPhone();
-		
-		String email = loginUser.getEmail();
-		
-		String address = loginUser.getAddress();
-		String localCode = loginUser.getLocalCode();
-		
-		List<MemberGenre> list = loginUser.getGenreList();
-		List<Reservation> resList = (ArrayList)request.getAttribute("list");
-		List<Movie> movieList = (ArrayList)request.getAttribute("movieList");
-		List<Board> boardList = (ArrayList)request.getAttribute("boardList");
-		List<Answer> answerList = (ArrayList)request.getAttribute("answerList");
-		List<Order> orderList = (ArrayList)request.getAttribute("orderList");
-		
+	<c:choose>
+		<c:when test="${ loginUser eq null }">
+			
+			<script>
+				location.href = ('${ path }/loginForm.me');
+			</script>
+			
+		</c:when>
+		<c:otherwise>
 
-		
-
-
-	%>
 	
 
     <div class="content">
@@ -417,19 +400,23 @@
             <span class="tit">회원정보</span>
         </div>
         <div class="info-area">
-            <a class="btn btn-warning" id="btn1" href="<%=contextPath %>/pwdCheckForm.me">정보수정</a>
+            <a class="btn btn-warning" id="btn1" href="${ path }/pwdCheckForm.me">정보수정</a>
             <div class="info-area-content">
                 <div class="info-content1">
-                    <div class="info-name"><%=memberName %> 님 <div class="info-id"><%=memberId %></div></div>
-                    <div class="info-address"><%=localCode%> <%=address %></div>
-                    <div class="info-email"><%=memberName%></div>
+                    <div class="info-name">${ sessionScope.loginUser.memberName } 님 <div class="info-id">${ sessionScope.loginUser.memberId }</div></div>
+                    <div class="info-address">${ sessionScope.loginUser.localCode } ${ sessionScope.loginUser.address }</div>
+                    <div class="info-email">${ sessionScope.loginUser.email }</div>
                     <div class="info-genre">
-                    <%if(list == null) {%>
-                    <%} else { %>
-                    	<% for(int i = 0; i< list.size(); i++){ %>
-                    		<%= list.get(i).getGenreCode()%>
-                    	<%} %>
-                    <%} %>
+
+                    <c:choose>
+                    	
+                    	<c:when test="${!empty sessionScope.loginUser.genreList }">
+                    	
+                    		<c:forEach var="genre" items="${ sessionScope.loginUser.genreList }">
+                    			${ genre.genreCode }
+                    		</c:forEach>
+                    	</c:when>
+                    </c:choose>
                     </div>
                 </div>
                 
@@ -441,50 +428,72 @@
         <div class="mini-tit">MY 예매내역</div>
         <div class="history-area">
             <div class="history-area-content">
-            <%if(resList == null) {%>
-            	<h5 align="center">고객님의 최근 예매 내역이 존재하지 않습니다.</h5>
-            <%} else { %>
-            
-                <div class="history-area-image"><img id="poster" src="<%=contextPath %>/<%= movieList.get(0).getFilePath()%>/<%=movieList.get(0).getChangeName() %>"></div>
-                <div class="history-area-list">
-                	<%Price price = resList.get(0).getPrice(); %>
-                    <div>영화&emsp;<%=resList.get(0).getMovieTitle() %></div>
-                    <div>날짜&emsp;<%=resList.get(0).getWatchDate() %></div>
-                    <div>극장&emsp;<%=resList.get(0).getTheaterName() %></div>
-                    <div>인원&emsp;&emsp;<%=(price.getStudentCount()+price.getCommonCount()) %>명</div>
-                </div>
-                <div class="history-area-price">
-                    <div class="count">
-                    <span>청소년 :&nbsp;<%=price.getStudentCount()%>&emsp;<%=price.getStudentPrice() %>원</span>
-                    <span>성인 :&nbsp;<%=price.getCommonCount() %>&emsp;&emsp;<%=price.getCommonPrice() %>원</span>
-                    <span style="border-top: 1px solid rgb(158, 157, 157);">금액 :&emsp;&emsp;&nbsp;&nbsp;&nbsp;<%=price.getTotalPrice() %>원</span></div>
-
-                </div>
-            <%} %>
+            <c:choose>
+            	<c:when test="${ empty requestScope.list }">
+            		<h5 align="center">고객님의 최근 예매 내역이 존재하지 않습니다.</h5>
+            	</c:when>
+            	<c:otherwise>
+            		<div class="history-area-image"><img id="poster" src="${ path }/${ requestScope.movieList[0].filePath }/${ requestScope.movieList[0].changeName}"></div>
+                		<div class="history-area-list">
+                			
+		                    <div>영화&emsp;${ requestScope.list[0].movieTitle }</div>
+		                    <div>날짜&emsp;${ requestScope.list[0].watchDate }</div>
+		                    <div>극장&emsp;${ requestScope.list[0].theaterName }</div>
+		                    <div>인원&emsp;&emsp;${ requestScope.list[0].price.studentCount + requestScope.list[0].price.commonCount }명</div>
+		                </div>
+		                <div class="history-area-price">
+		                    <div class="count">
+		                    <span>청소년 :&nbsp;${ requestScope.list[0].price.studentCount }&emsp;${ requestScope.list[0].price.studentPrice }원</span>
+		                    <span>성인 :&nbsp;${ requestScope.list[0].price.commonCount }&emsp;&emsp;${ requestScope.list[0].price.commonPrice }원</span>
+		                    <span style="border-top: 1px solid rgb(158, 157, 157);">금액 :&emsp;&emsp;&nbsp;&nbsp;&nbsp;${ requestScope.list[0].price.totalPrice }원</span></div>
+                		</div>
+            	</c:otherwise>
+            	
+            </c:choose>
             </div>
 
         </div>
         <div class="mini-tit">MY 문의글내역</div>
         <div class="QNA-area">
             <div class="QNA-area-content">
-            	<%if(boardList != null) {%>
-            		<%for(int i=0;i < boardList.size(); i ++) {%>
-            		<% if(i==2) { break;}%>
-                <div class="QNA-area-list" style="border-bottom: 1px solid rgb(158, 157, 157);">
-                    <div id="QNA-title"><%=boardList.get(i).getBoardTitle() %></div>
-                    <div id="QNA-createDate"><%=boardList.get(i).getCreateDate() %></div>
+            <c:choose>
+            	<c:when test="${ empty requestScope.boardList }">
+            		<h5 align="center">고객님의 최근 문의 내역이 존재하지 않습니다.</h5>
+            	</c:when>
+            	<c:otherwise>
+            		<c:forEach var="i" begin="0" end="1" >
+            			<div class="QNA-area-list" style="border-bottom: 1px solid rgb(158, 157, 157);">
+                    		<div id="QNA-title">
+                    		<c:choose>
+                    		<c:when test="${ requestScope.boardList[i].boardTitle.length() gt 20 }">
+                    			<c:set var="boardTitle" value='${ requestScope.boardList[i].boardTitle.substring(0,20).concat("...") }'/>
+                    		</c:when>
+                    		<c:otherwise>
+                    			<c:set var="boardTitle" value="${ requestScope.boardList[i].boardTitle }"/>
+                    		</c:otherwise>
+                    		
+                    		</c:choose>
+                    		${ boardTitle }
+                    		
+
+                    </div>
+                    <div id="QNA-createDate">${ requestScope.boardList[i].createDate }</div>
                     
-                    <%if(answerList == null) {%>
-                    <div id="QNA-yn">N</div>
-                    <%} else { %>
-                    <div id="QNA-yn">Y</div>
-                    <%} %>
+                    <c:choose>
+                    	<c:when test="${empty requestScope.answerList }">
+                    		<div id="QNA-yn">N</div>
+                    	</c:when>
+                    	<c:otherwise>
+                    		<div id="QNA-yn">Y</div>	
+                    	</c:otherwise>
+                    </c:choose>
                 </div>
-                	<%} %>
-                
-				<%} else { %>
-					<h5 align="center">고객님의 최근 문의 내역이 존재하지 않습니다.</h5>
-				<%} %>
+            		
+            		</c:forEach>
+            	</c:otherwise>
+            
+            </c:choose>
+            	
             </div>
         </div>
         <div class="mini-tit">MY 상품구매내역</div>
@@ -493,58 +502,61 @@
             <div class="store-area-list">
                 	<div class="store-img"></div>
                 	<div class="store-content">
-                	<% if(orderList != null) {%>
-                		<%for(int i = 0; i<orderList.size();i++) { %>
-                			<%if(i==1) break; %>
-                        <table>
+                	<c:choose>
+                		<c:when test="${ empty requestScope.orderList }">
+                			<h5 align="center">고객님의 최근 구매 내역이 존재하지 않습니다.</h5>
+                		</c:when>
+                		<c:otherwise>
+                			<table>
                             <thead>
                                 <tr>
-                                    <th colspan="3">주문번호 <%=orderList.get(i).getOrderNo() %></th>
+                                    <th colspan="3">주문번호 ${ requestScope.orderList[0].orderNo }</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
                                     <td class="menu">메뉴</td>
-                                    <%List<Goods> goodsList = orderList.get(i).getGoodsList();%>
-                                    <%if(!goodsList.isEmpty()) { %>
-                                    	<%for(Goods g : goodsList) {%>
-                                    <td class="menu"><%= g.getGoodsName() %></td>
-                                    	
-                                    	<%} %>
-
-                                    <%} %>
+                                    <c:choose>
+                                    	<c:when test="${ !empty requestScope.orderList[0].goodsList }">
+                                    		<c:forEach var='g' items="${ requestScope.orderList[0].goodsList }">
+                                    			<td class="menu">${ g.goodsName }</td>
+                                    		</c:forEach>
+                                    	</c:when>
+                                    </c:choose>
+                                    
                                 </tr>
                                 <tr>
                                     <td class="menu">개수</td>
-                                    <%if(!goodsList.isEmpty()) { %>
-                                    	<%for(Goods g : goodsList) {%>
-                                    <td class="menu"><%= g.getQty()%>개</td>
-                                    	
-                                    	<%} %>
-
-                                    <%} %>
+                                   <c:choose>
+                                    	<c:when test="${ !empty requestScope.orderList[0].goodsList }">
+                                    		<c:forEach var='g' items="${ requestScope.orderList[0].goodsList }">
+                                    			<td class="menu">${ g.qty }</td>
+                                    		</c:forEach>
+                                    	</c:when>
+                                    </c:choose>
                                 </tr>
                                 <tr>
                                     <td class="menu">비용</td>
-                                    <%if(!goodsList.isEmpty()) { %>
-                                    	<%for(Goods g : goodsList) {%>
-                                    <td class="menu"><%= g.getGoodsPrice() %></td>
-                                    	
-                                    	<%} %>
-
-                                    <%} %>
+                                    <c:choose>
+                                    	<c:when test="${ !empty requestScope.orderList[0].goodsList }">
+                                    		<c:forEach var='g' items="${ requestScope.orderList[0].goodsList }">
+                                    			<td class="menu">${ g.goodsPrice }</td>
+                                    		</c:forEach>
+                                    	</c:when>
+                                    </c:choose>
                                 </tr>
                             </tbody>
                         </table>
-                        <%} %>
-					<%} else { %>
-							<h5 align="center">고객님의 최근 구매 내역이 존재하지 않습니다.</h5>
-					<%} %>
+                		</c:otherwise>
+                	</c:choose>
+                	
                     </div>
             </div>
             
         </div>
     </div>
-<%}%>
+		</c:otherwise>
+	</c:choose>
+	<jsp:include page="/views/common/footer.jsp" />
 </body>
 </html>

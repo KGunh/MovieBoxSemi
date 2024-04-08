@@ -19,6 +19,8 @@ public class Member {
 	private String localCode;
 	private String localName;
 	private List<MemberGenre> genreList;
+	
+	
 	public Member() {
 		super();
 	}

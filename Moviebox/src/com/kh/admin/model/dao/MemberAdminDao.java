@@ -163,7 +163,17 @@ public class MemberAdminDao {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String sql = prop.getProperty("deleteAdmin");
-		
+		try {
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setInt(1, memberNo);
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
 		
 		
 		return result;
@@ -353,10 +363,9 @@ public class MemberAdminDao {
 	}
 	
 	public int deleleteCinema(Connection conn,int theaterNo) {
-		System.out.println(theaterNo);
 		PreparedStatement pstmt = null;
 		int result = 0;
-		String sql = prop.getProperty("dele");
+		String sql = prop.getProperty("deleleteCinema");
 		
 		try {
 			pstmt = conn.prepareStatement(sql);
@@ -376,10 +385,9 @@ public class MemberAdminDao {
 	}
 	
 	
-	public ArrayList<Member> search(Connection conn,String search, String category){
+	public ArrayList<Member> search(Connection conn,String category, String search){
 		Member member = new Member();
 		ArrayList<Member> list = new ArrayList<Member>();
-		
 		
 		
 		PreparedStatement pstmt = null;
@@ -388,9 +396,9 @@ public class MemberAdminDao {
 		try {
 			pstmt = conn.prepareStatement(sql);
 			
-	
 			pstmt.setString(1, category);
 			pstmt.setString(2, search);
+			
 			
 			rset = pstmt.executeQuery();
 			
@@ -405,7 +413,8 @@ public class MemberAdminDao {
 				
 			}
 			
-			System.out.println(list);
+			
+			
 			
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
@@ -445,8 +454,6 @@ public class MemberAdminDao {
 				list.add(theater);
 			
 			}
-			
-			
 			
 			
 			

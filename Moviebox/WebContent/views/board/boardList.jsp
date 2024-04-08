@@ -7,23 +7,11 @@
  				 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-<%
-	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("boardList");
-	Board board = (Board)request.getAttribute("board");
-	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
-	
-	int currentPage = pi.getCurrentPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
-	int maxPage = pi.getMaxPage();
-
-%>
-
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>고객센터 QnA</title>
+<title>고객센터 Q&A</title>
 
     <style>
         body{
@@ -245,8 +233,8 @@
 </head>
 <body>
     
-    <%@ include file="../common/header.jsp" %>
-       	
+    <jsp:include page="../common/header.jsp"></jsp:include>
+    <c:set var="path" value="${ pageContext.request.contextPath }" />
        	
     <div id="wrap">
 
@@ -269,19 +257,21 @@
                 </div>
 
                 <div id="search-img">
-                    <img src="<%= contextPath %>/resources/img/search.PNG" width="45" height="45">
+                    <img src="${ path }/resources/img/search.PNG" width="45" height="45">
                 </div>
 
             </div> <!-- search-notice -->
             
-            <!-- 회원만 작성 할 수 있게  -->
-
             <div id="qna-insert">
-            <% if (loginUser == null) { %>
-                <button id="qna-insert-btn" onclick="noMember();">글쓰기</button>
-            <% } else { %>
-            	<button id="qna-insert-btn" onclick="boardInsert();">글쓰기</button>
-            <% } %>
+            <c:choose>
+            	<c:when test="${ empty loginUser }">
+                	<button id="qna-insert-btn" onclick="noMember();">글쓰기</button>
+                </c:when>
+                
+                <c:otherwise>
+            		<button id="qna-insert-btn" onclick="boardInsert();">글쓰기</button>
+            	</c:otherwise>
+            </c:choose>
             </div>
 
 
@@ -298,79 +288,82 @@
                         </tr>
                     </thead>
                     <tbody>
-                    <% if (list.isEmpty()) { %>
-                        <tr>
-                            <td colspan="5" style="color: white;">조회 된 문의사항이 없습니다. </td>
-                        </tr>
-                        
-                        <% } else { %>
-                        
-                        	<% for(Board b : list) { %>
-                        <tr class="board">
-                            <td id="list-no"><%= b.getBoardNo() %></td>
-                            <td id="list-ca"><%= b.getBoardCategory() %></td>
-                            <td id="list-title"><%= b.getBoardTitle() %></td>
-                            <td id="list-count"><%= b.getBoardWriter() %></td>
-                            <td id="list-date"><%= b.getCreateDate() %></td>
-                        </tr>
-                        	<% } %>
-                        <% } %>
+                    
+						<c:choose>
+							<c:when test="${ empty boardList }">
+							
+		                        <tr>
+		                            <td colspan="5" style="color: white;">조회 된 문의사항이 없습니다. </td>
+		                        </tr>
+	                        </c:when>
+	                        <c:otherwise>
+	                        	<c:forEach var="b" items="${ requestScope.boardList }">
+	                        <tr class="board">
+	                            <td id="list-no">${ b.boardNo }</td>
+	                            <td id="list-ca">${ b.boardCategory }</td>
+	                            <td id="list-title">${ b.boardTitle }</td>
+	                            <td id="list-count">${ b.boardWriter }</td>
+	                            <td id="list-date">${ b.createDate }</td>
+	                        </tr>
+	                        	</c:forEach>
+	                        </c:otherwise>
+						</c:choose>
                     </tbody>
                 </table>
             </div>
 
             <div id="page">
                 <div class="paging-area" align="center" style="margin-top:12px;">
-          			
-          			<% if(currentPage > 1) { %>
-	          			<button class="btn btn-outline-secondary" style="color:white; background: none; border: 1px solid white;"
-	          			onclick="location.href='<%=contextPath%>/list.board?currentPage=<%= currentPage - 1 %>'"> < </button>
-	               	<% } %>
+          			<c:if test="${ pageInfo.currentPage > 1}">
+		          			<button class="btn btn-outline-secondary" style="color:white; background: none; border: 1px solid white;"
+		          			onclick="location.href='${ path }/list.notice?currentPage=${ pageInfo.currentPage - 1 }'"> < </button>
+		          	</c:if>
 	                    
-	                <% for(int i = startPage; i <= endPage; i++) { %>
-	                	<% if(currentPage != i) { %>
-					        <button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
-					        onclick="location.href='<%=contextPath%>/list.board?currentPage=<%=i%>'"><%= i %></button>
-					    <% } else { %>
-					    	<button disabled class="btn btn-outline-secondary" style="color:white; background-color:#6c757d; border: 1px solid white;"><%=i%></button>
-					    <% } %>
-	                <% } %>
+	                <c:forEach begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }" var="i" >
+	                	<c:choose>
+		                	<c:when test="${ pageInfo.currentPage ne i }">
+						        <button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
+						        onclick="location.href='${ path }/list.notice?currentPage=${ i }'">${ i }</button>
+						    </c:when>
+						    <c:otherwise>
+						    	<button disabled class="btn btn-outline-secondary" style="color:white; background-color:#6c757d; border: 1px solid white;">${ i }</button>
+						    </c:otherwise>
+					    </c:choose>
+	                </c:forEach>
 	                
-	                <% if(currentPage != maxPage) { %>
-		                <button class="btn btn-outline-secondary" style="color:white; background: none; border: 1px solid white;"
-		                onclick="location.href='<%=contextPath%>/list.board?currentPage=<%= currentPage + 1 %>'"> > </button>
-		            <% } %>
+	                	<c:if test="${ pageInfo.currentPage ne pageInfo.maxPage }">
+			                <button class="btn btn-outline-secondary" style="color:white; background: none; border: 1px solid white;"
+			                onclick="location.href='${ path }/list.notice?currentPage=${ pageInfo.currentPage + 1 }'"> > </button>
+		            	</c:if>
                 </div>
-                
-
             </div>
 
         </div>
     </div>
 
-   	<%@ include file="../common/footer.jsp" %>
+	<jsp:include page="../common/footer.jsp"></jsp:include>
    	
  	    <script>
     		function openNoticePage(){
-    			location.href = '<%=contextPath %>/list.notice?currentPage=1';
+    			location.href = '${ path }/list.notice?currentPage=1';
     		}
     		
     		function openQnaPage(){
-    			location.href = '<%= contextPath %>/list.board?currentPage=1';
+    			location.href = '${ path }/list.board?currentPage=1';
     		}
     		
     		function boardInsert(){
-    			location.href = '<%=contextPath%>/enrollForm.board';
+    			location.href = '${ path }/enrollForm.board';
     		}
     		
     		$('tbody > tr.board').click(function(){
     			const boardNo = $(this).children().eq(0).text();
-    			location.href = '<%=contextPath%>/detail.board?boardNo=' + boardNo;
+    			location.href = '${ path }/detail.board?boardNo=' + boardNo;
             });
     		
     		function noMember(){
-    			location.href = ('<%=contextPath%>/loginForm.me');
     			alert('로그인이 필요한 서비스 입니다.');
+    			location.href = ('${ path }/loginForm.me');
     		}
     	
     	</script>

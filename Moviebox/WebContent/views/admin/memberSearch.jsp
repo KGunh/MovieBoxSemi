@@ -2,9 +2,8 @@
     pageEncoding="UTF-8" import = " java.util.ArrayList, com.kh.member.model.vo.Member" 
     %>
     
-<%
-ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
-%>    
+ <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+   
 
     <!DOCTYPE html>
 <html lang="en">
@@ -335,25 +334,25 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
             <div class="content_1">
                 <ul class="menu">
                     <li>
-                        <a href="<%=contextPath %>/selectAdmin.mb">회원 관리</a>
+                        <a href="${path }/selectAdmin.mb">회원 관리</a>
                         <ul class="submenu">
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminScreenList.admin">예매 관리</a>
+                        <a href="${path }/adminScreenList.admin">예매 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminMovieCheck.admin?currentPage=1">영화 관리</a>
+                        <a href="${path }/adminMovieCheck.admin?currentPage=1">영화 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath%>/checkAdmin.cm">영화관 관리</a>
+                        <a href="${path }/checkAdmin.cm">영화관 관리</a>
                         <ul class="submenu">
 
                         </ul>
@@ -361,8 +360,8 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                     <li class="post">
                         <a href="#">게시글 관리</a>
                         <ul class="submenu">
-                        <li><a href="<%=contextPath %>/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
-                        <li><a href="<%=contextPath %>/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
+                        <li><a href="${path }/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
+                        <li><a href="${path }/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
                         </ul>
                     </li>
                 </ul>    
@@ -407,6 +406,8 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                             </tr>
                           </thead>
                           <tbody>
+                          
+                         
                        <%if(mb.isEmpty()) {%>
                        <tr>
                        <td colspan="5" >조회 결과가 없습니다.</td>
@@ -415,19 +416,18 @@ ArrayList<Member> mb =(ArrayList<Member>)request.getAttribute("member");
                        </tr>
                        
                        <% } else {%>
-                           <% for(Member m : mb){ %>
+                        <c:forEach var="m" items="member">
                                 <tr class="member">
 							     <!-- <td class="ch"><input type="checkbox" name="check" value="check" id="check" ></td>  -->
 
-                                <td><%= m.getMemberNo() %></td>
+                                <td>${m.memberNo }</td>
                                 <td><%= m.getMemberName()%></td>
                                 <td><%= m.getEnrollDate() %></td>
                                 <td><%= m.getStatus() %></td>
                                 <td><%= m.getPhone() %></td>
                                 
                             </tr>
-                            <% } %>
-                            	<% } %>
+                            </c:forEach>
                            
                             
                           </tbody>

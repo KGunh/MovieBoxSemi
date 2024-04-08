@@ -7,8 +7,6 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
 <%
-	ArrayList<Movie> movies = (ArrayList<Movie>)request.getAttribute("movie");
-	ArrayList<Attachment> attachment = (ArrayList<Attachment>)request.getAttribute("attachment");
 %>
 <!DOCTYPE html>
 <html>
@@ -195,11 +193,10 @@
     <div id="wrap">
 
         <!-- 영화관 안내 전체 박스 -->
-        
         <c:choose>
         	<c:when test="${ empty theater }">
 				<div id="noMovieList">
-					<a id="noMovie">해당 영화관에 조회 된 영화가 없습니다.</a>
+					<a id="noMovie">영화관이 존재하지 않습니다.</a>
 				</div>
        	 	</c:when>
        	 	<c:otherwise>
@@ -235,7 +232,6 @@
 	                		<button id="movie-content-btn2" onclick="reservationPage();">예매하기</button>
 	                		</c:otherwise>
 	                	</c:choose>
-                        <%--<button id="movie-content-btn2">예매하기</button> --%>
                     </div>
         		 </c:forEach>
             </div>

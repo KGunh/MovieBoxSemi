@@ -38,7 +38,6 @@ public class AjaxAdminInsertScreen extends HttpServlet {
 		String watchTime = request.getParameter("watchTime");
 		int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));
 		String insertDate = watchDate + "/" + watchTime;
-		System.out.println(insertDate);
 		Screen sc = new Screen();
 		sc.setMovieNo(movieNo);
 		sc.setTheaterNo(theaterNo);
