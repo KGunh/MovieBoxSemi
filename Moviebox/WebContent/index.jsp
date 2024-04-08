@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    
 <!DOCTYPE html>
 <html>
 <head>
@@ -204,10 +206,7 @@
 <body>
 
 	
-    
-    <%@ include file="views/common/header.jsp" %> 
-    
-
+    <jsp:include page="views/common/header.jsp" />
     
     <div id="main-cotent">
         <div id="content_1">
@@ -246,22 +245,22 @@
         <div class="long-div">
             <div class="movie-genre-content">
                 <div class="genre-content">
-                    <div class="genre-content-img"><img src="<%=contextPath%>/resources/img/action.png" alt="">액션</div>
+                    <div class="genre-content-img"><img src="${ path }/resources/img/action.png" alt="">액션</div>
                 </div>
                 <div class="genre-content">
-                    <div class="genre-content-img"><img src="<%=contextPath%>/resources/img/couple.png" alt="">로맨스</div>
+                    <div class="genre-content-img"><img src="${ path }/resources/img/couple.png" alt="">로맨스</div>
                 </div>
                 <div class="genre-content">
-                    <div class="genre-content-img"><img src="<%=contextPath%>/resources/img/fear.png" alt="">공포/스릴러</div>
+                    <div class="genre-content-img"><img src="${ path }/resources/img/fear.png" alt="">공포/스릴러</div>
                 </div>
                 <div class="genre-content">
-                    <div class="genre-content-img"><img src="<%=contextPath%>/resources/img/comedy.png" alt="">코미디</div>
+                    <div class="genre-content-img"><img src="${ path }/resources/img/comedy.png" alt="">코미디</div>
                 </div>
                 <div class="genre-content">
-                    <div class="genre-content-img"><img src="<%=contextPath%>/resources/img/cartoon.png" alt="">애니</div>
+                    <div class="genre-content-img"><img src="${ path }/resources/img/cartoon.png" alt="">애니</div>
                 </div>
                 <div class="genre-content">
-                    <div class="genre-content-img"><img src="<%=contextPath%>/resources/img/fantasy-movie.png" alt="">판타지</div>
+                    <div class="genre-content-img"><img src="${ path }/resources/img/fantasy-movie.png" alt="">판타지</div>
                 </div>
             </div>
         </div>
@@ -273,7 +272,7 @@
                     <div class="phone-number">1588-8888</div>
                 </div>
                 <div class="phone-img">
-                    <img src="<%=contextPath%>/resources/img/telephone.png" alt="">
+                    <img src="${ path }/resources/img/telephone.png" alt="">
                 </div>
             </div>
             <div class="board-content">
@@ -294,7 +293,7 @@
     </div>
     <script>
     $('.genre-content-img').on('click',function(){
-    	location.href = '<%=contextPath%>/selectGenre.movie?type=genre&genre=' + $(this).text();
+    	location.href = '${ path }/selectGenre.movie?type=genre&genre=' + $(this).text();
     });
     	
     </script>
@@ -308,7 +307,7 @@
 				
 				let resultStr = '';
 				for(let i = 0; i < result.length; i++){
-					resultStr += '<div class="swiper-slide" ><img class="'+  result[i].movieNo  +'" src="<%=contextPath%>/' + result[i].filePath +'/'+ result[i].changeName+'"' +'/></div>'; 
+					resultStr += '<div class="swiper-slide" ><img class="'+  result[i].movieNo  +'" src="${ path }/' + result[i].filePath +'/'+ result[i].changeName+'"' +'/></div>'; 
 
 					
 				}
@@ -332,13 +331,13 @@
 				let resultStr = '';
 				for(let i = 0; i < result.length; i++){
 					if(i==5) break;
-					resultStr += '<div><img class="'+   result[i].movieNo  +'" src="<%=contextPath%>/' + result[i].filePath +'/'+ result[i].changeName+'"' +'/></div>'; 
+					resultStr += '<div><img class="'+   result[i].movieNo  +'" src="${ path }/' + result[i].filePath +'/'+ result[i].changeName+'"' +'/></div>'; 
 				}
 				
 				$('.movie-chart').html(resultStr);
 				for(let i = 0; i < result.length; i++){
 					$('.' + result[i].movieNo).on('click',function(){
-						location.href = '<%=contextPath%>/detail.movie?movieNo=' + result[i].movieNo;
+						location.href = '${ path }/detail.movie?movieNo=' + result[i].movieNo;
 					});
 
 					
@@ -389,7 +388,6 @@
     </script>
     
 
-    
-    <%@ include file="views/common/footer.jsp" %>
+    <jsp:include page="views/common/footer.jsp" />
 </body>
 </html>

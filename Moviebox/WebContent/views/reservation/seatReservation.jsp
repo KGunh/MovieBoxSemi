@@ -22,13 +22,11 @@
 
 	<jsp:include page="/views/common/header.jsp"></jsp:include>
 	
-	<c:set var="path" value="${ pageContext.request.contextPath }"/>
-
 	<c:choose>
 		<c:when test="${ loginUser eq null }">
 			
 			<script>
-				location.href = ('${ path }/loginForm.me');
+				location.href = ('${ sessionScope.path }/loginForm.me');
 			</script>
 			
 		</c:when>
@@ -152,6 +150,19 @@
 								<div class="select-info" style="margin-top: 50px;">결제금액</div>
 							</div>
 							<div id="print-reservation-info">
+
+								<!--
+									이걸 이렇게 하는게 맞지않나 시프요...
+								<script>
+									$('#reservation-info>div>div').last().css('margin-top', '50px');
+									$('#movie-select>div').css('text-align', 'center');
+								</script>
+								<c:forEach var="i" begin="1" end="6">
+									<div class="print-info"></div>							
+								</c:forEach>
+								-->
+
+
 								<div class="print-info"></div>
 								<div class="print-info"></div>
 								<div class="print-info"></div>
@@ -160,7 +171,7 @@
 								<div class="print-info" style="margin-top: 50px;"></div>
 							</div>
 						</div>
-						<form id="payment-form" action="/moviebox/payment.reservation" method="post">
+						<form id="payment-form" action="${ sessionScope.path }/payment.reservation" method="post">
 							<input type="hidden" name="movieNo" value="">
 							<input type="hidden" name="screenNo" value="">
 							<input type="hidden" name="memberNo" value="">
@@ -179,7 +190,7 @@
     <jsp:include page="/views/common/footer.jsp" />
 
     <script>
-        let path = '${ path }';
+        let path = '${ sessionScope.path }';
     	let memberNo = ${ sessionScope.loginUser.memberNo };
 		let selectScreenNo = ${ requestScope.screenNo };
 		let selectMovieNo = ${ requestScope.movieNo };

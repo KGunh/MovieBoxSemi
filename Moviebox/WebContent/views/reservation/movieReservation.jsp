@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.List, com.kh.common.model.vo.Location, com.kh.movie.model.vo.Movie" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
 
 <!DOCTYPE html>
@@ -20,13 +19,11 @@
 	
 	<jsp:include page="/views/common/header.jsp"></jsp:include>
 	
-	<c:set var="path" value="${ pageContext.request.contextPath }"/>
-
 	<c:choose>
 		<c:when test="${ loginUser eq null }">
 			
 			<script>
-				location.href = ('${ path }/loginForm.me');
+				location.href = ('${ sessionScope.path }/loginForm.me');
 			</script>
 			
 		</c:when>
@@ -43,7 +40,7 @@
 		                            <c:forEach var="movie" items="${ movieList }">
 			                           	<div class="swiper-slide">
 			                                <div class="poster">
-			                                    <img src="${ path }/${ movie.filePath }/${ movie.changeName }" alt="영화포스터">
+			                                    <img src="${ sessionScope.path }/${ movie.filePath }/${ movie.changeName }" alt="영화포스터">
 		                                        <input type="hidden" value="${ movie.movieNo }">
 		                                        <input type="hidden" value="${ movie.movieTitle }">
 			                                </div>
