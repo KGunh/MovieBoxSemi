@@ -279,7 +279,7 @@
 </head>
 <body>
 	<!-- 헤더 -->
-    <%@ include file="/views/common/header.jsp" %>
+	<jsp:include page="/views/common/header.jsp"></jsp:include>
     
     <div id="wrap">
 
@@ -294,25 +294,25 @@
             <div class="content_1">
                 <ul class="menu">
                     <li>
-                        <a href="<%=contextPath %>/selectAdmin.mb">회원 관리</a>
+                        <a href="${ path }/selectAdmin.mb">회원 관리</a>
                         <ul class="submenu">
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminScreenList.admin">예매 관리</a>
+                        <a href="${ path }/adminScreenList.admin">예매 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminMovieCheck.admin?currentPage=1">영화 관리</a>
+                        <a href="${ path }/adminMovieCheck.admin?currentPage=1">영화 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath%>/checkAdmin.cm">영화관 관리</a>
+                        <a href="${ path }/checkAdmin.cm">영화관 관리</a>
                         <ul class="submenu">
 
                         </ul>
@@ -320,8 +320,8 @@
                     <li class="post">
                         <a href="#">게시글 관리</a>
                         <ul class="submenu">
-                        <li><a href="<%=contextPath %>/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
-                        <li><a href="<%=contextPath %>/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
+                        <li><a href="${ path }/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
+                        <li><a href="${ path }/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
                         </ul>
                     </li>
                 </ul>    
@@ -338,7 +338,7 @@
 
                     <div id="box_category">
                         <select name="#" id="category" >
-                            <option value=""><%=n.getNoticeCategory() %></option>
+                            <option value="">${notice2323.noticeCategory}</option>
                         </select>
                     </div>
 
@@ -347,7 +347,7 @@
                     </div>
 
                     <div id="box_2">
-                        <input type="text" class="form-control" name="title" style="border-radius: 8px;" value="<%=n.getNoticeTitle() %>" readonly>
+                        <input type="text" class="form-control" name="title" style="border-radius: 8px;" value="${notice2323.noticeTitle }" readonly>
                     </div>
 
                     <div id="box_1">
@@ -355,7 +355,7 @@
                     </div>
 
                     <div id="box_3">
-                        <textarea class="form-control" rows="5" name="content" style="resize:none; height: 250px; border-radius: 8px;" readonly><%=n.getNoticeContent()%></textarea>
+                        <textarea class="form-control" rows="5" name="content" style="resize:none; height: 250px; border-radius: 8px;" readonly>${notice2323.noticeContent}</textarea>
                     </div>
 
                     
@@ -376,19 +376,20 @@
         </div>
 
     </div>
- 	<%@ include file="/views/common/footer.jsp" %>
+    
+    <jsp:include page="/views/common/footer.jsp"></jsp:include>
  	<!-- 푸터 -->
  	
  	<script>
  		function noticeUpdate() {
- 			location.href = '<%=contextPath %>/adminBoardUpdateEnrollForm.admin?noticeNo=<%=n.getNoticeNo()%>';
+ 			location.href = '${path}/adminBoardUpdateEnrollForm.admin?noticeNo=${notice2323.noticeNo}';
  		}
  	
  		function noticeDelete() {
  			const result = confirm('삭제하려면 확인을 눌러주세요.');
  			
  			if(result) {
- 				location.href = '<%=contextPath %>/adminBoardDelete.admin?noticeNo=<%=n.getNoticeNo()%>';	
+ 				location.href = '${path}/adminBoardDelete.admin?noticeNo=${notice2323.noticeNo}>';	
  			}
  			
  		}
