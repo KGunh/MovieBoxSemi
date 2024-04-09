@@ -451,7 +451,8 @@
 
     </div>
  	
- 	
+ 	    <jsp:include page="/views/common/footer.jsp"></jsp:include>
+ 	<!-- 푸터 -->
  	
  	<script>
  		function insertButton(){
