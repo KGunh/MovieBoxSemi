@@ -1,16 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.kh.board.model.vo.Board, java.util.ArrayList, com.kh.common.model.vo.PageInfo"%>
-    
-<%
-	ArrayList<Board> list = (ArrayList<Board>)request.getAttribute("adminQnACheckList");
-	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
-	//System.out.print(pi);
-	int currentPage = pi.getCurrentPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
-	int maxPage = pi.getMaxPage();
-%> 
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+
 
 
 <!DOCTYPE html>
@@ -291,7 +284,7 @@
 </head>
 <body>
 	<!-- 헤더 -->
-    <%@ include file="/views/common/header.jsp" %>
+    <jsp:include page="/views/common/header.jsp"></jsp:include>
 
     <div id="wrap">
 
@@ -306,25 +299,25 @@
             <div class="content_1">
                 <ul class="menu">
                     <li>
-                        <a href="<%=contextPath %>/selectAdmin.mb">회원 관리</a>
+                        <a href="${path}/selectAdmin.mb">회원 관리</a>
                         <ul class="submenu">
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminScreenList.admin">예매 관리</a>
+                        <a href="${path}/adminScreenList.admin">예매 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminMovieCheck.admin?currentPage=1">영화 관리</a>
+                        <a href="${path}/adminMovieCheck.admin?currentPage=1">영화 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath%>/checkAdmin.cm">영화관 관리</a>
+                        <a href="${path}/checkAdmin.cm">영화관 관리</a>
                         <ul class="submenu">
 
                         </ul>
@@ -332,8 +325,8 @@
                     <li class="post">
                         <a href="#">게시글 관리</a>
                         <ul class="submenu">
-                        <li><a href="<%=contextPath %>/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
-                        <li><a href="<%=contextPath %>/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
+                        <li><a href="${path}/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
+                        <li><a href="${path}/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
                         </ul>
                     </li>
                 </ul>    
@@ -374,19 +367,21 @@
                                 </tr>
                               </thead>
                               <tbody id="tbody">
-                              <% if(list == null || list.isEmpty()) { %>
-
-                              <% }else{ %>
-                              	<% for(Board b : list) {%>	
+                              <c:choose>
+                              <c:when test="${ empty adminQnACheckList}">
+							  </c:when>
+							  <c:otherwise>
+                              	<c:forEach var="b" items="${ requestScope.adminQnACheckList}">
 	                                <tr>
-	                                    <td><%= b.getBoardNo() %></td>
-	                                    <td><%= b.getBoardCategory() %></td>
-	                                    <td><%= b.getBoardTitle() %></td>
-	                                    <td><%= b.getBoardWriter() %></td>
-	                                    <td><%= b.getCreateDate() %></td>
+	                                    <td>${ b.boardNo}</td>
+	                                    <td>${ b.boardCategory}</td>
+	                                    <td>${ b.boardTitle}</td>
+	                                    <td>${ b.boardWriter}</td>
+	                                    <td>${ b.createDate}</td>
 	                                </tr>
-	                            <% } %>    
-                              <% } %> 
+	                                </c:forEach>
+	                              </c:otherwise>
+                              </c:choose>
                               </tbody>
                             </table>
                           </div>
@@ -398,26 +393,30 @@
 
                     
                     <div class="paging-area" align="center" style="margin-top:12px;">
-                    
-                    	<% if(currentPage > 1) { %>
-                    	<button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
-					        onclick="location.href='<%=contextPath%>/adminQnACheck.admin?currentPage=<%= currentPage - 1 %>'"> < </button>
-                    	<% } %>
-                    	<% for(int i = startPage; i <= endPage; i++) { %>
                     	
-                    		<% if(currentPage != i) { %>
-							<button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
-					        onclick="location.href='<%=contextPath%>/adminQnACheck.admin?currentPage=<%=i%>'"><%= i %></button>
-	                        <%} else {%>
-								 <button disabled class="btn btn-outline-secondary" style="color:#ffffff">
-								 <%= i %></button>                       
-	                        <%} %>
-                        <% } %>
+                    	<c:if test="${ pageInfo.currentPage > 1 }">
+	                    	<button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
+						        onclick="location.href='${path}/adminQnACheck.admin?currentPage=${pageInfo.currentPage - 1}'"> < </button>
+                    	</c:if>
+                    	
+                    	<c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}" >
+                    	
+                    		<c:choose>
+                    			<c:when test="${ pageInfo.currentPage ne i }">
+									<button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
+							        onclick="location.href='${path}/adminQnACheck.admin?currentPage=${i}'">${i}</button>
+		                        </c:when>
+		                        <c:otherwise>
+									 <button disabled class="btn btn-outline-secondary" style="color:#ffffff">
+									 ${i}</button>                       
+		                        </c:otherwise>
+	                        </c:choose>
+                        </c:forEach>
                         
-                        <% if(currentPage != maxPage) { %>
-                        <button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
-					        onclick="location.href='<%=contextPath%>/adminQnACheck.admin?currentPage=<%= currentPage + 1 %>'"> > </button>
-					    <% } %>    
+                        <c:if test="${ pageInfo.currentPage ne pageInfo.maxPage }">
+	                        <button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
+						        onclick="location.href='${path}/adminQnACheck.admin?currentPage=${pageInfo.currentPage + 1}'"> > </button>
+						</c:if>
                     </div>
                     <!--페이지 숫자-->
 
@@ -434,17 +433,17 @@
         </div>
 
     </div>
-     	<%@ include file="/views/common/footer.jsp" %>
+     	<jsp:include page="/views/common/footer.jsp"></jsp:include>
  	<!-- 푸터 -->
  	
  	<script>
  		function insertButton(){
- 			location.href = '<%= contextPath %>/adminQnAInsert.admin';
+ 			location.href = '${path}/adminQnAInsert.admin';
  		}
  		
  		$('#tbody').on('click', 'tr', function(){
 			const boardNo = $(this).children().eq(0).text();
-			location.href='<%= contextPath %>/adminQnADetail.admin?boardNo=' + boardNo;
+			location.href='${path}/adminQnADetail.admin?boardNo=' + boardNo;
  		});
  		
  		
