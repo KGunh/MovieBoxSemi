@@ -332,7 +332,7 @@
                 
               
                 function deleleteCinema(){
-                	location.href = '${ path }/dele.cm?theaterNo=${theater.theaterNo}';
+                	location.href = '${ path }/deleteCinema.cm?theaterNo=${theater.theaterNo}';
                 }
                 
                 function check(){
