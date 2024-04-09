@@ -9,6 +9,11 @@
 <meta charset="UTF-8">
 <title>스토어</title>
 
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/css/bootstrap.min.css">
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.7.1/dist/jquery.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.1/dist/umd/popper.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.6.2/dist/js/bootstrap.bundle.min.js"></script>
+
 <style>
 
     .container{
@@ -229,7 +234,10 @@
     }
 
     .product-detail-container{
-        margin-top: 55px;
+        margin-top: 5px;
+        position: absolute;
+        bottom: 3px;
+        width: 100%;
     }
 
     .buy:hover, .rating-number:hover, .image-container:hover, .dress-name:hover{
@@ -248,19 +256,33 @@
     .goods-container{
         width: 20%;
         padding: 20px;
+        position: relative;
     }
     
-    image-container > img{
+    .image-container > img{
+        margin: auto;
         width: 100%;
-        height: 100%;
     }
+    .pagination-container{
+        width: 800px;
+        margin: auto;
+        margin-bottom: 50px;
+        display: flex;
+        justify-content: center;
+        justify-items: center;
+    }
+
+    .pagination{
+        width: 100%;
+    }
+
 
 </style>
 </head>
 <body>
 
  	<jsp:include page="/views/common/header.jsp" />
- 	
+ 	 	
     <div id="wrap" style="padding-bottom: 50px;">
         <h1 align="center" style="margin-top:50px; color:crimson;">
             <img style="height: 210px; width: 1200px; border:rgba(252, 252, 252, 0.15);" src="https://cf.lottecinema.co.kr//Media/WebAdmin/f04df114813f45b18e63e06308211d0f.jpg" alt="스토어상품이미지">
@@ -310,6 +332,25 @@
         </c:choose>
         
         </div>
+    </div>
+   
+    <div class="paging-area" align="center">
+        <c:if test=" ${ pageInfo.currentPage > 1 }">
+            <button class="btn btn-outline-danger" style="color:#ff52a0;" onclick="location.href='${ sessionScope.path }/list.goods?currentPage=${ pageInfo.currentPage - 1 }'">이전</button>
+        </c:if>
+             <c:forEach var="i" begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }">
+	             <c:choose>
+		             <c:when test="${ pageInfo.currentPage != i }">
+		                 <button class="btn btn-outline-danger" style="color:#ff52a0;" onclick="location.href='${ sessionScope.path }/list.goods?currentPage=${ i }'">${ i }</button>
+		             </c:when>
+		             <c:otherwise>
+		                 <button disabled class="btn btn-danger">${ i }</button>
+	                 </c:otherwise>
+	             </c:choose>
+             </c:forEach>
+		<c:if test=" ${ pageInfo.currentPage != maxPage }">
+              <button class="btn btn-outline-danger" style="color:#ff52a0;" onclick="location.href='${ sessionScope.path }/list.goods?currentPage=${ pageInfo.currentPage + 1 }'">다음</button>
+   		</c:if>
     </div>
 	
 	<jsp:include page="/views/common/footer.jsp" />

@@ -33,13 +33,11 @@ public class MemberAdminServlet extends HttpServlet {
 		
 		request.setCharacterEncoding("UTF-8");
 		String uri =request.getRequestURI();
-		
 		String mapping = uri.substring(uri.lastIndexOf("/")+1,uri.lastIndexOf("."));
 		String view = "";
 		boolean flag = false;
 		
 		MemberAdminController MAC = new MemberAdminController();
-		
 		
 		
 		switch(mapping) {
