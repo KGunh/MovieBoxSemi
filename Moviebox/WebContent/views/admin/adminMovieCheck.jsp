@@ -1,17 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.kh.movie.model.vo.Movie, java.util.ArrayList, com.kh.common.model.vo.PageInfo" %>
-    
-<%
-	ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("adminMovieCheckList");
-	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
-	//System.out.print(pi);
-	int currentPage = pi.getCurrentPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
-	int maxPage = pi.getMaxPage();
+  
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+  
 
-%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -289,8 +282,7 @@
 <body>
 
 	<!-- 헤더 -->
-    <%@ include file="/views/common/header.jsp" %>
-    
+    <jsp:include page="/views/common/header.jsp"></jsp:include>
     <div id="wrap">
 
 
@@ -305,25 +297,25 @@
             <div class="content_1">
                 <ul class="menu">
                     <li>
-                        <a href="<%=contextPath %>/selectAdmin.mb">회원 관리</a>
+                        <a href="${ path }/selectAdmin.mb">회원 관리</a>
                         <ul class="submenu">
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminScreenList.admin">예매 관리</a>
+                        <a href="${ path }/adminScreenList.admin">예매 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminMovieCheck.admin?currentPage=1">영화 관리</a>
+                        <a href="${ path }/adminMovieCheck.admin?currentPage=1">영화 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath%>/checkAdmin.cm">영화관 관리</a>
+                        <a href="${ path }/checkAdmin.cm">영화관 관리</a>
                         <ul class="submenu">
 
                         </ul>
@@ -331,8 +323,8 @@
                     <li class="post">
                         <a href="#">게시글 관리</a>
                         <ul class="submenu">
-                        <li><a href="<%=contextPath %>/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
-                        <li><a href="<%=contextPath %>/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
+                        <li><a href="${ path }/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
+                        <li><a href="${ path }/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
                         </ul>
                     </li>
                 </ul>    
@@ -381,23 +373,23 @@
                                     <th>등록일</th>
                                 </tr>
                               </thead>
-                              
-			                    <tbody id="tbody">
-			                    <% if(list == null || list.isEmpty()) { %>
-
-			                     <% } else { %>
-			                     	<% for(Movie m : list) { %>                                   
+				                    <tbody id="tbody">
+	                              	<c:choose>
+				                    	<c:when test="${ empty adminMovieCheckList }"></c:when>
+									 <c:otherwise>
+									 	<c:forEach var="m" items="${ requestScope.adminMovieCheckList }">
 											<tr>
-			                                    <td><%= m.getMovieNo() %></td>
-			                                    <td><%= m.getMovieRelease() %></td>
-			                                    <td><%= m.getMovieTitle() %></td>
-			                                    <td><%= m.getGenreNo() %></td>
-			                                    <td><%= m.getMovieRated() %></td>
-			                                    <td><%= m.getMovieUpdate() %></td>
+			                                    <td>${ m.movieNo }</td>
+			                                    <td>${ m.movieRelease }</td>
+			                                    <td>${ m.movieTitle }</td>
+			                                    <td>${ m.genreNo }</td>
+			                                    <td>${ m.movieRated }</td>
+			                                    <td>${ m.movieUpdate }</td>
 
 			                                </tr>
-			                      	<% } %>          
-			                     <% } %>          
+		                                </c:forEach>
+	                                </c:otherwise>
+			                     </c:choose>
                               </tbody>
                             </table>
                           </div>
@@ -409,26 +401,30 @@
 					
                     
                     <div class="paging-area" align="center" style="margin-top:12px;">
-                    
-                    	<% if(currentPage > 1) { %>
-                    	<button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
-					        onclick="location.href='<%=contextPath%>/adminMovieCheck.admin?currentPage=<%= currentPage - 1 %>'"> < </button>
-                    	<% } %>
-                    	<% for(int i = startPage; i <= endPage; i++) { %>
                     	
-                    		<% if(currentPage != i) { %>
-							<button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
-					        onclick="location.href='<%=contextPath%>/adminMovieCheck.admin?currentPage=<%=i%>'"><%= i %></button>
-	                        <%} else {%>
-								 <button disabled class="btn btn-outline-secondary" style="color:#ffffff">
-								 <%= i %></button>                       
-	                        <%} %>
-                        <% } %>
+                    	<c:if test="${ pageInfo.currentPage > 1 }">
+	                    	<button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
+						        onclick="location.href='${path}/adminMovieCheck.admin?currentPage=${pageInfo.currentPage - 1}'"> < </button>
+                    	</c:if>
+                    	
+                    	<c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}" >
+                    	
+                    		<c:choose>
+                    			<c:when test="${ pageInfo.currentPage ne i }">
+									<button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
+							        onclick="location.href='${path}/adminMovieCheck.admin?currentPage=${i}'">${i}</button>
+		                        </c:when>
+		                        <c:otherwise>
+									 <button disabled class="btn btn-outline-secondary" style="color:#ffffff">
+									 ${i}</button>                       
+		                        </c:otherwise>
+	                        </c:choose>
+                        </c:forEach>
                         
-                        <% if(currentPage != maxPage) { %>
-                        <button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
-					        onclick="location.href='<%=contextPath%>/adminMovieCheck.admin?currentPage=<%= currentPage + 1 %>'"> > </button>
-					    <% } %>    
+                        <c:if test="${ pageInfo.currentPage ne pageInfo.maxPage }">
+	                        <button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
+						        onclick="location.href='${path}/adminMovieCheck.admin?currentPage=${pageInfo.currentPage + 1}'"> > </button>
+						</c:if>
                     </div>
                     <!--페이지 숫자-->
 
@@ -445,14 +441,13 @@
         </div>
 
     </div>
- 	<%@ include file="/views/common/footer.jsp" %>
+ 	
+ 	    <jsp:include page="/views/common/footer.jsp"></jsp:include>
  	<!-- 푸터 -->
- 	
- 	
  	
  	<script>
  		function insertButton(){
- 			location.href = '<%= contextPath %>/adminMovieInsert.admin';
+ 			location.href = '${path}/adminMovieInsert.admin';
  		}
  		
  		$('#tbody').on('click', 'tr', function(){
@@ -464,7 +459,7 @@
  		    
  		    const movieNo = children.eq(0).text();
 		    
-			location.href='<%= contextPath %>/adminMovieDetail.admin?movieNo=' + movieNo;
+			location.href='${path}/adminMovieDetail.admin?movieNo=' + movieNo;
  		});
     	
     	$('.keyword').on('click', function(){

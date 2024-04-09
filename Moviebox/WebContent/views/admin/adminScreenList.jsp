@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.List,java.util.ArrayList,com.kh.common.model.vo.Location"%>
-
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -207,14 +207,22 @@
 </head>
 <body>
 	<!-- 헤더 -->
-    <%@ include file="/views/common/header.jsp" %>
-    <% if(loginUser == null || loginUser.getPrivilege().equals("N")) {%>
-		<script>
-			location.href = ('<%=contextPath%>');
-		</script>
-	<%} else {%>
-    
-    <div id="wrap">
+    <jsp:include page="/views/common/header.jsp"></jsp:include>
+    <c:choose>
+		<c:when test="${ loginUser eq null }">
+			
+			<script>
+				location.href = ('${ path }/loginForm.me');
+			</script>
+			
+		</c:when>
+		<c:when test='${ loginUser.privilege eq "Y" }'>
+			<script>
+				location.href = ('${ path }');
+			</script>
+		</c:when>
+		<c:otherwise>
+			<div id="wrap">
 
 
         <div id="top_wrap">
@@ -228,25 +236,25 @@
             <div class="content_1">
                 <ul class="menu">
                     <li>
-                        <a href="<%=contextPath %>/selectAdmin.mb">회원 관리</a>
+                        <a href="${ path }/selectAdmin.mb">회원 관리</a>
                         <ul class="submenu">
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminScreenList.admin">상영관 관리</a>
+                        <a href="${ path }/adminScreenList.admin">상영관 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminMovieCheck.admin?currentPage=1">영화 관리</a>
+                        <a href="${ path }/adminMovieCheck.admin?currentPage=1">영화 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath%>/checkAdmin.cm">영화관 관리</a>
+                        <a href="${ path }/checkAdmin.cm">영화관 관리</a>
                         <ul class="submenu">
 
                         </ul>
@@ -254,8 +262,8 @@
                     <li class="post">
                         <a href="#">게시글 관리</a>
                         <ul class="submenu">
-                        <li><a href="<%=contextPath %>/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
-                        <li><a href="<%=contextPath %>/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
+                        <li><a href="${ path }/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
+                        <li><a href="${ path }/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
                         </ul>
                     </li>
                 </ul>    
@@ -281,6 +289,10 @@
             </div>
         </div>
     </div>
+		</c:otherwise>
+	</c:choose>
+    
+    
 
     <script>
     var date = new Date();
@@ -317,7 +329,7 @@
                         var resultStr = '';
                         for(let i = 0; i < result.length; i++){
                             
-                            resultStr += '<div class="printTheaterName"><a href="<%=contextPath%>/adminDetailTheater.admin?theaterNo=' +result[i].theaterNo +'&watchDate='+ year + '-' + month + '-' + day +'">'+ result[i].theaterName +'</a></div>';
+                            resultStr += '<div class="printTheaterName"><a href="${ path }/adminDetailTheater.admin?theaterNo=' +result[i].theaterNo +'&watchDate='+ year + '-' + month + '-' + day +'">'+ result[i].theaterName +'</a></div>';
                         }
                         $('.theater-content').html(resultStr);
                     }
@@ -337,7 +349,7 @@
                         var resultStr = '';
 						for(let i = 0; i < result.length; i++){
                             console.log(result);
-                            resultStr += '<div class="printTheaterName"><a href="<%=contextPath%>/adminDetailTheater.admin?theaterNo=' +result[i].theaterNo +'&watchDate='+ year + '-' + month + '-' + day +'">'+ result[i].theaterName +'</a></div>';
+                            resultStr += '<div class="printTheaterName"><a href="${ path }/adminDetailTheater.admin?theaterNo=' +result[i].theaterNo +'&watchDate='+ year + '-' + month + '-' + day +'">'+ result[i].theaterName +'</a></div>';
                         }
                         $('.theater-content').html(resultStr);
                     }
@@ -348,8 +360,8 @@
     </script>
 
 
- 	<%@ include file="/views/common/footer.jsp" %>
+ 	<jsp:include page="/views/common/footer.jsp" />
  	<!-- 푸터 -->
- 	<%} %>
+
 </body>
 </html>
