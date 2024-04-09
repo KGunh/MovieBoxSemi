@@ -335,44 +335,43 @@
     </div>
    
     <div class="paging-area" align="center">
-        <c:if test=" ${ pageInfo.currentPage > 1 }">
-            <button class="btn btn-outline-danger" style="color:#ff52a0;" onclick="location.href='${ sessionScope.path }/list.goods?currentPage=${ pageInfo.currentPage - 1 }'">이전</button>
+        <c:if test="${pageInfo.currentPage > 1}">
+            <button class="btn btn-outline-danger" style="color:#ff52a0;" onclick="goToPage(${pageInfo.currentPage - 1})">이전</button>
         </c:if>
-             <c:forEach var="i" begin="${ pageInfo.startPage }" end="${ pageInfo.endPage }">
-	             <c:choose>
-		             <c:when test="${ pageInfo.currentPage != i }">
-		                 <button class="btn btn-outline-danger" style="color:#ff52a0;" onclick="location.href='${ sessionScope.path }/list.goods?currentPage=${ i }'">${ i }</button>
-		             </c:when>
-		             <c:otherwise>
-		                 <button disabled class="btn btn-danger">${ i }</button>
-	                 </c:otherwise>
-	             </c:choose>
-             </c:forEach>
-		<c:if test=" ${ pageInfo.currentPage != maxPage }">
-              <button class="btn btn-outline-danger" style="color:#ff52a0;" onclick="location.href='${ sessionScope.path }/list.goods?currentPage=${ pageInfo.currentPage + 1 }'">다음</button>
-   		</c:if>
+        <c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
+            <c:choose>
+                <c:when test="${pageInfo.currentPage != i}">
+                    <button class="btn btn-outline-danger" style="color:#ff52a0;" onclick="goToPage(${i})">${i}</button>
+                </c:when>
+                <c:otherwise>
+                    <button disabled class="btn btn-danger">${i}</button>
+                </c:otherwise>
+            </c:choose>
+        </c:forEach>
+        <c:if test="${pageInfo.currentPage != maxPage}">
+            <button class="btn btn-outline-danger" style="color:#ff52a0;" onclick="goToPage(${pageInfo.currentPage + 1})">다음</button>
+        </c:if>
     </div>
 	
 	<jsp:include page="/views/common/footer.jsp" />
     
     <script>
-	/*
-        $(window).on('load', function(){
+        
+        function goToPage(page) {
             $.ajax({
-                url : 'printInfo.reservationAjax',
-            	type : 'post',
-            	data : {
-                    
+                url: '/list.goodsAjax',
+                type: 'GET',
+                data: {
+                    currentPage: page
                 },
-                success : function(result){
-                    console.log('성공');
+                success: function(pi) {
+                    $('.paging-area').html(pi);
                 },
-                error : function(){
-                    console.log('실패');
+                error: function(xhr, status, error) {
+                    console.error('Failed to fetch data:', error);
                 }
             });
-        });
-	*/
+        };
 
     </script>
 
