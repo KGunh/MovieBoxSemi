@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
@@ -153,24 +154,22 @@
     </style>
 
 </head>
+	
 
-<%
-    	int memberNo = (int)request.getAttribute("memberNo");
-    %>
 <body>
 
-	<%@ include file="../common/header.jsp" %>
+	<jsp:include page="/views/common/header.jsp"></jsp:include>
 	
     <div class="content">
         <div class="title-area">
             <div class="title-content"><span class="tit">비밀번호 재설정</span></div>
         </div>
         <div id="input-list">
-            <form action="<%=contextPath%>/pwdSearchUpdate.me" method="post">
+            <form action="${ path }/pwdSearchUpdate.me" method="post">
                 <div class="inputdiv">
                     <span class="input-span">새 비밀번호</span><br>
                     <input type="password" class="input-text" name="memberPwd" placeholder="새 비밀번호" required>
-                    <input type="hidden" name="memberNo" value="<%=memberNo%>">
+                    <input type="hidden" name="memberNo" value="${ memberNo }">
                 </div>
 
                 <div class="inputdiv">
@@ -191,7 +190,7 @@
 
 
 
-
+<jsp:include page="/views/common/footer.jsp" />
 </body>
 
 </html>
