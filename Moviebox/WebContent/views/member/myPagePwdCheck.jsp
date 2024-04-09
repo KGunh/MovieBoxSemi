@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -205,14 +206,19 @@
     </style>
 </head>
 <body>
-	<%@ include file="../common/header.jsp" %>
-	<% if(loginUser == null) {%>
-		<script>
-			location.href = ('<%=contextPath%>/loginForm.me');
-		</script>
-	<%} else {%>
+	<jsp:include page="/views/common/header.jsp"></jsp:include>
 	
-	<div id="info-header">
+
+	<c:choose>
+		<c:when test="${ loginUser eq null }">
+			
+			<script>
+				location.href = ('${ path }/loginForm.me');
+			</script>
+			
+		</c:when>
+		<c:otherwise>
+			<div id="info-header">
         <div id="info-title">
             <span class="title">마이페이지</span>
         </div>
@@ -220,10 +226,10 @@
             
             <ul class="info-navi">
                 <li id="info-navi-first">
-                    <a href="<%=contextPath %>/mypage.me" class="info-my">회원정보</a>
+                    <a href="${ path }/mypage.me" class="info-my">회원정보</a>
                 </li>
                 <li id="info-navi-second">
-                    <a href="<%=contextPath %>/resList.me" class="info-list">예매내역</a>
+                    <a href="${ path }/resList.me" class="info-list">예매내역</a>
                 </li>
             </ul>
         </div>
@@ -233,9 +239,9 @@
     <div class="wrap">
        
         <div id="input-list">
-            <form action="<%=contextPath%>/pwdCheck.me" method="post">
+            <form action="${ path }/pwdCheck.me" method="post">
                 <div class="img-area">
-                    <div class="lockImg"><img id="lockImg" src="<%=contextPath%>/resources/img/lock.png" alt=""></div>
+                    <div class="lockImg"><img id="lockImg" src="${ path }/resources/img/lock.png" alt=""></div>
                     <div class="img-area-content">
                         회원님의 정보를 안전하게 보호하기 위해<br>
                         비밀번호를 다시 한번 확인해 주세요.
@@ -249,7 +255,7 @@
                 </div>
                 
                 <div class="input-button">
-                    <a id="secession" href="<%=contextPath%>/mypage.me">취소</a>
+                    <a id="secession" href="${ path }/mypage.me">취소</a>
                     <input id="edit" type="submit" value="확인" onclick="return true;">
                 </div>
             </form>
@@ -259,8 +265,10 @@
 
 
     </div>
-    
-    <%@ include file="../common/footer.jsp" %>
-	<%} %>
+		</c:otherwise>
+	</c:choose>
+	
+	
+    <jsp:include page="/views/common/footer.jsp" />
 </body>
 </html>

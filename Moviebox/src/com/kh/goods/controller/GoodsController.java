@@ -12,7 +12,6 @@ public class GoodsController {
 	public String selectGoodsList(HttpServletRequest request) {
 		
 		List<Goods> goodsList = new GoodsService().selectGoodsList();
-		
 		request.setAttribute("goodsList", goodsList);
 		
 		return "views/goods/goodsList.jsp";

@@ -367,23 +367,23 @@
             <form action="${ path }/update.me" method="post">
                 <div class="inputdiv">
                     <span class="input-span">생년월일</span><br>
-                    <input type="text" class="input-text N" value="${ birthday }" disabled>
+                    <input type="text" class="input-text N" value="${ loginUser.birthday }" disabled>
                 </div>
                 <div class="inputdiv">
                     <span class="input-span">이름</span><br>
-                    <input type="text" class="input-text N" value="${ memberName }" disabled>
+                    <input type="text" class="input-text N" value="${ loginUser.memberName }" disabled>
                 </div>
                 <div class="inputdiv">
                     <span class="input-span">전화번호</span><br>
-                    <input type="text" class="input-text N" value="<%=phone %>"  disabled>
+                    <input type="text" class="input-text N" value="${ loginUser.phone }"  disabled>
                 </div>
                 <div class="inputdiv">
                     <span class="input-span">아이디</span><br>
-                    <input type="text" class="input-text N" name="memberId" value="<%=memberId %>" disabled>
+                    <input type="text" class="input-text N" name="memberId" value="${ loginUser.memberId }" disabled>
                 </div>
                 <div class="inputdiv pwd">
                     <span class="input-span">비밀번호</span><br>
-                    <input type="password" class="input-text N password" value="<%=memberPwd %>"  disabled>
+                    <input type="password" class="input-text N password" value="${ loginUser.memberPwd }"  disabled>
                     <button type="button" class="password-edit" data-toggle="modal" data-target="#updatePwd">변경</button>
                 </div>
                 <div class="inputdiv">
@@ -405,12 +405,12 @@
                         <option>광주</option>
 
                     </select>
-                    <input type="text" class="input-text address" name="address" value="<%=address%>">
+                    <input type="text" class="input-text address" name="address" value="${ loginUser.address }">
                     <span class="input-bottom"></span>
                 </div>
                 <div class="inputdiv">
                     <span class="input-span">이메일</span><br>
-                    <input type="text" class="input-text" value="<%=email %>" name="email" placeholder="이메일입력 | ex)aaa@movie.box (***@***.***)" >
+                    <input type="text" class="input-text" value="${ loginUser.email }" name="email" placeholder="이메일입력 | ex)aaa@movie.box (***@***.***)" >
                     <span class="input-bottom"></span>
                 </div>
                 <div class="checkbox-div">
@@ -443,15 +443,15 @@
                     </div>
                 </div>
                 <div class="input-button">
-                    <a id="secession" href="<%=contextPath%>/deleteForm.me">회원 탈퇴</a>
+                    <a id="secession" href="${ path }/deleteForm.me">회원 탈퇴</a>
                     <input id="edit" type="submit" value="정보수정" disabled>
                 </div>
             </form>
             <script>
                 $(function(){
-                    const local = '<%=localCode%>';
+                    const local = '${ loginUser.localCode }';
                     
-                    const genreList = '<%=genreList%>'
+                    const genreList = '${ loginUser.genreList }'
                     $('#location').val(local).attr('selected',true);
                     
                     $('input[type=checkbox]').each(function(){	
@@ -505,7 +505,7 @@
 
 				
 				<div class="modal-body" id="modal-body">
-					<form action="<%=contextPath%>/updatePwd.me" method="post" id="pwdUpdateForm">
+					<form action="${ path }/updatePwd.me" method="post" id="pwdUpdateForm">
 						<div class="form-group">
 							<label for="userPwd">현재 비밀번호</label> 
 							<input type="password" class="form-control" name="userPwd" placeholder="비밀번호를 입력해주세요" id="userPwd"  maxlength="16">
@@ -523,7 +523,7 @@
                             <span class="input-bottom" id="errorText3"></span>
 						</div>
 						<button type="button" class="btn btn-warning" id="modal-btn">비밀번호 변경</button>
-						<input type="hidden" value="<%=loginUser.getMemberNo() %>" name="userNo">
+						<input type="hidden" value="${ loginUser.memberNo }" name="userNo">
                         <script>
                             $(function(){
                                 $('#userPwd').blur(function(){

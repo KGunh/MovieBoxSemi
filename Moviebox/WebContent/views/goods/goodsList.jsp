@@ -235,6 +235,20 @@
         cursor: pointer;
     }
 
+    #goodslist-content{
+        padding-top: 80px;
+        width: 1100px;
+        height: auto;
+        margin: auto;
+        display: flex;
+  flex-wrap: wrap;
+    }
+
+    .goods-container{
+        width: 20%;
+        padding: 20px;
+    }
+
 </style>
 </head>
 <body>
@@ -245,42 +259,50 @@
         <h1 align="center" style="margin-top:50px; color:crimson;">
             <img style="height: 210px; width: 1200px; border:rgba(252, 252, 252, 0.15);" src="https://cf.lottecinema.co.kr//Media/WebAdmin/f04df114813f45b18e63e06308211d0f.jpg" alt="스토어상품이미지">
         </h1>
-        <div class="container mt-5" >
-            <div class="row">
-                <div class="col-md-3">
 
-                    <c:if test="${ not empty goodsList }">
+        <div id="goodslist-content">
+
+        <c:choose>
+        	<c:when test="${ not empty goodsList }">
+            	<c:forEach var="goods" begin="0" end="${ goodsList.size() - 1 }">
+                       
+	                <div class="goods-container">
+	                    <div class="card">
+	                        <div class="image-container">
+	                            <div class="first">
+	                                <div class="d-flex justify-content-between align-items-center">
+	                                </div>
+	                            </div>
+	                            <img src="${ goods.filePath }/${ goods.ChangeName }" class="img-fluid rounded thumbnail-image">
+	                        </div>
+	                        <div class="product-detail-container p-2">
+	                            <div class="d-flex justify-content-between align-items-center">
+	                                <h5 class="dress-name" style="text-shadow: 0px 1px 2px lightgray;">${ goods.goodsName }</h5>
+	                                <div class="d-flex flex-column mb-2">
+	                                    <span class="new-price"><strong>￦${ goods.goodsPrice }</strong></span>
+	                                </div>
+	                            </div>
+	                            <div class="d-flex justify-content-between align-items-center pt-1">
+	                            </div>
+	                            <div class="d-flex justify-content-between align-items-center pt-1">
+	                                <div>
+	                                    <span class="rating-number">장바구니</span>
+	                                </div>
+	                                <span class="buy">구매</span>
+	                            </div>
+	                        </div>
+	                    </div>
+	                </div>
+
+				</c:forEach>
+            </c:when>
+            <c:otherwise>
+            
+                <h1>조회된 상품이 없습니다.</h1>
                 
-                    <div class="card">
-                        <div class="image-container">
-                            <div class="first">
-                                <div class="d-flex justify-content-between align-items-center">
-                                </div>
-                            </div>
-                            <img src="https://cf.lottecinema.co.kr//Media/WebAdmin/70fc20fe998a4ab7b44d1bfa0d1440e4.jpg" class="img-fluid rounded thumbnail-image">
-                        </div>
-                        <div class="product-detail-container p-2">
-                            <div class="d-flex justify-content-between align-items-center">
-                                <h5 class="dress-name" style="text-shadow: 0px 1px 2px lightgray;">오리지널팝콘L</h5>
-                                <div class="d-flex flex-column mb-2">
-                                    <span class="new-price"><strong>￦6,000</strong></span>
-                                </div>
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center pt-1">
-                            </div>
-                            <div class="d-flex justify-content-between align-items-center pt-1">
-                                <div>
-                                    <span class="rating-number">장바구니</span>
-                                </div>
-                                <span class="buy">구매</span>
-                            </div>
-                        </div>
-                    </div>
-                
-                    </c:if>
-                
-                </div>
-            </div>
+            </c:otherwise>
+        </c:choose>
+        
         </div>
     </div>
 	
