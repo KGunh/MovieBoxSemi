@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="java.util.Date,java.text.SimpleDateFormat,com.kh.reservation.model.vo.Seat,com.kh.common.model.vo.Price,java.util.ArrayList,com.kh.member.model.vo.MemberGenre,java.util.List,com.kh.common.model.vo.Reservation,com.kh.movie.model.vo.Movie"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
 <%
 %>
@@ -192,25 +194,20 @@
     </style>    
 </head>
 <body>
-	<%@ include file="../common/header.jsp" %>
+	<jsp:include page="/views/common/header.jsp"></jsp:include>
+	
 
 	
-	<%
-	
-		List<Reservation> resList = (ArrayList)request.getAttribute("list");
-		List<Movie> movieList = (ArrayList)request.getAttribute("movieList");
-
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd, HH:mm");
-		Date currentDate = new Date();
-	%>
-	
-	<% if(loginUser == null) {%>
+	<c:choose>
+		<c:when test="${ loginUser eq null }">
 			
-		<script>
-			location.href = ('<%=contextPath%>/loginForm.me');
-		</script>
-	<%} else {%>
-	<div class="wrap">
+			<script>
+				location.href = ('${ path }/loginForm.me');
+			</script>
+			
+		</c:when>
+		<c:otherwise>
+			<div class="wrap">
 	    <div id="info-header">
             <div id="info-title">
             <span class="title">마이페이지</span>
@@ -218,7 +215,7 @@
             <div id="info-header-navi">
                 <ul class="info-navi">
                     <li id="info-navi-first">
-                        <a href="<%=contextPath%>/mypage.me" class="info-my">회원정보</a>
+                        <a href="${ path }/mypage.me" class="info-my">회원정보</a>
                     </li>
                     <li id="info-navi-second">
                         <a href="#" class="info-list">예매내역</a>
@@ -230,109 +227,117 @@
         </div>
 
         <div id="reservationList">
+        <c:choose>
+        	<c:when test="${empty list }">
+        		<div id="noData">
+					<h3> 예매내역이 존재하지 않습니다.</h3>
+            	</div>
+        	</c:when>
+        	<c:otherwise>
+        		<c:forEach var="i" begin="0" end="${ list.size()-1}">
+        			<div id="reservationList-content">
+        				<div class="res-img">
+        					<div><img id="poster" src="${ path }/${ movieList[i].filePath }/${ movieList[i].changeName }" alt=""></div>
+        				</div>
+        				<div class="res-content">
+        					<div>
+        						<table id="contentTable">
+		                            <thead>
+		                                <tr>
+		                                    <th colspan="4">${ list[i].movieTitle }</th>
+		                                </tr>
+		                            </thead>
+		                            <tbody>
+		                                <tr>
+		                                    <td>예약번호</td>
+		                                    <td>${ list[i].ticketNo }</td>
+		                                    <td>상영관</td>
+		                                    <td>${ list[i].screenName }관</td>
+		                                </tr>
+		                                <tr>
+		                                    <td>극장</td>
+		                                    <td>${ list[i].theaterName }</td>
+		                                    <td>시간</td>
+		                                    <td>${ list[i].runningTime }</td>
+		                                </tr>
+		                                <tr>
+		                                    <td>날짜</td>
+		                                    <td>${ list[i].watchDate }</td>
+		                                    <td>좌석</td>
+		                                    <td style="font-size: 10px;">
+		                                    <c:forEach var="seat" items="${ list[i].seatList }">
+		                                    	${ seat.seatNo }
+		                                    </c:forEach>
+		                                    </td>
+		                                </tr>
+		                                <tr>
+		                                    <td>인원</td>
+		                                    <td>
+		                                    <c:choose>
+		                                    	<c:when test="${ list[i].price.studentCount > 0 }">
+		                                    		청소년 ${ list[i].price.studentCount }명
+		                                    	</c:when>
+		                                    </c:choose>
+		                                    <c:choose>
+		                                    	<c:when test="${ list[i].price.commonCount > 0 }">
+		                                    		성인 ${ list[i].price.commonCount }명
+		                                    	</c:when>
+		                                    </c:choose>
+		                                    		
+		                                    </td>
+		                                    <td>예매일시</td>
+		                                    <td>${ list[i].reservationDate }</td>   
+		                                </tr>
+		                            </tbody>
+		                        </table>
+        					</div>
+        				</div>
+        				<div class="res-btn">
 
-         <%if(resList != null) { %>
-            	<%for(int i= 0; i<resList.size(); i++) {%>
-            <div id="reservationList-content">
-           
-                <div class="res-img">
 
-                    <div><img id="poster" src="<%=contextPath %>/<%= movieList.get(i).getFilePath()%>/<%=movieList.get(i).getChangeName() %>" alt=""></div>
-                </div>
-                <div class="res-content">
-                    <div>
-                        <table id="contentTable">
-                            <thead>
-                                <tr>
-                                    <th colspan="4"><%=resList.get(i).getMovieTitle() %></th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>예약번호</td>
-                                    <td><%=resList.get(i).getTicketNo() %></td>
-                                    <td>상영관</td>
-                                    <td><%=resList.get(i).getScreenName() %>관</td>
-                                </tr>
-                                <tr>
-                                    <td>극장</td>
-                                    <td><%=resList.get(i).getTheaterName() %></td>
-                                    <td>시간</td>
-                                    <td><%=resList.get(i).getRunningTime() %></td>
-                                </tr>
-                                <tr>
-                                    <td>날짜</td>
-                                    <td><%=resList.get(i).getWatchDate() %></td>
-                                    <td>좌석</td>
-                                    <td style="font-size: 10px;">
-                                    <%
-                                    	List<Seat> seatList = resList.get(i).getSeatList(); 
-										for(Seat s : seatList){   
-                                    %>
-                                     <%=s.getSeatNo()%> <%} %>
-                                     </td>
-                                   
-                                </tr>
-                                <tr>
-                                	<%Price price = resList.get(i).getPrice(); %>
-                                    <td>인원</td>
-                                    <td>
-                                    <%if(price.getStudentCount() > 0) {%>
-                                    		청소년 <%=price.getStudentCount()%>명
-                                    <%} %>		
-                                    <%if(price.getCommonCount() > 0) {%>
-                                    		성인 <%=price.getCommonCount()%>명
-                                    <%} %>				
-                                    </td>
-                                    <td>예매일시</td>
-                                    <td><%=resList.get(i).getReservationDate() %></td>   
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="res-btn">
-                    <% if(resList.get(i).getStatus().equals("Y") ) {%>
-                   			<% if(dateFormat.parse(resList.get(i).getWatchDate()).before(currentDate) ){ %>
-                   				<div><button type="button" id="<%=resList.get(i).getTicketNo() %>" class="btn btn-warning" disabled style="width: 100%; height: 30px; color: black; font-size: 15px; font-weight: bold; padding: 0; background: gray; border:none" >취소불가</button></div>
-                   			<%} else {%>
-								<div><button style="width: 100%; height: 30px; color: black; font-size: 15px; font-weight: bold; padding: 0;" type="button" id="<%=resList.get(i).getTicketNo() %>" class="btn btn-warning" >취소</button><input type="hidden" id="ticketNo" value="<%=resList.get(i).getTicketNo()%>"></div>      
-								  			
-                   			<%} %>
-                   	<%} else {%>
-                   		<div><button type="button" id="<%=resList.get(i).getTicketNo() %>" class="btn btn-warning" disabled style="width: 100%; height: 30px; color: black; font-size: 15px; font-weight: bold; padding: 0; background: gray; border:none">취소됨</button></div>
-                   	<%} %> 
-                </div>
-
-                
-                <div class="res-result">
-                    <div>
-                        <div class="totalCount">
-                            <h6>총 인원 : <%=price.getCommonCount() + price.getStudentCount() %> 명</h6>
-                        </div>
-                        <div class="countPrice">
-                            <h6 id="studentText">청소년 : <%=price.getStudentCount()%> X 11000  = <%=price.getStudentPrice() %></h6>
-                            <h6>성인 : <%=price.getCommonCount()%> X 13000  = <%=price.getCommonPrice() %></h6>
-                        </div>
-                        <div class="totalPrice">
-                            <h6>총 가격 : <%=price.getTotalPrice() %> 원</h6>
-                        </div>
-                    </div>
-                </div>
-                
-            </div>
-            <%}
-            	} else { %>
-                		<div id="noData">
-								<h3> 예매내역이 존재하지 않습니다.</h3>
-            			</div>
-                
-                <%} %>
+        				<c:choose>
+        					<c:when test='${ list[i].status eq "Y" }'>
+        							<c:choose>
+        								<c:when test="${ list[i].beforeCurrent}">
+        									<div><button type="button" id="${ list[i].ticketNo }" class="btn btn-warning" disabled style="width: 100%; height: 30px; color: black; font-size: 15px; font-weight: bold; padding: 0; background: gray; border:none" >취소불가</button></div>
+        								</c:when>
+        								<c:otherwise>
+        									<div><button style="width: 100%; height: 30px; color: black; font-size: 15px; font-weight: bold; padding: 0;" type="button" id="${ list[i].ticketNo }" class="btn btn-warning" >취소</button><input type="hidden" id="ticketNo" value="${ list[i].ticketNo }"></div>
+        								</c:otherwise>
+        							</c:choose>	
+        					</c:when>
+        					<c:otherwise>
+        						<div><button type="button" id="${ list[i].ticketNo }" class="btn btn-warning" disabled style="width: 100%; height: 30px; color: black; font-size: 15px; font-weight: bold; padding: 0; background: gray; border:none">취소됨</button></div>
+        					</c:otherwise>
+        				</c:choose>
+		                   
+		                </div>
+		                <div class="res-result">
+		                    <div>
+		                        <div class="totalCount">
+		                            <h6>총 인원 : ${ list[i].price.studentCount + list[i].price.commonCount} 명</h6>
+		                        </div>
+		                        <div class="countPrice">
+		                            <h6 id="studentText">청소년 : ${ list[i].price.studentCount } X 11000  = ${ list[i].price.studentPrice }</h6>
+		                            <h6>성인 : ${ list[i].price.commonCount } X 13000  = ${ list[i].price.commonPrice }</h6>
+		                        </div>
+		                        <div class="totalPrice">
+		                            <h6>총 가격 : ${ list[i].price.totalPrice } 원</h6>
+		                        </div>
+		                    </div>
+		                </div>
+        			</div>
+        		</c:forEach>
+        	</c:otherwise>
+        </c:choose>
+		
+         
             
         </div>
     </div>
-	
-	<%} %>
+		</c:otherwise>
+	</c:choose>
+
 	<script>
 		$('.res-btn button').click(function(){
 			const $ticketNo = $(this);
@@ -361,6 +366,6 @@
 		})
 					
 				</script>
-	<%@ include file="../common/footer.jsp" %>
+	<jsp:include page="/views/common/footer.jsp" />
 </body>
 </html>

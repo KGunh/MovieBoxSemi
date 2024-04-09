@@ -1,7 +1,10 @@
 package com.kh.member.controller;
 
 import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,7 +16,6 @@ import com.kh.board.model.vo.Board;
 import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.Reservation;
 import com.kh.goods.model.vo.Order;
-import com.kh.member.model.dao.MemberDao;
 import com.kh.member.model.service.MemberService;
 import com.kh.member.model.vo.Member;
 import com.kh.movie.model.vo.Movie;
@@ -189,6 +191,12 @@ public class MemberController {
 		HttpSession session = request.getSession();
 		List<Movie> movieList = new ArrayList();
 		
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd, HH:mm");
+		
+		Date current = new Date();
+		
+		boolean isBeforeCurrent = true;
+		
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		
 		if(loginUser == null) {
@@ -200,7 +208,7 @@ public class MemberController {
 			if (list.isEmpty()) {
 				return view ="views/member/myReservation.jsp";
 			} else {
-				
+
 				
 				for (int i = 0; i < list.size(); i++) {
 					Reservation res = list.get(i);
@@ -209,6 +217,17 @@ public class MemberController {
 						request.setAttribute("errorMsg", "");
 						return view = "views/common/errorPage.jsp";
 					}
+					Date watchDate;
+					try {
+						watchDate = dateFormat.parse(list.get(i).getWatchDate());
+						isBeforeCurrent = watchDate.before(current);
+						list.get(i).setBeforeCurrent(isBeforeCurrent);
+					} catch (ParseException e) {
+						e.printStackTrace();
+					}
+					
+					
+		
 
 					movieList.add(m);
 

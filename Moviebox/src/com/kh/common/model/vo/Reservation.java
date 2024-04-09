@@ -21,7 +21,7 @@ public class Reservation {
 	private List<Seat> seatList;
 	private Movie movie;
 	private String screenName;
-	
+	private boolean beforeCurrent;
 	
 	public Reservation() {
 		super();
@@ -37,6 +37,12 @@ public class Reservation {
 	
 	
 	
+	public boolean isBeforeCurrent() {
+		return beforeCurrent;
+	}
+	public void setBeforeCurrent(boolean beforeCurrent) {
+		this.beforeCurrent = beforeCurrent;
+	}
 	public String getReservationDate() {
 		return reservationDate;
 	}
