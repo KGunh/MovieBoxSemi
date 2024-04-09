@@ -279,9 +279,7 @@
 
 </head>
 <body>
-
-    <c:set var="path" value="${ pageContext.request.contextPath }" />
-    <jsp:include page="../common/header.jsp"></jsp:include>
+    <jsp:include page="/views/common/header.jsp"></jsp:include>
 	
     <div id="wrap">
         <div id="notice-detail">
@@ -402,8 +400,8 @@
                 </div>
         </div> <!-- notice-detail -->
 	</div>
-    
-    	<%@ include file="../common/footer.jsp" %>
+
+	<jsp:include page="/views/common/footer.jsp"></jsp:include>
     	
     	<script>
 			function openNoticePage(){
