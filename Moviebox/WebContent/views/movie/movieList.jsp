@@ -223,7 +223,7 @@
                        <img src="${ path }/resources/img/search.PNG" alt="검색 아이콘">
                     </div>
                     <div id="movie-list-input">
-                        <input type="text" id="movie-list-search" placeholder="검색창">
+                        <input type="text" id="movie-list-search" placeholder="검색창" name="movieSearch">
                     </div>
                 </div>
             </div> <!-- movie-list-header -->
@@ -268,7 +268,6 @@
 	<jsp:include page="/views/common/footer.jsp"></jsp:include>
     
 </body>
-
 	
     <script>
 
@@ -289,6 +288,9 @@
 		    document.getElementById('selectGenreForm').submit();
 		});
 		
+    	// 검색
+    	$('#movie-list-search').
+    	
 
 
     	

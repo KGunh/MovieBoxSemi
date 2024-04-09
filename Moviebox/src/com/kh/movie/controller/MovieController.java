@@ -70,4 +70,11 @@ public class MovieController {
 		}
 		return view;
 	}
+
+	// 검색 도전
+	
+
+
+
+
 }

@@ -49,7 +49,7 @@ public class AjaxAdminSelectDate extends HttpServlet {
 		List<Movie> movieNameList = new MovieService().selectMovieList();
 		
 		List<Screen> list = new AdminPageService().adminDetailTheater(sc);
-		for(int i = 0; i<movieNameList.size();i++) {
+		for(int i = 0; i<list.size();i++) {
 			list.get(i).setMovieNameList(movieNameList);
 		}
 		
