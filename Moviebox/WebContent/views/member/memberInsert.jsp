@@ -491,11 +491,9 @@
 	        		birthdayReg = /^(19|20)\d{2}02(0[1-9]|1[0-9]|2[0-8])$/;
 	        	}
 	        	else if(month == '04' || month == '06' || month == '09' || month == '11'){
-	        		console.log(month);
 	        		birthdayReg = /^(19|20)\d{2}(0[469]|11)(0[1-9]|1[0-9]|2[0-9]|30)$/;
 	    		}
 	    		else{
-	    			console.log($birthdayInput.val());
 	    			birthdayReg = /^(19|20)\d{2}(0[13578]|1[02])(0[1-9]|1[0-9]|2[0-9]|3[0-1])$/;
 	    		}
 	        }

@@ -229,7 +229,7 @@
                         
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="${ sessionScope.path }/list.goods"><span>스토어</span></a>
+                        <a class="nav-link" href="${ sessionScope.path }/list.goods?currentPage=1"><span>스토어</span></a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="${ path }/list.movie"><span>영화</span></a>

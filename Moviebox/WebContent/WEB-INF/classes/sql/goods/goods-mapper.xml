@@ -6,27 +6,49 @@
 		Goods Mapper
 	</comment>
 	
-	<entry key="selectGoodsList">
+	<entry key="selectListCount">
 		SELECT
-		       GOODS_NO,
-		       GOODS_NAME,
-		       GOODS_PRICE,
-		       TYPE_NAME,
-		       FILE_PATH,
-		       CHANGE_NAME
+			   COUNT(*)
 		  FROM
-		       TB_GOODS
-		  JOIN
-		       TB_GOODSTYPE USING(TYPE_NO)
-		  LEFT
-		  JOIN
-		       TB_GOODSATTACHMENT USING(GOODS_NO)
+			   TB_GOODS
 		 WHERE
-		       STATUS = 'Y'
-		 ORDER
-		    BY
-		       TYPE_NAME,
-		       GOODS_NO
+			   STATUS = 'Y'
+								   
+	</entry>
+	
+	<entry key="selectGoodsList">
+		SELECT 
+			   *
+		  FROM 
+		  	   (
+		        SELECT 
+		               A.*, 
+		               ROWNUM RNUM
+		          FROM (
+		                SELECT
+		                       GOODS_NO,
+		                       GOODS_NAME,
+		                       GOODS_PRICE,
+		                       TYPE_NAME,
+		                       FILE_PATH,
+		                       CHANGE_NAME
+		                  FROM
+		                       TB_GOODS
+		                  JOIN
+		                       TB_GOODSTYPE USING(TYPE_NO)
+		                  LEFT
+		                  JOIN
+		                       TB_GOODSATTACHMENT USING(GOODS_NO)
+		                 WHERE
+		                       STATUS = 'Y'
+		                 ORDER
+		                    BY
+		                       TYPE_NAME,
+		                       GOODS_NO
+		                ) A
+		        )
+		 WHERE
+		       RNUM BETWEEN ? AND ?
 	</entry>
 	
 	

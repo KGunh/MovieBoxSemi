@@ -39,9 +39,7 @@ public class GoodsServlet extends HttpServlet {
 		boolean flag = false;
 		
 		switch(mapping) {
-		case "list" : view = gc.selectGoodsList(request); break; 
-		//case "seat" : view = rc.connectSeatList(request); break;
-		//case "payment" : view = rc.insertReservation(request); break;
+			case "list" : view = gc.selectGoodsList(request); break; 
 		}
 		
 		if(flag) {

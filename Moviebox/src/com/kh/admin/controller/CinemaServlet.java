@@ -34,6 +34,7 @@ public class CinemaServlet extends HttpServlet {
 		
 		CinemaAdminContorller CAC = new CinemaAdminContorller();
 		
+		
 		boolean flag = false;
 		
 		switch(mapping) {

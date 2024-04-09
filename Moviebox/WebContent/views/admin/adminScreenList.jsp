@@ -216,7 +216,7 @@
 			</script>
 			
 		</c:when>
-		<c:when test='${ loginUser.privilege eq "Y" }'>
+		<c:when test='${ loginUser.privilege eq "N" }'>
 			<script>
 				location.href = ('${ path }');
 			</script>
