@@ -264,7 +264,17 @@
         
         #answerContent2{
         	width: 950px;
-        	padding: 25px;
+        	padding: 20px;
+
+        }
+        
+        #preA {
+        	width: 950px;
+        	color: white;
+        	font-size: 20px;
+        	font-family: "Noto Sans KR", sans-serif;
+        	margin-bottom: 0px;
+        	white-space: pre-wrap;
         }
         
         tbody > tr{
@@ -352,7 +362,7 @@
                     			for(let i in result){
                     				resultStr += '<tr>'
                     						   + '<td id="answerWriter">' + result[i].answerWriter + '</td>'
-                    						   + '<td id="answerContent2">' + result[i].answerContent + '</td>'
+                    						   + '<td id="answerContent2"><pre id="preA">' + result[i].answerContent + '</pre></td>'
                     						   + '<td id="answercreateDate">' + result[i].createDate + '</td>'
                     						   + '</tr>'
                     			};
