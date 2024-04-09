@@ -3,6 +3,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="com.kh.theater.model.vo.Theater, java.util.ArrayList"%>
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+
 <%
 	ArrayList<Theater> list = (ArrayList<Theater>)request.getAttribute("list");
 	String type = (String)request.getAttribute("type");
@@ -146,7 +148,7 @@
 </head>
 <body>
     
-    <%@ include file="/views/common/header.jsp" %>
+    <jsp:include page="/views/common/header.jsp"></jsp:include>
 
     <div id="wrap">
         <div id="content_searchTheater">
@@ -190,19 +192,19 @@
             <div id="printTheaterArea">
                 <div id="printTheater">
                     
-                    <% for(int i = 0; i < list.size(); i++){ %>
+                    <c:forEach var="i" begin="0" end="${ list.size() - 1 }">
                         <div class="printTheaterName">
-	                        <a href="#" onclick="goToTheaterDetail('<%= list.get(i).getTheaterNo() %>');">
-	                        <%= list.get(i).getTheaterName() %></a>
+	                        <a href="#" onclick="goToTheaterDetail('${ list[i].theaterNo }');">
+	                        ${ list[i].theaterName }</a>
                         </div>
-                    <% } %>
+                    </c:forEach>
                     
                 </div>
             </div>
         </div>
     </div>
 
-    <%@ include file="../common/footer.jsp" %>
+	<jsp:include page="/views/common/footer.jsp"></jsp:include>
 
     <script>
 
@@ -210,9 +212,9 @@
             var typeLocation = document.getElementById('searchTypeLocation');
             var search = document.getElementsByClassName('searchLocation');
             
-            if('location' == '<%= type %>'){
+            if('location' == '${ type }'){
 	            for(let i = 0; i < search.length; i++){
-                    if(search[i].innerHTML == '<%= location %>'){
+                    if(search[i].innerHTML == '${ location }'){
                         search[i].style.color = '#1A1A1A';
                         search[i].style.background = 'rgb(255, 193, 69)';
             		}
@@ -231,7 +233,7 @@
         };
         
         function goToTheaterDetail(theaterNo) {
-            location.href = '<%=contextPath%>/detail.theater?theaterNo=' + theaterNo;
+            location.href = '${ path }/detail.theater?theaterNo=' + theaterNo;
         };
         
     </script>

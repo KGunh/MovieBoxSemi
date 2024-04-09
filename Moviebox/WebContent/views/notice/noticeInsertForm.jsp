@@ -5,11 +5,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-<%
-	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("category");
-%>
-    
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -234,81 +229,82 @@
 </head>
 <body>
 
-    <%@ include file="../common/header.jsp" %>
-    
-    <% if(loginUser == null) { %>
-    	<script>
-    		alert('관리자만 작성 가능합니다.');
-    	</script>
+	<jsp:include page="/views/common/header.jsp"></jsp:include>
 
-	<% } else { %>
-    <div id="wrap">
-        <div id="notice-detail">
-            <!-- 전체 감싸는 부분 -->
-            <div id="notice-list">
-
-                <div id="title">고객센터</div>
-        
-                <!-- 고객센터 큰 분류 카테고리 
-                <div id="board-category">
-                    <div class="notice-tap">공지사항</div>
-                    <div class="qna-tap">QnA</div>
-                </div>-->
-
-                <div class="notice-content">
-                    <div class="detail-box1">
-                        <div class="detail-title-box1">
-                            <div class="detail-category"><span>공지사항 작성</span></div>
-                        </div>
-                    </div>
-
-
-                    <div class="detail-content-box">
-                        <form action="<%= contextPath %>/insert.notice" method="post" id="insert-box">
-                        
-                        <input type="hidden" name="userNo" value="<%= loginUser.getMemberNo()%>" />
-                            
-                            <div id="category-box">
-                                <div id="box-name">분류</div>
-                                
-                                <select name="category" id="select-category">
-                                <% for(Category c : list) { %>
-									<option value="<%= c.getCategoryNo() %>">
-										<%= c.getCategoryName() %>
-									</option>
-								<% } %>
-                                </select>
-                            </div> <!-- category box -->
-
-                            <div id="title-box">
-                                <div id="box-name">제목</div>
-                                <input type="text" id="select-title" name="title">
-                            </div>
-
-                            <div id="content-box">
-                                <div id="box-name">내용</div>
-                                <textarea id="select-content" cols="30" rows="10" name="content"></textarea>
-                            </div>
+	<c:choose>
+		<c:when test="${ empty loginUser }">
+	    	<script>
+	    		alert('관리자만 작성 가능합니다.');
+	    	</script>
+    	</c:when>
+		<c:otherwise>
+		    <div id="wrap">
+		        <div id="notice-detail">
+		            <!-- 전체 감싸는 부분 -->
+		            <div id="notice-list">
+		
+		                <div id="title">고객센터</div>
+		        
+		                <!-- 고객센터 큰 분류 카테고리 
+		                <div id="board-category">
+		                    <div class="notice-tap">공지사항</div>
+		                    <div class="qna-tap">QnA</div>
+		                </div>-->
+		
+		                <div class="notice-content">
+		                    <div class="detail-box1">
+		                        <div class="detail-title-box1">
+		                            <div class="detail-category"><span>공지사항 작성</span></div>
+		                        </div>
+		                    </div>
+		
+		
+		                    <div class="detail-content-box">
+		                        <form action="${ path }/insert.notice" method="post" id="insert-box">
+		                        
+		                        <input type="hidden" name="userNo" value="${ loginUser.memberNo }" />
+		                            
+		                            <div id="category-box">
+		                                <div id="box-name">분류</div>
+		                                
+		                                <select name="category" id="select-category">
+		                                
+		                                <c:forEach var="c" items="${ requestScope.category }">
+											<option value="${ c.categoryNo }">
+												${ c.categoryName }
+											</option>
+										</c:forEach>
+		                                </select>
+		                            </div> <!-- category box -->
+		
+		                            <div id="title-box">
+		                                <div id="box-name">제목</div>
+		                                <input type="text" id="select-title" name="title">
+		                            </div>
+		
+		                            <div id="content-box">
+		                                <div id="box-name">내용</div>
+		                                <textarea id="select-content" cols="30" rows="10" name="content"></textarea>
+		                            </div>
+			
+			                        <div id="insert-btn" align="center">
+			                        
+			                            <button type="submit" class="notice-detail-btn">등록</button>
+		                				<button type="button" class="notice-detail-btn1" onclick="history.back()">취소</button>
+		                
+			                        </div>
+		                    	</form> <!-- insert box -->
+		                    </div> <!-- detail-content-box -->
+		
+		                </div> <!-- notice-content -->
+		
+		            </div> <!-- notice-list -->
+		        </div> <!-- notice-detail -->
+		    </div> <!-- wrap -->
+    	</c:otherwise>
+	</c:choose>    
 	
-	                        <div id="insert-btn" align="center">
-	                        
-	                            <button type="submit" class="notice-detail-btn">등록</button>
-                				<button type="button" class="notice-detail-btn1" onclick="history.back()">취소</button>
-                
-	                        </div>
-                    	</form> <!-- insert box -->
-                    </div> <!-- detail-content-box -->
-
-                </div> <!-- notice-content -->
-
-            </div> <!-- notice-list -->
-        </div> <!-- notice-detail -->
-    </div> <!-- wrap -->
-	
-	<% } %>
-    
-    <%@ include file="../common/footer.jsp" %>
-
+	<jsp:include page="/views/common/footer.jsp"></jsp:include>
     
 </body>
 </html>

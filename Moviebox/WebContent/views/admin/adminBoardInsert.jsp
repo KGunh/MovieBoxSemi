@@ -259,7 +259,7 @@
 <body>
 
 	<!-- 헤더 -->
-    <%@ include file="/views/common/header.jsp" %>
+	<jsp:include page="/views/common/header.jsp"></jsp:include>
    
     <div id="wrap">
 
@@ -273,25 +273,25 @@
             <div class="content_1">
                 <ul class="menu">
                     <li>
-                        <a href="<%=contextPath %>/selectAdmin.mb">회원 관리</a>
+                        <a href="${ path }/selectAdmin.mb">회원 관리</a>
                         <ul class="submenu">
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminScreenList.admin">예매 관리</a>
+                        <a href="${ path }/adminScreenList.admin">예매 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminMovieCheck.admin?currentPage=1">영화 관리</a>
+                        <a href="${ path }/adminMovieCheck.admin?currentPage=1">영화 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath%>/checkAdmin.cm">영화관 관리</a>
+                        <a href="${ path }/checkAdmin.cm">영화관 관리</a>
                         <ul class="submenu">
 
                         </ul>
@@ -299,8 +299,8 @@
                     <li class="post">
                         <a href="#">게시글 관리</a>
                         <ul class="submenu">
-                        <li><a href="<%=contextPath %>/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
-                        <li><a href="<%=contextPath %>/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
+                        <li><a href="${ path }/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
+                        <li><a href="${ path }/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
                         </ul>
                     </li>
                 </ul>    
@@ -311,8 +311,8 @@
             <div class="content_2"><!--content_2 시작-->
                 <p id="p">게시글관리 > 공지 관리 > 공지 등록</p>
 
-           <form action="<%=contextPath %>/adminBoardInsert.admin" method="post" id="insert-box">
-            	<input type="hidden" name="userNo" value="<%= loginUser.getMemberNo()%>" />
+           <form action="${ path }/adminBoardInsert.admin" method="post" id="insert-box">
+            	<input type="hidden" name="userNo" value="${loginUser.memberNo}" />
             
                 <div id="content_2_box"><!--컨텐트2 전체박스-->
                     <div id="box_wrap">
@@ -341,7 +341,7 @@
                         <div id="box_3">
                             <textarea class="form-control" rows="5" name="content" style="resize:none; height: 250px; border-radius: 8px;"></textarea>
                         </div>
->
+
                         
                         <div id="button"><!--등록 버튼-->
                             <button type="submit" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;">등록</button>
@@ -360,7 +360,7 @@
 
 
     </div>
-    <%@ include file="/views/common/footer.jsp" %>
+    <jsp:include page="/views/common/footer.jsp"></jsp:include>
  	<!-- 푸터 -->
 
 </body>

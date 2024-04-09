@@ -5,11 +5,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-
-<%
-	Notice notice = (Notice)request.getAttribute("notice");
-%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -192,9 +187,7 @@
     
 </head>
 <body>
-
-	<c:set var="path" value="${ pageContext.request.contextPath }" />
-	<jsp:include page="../common/header.jsp"></jsp:include>
+	<jsp:include page="/views/common/header.jsp"></jsp:include>
 
     <div id="wrap">
         <div id="notice-detail">
@@ -206,7 +199,7 @@
                 <!-- 카테고리 -->
                 <div id="board-category">
 	                <div class="notice-tap" onclick="openNoticePage();">공지사항</div>
-	                <div class="qna-tap" onclick="openQnaPage();">QnA</div>
+	                <div class="qna-tap" onclick="openQnaPage();">문의사항</div>
                 </div> <!-- board-category -->
 
                 <div class="notice-content">
@@ -244,7 +237,7 @@
         </div> <!-- notice-detail -->
     </div> <!-- wrap -->
     
-    <jsp:include page="../common/footer.jsp"></jsp:include>
+    <jsp:include page="/views/common/footer.jsp"></jsp:include>
     
       	<script>
     		function openNoticePage(){

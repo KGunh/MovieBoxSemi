@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import = " java.util.ArrayList, com.kh.member.model.vo.Member" %>
- <% Member m = (Member)request.getAttribute("member"); %>
+
         
  
 
@@ -283,25 +283,25 @@
             <div class="content_1">
                 <ul class="menu">
                     <li>
-                        <a href="<%=contextPath %>/selectAdmin.mb">회원 관리</a>
+                        <a href="${ path }/selectAdmin.mb">회원 관리</a>
                         <ul class="submenu">
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminScreenList.admin">예매 관리</a>
+                        <a href="${ path }/adminScreenList.admin">예매 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminMovieCheck.admin?currentPage=1">영화 관리</a>
+                        <a href="${ path }/adminMovieCheck.admin?currentPage=1">영화 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath%>/checkAdmin.cm">영화관 관리</a>
+                        <a href="$ { path }/checkAdmin.cm">영화관 관리</a>
                         <ul class="submenu">
 
                         </ul>
@@ -309,8 +309,8 @@
                     <li class="post">
                         <a href="#">게시글 관리</a>
                         <ul class="submenu">
-                        <li><a href="<%=contextPath %>/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
-                        <li><a href="<%=contextPath %>/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
+                        <li><a href="${ path }/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
+                        <li><a href="${ path }/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
                         </ul>
                     </li>
                 </ul>    
@@ -319,7 +319,7 @@
 			 <div id="content2">
             <div class="content_2">
             
-            	<form action="<%=contextPath%>/revisedAdmin.mb" method="post">
+            	<form action="$ { path }/revisedAdmin.mb" method="post">
                 <h2> 회원 기본 정보</h2>
                 <div class="content_2_top">
                  
@@ -331,53 +331,53 @@
                         <tr>
                            
                             <th class="title">회원번호</th>
-                            <td><input type="text" class="input1" name="memberNo" value="<%=m.getMemberNo()%>" readonly></td>
+                            <td><input type="text" class="input1" name="memberNo" value="${member.memberNo }" readonly></td>
                         </tr>
                            
                             <tr>  
                               <th class="title">이름</th>
-                              <td><input type="text" class="input1" name="memberName" value="<%=m.getMemberName()%>" ></td>
+                              <td><input type="text" class="input1" name="memberName" value="${member.memberName }" ></td>
                               
                             </tr>
                             
                              <tr>
                               <th class="title">아이디</th>
-                              <td><input type="text" class="input1" name=memberId value="<%=m.getMemberId()%>" readonly></td>
+                              <td><input type="text" class="input1" name=memberId value="${member.memberId }" readonly></td>
                             </tr>
                             
                              <tr>
                               <th class="title">비밀번호</th>
-                              <td><input type="text" class="input1" value="<%=m.getMemberPwd()%>" readonly></td>
+                              <td><input type="text" class="input1" value="${member.memberPwd } " readonly></td>
                             </tr>
                             
                             <tr>  
                             
                               <th class="title">성별</th>
-                              <td><input type="text" class="input1" value="<%=m.getGender()%>" readonly></td>
+                              <td><input type="text" class="input1" value="${member.gender }" readonly></td>
                             </tr>  
                             <tr>
                               <th class="title">생년월일</th>
-                              <td><input type="text" class="input1" value="<%=m.getBirthday()%>" readonly></td> 
+                              <td><input type="text" class="input1" value="${member.birthday }" readonly></td> 
                             </tr>
                              <tr>
                               <th class="title">이메일</th>
-                              <td><input type="email" class="input1" name="Email" value="<%=m.getEmail()%>" ></td> 
+                              <td><input type="email" class="input1" name="Email" value="${member.email }" ></td> 
                             </tr>
                             <tr>
                               <th class="title">주소</th>
-                              <td><input type="text" class="input1" name="address" value="<%=m.getAddress()%>" ></td>
+                              <td><input type="text" class="input1" name="address" value="${member.address }" ></td>
                             </tr>
                             <tr>  
                               <th class="title">전화번호</th>
-                              <td><input type="number" class="input1" name="phone" value="<%=m.getPhone()%>" maxlength="11" ></td>
+                              <td><input type="number" class="input1" name="phone" value="${member.phone }" maxlength="11" ></td>
                             </tr>
                             <tr>
                               <th class="title">가입일</th>
-                              <td><input type="text" class="input1" value="<%=m.getEnrollDate()%>" readonly></td>
+                              <td><input type="text" class="input1" value="${member.enrollDate }" readonly></td>
                             </tr>  
                             <tr>
                               <th class="title">탈퇴여부</th>
-                              <td><input type="text" class="input1" name="status" value="<%=m.getStatus()%>" maxlength="1"></td>
+                              <td><input type="text" class="input1" name="status" value="${member.status }" maxlength="1"></td>
                             </tr>
                             
                            
@@ -401,13 +401,13 @@
                 <script>
                 
                 function close(){                	
-                	location.href='<%=contextPath%>/selectAdmin.mb';
+                	location.href='$ { path }/selectAdmin.mb';
                 }
                 
                 function deleteAdmin(){
             		
             		
-            		location.href='<%=contextPath%>/deleteAdmin.mb?memberNo='+<%=m.getMemberNo()%>;
+            		location.href='$ { path }/deleteAdmin.mb?memberNo='+${member.memberNo};
             	}
               
                 
