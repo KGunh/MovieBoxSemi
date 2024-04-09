@@ -45,16 +45,10 @@ public class MemberAdminController {
 				view = "views/admin/memberModify.jsp";
 				
 			}else {
+			
 				view = "index.jsp";
 			}
 			
-		
-			
-		
-		
-		
-		
-		
 		
 		return view;
 		

@@ -4,16 +4,7 @@
   
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   
-<%
-	ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("adminMovieCheckList");
-	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
-	//System.out.print(pi);
-	int currentPage = pi.getCurrentPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
-	int maxPage = pi.getMaxPage();
 
-%> 
 <!DOCTYPE html>
 <html>
 <head>
@@ -413,7 +404,7 @@
                     	
                     	<c:if test="${ pageInfo.currentPage > 1 }">
 	                    	<button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
-						        onclick="location.href='${path}/adminBoardCheck.admin?currentPage=${pageInfo.currentPage - 1}'"> < </button>
+						        onclick="location.href='${path}/adminMovieCheck.admin?currentPage=${pageInfo.currentPage - 1}'"> < </button>
                     	</c:if>
                     	
                     	<c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}" >
@@ -421,7 +412,7 @@
                     		<c:choose>
                     			<c:when test="${ pageInfo.currentPage ne i }">
 									<button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
-							        onclick="location.href='${path}/adminBoardCheck.admin?currentPage=${i}'">${i}</button>
+							        onclick="location.href='${path}/adminMovieCheck.admin?currentPage=${i}'">${i}</button>
 		                        </c:when>
 		                        <c:otherwise>
 									 <button disabled class="btn btn-outline-secondary" style="color:#ffffff">
@@ -432,7 +423,7 @@
                         
                         <c:if test="${ pageInfo.currentPage ne pageInfo.maxPage }">
 	                        <button class="btn btn-outline-secondary" style="color:white; border: 1px solid white;"
-						        onclick="location.href='${path}/adminBoardCheck.admin?currentPage=${pageInfo.currentPage + 1}'"> > </button>
+						        onclick="location.href='${path}/adminMovieCheck.admin?currentPage=${pageInfo.currentPage + 1}'"> > </button>
 						</c:if>
                     </div>
                     <!--페이지 숫자-->
