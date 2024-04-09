@@ -408,28 +408,29 @@
                           <tbody>
                           
                          
-                       <%if(mb.isEmpty()) {%>
+                         
+                       <c:choose>
+                       <c:when test="${ empty member }">
                        <tr>
                        <td colspan="5" >조회 결과가 없습니다.</td>
-                       
-                       
                        </tr>
+                       </c:when>
                        
-                       <% } else {%>
+                       <c:otherwise>
                         <c:forEach var="m" items="member">
                                 <tr class="member">
-							     <!-- <td class="ch"><input type="checkbox" name="check" value="check" id="check" ></td>  -->
-
+							     
                                 <td>${m.memberNo }</td>
-                                <td><%= m.getMemberName()%></td>
-                                <td><%= m.getEnrollDate() %></td>
-                                <td><%= m.getStatus() %></td>
-                                <td><%= m.getPhone() %></td>
+                                <td>${m.memberName }</td>
+                                <td>${m.enrollDate }</td>
+                                <td>${m.status }</td>
+                                <td>${m.phone }</td>
                                 
                             </tr>
                             </c:forEach>
-                           
                             
+                            </c:otherwise>
+                           </c:choose>
                           </tbody>
                         </table>
                       </div>
@@ -440,7 +441,7 @@
                     	$(function(){
                       		$('.member').click(function(){
                       			const memberNo = $(this).children().eq(0).text();
-                      			location.href='<%=contextPath%>/modifyAdmin.mb?memberNo=' + memberNo;
+                      			location.href='${path}/modifyAdmin.mb?memberNo=' + memberNo;
                       		});
                       	})
                     	
