@@ -6,12 +6,6 @@
 				 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-<%
-	Notice notice = (Notice)request.getAttribute("notice");
-	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("category");
-
-%>
-    
     
 <!DOCTYPE html>
 <html>
@@ -236,8 +230,7 @@
     
 </head>
 <body>
-
-    <%@ include file="../common/header.jsp" %>
+<jsp:include page="/views/common/header.jsp"></jsp:include>
     
    	<c:choose>
 	<c:when test="${ loginUser.memberNo eq 1 }">
@@ -261,9 +254,9 @@
 	                    </div>
 	                    
 	                    <div class="detail-content-box">
-	                        <form action="<%= contextPath %>/update.notice" method="post" id="insert-box">
+	                        <form action="%{ path }/update.notice" method="post" id="insert-box">
 	                        
-	                        <input type="hidden" name="noticeNo" value="<%= notice.getNoticeNo()%>" />
+	                        <input type="hidden" name="noticeNo" value="${ notice.noticeNo }" />
 	                            
 	                            <div id="category-box">
 	                                <div id="box-name">분류</div>
@@ -271,17 +264,17 @@
 	                                
 	                                <select name="category" id="select-category">
 	                               
-	                                <% for(Category c : list) { %>
-										<option class="<%= c.getCategoryName()%>" value="<%= c.getCategoryNo() %>">
-											<%= c.getCategoryName() %>
+	                               <c:forEach var="c" items="${ requestScope.category }">
+										<option class="${ c.categoryName }" value="${ c.categoryNo }">
+											${ c.categoryName }
 										</option>
-									<% } %>
+									</c:forEach>
 									
 	                                </select>
 	                                
 	                                    <script>
 									    	$(function(){
-									    		$('option[class="<%=notice.getNoticeCategory()%>"]').attr('selected', 'true');
+									    		$('option[class="${ notice.noticeCategory }"]').attr('selected', 'true');
 									    	})
 	    
 									    </script>
@@ -290,12 +283,12 @@
 	
 	                            <div id="title-box">
 	                                <div id="box-name">제목</div>
-	                                <input type="text" id="select-title" name="title" value="<%= notice.getNoticeTitle() %>">
+	                                <input type="text" id="select-title" name="title" value="${ notice.noticeTitle }">
 	                            </div>
 	
 	                            <div id="content-box">
 	                                <div id="box-name">내용</div>
-	                                <textarea id="select-content" cols="30" rows="10" name="content"><%= notice.getNoticeContent() %></textarea>
+	                                <textarea id="select-content" cols="30" rows="10" name="content">${ notice.noticeContent }</textarea>
 	                            </div>
 		
 		                        <div id="insert-btn" align="center">
@@ -317,14 +310,14 @@
 		<c:otherwise>
 			<script>
 				alert('관리자만 수정 가능합니다.');
-				location.href = '<%= contextPath %>/list.notice?currentPage=1';
+				location.href = '${ path }/list.notice?currentPage=1';
 			</script>
     	</c:otherwise>
     	
 	</c:choose>
     
-    <%@ include file="../common/footer.jsp" %>
-    
+
+<jsp:include page="/views/common/footer.jsp"></jsp:include>
 
 
     

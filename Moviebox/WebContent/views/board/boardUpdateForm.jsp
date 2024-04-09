@@ -3,12 +3,6 @@
 
 <%@ page import="com.kh.board.model.vo.*, java.util.ArrayList" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    
-<%
-	ArrayList<Category> list = (ArrayList<Category>)request.getAttribute("category");
-	Board board = (Board)request.getAttribute("board");
-	System.out.println(board);
-%>
 
 <!DOCTYPE html>
 <html>
@@ -239,8 +233,7 @@
 </head>
 <body>
 
-    <jsp:include page="../common/header.jsp"></jsp:include>
-    <c:set var="path" value="${ pageContext.request.contextPath }" />
+	<jsp:include page="../common/header.jsp"></jsp:include>
 
 	<c:choose>
 		<c:when test="${ loginUser.memberNo eq board.userNo }">
@@ -277,17 +270,15 @@
 		                                
 		                                <select name="category" id="select-category">
 		                                <c:forEach var="c" items="${ requestScope.category }">
-		                                
-		                                <% for(Category c : list) { %>
-											<option value="<%= c.getCategoryNo() %>" class="<%= c.getCategoryName() %>">
-												<%= c.getCategoryName() %>
+											<option value="${ c.categoryNo }" class="${ c.categoryName }">
+												${ c.categoryName } 문의
 											</option>
 										</c:forEach>
 		                                </select>
 		                                
 		                                <script>
 		                                	$(function(){
-		                                		$('option[class="<%=board.getBoardCategory()%>"]').attr('selected', 'true');
+		                                		$('option[class="${ board.boardCategory }"]').attr('selected', 'true');
 		                                	})
 		                                </script>
 		                                
@@ -295,12 +286,12 @@
 		
 		                            <div id="title-box">
 		                                <div id="box-name">제목</div>
-		                                <input type="text" id="select-title" name="title" value="<%= board.getBoardTitle() %>">
+		                                <input type="text" id="select-title" name="title" value="${ board.boardTitle }">
 		                            </div>
 		
 		                            <div id="content-box">
 		                                <div id="box-name">내용</div>
-		                                <textarea id="select-content" cols="30" rows="10" name="content"><%= board.getBoardContent() %></textarea>
+		                                <textarea id="select-content" cols="30" rows="10" name="content">${ board.boardContent }</textarea>
 		                            </div>
 			
 			
@@ -319,25 +310,25 @@
 		<c:otherwise>
 			<script>
 				alert('작성자만 수정 가능합니다.');
-				location.href = '<%= contextPath %>/list.board?currentPage=1';
+				location.href = '${ path }/list.board?currentPage=1';
 			</script>
     	</c:otherwise>
     	
 	</c:choose>
 	
-	<%@ include file="../common/footer.jsp" %>
+	<jsp:include page="/views/common/footer.jsp"></jsp:include>
 	
 	    <script>
 			function openNoticePage(){
-				location.href = '<%=contextPath %>/list.notice?currentPage=1';
+				location.href = '${ path }/list.notice?currentPage=1';
 			}
 			
 			function openQnaPage(){
-				location.href = '<%= contextPath %>/list.board?currentPage=1';
+				location.href = '${ path }/list.board?currentPage=1';
 			}
 			
     		function backPage(){
-    			location.href = '<%=contextPath%>/list.board?currentPage=1';
+    			location.href = '${ path }/list.board?currentPage=1';
     		}
     	</script>
     	

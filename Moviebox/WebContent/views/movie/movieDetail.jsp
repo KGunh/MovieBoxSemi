@@ -5,11 +5,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-
-<%
-	ArrayList<Attachment> list = (ArrayList<Attachment>)request.getAttribute("attach");
-%>
-
 <!DOCTYPE html>
 <html>
 <head>
@@ -310,12 +305,12 @@
 
 		function noMember(){
 			alert('로그인이 필요한 서비스 입니다.');
-			location.href = ('<%=contextPath%>/loginForm.me');
+			location.href = ('${ path }/loginForm.me');
 		}
 	
     	// 예매하기 버튼 -> 예매 페이지
     	function reservationPage(){
-    		location.href = '<%= contextPath %>/movie.reservation';
+    		location.href = '${ path }/movie.reservation';
     	}
 
 
