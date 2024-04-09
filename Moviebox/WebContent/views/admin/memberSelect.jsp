@@ -1,8 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import = " java.util.ArrayList, com.kh.member.model.vo.Member" 
     %>
-
- <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
   
 
     <!DOCTYPE html>
@@ -414,11 +412,9 @@
                           <tbody>
                        
                        		<c:forEach var="m" items="${ member}">
-                                <tr class="member">
-							     <!-- <td class="ch"><input type="checkbox" name="check" value="check" id="check" ></td>  -->
-
-                                <td>${m.memberNo }</td>
                                 
+                                <tr class="member">
+                                <td>${m.memberNo }</td>
                                 <td>${m.memberName }</td>
                                 <td>${m.enrollDate }</td>
                                 <td>${m.status }</td>
@@ -435,16 +431,17 @@
                       <script> 
                    
                     	
-                    	
-
-                      		$('.member').click(function(){
-                      			const memberNo = $(this).children().eq(0).text();
-                      			location.href='${path }/modifyAdmin.mb?memberNo=' + memberNo;
-                      		});
-                
-                    	
-                    	
-
+                      $(function(){
+                    	  
+								$('.member').click(function(){
+                    			const memberNo = $(this).children().eq(0).text();
+                    			location.href='${path }/modifyAdmin.mb?memberNo=' + memberNo;
+                      });
+                      
+                      })
+                      
+                      
+                  	
 
                       
                       </script>
