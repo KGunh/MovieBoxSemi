@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>   
     
 <!DOCTYPE html>
 <html>
@@ -241,12 +242,17 @@
         height: auto;
         margin: auto;
         display: flex;
-  flex-wrap: wrap;
+  		flex-wrap: wrap;
     }
 
     .goods-container{
         width: 20%;
         padding: 20px;
+    }
+    
+    image-container > img{
+        width: 100%;
+        height: 100%;
     }
 
 </style>
@@ -264,7 +270,7 @@
 
         <c:choose>
         	<c:when test="${ not empty goodsList }">
-            	<c:forEach var="goods" begin="0" end="${ goodsList.size() - 1 }">
+            	<c:forEach var="goods" begin="0" end="${ fn:length(goodsList) - 1 }">
                        
 	                <div class="goods-container">
 	                    <div class="card">
@@ -273,13 +279,13 @@
 	                                <div class="d-flex justify-content-between align-items-center">
 	                                </div>
 	                            </div>
-	                            <img src="${ goods.filePath }/${ goods.ChangeName }" class="img-fluid rounded thumbnail-image">
+	                            <img src="${ sessionScope.path }/${ goodsList[goods].filePath }/${ goodsList[goods].changeName }" class="img-fluid rounded thumbnail-image">
 	                        </div>
 	                        <div class="product-detail-container p-2">
 	                            <div class="d-flex justify-content-between align-items-center">
-	                                <h5 class="dress-name" style="text-shadow: 0px 1px 2px lightgray;">${ goods.goodsName }</h5>
+	                                <h5 class="dress-name" style="text-shadow: 0px 1px 2px lightgray;">${ goodsList[goods].goodsName }</h5>
 	                                <div class="d-flex flex-column mb-2">
-	                                    <span class="new-price"><strong>￦${ goods.goodsPrice }</strong></span>
+	                                    <span class="new-price"><strong>￦${ goodsList[goods].goodsPrice }</strong></span>
 	                                </div>
 	                            </div>
 	                            <div class="d-flex justify-content-between align-items-center pt-1">

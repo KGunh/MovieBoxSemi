@@ -11,7 +11,6 @@ import java.util.List;
 import java.util.Properties;
 
 import com.kh.goods.model.vo.Goods;
-import static com.kh.common.JDBCTemplate.close;
 
 public class GoodsDao {
 	
@@ -44,13 +43,12 @@ public class GoodsDao {
 				goods.setTypeName(rset.getString("TYPE_NAME"));
 				goods.setFilePath(rset.getString("FILE_PATH"));
 				goods.setGoodsNo(rset.getInt("GOODS_NO"));
-				
+				System.out.println(goods.getChangeName()+goods.getFilePath());
 				goodsList.add(goods);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		System.out.println(goodsList);
 		return goodsList;
 	}
 

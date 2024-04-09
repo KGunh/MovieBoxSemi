@@ -5,13 +5,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-<%
-	ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("movieList");
-	String type = (String)request.getAttribute("type");
-	String genre = (String)request.getAttribute("genre");
-	
-%>
-    
 <!DOCTYPE html>
 <html>
 <head>
@@ -195,7 +188,7 @@
     </style>
 </head>
 <body>
-    <%@ include file="/views/common/header.jsp" %>
+	<jsp:include page="/views/common/header.jsp"></jsp:include>
     
     <div id="wrap">
         <div id="movie-list">
@@ -215,7 +208,7 @@
                 </div>
                 
                 <!-- 장르 버튼 -->
-                <form id="selectGenreForm" action="<%=contextPath%>/selectGenre.movie" method="get">
+                <form id="selectGenreForm" action="${ path }/selectGenre.movie" method="get">
                 	<input id="selectTypeGenre" type="hidden" name="type" value="genre">
                 	<input id="genreInput" type="hidden" name="genre">
                 </form>
@@ -227,7 +220,7 @@
                     </div>
 
                      <div id="search-img">
-                       <img src="<%= contextPath %>/resources/img/search.PNG" alt="검색 아이콘">
+                       <img src="${ path }/resources/img/search.PNG" alt="검색 아이콘">
                     </div>
                     <div id="movie-list-input">
                         <input type="text" id="movie-list-search" placeholder="검색창">
@@ -236,41 +229,43 @@
             </div> <!-- movie-list-header -->
 
             <div id="movie-content-body">
-			<% if(list.isEmpty()) { %>
-				<a style="color: white;">등록된 영화가 존재하지 않습니다.</a> <br>
-			<% } else { %>
-
-                <% for(Movie m : list) { %>
-                    <div class="movie-content">
-                    	<input type="hidden" id="inputId" name="movieNo" value="<%= m.getMovieNo()%>" />
-                    	
-                        <div class="movie-list-img"> <!-- 포스터 -->
-                        	<a href="<%=contextPath%>/detail.movie?movieNo=<%= m.getMovieNo()%>">
-                        		<img src="<%= m.getFilePath() %>/<%= m.getChangeName() %>" width="232" height="300">
-                        	</a>
-                        </div>
-                        
-                        <div class="movie-list-title"><%= m.getMovieTitle() %></div>
-                        <div id="movie-content-btn1">
-	                        <a href="<%=contextPath%>/detail.movie?movieNo=<%= m.getMovieNo()%>" id="detailbtn">상세정보</a>
-                        </div>
-	                    <% if(loginUser == null) { %>
-	                    	<button id="movie-content-btn2" onclick="noMember();">예매하기</button>
-	                	<%} else { %>
-	                		<button id="movie-content-btn2" onclick="reservationPage();">예매하기</button>
-	                	<% } %>
-                    </div>
-                 <% } %>
-             <% } %>
-
+	            <c:choose>
+	            	<c:when test="${ empty movieList }">
+						<a style="color: white;">등록된 영화가 존재하지 않습니다.</a> <br>
+					</c:when>
+					<c:otherwise>
+						<c:forEach var="m" items="${ movieList }">
+		                    <div class="movie-content">
+		                    	<input type="hidden" id="inputId" name="movieNo" value="${ m.movieNo }" />
+		                    	
+		                        <div class="movie-list-img"> <!-- 포스터 -->
+		                        	<a href="${ path }/detail.movie?movieNo=${ m.movieNo }">
+		                        		<img src="${ m.filePath }/${ m.changeName }" width="232" height="300">
+		                        	</a>
+		                        </div>
+		                        
+		                        <div class="movie-list-title">${ m.movieTitle }</div>
+		                        <div id="movie-content-btn1">
+			                        <a href="${ path }/detail.movie?movieNo=${ m.movieNo }" id="detailbtn">상세정보</a>
+		                        </div>
+		                        <c:choose>
+		                        	<c:when test="${ empty loginUser }">
+			                    		<button id="movie-content-btn2" onclick="noMember();">예매하기</button>
+			                    	</c:when>
+			                    	<c:otherwise>
+			                			<button id="movie-content-btn2" onclick="reservationPage();">예매하기</button>
+			                		</c:otherwise>
+			                	</c:choose>
+		                    </div>
+	                 	</c:forEach>
+	                 </c:otherwise>
+				</c:choose>
             </div>
 
         </div> <!-- movie-list -->
     </div> <!-- wrap -->
     
-    
-	<%@ include file="/views/common/footer.jsp" %>
-
+	<jsp:include page="/views/common/footer.jsp"></jsp:include>
     
 </body>
 
@@ -280,12 +275,12 @@
     	// 비회원 상태에서 예매하기 버튼 클릭 시
 		function noMember(){
 			alert('로그인이 필요한 서비스 입니다.');
-			location.href = ('<%=contextPath%>/loginForm.me');
+			location.href = ('${ path }/loginForm.me');
 		}
 		
     	// 예매하기 버튼 -> 예매 페이지
     	function reservationPage(){
-    		location.href = '<%= contextPath %>/movie.reservation';
+    		location.href = '${ path }/movie.reservation';
     	}
     	
     	// 카테고리 네비 바
