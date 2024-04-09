@@ -57,8 +57,8 @@
 			ADDRESS =?,
 			PHONE =?,
 			STATUS =?,
-			UPDATE_DATE 
-		WHERE 
+			UPDATE_DATE = SYSDATE
+		WHERE
 			MEMBER_ID = ?
 		AND
 			STATUS = 'Y'
@@ -139,7 +139,7 @@
 	SET
 		THEATER_NAME = ?,
 		THEATER_ADDR = ?,
-		MAP_LINK = ? ,
+		MAP_LINK = ?,
 		LOCATION_CODE = ?,
 		THEATER_UPDATE = SYSDATE
 	WHERE

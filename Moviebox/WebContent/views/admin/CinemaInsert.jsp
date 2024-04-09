@@ -1,11 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import = "java.util.ArrayList, com.kh.common.model.vo.Location"%>
     
-    <%
-   	ArrayList<Location> location = (ArrayList<Location>)session.getAttribute("location");
-    
-    
-    %>
+   
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -324,25 +320,25 @@
             <div class="content_1">
                 <ul class="menu">
                     <li>
-                        <a href="<%=contextPath %>/selectAdmin.mb">회원 관리</a>
+                        <a href="${ path }/selectAdmin.mb">회원 관리</a>
                         <ul class="submenu">
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminScreenList.admin">예매 관리</a>
+                        <a href="${ path }/adminScreenList.admin">예매 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminMovieCheck.admin?currentPage=1">영화 관리</a>
+                        <a href="${ path }/adminMovieCheck.admin?currentPage=1">영화 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath%>/checkAdmin.cm">영화관 관리</a>
+                        <a href="${path }/checkAdmin.cm">영화관 관리</a>
                         <ul class="submenu">
 
                         </ul>
@@ -350,8 +346,8 @@
                     <li class="post">
                         <a href="#">게시글 관리</a>
                         <ul class="submenu">
-                        <li><a href="<%=contextPath %>/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
-                        <li><a href="<%=contextPath %>/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
+                        <li><a href="${ path }/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
+                        <li><a href="${ path }/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
                         </ul>
                     </li>
                 </ul>    
@@ -361,7 +357,7 @@
                 <div class="content_2_top">
                 
             </div>
-             <form action="<%=contextPath%>/enroll.cm" method="post"> 
+             <form action="${ path }/enroll.cm" method="post"> 
             
             
             <div id="content_2_content" >
@@ -373,14 +369,15 @@
                     <span class="name" id="region">지역</span>
                      
                     <select name="region" class="input" style="width: 650px; height: 39px;">
-                       <%for(Location l : location) { %>
-                       <option value="<%=l.getLocationCode()%>">
-                       <%=l.getLocationName() %>
+                     
+                      
+                      <c:forEach var="l" items="${location }"> 
+                       <option value="${l.locationCode }">
+                       ${l.locationName }
                        </option>
-                       <% } %>
+                    </c:forEach>   
                     </select>
-                
-                
+                	
                 </div>
                 <div>
                     <span class="name">영화관 이름</span>
@@ -401,7 +398,7 @@
                 <div id="delete" >
                     <input type="submit" id="btn1" value="등록"></button>
                 </div>
-                    
+                    </form>
                      
                 </div>
 
@@ -412,7 +409,7 @@
               
                 
             </div>
-                 </form>
+                 
                 </div>
        
                 </div>
