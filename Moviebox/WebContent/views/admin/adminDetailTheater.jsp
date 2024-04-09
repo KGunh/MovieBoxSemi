@@ -1,11 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import="com.kh.movie.model.vo.Movie,java.util.List,java.util.ArrayList,com.kh.theater.model.vo.Screen,com.kh.theater.model.vo.Theater,java.text.SimpleDateFormat,java.util.Date,com.kh.movie.model.vo.Movie"%>
+    
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%
 	List<Screen> screenList = (ArrayList)request.getAttribute("screenList");
     
     Theater th = (Theater)request.getAttribute("theater");
 
-    List<Movie> movieNameList = (ArrayList)request.getAttribute("movieList");
+    List<Movie> movieNameList = (ArrayList)request.getAttribute("movieNameList");
     SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
     Date currentDate = new Date();
 
@@ -221,25 +223,32 @@
 </head>
 <body>
 	<!-- 헤더 -->
-    <%@ include file="/views/common/header.jsp" %>
+   <jsp:include page="/views/common/header.jsp"></jsp:include>
 
-	<% if(loginUser == null && loginUser.getPrivilege().equals("N")) {%>
-		<script>
-			location.href = ('<%=contextPath%>');
-		</script>
-	<%} else {%>
-	
-    <script>
-        window.onload = function() {
-            today = new Date();
-            today = today.toISOString().slice(0, 10);
-            bir = document.getElementById("today");
-            bir.value = today;
-        }
-        
-    </script>
-    <div id="wrap">
-
+	<c:choose>
+		<c:when test="${ loginUser eq null }">
+			
+			<script>
+				location.href = ('${ path }/loginForm.me');
+			</script>
+			
+		</c:when>
+		<c:when test='${ loginUser.privilege eq "Y" }'>
+			<script>
+				location.href = ('${ path }');
+			</script>
+		</c:when>
+		<c:otherwise>
+			<script>
+		        window.onload = function() {
+		            today = new Date();
+		            today = today.toISOString().slice(0, 10);
+		            bir = document.getElementById("today");
+		            bir.value = today;
+		        }
+		        
+		    </script>
+	<div id="wrap">
 
         <div id="top_wrap">
             <div class="top_1">
@@ -252,25 +261,25 @@
             <div class="content_1">
                 <ul class="menu">
                     <li>
-                        <a href="<%=contextPath %>/selectAdmin.mb">회원 관리</a>
+                        <a href="${ path }/selectAdmin.mb">회원 관리</a>
                         <ul class="submenu">
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminScreenList.admin">상영관 관리</a>
+                        <a href="${ path }/adminScreenList.admin">상영관 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminMovieCheck.admin?currentPage=1">영화 관리</a>
+                        <a href="${ path }/adminMovieCheck.admin?currentPage=1">영화 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath%>/checkAdmin.cm">영화관 관리</a>
+                        <a href="${ path }/checkAdmin.cm">영화관 관리</a>
                         <ul class="submenu">
 
                         </ul>
@@ -278,8 +287,8 @@
                     <li class="post">
                         <a href="#">게시글 관리</a>
                         <ul class="submenu">
-                        <li><a href="<%=contextPath %>/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
-                        <li><a href="<%=contextPath %>/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
+                        <li><a href="${ path }/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
+                        <li><a href="${ path }/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
                         </ul>
                     </li>
                 </ul>    
@@ -289,61 +298,57 @@
 
             <div class="content_2"><!--content_2 시작-->
                 <div class="date-area">
-                    <%= th.getTheaterName() %>
+                    ${ theater.theaterName }
                     <input type="date" id="today">
                 </div>
 
                 <div id="screenList-top">
-                <%if(screenList != null) {%>
-    
-                    <div class="row" >
-						  <%for(int i = 0; i< 4; i++) {%>	                      
-                        <div class="screenList col-sm-6 " style="height: 250px;margin-top: 40px">
+                <c:choose>
+                	<c:when test="${empty screenList }">
+                	<div class="row" >
+                		<c:forEach var="i" begin="0" end="3">
+                			<div class="screenList col-sm-6 " style="height: 250px;margin-top: 40px">
                         
-                            <div class="screenList-title"><%=screenList.get(i).getScreenName() %>관</div>
-                            <% List<Movie> movieList =  screenList.get(i).getMovieList(); %>
-                            <%for(int j = 0; j<movieList.size();j++) {%>
-                            <div>
-                            <select name="movie" id="<%=movieList.get(j).getScreenNo()%>">
-                            
-                            	
-                                <%for(Movie m : movieNameList) {%>
-                                    <option value="<%=m.getMovieNo()%>"><%=m.getMovieTitle() %></option>
-                                <%} %>
-                                
-                                
-                            </select>
-                            
-                            	
-                                    <input type="time" value="<%=movieList.get(j).getWatchDate()%>">
-                              <script>
-                              	
-                              		$('#<%=movieList.get(j).getScreenNo()%>').val('<%=movieList.get(j).getMovieNo()%>').prop("selected",true);
-                              </script>
-                           </div>
-                            	<%} %>
-                            
-                            
-                            
-                        </div>
-                    
-                        <%} %>
-                    </div>
+	                            <div class="screenList-title">${ screenList[i].screenName }관</div>
+	                            <c:set var="movieList" value="${ screenList[i].movieList }"/>
+	                            <c:forEach var="j" begin="0" end="${ movieList.size()-1 }" >
+	                            	<div>
+	                            		 <select name="movie" id="${ movieList[j].screenNo }">
+	                            		 <c:forEach var="m" items="${ movieNameList }">
+	                            		 	<option value="${ m.movieNo }">${ m.movieTitle }</option>	
+	                            		 </c:forEach>
+	                            		 
+	                            		 </select>
+	                            		 <input type="time" value="${ movieList[j].watchDate }">
+	                            		 
+	                            		  <script>
+	                            		  	$('#${ movieList[j].screenNo }').val('${ movieList[j].movieNo }').prop("selected",true);
+			                              </script>
+	                            	</div>
+	                            </c:forEach>
 
-                <%} %>
+	          
+                           </div>>
+                		</c:forEach>
+                	
+                	
+                	</div>
+                	</c:when>
+                </c:choose>
+                
                 </div>
 				<div id="insertScreen-area">
 					<select id="screenName">
-						<%for(int i = 1; i<= 4; i++) {%>
-							<option value="<%=i%>"><%=i %>관</option>
-						<%} %>
+						<c:forEach var="i" begin="1" end="4">
+							<option value="${ i }">${ i }관</option>
+						</c:forEach>
 						
 					</select>
 					<select id="selectMovie" >
-					
-						<%for(Movie m : movieNameList) {%>
-                           	<option value="<%=m.getMovieNo()%>"><%=m.getMovieTitle() %></option>
-                           <%} %>
+						<c:forEach var="m" items="${ movieNameList }">
+                           	<option value="${ m.movieNo }">${ m.movieTitle }</option>
+ 
+                       	</c:forEach>
 					</select>
 					<select id="watchTime">
 						<option>01:00</option>
@@ -367,7 +372,7 @@
 								type : 'get',
 								data : {
 									screenName : $screenName.val(),
-									theaterNo : <%= th.getTheaterNo()%>,
+									theaterNo : ${ theater.theaterNo },
 									selectMovie : $selectMovie.val(),
 									watchTime : $watchTime.val(),
 									watchDate : $today.val()
@@ -392,6 +397,12 @@
         </div>
 
     </div>
+		</c:otherwise>
+		
+	</c:choose>
+	
+    
+    
     <script>
         $('#today').on('change' , function(){
             let $today = $(this);
@@ -406,7 +417,7 @@
                 type : 'get',
                 data : {
                     watchDate : today.val(),
-                    theaterNo : <%= th.getTheaterNo()%>
+                    theaterNo : ${ theater.theaterNo }
                 },
                 success : function(result){
                     let resultStr = '';
@@ -421,12 +432,11 @@
                                             result[i].screenName +'관' +
                                         '</div>';
                         for(let j = 0; j< result[i].movieList.length;j++){
-                        	resultOption +='<div>' + 
-            									'<select name="movie" id="' + result[i].movieList[j].screenNo + '">' + 
-           							 				<%for(Movie m : movieNameList) {%>
-            										'<option value="<%=m.getMovieNo()%>"><%=m.getMovieTitle() %></option>' +
-            										<%}%> 
-            										'</select>' + 
+                        	resultOption +='<div>' + '<select name="movie" id="' + result[i].movieList[j].screenNo + '">';
+							for(let k = 0; k < result[i].movieNameList.length;k++){
+								resultOption += 'option value="' + result[i].movieNameList[k].movieNo + '">' + result[i].movieNameList[k].movieTitle + '</option>';  
+							}
+            				resultOption +=	'</select>' + 
             									'<input type="time" value="'+ result[i].movieList[j].watchDate +'">'  +
             								'</div>';
         				}      

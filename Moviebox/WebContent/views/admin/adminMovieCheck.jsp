@@ -4,16 +4,7 @@
   
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
   
-<%
-	ArrayList<Movie> list = (ArrayList<Movie>)request.getAttribute("adminMovieCheckList");
-	PageInfo pi = (PageInfo)request.getAttribute("pageInfo");
-	//System.out.print(pi);
-	int currentPage = pi.getCurrentPage();
-	int startPage = pi.getStartPage();
-	int endPage = pi.getEndPage();
-	int maxPage = pi.getMaxPage();
 
-%> 
 <!DOCTYPE html>
 <html>
 <head>

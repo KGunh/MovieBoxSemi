@@ -20,6 +20,7 @@ public class Screen {
 	
 	private List<String> watchDateList;
 	private List<Movie> movieList;
+	private List<Movie> movieNameList;
 	
 	
 	public Screen() {
@@ -34,6 +35,14 @@ public class Screen {
 		this.screenName = screenName;
 	}
 	
+	
+	
+	public List<Movie> getMovieNameList() {
+		return movieNameList;
+	}
+	public void setMovieNameList(List<Movie> movieNameList) {
+		this.movieNameList = movieNameList;
+	}
 	public List<Movie> getMovieList() {
 		return movieList;
 	}
