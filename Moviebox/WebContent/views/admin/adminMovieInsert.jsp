@@ -538,11 +538,11 @@
 			            </div>
 			
 			            <div id="sub_4">
-			                <input type="text" name="running_time" id="runningTime" placeholder="러닝타임을 입력해 주세요.(ex - 120)" oninput="this.value = this.value.replace(/[^0-9]/g, '');">
+			                <input type="text" name="running_time" id="runningTime" placeholder="러닝타임을 입력해 주세요." oninput="this.value = this.value.replace(/[^0-9]/g, '');">
 			            </div>
 			
 			            <div id="sub_5">
-			                <input type="text" name="rated" id="rating" placeholder="관람 등급을 입력해 주세요.(ex - 12세)">
+			                <input type="text" name="rated" id="rating" placeholder="관람 등급을 입력해 주세요.(ex - oo세)">
 			            </div>
 			
 			            <div id="sub_6">
@@ -550,11 +550,11 @@
 			            </div>
 			
 			            <div id="sub_7">
-			                <input type="text" name="director_name" id="director_name" placeholder="감독을 입력해 주세요.(ex - 호빵맨, 식빵맨 )">
+			                <input type="text" name="director_name" id="director_name" placeholder="감독을 입력해 주세요.">
 			            </div>
 			
 			            <div id="sub_8">
-			                <input type="text" name="actors" id="cast" placeholder="출연진을 입력해 주세요.(ex - 잉어빵, 붕어빵 )">
+			                <input type="text" name="actors" id="cast" placeholder="출연진을 입력해 주세요.(ex - ooo, ooo )">
 			            </div>
 			
 			            <div id="sub_9">
