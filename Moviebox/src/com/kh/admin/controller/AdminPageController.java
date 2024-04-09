@@ -516,7 +516,7 @@ public class AdminPageController {
 	        }
 	        
 	        if(!list.isEmpty()) {
-	            request.setAttribute("movieList", movieList);
+	            request.setAttribute("movieNameList", movieList);
 	            request.setAttribute("screenList", list);
 	            
 	            view = "views/admin/adminDetailTheater.jsp";

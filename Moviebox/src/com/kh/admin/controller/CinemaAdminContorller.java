@@ -38,7 +38,6 @@ public class CinemaAdminContorller {
 		
 		Theater theater = new MemberAdminService().cinemaEdit(theaterNo);
 		request.setAttribute("theater", theater);
-		System.out.println(theater);
 		String view = "/views/admin/CinemaEdit.jsp";
 		
 		return view;
@@ -75,7 +74,6 @@ public class CinemaAdminContorller {
 		Theater theater = new Theater();
 		String view = "/views/admin/CinemaInsert.jsp";
 		String name = request.getParameter("cinemaname");
-		System.out.println(name);
 		String code = request.getParameter("address");
 		String region = request.getParameter("region");
 		String link = request.getParameter("link");
@@ -130,6 +128,7 @@ public class CinemaAdminContorller {
 		
 		if(result > 0) {
 			HttpSession session = request.getSession();
+			request.setAttribute("theater", theater);
 			session.setAttribute("alertMsg", "정보수정이 완료되었습니다");
 			
 		}else {
@@ -157,7 +156,7 @@ public class CinemaAdminContorller {
 			request.setAttribute("errorMsg", "삭제되지 않았습니다");
 		}
 		
-		String view ="views/admin/CinemaCheck.jsp";
+		String view =request.getContextPath()+"/checkAdmin.cm";
 		
 		return view; 
 		

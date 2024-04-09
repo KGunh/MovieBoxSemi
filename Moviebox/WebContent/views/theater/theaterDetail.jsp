@@ -6,8 +6,6 @@
 
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     
-<%
-%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -188,7 +186,7 @@
     
 </head>
 <body>
-<%@ include file="../common/header.jsp" %>
+<jsp:include page="/views/common/header.jsp"></jsp:include>
 
     <div id="wrap">
 
@@ -215,21 +213,21 @@
                <!-- <div class="movie-conten1"> -->
                <c:forEach var="t" items="${ requestScope.theater }">
                     <div class="movie-content">
-                    <input type="hidden" id="inputId" name="movieNo" value="${ t.movieNo }" />
+                    	<input type="hidden" id="inputId" name="movieNo" value="${ t.movieNo }" />
                     	
                         <div class="movie-list-img">
-                        	<a href="<%=contextPath%>/detail.movie?movieNo=${ t.movieNo }"><img src="${ t.filePath }/${ t.changeName }" width="232" height="300"></a>
+                        	<a href="${ path }/detail.movie?movieNo=${ t.movieNo }"><img src="${ t.filePath }/${ t.changeName }" width="232" height="300"></a>
                         </div>
                     
                         <div class="movie-list-title">${ t.movieTitle }</div>
                         
-                        <div id="movie-content-btn1"><a href="<%=contextPath%>/detail.movie?movieNo=${ t.movieNo }" id="detailbtn">상세정보</a></div>
+                        <div id="movie-content-btn1"><a href="${ path }/detail.movie?movieNo=${ t.movieNo }" id="detailbtn">상세정보</a></div>
 	                    <c:choose>
 	                    	<c:when test="${ empty loginUser }">
 	                    		<button id="movie-content-btn2" onclick="noMember();">예매하기</button>
 	                    	</c:when>
 	                		<c:otherwise>
-	                		<button id="movie-content-btn2" onclick="reservationPage();">예매하기</button>
+	                			<button id="movie-content-btn2" onclick="reservationPage();">예매하기</button>
 	                		</c:otherwise>
 	                	</c:choose>
                     </div>
@@ -251,17 +249,17 @@
 	
     </div> <!-- wrap -->
 
-<%@ include file="../common/footer.jsp" %>
+<jsp:include page="/views/common/footer.jsp"></jsp:include>
 
         
     <script>
 		function noMember(){
 			alert('로그인이 필요한 서비스 입니다.');
-			location.href = ('<%=contextPath%>/loginForm.me');
+			location.href = ('${ path }/loginForm.me');
 		}
     	// 예매하기 버튼 -> 예매 페이지
     	function reservationPage(){
-    		location.href = '<%= contextPath %>/movie.reservation';
+    		location.href = '${ path }/movie.reservation';
     	}
 
 	</script>

@@ -11,6 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.google.gson.Gson;
 import com.kh.admin.model.service.AdminPageService;
+import com.kh.movie.model.service.MovieService;
+import com.kh.movie.model.vo.Movie;
 import com.kh.theater.model.vo.Screen;
 
 /**
@@ -38,11 +40,19 @@ public class AjaxAdminSelectDate extends HttpServlet {
 		int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));
 		String watchDate = request.getParameter("watchDate");
 		
+		
+		
+		
 		Screen sc = new Screen();
 		sc.setTheaterNo(theaterNo);
 		sc.setWatchDate(watchDate);
-
+		List<Movie> movieNameList = new MovieService().selectMovieList();
+		
 		List<Screen> list = new AdminPageService().adminDetailTheater(sc);
+		for(int i = 0; i<movieNameList.size();i++) {
+			list.get(i).setMovieNameList(movieNameList);
+		}
+		
 		response.setContentType("application/json; charset=UTF-8");
 				
 		new Gson().toJson(list, response.getWriter());

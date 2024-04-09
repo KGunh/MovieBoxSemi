@@ -1,6 +1,9 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import = " java.util.ArrayList, com.kh.movie.model.vo.Movie" 
     %>
+    
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
+
 <%
 	Movie m =(Movie)request.getAttribute("movie");
 	String c =(String)request.getAttribute("cast");
@@ -338,7 +341,7 @@
 </head>
 <body>
 	<!-- 헤더 -->
-    <%@ include file="/views/common/header.jsp" %>
+	<jsp:include page="/views/common/header.jsp"></jsp:include>
     
     <div id="wrap">
 
@@ -354,25 +357,25 @@
            	<div class="content_1">
                 <ul class="menu">
                     <li>
-                        <a href="<%=contextPath %>/selectAdmin.mb">회원 관리</a>
+                        <a href="${ path } /selectAdmin.mb">회원 관리</a>
                         <ul class="submenu">
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminScreenList.admin">예매 관리</a>
+                        <a href="${ path }/adminScreenList.admin">예매 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminMovieCheck.admin?currentPage=1">영화 관리</a>
+                        <a href="${ path }/adminMovieCheck.admin?currentPage=1">영화 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath%>/checkAdmin.cm">영화관 관리</a>
+                        <a href="${ path }/checkAdmin.cm">영화관 관리</a>
                         <ul class="submenu">
 
                         </ul>
@@ -380,8 +383,8 @@
                     <li class="post">
                         <a href="#">게시글 관리</a>
                         <ul class="submenu">
-                        <li><a href="<%=contextPath %>/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
-                        <li><a href="<%=contextPath %>/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
+                        <li><a href="${ path }/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
+                        <li><a href="${ path }/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
                         </ul>
                     </li>
                 </ul>    
@@ -395,12 +398,12 @@
 
                 <div id="content_2_box"><!--컨텐트2 전체박스-->
                     <div id="box_1">
-                        <div id="postimg"><img style="width: 250px; height: 350px; border: 1px solid rgb(177, 177, 177);" src="<%= p %>"></div>
+                        <div id="postimg"><img style="width: 250px; height: 350px; border: 1px solid rgb(177, 177, 177);" src="${ poster }"></div>
                         <div id="plot">
                             
                             <div id="plotPage">
                                 <p id="plotStyle">줄거리</p>
-                                <textarea name="text" class="form-control" id="sub8plot" cols="30" rows="10" placeholder="줄거리를 입력해 주세요." readonly><%=m.getMovieStory() %></textarea>
+                                <textarea name="text" class="form-control" id="sub8plot" cols="30" rows="10" placeholder="줄거리를 입력해 주세요." readonly>${ movie.movieStory}</textarea>
                                 <div id="button"><!--등록 버튼-->
                                     <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;" onclick="deleteButton();">삭제</button>
                                     <button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;" onclick="updateButton()">수정</button>
@@ -448,31 +451,31 @@
 
                             <div id="right">
                                 <div id="right_1">
-                                    <input type="text" class="form-control" name='movieTitle' value="<%= m.getMovieTitle() %>" readonly>
+                                    <input type="text" class="form-control" name='movieTitle' value="${ movie.movieTitle }" readonly>
                                 </div>    
 
                                 <div id="right_2">
-                                    <input type="text" class="form-control" name='movieName' value="<%= m.getGenreName() %>" readonly>
+                                    <input type="text" class="form-control" name='movieName' value="${ movie.genreName }" readonly>
                                 </div>    
 
                                 <div id="right_3">
-                                    <input type="text" class="form-control" name='running_time' value="<%= m.getMovieRt() %>" readonly>
+                                    <input type="text" class="form-control" name='running_time' value="${ movie.movieRt }" readonly>
                                 </div>    
 
                                 <div id="right_4">
-                                    <input type="text" class="form-control" name='rated' value="<%= m.getMovieRated() %>" readonly>
+                                    <input type="text" class="form-control" name='rated' value="${ movie.movieRated }" readonly>
                                 </div>    
 
                                 <div id="right_5">
-                                    <input type="text" class="form-control" name='release_date' value="<%= m.getMovieRelease()%>" readonly>
+                                    <input type="text" class="form-control" name='release_date' value="${ movie.movieRelease }" readonly>
                                 </div>    
 
                                 <div id="right_6">
-                                    <input type="text" class="form-control" name='director_name' value="<%= m.getDirectorName()%>" readonly>
+                                    <input type="text" class="form-control" name='director_name' value="${ movie.directorName }" readonly>
                                 </div>    
 
                                 <div id="right_7">
-                                    <input type="text" class="form-control" name='actors' value="<%= c %>" readonly>
+                                    <input type="text" class="form-control" name='actors' value="${ cast }" readonly>
                                 </div>    
                             
                             </div>
@@ -496,7 +499,8 @@
         </div>
 
     </div>
-     	<%@ include file="/views/common/footer.jsp" %>
+    
+    	<jsp:include page="/views/common/footer.jsp"></jsp:include>
  		<!-- 푸터 -->
  		
  		<script>
@@ -504,12 +508,12 @@
     			const result = confirm('삭제하려면 확인을 눌러주세요.');
     			
                 if(result){
-                	location.href =  '<%= contextPath %>/adminMovieDelete.admin?movieNo=<%=m.getMovieNo()%>';
+                	location.href =  '${ path }/adminMovieDelete.admin?movieNo=${ movie.movieNo }';
                 }
 	 		}
 	 		
 	 		function updateButton() {
-	 			location.href = '<%=contextPath%>/adminMovieUpdateEnrollForm.admin?movieNo=<%=m.getMovieNo()%>';
+	 			location.href = '${ path }/adminMovieUpdateEnrollForm.admin?movieNo=${ movie.movieNo }';
 	 		}
  		</script>
 

@@ -1,10 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import = "com.kh.theater.model.vo.Theater"%>
     
-    <%
-    Theater theater = (Theater)request.getAttribute("theater");
-    %>
-    
+  
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -263,7 +260,7 @@
                         </ul>
                     </li>
                     <li>
-                        <a href="${ path }/checkAdmin.cm">영화관 관리</a>
+                        <a href="${path }/checkAdmin.cm">영화관 관리</a>
                         <ul class="submenu">
 
                         </ul>
@@ -324,7 +321,7 @@
                    <button type="submit" class="btn1">수정</button>
                     </form>
                    <button type="button" class="btn1" onclick="deleleteCinema();">삭제</button>
-                   <button  type="button" class="btn1" onclick="check();">닫기</button>
+                   <button  type="button" class="btn1" onclick="history.back()">닫기</button>
                 </div>
                 </div>
                 </div>
@@ -334,9 +331,8 @@
                
                 
               
-                function dele(){
-                	console.log('asas');
-                	location.href = '${ path }/dele.cm?theaterNo=${theater.theaterNo}';
+                function deleleteCinema(){
+                	location.href = '${ path }/deleteCinema.cm?theaterNo=${theater.theaterNo}';
                 }
                 
                 function check(){
@@ -347,7 +343,7 @@
                 
           
         </div>
-
+	
 
 
 

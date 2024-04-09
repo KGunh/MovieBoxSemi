@@ -254,7 +254,7 @@
 	                    </div>
 	                    
 	                    <div class="detail-content-box">
-	                        <form action="%{ path }/update.notice" method="post" id="insert-box">
+	                        <form action="${ path }/update.notice" method="post" id="insert-box">
 	                        
 	                        <input type="hidden" name="noticeNo" value="${ notice.noticeNo }" />
 	                            
