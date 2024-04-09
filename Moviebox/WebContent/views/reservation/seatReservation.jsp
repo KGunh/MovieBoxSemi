@@ -47,27 +47,17 @@
 		                    <button class="people-teen ageBtn" style="cursor: auto;">청소년</button>
 		                </div>
 		                <div id="selectPerson">
-		                    <button class="people-Count teenBtn">1</button>
-		                    <button class="people-Count teenBtn">2</button>
-		                    <button class="people-Count teenBtn">3</button>
-		                    <button class="people-Count teenBtn">4</button>
-		                    <button class="people-Count teenBtn">5</button>
-		                    <button class="people-Count teenBtn">6</button>
-		                    <button class="people-Count teenBtn">7</button>
-		                    <button class="people-Count teenBtn">8</button>
+							<c:forEach var="i" begin="1" end="8">
+		                    	<button class="people-Count teenBtn">${ i }</button>
+		                    </c:forEach>
 		                </div>
 		                <div class="selectAge">
 		                    <button class="people-adult ageBtn" style="cursor: auto;">성인</button>
 		                </div>
 		                <div id="selectPerson">
-		                    <button class="people-Count adultBtn">1</button>
-		                    <button class="people-Count adultBtn">2</button>
-		                    <button class="people-Count adultBtn">3</button>
-		                    <button class="people-Count adultBtn">4</button>
-		                    <button class="people-Count adultBtn">5</button>
-		                    <button class="people-Count adultBtn">6</button>
-		                    <button class="people-Count adultBtn">7</button>
-		                    <button class="people-Count adultBtn">8</button>
+		               		<c:forEach var="i" begin="1" end="8">
+		                    	<button class="people-Count adultBtn">${ i }</button>
+		                    </c:forEach>
 		                </div>
 		            </div>
 		            <div id="select-people"></div>

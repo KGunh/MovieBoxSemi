@@ -33,8 +33,7 @@ function init(){
     
     $('#movie-select>div').css('text-align', 'center');
     $('#reservation-info>div>div').last().css('margin-top', '50px');
-}
-
+};
 
 $('.people-Count').on('click', function() {
     let ageType = $(this).parent().prev().children().eq(0);
@@ -167,12 +166,8 @@ function arrangeSeat(){
         let strA = a.match(/[A-F]/);
         let strB = b.match(/[A-F]/);
         
-        if (strA < strB) {
-            return -1;
-        } 
-        else if (strA > strB) {
-            return 1;
-        };
+        if (strA < strB) return -1;
+        else if (strA > strB) return 1;
         
         let numA = parseInt(a.match(/\d+/));
         let numB = parseInt(b.match(/\d+/));

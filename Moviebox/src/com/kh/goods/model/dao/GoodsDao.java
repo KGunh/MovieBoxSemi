@@ -50,7 +50,7 @@ public class GoodsDao {
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
+		System.out.println(goodsList);
 		return goodsList;
 	}
 
