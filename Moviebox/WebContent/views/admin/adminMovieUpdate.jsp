@@ -2,6 +2,8 @@
     pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList, com.kh.common.model.vo.Genre, com.kh.common.model.vo.PageInfo, com.kh.movie.model.vo.Movie" %>    
 
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+
 <%
 	Movie m =(Movie) request.getAttribute("movie");
 	String cast = (String) request.getAttribute("cast");
@@ -457,25 +459,25 @@
             <div class="content_1">
                 <ul class="menu">
                     <li>
-                        <a href="<%=contextPath %>/selectAdmin.mb">회원 관리</a>
+                        <a href="${path}/selectAdmin.mb">회원 관리</a>
                         <ul class="submenu">
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminScreenList.admin">예매 관리</a>
+                        <a href="${path}/adminScreenList.admin">예매 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminMovieCheck.admin?currentPage=1">영화 관리</a>
+                        <a href="${path}/adminMovieCheck.admin?currentPage=1">영화 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath%>/checkAdmin.cm">영화관 관리</a>
+                        <a href="${path}/checkAdmin.cm">영화관 관리</a>
                         <ul class="submenu">
 
                         </ul>
@@ -483,8 +485,8 @@
                     <li class="post">
                         <a href="#">게시글 관리</a>
                         <ul class="submenu">
-                        <li><a href="<%=contextPath %>/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
-                        <li><a href="<%=contextPath %>/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
+                        <li><a href="${path}/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
+                        <li><a href="${path}/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
                         </ul>
                     </li>
                 </ul>    
@@ -496,9 +498,9 @@
                 <p id="p">영화 관리 > 영화 등록</p>
 			<!-- /adminMovieInsert.admin 이름을 가진 서블릿으로 폼 데이터를 post방식으로 전달,
 					 파일업로드가 있기 때문에 enctype="multipart/form-data"로 전달 -->
-			<form action="<%= contextPath %>/adminMovieUpdate.admin" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
+			<form action="${path}/adminMovieUpdate.admin" method="post" enctype="multipart/form-data" onsubmit="return validateForm();">
 			
-				<input type="hidden" name="movieNo" value="<%= m.getMovieNo()%>" />
+				<input type="hidden" name="movieNo" value="${movie.movieNo}" />
 			    <div id="content_2_box"><!--컨텐트2 전체박스-->
 			        <div id="box_1">
 			            <div class="title-file">파일첨부</div>
@@ -527,26 +529,31 @@
 			
 			            
 			            <div id="sub_2">
-			                <input type="text" name="title" id="movieTitle" placeholder="영화 제목을 입력해 주세요." value="<%=m.getMovieTitle()%>"> <!-- 영화제목 = name="title" 로 전달!  -->
+			                <input type="text" name="title" id="movieTitle" placeholder="영화 제목을 입력해 주세요." value="${movie.movieTitle}"> <!-- 영화제목 = name="title" 로 전달!  -->
 			            </div>
 									
 						<!--장르카테고리-->
 			            <div id="sub_3">
 						    <select name="genre" id="select_1">
-						        <% for(Genre g : genrelist) { %>
-						            <option value="<%= g.getGenreCode()%>" <% if (m.getGenreNo().equals(g.getGenreCode())) { %> selected <% } %>>
-						                <%= g.getGenreName() %>
+						    	<c:forEach var="g" items="${ requestScope.genreList }">
+						            <option value="${g.genreCode}">
+						            <c:choose>
+						            	<c:when test="${movie.genreNo eq g.genreCode}"> 
+						            	selected 
+						            	</c:when>
+						            </c:choose>
+						            	${ g.genreName }
 						            </option>
-						        <% } %>
+						        </c:forEach>
 						    </select>
 			            </div>
 			
 			            <div id="sub_4">
-			                <input type="text" name="running_time" id="runningTime" placeholder="러닝타임을 입력해 주세요.(ex - 120)" value="<%=m.getMovieRt()%>">
+			                <input type="text" name="running_time" id="runningTime" placeholder="러닝타임을 입력해 주세요.(ex - 120)" value="${movie.movieRt}">
 			            </div>
 			
 			            <div id="sub_5">
-			                <input type="text" name="rated" id="rating" placeholder="관람 등급을 입력해 주세요.(ex - 12세)" value="<%=m.getMovieRated()%>">
+			                <input type="text" name="rated" id="rating" placeholder="관람 등급을 입력해 주세요.(ex - 12세)" value="${movie.movieRated}">
 			            </div>
 			
 			            <div id="sub_6">
@@ -554,24 +561,24 @@
 			            </div>
 			
 			            <div id="sub_7">
-			                <input type="text" name="director_name" id="director_name" placeholder="감독을 입력해 주세요.(ex - 호빵맨, 식빵맨 )" value="<%=m.getDirectorName()%>">
+			                <input type="text" name="director_name" id="director_name" placeholder="감독을 입력해 주세요.(ex - 호빵맨, 식빵맨 )" value="${movie.directorName}">
 			            </div>
 			
 			            <div id="sub_8">
-			                <input type="text" name="actors" id="cast" placeholder="출연진을 입력해 주세요.(ex - 잉어빵, 붕어빵 )" value="<%=cast%>">
+			                <input type="text" name="actors" id="cast" placeholder="출연진을 입력해 주세요.(ex - 잉어빵, 붕어빵 )" value="${cast}">
 			            </div>
 			
 			            <div id="sub_9">
-			                <textarea name="story" id="plot" cols="30" rows="10" placeholder="줄거리를 입력해 주세요."><%=m.getMovieStory()%></textarea>
+			                <textarea name="story" id="plot" cols="30" rows="10" placeholder="줄거리를 입력해 주세요.">${movie.movieStory}</textarea>
 			            </div>
 			            
 			            <div id="sub_11">
-			                <input type="text" name="trailer" id="trailer" placeholder="예고편 영상 링크를 입력해 주세요." value="<%=m.getTrailerVideo()%>">
+			                <input type="text" name="trailer" id="trailer" placeholder="예고편 영상 링크를 입력해 주세요." value="${movie.trailerVideo}">
 			            </div>
 			
 			            <div id="sub_10"><!--수정 버튼-->
 			                <input type="submit" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right;" value="등록">
-			            	<button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;" onclick="location.href='<%=contextPath%>/adminMovieCheck.admin?currentPage=1'">목록</button>
+			            	<button type="button" class="btn btn-warning" style="height: 30px; font-size: 12px; background-color: #FFC145; float: right; margin-right: 5px;" onclick="location.href='${path}/adminMovieCheck.admin?currentPage=1'">목록</button>
 			            </div><!--수정 버튼-->
 			            
 			           
@@ -585,8 +592,8 @@
     </div>
 
 
-	 <%@ include file="/views/common/footer.jsp" %>
- 	 <!-- 푸터 -->
+    	<jsp:include page="/views/common/footer.jsp"></jsp:include>
+ 		<!-- 푸터 -->
  	 
  	 
  	<script>

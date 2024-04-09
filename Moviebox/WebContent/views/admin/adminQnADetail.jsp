@@ -1,9 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8" import = "com.kh.board.model.vo.Board"
 %>
+
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> 
+
 <%
 	Board b =(Board)request.getAttribute("qna");
 %>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -285,7 +290,7 @@
 </head>
 <body>
 	<!-- 헤더 -->
-    <%@ include file="/views/common/header.jsp" %>
+ <jsp:include page="/views/common/header.jsp"></jsp:include>
     <div id="wrap">
 
         <div id="top_wrap">
@@ -299,25 +304,25 @@
             <div class="content_1">
                 <ul class="menu">
                     <li>
-                        <a href="<%=contextPath %>/selectAdmin.mb">회원 관리</a>
+                        <a href="${path}/selectAdmin.mb">회원 관리</a>
                         <ul class="submenu">
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminScreenList.admin">예매 관리</a>
+                        <a href="${path}/adminScreenList.admin">예매 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminMovieCheck.admin?currentPage=1">영화 관리</a>
+                        <a href="${path}/adminMovieCheck.admin?currentPage=1">영화 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath%>/checkAdmin.cm">영화관 관리</a>
+                        <a href="${path}/checkAdmin.cm">영화관 관리</a>
                         <ul class="submenu">
 
                         </ul>
@@ -325,8 +330,8 @@
                     <li class="post">
                         <a href="#">게시글 관리</a>
                         <ul class="submenu">
-                        <li><a href="<%=contextPath %>/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
-                        <li><a href="<%=contextPath %>/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
+                        <li><a href="${path}/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
+                        <li><a href="${path}/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
                         </ul>
                     </li>
                 </ul>    
@@ -343,7 +348,7 @@
 
                         <div id="box_category">
                             <select name="#" id="category" >
- 								<option value=""><%=b.getBoardCategory() %></option>
+ 								<option value="">${qna.boardCategory}</option>
                             </select>
                         </div>
 
@@ -352,7 +357,7 @@
                         </div>
 
                         <div id="box_2">
-                            <input type="text" class="form-control" name="title" style="border-radius: 8px;" value="<%=b.getBoardTitle() %>" readonly >
+                            <input type="text" class="form-control" name="title" style="border-radius: 8px;" value="${qna.boardTitle}" readonly >
                         </div>
 
                         <div id="box_1">
@@ -360,7 +365,7 @@
                         </div>
 
                         <div id="box_3">
-                            <textarea class="form-control" rows="5" name="content" style="resize:none; height: 250px; border-radius: 8px;" readonly ><%=b.getBoardContent()%></textarea>
+                            <textarea class="form-control" rows="5" name="content" style="resize:none; height: 250px; border-radius: 8px;" readonly >${qna.boardContent}</textarea>
                         </div>
 
                         
@@ -380,7 +385,8 @@
         </div>
 
     </div>
- 	<%@ include file="/views/common/footer.jsp" %>
+    
+ 	<jsp:include page="/views/common/footer.jsp"></jsp:include>
  	<!-- 푸터 -->
  	
  	
@@ -391,7 +397,7 @@
 			const result = confirm('삭제하려면 확인을 눌러주세요.');
 			
 			if(result) {
-				location.href = '<%=contextPath %>/adminQnADelete.admin?boardNo=<%=b.getBoardNo()%>';	
+				location.href = '${path}/adminQnADelete.admin?boardNo=${qna.boardNo}';	
 			}
 			
 		}
