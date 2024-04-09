@@ -390,8 +390,6 @@
                     
                     <script>
                     	function enrollment(){
-                    		console.log('${ path}/insertAdmin.cm');
-                    		
                     		location.href = '${ path}/insertAdmin.cm';
                     	}
                     

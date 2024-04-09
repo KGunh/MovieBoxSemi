@@ -37,8 +37,6 @@ public class CinemaAdminContorller {
 		int theaterNo = Integer.parseInt(request.getParameter("theaterNo"));
 		
 		Theater theater = new MemberAdminService().cinemaEdit(theaterNo);
-		request.setAttribute("theater", theater);
-		System.out.println(theater);
 		String view = "/views/admin/CinemaEdit.jsp";
 		
 		return view;
@@ -130,6 +128,7 @@ public class CinemaAdminContorller {
 		
 		if(result > 0) {
 			HttpSession session = request.getSession();
+			request.setAttribute("theater", theater);
 			session.setAttribute("alertMsg", "정보수정이 완료되었습니다");
 			
 		}else {
