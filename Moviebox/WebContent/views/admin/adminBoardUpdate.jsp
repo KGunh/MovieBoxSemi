@@ -172,6 +172,7 @@
             margin-bottom: 30px;
             font-size: x-large;
             font-weight: bold;
+            color: #ffffff;
             
         }  
 
@@ -252,7 +253,7 @@
             font-size: 18px;
             font-weight: bold;
             line-height: 50px;
-            color: #5a5a5a;
+            color: #ffffff;
         }
 
         #button{
@@ -278,8 +279,9 @@
     </style>
 </head>
 <body>
+
 	<!-- 헤더 -->
-    <%@ include file="/views/common/header.jsp" %>
+	<jsp:include page="/views/common/header.jsp"></jsp:include>
     
     <div id="wrap">
 
@@ -294,25 +296,25 @@
             <div class="content_1">
                 <ul class="menu">
                     <li>
-                        <a href="<%=contextPath %>/selectAdmin.mb">회원 관리</a>
+                        <a href="${path} /selectAdmin.mb">회원 관리</a>
                         <ul class="submenu">
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminScreenList.admin">예매 관리</a>
+                        <a href="${path}/adminScreenList.admin">예매 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath %>/adminMovieCheck.admin?currentPage=1">영화 관리</a>
+                        <a href="${path}/adminMovieCheck.admin?currentPage=1">영화 관리</a>
                         <ul class="submenu" >
 
                         </ul>
                     </li>
                     <li>
-                        <a href="<%=contextPath%>/checkAdmin.cm">영화관 관리</a>
+                        <a href="${path}/checkAdmin.cm">영화관 관리</a>
                         <ul class="submenu">
 
                         </ul>
@@ -320,8 +322,8 @@
                     <li class="post">
                         <a href="#">게시글 관리</a>
                         <ul class="submenu">
-                        <li><a href="<%=contextPath %>/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
-                        <li><a href="<%=contextPath %>/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
+                        <li><a href="${path}/adminBoardCheck.admin?currentPage=1">공지 관리</a></li>
+                        <li><a href="${path}/adminQnACheck.admin?currentPage=1">문의 게시글 관리</a></li>
                         </ul>
                     </li>
                 </ul>    
@@ -330,10 +332,10 @@
             <!------------------------------------------------------------>
 			
             <div class="content_2"><!--content_2 시작-->
-                <p id="p">게시글관리 > 공지 관리 > 공지 상세수정</p>
+                <p id="p">게시글관리 > 공지수정</p>
 
-            		<form action="<%=contextPath %>/adminBoardUpdate.admin" method="post" id="insert-box">
-            			<input type="hidden" name="noticeNo" value="<%= n.getNoticeNo()%>" />
+            		<form action="${path}/adminBoardUpdate.admin" method="post" id="insert-box">
+            			<input type="hidden" name="noticeNo" value="${notice.noticeNo}" />
             			
 		            	<div id="content_2_box"><!--컨텐트2 전체박스-->
 			                <div id="box_wrap">
@@ -352,7 +354,7 @@
 			                    </div>
 			
 			                    <div id="box_2">
-			                        <input type="text" class="form-control" name="title" style="border-radius: 8px;" value="<%=n.getNoticeTitle() %>" >
+			                        <input type="text" class="form-control" name="title" style="border-radius: 8px;" value="${notice.noticeTitle}" >
 			                    </div>
 			
 			                    <div id="box_1">
@@ -360,7 +362,7 @@
 			                    </div>
 			
 			                    <div id="box_3">
-			                        <textarea class="form-control" rows="5" name="content" style="resize:none; height: 250px; border-radius: 8px;"><%=n.getNoticeContent()%></textarea>
+			                        <textarea class="form-control" rows="5" name="content" style="resize:none; height: 250px; border-radius: 8px;">${notice.noticeContent}</textarea>
 			                    </div>
 			
 			                    <div id="button"><!--수정 버튼-->
@@ -376,13 +378,13 @@
         </div>
 
     </div>
- 	<%@ include file="/views/common/footer.jsp" %>
+    <jsp:include page="/views/common/footer.jsp"></jsp:include>
  	<!-- 푸터 -->
  	
  	<script>
 
  		window.onload = function() {
- 		    var categoryValue = <%=n.getCategoryNo()%> // JSP로부터 category 값을 받아옴
+ 		    var categoryValue = ${notice.categoryNo} // JSP로부터 category 값을 받아옴
 
  		    // 받아온 category 값에 해당하는 option을 선택
  		    $('#category').val(categoryValue);
@@ -392,7 +394,7 @@
  			const result = confirm('삭제하려면 확인을 눌러주세요.');
  			
  			if(result) {
- 				location.href = '<%=contextPath %>/adminBoardDelete.admin?noticeNo=<%=n.getNoticeNo()%>';	
+ 				location.href = '${path}/adminBoardDelete.admin?noticeNo=${notice.noticeNo}';	
  			}
  			
  		}
