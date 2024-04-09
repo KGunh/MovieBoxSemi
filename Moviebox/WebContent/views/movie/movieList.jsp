@@ -289,7 +289,15 @@
 		});
 		
     	// 검색
-    	$('#movie-list-search').
+    	$(document).ready(function(){
+    		$("#movie-list-search").keyup(function(){
+    			var k = $(this).val();
+    			$("#movie-content-body").hide();
+    			var temp = $("#movie-content-body:contains('" + k + "')");
+    			$(temp).show();
+    		});
+    		
+    	});
     	
 
 
