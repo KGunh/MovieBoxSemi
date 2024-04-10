@@ -190,6 +190,7 @@ $('#print-resv-info').click(function(){
             if(!(selectSeat.length == 0) && selectPeople == 0){
                 
                 let selectSeats = selectSeat.join(', ');
+                
                 let MovieItems = [
                     result.movieTitle,
                     result.movie.movieRelease,

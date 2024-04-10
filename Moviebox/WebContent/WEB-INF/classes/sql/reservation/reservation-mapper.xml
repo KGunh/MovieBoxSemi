@@ -123,12 +123,12 @@
 		  INTO 
 		       TB_RESERVATION
 		       (
-		       TICKET_NO,
-		       PERSONNEL,
-		       MEMBER_NO,
-		       SCREEN_NO,
-		       STATUS,
-		       RESERVATION_DATE
+		        TICKET_NO,
+		        PERSONNEL,
+		        MEMBER_NO,
+		        SCREEN_NO,
+		        STATUS,
+		        RESERVATION_DATE
 		       ) 
 		VALUES 
 		       (
