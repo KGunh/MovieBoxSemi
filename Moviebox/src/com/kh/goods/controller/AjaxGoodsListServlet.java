@@ -7,19 +7,21 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import com.google.gson.Gson;
+import com.kh.common.model.vo.Reservation;
 import com.kh.reservation.controller.ReservationController;
 
 /**
- * Servlet implementation class goodsServlet
+ * Servlet implementation class goodsListAjax
  */
-@WebServlet("*.goods")
-public class GoodsServlet extends HttpServlet {
+@WebServlet("/list.goodsAjax")
+public class AjaxGoodsListServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
        
     /**
      * @see HttpServlet#HttpServlet()
      */
-    public GoodsServlet() {
+    public AjaxGoodsListServlet() {
         super();
         // TODO Auto-generated constructor stub
     }
@@ -28,27 +30,11 @@ public class GoodsServlet extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		request.setCharacterEncoding("UTF-8");
+		Reservation reservation = new ReservationController().printReservationInfo(request);
+        
+        response.setContentType("application/json; charset=UTF-8");
 		
-		String uri = request.getRequestURI();
-		String mapping = uri.substring(uri.lastIndexOf("/") + 1 , uri.lastIndexOf("."));
-		GoodsController gc = new GoodsController(); 
-		
-		String view = "";
-		
-		boolean flag = false;
-		
-		switch(mapping) {
-			case "list" : view = gc.selectGoodsList(request); break; 
-			case "detail" : break;
-		}
-		
-		if(flag) {
-			response.sendRedirect(view);
-		} else {
-			request.getRequestDispatcher(view).forward(request, response);
-		}
-	
+		new Gson().toJson(reservation, response.getWriter());
 	}
 
 	/**
