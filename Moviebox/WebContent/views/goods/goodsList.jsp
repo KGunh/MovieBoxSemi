@@ -367,8 +367,8 @@
                 success: function(pi) {
                     $('.paging-area').html(pi);
                 },
-                error: function(xhr, status, error) {
-                    console.error('Failed to fetch data:', error);
+                error: function() {
+
                 }
             });
         };

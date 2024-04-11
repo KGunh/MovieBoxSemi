@@ -49,8 +49,6 @@
 	            MEMBER_PWD = ?
 	        AND
 	            STATUS = 'Y'
-	
-	
 	</entry>
 	
 	
