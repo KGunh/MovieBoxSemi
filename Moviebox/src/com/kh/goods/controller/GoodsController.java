@@ -11,7 +11,7 @@ import com.kh.goods.model.vo.Goods;
 public class GoodsController {
 
 	public String selectGoodsList(HttpServletRequest request) {
-		
+		// 시작부터 ajax로 전부 바꿔야함
 		int listCount; // 현재 일반게시판의 게시글 총 개수 => BOARD테이블로부터 COUNT(*)활용해서 조회
 		int currentPage; // 현재 페이지(사용자가 요청한 페이지)=> request.getParameter("currentPage")
 		int pageLimit; // 페이지 하단에 보여질 페이징바의 최대 개수 => 10개로 고정

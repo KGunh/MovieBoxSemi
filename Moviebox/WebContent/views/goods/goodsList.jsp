@@ -336,12 +336,12 @@
    
     <div class="paging-area" align="center">
         <c:if test="${pageInfo.currentPage > 1}">
-            <button class="btn btn-outline-danger" style="color:#ff52a0;" onclick="goToPage(${pageInfo.currentPage - 1})">이전</button>
+            <button class="btn btn-outline-danger" style="color:rgb(255, 193, 69);" onclick="goToPage(${pageInfo.currentPage - 1})">이전</button>
         </c:if>
         <c:forEach var="i" begin="${pageInfo.startPage}" end="${pageInfo.endPage}">
             <c:choose>
                 <c:when test="${pageInfo.currentPage != i}">
-                    <button class="btn btn-outline-danger" style="color:#ff52a0;" onclick="goToPage(${i})">${i}</button>
+                    <button class="btn btn-outline-danger" style="color:rgb(255, 193, 69);" onclick="goToPage(${i})">${i}</button>
                 </c:when>
                 <c:otherwise>
                     <button disabled class="btn btn-danger">${i}</button>
@@ -349,7 +349,7 @@
             </c:choose>
         </c:forEach>
         <c:if test="${pageInfo.currentPage != maxPage}">
-            <button class="btn btn-outline-danger" style="color:#ff52a0;" onclick="goToPage(${pageInfo.currentPage + 1})">다음</button>
+            <button class="btn btn-outline-danger" style="color:rgb(255, 193, 69);" onclick="goToPage(${pageInfo.currentPage + 1})">다음</button>
         </c:if>
     </div>
 	
