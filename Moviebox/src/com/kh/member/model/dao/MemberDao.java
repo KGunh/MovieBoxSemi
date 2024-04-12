@@ -1,7 +1,6 @@
 package com.kh.member.model.dao;
 
 import static com.kh.common.JDBCTemplate.close;
-import static com.kh.common.JDBCTemplate.getConnection;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -13,7 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
-import javax.naming.spi.DirStateFactory.Result;
+import org.apache.ibatis.session.SqlSession;
 
 import com.kh.board.model.vo.Answer;
 import com.kh.board.model.vo.Board;
@@ -42,126 +41,24 @@ public class MemberDao {
 		}
 	}
 	//로그인기능
-	public Member login(Connection conn, Member member) {
+	public Member login(SqlSession sqlSession, Member member) {
 		
-		Member m = null;
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("login");
-		try {
-			pstmt = conn.prepareStatement(sql);
-
-			pstmt.setString(1, member.getMemberId());
-			pstmt.setString(2, member.getMemberPwd());
-			
-			rset = pstmt.executeQuery();
-			
-			if(rset.next()) {
-				
-				
-				m = new Member(rset.getInt("MEMBER_NO"),
-										 rset.getString("MEMBER_ID"),
-										 rset.getString("MEMBER_PWD"),
-										 rset.getString("MEMBER_NAME"),
-										 rset.getString("BIRTHDAY"),
-										 rset.getString("GENDER"),
-										 rset.getString("EMAIL"),
-										 rset.getString("PHONE"),
-										 rset.getString("ADDRESS"),
-										 rset.getDate("ENROLL_DATE"),
-										 rset.getString("STATUS"),
-										 rset.getString("PRIVILEGE"),
-										 rset.getString("LOCATION_NAME"));
-								
-			}
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		return m;
+		return sqlSession.selectOne("memberMapper.login",member);
 		
 	}
 	// 로그인 장르
-	public ArrayList<MemberGenre> loginGenre(Connection conn,Member m){
-		ArrayList<MemberGenre> list = new ArrayList();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
+	public List<MemberGenre> loginGenre(SqlSession sqlSession,Member member){
 		
-		String sql = prop.getProperty("loginGenre");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, m.getMemberId());
-			pstmt.setString(2, m.getMemberPwd());
-			
-			rset = pstmt.executeQuery();
-			
-			
-			while(rset.next()) {
-				MemberGenre mg = new MemberGenre();
-				
-				mg.setGenreCode(rset.getString("GENRE_NAME"));
-				
-				list.add(mg);
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-		
-		
-		
-		
-		return list; 
+		return sqlSession.selectList("memberMapper.loginGenre", member);
 	}
 
-	public int memberInsert(Connection conn, Member m) {
-		int result = 0;
-		PreparedStatement pstmt = null;
-		String sql = prop.getProperty("memberInsert");
-		try {
-			pstmt = conn.prepareStatement(sql);		
-			pstmt.setString(1, m.getMemberId());
-			pstmt.setString(2, m.getMemberPwd());
-			pstmt.setString(3, m.getMemberName());
-			pstmt.setString(4, m.getBirthday());
-			pstmt.setString(5, m.getGender());
-			pstmt.setString(6, m.getEmail());
-			pstmt.setString(7, m.getPhone());
-			pstmt.setString(8, m.getAddress());
-			pstmt.setString(9, m.getLocalCode());	
-			result = pstmt.executeUpdate();	
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(pstmt);
-		}
-		return result;
+	public int memberInsert(SqlSession sqlSession,Member member) {
+		return sqlSession.insert("memberMapper.memberInsert", member);
 	}
 
-	public int genreInsert(Connection conn, Genre g) {
+	public int genreInsert(SqlSession sqlSession, Genre genre) {
 		
-		int result = 0;
-		PreparedStatement pstmt = null;
-		
-		String sql = prop.getProperty("genreInsert");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setString(1, g.getGenreName());
-			
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		return result;
+		return sqlSession.insert("memberMapper.genreInsert", genre);
 	}
 	
 	public List<Reservation> myPagePrint(Connection conn, Member loginUser) {
