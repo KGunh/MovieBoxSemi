@@ -14,16 +14,21 @@
 	<!-- 
 		settings : MyBatis를 구동 시 선언할 설정들을 작성하는 영역
 	 -->
-	 <settings>
+	<settings>
 	 	<!-- 만약에 null로 값이 전달되었다면 빈 칸이 아닌NULL로 인식하겠다.(무조건 대문자 NULL로 작성해야함!!) -->
-	 	<setting name="jdbcTypeForNull" value="NULL" />
-	 </settings>
+		<setting name="jdbcTypeForNull" value="NULL" />
+	</settings>
 	
 	<!-- typeAliases : VO/DTO클래스들의 풀클래스명을 단순한 별칭으로 사용하기 위해 등록할 수 있는 영역 -->
 	<typeAliases>
-		
+		<typeAlias type="com.kh.common.model.vo.Reservation" alias="reservation"/>
+		<typeAlias type="com.kh.common.model.vo.Location" alias="location" />
+		<typeAlias type="com.kh.theater.model.vo.Screen" alias="screen" />
+		<typeAlias type="com.kh.reservation.model.vo.Seat" alias="seat" />
+		<typeAlias type="com.kh.common.model.vo.Price" alias="price" />
+		<typeAlias type="com.kh.movie.model.vo.Movie" alias="movie" />
 	</typeAliases>
-
+	
 	<!-- 
 		environments : MyBatis에서 연동할 DB정보들을 등록하는 영역(여러 개의 DB정보를 등록가능)
 		=> default속성으로 여러개의 id중 어떤 DB를 기본 DB로 사용할건지 꼭 지정을 해줘야함!!
@@ -62,7 +67,9 @@
 
 	<!-- mappers : 실행할 SQL문을 기록해둔 mapper파일을 등록하는 영역 -->
 	<mappers>
+		<mapper resource="/resources/mapper/reservation-mapper.xml" />
 		<mapper resource="/resources/mapper/member-mapper.xml" />
+		<mapper resource="/resources/mapper/movie-mapper.xml" />
 	</mappers>
 
 

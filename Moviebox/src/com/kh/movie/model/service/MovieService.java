@@ -7,18 +7,23 @@ import java.sql.Connection;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
+import com.kh.common.Template;
 import com.kh.common.model.vo.Attachment;
 import com.kh.movie.model.dao.MovieDao;
 import com.kh.movie.model.vo.Movie;
 
 public class MovieService {
 
+	private MovieDao movieDao = new MovieDao();
+	
 	public List<Movie> selectMovieList() {
-		Connection conn = getConnection();
+		SqlSession sqlSession = Template.getSqlSession();
 		
-		List<Movie> movieList = new MovieDao().selectMovieList(conn);
+		List<Movie> movieList = movieDao.selectMovieList(sqlSession);
 		
-		close(conn);
+		sqlSession.close();
 		
 		return movieList;
 	}

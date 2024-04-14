@@ -22,6 +22,8 @@ public class Reservation {
 	private Movie movie;
 	private String screenName;
 	private boolean beforeCurrent;
+	private int teenPersonNo;
+	private int adultPersonNo;
 	
 	public Reservation() {
 		super();
@@ -35,8 +37,18 @@ public class Reservation {
 		this.status = status;
 	}
 	
-	
-	
+	public int getTeenPersonNo() {
+		return teenPersonNo;
+	}
+	public void setTeenPersonNo(int teenPersonNo) {
+		this.teenPersonNo = teenPersonNo;
+	}
+	public int getAdultPersonNo() {
+		return adultPersonNo;
+	}
+	public void setAdultPersonNo(int adultPersonNo) {
+		this.adultPersonNo = adultPersonNo;
+	}
 	public boolean isBeforeCurrent() {
 		return beforeCurrent;
 	}
