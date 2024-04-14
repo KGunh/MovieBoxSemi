@@ -7,7 +7,6 @@ import java.util.List;
 import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
 
 import com.kh.common.model.vo.Reservation;
 import com.kh.movie.model.service.MovieService;
@@ -29,20 +28,26 @@ public class ReservationController {
 		String screenLocation = request.getParameter("location");
 		String theaterName = request.getParameter("theaterName");
 		String screenDate = "";
-		int movieNo = 0;
+		String movieNo = "";
 		
 		if(dateStr.length >= 3) {
 			screenDate = dateStr[0].substring(2) + "/" + dateStr[1] + "/" + dateStr[2];
 		}
 		
 		if(!request.getParameter("movieNo").equals("")) {
-			movieNo = Integer.parseInt(request.getParameter("movieNo"));
+			movieNo = request.getParameter("movieNo");
 		}
-		
 
 		if(screenLocation.equals("전체")) screenLocation = "";
 		
-		List<Screen> list = new ReservationService().selectScreen(screenDate, screenLocation, movieNo, theaterName); 
+		HashMap<String,String> map = new HashMap<String, String>();
+		
+		map.put("screenDate", screenDate);
+		map.put("screenLocation", screenLocation);
+		map.put("movieNo", movieNo);
+		map.put("theaterName", theaterName);
+		
+		List<Screen> list = new ReservationService().selectScreen(map); 
 
 		Set<Screen> set = new LinkedHashSet<>();
 
@@ -119,35 +124,41 @@ public class ReservationController {
 	}
 
 	public Reservation printReservationInfo(HttpServletRequest request) {
-		int screenNo = Integer.parseInt(request.getParameter("screenNo"));
-		int adultAge = Integer.parseInt(request.getParameter("adultAge"));
+		HashMap<String, Integer> map = new HashMap<String, Integer>(); 
 		
-		int movieNo = 0;
 		if(request.getParameter("movieNo") != "") {
-			movieNo = Integer.parseInt(request.getParameter("movieNo"));
+			map.put("movieNo", Integer.parseInt(request.getParameter("movieNo")));
 		}
+
+		map.put("screenNo", Integer.parseInt(request.getParameter("screenNo")));
+		map.put("adultAge", Integer.parseInt(request.getParameter("adultAge")));
+		map.put("teenAge", Integer.parseInt(request.getParameter("teenAge")));
 		
-		int teenAge = Integer.parseInt(request.getParameter("teenAge"));
-		
-		return new ReservationService().printReservationInfo(screenNo, movieNo, teenAge, adultAge); 
+		return new ReservationService().printReservationInfo(map); 
 	}
 
 	public String insertReservation(HttpServletRequest request) {
 		List<Seat> seatList = new ArrayList<Seat>();
 		Reservation reservation = new Reservation();
 		
+		String seatNo = request.getParameter("seatNo");
+		String[] seatArray = seatNo.split(", ");
+		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+		int adultPersonNo = 0;
+		int teenPersonNo = 0;
 		int screenNo = 0;
 		int movieNo = 0;
+
+		if(request.getParameter("adult") != "") adultPersonNo = Integer.parseInt(request.getParameter("adult"));
+		
+		if(request.getParameter("teen") != "") teenPersonNo = Integer.parseInt(request.getParameter("teen"));
+
 		if(request.getParameter("screenNo") != null && request.getParameter("movieNo")!= null) {
 			screenNo = Integer.parseInt(request.getParameter("screenNo"));
 			movieNo = Integer.parseInt(request.getParameter("movieNo"));
 		} else {
 			return "views/common/errorPage.jsp";
 		}
-		
-		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
-		String seatNo = request.getParameter("seatNo");
-		String[] seatArray = seatNo.split(", ");
 		
 		for(int i = 0; i < seatArray.length; i++) {
 			Seat seat = new Seat();
@@ -156,21 +167,18 @@ public class ReservationController {
 			
 			seatList.add(seat);
 		}
-		
+
+		reservation.setPersonNum(teenPersonNo + adultPersonNo);
+		reservation.setAdultPersonNo(adultPersonNo);
+		reservation.setTeenPersonNo(teenPersonNo);
 		reservation.setSeatList(seatList);
 		reservation.setScreenNo(screenNo);
 		reservation.setMemberNo(memberNo);
 		reservation.setMovieNo(movieNo);
 		
-		int adultPersonNo = 0;
-		if(request.getParameter("adult") != "") adultPersonNo = Integer.parseInt(request.getParameter("adult"));
-
-		int teenPersonNo = 0;
-		if(request.getParameter("teen") != "") teenPersonNo = Integer.parseInt(request.getParameter("teen"));
+		int ticketNo = new ReservationService().insertReservation(reservation);
 		
-		HashMap<String, Integer> reservationKey = new ReservationService().insertReservation(reservation, teenPersonNo, adultPersonNo);
-		
-		request.setAttribute("ticketNo", reservationKey.get("ticketNo"));
+		request.setAttribute("ticketNo", ticketNo);
 		
 		return "views/reservation/infoReservation.jsp";
 	}

@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Properties;
 
+import org.apache.ibatis.session.SqlSession;
+
 import com.kh.common.model.vo.Attachment;
 import com.kh.movie.model.vo.Movie;
 
@@ -28,46 +30,10 @@ public class MovieDao {
 			e.printStackTrace();
 		}
 	}
-
-	public List<Movie> selectMovieList(Connection conn) {
-		List<Movie> movieList = new ArrayList<Movie>();
-		PreparedStatement pstmt = null;
-		ResultSet rset = null;
-		
-		String sql = prop.getProperty("selectMovieList");
-		
-		try {
-			pstmt = conn.prepareStatement(sql);
-			rset= pstmt.executeQuery();
-			
-			while(rset.next()) {
-				Movie movie = new Movie();
+	
+	public List<Movie> selectMovieList(SqlSession sqlSession) {
 				
-				movie.setMovieRelease(rset.getString("MOVIE_RELEASE"));
-				movie.setTrailerVideo(rset.getString("TRAILER_VIDEO"));
-				movie.setMovieUpdate(rset.getString("MOVIE_UPDATE"));
-				movie.setDirectorName(rset.getString("DIRECTOR_NO"));
-				movie.setMovieTitle(rset.getString("MOVIE_TITLE"));
-				movie.setMovieRated(rset.getString("MOVIE_RATED"));
-				movie.setMovieStory(rset.getString("MOVIE_STORY"));
-				movie.setChangeName(rset.getString("CHANGE_NAME"));
-				movie.setGenreName(rset.getString("GENRE_CODE"));
-				movie.setFilePath(rset.getString("FILE_PATH"));
-				movie.setMovieRt(rset.getString("MOVIE_RT"));
-				movie.setMovieNo(rset.getInt("MOVIE_NO"));
-				movie.setStatus(rset.getString("STATUS"));
-				
-				movieList.add(movie);
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(rset);
-			close(pstmt);
-		}
-		
-		return movieList;
+		return sqlSession.selectList("movieMapper.selectMovieList");
 	}
 
 	public ArrayList<Movie> movieCategory(Connection conn, String genre) {

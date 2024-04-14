@@ -34,9 +34,6 @@ public class Screen {
 		this.watchDate = watchDate;
 		this.screenName = screenName;
 	}
-	
-	
-	
 	public List<Movie> getMovieNameList() {
 		return movieNameList;
 	}
@@ -49,7 +46,6 @@ public class Screen {
 	public void setMovieList(List<Movie> movieList) {
 		this.movieList = movieList;
 	}
-
 	public String getMovieTitle() {
 		return movieTitle;
 	}
@@ -86,7 +82,6 @@ public class Screen {
 	public void setScreenName(String screenName) {
 		this.screenName = screenName;
 	}
-	
 	public String getTheaterName() {
 		return theaterName;
 	}
@@ -99,14 +94,12 @@ public class Screen {
 	public void setMovieRt(int movieRt) {
 		this.movieRt = movieRt;
 	}
-	
 	public List<String> getWatchDateList() {
 		return watchDateList;
 	}
 	public void setWatchDateList(List<String> watchDateList) {
 		this.watchDateList = watchDateList;
 	}
-	
 	public List<Integer> getScreenNoList() {
 		return screenNoList;
 	}
