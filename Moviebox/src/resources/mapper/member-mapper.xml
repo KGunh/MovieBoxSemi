@@ -24,7 +24,13 @@
 	 	내부적으로 getter메소드 호출
 		
 	 -->
-
+	
+	<resultMap type="seat" id="seatResultSet">
+		<result column="SCREEN_NO" property="screenNo" />
+		<result column="TICKET_NO" property="ticketNo" />
+		<result column="SEAT_NO" property="seatNo" />
+	</resultMap>
+	
 	<insert id="memberInsert" parameterType="com.kh.member.model.vo.Member">
 		INSERT
   	      INTO
@@ -72,7 +78,7 @@
 	</insert>
 
 	<select id="login" parameterType="com.kh.member.model.vo.Member"
-			resultType="com.kh.member.model.vo.Member">
+				       resultType="com.kh.member.model.vo.Member">
 		SELECT
                MEMBER_NO memberNo,
                MEMBER_ID memberId,	
@@ -115,6 +121,20 @@
 	           MEMBER_PWD = #{memberPwd}
 	       AND
 	           STATUS = 'Y'
+	</select>
+	
+	<select id="seatList" parameterType="_int" resultMap="seatResultSet">
+		SELECT
+       			SEAT_NO
+ 		   FROM   
+       			TB_SEAT
+ 		  WHERE
+       			TICKET_NO = #{ticketNo}
+ 		  ORDER
+   		     BY
+       			SUBSTR(SEAT_NO, 1, 1),
+	   			CAST(SUBSTR(SEAT_NO, 2) AS NUMBER),
+       			SEAT_NO
 	</select>
 
 </mapper>

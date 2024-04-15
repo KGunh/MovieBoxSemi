@@ -19,6 +19,7 @@ import org.apache.ibatis.session.SqlSession;
 
 import com.kh.board.model.vo.Answer;
 import com.kh.board.model.vo.Board;
+import com.kh.common.Template;
 import com.kh.common.model.vo.Genre;
 import com.kh.common.model.vo.Price;
 import com.kh.common.model.vo.Reservation;
@@ -35,7 +36,6 @@ public class MemberDao {
 	
 	public MemberDao() {
 		String sqlFile = MemberDao.class.getResource("/sql/member/member-mapper.xml").getPath();
-	
 				
 		try {
 			prop.loadFromXML(new FileInputStream(sqlFile));
@@ -71,7 +71,7 @@ public class MemberDao {
 	}
 	
 	public List<Reservation> myPagePrint(Connection conn, Member loginUser) {
-		
+		SqlSession sqlSession = Template.getSqlSession();
 		List<Reservation> list = new ArrayList();
 				
 		PreparedStatement pstmt = null;
@@ -108,7 +108,7 @@ public class MemberDao {
 				price.setCommonPrice(rset.getInt("COMMON_PRICE"));
 				price.setTotalPrice(rset.getInt("TOTAL_PRICE"));
 				r.setPrice(price);
-				r.setSeatList(seatList(conn, r.getTicketNo()));
+				r.setSeatList(seatList(sqlSession, r.getTicketNo()));
 				list.add(r);
 			}
 			
@@ -124,35 +124,10 @@ public class MemberDao {
 		return list;
 		
 	}
-	public List<Seat> seatList(Connection conn, int ticketNo){
-		List<Seat> seatList = new ArrayList<>();    
-		 PreparedStatement pstmt = null;
-		 ResultSet rset = null;
-		 String sql = prop.getProperty("seatList");
-		 
-		 try {
-			pstmt = conn.prepareStatement(sql);
-			
-			pstmt.setInt(1, ticketNo);
-			
-			rset = pstmt.executeQuery();
-			
-			while(rset.next()) {
-				Seat seat = new Seat();
-				
-				seat.setSeatNo(rset.getString("SEAT_NO"));
-				
-				seatList.add(seat);
-			}
-			
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}finally {
-			close(rset);
-			close(pstmt);
-		}
-		 
-		return seatList;
+	// 마이바티스 적용
+	public List<Seat> seatList(SqlSession sqlSession, int ticketNo){
+				 
+		return sqlSession.selectList("memberMapper.seatList", ticketNo);
 	}
 	
 	public Movie myPageMoviePoster(Connection conn,Reservation res){

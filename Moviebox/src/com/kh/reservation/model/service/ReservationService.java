@@ -1,100 +1,98 @@
 package com.kh.reservation.model.service;
 
-import static com.kh.common.JDBCTemplate.*;
-
-import java.sql.Connection;
-import java.sql.SQLException;
 import java.util.HashMap;
 import java.util.List;
 
+import org.apache.ibatis.session.SqlSession;
+
+import com.kh.common.Template;
 import com.kh.common.model.vo.Location;
 import com.kh.common.model.vo.Reservation;
 import com.kh.member.model.dao.MemberDao;
-import com.kh.movie.model.vo.Movie;
 import com.kh.reservation.model.dao.ReservationDao;
 import com.kh.reservation.model.vo.Seat;
 import com.kh.theater.model.vo.Screen;
 
-import oracle.jdbc.OracleConnection.CommitOption;
-
 public class ReservationService {
 	
+	private ReservationDao reservationDao = new ReservationDao();
+	// 마이바티스 적용
 	public List<Location> selectLocationList() {
-		Connection conn = getConnection();
-	
-		List<Location> locationList =  new ReservationDao().selectLocationList(conn);
-	
-		close(conn);
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		List<Location> locationList = reservationDao.selectLocationList(sqlSession); 
+		
+		sqlSession.close();
 		
 		return locationList;
 	}
-
-	public List<Screen> selectScreen(String screenDate, String screenLocation,  int movieNo, String theaterName) {
-		Connection conn = getConnection();
+	// 마이바티스 적용
+	public List<Screen> selectScreen(HashMap<String, String> map) {
+		SqlSession sqlSession = Template.getSqlSession();
 		
-		List<Screen> screenList = new ReservationDao().selectScreen(conn, screenDate, screenLocation, movieNo, theaterName);
+		List<Screen> screenList = reservationDao.selectScreen(sqlSession, map);
 
-		close(conn);
+		sqlSession.close();
 		
 		return screenList;
 	}
-
+	// 마이바티스 적용
 	public List<Seat> selectSeatList(int screenNo) {
-		Connection conn = getConnection();
+		SqlSession sqlSession = Template.getSqlSession();
 		
-		List<Seat> seatlist = new ReservationDao().selectSeatList(conn, screenNo);
+		List<Seat> seatlist = reservationDao.selectSeatList(sqlSession, screenNo);
 		
-		close(conn);
+		sqlSession.close();
 		
 		return seatlist;
 	}
+	// 마이바티스 적용
+	public Reservation printReservationInfo(HashMap<String, Integer> map) {
+		SqlSession sqlSession = Template.getSqlSession();
+		
+		Reservation reservation = reservationDao.printReservationInfo(sqlSession, map);
 
-	public Reservation printReservationInfo(int screenNo, int movieNo, int teenAge, int adultAge) {
-		Connection conn = getConnection();
-		
-		Reservation reservation = new ReservationDao().printReservationInfo(conn, screenNo, movieNo, teenAge, adultAge);
-		
-		close(conn);
+		sqlSession.close();
 		
 		return reservation;
 	}
-
-	public HashMap<String,Integer> insertReservation(Reservation reservation, int teenPersonNo, int adultPersonNo) {
-		Connection conn = getConnection();
+	// 마이바티스 적용
+	public int insertReservation(Reservation reservation) {
+		SqlSession sqlSession = Template.getSqlSession();
 		int priceSheetResult = 0;
 		int seatResult = 0;
-	    
-		HashMap<String, Integer> reservationKey = new ReservationDao().insertReservation(conn, reservation);
-
-		if (reservationKey.get("result") > 0) {
-        	priceSheetResult = new ReservationDao().insertPriceSheet(conn, reservationKey.get("ticketNo"), teenPersonNo, adultPersonNo);
+		
+		int result = reservationDao.insertReservation(sqlSession, reservation);
+		
+		if (result > 0) {
+        	priceSheetResult = reservationDao.insertPriceSheet(sqlSession, reservation);
         }
 
         if (priceSheetResult > 0) {
-        	seatResult = new ReservationDao().insertSeat(conn, reservation, reservationKey.get("ticketNo"));
+        	seatResult = reservationDao.insertSeat(sqlSession, reservation);
         }
 
-        if (reservationKey.get("result") > 0 && priceSheetResult > 0 && seatResult > 0) {
-            commit(conn);
+        if (result > 0 && priceSheetResult > 0 && seatResult > 0) {
+            sqlSession.commit();
         } else {
-            rollback(conn);
+            sqlSession.rollback();
         }
         
-        close(conn);
+        sqlSession.close();
         
-        return reservationKey;
+        return reservation.getTicketNo();
 	}
-
+	// 마이바티스 적용
 	public Reservation checkReservationInfo(int ticketNo) {
-		Connection conn = getConnection();
+		SqlSession sqlSession = Template.getSqlSession();
 		
-		Reservation reservation = new ReservationDao().checkReservationInfo(conn, ticketNo);
+		Reservation reservation = reservationDao.checkReservationInfo(sqlSession, ticketNo);
 		
-		List<Seat> seatList = new MemberDao().seatList(conn, ticketNo);
+		List<Seat> seatList = new MemberDao().seatList(sqlSession, ticketNo);
 		
 		reservation.setSeatList(seatList);
 		
-		close(conn);
+		sqlSession.close();
 		
 		return reservation;
 	}
