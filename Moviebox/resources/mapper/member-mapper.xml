@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+  
+<mapper namespace="memberMapper">
+	
+	<insert id="memberinsert" parameterType="com/kh/member/model/vo/Member">
+		INSERT
+  	      INTO
+       		   TB_MEMBER
+       		   (
+       		   MEMBER_NO,
+       		   MEMBER_ID,
+       		   MEMBER_PWD,
+       		   MEMBER_NAME,
+       		   BIRTHDAY,
+       		   GENDER,
+       		   EMAIL,
+       		   PHONE,
+       		   ADDRESS,
+       		   LOCAL_CODE
+       		   )
+		VALUES 
+			   (
+			   SEQ_MEMNO.NEXTVAL,
+			   ?,
+			   ?,
+			   ?,
+			   ?,
+			   ?,
+			   ?,
+			   ?,
+			   ?,
+			   ?
+			   )
+	</insert>
+
+
+</mapper>

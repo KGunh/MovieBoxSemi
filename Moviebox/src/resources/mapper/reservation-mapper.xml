@@ -18,12 +18,12 @@
 	<resultMap type="screen" id="screenResultSet">
 		<result column="THEATER_NAME" property="theaterName" />
 		<result column="MOVIE_TITLE" property="movieTitle" />
-		<result column="SCREEN_NAME" property="screenName" />
-		<result column="WATCH_DATE" property="watchDate" />
 		<result column="THEATER_NO" property="theaterNo" />
-		<result column="SCREEN_NO" property="screenNo" />
 		<result column="MOVIE_NO" property="movieNo" />
 		<result column="MOVIE_RT" property="movieRt" />
+		<collection property="screenNoList" column="SCREEN_NO" />
+		<collection property="screenNameList" column="SCREEN_NAME" />
+		<collection property="watchDateList" column="WATCH_DATE" />
 	</resultMap>
 	
 	<resultMap type="reservation" id="reservationResultSet">
