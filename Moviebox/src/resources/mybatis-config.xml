@@ -27,6 +27,7 @@
 		<typeAlias type="com.kh.reservation.model.vo.Seat" alias="seat" />
 		<typeAlias type="com.kh.common.model.vo.Price" alias="price" />
 		<typeAlias type="com.kh.movie.model.vo.Movie" alias="movie" />
+		<typeAlias type="com.kh.theater.model.vo.Theater" alias="theater" />
 	</typeAliases>
 	
 	<!-- 

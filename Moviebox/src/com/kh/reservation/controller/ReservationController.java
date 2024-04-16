@@ -26,7 +26,7 @@ public class ReservationController {
 	public List<Screen> selectScreen(HttpServletRequest request) {
 		String[] dateStr = request.getParameter("date").split("-");
 		String screenLocation = request.getParameter("location");
-		String theaterName = request.getParameter("theaterName");
+		String theaterName = request.getParameter("searchTheaterName");
 		String screenDate = "";
 		String movieNo = "";
 		
@@ -48,52 +48,7 @@ public class ReservationController {
 		map.put("theaterName", theaterName);
 		
 		List<Screen> list = new ReservationService().selectScreen(map); 
-		/*
-		Set<Screen> set = new LinkedHashSet<>();
-
-		for(Screen screen : list) {
-			Screen sc = new Screen();
-			
-			sc.setTheaterName(screen.getTheaterName());
-			sc.setTheaterNo(screen.getTheaterNo());
-			sc.setMovieNo(screen.getMovieNo());
-			sc.setMovieRt(screen.getMovieRt());
-			
-            set.add(sc);
-        }
-        
-		List<Screen> screenList = new ArrayList<Screen>();
-		
-		for(Screen sc : set) {
-			Screen screen = new Screen();
-			
-			screen.setTheaterName(sc.getTheaterName());
-			screen.setTheaterNo(sc.getTheaterNo());
-			screen.setScreenNo(sc.getScreenNo());
-			screen.setMovieNo(sc.getMovieNo());
-			screen.setMovieRt(sc.getMovieRt());
-			
-			screenList.add(screen);
-		}
-		
-		for(int i = 0; i < screenList.size(); i++) {
-			List<String> screenNameList = new ArrayList<>();
-		    List<String> watchDateList = new ArrayList<>();
-		    List<Integer> screenNoList = new ArrayList<>();
-
-		    for(int j = 0; j < list.size(); j++) {
-		        if(list.get(j).getTheaterNo() == screenList.get(i).getTheaterNo()) {
-		        	screenNameList.add(list.get(j).getScreenName());
-		            watchDateList.add(list.get(j).getWatchDate());
-		            screenNoList.add(list.get(j).getScreenNo());
-		        }
-		    }
-
-		    screenList.get(i).setScreenNameList(screenNameList);
-		    screenList.get(i).setWatchDateList(watchDateList);
-		    screenList.get(i).setScreenNoList(screenNoList);
-		}
-		*/
+				
 		return list;
 	}
 
@@ -102,7 +57,7 @@ public class ReservationController {
 		request.setAttribute("movieTitle", request.getParameter("movieTitle"));
 		request.setAttribute("screenDate", request.getParameter("screenDate"));
 		request.setAttribute("screenName", request.getParameter("screenName"));
-		
+
 		if(request.getParameter("screenNo") != null && request.getParameter("movieNo") != null) {
 			request.setAttribute("screenNo", request.getParameter("screenNo"));
 			request.setAttribute("movieNo", request.getParameter("movieNo"));
@@ -185,7 +140,7 @@ public class ReservationController {
 
 	public Reservation checkReservationInfo(HttpServletRequest request) {
 		int ticketNo = Integer.parseInt(request.getParameter("ticketNo"));
-				
+
 		Reservation reservation = new ReservationService().checkReservationInfo(ticketNo);
 		
 		return reservation;

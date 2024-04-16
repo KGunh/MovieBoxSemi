@@ -1,6 +1,7 @@
 package com.kh.theater.model.vo;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.kh.movie.model.vo.Movie;
 
@@ -16,13 +17,26 @@ public class Theater {
 	private int screenNo;
 	private int movieNo;
 	private String movieTitle;
-	
+	private String movieRt;
 	private String filePath;
 	private String changeName;
 	
-	private ArrayList<Movie> movies;
+	private List<Movie> movies;
+	private List<Screen> screenList;
 	
 	
+	public String getMovieRt() {
+		return movieRt;
+	}
+	public void setMovieRt(String movieRt) {
+		this.movieRt = movieRt;
+	}
+	public List<Screen> getScreenList() {
+		return screenList;
+	}
+	public void setScreenList(List<Screen> screenList) {
+		this.screenList = screenList;
+	}
 	public String getLocationName() {
 		return locationName;
 	}
@@ -114,10 +128,10 @@ public class Theater {
 		this.localCode = localCode;
 	}
 	
-	public ArrayList<Movie> getMovies() {
+	public List<Movie> getMovies() {
 		return movies;
 	}
-	public void setMovies(ArrayList<Movie> movies) {
+	public void setMovies(List<Movie> movies) {
 		this.movies = movies;
 	}
 	

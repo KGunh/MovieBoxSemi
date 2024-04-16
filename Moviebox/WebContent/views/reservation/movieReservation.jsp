@@ -71,7 +71,7 @@
 		                    <input id="screenDate" type="date" name="screenDate">
 							<div id="theaterInputBtnArea">
 								<button id="search-theaterName" type="button"><img src="resources/img/search.PNG" alt="검색"></button>
-								<input id="input-theaterName" type="text" name="theaterName" placeholder="영화관 이름 검색">
+								<input id="input-theaterName" type="text" name="searchTheaterName" placeholder="영화관 이름 검색">
 							</div>
 		                </div>
 		            </div>

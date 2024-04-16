@@ -50,7 +50,7 @@ function selectScreenNo(e){
     $('#select-screen').children().eq(3).html($(e).children().eq(1).html());
     $('#screenNo').val(e.children[2].value);
     $('#screenName').val(e.children[3].value);
-    $('#theaterName').val($(e).parent().prev().html());
+    $('#theaterName').val($(e).parent().parent().children().eq(0).html());
 };
 
 function selectScreen(){
@@ -65,7 +65,7 @@ function selectScreen(){
         },
         success : function(result){
             let resultStr = '';
-            console.log(result);
+
             if(result.length != 0){
 
                 for(let i = 0; i < result.length; i++){
@@ -73,12 +73,12 @@ function selectScreen(){
                                +    '<div class="theaterName">' + result[i].theaterName + '</div>'
                                +        '<div class="selectScreen">';
                     
-                    for(let j = 0; j < result[i].watchDateList.length; j++){
+                    for(let j = 0; j < result[i].screenList.length; j++){
                         resultStr +=        '<div class="screenName" onclick="selectScreenNo(this);">'
-                                   +            '<div style="color: black; height: 35px">' + result[i].screenNameList[j] + '</div>'
-                                   +            '<span style="color: black;">' + result[i].watchDateList[j] + '</span>'
-                                   +            '<input type="hidden" value="' + result[i].screenNoList[j] + '">'
-                                   +            '<input type="hidden" value="' + result[i].screenNameList[j] + '">'
+                                   +            '<div style="color: black; height: 35px">' + result[i].screenList[j].screenName + '</div>'
+                                   +            '<span style="color: black;">' + result[i].screenList[j].watchDate + '</span>'
+                                   +            '<input type="hidden" value="' + result[i].screenList[j].screenNo + '">'
+                                   +            '<input type="hidden" value="' + result[i].screenList[j].screenName + '">'
                                    +        '</div>';
                     };
                     
