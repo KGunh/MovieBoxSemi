@@ -48,7 +48,7 @@ public class ReservationController {
 		map.put("theaterName", theaterName);
 		
 		List<Screen> list = new ReservationService().selectScreen(map); 
-
+		/*
 		Set<Screen> set = new LinkedHashSet<>();
 
 		for(Screen screen : list) {
@@ -93,8 +93,8 @@ public class ReservationController {
 		    screenList.get(i).setWatchDateList(watchDateList);
 		    screenList.get(i).setScreenNoList(screenNoList);
 		}
-		
-		return screenList;
+		*/
+		return list;
 	}
 
 	public String connectSeatList(HttpServletRequest request) {
